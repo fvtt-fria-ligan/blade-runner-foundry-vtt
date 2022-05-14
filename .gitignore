@@ -1,0 +1,21 @@
+# IDE
+/.vs
+/.vscode
+*.code-workspace
+
+# Node Modules
+/node_modules
+package-lock.json
+
+# Logs
+/logs
+npm-debug.log
+*.log
+
+# Local Configuration
+foundryConfig.json
+jtmConfig.json
+/*.lock
+
+# Distribution Files
+/dist

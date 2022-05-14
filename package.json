@@ -1,0 +1,46 @@
+{
+  "name": "blade-runner-foundry-vtt",
+  "version": "0.1.0",
+  "description": "Foundry VTT game System for Fria Ligan's Blade Runner RPG",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stefouch/blade-runner-foundry-vtt.git"
+  },
+  "keywords": [
+    "Blade Runner",
+    "RPG",
+    "Fria Ligan",
+    "Free League",
+    "Foundry",
+    "VTT",
+    "Virtual Table Top"
+  ],
+  "author": "Stefouch",
+  "contributors": [
+    {
+      "name": "Stefouch",
+      "url": "https://stefouch.be"
+    }
+  ],
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Stefouch/blade-runner-foundry-vtt/issues"
+  },
+  "homepage": "https://github.com/Stefouch/blade-runner-foundry-vtt#readme",
+  "devDependencies": {
+    "@league-of-foundry-developers/foundry-vtt-types": "^9.268.0",
+    "@types/jquery": "^3.5.14",
+    "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
+    "eslint": "^8.15.0",
+    "eslint-config-jquery": "^3.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "execa": "^6.1.0",
+    "gulp": "^4.0.2",
+    "prettier": "^2.6.2",
+    "semver": "^7.3.7"
+  }
+}
