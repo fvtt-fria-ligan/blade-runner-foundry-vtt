@@ -1,0 +1,27 @@
+{
+  "Actor": {
+    "types": [
+      "character"
+    ],
+    "templates": {
+      "actorDescription": {
+        "description": ""
+      },
+      "actorAttributes": {
+        "attributes": {
+        }
+      }
+    }
+  },
+  "Item": {
+    "types": [],
+    "templates": {
+      "itemBase": {
+        "qty": 1,
+        "weight": 1,
+        "price": 0,
+        "description": ""
+      }
+    }
+  }
+}
