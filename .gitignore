@@ -19,3 +19,4 @@ jtmConfig.json
 
 # Distribution Files
 /dist
+/foundry.js
