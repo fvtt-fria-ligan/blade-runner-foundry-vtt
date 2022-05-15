@@ -1,16 +1,65 @@
 {
   "Actor": {
     "types": [
-      "character"
+      "character",
+      "npc"
     ],
     "templates": {
-      "actorDescription": {
-        "description": ""
+      "actorNature": { "nature": "human" },
+      "actorArchetype": { "archetype": "" },
+      "actorDescription": { "description": "" },
+      "actorBio": {
+        "bio": {
+          "keyMemory": "",
+          "keyRelationship": "",
+          "home": "",
+          "appearance": "",
+          "yearsOnTheForce": 0
+        }
       },
-      "actorAttributes": {
+      "actorAttributesAndSkills": {
         "attributes": {
+          "str": { "value": 6 },
+          "agi": { "value": 6 },
+          "int": { "value": 6 },
+          "emp": { "value": 6 }
+        },
+        "skills": {}
+      },
+      "actorHealth": {
+        "health": { "value": 4, "max": 4 }
+      },
+      "actorResolve": {
+        "resolve": { "value": 4, "max": 4 }
+      },
+      "actorPoints": {
+        "points": {
+          "promotion": 0,
+          "humanity": 0,
+          "chinyen": 0
         }
       }
+    },
+    "character": {
+      "templates": [
+        "actorAttributesAndSkills",
+        "actorNature",
+        "actorArchetype",
+        "actorBio",
+        "actorHealth",
+        "actorResolve",
+        "actorPoints",
+        "actorDescription"
+      ]
+    },
+    "npc": {
+      "templates": [
+        "actorAttributesAndSkills",
+        "actorNature",
+        "actorHealth",
+        "actorDescription"
+      ],
+      "bio": { "appearance": "", "goal": "" }
     }
   },
   "Item": {
