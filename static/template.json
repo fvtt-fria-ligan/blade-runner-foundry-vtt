@@ -2,7 +2,8 @@
   "Actor": {
     "types": [
       "character",
-      "npc"
+      "npc",
+      "vehicle"
     ],
     "templates": {
       "actorNature": { "nature": "human" },
@@ -19,21 +20,29 @@
       },
       "actorAttributesAndSkills": {
         "attributes": {
-          "str": { "value": 6 },
-          "agi": { "value": 6 },
-          "int": { "value": 6 },
-          "emp": { "value": 6 }
+          "str": { "value": 8 },
+          "agi": { "value": 8 },
+          "int": { "value": 8 },
+          "emp": { "value": 8 }
         },
-        "skills": {}
+        "skills": {},
+        "hasFastReflexes": false,
+        "isBroken": false
       },
       "actorHealth": {
-        "health": { "value": 4, "max": 4 }
+        "health": { "value": 4, "max": 4, "tough": 0 }
       },
       "actorResolve": {
-        "resolve": { "value": 4, "max": 4 }
+        "resolve": { "value": 4, "max": 4, "hardened": 0, "permanentLoss": 0 }
       },
-      "actorPoints": {
-        "points": {
+      "actorSignatureItem": {
+        "signatureItem": {
+          "name": "",
+          "used": false
+        }
+      },
+      "actorResources": {
+        "resources": {
           "promotion": 0,
           "humanity": 0,
           "chinyen": 0
@@ -48,9 +57,11 @@
         "actorBio",
         "actorHealth",
         "actorResolve",
-        "actorPoints",
+        "actorSignatureItem",
+        "actorResources",
         "actorDescription"
-      ]
+      ],
+      "favoredGear": ""
     },
     "npc": {
       "templates": [
@@ -60,17 +71,71 @@
         "actorDescription"
       ],
       "bio": { "appearance": "", "goal": "" }
+    },
+    "vehicle": {
+      "templates": ["actorDescription"],
+      "passengers": 1,
+      "maneuverability": 12,
+      "hull": { "value": 2, "max": 2 },
+      "armor": 0,
+      "availability": 2,
+      "cost": 5
     }
   },
   "Item": {
-    "types": [],
+    "types": [
+      "generic",
+      "upgrade",
+      "armor",
+      "weapon",
+      "explosive",
+      "specialty",
+      "injury"
+    ],
     "templates": {
       "itemBase": {
         "qty": 1,
-        "weight": 1,
-        "price": 0,
+        "cost": 0,
+        "availability": 4,
         "description": ""
-      }
+      },
+      "itemOffensive": {
+        "damage": 1,
+        "crit": 6,
+        "damageType": 1,
+        "range": { "min": 0, "max": 1 }
+      },
+      "itemModifiers": { "modifiers": {} }
+    },
+    "generic": {
+      "templates": ["itemBase", "itemModifiers"]
+    },
+    "upgrade": {
+      "templates": ["itemBase", "itemModifiers"]
+    },
+    "armor": {
+      "templates": ["itemBase", "itemModifiers"],
+      "armor": 6
+    },
+    "weapon": {
+      "templates": ["itemBase", "itemOffensive"]
+    },
+    "explosive": {
+      "templates": ["itemBase", "itemOffensive"],
+      "blast": 8
+    },
+    "specialty": {
+      "templates": ["itemModifiers"],
+      "description": ""
+    },
+    "injury": {
+      "templates": ["itemModifiers"],
+      "category": "piercing",
+      "lethal": false,
+      "permanent": false,
+      "deathSave": "",
+      "healing": "",
+      "effect": ""
     }
   }
 }

@@ -16,7 +16,11 @@ export const ATTRIBUTES = {
   AGILITY: 'agi',
   INTELLIGENCE: 'int',
   EMPATHY: 'emp',
+  VEHICLE_MANEUVERABILITY: 'mvr',
 };
+
+/** @type {string} *
+export const VEHICLE_MANEUVERABILITY = 'mvr';//*/
 
 /** @enum {string} */
 export const SKILLS = {
@@ -33,6 +37,12 @@ export const SKILLS = {
   CONNECTIONS: 'connections',
   INSIGHT: 'insight',
   MANIPULATION: 'manipulation',
+};
+
+/** @enum {string} */
+export const CAPACITIES = {
+  HEALTH: 'health',
+  RESOLVE: 'resolve',
 };
 
 /** @enum {string} */
@@ -53,9 +63,59 @@ export const ARCHETYPES = {
 };
 
 /** @enum {string} */
-export const YEARS_ON_THE_FORCE = {
-  ROOKIE: 'rookie',
-  SEASONED: 'seasoned',
-  VETERAN: 'veteran',
-  OLD_TIMER: 'oldTimer',
+export const RANGES = {
+  ENGAGED: 'engaged',
+  SHORT: 'short',
+  MEDIUM: 'medium',
+  LONG: 'long',
+  EXTREME: 'extreme',
+};
+
+/** @enum {string} */
+export const COMBAT_ACTIONS = {
+  SPRINT: 'action-sprint',
+  CRAWL: 'action-crawl',
+  UNARMED_ATTACK: 'action-unarmed-attack',
+  MELEE_ATTACK: 'action-melee-attack',
+  GRAPPLE: 'action-grapple',
+  BREAK_FREE: 'action-break-free',
+  SHOOT_FIREARM: 'action-shoot-firearm',
+  CAREFUL_AIM: 'action-careful-aim',
+  THROW_WEAPON: 'action-throw-weapon',
+  FIRST_AID: 'action-first-aid',
+  MANIPULATE: 'action-manipulate',
+  USE_ITEM: 'action-use-item',
+};
+
+/** @enum {number} */
+export const DAMAGE_TYPES = {
+  CRUSHING: 0,
+  PIERCING: 1,
+};
+
+/** @enum {number} */
+export const AVAILABILITIES = {
+  INCIDENTAL: 5,
+  STANDARD: 4,
+  PREMIUM: 3,
+  RARE: 2,
+  LUXURY: 1,
+};
+
+/** @enum {string} */
+export const ACTOR_TYPES = {
+  PC: 'character',
+  NPC: 'npc',
+  VEHICLE: 'vehicle',
+};
+
+/** @enum {string} */
+export const ITEM_TYPES = {
+  GENERIC: 'generic',
+  SYNTHETIC_AUGMENTATION: 'upgrade',
+  ARMOR: 'armor',
+  WEAPON: 'weapon',
+  EXPLOSIVE: 'explosive',
+  SPECIALTY: 'specialty',
+  CRITICAL_INJURY: 'injury',
 };
