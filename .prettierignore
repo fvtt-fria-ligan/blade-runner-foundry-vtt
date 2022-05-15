@@ -1,0 +1,4 @@
+dist
+static/lib
+.eslintrc
+package-lock.json
