@@ -3,9 +3,9 @@ import { ACTOR_TYPES, CAPACITIES } from '../system/constants.js';
 
 export default class BladeRunnerActor extends Actor {
 
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
+  /* ------------------------------------------ */
+  /*  Properties                                */
+  /* ------------------------------------------ */
 
   get props() {
     return this.data.data;
@@ -24,16 +24,16 @@ export default class BladeRunnerActor extends Actor {
   }
 
   get resolve() {
-    this.props.resolve;
+    return this.props.resolve;
   }
 
   get isBroken() {
     return this.props.isBroken;
   }
 
-  /* -------------------------------------------- */
-  /*  Create                                      */
-  /* -------------------------------------------- */
+  /* ------------------------------------------ */
+  /*  Create                                    */
+  /* ------------------------------------------ */
 
   /** @override */
   static async create(data, options) {
@@ -56,27 +56,27 @@ export default class BladeRunnerActor extends Actor {
     return super.create(data, options);
   }
 
-  /* ------------------------------------------- */
-  /*  Data Preparation                           */
-  /* ------------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Data Preparation                         */
+  /* ----------------------------------------- */
 
   /**
    * Augments the basic Actor data model with additional dynamic data.
    * @override
    */
-   prepareData() {
-     super.prepareData();
+  prepareData() {
+    super.prepareData();
 
-     switch (this.type) {
-       case [ACTOR_TYPES.PC]: this._prepareCharacterData(); break;
-       case [ACTOR_TYPES.NPC]: this._prepareNpcData(); break;
-     }
-   }
+    switch (this.type) {
+      case [ACTOR_TYPES.PC]: this._prepareCharacterData(); break;
+      case [ACTOR_TYPES.NPC]: this._prepareNpcData(); break;
+    }
+  }
 
-  /* ------------------------------------------- */
-  /*  Data Preparation                           */
-  /*   → Character & NPC                         */
-  /* ------------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Data Preparation                         */
+  /*   → Character & NPC                       */
+  /* ----------------------------------------- */
 
   /** @private */
   _prepareCharacterData() {
@@ -85,10 +85,10 @@ export default class BladeRunnerActor extends Actor {
 
   /** @private */
   _prepareNpcData() {
-    this._prepareCharacterData()
+    this._prepareCharacterData();
   }
 
-  /* ------------------------------------------- */
+  /* ----------------------------------------- */
 
   /**
    * Sets the maxima for each capacities *(e.g. Health & Resolve)*
@@ -122,9 +122,9 @@ export default class BladeRunnerActor extends Actor {
     }
   }
 
-  /* -------------------------------------------- */
-  /*  Utility Functions                           */
-  /* -------------------------------------------- */
+  /* ------------------------------------------ */
+  /*  Utility Functions                         */
+  /* ------------------------------------------ */
 
   /**
    * Gets the value of a specified attribute.

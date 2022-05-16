@@ -1,5 +1,4 @@
-import { FLBR } from "src/system/config";
-import { ITEM_TYPES } from "src/system/constants";
+import { FLBR } from '@system/config.js';
 
 export default class BladeRunnerItem extends Item {
 
@@ -40,6 +39,7 @@ export default class BladeRunnerItem extends Item {
   /*  Event Handlers                             */
   /* ------------------------------------------- */
 
+  // TODO later
   /** @override *
   async _onCreate(data, options, userId) {
     await super._onCreate(data, options, userId);
@@ -66,21 +66,3 @@ export default class BladeRunnerItem extends Item {
     }
   }//*/
 }
-
-/* ------------------------------------------- */
-
-BladeRunnerItem.CHAT_TEMPLATE = {};
-
-for (const type of Object.values(ITEM_TYPES)) {
-  BladeRunnerItem.CHAT_TEMPLATE[type] = `systems/${game.system.name}/item/${type}/templates/${type}-sheet.hbs`;
-}
-
-// BladeRunnerItem.CHAT_TEMPLATE = {
-//   [ITEM_TYPES.GENERIC]: 'systems/blade-runner/xxx.hbs',
-//   [ITEM_TYPES.SYNTHETIC_AUGMENTATION]: 'systems/blade-runner/xxx.hbs',
-//   [ITEM_TYPES.ARMOR]: 'systems/blade-runner/xxx.hbs',
-//   [ITEM_TYPES.WEAPON]: 'systems/blade-runner/xxx.hbs',
-//   [ITEM_TYPES.EXPLOSIVE]: 'systems/blade-runner/xxx.hbs',
-//   [ITEM_TYPES.SPECIALTY]: 'systems/blade-runner/xxx.hbs',
-//   [ITEM_TYPES.CRITICAL_INJURY]: 'systems/blade-runner/xxx.hbs',
-// };

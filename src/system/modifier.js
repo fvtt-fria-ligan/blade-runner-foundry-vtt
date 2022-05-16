@@ -1,8 +1,9 @@
+/* eslint-disable no-shadow */
 /**
  * A class representing a roll modifier with many properties and automatic label.
  * @class
  */
- export default class Modifier {
+export default class Modifier {
   /**
    * @param {string}        key     The key that will be parsed to identify the modifier.
    * @param {number|string} value   The modification value of the modifier. (If a string, will be parsed)
@@ -60,12 +61,12 @@
      * Whether the modifier is active.
      * @type {boolean}
      */
-    this.active = active ?? (this.value <= 0);
+    this.active = active ?? this.value <= 0;
   }
 
-  /* ------------------------------------------- */
-  /*  Getters                                    */
-  /* ------------------------------------------- */
+  /* ------------------------------------------ */
+  /*  Getters                                   */
+  /* ------------------------------------------ */
 
   /**
    * The item's name that is the source of the modifier.
@@ -115,12 +116,13 @@
     return str.replace(/<[^>]*>?/gm, '');
   }
 
-  /* ------------------------------------------- */
+  /* ------------------------------------------ */
 
   /**
    * Creates an array with all the modifiers in the corresponding item.
    * @param {Item}    item  The item containing the modifiers.
-   * @param {string} [path="data.data.modifiers"] The path to the object within the item that contains the modifiers data.
+   * @param {string} [path='data.data.modifiers'] The path to the object within the item
+   *    that contains the modifiers data.
    * @returns {Modifier[]}
    * @static
    */
@@ -142,8 +144,9 @@
   }
 }
 
-/* ------------------------------------------- */
+/* ------------------------------------------ */
 
+// TODO remove
 // Modifier.ALLOWED_CATEGORIES = [
 //   'attribute',
 //   'skill',

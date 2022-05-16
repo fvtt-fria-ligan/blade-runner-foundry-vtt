@@ -2,6 +2,9 @@
  * These values should never be changed!
  */
 
+/** @enum {string} */
+export const BLADE_RUNNER = 'blade-runner';
+
 /** @enum {number} */
 export const DIE_SCORES = {
   A: 12,

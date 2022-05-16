@@ -17,11 +17,16 @@
  */
 
 import { FLBR } from './system/config.js';
-import * as YZUR from 'static/lib/yzur.js';
+import * as YZUR from '@lib/yzur.js';
+import { registerSheets } from './system/sheets.js';
+import { initializeHandlebars } from './system/handlebars.js';
+import { registerSystemSettings } from './system/settings.js';
+import BladeRunnerActor from './actor/actor-document.js';
+import BladeRunnerItem from './item/item-document.js';
 
-/* ------------------------------------------- */
-/*  Foundry VTT Initialization                 */
-/* ------------------------------------------- */
+/* ------------------------------------------ */
+/*  Foundry VTT Initialization                */
+/* ------------------------------------------ */
 
 Hooks.once('init', () => {
   console.log('FLBR | Initializing the Blade Runner RPG Game System');
@@ -33,11 +38,15 @@ Hooks.once('init', () => {
   // Places our classes in their own namespace for later reference.
   game.bladerunner = {
     config: FLBR,
-    roller: '',
+    roll: '',
   };
 
   // Records configuration values.
   CONFIG.BLADE_RUNNER = FLBR;
+  CONFIG.Actor.documentClass = BladeRunnerActor;
+  CONFIG.Item.documentClass = BladeRunnerItem;
+  // CONFIG.Combat.documentClass = BladeRunnerCombat;
+  // CONFIG.Combatant.documentClass = BladeRunnerCombatant;
 
   // Patches Core functions.
   CONFIG.Combat.initiative = {
@@ -45,22 +54,22 @@ Hooks.once('init', () => {
     decimals: 2,
   };
 
-  // registerSheets();
-  // registerHandlebars();
-  // registerSystemSettings();
+  registerSheets();
+  initializeHandlebars();
+  registerSystemSettings();
 });
 
 Hooks.once('ready', () => {
-  // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to.
+  // TODO Wait to register hotbar drop hook on ready so that modules could register earlier if they want to.
   // Hooks.on('hotbarDrop', (bar, data, slot) => createT2KMacro(data, slot));
 
-  // Determines whether a system migration is required and feasible.
+  // TODO Determines whether a system migration is required and feasible.
   // checkMigration();
 
   console.log('FLBR | READY!');
 });
 
-// Hooks.once('diceSoNiceReady', dice3d => registerDsN(dice3d));
+// TODO Hooks.once('diceSoNiceReady', dice3d => registerDsN(dice3d));
 
 Hooks.on('renderItemSheet', (app, _html) => {
   app._element[0].style.height = 'auto';

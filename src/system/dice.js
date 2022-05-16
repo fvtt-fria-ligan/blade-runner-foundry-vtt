@@ -2,7 +2,6 @@ import { FLBR } from './config.js';
 
 /**
  * Gets the score of a die from its size.
- * 
  * @param {number} size The number of faces on the Blade Runner die.
  * @returns {string} The corresponding score.
  */
@@ -13,7 +12,7 @@ export function getScore(size) {
   return score;
 }
 
-/* -------------------------------------------- */
+/* ------------------------------------------ */
 
 /**
  * Gets a DiceQuantities object from given values.
@@ -25,7 +24,7 @@ export function getScore(size) {
  * @see {YearZeroRoll}
  * @returns {import('static/lib/yzur.js').DiceQuantities}
  */
- export function getDiceQuantities(attribute, skill = 0, rof = 0, locate = false) {
+export function getDiceQuantities(attribute, skill = 0, rof = 0, locate = false) {
   const DIE_SIZES = [0, 0, 0, 0, 0, 0, 'd', 'd', 'c', 'c', 'b', 'b', 'a'];
   const attributeScore = DIE_SIZES[attribute];
   const skillScore = DIE_SIZES[skill];
