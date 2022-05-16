@@ -14,8 +14,8 @@
     "eslint:recommended",
     "jquery",
     "@typhonjs-fvtt/eslint-config-foundry.js/0.8.0",
-    // "prettier",
-    "plugin:prettier/recommended"
+    "prettier"
+    // "plugin:prettier/recommended"
   ],
   "plugins": [
     "prettier"
@@ -29,11 +29,11 @@
     "comma-style": "error",
     "curly": ["error", "multi-line"],
     "dot-location": ["error", "property"],
-    "eqeqeq": ["warn", "smart", { "undefined": "ignore" }],
+    "eqeqeq": 0, // ["warn", "always", { "null": "ignore" }],
     "handle-callback-err": "off",
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "linebreak-style": ["error", "unix"],
-    "max-len": ["error", { "code": 120 }],
+    "max-len": ["error", { "code": 120, "ignoreUrls": true }],
     "max-nested-callbacks": ["error", { "max": 4 }],
     "max-statements-per-line": ["error", { "max": 2 }],
     "no-console": "off",
