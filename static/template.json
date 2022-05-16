@@ -30,10 +30,10 @@
         "isBroken": false
       },
       "actorHealth": {
-        "health": { "value": 4, "max": 4, "tough": 0 }
+        "health": { "value": 4, "max": 4, "mod": 0, "permanentLoss": 0 }
       },
       "actorResolve": {
-        "resolve": { "value": 4, "max": 4, "hardened": 0, "permanentLoss": 0 }
+        "resolve": { "value": 4, "max": 4, "mod": 0, "permanentLoss": 0 }
       },
       "actorSignatureItem": {
         "signatureItem": {

@@ -16,7 +16,7 @@
  * ============================================================================
  */
 
-import { FLBR } from './config.js';
+import { FLBR } from './system/config.js';
 import * as YZUR from 'static/lib/yzur.js';
 
 /* ------------------------------------------- */

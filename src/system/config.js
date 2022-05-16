@@ -65,8 +65,17 @@ FLBR.archetypes = {
   },
 };
 
-FLBR.maxHealth = 10;
-FLBR.maxResolve = 10;
+FLBR.capacitiesMap = {
+  [BR.CAPACITIES.HEALTH]: {
+    attributes: [BR.ATTRIBUTES.STRENGTH, BR.ATTRIBUTES.AGILITY],
+    max: 10,
+  },
+  [BR.CAPACITIES.RESOLVE]: {
+    attributes: [BR.ATTRIBUTES.INTELLIGENCE, BR.ATTRIBUTES.EMPATHY],
+    max: 10,
+  },
+};
+
 FLBR.maxPromotionPoints = 20;
 FLBR.maxHumanityPoints = 20;
 FLBR.maxChinyenPoints = 20;
