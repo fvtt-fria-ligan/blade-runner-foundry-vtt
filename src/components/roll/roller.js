@@ -15,7 +15,7 @@ export default class BRRollHandler extends FormApplication {
 
   /**
    * @param {string}              [title]         The title of the roll
-   * @param {Actor}               [actor]         The actor who rolled the dice, if any
+   * @param {Actor}               [actor={}]      The actor who rolled the dice, if any
    * @param {Item|Item[]}         [items]         The item(s) used to roll the dice, if any
    * @param {string}              [attributeName] The name of the attribute used (important for modifiers)
    * @param {string}              [skillName]     The name of the skill used (important for modifiers)
@@ -30,7 +30,7 @@ export default class BRRollHandler extends FormApplication {
    */
   constructor({
     title = 'Blade Runner RPG',
-    actor = null,
+    actor = {},
     items = [],
     attributeName = null,
     skillName = null,
@@ -145,6 +145,8 @@ export default class BRRollHandler extends FormApplication {
     return {
       title: this.title,
       dice: this.dice,
+      advantage: this.advantage,
+      disadvantage: this.disadvantage,
       options,
     };
   }
@@ -176,27 +178,29 @@ export default class BRRollHandler extends FormApplication {
    * Not overriding this method will result in a thrown error.
    * @description In this method we pass the formData onto the correct internal rollHandler.
    * @param {JQueryEventConstructor} event
-   * @param {Object<String | null>}  formData
+   * @param {Object.<string|null>}  formData
    * @returns private RollHandler //TODO what does it returns?
+   * @override Required
+   * @async
    */
   async _updateObject(event, formData) {
     this._validateForm(event, formData);
-    return this._handleFormDat(formData);
+    return this._handleFormData(formData);
   }
 
   /* ------------------------------------------ */
 
   /**
-	 * Validates whether a form is empty and contains a valid artifact string (if any).
-	 * @param {JQueryEventConstructor} event
-	 * @param {Object<String | null>}  formData
+   * Validates whether a form is empty and contains a valid artifact string (if any).
+   * @param {JQueryEventConstructor} event
+   * @param {Object.<string|null>}  formData
    * @returns {boolean} `true` when OK
    * @throws {Error} When formData is empty
-	 */
+   */
   _validateForm(event, formData) {
     const isEmpty = Object.values(formData).every(value => !value);
     if (isEmpty) {
-      const warning = localizeString('WARNING.NO_DICE_INPUT');
+      const warning = game.i18n.localize('WARNING.NO_DICE_INPUT');
       event.target.base.focus();
       ui.notifications.warn(warning);
       throw new Error(warning);
@@ -205,6 +209,57 @@ export default class BRRollHandler extends FormApplication {
   }
 
   /* ------------------------------------------ */
+
+  _handleFormData(formData) {
+    // TODO do some stuff on our variables.
+    return this.executeRoll();
+  }
+
+  /* ------------------------------------------ */
+  /*  Roll Creation (YZUR)                      */
+  /* ------------------------------------------ */
+
+  getRollOptions() {
+    const unlimitedPush = this.options.unlimitedPush;
+    return {
+      name: this.title,
+      maxPush: unlimitedPush ? 1000 : this.maxPush,
+      type: this.options.type,
+      actorId: this.options.actorId || this.actor.id,
+      actorType: this.options.actorType || this.actor.type,
+      // alias: this.options.alias,
+      // attribute: this.base.name,
+      // chance: this.spell.chance,
+      // isAttack: this.isAttack,
+      // consumable: this.options.consumable,
+      damage: this.damage,
+      tokenId: this.options.tokenId,
+      sceneId: this.options.sceneId,
+      item: this.item.name || this.items.map(i => i.name),
+      itemId: this.item.id || this.items.map(i => i.id),
+    };
+  }
+
+  /* ------------------------------------------ */
+
+  async executeRoll() {
+    const dice = this.dice.reduce((o, die) => {
+      const D = `brD${die}`;
+      if (o[D]) o[D]++; else o[D] = 1;
+      return o;
+    }, {});
+
+    this.roll = YearZeroRoll.forge(dice, {}, this.getRollOptions());
+
+    if (this.modifier) await this.roll.modify(this.modifier);
+
+    await this.roll.roll({ async: true });
+    return this.roll.toMessage();
+  }
+
+  /* ------------------------------------------ */
+
+  push() {}
 
   /* ------------------------------------------ */
   /*  Form Listeners                            */
