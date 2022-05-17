@@ -120,14 +120,17 @@ export default class Modifier {
 
   /**
    * Creates an array with all the modifiers in the corresponding item.
-   * @param {Item}    item  The item containing the modifiers.
-   * @param {string} [path='data.data.modifiers'] The path to the object within the item
-   *    that contains the modifiers data.
+   * @param {Item}             item              The item containing the modifiers
+   * @param {string}          [path='data.data.modifiers'] The path to the object within the item
+   *   that contains the modifiers data
+   * @param {string|string[]} [targets=[]]       Additional filter based on targets
+   * @param {boolean}         [onlyActive=false] Whether to return only active modifiers
    * @returns {Modifier[]}
    * @static
    */
-  static getModifiers(item, path = 'data.data.modifiers') {
-    const out = [];
+  static getModifiers(item, path = 'data.data.modifiers', { targets = [], onlyActive = false } = {}) {
+    // Gets the modifiers.
+    let out = [];
     const mods = foundry.utils.getProperty(item, path);
     for (const mod of Object.values(mods)) {
       let m;
@@ -139,6 +142,14 @@ export default class Modifier {
         ui.notifications.error(error.message, { permanent: true });
         console.error(error);
       }
+    }
+    // Filters the modifiers.
+    if (!Array.isArray(targets)) targets = [targets];
+    if (onlyActive || targets.length > 0) {
+      out = out.filter(m => {
+        const a = onlyActive ? m.active : true;
+        return (a && targets.includes(m.target));
+      });
     }
     return out;
   }

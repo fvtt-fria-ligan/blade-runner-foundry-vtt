@@ -1,4 +1,5 @@
 import { FLBR } from '@system/config.js';
+import Modifier from '@system/modifier.js';
 
 export default class BladeRunnerItem extends Item {
 
@@ -33,6 +34,19 @@ export default class BladeRunnerItem extends Item {
       str += `(${this.qty})`;
     }
     return str;
+  }
+
+  /* ------------------------------------------- */
+
+  /**
+   * Gets an array of modifiers in this item.
+   * @param {?Object}         options            Additional options to filter the returned array of modifiers
+   * @param {string|string[]} options.targets    Filters modifiers based on plausible targets
+   * @param {boolean}         options.onlyActive Filters modifiers based on their active status
+   * @returns {Modifier[]}
+   */
+  getModifiers(options) {
+    return Modifier.getModifiers(this, 'data.data.modifiers', options);
   }
 
   /* ------------------------------------------- */
