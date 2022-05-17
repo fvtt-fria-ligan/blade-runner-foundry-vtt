@@ -55,11 +55,11 @@ function registerHandlebarsHelpers() {
   });
 
   Handlebars.registerHelper('mathMin', function (...args) {
-    return Math.min(args);
+    return Math.min(...args);
   });
 
   Handlebars.registerHelper('mathMax', function (...args) {
-    return Math.max(args);
+    return Math.max(...args);
   });
 
   Handlebars.registerHelper('add', function (a, b) {
