@@ -1,10 +1,10 @@
 // config: true (visible)
 // scope: world (gm), client (player)
 
-import { BLADE_RUNNER } from './constants.js';
+import { SYSTEM_NAME } from './constants.js';
 
 export function registerSystemSettings() {
-  const br = game.system.data.name || BLADE_RUNNER;
+  const br = game.system.data.name || SYSTEM_NAME;
 
   game.settings.register(br, 'systemMigrationVersion', {
     config: false,

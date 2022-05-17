@@ -1,8 +1,8 @@
 import BladeRunnerCharacterSheet from '@actor/character/character-sheet.js';
-import { ACTOR_TYPES, BLADE_RUNNER, ITEM_TYPES } from './constants.js';
+import { ACTOR_TYPES, SYSTEM_NAME, ITEM_TYPES } from './constants.js';
 
 export function registerSheets() {
-  const br = game.system.data.name || BLADE_RUNNER;
+  const br = game.system.data.name || SYSTEM_NAME;
 
   Actors.unregisterSheet('core', ActorSheet);
   Actors.registerSheet(br, BladeRunnerCharacterSheet, { types: [ACTOR_TYPES.PC, ACTOR_TYPES.NPC], makeDefault: true });

@@ -1,18 +1,19 @@
 import * as BR from './constants.js';
 
 /**
- * The FLBR Configuration.
+ * The Blade Runner RPG configuration.
  * @constant
+ * @enum
  */
 export const FLBR = {};
 
-/** @type {Map<string, number>} */
+/** @type {Map.<string, number>} */
 FLBR.scoreMap = new Map();
 FLBR.scoreMap.set('—', 0);
 for (const score in BR.DIE_SCORES) {
   FLBR.scoreMap.set(score, BR.DIE_SCORES[score]);
 }
-/** @type {Map<number, string>} */
+/** @type {Map.<number, string>} */
 FLBR.dieMap = new Map(Array.from(FLBR.scoreMap, ([n, v]) => [v, n]));
 
 FLBR.skillMap = {
@@ -34,36 +35,38 @@ FLBR.skillMap = {
 FLBR.startingAttributeLevel = 8;
 FLBR.startingSkillLevel = 6;
 
-FLBR.archetypes = {
-  [BR.ARCHETYPES.ANALYST]: {
-    label: 'FLBR.Archetype.Analyst',
-    allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
-  },
-  [BR.ARCHETYPES.CITY_SPEAKER]: {
-    label: 'FLBR.Archetype.CitySpeaker',
-    allowedNatures: [BR.NATURES.HUMAN],
-  },
-  [BR.ARCHETYPES.ENFORCER]: {
-    label: 'FLBR.Archetype.Enforcer',
-    allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
-  },
-  [BR.ARCHETYPES.DOXIE]: {
-    label: 'FLBR.Archetype.Doxie',
-    allowedNatures: [BR.NATURES.REPLICANT],
-  },
-  [BR.ARCHETYPES.FIXER]: {
-    label: 'FLBR.Archetype.Fixed',
-    allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
-  },
-  [BR.ARCHETYPES.INSPECTOR]: {
-    label: 'FLBR.Archetype.Inspector',
-    allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
-  },
-  [BR.ARCHETYPES.SKIMMER]: {
-    label: 'FLBR.Archetype.Skimmer',
-    allowedNatures: [BR.NATURES.HUMAN],
-  },
-};
+// TODO
+FLBR.archetypes = Object.values(BR.ARCHETYPES);
+// FLBR.archetypes = {
+//   [BR.ARCHETYPES.ANALYST]: {
+//     label: 'FLBR.Archetype.Analyst',
+//     allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
+//   },
+//   [BR.ARCHETYPES.CITY_SPEAKER]: {
+//     label: 'FLBR.Archetype.CitySpeaker',
+//     allowedNatures: [BR.NATURES.HUMAN],
+//   },
+//   [BR.ARCHETYPES.ENFORCER]: {
+//     label: 'FLBR.Archetype.Enforcer',
+//     allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
+//   },
+//   [BR.ARCHETYPES.DOXIE]: {
+//     label: 'FLBR.Archetype.Doxie',
+//     allowedNatures: [BR.NATURES.REPLICANT],
+//   },
+//   [BR.ARCHETYPES.FIXER]: {
+//     label: 'FLBR.Archetype.Fixed',
+//     allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
+//   },
+//   [BR.ARCHETYPES.INSPECTOR]: {
+//     label: 'FLBR.Archetype.Inspector',
+//     allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
+//   },
+//   [BR.ARCHETYPES.SKIMMER]: {
+//     label: 'FLBR.Archetype.Skimmer',
+//     allowedNatures: [BR.NATURES.HUMAN],
+//   },
+// };
 
 FLBR.capacitiesMap = {
   [BR.CAPACITIES.HEALTH]: {
@@ -181,6 +184,7 @@ FLBR.blastPowerMap = {
   6: { damage: 1, crit: 6 },
 };
 
+// TODO
 // FLBR.yearsOnTheForce = {
 //   [BR.YEARS_ON_THE_FORCE.ROOKIE]: {
 //     years: [0, 1],

@@ -22,7 +22,7 @@ export function getScore(size) {
  * @param {number}  [modifier=0]   The task modifier
  * @param {boolean} [locate=false] Whether to roll a Location die
  * @see {YearZeroRoll}
- * @returns {import('static/lib/yzur.js').DiceQuantities}
+ * @returns {import('@lib/yzur.js').DiceQuantities}
  */
 export function getDiceQuantities(attribute, skill = 0, rof = 0, locate = false) {
   const DIE_SIZES = [0, 0, 0, 0, 0, 0, 'd', 'd', 'c', 'c', 'b', 'b', 'a'];

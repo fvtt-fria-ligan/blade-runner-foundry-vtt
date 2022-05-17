@@ -1,4 +1,4 @@
-import { BLADE_RUNNER } from '@system/constants.js';
+import { SYSTEM_NAME } from '@system/constants.js';
 
 /**
  * Blade Runner RPG Item Sheet.
@@ -13,7 +13,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [BLADE_RUNNER, 'sheet', 'item'],
+      classes: [SYSTEM_NAME, 'sheet', 'item'],
       width: window.innerWidth * 0.08 + 350,
       resizable: true,
     });

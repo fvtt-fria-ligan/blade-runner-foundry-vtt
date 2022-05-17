@@ -1,5 +1,5 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet.js';
-import { BLADE_RUNNER, ACTOR_TYPES } from '@system/constants.js';
+import { SYSTEM_NAME, ACTOR_TYPES } from '@system/constants.js';
 
 /**
  * Blade Runner RPG Actor Sheet for Character.
@@ -14,7 +14,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [BLADE_RUNNER, 'sheet', 'actor'],
+      classes: [SYSTEM_NAME, 'sheet', 'actor'],
       width: 700,
       height: 780,
       resizable: true,
@@ -29,13 +29,14 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
   /** @override */
   get template() {
+    const br = game.system.data.name || SYSTEM_NAME;
     if (!game.user.isGM && this.actor.limited) {
-      return '';
+      return `systems/${br}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.PC}-limited-sheet.hbs`;
     }
     if (this.actor.type === ACTOR_TYPES.NPC) {
-      return '';
+      return `systems/${br}/templates/actor/${ACTOR_TYPES.PC}/npc-sheet.hbs`;
     }
-    return '';
+    return `systems/${br}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.PC}-sheet.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -49,5 +50,4 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     sheetData.isNPC = this.actor.type === ACTOR_TYPES.NPC;
     return sheetData;
   }
-
 }

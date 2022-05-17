@@ -4,8 +4,20 @@
   "type": "module",
   "description": "Foundry VTT game System for Fria Ligan's Blade Runner RPG",
   "scripts": {
-    "lint": "eslint --ext .js",
+    "dev": "cross-env NODE_ENV=development gulp build",
+    "dev:watch": "cross-env NODE_ENV=development gulp watch",
+    "build": "cross-env NODE_ENV=production gulp build",
+    "link-project": "gulp link",
+    "clean": "gulp clean",
+    "clean:link": "gulp link --clean",
+    "bump": "cross-env NODE_ENV=production npm run lint:fix && gulp bump --r",
+    "release": "npm run format && gulp release",
+    "lint": "eslint --ext .js .",
     "lint:fix": "eslint --ext .js --fix .",
+    "format": "prettier --write \"./**/*.(js|json|scss)\"",
+    "format:hbs": "prettier **/*.hbs --write --parser=glimmer",
+    "postinstall": "npx patch-package & npx husky install",
+    "import:yzur": "xcopy node_modules\\foundry-year-zero-roller\\dist\\yzur.js static\\lib\\ /L /Y",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,6 +45,9 @@
     "url": "https://github.com/Stefouch/blade-runner-foundry-vtt/issues"
   },
   "homepage": "https://github.com/Stefouch/blade-runner-foundry-vtt#readme",
+  "dependencies": {
+    "foundry-year-zero-roller": "github:Stefouch/foundry-year-zero-roller"
+  },
   "devDependencies": {
     "@league-of-foundry-developers/foundry-vtt-types": "^9.268.0",
     "@types/jquery": "^3.5.14",
