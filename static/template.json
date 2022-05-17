@@ -42,7 +42,7 @@
         }
       },
       "actorResources": {
-        "resources": {
+        "metaCurrencies": {
           "promotion": 0,
           "humanity": 0,
           "chinyen": 0

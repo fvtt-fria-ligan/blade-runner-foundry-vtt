@@ -16,6 +16,9 @@ for (const score in BR.DIE_SCORES) {
 /** @type {Map.<number, string>} */
 FLBR.dieMap = new Map(Array.from(FLBR.scoreMap, ([n, v]) => [v, n]));
 
+FLBR.vehicleAttribute = BR.ATTRIBUTES.VEHICLE_MANEUVERABILITY;
+FLBR.attributes = Object.values(BR.ATTRIBUTES).filter(v => v !== FLBR.vehicleAttribute);
+
 FLBR.skillMap = {
   [BR.SKILLS.CLOSE_COMBAT]: BR.ATTRIBUTES.STRENGTH,
   [BR.SKILLS.FORCE]: BR.ATTRIBUTES.STRENGTH,
@@ -31,6 +34,8 @@ FLBR.skillMap = {
   [BR.SKILLS.MANIPULATION]: BR.ATTRIBUTES.EMPATHY,
   [BR.SKILLS.DRIVING]: BR.ATTRIBUTES.VEHICLE_MANEUVERABILITY,
 };
+
+FLBR.skills = Object.keys(FLBR.skillMap);
 
 FLBR.startingAttributeLevel = 8;
 FLBR.startingSkillLevel = 6;

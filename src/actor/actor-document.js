@@ -31,6 +31,19 @@ export default class BladeRunnerActor extends Actor {
     return this.props.isBroken;
   }
 
+  // TODO
+  // get bio() {
+  //   return this.props.bio;
+  // }
+
+  // get metaCurrencies() {
+  //   return this.props.metaCurrencies;
+  // }
+
+  // get rollData() {
+  //   return this.getRollData();
+  // }
+
   /* ------------------------------------------ */
   /*  Create                                    */
   /* ------------------------------------------ */
