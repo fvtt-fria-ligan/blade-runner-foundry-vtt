@@ -32,7 +32,7 @@ Hooks.once('init', () => {
   console.log('FLBR | Initializing the Blade Runner RPG Game System');
 
   // Registers dice.
-  YZUR.YearZeroRollManager.register('br');
+  YZUR.YearZeroRollManager.register('br', {}, { index: 1 });
 
   // Creates a namespace within the game global.
   // Places our classes in their own namespace for later reference.
