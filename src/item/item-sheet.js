@@ -50,4 +50,21 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     };
     return sheetData;
   }
+
+  /* ------------------------------------------ */
+  /*  Sheet Listeners                           */
+  /* ------------------------------------------ */
+
+  /** @override */
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    // Editable-only Listeners
+    if (!game.user.isGM && this.actor.limited) return;
+    // if (!this.options.editable) return;
+    if (!this.isEditable) return;
+
+    // Input Focus
+    html.find('input').focus(ev => ev.currentTarget.select());
+  }
 }
