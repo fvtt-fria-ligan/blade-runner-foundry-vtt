@@ -49,9 +49,13 @@
     "foundry-year-zero-roller": "github:Stefouch/foundry-year-zero-roller"
   },
   "devDependencies": {
-    "@league-of-foundry-developers/foundry-vtt-types": "^9.268.0",
+    "@league-of-foundry-developers/foundry-vtt-types": "^9.268.2",
     "@types/jquery": "^3.5.14",
     "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
+    "chalk": "^4.1.2",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.14.39",
+    "esbuild-sass-plugin": "^2.2.6",
     "eslint": "^8.15.0",
     "eslint-config-jquery": "^3.0.0",
     "eslint-config-prettier": "^8.5.0",
@@ -59,6 +63,7 @@
     "execa": "^6.1.0",
     "gulp": "^4.0.2",
     "prettier": "^2.6.2",
-    "semver": "^7.3.7"
+    "semver": "^7.3.7",
+    "standard-version": "^9.5.0"
   }
 }
