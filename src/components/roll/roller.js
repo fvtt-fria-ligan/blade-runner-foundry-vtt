@@ -86,6 +86,10 @@ export default class BRRollHandler extends FormApplication {
      */
     this.dice = !Array.isArray(dice) ? [dice] : dice;
 
+    this.die1 = { value: this.dice[0] };
+    this.die2 = { value: this.dice[1] ?? 0 };
+    this.die2 = { value: this.dice[2] ?? 0 };
+
     /**
      * The roll in this FormApplication.
      * @type {YearZeroRoll}
@@ -104,8 +108,11 @@ export default class BRRollHandler extends FormApplication {
   /**
    * The final numeric modifier.
    * @type {number}
-   * @readonly
    */
+  set modifier(val) {
+    this._modifier = val;
+  }
+
   get modifier() {
     return this._modifier + this.modifiers.reduce((sum, m) => sum + (m.active ? m.value : 0), 0);
   }
@@ -265,5 +272,10 @@ export default class BRRollHandler extends FormApplication {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
+
+    // We need to bind the cancel button to the FormApplication's close method.
+    html.find('#cancel').click(() => {
+      this.close();
+    });
   }
 }
