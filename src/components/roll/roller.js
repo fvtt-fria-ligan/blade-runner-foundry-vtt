@@ -243,11 +243,8 @@ export default class BRRollHandler extends FormApplication {
   /* ------------------------------------------ */
 
   async executeRoll() {
-    const dice = this.dice.reduce((o, die) => {
-      const D = `brD${die}`;
-      if (o[D]) o[D]++; else o[D] = 1;
-      return o;
-    }, {});
+    // TODO
+    const dice = this.dice.map(d => { return { term: `${d}`, number: 1 }; });
 
     this.roll = YearZeroRoll.forge(dice, {}, this.getRollOptions());
 
