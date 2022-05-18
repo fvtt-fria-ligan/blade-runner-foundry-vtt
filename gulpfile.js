@@ -249,11 +249,11 @@ async function bumpVersion(cb) {
     console.log(`Updating version number to '${targetVersion}'`);
 
     packageJson.version = targetVersion;
-    fs.writeFileSync('package.json', JSON.stringify(packageJson, null, '\t'));
+    fs.writeFileSync('package.json', JSON.stringify(packageJson, null, '  '));
 
     manifest.file.version = targetVersion;
     manifest.file.download = getDownloadURL(targetVersion);
-    fs.writeFileSync(`static/${manifest.name}`, JSON.stringify(manifest.file, null, '\t'));
+    fs.writeFileSync(`static/${manifest.name}`, JSON.stringify(manifest.file, null, '  '));
 
     return cb();
   }
