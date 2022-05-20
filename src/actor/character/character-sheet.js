@@ -1,5 +1,6 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet.js';
 import { SYSTEM_NAME, ACTOR_TYPES } from '@system/constants.js';
+import { generateScores } from 'src/utils/get-score.js';
 
 /**
  * Blade Runner RPG Actor Sheet for Character.
@@ -34,7 +35,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
       return `systems/${br}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.PC}-limited-sheet.hbs`;
     }
     if (this.actor.type === ACTOR_TYPES.NPC) {
-      return `systems/${br}/templates/actor/${ACTOR_TYPES.PC}/npc-sheet.hbs`;
+      return `systems/${br}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.NPC}-sheet.hbs`;
     }
     return `systems/${br}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.PC}-sheet.hbs`;
   }
@@ -46,6 +47,8 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   /** @override */
   getData(options) {
     const sheetData = super.getData(options);
+    generateScores(sheetData.data.attributes);
+    generateScores(sheetData.data.skills);
     sheetData.isPC = this.actor.type === ACTOR_TYPES.PC;
     sheetData.isNPC = this.actor.type === ACTOR_TYPES.NPC;
     return sheetData;

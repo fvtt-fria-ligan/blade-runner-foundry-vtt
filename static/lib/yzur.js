@@ -4,8 +4,8 @@
  * #   YEAR ZERO UNIVERSAL DICE ROLLER FOR THE FOUNDRY VTT
  * ===============================================================================
  * Author: @Stefouch
- * Version: 4.1.0     for:     Foundry VTT V9
- * Date: 2022-05-18
+ * Version: 4.0.0     for:     Foundry VTT V9
+ * Date: 2022-05-19
  * License: MIT
  * ===============================================================================
  * Content:
@@ -32,6 +32,11 @@
 /*  Custom Dice classes                         */
 /* -------------------------------------------- */
 
+/**
+ * Custom Die class for Year Zero games.
+ * @extends {Die} The Foundry Die class
+ * @category MAIN
+ */
 class YearZeroDie extends Die {
   constructor(termData = {}) {
     termData.faces = termData.faces || 6;
@@ -343,6 +348,7 @@ YearZeroDie.MODIFIERS = foundry.utils.mergeObject(
 /**
  * Base Die: 1 & 6 cannot be re-rolled.
  * @extends {YearZeroDie}
+ * @category OTHER DICE
  */
 class BaseDie extends YearZeroDie {}
 BaseDie.TYPE = 'base';
@@ -352,6 +358,7 @@ BaseDie.LOCKED_VALUES = [1, 6];
 /**
  * Skill Die: 6 cannot be re-rolled.
  * @extends {YearZeroDie}
+ * @category OTHER DICE
  */
 class SkillDie extends YearZeroDie {}
 SkillDie.TYPE = 'skill';
@@ -360,6 +367,7 @@ SkillDie.DENOMINATION = 's';
 /**
  * Gear Die: 1 & 6 cannot be re-rolled.
  * @extends {YearZeroDie}
+ * @category OTHER DICE
  */
 class GearDie extends YearZeroDie {}
 GearDie.TYPE = 'gear';
@@ -369,6 +377,7 @@ GearDie.LOCKED_VALUES = [1, 6];
 /**
  * Negative Die: 6 cannot be re-rolled.
  * @extends {SkillDie}
+ * @category OTHER DICE
  */
 class NegativeDie extends SkillDie {}
 NegativeDie.TYPE = 'neg';
@@ -379,6 +388,7 @@ NegativeDie.DENOMINATION = 'n';
 /**
  * Stress Die: 1 & 6 cannot be re-rolled.
  * @extends {YearZeroDie}
+ * @category OTHER DICE
  */
 class StressDie extends YearZeroDie {}
 StressDie.TYPE = 'stress';
@@ -390,6 +400,7 @@ StressDie.LOCKED_VALUES = [1, 6];
 /**
  * Artifact Die: 6+ cannot be re-rolled.
  * @extends {SkillDie}
+ * @category OTHER DICE
  */
 class ArtifactDie extends SkillDie {
   /** @override */
@@ -433,6 +444,7 @@ D12ArtifactDie.DENOMINATION = '12';
 /**
  * Twilight Die: 1 & 6+ cannot be re-rolled.
  * @extends {ArtifactDie} But LOCKED_VALUES are not the same
+ * @category OTHER DICE
  */
 class TwilightDie extends ArtifactDie {
   /** @override */
@@ -515,6 +527,7 @@ LocationDie.LOCKED_VALUES = [1, 2, 3, 4, 5, 6];
 /**
  * BladeRunner Die: 1 cannot be re-rolled.
  * @extends {ArtifactDie} But LOCKED_VALUES are not the same
+ * @category OTHER DICE
  */
 class BladeRunnerDie extends ArtifactDie {
   /** @override */
@@ -590,6 +603,32 @@ var YearZeroDice = /*#__PURE__*/Object.freeze({
 
 /* -------------------------------------------- */
 
+/**
+ * All constants used by YZUR which are stored in Foundry's `CONFIG.YZUR`.
+ * @constant
+ * @property {!string} game The identifier for the game
+ * @property {Object}         CHAT                 Options for the chat
+ * @property {boolean}       [CHAT.showInfos=true] Whether to show the additional information under the roll result
+ * @property {DieTypeString} [CHAT.diceSorting=['base', 'skill', 'neg', 'gear', 'arto', 'loc', 'ammo']]
+ *   Defines the default order
+ * @property {Object}  ROLL                 Options for the YearZeroRoll class
+ * @property {!string} ROLL.chatTemplate    Path to the chat template
+ * @property {!string} ROLL.tooltipTemplate Path to the tooltip template
+ * @property {!string} ROLL.infosTemplate   Path to the infos template
+ * @property {Object}   DICE   Options for the YearZeroDie class
+ * @property {boolean} [DICE.localizeDieTypes=true]
+ *   Whether to localize the type of the die
+ * @property {Object.<DieTypeString, class>}  DICE.DIE_TYPES
+ *   An enumeration of YearZeroDie classes
+ * @property {Object.<string, DieTypeString>} DICE.DIE_TYPES_BY_CLASS
+ *   An enumeration of YearZeroDie types sorted by their class names
+ * @property {Object}    DICE.ICONS    Options for the icons and what's on the die faces
+ * @property {function} [DICE.ICONS.getLabel=getLabel( type: DieTypeString, result: number )] 
+ *   A customizable helper function for creating the labels of the die.
+ *   Note: You must return a string or DsN will throw an error.
+ * @property {Object.<DieTypeString, Object.<string, string|number>>} DICE.ICONS.yzGame
+ *   Defines the labels for your dice. Change `yzGame` with the 
+ */
 const YZUR = {
   game: '',
   CHAT: {
@@ -631,7 +670,7 @@ const YZUR = {
        * @param {number} result
        * @returns {string}
        */
-      getLabel: function(type, result) {
+      getLabel: function (type, result) {
         const arto = ['d8', 'd10', 'd12'];
         if (arto.includes(type)) type = 'arto';
         return String(this[CONFIG.YZUR.game][type][result]);
@@ -852,6 +891,7 @@ class DieTypeError extends TypeError {
 /**
  * Custom Roll class for Year Zero games.
  * @extends {Roll} The Foundry Roll class
+ * @category MAIN
  */
 class YearZeroRoll extends Roll {
   /**
@@ -1959,9 +1999,8 @@ class YearZeroRollManager {
 /**
  * Die Types mapped with Games.
  * Used by the register method to choose which dice to activate.
- * @type {Object.<GameTypeString, DieTypeString[]>}
+ * @enum {DieTypeString[]}
  * @constant
- * @enum
  */
 YearZeroRollManager.DIE_TYPES_MAP = {
   // Mutant Year Zero
@@ -1982,7 +2021,11 @@ YearZeroRollManager.DIE_TYPES_MAP = {
   'br': ['brD12', 'brD10', 'brD8', 'brD6'],
 };
 
-/** @type {GameTypeString[]} @enum */
+/**
+ * List of identifiers for the games.
+ * @enum {GameTypeString}
+ * @constant
+ */
 YearZeroRollManager.GAMES = Object.keys(YearZeroRollManager.DIE_TYPES_MAP);
 
 export { YZUR, YearZeroDice, YearZeroRoll, YearZeroRollManager };

@@ -1,8 +1,5 @@
-import BladeRunnerActor from '@actor/actor-document';
-import BladeRunnerItem from '@item/item-document';
 import { YearZeroRoll } from '@lib/yzur';
-import { SYSTEM_NAME } from '@system/constants';
-import Modifier from '@system/modifier';
+import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
 
 /**
  * A Form Application that mimics Dialog,
@@ -12,7 +9,6 @@ import Modifier from '@system/modifier';
  * @extends {FormApplication}
  */
 export default class BRRollHandler extends FormApplication {
-
   /**
    * @param {string}              [title]         The title of the roll
    * @param {Actor}               [actor={}]      The actor who rolled the dice, if any
@@ -48,11 +44,15 @@ export default class BRRollHandler extends FormApplication {
      */
     this.title = title;
 
+    /** @typedef {import('@actor/actor-document').default} BladeRunnerActor */
+
     /**
      * The actor who rolled the dice.
      * @type {BladeRunnerActor}
      */
     this.actor = actor;
+
+    /** @typedef {import('@item/item-document').default} BladeRunnerItem */
 
     /**
      * The item(s) used to roll the dice.
@@ -66,9 +66,11 @@ export default class BRRollHandler extends FormApplication {
      */
     this.item = this.items[0];
 
+    /** @typedef {import('@system/modifier').default} Modifier */
+
     /**
      * A group of modifiers that can also be applied to the roll.
-     * @type {Modifier[]}
+     * @type {Modifier|Modifier[]>}
      */
     this.modifiers = !Array.isArray(modifiers) ? [modifiers] : modifiers;
     this.modifiers.push(this.items.flatMap(i => i.getModifiers({ targets: [attributeName, skillName] })));
@@ -86,9 +88,9 @@ export default class BRRollHandler extends FormApplication {
      */
     this.dice = !Array.isArray(dice) ? [dice] : dice;
 
-    this.die1 = { value: this.dice[0] };
-    this.die2 = { value: this.dice[1] ?? 0 };
-    this.die2 = { value: this.dice[2] ?? 0 };
+    // this.die1 = { value: this.dice[0] };
+    // this.die2 = { value: this.dice[1] ?? 0 };
+    // this.die2 = { value: this.dice[2] ?? 0 };
 
     /**
      * The roll in this FormApplication.
@@ -101,6 +103,12 @@ export default class BRRollHandler extends FormApplication {
      * @type {number}
      */
     this.maxPush = maxPush ?? 1;
+
+    /**
+     * Quantity of damage brought with this roll.
+     * @type {number}
+     */
+    this.damage = options.damage;
   }
 
   /* ------------------------------------------ */
@@ -123,6 +131,10 @@ export default class BRRollHandler extends FormApplication {
 
   get disadvantage() {
     return this.modifier < 0;
+  }
+
+  get isAttack() {
+    return !!this.damage || [ITEM_TYPES.WEAPON, ITEM_TYPES.EXPLOSIVE].includes(this.item?.type);
   }
 
   /* ------------------------------------------ */
@@ -154,6 +166,9 @@ export default class BRRollHandler extends FormApplication {
       dice: this.dice,
       advantage: this.advantage,
       disadvantage: this.disadvantage,
+      damage: this.damage,
+      attack: this.isAttack,
+      roll: this.roll,
       options,
     };
   }
@@ -185,7 +200,7 @@ export default class BRRollHandler extends FormApplication {
    * Not overriding this method will result in a thrown error.
    * @description In this method we pass the formData onto the correct internal rollHandler.
    * @param {JQueryEventConstructor} event
-   * @param {Object.<string|null>}  formData
+   * @param {Object.<string|null>}   formData
    * @returns private RollHandler //TODO what does it returns?
    * @override Required
    * @async
