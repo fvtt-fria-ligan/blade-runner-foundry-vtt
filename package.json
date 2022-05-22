@@ -17,7 +17,7 @@
     "format": "prettier --write \"./**/*.(js|json|scss)\"",
     "format:hbs": "prettier **/*.hbs --write --parser=glimmer",
     "postinstall": "npx patch-package & npx husky install",
-    "import:yzur": "xcopy node_modules\\foundry-year-zero-roller\\dist\\yzur.js static\\lib\\ /L /Y",
+    "import:yzur": "gulp yzur",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

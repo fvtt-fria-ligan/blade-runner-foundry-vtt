@@ -16,6 +16,7 @@ const production = process.env.NODE_ENV === 'production';
 const repoName = path.basename(path.resolve('.'));
 const sourceDirectory = './src';
 const distDirectory = './dist';
+const yzurDirectory = './static/lib';
 const templateExt = 'hbs';
 const staticFiles = ['lib', 'lang', 'assets', 'fonts', 'scripts', 'system.json', 'template.json', 'LICENSE'];
 const getDownloadURL = version =>
@@ -263,6 +264,26 @@ async function bumpVersion(cb) {
 }
 
 /* ------------------------------------------ */
+/*  YZUR                                      */
+/* ------------------------------------------ */
+
+/**
+ * Imports the latest YZUR library.
+ * @async
+ */
+async function importYzur() {
+  const source = path.resolve('node_modules/foundry-year-zero-roller/dist/yzur.js');
+  const dest = path.resolve(`${yzurDirectory}/yzur.js`);
+  if (fs.existsSync(source)) {
+    fs.copyFileSync(source, dest);
+    console.log(chalk.greenBright(`YZUR | File copied: "${dest}"`));
+  }
+  else {
+    throw new Error(chalk.red(`YZUR | Library file Not Found in "${source}"`));
+  }
+};
+
+/* ------------------------------------------ */
 /*  Scripts                                   */
 /* ------------------------------------------ */
 
@@ -274,3 +295,5 @@ export const build = gulp.series(clean, execBuild);
 export const watch = gulp.series(buildWatch);
 export const bump = gulp.series(bumpVersion, changelog, clean, execBuild);
 export const release = commitTagPush;
+
+export const yzur = gulp.series(importYzur);
