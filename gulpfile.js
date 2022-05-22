@@ -276,10 +276,10 @@ async function importYzur() {
   const dest = path.resolve(`${yzurDirectory}/yzur.js`);
   if (fs.existsSync(source)) {
     fs.copyFileSync(source, dest);
-    console.log(chalk.greenBright(`YZUR | File copied: "${dest}"`));
+    console.log(chalk.greenBright('[🎲YZUR🎲] Copied 1 file', chalk.blueBright(dest)));
   }
   else {
-    throw new Error(chalk.red(`YZUR | Library file Not Found in "${source}"`));
+    throw new Error(chalk.red(`[YZUR] 🎲 Library file Not Found in "${source}"`));
   }
 };
 
