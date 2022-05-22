@@ -102,8 +102,8 @@ async function cleanDist() {
 /**
  * Gets the data path of Foundry VTT based on what is configured in `foundryConfig.json`.
  * @returns {string} data path
- * @throws {Error} If user data path invalid (no data directory found)
- * @throws {Error} If no user data path defined in `foundryConfig.json`
+ * @throws {Error} When user data path invalid (no data directory found)
+ * @throws {Error} When no user data path defined in `foundryConfig.json`
  */
 function getDataPath() {
   const config = JSON.parse(fs.readFileSync('foundryConfig.json'));
@@ -124,7 +124,7 @@ function getDataPath() {
 
 /**
  * Links build to User Data folder.
- * @throws {Error} If could not find the `system.json`
+ * @throws {Error} When could not find the `system.json`
  * @async
  */
 async function linkUserData() {
@@ -216,10 +216,10 @@ async function commitTagPush() {
 /**
  * Updates version and download URL.
  * @param {function} cb Callback function
- * @throws {Error} If manifest JSON not found
- * @throws {Error} If missing release type
- * @throws {Error} If incorrect version arguments
- * @throws {Error} If target version is identical to current version
+ * @throws {Error} When manifest JSON not found
+ * @throws {Error} When missing release type
+ * @throws {Error} When incorrect version arguments
+ * @throws {Error} When target version is identical to current version
  * @async
  */
 async function bumpVersion(cb) {
