@@ -36,7 +36,7 @@
  * Custom Die class for Year Zero games.
  * @extends {Die} The Foundry Die class
  */
- class YearZeroDie extends Die {
+class YearZeroDie extends Die {
   constructor(termData = {}) {
     termData.faces = termData.faces || 6;
     super(termData);

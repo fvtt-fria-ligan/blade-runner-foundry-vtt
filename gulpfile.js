@@ -296,4 +296,4 @@ export const watch = gulp.series(buildWatch);
 export const bump = gulp.series(bumpVersion, changelog, clean, execBuild);
 export const release = commitTagPush;
 
-export const yzur = gulp.series(importYzur);
+export const yzur = importYzur;
