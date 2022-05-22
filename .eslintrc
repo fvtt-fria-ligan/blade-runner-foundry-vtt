@@ -46,6 +46,7 @@
     "no-prototype-builtins": "off",
     "no-shadow": ["error", { "builtinGlobals": true, "hoist": "all", "allow": ["event"] }],
     "no-trailing-spaces": ["error", { "ignoreComments": true }],
+    "no-unreachable": "warn",
     "no-unused-labels": 0,
     "no-unused-vars": "warn",
     "no-var": "error",
