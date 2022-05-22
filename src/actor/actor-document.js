@@ -51,8 +51,8 @@ export default class BladeRunnerActor extends Actor {
   /** @override */
   static async create(data, options) {
     switch (data.type) {
-      case [ACTOR_TYPES.PC]:
-      case [ACTOR_TYPES.NPC]:
+      case ACTOR_TYPES.PC:
+      case ACTOR_TYPES.NPC:
         if (!data.data.attributes || !data.data.skills) {
           throw new TypeError(`FLBR | "${data.type}" has No attribute nor skill`);
         }
@@ -81,8 +81,8 @@ export default class BladeRunnerActor extends Actor {
     super.prepareData();
 
     switch (this.type) {
-      case [ACTOR_TYPES.PC]: this._prepareCharacterData(); break;
-      case [ACTOR_TYPES.NPC]: this._prepareNpcData(); break;
+      case ACTOR_TYPES.PC: this._prepareCharacterData(); break;
+      case ACTOR_TYPES.NPC: this._prepareNpcData(); break;
     }
   }
 
