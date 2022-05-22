@@ -48,26 +48,27 @@ export default class BladeRunnerActor extends Actor {
   /*  Create                                    */
   /* ------------------------------------------ */
 
-  /** @override */
-  static async create(data, options) {
-    switch (data.type) {
-      case ACTOR_TYPES.PC:
-      case ACTOR_TYPES.NPC:
-        if (!data.data.attributes || !data.data.skills) {
-          throw new TypeError(`FLBR | "${data.type}" has No attribute nor skill`);
-        }
-        // Sets the default starting value for attributes.
-        for (const attribute in data.data.attributes) {
-          data.data.attributes[attribute] = { value: FLBR.startingAttributeLevel };
-        }
-        // Builds the list of skills.
-        for (const skill in FLBR.skillMap) {
-          data.data.skills[skill] = { value: FLBR.startingSkillLevel };
-        }
-        break;
-    }
-    return super.create(data, options);
-  }
+  // /** @override */
+  // static async create(data, options) {
+  //   console.warn(data, options);
+  //   switch (data.type) {
+  //     case ACTOR_TYPES.PC:
+  //     case ACTOR_TYPES.NPC:
+  //       if (!data.data.attributes || !data.data.skills) {
+  //         throw new TypeError(`FLBR | "${data.type}" has No attribute nor skill`);
+  //       }
+  //       // Sets the default starting value for attributes.
+  //       for (const attribute in data.data.attributes) {
+  //         data.data.attributes[attribute] = { value: FLBR.startingAttributeLevel };
+  //       }
+  //       // Builds the list of skills.
+  //       for (const skill in FLBR.skillMap) {
+  //         data.data.skills[skill] = { value: FLBR.startingSkillLevel };
+  //       }
+  //       break;
+  //   }
+  //   return super.create(data, options);
+  // }
 
   /* ----------------------------------------- */
   /*  Data Preparation                         */

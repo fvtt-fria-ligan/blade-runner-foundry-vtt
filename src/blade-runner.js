@@ -23,10 +23,19 @@ import { initializeHandlebars } from './system/handlebars.js';
 import { registerSystemSettings } from './system/settings.js';
 import BladeRunnerActor from './actor/actor-document.js';
 import BladeRunnerItem from './item/item-document.js';
+import { ACTOR_TYPES } from '@system/constants.js';
 
 /* ------------------------------------------ */
 /*  Foundry VTT Initialization                */
 /* ------------------------------------------ */
+
+/**
+ * Debugging
+ */
+/** @__PURE__ */ (async () => {
+  CONFIG.debug.hooks = true;
+  console.warn('HOOKS DEBUG ACTIVATED: ', CONFIG.debug.hooks);
+})();
 
 Hooks.once('init', () => {
   console.log('FLBR | Initializing the Blade Runner RPG Game System');
@@ -78,3 +87,27 @@ Hooks.on('renderItemSheet', (app, _html) => {
 // Hooks.on('renderActorSheet', (app, _html) => {
 //   app._element[0].style.height = 'auto';
 // });
+
+Hooks.on('createActor', async (actor, _data, _options) => {
+  const actorData = actor.data.data;
+  const updateData = {};
+  switch (actor.type) {
+    case ACTOR_TYPES.PC:
+    case ACTOR_TYPES.NPC:
+      if (!actorData.attributes || !actorData.skills) {
+        throw new TypeError(`FLBR | "${actor.type}" has No attribute nor skill`);
+      }
+      // Sets the default starting value for each attribute.
+      for (const attribute in actorData.attributes) {
+        updateData[`data.attributes.${attribute}.value`] = FLBR.startingAttributeLevel;
+      }
+      // Builds the list of skills and sets their default values.
+      for (const skill in FLBR.skillMap) {
+        updateData[`data.skills.${skill}.value`] = FLBR.startingSkillLevel;
+      }
+      break;
+  }
+  if (!foundry.utils.isObjectEmpty(updateData)) {
+    await actor.update(updateData);
+  }
+});
