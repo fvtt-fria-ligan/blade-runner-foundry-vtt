@@ -21,8 +21,8 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const br = game.system.data.name || SYSTEM_NAME;
-    return `systems/${br}/templates/item/${this.item.type}-sheet.hbs`;
+    const sysName = game.system.data.name || SYSTEM_NAME;
+    return `systems/${sysName}/templates/item/${this.item.type}-sheet.hbs`;
   }
 
   /* ------------------------------------------ */

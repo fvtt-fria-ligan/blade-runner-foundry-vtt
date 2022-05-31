@@ -151,8 +151,8 @@ export default class BRRollHandler extends FormApplication {
 
   /** @override */
   get template() {
-    const br = game.system.data.name || SYSTEM_NAME;
-    return this.options.template || `systems/${br}/templates/components/roll/roll-dialog.hbs`;
+    const sysName = game.system.data.name || SYSTEM_NAME;
+    return this.options.template || `systems/${sysName}/templates/components/roll/roll-dialog.hbs`;
   }
 
   /* ------------------------------------------ */

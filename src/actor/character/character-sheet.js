@@ -30,14 +30,14 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
   /** @override */
   get template() {
-    const br = game.system.data.name || SYSTEM_NAME;
+    const sysName = game.system.data.name || SYSTEM_NAME;
     if (!game.user.isGM && this.actor.limited) {
-      return `systems/${br}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.PC}-limited-sheet.hbs`;
+      return `systems/${sysName}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.PC}-limited-sheet.hbs`;
     }
     if (this.actor.type === ACTOR_TYPES.NPC) {
-      return `systems/${br}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.NPC}-sheet.hbs`;
+      return `systems/${sysName}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.NPC}-sheet.hbs`;
     }
-    return `systems/${br}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.PC}-sheet.hbs`;
+    return `systems/${sysName}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.PC}-sheet.hbs`;
   }
 
   /* ------------------------------------------ */
