@@ -1,10 +1,19 @@
+import { FLBR } from './config.js';
+import { SYSTEM_NAME } from './constants';
+
 /**
  * Defines a set of template paths to pre-load.
  * Pre-loaded templates are compiled and cached for fast access when rendering.
  * @returns {Promise}
  */
 function preloadHandlebarsTemplates() {
-  return loadTemplates([]);
+  const sysName = game.system.data.name || SYSTEM_NAME;
+  const templates = `systems/${sysName}/templates`;
+  return loadTemplates([
+    `${templates}/actor/character/character-sheet.hbs`,
+    `${templates}/actor/character/sheet-tabs/stats-tab.hbs`,
+    `${templates}/actor/character/sheet-tabs/bio-tab.hbs`,
+  ]);
 }
 
 /* ------------------------------------------ */
@@ -15,15 +24,16 @@ function preloadHandlebarsTemplates() {
  * Defines Handlebars custom Helpers and Partials.
  */
 function registerHandlebarsHelpers() {
-  Handlebars.registerHelper('concat', function () {
-    let str = '';
-    for (const arg in arguments) {
-      if (typeof arguments[arg] !== 'object') {
-        str += arguments[arg];
-      }
-    }
-    return str;
-  });
+  // TODO remove: inclus de base
+  // Handlebars.registerHelper('concat', function () {
+  //   let str = '';
+  //   for (const arg in arguments) {
+  //     if (typeof arguments[arg] !== 'object') {
+  //       str += arguments[arg];
+  //     }
+  //   }
+  //   return str;
+  // });
 
   Handlebars.registerHelper('capitalize', function (str) {
     return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.slice(1) : str;
@@ -77,6 +87,35 @@ function registerHandlebarsHelpers() {
   Handlebars.registerHelper('ratio', function (a, b) {
     return (a / b) * 100;
   });
+
+  /**
+   * Templates for a die Score selector.
+   * Parameters:
+   * * `target` - The name of the affected variable.
+   * * `selected` - The current selected value.
+   */
+  Handlebars.registerHelper('scoreSelector', function (target, selected) {
+    const options = [];
+    for (const [score, size] of FLBR.scoreMap) {
+      const isSelected = size === Number(selected);
+      const opt = `<option value="${size}"${isSelected ? ' selected' : ''}>${score}</option>`;
+      options.push(opt);
+    }
+    return new Handlebars.SafeString(
+      `<select name="${target}" class="score-selector">
+      ${options.join('\n')}
+      </select>`,
+    );
+  });
+  // Handlebars.registerPartial('scoreSelector',
+  //   `<select name="{{name}}" class="score-selector">
+  //     {{#select selected}}
+  //     {{#each @root.config.scoreMap | score size |}}
+  //       <option value="{{size}}">{{score}}</option>
+  //     {{/each}}
+  //     {{/select}}
+  //   </select>`,
+  // );
 }
 
 export function initializeHandlebars() {
