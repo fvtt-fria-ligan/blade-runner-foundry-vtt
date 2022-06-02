@@ -18,6 +18,7 @@
     "format:hbs": "prettier **/*.hbs --write --parser=glimmer",
     "postinstall": "npx patch-package & npx husky install",
     "import:yzur": "gulp yzur",
+    "upd": "npm outdated & npx npm-check -u",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -49,7 +50,7 @@
     "foundry-year-zero-roller": "github:Stefouch/foundry-year-zero-roller#v5.0.0"
   },
   "devDependencies": {
-    "@league-of-foundry-developers/foundry-vtt-types": "^9.268.2",
+    "@league-of-foundry-developers/foundry-vtt-types": "^9.269.0",
     "@types/jquery": "^3.5.14",
     "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
     "chalk": "^4.1.2",
