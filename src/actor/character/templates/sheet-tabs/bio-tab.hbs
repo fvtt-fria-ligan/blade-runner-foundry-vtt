@@ -1,0 +1,22 @@
+<div class="bio-tab">
+	<div class="section flex row space-between">
+		<h1>{{localize "FLBR.HEADER.YEARS_ON_THE_FORCE"}}</h1>
+		<input type="text" name="data.bio.yearsOnTheForce" value="{{data.bio.yearsOnTheForce}}" data-dtype="Number"/>
+	</div>
+	<div class="section">
+		<h1>{{localize "FLBR.HEADER.APPEARANCE"}}</h1>
+		{{editor content=data.bio.appearance target="data.bio.appearance" owner=owner button=true editable=true}}
+	</div>
+	<div class="section">
+		<h1>{{localize "FLBR.HEADER.KEY_MEMORY"}}</h1>
+		{{editor content=data.bio.keyMemory target="data.bio.keyMemory" owner=owner button=true editable=true}}
+	</div>
+	<div class="section">
+		<h1>{{localize "FLBR.HEADER.KEY_RELATIONSHIP"}}</h1>
+		{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=true}}
+	</div>
+	<div class="section">
+		<h1>{{localize "FLBR.HEADER.HOME"}}</h1>
+		{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=true}}
+	</div>
+</div>

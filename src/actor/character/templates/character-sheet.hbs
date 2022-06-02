@@ -1,6 +1,24 @@
 <form class="{{cssClass}}" autocomplete="off">
-	<div class="character">
-		<div class="character-bio">
+
+	{{!-- SHEET HEADER --}}
+
+	<div class="sheet-header"></div>
+
+	{{!-- SHEET TABS --}}
+
+	<div class="sheet-tabs flex row" data-group="primary">
+		<b class="sheet-tab" data-tab="bio">{{localize "FLBR.TAB.BIO"}}</b>
+	</div>
+
+	{{!-- SHEET BODY --}}
+
+	<div class="sheet-body">
+		<div class="tab" data-group="primary" data-tab="stats">
+{{> systems/blade-runner/templates/actor/character/sheet-tabs/stats-tab.hbs}}
+		</div>
+		<div class="tab" data-group="primary" data-tab="bio">
+{{> systems/blade-runner/templates/actor/character/sheet-tabs/bio-tab.hbs}}
 		</div>
 	</div>
+
 </form>

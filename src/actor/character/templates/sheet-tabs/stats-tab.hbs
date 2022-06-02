@@ -1,0 +1,40 @@
+<div class="stats-tab">
+	<div class="attributes-skills">
+		<h1>{{localize "FLBR.HEADER.ATTRIBUTES_AND_SKILLS"}}</h1>
+		<div class="stats-list flex row">
+		{{#each data.attributes as | attribute attrKey |}}
+			<div class="stat-blok stat-blok-{{attrKey}}">
+				<div class="stat-blok-header flex row align-end">
+					<h4 class="flex-1">{{localize "FLBR.RATING"}}</h4>
+					<h4>{{localize "FLBR.DIE_SIZE"}}</h4>
+				</div>
+				<div class="stat-blok-body">
+					<div class="stat-attribute flex row align-end">
+						<h2 class="flex-1">{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase attrKey))}}</h2>
+						<div class="attribute-score">
+							{{scoreSelector (concat "data.attributes." attrKey ".value") selected=attribute.value}}
+						</div>
+						<div class="attribute-size rollable" data-attribute="{{attrKey}}">{{localize "FLBR.DIE_ABBR"}}{{attribute.value}}</div>
+					</div>
+					{{!-- Each skills under the attribute --}}
+					{{#each @root.data.skills as | skill skillKey |}}
+						{{#if (eq attrKey (lookup @root.config.skillMap skillKey))}}
+							<div class="stat-skill skill-{{skillKey}} flex row align-end">
+								<h2 class="flex-1">{{localize (concat "FLBR.SKILL." (toUpperCase skillKey))}}</h2>
+								<div class="skill-score">
+									{{scoreSelector (concat "data.skills." skillKey ".value") selected=skill.value}}
+								</div>
+								{{#if (lte skill.value 0)}}
+									{{localize "FLBR.NO_VALUE"}}
+								{{else}}
+									<div class="skill-size rollable" data-skill="{{skillKey}}">{{localize "FLBR.DIE_ABBR"}}{{skill.value}}</div>
+								{{/if}}
+							</div>
+						{{/if}}
+					{{/each}}
+				</div>
+			</div>
+		{{/each}}
+		</div>
+	</div>
+</div>
