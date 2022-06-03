@@ -2,11 +2,35 @@
 
 	{{!-- SHEET HEADER --}}
 
-	<div class="sheet-header"></div>
+	<div class="sheet-header">
+		<div class="curriculum flex row">
+			<div class="photo">
+				<div class="avatar">
+					<img class="profile" src="{{img}}"/>
+				</div>
+				<div class="nature">
+					{{!-- TODO select --}}
+				</div>
+			</div>
+			<div class="identity">
+				<div class="name">
+					<input type="text" name="name" value="{{name}}"/>
+				</div>
+				<div class="archetype">
+					<input type="text" name="data.archetype" value="{{data.archetype}}"/>
+				</div>
+			</div>
+		</div>
+		<div class="capacities">
+			{{!-- TODO capacities --}}
+		</div>
+	</div>
 
 	{{!-- SHEET TABS --}}
 
 	<div class="sheet-tabs flex row" data-group="primary">
+		<b class="sheet-tab" data-tab="stats">{{localize "FLBR.TAB.STATS"}}</b>
+		<b class="sheet-tab" data-tab="inventory">{{localize "FLBR.TAB.INVENTORY"}}</b>
 		<b class="sheet-tab" data-tab="bio">{{localize "FLBR.TAB.BIO"}}</b>
 	</div>
 
@@ -15,6 +39,9 @@
 	<div class="sheet-body">
 		<div class="tab" data-group="primary" data-tab="stats">
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/stats-tab.hbs}}
+		</div>
+		<div class="tab" data-group="primary" data-tab="inventory">
+{{> systems/blade-runner/templates/actor/character/sheet-tabs/inventory-tab.hbs}}
 		</div>
 		<div class="tab" data-group="primary" data-tab="bio">
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/bio-tab.hbs}}

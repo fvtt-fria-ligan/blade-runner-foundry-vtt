@@ -47,8 +47,8 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   /** @override */
   getData(options) {
     const sheetData = super.getData(options);
-    generateScores(sheetData.data.attributes);
-    generateScores(sheetData.data.skills);
+    // generateScores(sheetData.data.attributes);
+    // generateScores(sheetData.data.skills);
     sheetData.isPC = this.actor.type === ACTOR_TYPES.PC;
     sheetData.isNPC = this.actor.type === ACTOR_TYPES.NPC;
     return sheetData;
