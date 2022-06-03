@@ -8,5 +8,13 @@
   "printWidth": 120,
   "tabWidth": 2,
   "quoteProps": "as-needed",
-  "arrowParens": "avoid"
+  "arrowParens": "avoid",
+  "overrides": [
+    {
+      "files": [".hbs", ".htm", ".html"],
+      "options": {
+        "useTabs": true
+      }
+    }
+  ]
 }
