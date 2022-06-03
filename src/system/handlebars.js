@@ -8,11 +8,13 @@ import { SYSTEM_NAME } from './constants';
  */
 function preloadHandlebarsTemplates() {
   const sysName = game.system.data.name || SYSTEM_NAME;
-  const templates = `systems/${sysName}/templates`;
+  const path = `systems/${sysName}/templates`;
   return loadTemplates([
-    `${templates}/actor/character/character-sheet.hbs`,
-    `${templates}/actor/character/sheet-tabs/stats-tab.hbs`,
-    `${templates}/actor/character/sheet-tabs/bio-tab.hbs`,
+    `${path}/actor/character/character-sheet.hbs`,
+    `${path}/actor/character/sheet-tabs/stats-tab.hbs`,
+    `${path}/actor/character/sheet-tabs/inventory-tab.hbs`,
+    `${path}/actor/character/sheet-tabs/bio-tab.hbs`,
+    `${path}/actor/character/inventory.hbs`,
   ]);
 }
 
@@ -116,6 +118,17 @@ function registerHandlebarsHelpers() {
   //     {{/select}}
   //   </select>`,
   // );
+  Handlebars.registerHelper('boxes', function (target, value, min, max) {
+    let str = `<a class="boxes" data-target="${target}" data-min="${min}" data-max="${max}"`;
+    value = Number(value);
+    max = Number(max);
+    for (let i = 0; i < max; i++) {
+      if (value >= i) str += `${FLBR.Icons.boxes.full}`;
+      else str += `${FLBR.Icons.boxes.empty}`;
+    }
+    str += '</a>';
+    return new Handlebars.SafeString(str);
+  });
 }
 
 export function initializeHandlebars() {
