@@ -4,34 +4,55 @@
 
 	<div class="sheet-header">
 		<div class="curriculum flex row">
-			<div class="photo">
+			<div class="avatar-blok">
 				<div class="avatar">
-					<img class="profile" src="{{img}}"/>
+					<img class="profile" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="64" width="64"/>
 				</div>
 				<div class="nature">
-					{{!-- TODO select --}}
+					<select name="data.nature">
+						{{selectOptions config.natures selected=data.nature localize=true}}
+					</select>
 				</div>
 			</div>
 			<div class="identity">
 				<div class="name">
-					<input type="text" name="name" value="{{name}}"/>
+					<input type="text" name="name" value="{{actor.name}}"/>
 				</div>
 				<div class="archetype">
-					<input type="text" name="data.archetype" value="{{data.archetype}}"/>
+					{{!-- TODO Améliorer --}}
+					<input list="list-of-archetypes" type="text" name="data.archetype" value="{{data.archetype}}"/>
+					<datalist id="list-of-archetypes">
+						{{#each config.archetypes}}
+							<option value="{{.}}"></option>
+						{{/each}}
+					</datalist>
 				</div>
 			</div>
 		</div>
-		<div class="capacities">
-			{{!-- TODO capacities --}}
+		<div class="capacities flex row">
+			{{#if data.health}}
+				<div class="capacity-health">
+					<h2>{{localize "FLBR.HEADER.Health"}}</h2>
+					{{boxes "data.health.value" value=(substract data.health.max data.health.value) min=0 max=data.health.max}}
+					&nbsp;{{data.health.value}}/{{data.health.max}}
+				</div>
+			{{/if}}
+			{{#if data.resolve}}
+				<div class="capacity-resolve">
+					<h2>{{localize "FLBR.HEADER.Resolve"}}</h2>
+					{{boxes "data.resolve.value" value=(substract data.resolve.max data.resolve.value) min=0 max=data.resolve.max}}
+					&nbsp;{{data.resolve.value}}/{{data.resolve.max}}
+				</div>
+			{{/if}}
 		</div>
 	</div>
 
 	{{!-- SHEET TABS --}}
 
 	<div class="sheet-tabs flex row" data-group="primary">
-		<b class="sheet-tab" data-tab="stats">{{localize "FLBR.TAB.STATS"}}</b>
-		<b class="sheet-tab" data-tab="inventory">{{localize "FLBR.TAB.INVENTORY"}}</b>
-		<b class="sheet-tab" data-tab="bio">{{localize "FLBR.TAB.BIO"}}</b>
+		<b class="sheet-tab" data-tab="stats">{{localize "FLBR.TAB.Stats"}}</b>
+		<b class="sheet-tab" data-tab="inventory">{{localize "FLBR.TAB.Inventory"}}</b>
+		<b class="sheet-tab" data-tab="bio">{{localize "FLBR.TAB.Bio"}}</b>
 	</div>
 
 	{{!-- SHEET BODY --}}
@@ -41,11 +62,32 @@
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/stats-tab.hbs}}
 		</div>
 		<div class="tab" data-group="primary" data-tab="inventory">
-{{> systems/blade-runner/templates/actor/character/sheet-tabs/inventory-tab.hbs}}
+{{!-- {{> systems/blade-runner/templates/actor/character/sheet-tabs/inventory-tab.hbs}} --}}
 		</div>
 		<div class="tab" data-group="primary" data-tab="bio">
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/bio-tab.hbs}}
 		</div>
+	</div>
+
+	{{!-- SHEET FOOTER --}}
+
+	<div class="sheet-footer">
+		{{#if isPC}}
+			<div class="meta-currencies flex row space-between">
+				<div class="meta-currency-promotion">
+					<h2>{{localize "FLBR.HEADER.PromotionPoints"}}</h2>
+					{{boxes "data.metaCurrencies.promotion" value=data.metaCurrencies.promotion min=0 max=config.maxPromotionPoints}}
+				</div>
+				<div class="meta-currency-humanity">
+					<h2>{{localize "FLBR.HEADER.HumanityPoints"}}</h2>
+					{{boxes "data.metaCurrencies.humanity" value=data.metaCurrencies.humanity min=0 max=config.maxHumanityPoints}}
+				</div>
+				<div class="meta-currency-chinyen">
+					<h2>{{localize "FLBR.HEADER.ChinyenPoints"}}</h2>
+					{{boxes "data.metaCurrencies.chinyen" value=data.metaCurrencies.chinyen min=0 max=config.maxChinyenPoints}}
+				</div>
+			</div>
+		{{/if}}
 	</div>
 
 </form>

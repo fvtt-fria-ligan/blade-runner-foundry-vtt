@@ -12,17 +12,19 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   /** @override */
   static get defaultOptions() {
+    const sysName = game.system.data.name || SYSTEM_NAME;
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [SYSTEM_NAME, 'sheet', 'item'],
+      classes: [sysName, 'sheet', 'item'],
       width: window.innerWidth * 0.08 + 350,
       resizable: true,
+      tabs: [{ navSelector: '.sheet-tabs', contentSelector: '.sheet-body', initial: 'info' }],
     });
   }
 
   /** @override */
   get template() {
     const sysName = game.system.data.name || SYSTEM_NAME;
-    return `systems/${sysName}/templates/item/${this.item.type}-sheet.hbs`;
+    return `systems/${sysName}/templates/item/item-sheet.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -31,16 +33,16 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   /** @override */
   getData(options) {
-    const isOwner = this.actor.isOwner;
     const baseData = super.getData(options);
     const sheetData = {
-      cssClass: isOwner ? 'editable' : 'locked',
-      owner: isOwner,
+      cssClass: this.isEditable ? 'editable' : 'locked',
+      owner: !!this.item.actor?.isOwner,
       // limited: this.actor.limited,
       editable: this.isEditable,
       options: this.options,
       isGM: game.user.isGM,
-      inActor: this.item.actor ? true : false,
+      inActor: !!this.item.actor,
+      isOffensive: this.item.isOffensive,
       // inVehicle: this.item.actor?.type === 'vehicle',
       item: baseData.item,
       data: baseData.item.data.data,
@@ -64,7 +66,49 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     // if (!this.options.editable) return;
     if (!this.isEditable) return;
 
-    // Input Focus
-    html.find('input').focus(ev => ev.currentTarget.select());
+    // Input Focus & Update
+    const inputs = html.find('input');
+    inputs.focus(ev => ev.currentTarget.select());
+    inputs.addBack().find('[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
+
+    // Roll Modifiers
+    html.find('.add-modifier').click(this._onAddModifier.bind(this));
+    html.find('.delete-modifier').click(this._onDeleteModifier.bind(this));
+  }
+
+  /* ------------------------------------------- */
+
+  /**
+   * Changes the value based on an input delta.
+   * @param {Event} event
+   */
+  _onChangeInputDelta(event) {
+    event.preventDefault();
+    const input = event.target;
+    const value = input.value;
+    if (value[0] === '+' || value[0] === '-') {
+      const delta = parseFloat(value);
+      input.value = foundry.utils.getProperty(this.item.data, input.name) + delta;
+    }
+    else if (value[0] === '=') {
+      input.value = value.slice(1);
+    }
+  }
+
+  /* ------------------------------------------- */
+
+  _onAddModifier(event) {
+    event.preventDefault();
+    const rollModifiers = foundry.utils.duplicate(this.item.data.data.rollModifiers ?? {});
+    const modifierId = Math.max(-1, ...Object.getOwnPropertyNames(rollModifiers)) + 1;
+    return this.item.update({ [`data.rollModifiers.${modifierId}`]: { name: '', value: '+1' } });
+  }
+
+  _onDeleteModifier(event) {
+    event.preventDefault();
+    const modifierId = event.currentTarget.dataset.modifierId;
+    if (this.item.data.data.rollModifiers[modifierId]) {
+      this.item.update({ [`data.rollModifiers.-=${modifierId}`]: null });
+    }
   }
 }

@@ -12,7 +12,7 @@ function preloadHandlebarsTemplates() {
   return loadTemplates([
     `${path}/actor/character/character-sheet.hbs`,
     `${path}/actor/character/sheet-tabs/stats-tab.hbs`,
-    `${path}/actor/character/sheet-tabs/inventory-tab.hbs`,
+    // `${path}/actor/character/sheet-tabs/inventory-tab.hbs`,
     `${path}/actor/character/sheet-tabs/bio-tab.hbs`,
     `${path}/actor/character/inventory.hbs`,
   ]);
@@ -26,16 +26,20 @@ function preloadHandlebarsTemplates() {
  * Defines Handlebars custom Helpers and Partials.
  */
 function registerHandlebarsHelpers() {
-  // TODO remove: inclus de base
-  // Handlebars.registerHelper('concat', function () {
-  //   let str = '';
-  //   for (const arg in arguments) {
-  //     if (typeof arguments[arg] !== 'object') {
-  //       str += arguments[arg];
-  //     }
-  //   }
-  //   return str;
-  // });
+  /**
+   * Replaces the default Foundry concat helper
+   * because we want to return a string
+   * and not a SafeString object.
+   */
+  Handlebars.registerHelper('concat', function () {
+    let str = '';
+    for (const arg in arguments) {
+      if (typeof arguments[arg] !== 'object') {
+        str += arguments[arg];
+      }
+    }
+    return str;
+  });
 
   Handlebars.registerHelper('capitalize', function (str) {
     return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.slice(1) : str;
@@ -78,6 +82,10 @@ function registerHandlebarsHelpers() {
     return a + b;
   });
 
+  Handlebars.registerHelper('substract', function (a, b) {
+    return a - b;
+  });
+
   Handlebars.registerHelper('divide', function (a, b) {
     return a / b;
   });
@@ -96,34 +104,28 @@ function registerHandlebarsHelpers() {
    * * `target` - The name of the affected variable.
    * * `selected` - The current selected value.
    */
-  Handlebars.registerHelper('scoreSelector', function (target, selected) {
-    const options = [];
+  Handlebars.registerHelper('scoreSelector', function (target, options) {
+    const selectOptions = [];
+    const selected = Number(options.hash.selected);
     for (const [score, size] of FLBR.scoreMap) {
-      const isSelected = size === Number(selected);
+      const isSelected = size === selected;
       const opt = `<option value="${size}"${isSelected ? ' selected' : ''}>${score}</option>`;
-      options.push(opt);
+      selectOptions.push(opt);
     }
     return new Handlebars.SafeString(
       `<select name="${target}" class="score-selector">
-      ${options.join('\n')}
+      ${selectOptions.join('\n')}
       </select>`,
     );
   });
-  // Handlebars.registerPartial('scoreSelector',
-  //   `<select name="{{name}}" class="score-selector">
-  //     {{#select selected}}
-  //     {{#each @root.config.scoreMap | score size |}}
-  //       <option value="{{size}}">{{score}}</option>
-  //     {{/each}}
-  //     {{/select}}
-  //   </select>`,
-  // );
-  Handlebars.registerHelper('boxes', function (target, value, min, max) {
-    let str = `<a class="boxes" data-target="${target}" data-min="${min}" data-max="${max}"`;
-    value = Number(value);
-    max = Number(max);
+  Handlebars.registerHelper('boxes', function (field, options) {
+    const value = Number(options.hash.value);
+    const min = Number(options.hash.min);
+    const max = Number(options.hash.max);
+    let str = `<a class="capacity-boxes" data-field="${field}" data-min="${min}" data-max="${max}">`;
     for (let i = 0; i < max; i++) {
-      if (value >= i) str += `${FLBR.Icons.boxes.full}`;
+      if (i === 10) str += '<br/>';
+      if (value > i) str += `${FLBR.Icons.boxes.full}`;
       else str += `${FLBR.Icons.boxes.empty}`;
     }
     str += '</a>';

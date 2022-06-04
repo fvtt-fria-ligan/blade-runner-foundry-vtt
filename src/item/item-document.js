@@ -19,6 +19,10 @@ export default class BladeRunnerItem extends Item {
     return FLBR.physicalItems.includes(this.type);
   }
 
+  get isOffensive() {
+    return this.props.damage != null;
+  }
+
   get hasModifier() {
     if (!this.props.modifiers) return false;
     return !foundry.utils.isObjectEmpty(this.props.modifiers);

@@ -9,7 +9,7 @@ export const FLBR = {};
 
 /** @type {Map.<string, number>} */
 FLBR.scoreMap = new Map();
-FLBR.scoreMap.set('—', 0);
+FLBR.scoreMap.set('–', 0);
 for (const score in BR.DIE_SCORES) {
   FLBR.scoreMap.set(score, BR.DIE_SCORES[score]);
 }
@@ -42,36 +42,10 @@ FLBR.startingSkillLevel = 6;
 
 // TODO
 FLBR.archetypes = Object.values(BR.ARCHETYPES);
-// FLBR.archetypes = {
-//   [BR.ARCHETYPES.ANALYST]: {
-//     label: 'FLBR.Archetype.Analyst',
-//     allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
-//   },
-//   [BR.ARCHETYPES.CITY_SPEAKER]: {
-//     label: 'FLBR.Archetype.CitySpeaker',
-//     allowedNatures: [BR.NATURES.HUMAN],
-//   },
-//   [BR.ARCHETYPES.ENFORCER]: {
-//     label: 'FLBR.Archetype.Enforcer',
-//     allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
-//   },
-//   [BR.ARCHETYPES.DOXIE]: {
-//     label: 'FLBR.Archetype.Doxie',
-//     allowedNatures: [BR.NATURES.REPLICANT],
-//   },
-//   [BR.ARCHETYPES.FIXER]: {
-//     label: 'FLBR.Archetype.Fixed',
-//     allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
-//   },
-//   [BR.ARCHETYPES.INSPECTOR]: {
-//     label: 'FLBR.Archetype.Inspector',
-//     allowedNatures: [BR.NATURES.HUMAN, BR.NATURES.REPLICANT],
-//   },
-//   [BR.ARCHETYPES.SKIMMER]: {
-//     label: 'FLBR.Archetype.Skimmer',
-//     allowedNatures: [BR.NATURES.HUMAN],
-//   },
-// };
+
+FLBR.maxPromotionPoints = 20;
+FLBR.maxHumanityPoints = 20;
+FLBR.maxChinyenPoints = 20;
 
 FLBR.capacitiesMap = {
   [BR.CAPACITIES.HEALTH]: {
@@ -84,13 +58,9 @@ FLBR.capacitiesMap = {
   },
 };
 
-FLBR.maxPromotionPoints = 20;
-FLBR.maxHumanityPoints = 20;
-FLBR.maxChinyenPoints = 20;
-
 FLBR.natures = {
-  [BR.NATURES.HUMAN]: 'FLBR.Nature.Human',
-  [BR.NATURES.REPLICANT]: 'FLBR.Nature.Replicant',
+  [BR.NATURES.HUMAN]: 'FLBR.NATURE.Human',
+  [BR.NATURES.REPLICANT]: 'FLBR.NATURE.Replicant',
 };
 
 FLBR.natureModifierMap = {
@@ -123,10 +93,6 @@ FLBR.pushTraumaMap = {
     [BR.ATTRIBUTES.EMPATHY]: BR.CAPACITIES.RESOLVE,
   },
 };
-
-FLBR.physicalItems = [BR.ITEM_TYPES.GENERIC, BR.ITEM_TYPES.WEAPON, BR.ITEM_TYPES.ARMOR, BR.ITEM_TYPES.EXPLOSIVE];
-
-FLBR.ranges = [BR.RANGES.ENGAGED, BR.RANGES.SHORT, BR.RANGES.MEDIUM, BR.RANGES.LONG, BR.RANGES.EXTREME];
 
 FLBR.actionSkillMap = {
   [BR.COMBAT_ACTIONS.SPRINT]: {
@@ -181,6 +147,29 @@ FLBR.actionSkillMap = {
 
 FLBR.deathSaveTest = BR.SKILLS.STAMINA;
 FLBR.baselineTest = BR.SKILLS.INSIGHT;
+
+FLBR.physicalItems = [BR.ITEM_TYPES.GENERIC, BR.ITEM_TYPES.WEAPON, BR.ITEM_TYPES.ARMOR, BR.ITEM_TYPES.EXPLOSIVE];
+
+FLBR.ranges = {
+  [BR.RANGES.ENGAGED]: 'FLBR.WEAPON_RANGE.Engaged',
+  [BR.RANGES.SHORT]: 'FLBR.WEAPON_RANGE.Short',
+  [BR.RANGES.MEDIUM]: 'FLBR.WEAPON_RANGE.Medium',
+  [BR.RANGES.LONG]: 'FLBR.WEAPON_RANGE.Long',
+  [BR.RANGES.EXTREME]: 'FLBR.WEAPON_RANGE.Extreme',
+};
+
+FLBR.availabilities = {
+  [BR.AVAILABILITIES.INCIDENTAL]: 'FLBR.ITEM_AVAILABILITY.Incidental',
+  [BR.AVAILABILITIES.STANDARD]: 'FLBR.ITEM_AVAILABILITY.Standard',
+  [BR.AVAILABILITIES.PREMIUM]: 'FLBR.ITEM_AVAILABILITY.Premium',
+  [BR.AVAILABILITIES.RARE]: 'FLBR.ITEM_AVAILABILITY.Rare',
+  [BR.AVAILABILITIES.LUXURY]: 'FLBR.ITEM_AVAILABILITY.Luxury',
+};
+
+FLBR.damageTypes = {
+  [BR.DAMAGE_TYPES.CRUSHING]: 'FLBR.WEAPON_DAMAGE_TYPE.Crushing',
+  [BR.DAMAGE_TYPES.PIERCING]: 'FLBR.WEAPON_DAMAGE_TYPE.Piercing',
+};
 
 FLBR.blastPowerMap = {
   12: { damage: 4, crit: 12 },

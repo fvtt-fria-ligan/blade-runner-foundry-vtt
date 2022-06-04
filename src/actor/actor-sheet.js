@@ -95,6 +95,8 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     inputs.focus(ev => ev.currentTarget.select());
 
     // Item Management
+    html.find('.capacities .capacity-boxes').on('click contextmenu', this._onCapacityDecrease.bind(this));
+    html.find('.meta-currencies .capacity-boxes').on('click contextmenu', this._onCapacityIncrease.bind(this));
     html.find('.item-create').click(this._onItemCreate.bind(this));
     html.find('.item-edit').click(this._onItemEdit.bind(this));
     html.find('.item-delete').click(this._onItemDelete.bind(this));
@@ -145,20 +147,24 @@ export default class BladeRunnerActorSheet extends ActorSheet {
 
   /* ------------------------------------------ */
 
-  /** Left-clic: +1, Right-clic: -1 */
-  _onValueChange(event) {
+  _onCapacityIncrease(event) { return this._onCapacityChange(event, +1); }
+  _onCapacityDecrease(event) { return this._onCapacityChange(event, -1); }
+
+  /** Default => Left-click: +1, Right-click: -1 */
+  _onCapacityChange(event, mod = 1) {
     event.preventDefault();
     const elem = event.currentTarget;
-    const min = +elem.dataset.min || 0;
+    const min = +elem.dataset.min ?? 0;
     const max = +elem.dataset.max || 10;
     const field = elem.dataset.field;
-    const currentCount = foundry.utils.getProperty(this.actor, `data.data.${field}`) || 0;
-    let newCount = currentCount;
+    if (!field) return;
 
-    if (event.type === 'click') newCount++;
-    else newCount--; // contextmenu
-    newCount = Math.clamped(newCount, min, max);
+    let count = foundry.utils.getProperty(this.actor, `data.${field}`) ?? 0;
 
-    return this.actor.update({ [`data.${field}`]: newCount });
+    if (event.type === 'click') count += mod;
+    else count -= mod; // contextmenu
+    count = Math.clamped(count, min, max);
+
+    return this.actor.update({ [field]: count });
   }
 }

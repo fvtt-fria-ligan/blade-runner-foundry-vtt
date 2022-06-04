@@ -103,7 +103,8 @@
         "damage": 1,
         "crit": 6,
         "damageType": 1,
-        "range": { "min": 0, "max": 1 }
+        "range": { "min": 0, "max": 1 },
+        "special": ""
       },
       "itemModifiers": { "modifiers": {} }
     },
@@ -130,7 +131,7 @@
     },
     "injury": {
       "templates": ["itemModifiers"],
-      "category": "piercing",
+      "category": 1,
       "lethal": false,
       "permanent": false,
       "deathSave": "",

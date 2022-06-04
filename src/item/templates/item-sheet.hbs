@@ -1,0 +1,125 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+	{{!-- SHEET HEADER --}}
+
+	<div class="sheet-header">
+		<div class="flex row">
+			<img class="profile" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="150" width="150"/>
+			<div class="item-type">{{localize (concat "ITEM.Type" (capitalize item.type))}}</div>
+		</div>
+		<div class="item-name">
+			<input type="text" name="name" value="{{item.name}}"/>
+		</div>
+	</div>
+
+	{{!-- SHEET TABS --}}
+
+	<div class="sheet-tabs flex row" data-group="primary">
+		<a class="sheet-tab" data-tab="info">{{localize "FLBR.TAB.Info"}}</a>
+		{{#unless (eq item.type "specialty")}}
+			<a class="sheet-tab" data-tab="features">{{localize "FLBR.TAB.Features"}}</a>
+		{{/unless}}
+	</div>
+
+	{{!-- SHEET BODY --}}
+
+	<div class="sheet-body">
+
+		<div class="tab" data-group="primary" data-tab="info">
+			{{editor content=data.description target="data.description" owner=owner button=true editable=editable}}
+		</div>
+
+		{{#unless (eq item.type "specialty")}}
+			<div class="tab tab-features" data-group="primary" data-tab="features">
+
+				{{#if (eq item.type "injury")}}
+					<div class="item-property-category">
+						<label>{{localize "FLBR.InjuryCategory"}}</label>
+						<select name="data.category">
+							{{selectOptions config.damageTypes selected=data.category localize=true}}
+						</select>
+					</div>
+					<div class="item-property-lethal">
+						<label>{{localize "FLBR.InjuryLethal"}}</label>
+						<input type="checkbox" name="data.lethal" {{checked data.lethal}}/>
+					</div>
+					<div class="item-property-permanent">
+						<label>{{localize "FLBR.InjuryPermanent"}}</label>
+						<input type="checkbox" name="data.permanent" {{checked data.permanent}}/>
+					</div>
+					<div class="item-property-death-save">
+						<label>{{localize "FLBR.InjuryDeathSave"}}</label>
+						<input type="text" name="data.deathSave" value="{{data.deathSave}}"/>
+					</div>
+					<div class="item-property-healing">
+						<label>{{localize "FLBR.InjuryHealing"}}</label>
+						<input type="text" name="data.healing" value="{{data.healing}}"/>
+					</div>
+					<div class="item-property-effect">
+						<label>{{localize "FLBR.InjuryEffect"}}</label>
+						<input type="text" name="data.effect" value="{{data.effect}}"/>
+					</div>
+				{{else}}
+					<div class="item-property-quantity">
+						<label>{{localize "FLBR.ItemQuantity"}}</label>
+						<input type="text" name="data.qty" value="{{data.qty}}" data-dtype="Number"/>
+					</div>
+					<div class="item-property-cost">
+						<label>{{localize "FLBR.ItemCost"}}</label>
+						<input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
+					</div>
+					<div class="item-property-availability">
+						<label>{{localize "FLBR.ItemAvailability"}}</label>
+						<select name="data.availability">
+							{{selectOptions config.availabilities selected=data.availability localize=true}}
+						</select>
+					</div>
+
+					{{#if (eq item.type "armor")}}
+						<div class="item-property-armor">
+							<label>{{localize "FLBR.ItemArmor"}}</label>
+							<input type="text" name="data.armor" value="{{data.armor}}" data-dtype="Number"/>
+						</div>
+					{{/if}}
+
+					{{#if isOffensive}}
+						{{#if (eq item.type "explosive")}}
+							<div class="item-property-blast">
+								<label>{{localize "FLBR.ExplosiveBlast"}}</label>
+								{{scoreSelector "data.blast" selected=data.blast}}
+							</div>
+						{{/if}}
+						<div class="item-property-damage">
+							<label>{{localize "FLBR.WeaponDamage"}}</label>
+							<input type="text" name="data.damage" value="{{data.damage}}" data-dtype="Number"/>
+						</div>
+						<div class="item-property-crit">
+							<label>{{localize "FLBR.WeaponCrit"}} ({{localize "FLBR.D"}}{{data.crit}})</label>
+							{{scoreSelector "data.crit" selected=data.crit}}
+						</div>
+						<div class="item-property-damage-type">
+							<label>{{localize "FLBR.WeaponDamageType"}}</label>
+							<select name="data.damageType">
+								{{selectOptions config.damageTypes selected=data.damageType localize=true}}
+							</select>
+						</div>
+						<div class="item-property-range">
+							<label>{{localize "FLBR.WeaponRange"}}</label>
+							<div class="ranges-min-max flex row">
+								<select name="data.range.min">
+									{{selectOptions config.ranges selected=data.range.min localize=true}}
+								</select>
+								{{localize "FLBR.To"}}
+								<select name="data.range.max">
+									{{selectOptions config.ranges selected=data.range.max localize=true}}
+								</select>
+							</div>
+						</div>
+					{{/if}}
+				{{/if}}
+
+			</div>
+		{{/unless}}
+	</div>
+
+</form>

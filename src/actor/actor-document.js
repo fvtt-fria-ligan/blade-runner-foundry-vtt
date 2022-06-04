@@ -19,6 +19,14 @@ export default class BladeRunnerActor extends Actor {
     return this.props.skills;
   }
 
+  get archetype() {
+    return this.props.archetype;
+  }
+
+  get nature() {
+    return this.props.nature;
+  }
+
   get health() {
     return this.props.health;
   }
@@ -111,13 +119,13 @@ export default class BladeRunnerActor extends Actor {
    */
   _prepareCapacities() {
     // Rolls over each legal capacity.
-    for (const identifier of Object.values(CAPACITIES)) {
-      const capacity = this.data.data[identifier];
-      const capData = FLBR.capacitiesMap[identifier];
+    for (const cap of Object.values(CAPACITIES)) {
+      const capacity = this.data.data[cap];
+      const capData = FLBR.capacitiesMap[cap];
       // Proceeds if it exists in the character.
       if (capacity && capData) {
         // Gets the nature modifier.
-        const natureModifier = FLBR.natureModifierMap[this.type]?.[identifier] ?? 0;
+        const natureModifier = FLBR.natureModifierMap[this.type]?.[cap] ?? 0;
         // Gets any permanent loss.
         const permanentLoss = capacity.permanentLoss ?? 0;
 
@@ -146,7 +154,7 @@ export default class BladeRunnerActor extends Actor {
    * @returns {number}
    */
   getAttribute(attributeName) {
-    return this.attributes[attributeName]?.value;
+    return +this.attributes[attributeName]?.value;
   }
 
   /**
@@ -155,6 +163,6 @@ export default class BladeRunnerActor extends Actor {
    * @returns {number}
    */
   getSkill(skillName) {
-    return this.skills[skillName]?.value;
+    return +this.skills[skillName]?.value;
   }
 }

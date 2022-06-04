@@ -1,22 +1,24 @@
 <div class="bio-tab">
+	{{#if data.bio}}
 	<div class="section flex row space-between">
-		<h1>{{localize "FLBR.HEADER.YEARS_ON_THE_FORCE"}}</h1>
+		<h1>{{localize "FLBR.HEADER.YearsOnTheForce"}}</h1>
 		<input type="text" name="data.bio.yearsOnTheForce" value="{{data.bio.yearsOnTheForce}}" data-dtype="Number"/>
 	</div>
 	<div class="section">
-		<h1>{{localize "FLBR.HEADER.APPEARANCE"}}</h1>
-		{{editor content=data.bio.appearance target="data.bio.appearance" owner=owner button=true editable=true}}
+		<h1>{{localize "FLBR.HEADER.Appearance"}}</h1>
+		{{editor content=data.bio.appearance target="data.bio.appearance" owner=owner button=true editable=editable}}
 	</div>
 	<div class="section">
-		<h1>{{localize "FLBR.HEADER.KEY_MEMORY"}}</h1>
-		{{editor content=data.bio.keyMemory target="data.bio.keyMemory" owner=owner button=true editable=true}}
+		<h1>{{localize "FLBR.HEADER.KeyMemory"}}</h1>
+		{{editor content=data.bio.keyMemory target="data.bio.keyMemory" owner=owner button=true editable=editable}}
 	</div>
 	<div class="section">
-		<h1>{{localize "FLBR.HEADER.KEY_RELATIONSHIP"}}</h1>
-		{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=true}}
+		<h1>{{localize "FLBR.HEADER.KeyRelationship"}}</h1>
+		{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=editable}}
 	</div>
 	<div class="section">
-		<h1>{{localize "FLBR.HEADER.HOME"}}</h1>
-		{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=true}}
+		<h1>{{localize "FLBR.HEADER.Home"}}</h1>
+		{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=editable}}
 	</div>
+	{{/if}}
 </div>
