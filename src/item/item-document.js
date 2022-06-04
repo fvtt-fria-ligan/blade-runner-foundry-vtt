@@ -35,7 +35,7 @@ export default class BladeRunnerItem extends Item {
   get detailedName() {
     let str = this.name;
     if (this.qty > 1) {
-      str += `(${this.qty})`;
+      str += ` (${this.qty})`;
     }
     return str;
   }

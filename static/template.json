@@ -96,47 +96,47 @@
       "itemBase": {
         "qty": 1,
         "cost": 0,
-        "availability": 4,
-        "description": ""
+        "availability": 4
+      },
+      "itemDesc": {
+        "description": "",
+        "special": ""
       },
       "itemOffensive": {
         "damage": 1,
         "crit": 6,
         "damageType": 1,
-        "range": { "min": 0, "max": 1 },
-        "special": ""
+        "range": { "min": 0, "max": 1 }
       },
       "itemModifiers": { "modifiers": {} }
     },
     "generic": {
-      "templates": ["itemBase", "itemModifiers"]
+      "templates": ["itemBase", "itemDesc", "itemModifiers"]
     },
     "upgrade": {
-      "templates": ["itemBase", "itemModifiers"]
+      "templates": ["itemBase", "itemDesc", "itemModifiers"]
     },
     "armor": {
-      "templates": ["itemBase", "itemModifiers"],
+      "templates": ["itemBase", "itemDesc", "itemModifiers"],
       "armor": 6
     },
     "weapon": {
-      "templates": ["itemBase", "itemOffensive"]
+      "templates": ["itemBase", "itemDesc", "itemOffensive"]
     },
     "explosive": {
-      "templates": ["itemBase", "itemOffensive"],
+      "templates": ["itemBase", "itemDesc", "itemOffensive"],
       "blast": 8
     },
     "specialty": {
-      "templates": ["itemModifiers"],
-      "description": ""
+      "templates": ["itemDesc", "itemModifiers"]
     },
     "injury": {
-      "templates": ["itemModifiers"],
+      "templates": ["itemDesc", "itemModifiers"],
       "category": 1,
       "lethal": false,
       "permanent": false,
       "deathSave": "",
-      "healing": "",
-      "effect": ""
+      "healing": ""
     }
   }
 }

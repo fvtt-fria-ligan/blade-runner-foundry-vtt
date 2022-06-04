@@ -1,3 +1,40 @@
-<div class="inventory">
-
+<div class="embedded-items flex row wrap">
+	{{#each .}}
+		<div class="embedded-item flex row" data-item-id="{{id}}">
+			<div class="photo">
+				<img src="{{img}}" title="{{name}}" width="64" height="64"/>
+			</div>
+			<div class="details">
+				<div class="item-detail name">{{detailedName}}</div>
+					{{#with data}}
+						{{#if damage}}
+							<div class="item-detail damage">
+								{{#if blast}}
+									{{localize "FLBR.Blast"}}&nbsp;{{localize "FLBR.D"}}{{blast}}
+								{{else}}
+									{{localize "FLBR.WeaponDamage"}}&nbsp;{{damage}}
+								{{/if}}
+							</div>
+						{{/if}}
+						{{#if special}}
+							<div class="item-detail special">{{special}}</div>
+						{{/if}}
+					{{/with}}
+				<div class="item-controls">
+					<a class="button item-edit" title="{{localize "FLBR.BUTTON.Edit"}}">
+						{{{@root.config.Icons.buttons.edit}}}
+					</a>
+					<a class="button item-chat" title="{{localize "FLBR.BUTTON.ToChat"}}">
+						{{{@root.config.Icons.buttons.chat}}}
+					</a>
+					<a class="button item-delete" title="{{localize "FLBR.BUTTON.Delete"}}">
+						{{{@root.config.Icons.buttons.times}}}
+					</a>
+					<a class="button item-delete-confirmed" style="display: none;" title="{{localize "FLBR.BUTTON.Delete"}}">
+						{{{@root.config.Icons.buttons.delete}}}
+					</a>
+				</div>
+			</div>
+		</div>
+	{{/each}}
 </div>

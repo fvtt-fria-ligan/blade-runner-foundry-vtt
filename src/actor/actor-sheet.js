@@ -100,6 +100,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     html.find('.item-create').click(this._onItemCreate.bind(this));
     html.find('.item-edit').click(this._onItemEdit.bind(this));
     html.find('.item-delete').click(this._onItemDelete.bind(this));
+    html.find('.item-delete-confirmed').click(this._onItemDeleteConfirmed.bind(this));
 
     // // Owner-only listeners.
     // if (this.actor.isOwner) {
@@ -133,15 +134,25 @@ export default class BladeRunnerActorSheet extends ActorSheet {
   _onItemEdit(event) {
     event.preventDefault();
     const elem = event.currentTarget;
-    const itemId = elem.closest('.item').dataset.itemId;
+    const itemId = elem.closest('.embedded-item').dataset.itemId;
     const item = this.actor.items.get(itemId);
     return item.sheet.render(true);
   }
 
-  _onItemDelete(event /* :MouseEvent */) {
+  /** @param {MouseEvent} event */
+  _onItemDelete(event) {
     event.preventDefault();
     const elem = event.currentTarget;
-    const itemId = elem.closest('.item').dataset.itemId;
+    elem.style.display = 'none';
+    const embeddedItem = elem.closest('.embedded-item');
+    const deleteButton = embeddedItem.getElementsByClassName('item-delete-confirmed')[0];
+    deleteButton.style.display = 'inline';
+  }
+
+  _onItemDeleteConfirmed(event) {
+    event.preventDefault();
+    const elem = event.currentTarget;
+    const itemId = elem.closest('.embedded-item').dataset.itemId;
     return this.actor.deleteEmbeddedDocuments('Item', [itemId]);
   }
 

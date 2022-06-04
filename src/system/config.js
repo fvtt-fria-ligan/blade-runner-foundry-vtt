@@ -178,6 +178,8 @@ FLBR.blastPowerMap = {
   6: { damage: 1, crit: 6 },
 };
 
+FLBR.itemSpecialInputMaxLength = 80;
+
 // TODO
 // FLBR.yearsOnTheForce = {
 //   [BR.YEARS_ON_THE_FORCE.ROOKIE]: {
@@ -227,6 +229,13 @@ FLBR.blastPowerMap = {
 /* ------------------------------------------ */
 
 FLBR.Icons = {
+  tabs: {
+    bio: '<i class="fas fa-align-left"></i>',
+    combat: '<i class="fas fa-fist-raised"></i>',
+    features: '<i class="fas fa-briefcase"></i>',
+    inventory: '<i class="fas fa-table-list"></i>',
+    stats: '<i class="fas fa-horse-head"></i>',
+  },
   boxes: {
     empty: '<i class="far fa-square"></i>',
     full: '<i class="fas fa-square"></i>',
@@ -235,6 +244,7 @@ FLBR.Icons = {
     edit: '<i class="fas fa-edit"></i>',
     delete: '<i class="fas fa-trash"></i>',
     remove: '<i class="fas fa-times"></i>',
+    times: '<i class="fas fa-times"></i>',
     plus: '<i class="fas fa-plus"></i>',
     minus: '<i class="fas fa-minus"></i>',
     equip: '<i class="fas fa-star"></i>',
@@ -246,5 +256,6 @@ FLBR.Icons = {
     // reload: '<i class="fas fa-sync-alt"></i>',
     lethal: '<i class="fas fa-skull"></i>',
     // mental: '<i class="fas fa-brain"></i>',
+    chat: '<i class="far fa-comment-dots"></i>',
   },
 };

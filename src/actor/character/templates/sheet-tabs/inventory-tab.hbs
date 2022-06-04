@@ -1,0 +1,18 @@
+<div class="inventory-tab">
+	{{#if isPC}}
+		<div class="favored-gear">
+			<h2>{{localize "FLBR.HEADER.FavoredGear"}}</h2>
+			<input type="text" name="data.favoredGear" value="{{data.favoredGear}}"/>
+		</div>
+		<div class="signature-item">
+			<h2>{{localize "FLBR.HEADER.SignatureItem"}}</h2>
+			<div class="flex row">
+				<input type="text" name="data.signatureItem.name" value="{{data.signatureItem.name}}" class="flex-1"/>
+				<input type="checkbox" name="data.signatureItem.used" {{checked data.signatureItem.used}}/>
+		</div>
+	{{/if}}
+	<div class="inventory">
+		<h2>{{localize "FLBR.HEADER.Inventory"}}</h2>
+{{> systems/blade-runner/templates/actor/character/inventory.hbs actor.itemTypes.generic}}
+	</div>
+</div>

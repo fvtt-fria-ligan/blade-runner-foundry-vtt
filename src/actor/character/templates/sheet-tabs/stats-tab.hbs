@@ -1,5 +1,5 @@
 <div class="stats-tab">
-	<div class="attributes-skills">
+	<div class="attributes-and-skills">
 		<h1>{{localize "FLBR.HEADER.AttributesAndSkills"}}</h1>
 		<div class="stats-list flex row">
 		{{#each data.attributes as | attribute attrKey |}}
@@ -43,6 +43,16 @@
 				</div>
 			</div>
 		{{/each}}
+		</div>
+	</div>
+	<div class="talents flex row">
+		<div class="specialties">
+			<h2>{{localize "FLBR.HEADER.Specialties"}}</h2>
+{{> systems/blade-runner/templates/actor/character/inventory.hbs actor.itemTypes.specialty}}
+		</div>
+		<div class="augments">
+			<h2>{{localize "FLBR.HEADER.Augments"}}</h2>
+{{> systems/blade-runner/templates/actor/character/inventory.hbs actor.itemTypes.upgrade}}
 		</div>
 	</div>
 </div>

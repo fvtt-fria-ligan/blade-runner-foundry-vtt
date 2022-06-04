@@ -6,7 +6,7 @@
 		<div class="curriculum flex row">
 			<div class="avatar-blok">
 				<div class="avatar">
-					<img class="profile" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="64" width="64"/>
+					<img class="profile" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
 				</div>
 				<div class="nature">
 					<select name="data.nature">
@@ -50,9 +50,9 @@
 	{{!-- SHEET TABS --}}
 
 	<div class="sheet-tabs flex row" data-group="primary">
-		<b class="sheet-tab" data-tab="stats">{{localize "FLBR.TAB.Stats"}}</b>
-		<b class="sheet-tab" data-tab="inventory">{{localize "FLBR.TAB.Inventory"}}</b>
-		<b class="sheet-tab" data-tab="bio">{{localize "FLBR.TAB.Bio"}}</b>
+		<a class="sheet-tab" data-tab="stats">{{{config.Icons.tabs.stats}}}&nbsp;{{localize "FLBR.TAB.Stats"}}</a>
+		<a class="sheet-tab" data-tab="inventory">{{{config.Icons.tabs.inventory}}}&nbsp;{{localize "FLBR.TAB.Inventory"}}</a>
+		<a class="sheet-tab" data-tab="bio">{{{config.Icons.tabs.bio}}}&nbsp;{{localize "FLBR.TAB.Bio"}}</a>
 	</div>
 
 	{{!-- SHEET BODY --}}
@@ -62,7 +62,7 @@
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/stats-tab.hbs}}
 		</div>
 		<div class="tab" data-group="primary" data-tab="inventory">
-{{!-- {{> systems/blade-runner/templates/actor/character/sheet-tabs/inventory-tab.hbs}} --}}
+{{> systems/blade-runner/templates/actor/character/sheet-tabs/inventory-tab.hbs}}
 		</div>
 		<div class="tab" data-group="primary" data-tab="bio">
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/bio-tab.hbs}}
