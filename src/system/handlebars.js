@@ -12,6 +12,7 @@ function preloadHandlebarsTemplates() {
   return loadTemplates([
     `${path}/actor/character/character-sheet.hbs`,
     `${path}/actor/character/sheet-tabs/stats-tab.hbs`,
+    `${path}/actor/character/sheet-tabs/combat-tab.hbs`,
     `${path}/actor/character/sheet-tabs/inventory-tab.hbs`,
     `${path}/actor/character/sheet-tabs/bio-tab.hbs`,
     `${path}/actor/character/inventory.hbs`,

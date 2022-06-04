@@ -1,3 +1,13 @@
 <div class="combat-tab">
-
+	<div class="flex row">
+		<div class="weapons">
+			<h2>{{localize "FLBR.HEADER.Weapons"}}</h2>
+{{> systems/blade-runner/templates/actor/character/inventory.hbs actor.itemTypes.weapon}}
+{{> systems/blade-runner/templates/actor/character/inventory.hbs actor.itemTypes.explosive}}
+		</div>
+		<div class="armors">
+			<h2>{{localize "FLBR.HEADER.Armors"}}</h2>
+{{> systems/blade-runner/templates/actor/character/inventory.hbs actor.itemTypes.armor}}
+		</div>
+	</div>
 </div>
