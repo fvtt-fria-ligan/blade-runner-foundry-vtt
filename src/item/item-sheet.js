@@ -17,7 +17,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       classes: [sysName, 'sheet', 'item'],
       width: window.innerWidth * 0.08 + 350,
       resizable: true,
-      tabs: [{ navSelector: '.sheet-tabs', contentSelector: '.sheet-body', initial: 'info' }],
+      tabs: [{ navSelector: '.sheet-tabs', contentSelector: '.sheet-body', initial: 'features' }],
     });
   }
 

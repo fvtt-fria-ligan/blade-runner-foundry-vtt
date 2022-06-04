@@ -51,6 +51,7 @@
 
 	<div class="sheet-tabs flex row" data-group="primary">
 		<a class="sheet-tab" data-tab="stats">{{{config.Icons.tabs.stats}}}&nbsp;{{localize "FLBR.TAB.Stats"}}</a>
+		<a class="sheet-tab" data-tab="combat">{{{config.Icons.tabs.combat}}}&nbsp;{{localize "FLBR.TAB.Combat"}}</a>
 		<a class="sheet-tab" data-tab="inventory">{{{config.Icons.tabs.inventory}}}&nbsp;{{localize "FLBR.TAB.Inventory"}}</a>
 		<a class="sheet-tab" data-tab="bio">{{{config.Icons.tabs.bio}}}&nbsp;{{localize "FLBR.TAB.Bio"}}</a>
 	</div>
@@ -60,6 +61,9 @@
 	<div class="sheet-body">
 		<div class="tab" data-group="primary" data-tab="stats">
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/stats-tab.hbs}}
+		</div>
+		<div class="tab" data-group="primary" data-tab="combat">
+{{> systems/blade-runner/templates/actor/character/sheet-tabs/combat-tab.hbs}}
 		</div>
 		<div class="tab" data-group="primary" data-tab="inventory">
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/inventory-tab.hbs}}

@@ -6,7 +6,7 @@
 			</div>
 			<div class="details">
 				<div class="item-detail name">{{detailedName}}</div>
-					{{#with data}}
+					{{#with data.data}}
 						{{#if damage}}
 							<div class="item-detail damage">
 								{{#if blast}}
@@ -16,7 +16,7 @@
 								{{/if}}
 							</div>
 						{{/if}}
-						{{#if special}}
+						{{#if special includeZero=true}}
 							<div class="item-detail special">{{special}}</div>
 						{{/if}}
 					{{/with}}

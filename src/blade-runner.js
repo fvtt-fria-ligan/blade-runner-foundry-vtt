@@ -76,6 +76,9 @@ Hooks.once('ready', () => {
   // checkMigration();
 
   console.log('FLBR | READY!');
+
+  // Debugging.
+  game.actors.getName('Bob')?.sheet?.render(true);
 });
 
 // TODO Hooks.once('diceSoNiceReady', dice3d => registerDsN(dice3d));
