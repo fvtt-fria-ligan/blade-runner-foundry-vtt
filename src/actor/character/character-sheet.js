@@ -1,6 +1,5 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet.js';
 import { SYSTEM_NAME, ACTOR_TYPES } from '@system/constants.js';
-import { generateScores } from 'src/utils/get-score.js';
 
 /**
  * Blade Runner RPG Actor Sheet for Character.
@@ -48,10 +47,36 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   /** @override */
   getData(options) {
     const sheetData = super.getData(options);
-    // generateScores(sheetData.data.attributes);
-    // generateScores(sheetData.data.skills);
     sheetData.isPC = this.actor.type === ACTOR_TYPES.PC;
     sheetData.isNPC = this.actor.type === ACTOR_TYPES.NPC;
     return sheetData;
+  }
+
+  /* ------------------------------------------ */
+  /*  Sheet Listeners                           */
+  /* ------------------------------------------ */
+
+  /** @override */
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    // Editable-only Listeners
+    if (!game.user.isGM && this.actor.limited) return;
+    // if (!this.options.editable) return;
+    if (!this.isEditable) return;
+
+    // Stats Roll
+    html.find('.stat .rollable').click(this._onStatRoll.bind(this));
+  }
+
+  /* ------------------------------------------ */
+
+  _onStatRoll(event) {
+    event.preventDefault();
+    const elem = event.currentTarget;
+    const stat = elem.closest('.stat');
+    const attrKey = stat.dataset.attribute;
+    const skillKey = stat.dataset.skill;
+    return this.actor.rollStat(attrKey, skillKey);
   }
 }

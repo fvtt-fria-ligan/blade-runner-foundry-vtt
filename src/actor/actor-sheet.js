@@ -1,5 +1,6 @@
-import { FLBR } from '@system/config.js';
-import { ACTOR_TYPES, ITEM_TYPES } from '@system/constants.js';
+import { FLBR } from '@system/config';
+import { ACTOR_TYPES, ITEM_TYPES } from '@system/constants';
+import { capitalize } from '@utils/string-utils';
 
 /**
  * Blade Runner RPG Actor Sheet.
@@ -118,10 +119,10 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     event.preventDefault();
     const elem = event.currentTarget;
     const type = elem.dataset.type;
-    const itemData = {
-      name: game.i18n.localize(`FLBR.ActorSheet.NewItem.${type}`),
-      type,
-    };
+    const itemName = game.i18n.format('FLBR.NewItem', {
+      type: game.i18n.localize(`ITEM.Type${capitalize(type)}`),
+    });
+    const itemData = { name: itemName, type };
     return this.actor.createEmbeddedDocuments('Item', [itemData])
       // Displays the sheet of the newly created item.
       .then(itmData => {

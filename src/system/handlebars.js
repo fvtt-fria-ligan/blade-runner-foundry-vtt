@@ -1,3 +1,4 @@
+import { capitalize } from '@utils/string-utils.js';
 import { FLBR } from './config.js';
 import { SYSTEM_NAME } from './constants';
 
@@ -119,6 +120,7 @@ function registerHandlebarsHelpers() {
       </select>`,
     );
   });
+
   Handlebars.registerHelper('boxes', function (field, options) {
     const value = Number(options.hash.value);
     const min = Number(options.hash.min);
@@ -130,6 +132,14 @@ function registerHandlebarsHelpers() {
       else str += `${FLBR.Icons.boxes.empty}`;
     }
     str += '</a>';
+    return new Handlebars.SafeString(str);
+  });
+
+  Handlebars.registerHelper('createNewItemButton', function (type) {
+    const title = game.i18n.format('FLBR.CreateNewItem', {
+      type: game.i18n.localize(`ITEM.Type${capitalize(type)}`),
+    });
+    const str = `<a class="button item-create" data-type="${type}" title="${title}">${FLBR.Icons.buttons.plus}</a>`;
     return new Handlebars.SafeString(str);
   });
 }

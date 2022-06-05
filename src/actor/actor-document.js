@@ -1,5 +1,8 @@
-import { FLBR } from '../system/config.js';
-import { ACTOR_TYPES, CAPACITIES } from '../system/constants.js';
+import BRRollHandler from 'src/components/roll/roller.js';
+import Modifier from '@system/modifier';
+import { FLBR } from '@system/config';
+import { ACTOR_TYPES, CAPACITIES } from '@system/constants';
+import { capitalize } from '@utils/string-utils';
 
 export default class BladeRunnerActor extends Actor {
 
@@ -144,25 +147,85 @@ export default class BladeRunnerActor extends Actor {
     }
   }
 
+  /* ------------------------------------------- */
+  /*  Roll Modifiers                             */
+  /* ------------------------------------------- */
+
+  getRollModifiers() {
+    const modifiers = [];
+    // Iterates over each item owned by the actor.
+    for (const i of this.items) {
+      // If there are modifiers...
+      if (i.hasModifier) {
+        // // Physical items must be equipped to give their modifier.
+        // // if (i.isPhysical && !i.isEquipped) continue;
+        // Iterates over each roll modifier.
+        for (const m of Object.values(i.data.data.rollModifiers)) {
+          let mod = {};
+          try {
+            mod = new Modifier(m.name, m.value, i);
+          }
+          catch (error) {
+            ui.notifications.error(error.message, { permanent: true });
+            console.error(error);
+          }
+          modifiers.push(mod);
+        }
+      }
+    }
+    return modifiers;
+  }
+
   /* ------------------------------------------ */
   /*  Utility Functions                         */
   /* ------------------------------------------ */
 
   /**
    * Gets the value of a specified attribute.
-   * @param {string} attributeName The identifier for the attribute
+   * @param {string} attributeKey The identifier for the attribute
    * @returns {number}
    */
-  getAttribute(attributeName) {
-    return +this.attributes[attributeName]?.value;
+  getAttribute(attributeKey) {
+    return +this.attributes[attributeKey]?.value;
   }
 
   /**
    * Gets the value of a specified skill.
-   * @param {string} skillName The identifier for the skill
+   * @param {string} skillKey The identifier for the skill
    * @returns {number}
    */
-  getSkill(skillName) {
-    return +this.skills[skillName]?.value;
+  getSkill(skillKey) {
+    return +this.skills[skillKey]?.value;
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * Rolls a stat of this actor.
+   * @param {string}  attributeKey The identifier for the attribute
+   * @param {?string} skillkey     The identifier for the skill
+   * @returns {BRRollHandler}
+   */
+  rollStat(attributeKey, skillKey) {
+    const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
+    const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`) : null;
+    const title = skillName ?? attributeName;
+    const attributeValue = this.getAttribute(attributeKey);
+    const skillValue = this.getSkill(skillKey);
+
+    const dice = [];
+    if (attributeValue) dice.push(attributeValue);
+    if (skillValue) dice.push(skillValue);
+
+    const roller = new BRRollHandler({
+      title,
+      actor: this,
+      attributeKey, skillKey, dice,
+      modifiers: this.getRollModifiers(),
+      maxPush: FLBR.maxPushMap[this.type],
+    });
+
+    console.warn(roller);
+    // return roller.render(true);
   }
 }

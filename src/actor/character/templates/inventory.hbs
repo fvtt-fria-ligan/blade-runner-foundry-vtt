@@ -1,5 +1,5 @@
-<div class="embedded-items flex row wrap">
-	{{#each .}}
+<div class="embedded-items flex {{#if wrap}}row wrap{{else}}column{{/if}}">
+	{{#each items}}
 		<div class="embedded-item flex row" data-item-id="{{id}}">
 			<div class="photo">
 				<img src="{{img}}" title="{{name}}" width="64" height="64"/>
@@ -7,16 +7,25 @@
 			<div class="details">
 				<div class="item-detail name">{{detailedName}}</div>
 					{{#with data.data}}
-						{{#if damage}}
+						{{#if damage includeZero=true}}
 							<div class="item-detail damage">
 								{{#if blast}}
 									{{localize "FLBR.Blast"}}&nbsp;{{localize "FLBR.D"}}{{blast}}
 								{{else}}
-									{{localize "FLBR.WeaponDamage"}}&nbsp;{{damage}}
+									{{localize "FLBR.WeaponDamage"}}&nbsp;{{damage}}, {{localize "FLBR.Crit"}}&nbsp;{{localize "FLBR.D"}}{{crit}}
 								{{/if}}
 							</div>
+							{{#if range.max includeZero=true}}
+								<div class="item-detail range">
+									{{localize "FLBR.WeaponRangeMaxRange" range=(localize (lookup @root.config.ranges range.max))}}
+								</div>
+							{{/if}}
+						{{else if armor includeZero=true}}
+							<div class="item-detail armor">
+								{{localize "ITEM.TypeArmor"}}&nbsp;{{localize "FLBR.D"}}{{armor}}
+							</div>
 						{{/if}}
-						{{#if special includeZero=true}}
+						{{#if special}}
 							<div class="item-detail special">{{special}}</div>
 						{{/if}}
 					{{/with}}

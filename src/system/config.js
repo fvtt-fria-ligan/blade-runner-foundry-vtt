@@ -233,7 +233,7 @@ FLBR.Icons = {
     bio: '<i class="fas fa-align-left"></i>',
     combat: '<i class="fas fa-fist-raised"></i>',
     features: '<i class="fas fa-briefcase"></i>',
-    inventory: '<i class="fas fa-table-list"></i>',
+    inventory: '<i class="fas fa-archive"></i>',
     stats: '<i class="fas fa-horse-head"></i>',
   },
   boxes: {
