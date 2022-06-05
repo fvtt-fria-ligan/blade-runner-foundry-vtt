@@ -2,16 +2,16 @@
 	<div class="weapons-and-armors full">
 		<div class="armors">
 			<h2>{{localize "FLBR.HEADER.Armors"}}{{createNewItemButton "armor"}}</h2>
-{{> systems/blade-runner/templates/actor/character/inventory.hbs items=actor.itemTypes.armor}}
+{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.armor}}
 		</div>
 		<div class="weapons">
 			<h2>{{localize "FLBR.HEADER.Weapons"}}{{createNewItemButton "weapon"}}{{createNewItemButton "explosive"}}</h2>
-{{> systems/blade-runner/templates/actor/character/inventory.hbs items=actor.itemTypes.weapon}}
-{{> systems/blade-runner/templates/actor/character/inventory.hbs items=actor.itemTypes.explosive}}
+{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.weapon}}
+{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.explosive}}
 		</div>
 	</div>
 	<div class="injuries full">
 		<h2>{{localize "FLBR.HEADER.Injuries"}}{{createNewItemButton "injury"}}</h2>
-{{> systems/blade-runner/templates/actor/character/inventory.hbs items=actor.itemTypes.injury}}
+{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.injury}}
 	</div>
 </div>

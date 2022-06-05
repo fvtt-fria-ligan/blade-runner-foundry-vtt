@@ -48,11 +48,11 @@
 	<div class="talents flex row">
 		<div class="specialties full">
 			<h2>{{localize "FLBR.HEADER.Specialties"}}{{createNewItemButton "specialty"}}</h2>
-{{> systems/blade-runner/templates/actor/character/inventory.hbs items=actor.itemTypes.specialty wrap=true}}
+{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.specialty wrap=true}}
 		</div>
 		<div class="augments full">
 			<h2>{{localize "FLBR.HEADER.Augments"}}{{createNewItemButton "upgrade"}}</h2>
-{{> systems/blade-runner/templates/actor/character/inventory.hbs items=actor.itemTypes.upgrade wrap=true}}
+{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.upgrade wrap=true}}
 		</div>
 	</div>
 </div>
