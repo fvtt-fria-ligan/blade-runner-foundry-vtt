@@ -1,3 +1,6 @@
+{{!-- The parameters are: --}}
+{{!-- {Item[]}  items  -  See actor.itemTypes.<type> --}}
+{{!-- {boolean}  wrap  -  Whether to wrap items in rows or not. --}}
 <div class="embedded-items flex {{#if wrap}}row wrap{{else}}column{{/if}}">
 	{{#each items}}
 		<div class="embedded-item flex row" data-item-id="{{id}}">
@@ -44,6 +47,10 @@
 					</a>
 				</div>
 			</div>
+		</div>
+	{{else}}
+		<div class="embedded-item empty">
+			{{localize "FLBR.InventoryNoItem"}}
 		</div>
 	{{/each}}
 </div>
