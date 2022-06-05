@@ -19,10 +19,12 @@
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES } from '@system/constants';
 import * as YZUR from '@lib/yzur.js';
+import * as Chat from '@system/chat';
 import BRRollHandler from './components/roll/roller.js';
 import { registerSheets } from './system/sheets.js';
 import { initializeHandlebars } from './system/handlebars.js';
 import { registerSystemSettings } from './system/settings.js';
+import { registerDiceSoNice } from './plugins/dice-so-nice.js';
 import BladeRunnerActor from './actor/actor-document.js';
 import BladeRunnerItem from './item/item-document.js';
 
@@ -73,6 +75,10 @@ Hooks.once('init', () => {
   registerSystemSettings();
 });
 
+/* ------------------------------------------ */
+/*  Foundry VTT Ready                         */
+/* ------------------------------------------ */
+
 Hooks.once('ready', () => {
   // TODO Wait to register hotbar drop hook on ready so that modules could register earlier if they want to.
   // Hooks.on('hotbarDrop', (bar, data, slot) => createT2KMacro(data, slot));
@@ -86,11 +92,24 @@ Hooks.once('ready', () => {
   game.actors.getName('Bob')?.sheet?.render(true);
 });
 
-// TODO Hooks.once('diceSoNiceReady', dice3d => registerDsN(dice3d));
+/* ------------------------------------------ */
+/*  Foundry VTT Hooks (Other)                 */
+/* ------------------------------------------ */
+
+Hooks.once('diceSoNiceReady', dice3d => registerDiceSoNice(dice3d));
+
+/* ------------------------------------------ */
 
 Hooks.on('renderItemSheet', (app, _html) => {
   app._element[0].style.height = 'auto';
 });
+
+/* ------------------------------------------ */
+
+Hooks.on('renderChatLog', (_app, html, _data) => Chat.addChatListeners(html));
+Hooks.on('renderChatMessage', (_msg, html, _data) => Chat.hideChatActionButtons(html));
+
+/* ------------------------------------------ */
 
 // Hooks.on('renderActorSheet', (app, _html) => {
 //   app._element[0].style.height = 'auto';
