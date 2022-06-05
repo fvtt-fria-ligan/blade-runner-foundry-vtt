@@ -10,15 +10,15 @@ import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
  */
 export default class BRRollHandler extends FormApplication {
   /**
-   * @param {string}              [title]         The title of the roll
-   * @param {Actor}               [actor={}]      The actor who rolled the dice, if any
-   * @param {Item|Item[]}         [items]         The item(s) used to roll the dice, if any
-   * @param {string}              [attributeName] The name of the attribute used (important for modifiers)
-   * @param {string}              [skillName]     The name of the skill used (important for modifiers)
-   * @param {number|number[]}     [dice=[6]]      An array of die faces used to forge the roll
-   * @param {number}              [modifier]      Additional value for the final numeric modifier
-   * @param {Modifier|Modifier[]} [modifiers]     A group of modifiers that can also be applied to the roll
-   * @param {number}              [maxPush=1]     The maximum number of pushes (default is 1)
+   * @param {string}              [title]        The title of the roll
+   * @param {Actor}               [actor={}]     The actor who rolled the dice, if any
+   * @param {Item|Item[]}         [items]        The item(s) used to roll the dice, if any
+   * @param {string}              [attributeKey] The identifier of the attribute used (important for modifiers)
+   * @param {string}              [skillKey]     The identifier of the skill used (important for modifiers)
+   * @param {number|number[]}     [dice=[6]]     An array of die faces used to forge the roll
+   * @param {number}              [modifier]     Additional value for the final numeric modifier
+   * @param {Modifier|Modifier[]} [modifiers]    A group of modifiers that can also be applied to the roll
+   * @param {number}              [maxPush=1]    The maximum number of pushes (default is 1)
    * @param {Object}  [options] Additional options for the FormApplication instance
    * @param {boolean} [options.askForOptions=true] Whether to show a Dialog for roll options
    * @param {boolean} [options.skipDialog=false]   Whether to force skip the Dialog for roll options
@@ -28,13 +28,13 @@ export default class BRRollHandler extends FormApplication {
     title = 'Blade Runner RPG',
     actor = {},
     items = [],
-    attributeName = null,
-    skillName = null,
+    attributeKey = null,
+    skillKey = null,
     dice = [6],
     modifier = 0,
     modifiers = [],
     maxPush = 1,
-  } = {},
+  },
   options = {}) {
     super({}, options);
 
@@ -73,7 +73,8 @@ export default class BRRollHandler extends FormApplication {
      * @type {Modifier|Modifier[]>}
      */
     this.modifiers = !Array.isArray(modifiers) ? [modifiers] : modifiers;
-    this.modifiers.push(this.items.flatMap(i => i.getModifiers({ targets: [attributeName, skillName] })));
+    // TODO
+    // this.modifiers.push(this.items.flatMap(i => i.getModifiers({ targets: [attributeKey, skillKey] })));
     console.warn('FLBR | modifiers:', modifiers);
 
     /**
@@ -114,6 +115,13 @@ export default class BRRollHandler extends FormApplication {
   /* ------------------------------------------ */
 
   /**
+   * Missing in foundry.
+   */
+  set title(str) {
+    this.options.title = str;
+  }
+
+  /**
    * The final numeric modifier.
    * @type {number}
    */
@@ -141,8 +149,9 @@ export default class BRRollHandler extends FormApplication {
 
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
-      classes: [SYSTEM_NAME, 'roll-dialog'],
+    const sysName = game.system.data.name || SYSTEM_NAME;
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      classes: [sysName, 'roll-dialog'],
       width: '450',
       height: 'auto',
       resizable: false,
@@ -164,11 +173,15 @@ export default class BRRollHandler extends FormApplication {
     return {
       title: this.title,
       dice: this.dice,
+      modifier: this.modifier,
+      modifiers: this.modifiers,
+      maxPus: this.maxPush,
       advantage: this.advantage,
       disadvantage: this.disadvantage,
       damage: this.damage,
       attack: this.isAttack,
       roll: this.roll,
+      config: CONFIG.BLADE_RUNNER,
       options,
     };
   }
@@ -215,18 +228,19 @@ export default class BRRollHandler extends FormApplication {
   /**
    * Validates whether a form is empty and contains a valid artifact string (if any).
    * @param {JQueryEventConstructor} event
-   * @param {Object.<string|null>}  formData
+   * @param {Object.<string|null>}   formData
    * @returns {boolean} `true` when OK
    * @throws {Error} When formData is empty
    */
   _validateForm(event, formData) {
-    const isEmpty = Object.values(formData).every(value => !value);
-    if (isEmpty) {
-      const warning = game.i18n.localize('WARNING.NO_DICE_INPUT');
-      event.target.base.focus();
-      ui.notifications.warn(warning);
-      throw new Error(warning);
-    }
+    // const isEmpty = Object.values(formData).every(value => !value);
+    // if (isEmpty) {
+    //   const warning = game.i18n.localize('WARNING.NoDiceInput');
+    //   // TODO clean
+    //   // event.target.base.focus();
+    //   ui.notifications.warn(warning);
+    //   throw new Error(warning);
+    // }
     return true;
   }
 
@@ -234,6 +248,8 @@ export default class BRRollHandler extends FormApplication {
 
   _handleFormData(formData) {
     // TODO do some stuff on our variables.
+    this.modifier = formData.modifier;
+    this.options.unlimitedPush = formData['options.unlimitedPush'];
     return this.executeRoll();
   }
 
@@ -257,8 +273,8 @@ export default class BRRollHandler extends FormApplication {
       damage: this.damage,
       tokenId: this.options.tokenId,
       sceneId: this.options.sceneId,
-      item: this.item.name || this.items.map(i => i.name),
-      itemId: this.item.id || this.items.map(i => i.id),
+      item: this.item?.name || this.items.map(i => i.name),
+      itemId: this.item?.id || this.items.map(i => i.id),
     };
   }
 
@@ -284,13 +300,25 @@ export default class BRRollHandler extends FormApplication {
   /*  Form Listeners                            */
   /* ------------------------------------------ */
 
-  /** @override */
+  /**
+   * @param {JQuery} html
+   * @override
+   */
   activateListeners(html) {
     super.activateListeners(html);
 
-    // We need to bind the cancel button to the FormApplication's close method.
-    html.find('#cancel').click(() => {
-      this.close();
+    html.find('input[type=checkbox].modifier').on('change', function () {
+      const modifierInput = html.find('input[name=modifier]')[0];
+      let value = +modifierInput.value;
+      if (this.checked) value += +this.dataset.value;
+      else value -= +this.dataset.value;
+      this.modifier = value;
+      modifierInput.value = value >= 0 ? `+${value}` : value;
     });
+
+    // We need to bind the cancel button to the FormApplication's close method.
+    // html.find('#cancel').click(() => {
+    //   this.close();
+    // });
   }
 }

@@ -114,8 +114,17 @@
 			{{/if}}
 			
 			<div class="item-property-special">
-				<input type="text" name="data.special" value="{{data.special}}" maxlength="{{config.itemSpecialInputMaxLength}}"/>
+				<input type="text" name="data.special" value="{{data.special}}" maxlength="{{config.itemSpecialInputMaxLength}}" placeholder="{{localize "FLBR.ItemSpecial"}}"/>
 			</div>
+
+			<div class="item-modifiers-title flexrow">
+				<h4>{{localize "FLBR.HEADER.Modifiers"}}</h4>
+				<a class="button add-modifier" title="{{localize "FLBR.ItemAddModifier"}}">
+					{{{@root.config.Icons.buttons.plus}}}
+				</a>
+			</div>
+
+{{> systems/blade-runner/templates/item/modifiers-partial.hbs}}
 
 		</div>
 	</div>

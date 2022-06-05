@@ -1,0 +1,54 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+	<div class="sheet-header">
+		<h1>{{title}}</h1>
+	</div>
+
+	<div class="sheet-body">
+		{{!-- Dice --}}
+		<div class="dice flex row full align-center">
+			{{#each dice}}
+				<div class="die-box die-d{{.}}">{{localize "FLBR.D"}}{{.}}</div>
+			{{/each}}
+			{{#if (lte dice.length 2)}}
+				<div class="die-box empty">
+					<a class="button add-die" title="{{localize "FLBR.ROLLER.AddDie"}}">{{{@root.config.Icons.buttons.plus}}}</a>
+				</div>
+			{{/if}}
+		</div>
+		<hr/>
+		{{!-- Modifiers --}}
+		<div class="form-group-stacked">
+			{{#each modifiers}}
+				<label class="checkbox" title="{{description}}">
+					<input type="checkbox" class="modifier" data-value="{{value}}" {{checked active}}/>
+					{{label}}
+				</label>
+			{{/each}}
+		</div>
+		{{!-- Total Modifier --}}
+		<div class="form-group">
+			<label>{{localize "FLBR.ROLLER.TotalModifier"}}</label>
+			<input type="text" name="modifier" value="{{numberFormat modifier sign=true}}" data-dtype="Number"/>
+		</div>
+		<hr/>
+		{{!-- Max Pushes --}}
+		<div class="form-group">
+			<label>{{localize "FLBR.ROLLER.MaxPush"}}</label>
+			<div class="flex row">
+				<label class="checkbox flex-1">
+					<input type="checkbox" name="options.unlimitedPush" {{checked options.unlimitedPush}}/>
+					{{localize "FLBR.ROLLER.UnlimitedPush"}}
+				</label>
+				<input type="number" name="maxPush" value="{{maxPush}}" disabled/>
+			</div>
+		</div>
+	</div>
+
+	<div class="sheet-footer flex row space-between">
+		<button id="advantage" class="flbr-button" type="submit">{{localize "FLBR.ROLLER.RollWithAdvantageButton"}}</button>
+		<button id="roll" class="flbr-button" type="submit">{{localize "FLBR.ROLLER.RollButton"}}</button>
+		<button id="disadvantage" class="flbr-button" type="submit">{{localize "FLBR.ROLLER.RollWithDisadvantageButton"}}</button>
+	</div>
+
+</form>
