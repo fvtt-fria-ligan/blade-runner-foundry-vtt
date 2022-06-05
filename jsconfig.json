@@ -10,6 +10,7 @@
       "@actor/*": ["./src/actor/*"],
       "@item/*": ["./src/item/*"],
       "@system/*": ["./src/system/*"],
+      "@utils/*": ["./src/utils/*"],
     }
   },
   "include": ["src/**/*.js"],
