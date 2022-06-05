@@ -159,18 +159,21 @@ export default class BladeRunnerActor extends Actor {
       if (i.hasModifier) {
         // // Physical items must be equipped to give their modifier.
         // // if (i.isPhysical && !i.isEquipped) continue;
-        // Iterates over each roll modifier.
-        for (const m of Object.values(i.data.data.rollModifiers)) {
-          let mod = {};
-          try {
-            mod = new Modifier(m.name, m.value, i);
-          }
-          catch (error) {
-            ui.notifications.error(error.message, { permanent: true });
-            console.error(error);
-          }
-          modifiers.push(mod);
-        }
+        const mods = i.getModifiers();
+        if (mods.length > 0) modifiers.push(...mods);
+        // TODO clean code (but commented code just above)
+        // // Iterates over each roll modifier.
+        // for (const m of Object.values(i.props.modifiers)) {
+        //   let mod = {};
+        //   try {
+        //     mod = new Modifier(m.name, m.value, i);
+        //   }
+        //   catch (error) {
+        //     ui.notifications.error(error.message, { permanent: true });
+        //     console.error(error);
+        //   }
+        //   modifiers.push(mod);
+        // }
       }
     }
     return modifiers;
@@ -226,6 +229,6 @@ export default class BladeRunnerActor extends Actor {
     });
 
     console.warn(roller);
-    // return roller.render(true);
+    return roller.render(true);
   }
 }

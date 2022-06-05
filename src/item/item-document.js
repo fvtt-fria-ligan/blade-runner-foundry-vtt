@@ -44,12 +44,12 @@ export default class BladeRunnerItem extends Item {
 
   /**
    * Gets an array of modifiers in this item.
-   * @param {?Object}         options            Additional options to filter the returned array of modifiers
+   * @param {Object}         [options]           Additional options to filter the returned array of modifiers
    * @param {string|string[]} options.targets    Filters modifiers based on plausible targets
    * @param {boolean}         options.onlyActive Filters modifiers based on their active status
    * @returns {Modifier[]}
    */
-  getModifiers(options) {
+  getModifiers(options = {}) {
     return Modifier.getModifiers(this, 'data.data.modifiers', options);
   }
 

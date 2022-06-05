@@ -99,16 +99,16 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   _onAddModifier(event) {
     event.preventDefault();
-    const rollModifiers = foundry.utils.duplicate(this.item.data.data.rollModifiers ?? {});
-    const modifierId = Math.max(-1, ...Object.getOwnPropertyNames(rollModifiers)) + 1;
-    return this.item.update({ [`data.rollModifiers.${modifierId}`]: { name: '', value: '+1' } });
+    const modifiers = foundry.utils.duplicate(this.item.data.data.modifiers ?? {});
+    const modifierId = Math.max(-1, ...Object.getOwnPropertyNames(modifiers)) + 1;
+    return this.item.update({ [`data.modifiers.${modifierId}`]: { name: '', value: '+1' } });
   }
 
   _onDeleteModifier(event) {
     event.preventDefault();
     const modifierId = event.currentTarget.dataset.modifierId;
-    if (this.item.data.data.rollModifiers[modifierId]) {
-      this.item.update({ [`data.rollModifiers.-=${modifierId}`]: null });
+    if (this.item.data.data.modifiers[modifierId]) {
+      this.item.update({ [`data.modifiers.-=${modifierId}`]: null });
     }
   }
 }

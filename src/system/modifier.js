@@ -13,7 +13,7 @@ export default class Modifier {
    * @param {string}       [type]   Alternative type for the modifier, if you don't want to use the item's type.
    * @param {string}       [description]   Alternative description for the modifier.
    */
-  constructor(key, value, item = {}, { active, name, type, description }) {
+  constructor(key, value, item = {}, { active, name, type, description } = {}) {
     /**
      * The item that holds the modifier.
      * @type {Item}

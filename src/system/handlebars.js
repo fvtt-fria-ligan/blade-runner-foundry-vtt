@@ -16,7 +16,8 @@ function preloadHandlebarsTemplates() {
     `${path}/actor/character/sheet-tabs/combat-tab.hbs`,
     `${path}/actor/character/sheet-tabs/inventory-tab.hbs`,
     `${path}/actor/character/sheet-tabs/bio-tab.hbs`,
-    `${path}/actor/character/inventory.hbs`,
+    `${path}/actor/character/inventory-partial.hbs`,
+    `${path}/item/modifiers-partial.hbs`,
   ]);
 }
 

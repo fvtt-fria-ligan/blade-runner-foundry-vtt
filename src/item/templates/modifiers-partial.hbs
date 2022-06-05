@@ -1,0 +1,32 @@
+<div class="item-modifiers">
+	{{#each data.modifiers as | modifier |}}
+		<div class="item-modifier flex row">
+			<div class="item-modifier-name">
+				<select name="data.modifiers.{{@key}}.name">
+					{{#select modifier.name}}
+					<optgroup label="{{localize "FLBR.Attributes"}}">
+						{{#each @root.config.attributes}}
+							<option value="attribute.{{.}}"{{#if (eq . "str")}} selected{{/if}}>{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase .))}}</option>
+						{{/each}}
+					</optgroup>
+					<optgroup label="{{localize "FLBR.Skills"}}">
+						{{#each @root.config.skills}}
+							<option value="skill.{{.}}">{{localize (concat "FLBR.SKILL." (capitalize .))}}</option>
+						{{/each}}
+					</optgroup>
+					{{/select}}
+				</select>
+			</div>
+			<div class="item-modifier-value flex row">
+				<input type="text" name="data.modifiers.{{@key}}.value" value="{{modifier.value}}"/>
+				<div class="item-modifier-controls">
+					<a class="button delete-modifier" data-modifier-id="{{@key}}">
+						{{{@root.config.Icons.buttons.delete}}}
+					</a>
+				</div>
+			</div>
+		</div>
+	{{else}}
+		<div class="item-modifier empty">{{localize "FLBR.ItemNoModifier"}}</div>
+	{{/each}}
+</div>
