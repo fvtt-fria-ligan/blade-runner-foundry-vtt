@@ -12,6 +12,8 @@ $gap: 5px;
   .align-end { align-items: flex-end; }
   .space-around { justify-content: space-around; }
   .space-between { justify-content: space-between; }
+  .justify-start { justify-content: flex-start; }
+  .justify-center { justify-content: center; }
   .justify-end { justify-content: flex-end; }
   .half { flex: 0 0 50% }
   .margin { margin: $gap; }

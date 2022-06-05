@@ -70,11 +70,12 @@ export default class BRRollHandler extends FormApplication {
 
     /**
      * A group of modifiers that can also be applied to the roll.
-     * @type {Modifier|Modifier[]>}
+     * @type {Modifier[]>}
      */
     this.modifiers = !Array.isArray(modifiers) ? [modifiers] : modifiers;
-    // TODO
-    // this.modifiers.push(this.items.flatMap(i => i.getModifiers({ targets: [attributeKey, skillKey] })));
+    if (this.items.length > 0) {
+      this.modifiers.push(...this.items.flatMap(i => i.getModifiers({ targets: [attributeKey, skillKey] })));
+    }
     console.warn('FLBR | modifiers:', modifiers);
 
     /**
@@ -114,31 +115,28 @@ export default class BRRollHandler extends FormApplication {
 
   /* ------------------------------------------ */
 
-  /**
-   * Missing in foundry.
-   */
-  set title(str) {
-    this.options.title = str;
-  }
+  /** @override */
+  get title() { return this.options.title; };
+  set title(str) { this.options.title = str; }
 
   /**
    * The final numeric modifier.
    * @type {number}
    */
-  set modifier(val) {
-    this._modifier = val;
-  }
-
   get modifier() {
     return this._modifier + this.modifiers.reduce((sum, m) => sum + (m.active ? m.value : 0), 0);
   }
 
+  set modifier(val) {
+    this._modifier = val;
+  }
+
   get advantage() {
-    return this.modifier > 0;
+    return this.dice.length > 2 || this.modifier > 0;
   }
 
   get disadvantage() {
-    return this.modifier < 0;
+    return this.dice.length < 2 || this.modifier < 0;
   }
 
   get isAttack() {
@@ -151,7 +149,7 @@ export default class BRRollHandler extends FormApplication {
   static get defaultOptions() {
     const sysName = game.system.data.name || SYSTEM_NAME;
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [sysName, 'roll-dialog'],
+      classes: [sysName, 'roll-application'],
       width: '450',
       height: 'auto',
       resizable: false,
@@ -161,7 +159,7 @@ export default class BRRollHandler extends FormApplication {
   /** @override */
   get template() {
     const sysName = game.system.data.name || SYSTEM_NAME;
-    return this.options.template || `systems/${sysName}/templates/components/roll/roll-dialog.hbs`;
+    return this.options.template || `systems/${sysName}/templates/components/roll/roll-application.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -173,14 +171,14 @@ export default class BRRollHandler extends FormApplication {
     return {
       title: this.title,
       dice: this.dice,
-      modifier: this.modifier,
+      maxPush: this.maxPush,
+      modifier: this.modifier >= 0 ? `+${this.modifier}` : this.modifier,
       modifiers: this.modifiers,
-      maxPus: this.maxPush,
       advantage: this.advantage,
       disadvantage: this.disadvantage,
       damage: this.damage,
       attack: this.isAttack,
-      roll: this.roll,
+      // roll: this.roll,
       config: CONFIG.BLADE_RUNNER,
       options,
     };
@@ -232,6 +230,7 @@ export default class BRRollHandler extends FormApplication {
    * @returns {boolean} `true` when OK
    * @throws {Error} When formData is empty
    */
+  // TODO validateForm
   _validateForm(event, formData) {
     // const isEmpty = Object.values(formData).every(value => !value);
     // if (isEmpty) {
@@ -248,8 +247,8 @@ export default class BRRollHandler extends FormApplication {
 
   _handleFormData(formData) {
     // TODO do some stuff on our variables.
-    this.modifier = formData.modifier;
-    this.options.unlimitedPush = formData['options.unlimitedPush'];
+    // this.modifier = formData.modifier;
+    // this.options.unlimitedPush = formData['options.unlimitedPush'];
     return this.executeRoll();
   }
 
@@ -307,18 +306,75 @@ export default class BRRollHandler extends FormApplication {
   activateListeners(html) {
     super.activateListeners(html);
 
-    html.find('input[type=checkbox].modifier').on('change', function () {
-      const modifierInput = html.find('input[name=modifier]')[0];
-      let value = +modifierInput.value;
-      if (this.checked) value += +this.dataset.value;
-      else value -= +this.dataset.value;
-      this.modifier = value;
-      modifierInput.value = value >= 0 ? `+${value}` : value;
+    html.find('input').on('change', ev => {
+      ev.preventDefault();
+      const elem = ev.currentTarget;
+      const key = elem.name;
+      if (key == undefined) return;
+      let value = elem.type === 'checkbox' ? elem.checked : elem.value;
+      if (elem.dataset.dtype === 'Number' || elem.type === 'number') value = Number(value);
+      foundry.utils.setProperty(this, key, value);
+      return this.render();
+    });
+
+    html.find('.add-die').on('click', async ev => {
+      ev.preventDefault();
+      const elem = ev.currentTarget;
+      const lowestDie = Math.min(...this.dice);
+
+      elem.style.display = 'none';
+      const die = await BRRollHandler.askDie(lowestDie);
+      elem.style.display = 'block';
+
+      if (!die) return;
+      this.dice.push(die);
+      return this.render();
+    });
+
+    html.find('input[type=checkbox].modifier').on('click', ev => {
+      ev.preventDefault();
+      const elem = ev.currentTarget;
+      const modifierId = elem.dataset.id;
+
+      if (!modifierId) return;
+      const mod = this.modifiers.find(m => m.id === modifierId);
+
+      if (!mod) return;
+      mod.active = elem.checked;
+
+      return this.render();
     });
 
     // We need to bind the cancel button to the FormApplication's close method.
     // html.find('#cancel').click(() => {
     //   this.close();
     // });
+  }
+
+  /* ------------------------------------------ */
+
+  static async askDie(lowest) {
+    const template = 'systems/blade-runner/templates/components/roll/roll-askdie-dialog.hbs';
+    const content = await renderTemplate(template, { lowest });
+    return new Promise(resolve => {
+      // Sets the data of the dialog.
+      const data = {
+        title: game.i18n.localize('FLBR.ROLLER.AddDie'),
+        content,
+        buttons: {
+          normal: {
+            label: game.i18n.localize('FLBR.OK'),
+            callback: html => resolve(html[0].querySelector('form').diesize.value),
+          },
+          cancel: {
+            label: game.i18n.localize('FLBR.Cancel'),
+            callback: _=> resolve(false),
+          },
+        },
+        default: 'normal',
+        close: _=> resolve(false),
+      };
+      new Dialog(data, { width: 100 }).render(true);
+    });
   }
 }

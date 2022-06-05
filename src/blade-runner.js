@@ -16,14 +16,15 @@
  * ============================================================================
  */
 
-import { FLBR } from './system/config.js';
+import { FLBR } from '@system/config';
+import { ACTOR_TYPES } from '@system/constants';
 import * as YZUR from '@lib/yzur.js';
+import BRRollHandler from './components/roll/roller.js';
 import { registerSheets } from './system/sheets.js';
 import { initializeHandlebars } from './system/handlebars.js';
 import { registerSystemSettings } from './system/settings.js';
 import BladeRunnerActor from './actor/actor-document.js';
 import BladeRunnerItem from './item/item-document.js';
-import { ACTOR_TYPES } from '@system/constants.js';
 
 /* ------------------------------------------ */
 /*  Foundry VTT Initialization                */
@@ -41,13 +42,17 @@ Hooks.once('init', () => {
   console.log('FLBR | Initializing the Blade Runner RPG Game System');
 
   // Registers dice.
-  YZUR.YearZeroRollManager.register('br', {}, { index: 1 });
+  YZUR.YearZeroRollManager.register('br', {
+    'Roll.chatTemplate': 'systems/blade-runner/templates/components/roll/roll-chatcard.hbs',
+    'Roll.tooltipTemplate': 'systems/blade-runner/templates/components/roll/roll-chatcard-tooltip-partial.hbs',
+    'Roll.infosTemplate': 'systems/blade-runner/templates/components/roll/roll-chatcard-infos-partial.hbs',
+  }, { index: 1 });
 
   // Creates a namespace within the game global.
   // Places our classes in their own namespace for later reference.
   game.bladerunner = {
     config: FLBR,
-    roll: '',
+    Roller: BRRollHandler,
   };
 
   // Records configuration values.

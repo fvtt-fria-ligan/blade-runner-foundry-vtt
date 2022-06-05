@@ -227,8 +227,6 @@ export default class BladeRunnerActor extends Actor {
       modifiers: this.getRollModifiers(),
       maxPush: FLBR.maxPushMap[this.type],
     });
-
-    console.warn(roller);
     return roller.render(true);
   }
 }

@@ -18,18 +18,14 @@
 		</div>
 		<hr/>
 		{{!-- Modifiers --}}
-		<div class="form-group-stacked">
+		<div class="form-group-stacked flex row wrap">
 			{{#each modifiers}}
 				<label class="checkbox" title="{{description}}">
-					<input type="checkbox" class="modifier" data-value="{{value}}" {{checked active}}/>
+					<input type="checkbox" class="modifier" data-id="{{id}}" {{checked active}}/>
 					{{label}}
 				</label>
 			{{/each}}
-		</div>
-		{{!-- Total Modifier --}}
-		<div class="form-group">
-			<label>{{localize "FLBR.ROLLER.TotalModifier"}}</label>
-			<input type="text" name="modifier" value="{{numberFormat modifier sign=true}}" data-dtype="Number"/>
+			<input type="text" value="{{localize "FLBR.ROLLER.TotalModifier" value=modifier}}" disabled/>
 		</div>
 		<hr/>
 		{{!-- Max Pushes --}}
@@ -40,15 +36,21 @@
 					<input type="checkbox" name="options.unlimitedPush" {{checked options.unlimitedPush}}/>
 					{{localize "FLBR.ROLLER.UnlimitedPush"}}
 				</label>
-				<input type="number" name="maxPush" value="{{maxPush}}" disabled/>
+				<input type="number" name="maxPush" value="{{maxPush}}" disabled{{#if options.unlimitedPush}} style="display: none;"{{/if}}/>
 			</div>
 		</div>
 	</div>
 
 	<div class="sheet-footer flex row space-between">
-		<button id="advantage" class="flbr-button" type="submit">{{localize "FLBR.ROLLER.RollWithAdvantageButton"}}</button>
-		<button id="roll" class="flbr-button" type="submit">{{localize "FLBR.ROLLER.RollButton"}}</button>
-		<button id="disadvantage" class="flbr-button" type="submit">{{localize "FLBR.ROLLER.RollWithDisadvantageButton"}}</button>
+		<button id="roll" class="flbr-button" type="submit">
+			{{#if advantage}}
+				{{localize "FLBR.ROLLER.RollWithAdvantageButton"}}
+			{{else if disadvantage}}
+				{{localize "FLBR.ROLLER.RollWithDisadvantageButton"}}
+			{{else}}
+				{{localize "FLBR.ROLLER.RollButton"}}
+			{{/if}}
+		</button>
 	</div>
 
 </form>
