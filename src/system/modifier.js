@@ -15,6 +15,13 @@ export default class Modifier {
    */
   constructor(key, value, item = {}, { active, name, type, description } = {}) {
     /**
+     * Identifier for this modifier.
+     * @type {string}
+     * @constant
+     */
+    this.id = foundry.utils.randomID();
+
+    /**
      * The item that holds the modifier.
      * @type {Item}
      */
