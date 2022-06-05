@@ -20,9 +20,10 @@ export default class BRRollHandler extends FormApplication {
    * @param {Modifier|Modifier[]} [modifiers]    A group of modifiers that can also be applied to the roll
    * @param {number}              [maxPush=1]    The maximum number of pushes (default is 1)
    * @param {Object}  [options] Additional options for the FormApplication instance
-   * @param {boolean} [options.askForOptions=true] Whether to show a Dialog for roll options
-   * @param {boolean} [options.skipDialog=false]   Whether to force skip the Dialog for roll options
-   * @param {boolean} [options.sendMessage=true]   Whether the message should be sent
+   * @param {boolean} [options.askForOptions=true]  Whether to show a Dialog for roll options
+   * @param {boolean} [options.skipDialog=false]    Whether to force skip the Dialog for roll options
+   * @param {boolean} [options.sendMessage=true]    Whether the message should be sent
+   * @param {boolean} [options.unlimitedPush=false] Whether to allow unlimited roll pushes
    */
   constructor({
     title = 'Blade Runner RPG',
@@ -35,7 +36,10 @@ export default class BRRollHandler extends FormApplication {
     modifiers = [],
     maxPush = 1,
   },
-  options = {}) {
+  options = {
+    sendMessage: true,
+    unlimitedPush: false,
+  }) {
     super({}, options);
 
     /** 
@@ -76,7 +80,6 @@ export default class BRRollHandler extends FormApplication {
     if (this.items.length > 0) {
       this.modifiers.push(...this.items.flatMap(i => i.getModifiers({ targets: [attributeKey, skillKey] })));
     }
-    console.warn('FLBR | modifiers:', modifiers);
 
     /**
      * Additional value for the final numeric modifier.
@@ -89,10 +92,6 @@ export default class BRRollHandler extends FormApplication {
      * @type {number[]}
      */
     this.dice = !Array.isArray(dice) ? [dice] : dice;
-
-    // this.die1 = { value: this.dice[0] };
-    // this.die2 = { value: this.dice[1] ?? 0 };
-    // this.die2 = { value: this.dice[2] ?? 0 };
 
     /**
      * The roll in this FormApplication.
@@ -111,6 +110,9 @@ export default class BRRollHandler extends FormApplication {
      * @type {number}
      */
     this.damage = options.damage;
+
+    this.options.sendMessage = options.sendMessage ?? true;
+    this.options.unlimitedPush = options.unlimitedPush ?? false;
   }
 
   /* ------------------------------------------ */
@@ -176,8 +178,8 @@ export default class BRRollHandler extends FormApplication {
       modifiers: this.modifiers,
       advantage: this.advantage,
       disadvantage: this.disadvantage,
-      damage: this.damage,
-      attack: this.isAttack,
+      // damage: this.damage,
+      // attack: this.isAttack,
       // roll: this.roll,
       config: CONFIG.BLADE_RUNNER,
       options,
@@ -274,26 +276,74 @@ export default class BRRollHandler extends FormApplication {
       sceneId: this.options.sceneId,
       item: this.item?.name || this.items.map(i => i.name),
       itemId: this.item?.id || this.items.map(i => i.id),
+      yzur: true,
     };
   }
 
   /* ------------------------------------------ */
 
   async executeRoll() {
-    // TODO
+    if (this.modifier) {
+      const min = Math.min(...this.dice);
+      if (this.modifier > 0) this.dice.push(min);
+      else this.dice = this.dice.filter(d => d !== min);
+    }
     const dice = this.dice.map(d => { return { term: `${d}`, number: 1 }; });
-
     this.roll = YearZeroRoll.forge(dice, {}, this.getRollOptions());
-
-    if (this.modifier) await this.roll.modify(this.modifier);
+    // TODO remove // if (this.modifier) await this.roll.modify(this.modifier);
 
     await this.roll.roll({ async: true });
-    return this.roll.toMessage();
+
+    if (this.options.sendMessage) return this.roll.toMessage();
+    return this.roll;
+  }
+
+  /* ------------------------------------------ */
+  /*  Static Methods                            */
+  /* ------------------------------------------ */
+
+  /**
+   * Creates a Blade Runner Roll Handler FormApplication.
+   * @see {@link BRRollHandler} constructor
+   * @param {Object} [data]
+   * @param {Object} [options]
+   * @returns {BRRollHandler} Rendered instance of this FormApplication
+   * @static
+   */
+  static create(data = {}, options = {}) {
+    return new this(data, options).render(true);
   }
 
   /* ------------------------------------------ */
 
-  push() {}
+  /**
+   * Pushes a roll.
+   * @param {ChatMessage} message           The message that contains the roll to push.
+   * @param {boolean}    [sendMessage=true] Whether to send the pushed roll in a message.
+   * @returns {Promise.<YearZeroRoll|ChatMessage>}
+   * @static
+   * @async
+   */
+  static async pushRoll(message, { sendMessage = true } = {}) {
+    if (!message) return;
+
+    /** @type {YearZeroRoll} */
+    let roll = message.roll;
+    if (!roll) return;
+
+    // Copies the roll.
+    roll = roll.duplicate();
+
+    // Pushes the roll.
+    await roll.push({ async: true });
+
+    // No need to await the deletion.
+    message.delete();
+
+    // Sends the message.
+    if (sendMessage) return roll.toMessage();
+    return roll;
+  }
 
   /* ------------------------------------------ */
   /*  Form Listeners                            */
@@ -306,6 +356,7 @@ export default class BRRollHandler extends FormApplication {
   activateListeners(html) {
     super.activateListeners(html);
 
+    // (global) Listens to all inputs.
     html.find('input').on('change', ev => {
       ev.preventDefault();
       const elem = ev.currentTarget;
@@ -317,6 +368,7 @@ export default class BRRollHandler extends FormApplication {
       return this.render();
     });
 
+    // Listens to add die button.
     html.find('.add-die').on('click', async ev => {
       ev.preventDefault();
       const elem = ev.currentTarget;
@@ -327,10 +379,12 @@ export default class BRRollHandler extends FormApplication {
       elem.style.display = 'block';
 
       if (!die) return;
+      this.modifiers.forEach(m => m.active = false);
       this.dice.push(die);
       return this.render();
     });
 
+    // Listens to Modifier checkboxes.
     html.find('input[type=checkbox].modifier').on('click', ev => {
       ev.preventDefault();
       const elem = ev.currentTarget;
@@ -352,8 +406,18 @@ export default class BRRollHandler extends FormApplication {
   }
 
   /* ------------------------------------------ */
+  /*  Dialogs                                   */
+  /* ------------------------------------------ */
 
-  static async askDie(lowest) {
+  /**
+   * Displays a dialog for requesting a die size.
+   * @see {@link Dialog}
+   * @param {number} [lowest=6] Value of the lowest die
+   * @returns {Promise.<number>} The desired die size
+   * @static
+   * @async
+   */
+  static async askDie(lowest = 6) {
     const template = 'systems/blade-runner/templates/components/roll/roll-askdie-dialog.hbs';
     const content = await renderTemplate(template, { lowest });
     return new Promise(resolve => {
@@ -368,11 +432,11 @@ export default class BRRollHandler extends FormApplication {
           },
           cancel: {
             label: game.i18n.localize('FLBR.Cancel'),
-            callback: _=> resolve(false),
+            callback: () => resolve(false),
           },
         },
         default: 'normal',
-        close: _=> resolve(false),
+        close: () => resolve(false),
       };
       new Dialog(data, { width: 100 }).render(true);
     });

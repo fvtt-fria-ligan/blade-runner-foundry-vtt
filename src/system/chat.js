@@ -5,7 +5,7 @@ import BRRollHandler from 'src/components/roll/roller.js';
  * @param {JQuery} html
  */
 export function addChatListeners(html) {
-  html.find('.dice-button.push').on('click', _onPushRoll);
+  html.on('click', '.dice-button.push', _onPushRoll);
 }
 
 /* ------------------------------------------- */

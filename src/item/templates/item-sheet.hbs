@@ -17,6 +17,9 @@
 	<div class="sheet-tabs flex row" data-group="primary">
 		<a class="sheet-tab" data-tab="info">{{{config.Icons.tabs.bio}}}&nbsp;{{localize "FLBR.TAB.Info"}}</a>
 		<a class="sheet-tab" data-tab="features">{{{config.Icons.tabs.features}}}&nbsp;{{localize "FLBR.TAB.Features"}}</a>
+		{{#if rollable}}
+			<a class="sheet-tab" data-tab="roll">{{{config.Icons.tabs.roll}}}&nbsp;{{localize "FLBR.TAB.Roll"}}</a>
+		{{/if}}
 	</div>
 
 	{{!-- SHEET BODY --}}
@@ -127,6 +130,35 @@
 {{> systems/blade-runner/templates/item/modifiers-partial.hbs}}
 
 		</div>
+
+		{{#if rollable}}
+			<div class="tab tab-roll" data-group="primary" data-tab="roll">
+				<div class="item-property-rollable">
+					<label>{{localize "FLBR.ItemRollable"}}</label>
+					<input type="checkbox" name="data.rollable" {{checked data.rollable}}/>
+				</div>
+				<div class="item-property-attribute"{{#unless data.rollable}} style="display: none;"{{/unless}}>
+					<label>{{localize "FLBR.ItemAttribute"}}</label>
+					<select name="data.attribute">
+						{{#select data.attribute}}
+							{{#each @root.config.attributes}}
+								<option value="{{.}}">{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase .))}}</option>
+							{{/each}}
+						{{/select}}
+					</select>
+				</div>
+				<div class="item-property-skill"{{#unless data.rollable}} style="display: none;"{{/unless}}>
+					<label>{{localize "FLBR.ItemSkill"}}</label>
+					<select name="data.skill">
+						{{#select data.skill}}
+							{{#each @root.config.skills}}
+								<option value="{{.}}">{{localize (concat "FLBR.SKILL." (capitalize .))}}</option>
+							{{/each}}
+						{{/select}}
+					</select>
+				</div>
+			</div>
+		{{/if}}
 	</div>
 
 </form>

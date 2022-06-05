@@ -234,6 +234,7 @@ FLBR.Icons = {
     combat: '<i class="fas fa-fist-raised"></i>',
     features: '<i class="fas fa-briefcase"></i>',
     inventory: '<i class="fas fa-archive"></i>',
+    roll: '<i class="fas fa-dice-six"></i>',
     stats: '<i class="fas fa-horse-head"></i>',
   },
   boxes: {

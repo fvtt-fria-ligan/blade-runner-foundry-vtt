@@ -93,6 +93,11 @@
       "injury"
     ],
     "templates": {
+      "itemRoll": {
+        "rollable": false,
+        "attribute": "agi",
+        "skill": "firearms"
+      },
       "itemBase": {
         "qty": 1,
         "cost": 0,
@@ -111,24 +116,24 @@
       "itemModifiers": { "modifiers": {} }
     },
     "generic": {
-      "templates": ["itemBase", "itemDesc", "itemModifiers"]
+      "templates": ["itemBase", "itemRoll", "itemDesc", "itemModifiers"]
     },
     "upgrade": {
-      "templates": ["itemBase", "itemDesc", "itemModifiers"]
+      "templates": ["itemBase", "itemRoll", "itemDesc", "itemModifiers"]
     },
     "armor": {
-      "templates": ["itemBase", "itemDesc", "itemModifiers"],
+      "templates": ["itemBase", "itemRoll", "itemDesc", "itemModifiers"],
       "armor": 6
     },
     "weapon": {
-      "templates": ["itemBase", "itemDesc", "itemOffensive"]
+      "templates": ["itemBase", "itemRoll", "itemDesc", "itemOffensive"]
     },
     "explosive": {
-      "templates": ["itemBase", "itemDesc", "itemOffensive"],
+      "templates": ["itemBase", "itemRoll", "itemDesc", "itemOffensive"],
       "blast": 8
     },
     "specialty": {
-      "templates": ["itemDesc", "itemModifiers"]
+      "templates": ["itemDesc", "itemRoll", "itemModifiers"]
     },
     "injury": {
       "templates": ["itemDesc", "itemModifiers"],

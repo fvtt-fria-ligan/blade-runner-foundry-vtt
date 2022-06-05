@@ -47,6 +47,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       item: baseData.item,
       data: baseData.item.data.data,
       // effects: baseData.effects,
+      rollable: this.item.props.rollable != undefined ? true : false,
       rollData: this.item.getRollData(),
       config: CONFIG.BLADE_RUNNER,
     };
@@ -76,7 +77,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     html.find('.delete-modifier').click(this._onDeleteModifier.bind(this));
   }
 
-  /* ------------------------------------------- */
+  /* ------------------------------------------ */
 
   /**
    * Changes the value based on an input delta.
@@ -95,7 +96,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     }
   }
 
-  /* ------------------------------------------- */
+  /* ------------------------------------------ */
 
   _onAddModifier(event) {
     event.preventDefault();

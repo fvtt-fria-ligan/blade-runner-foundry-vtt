@@ -4,16 +4,16 @@
 			<div class="item-modifier-name">
 				<select name="data.modifiers.{{@key}}.name">
 					{{#select modifier.name}}
-					<optgroup label="{{localize "FLBR.Attributes"}}">
-						{{#each @root.config.attributes}}
-							<option value="attribute.{{.}}"{{#if (eq . "str")}} selected{{/if}}>{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase .))}}</option>
-						{{/each}}
-					</optgroup>
-					<optgroup label="{{localize "FLBR.Skills"}}">
-						{{#each @root.config.skills}}
-							<option value="skill.{{.}}">{{localize (concat "FLBR.SKILL." (capitalize .))}}</option>
-						{{/each}}
-					</optgroup>
+						<optgroup label="{{localize "FLBR.Attributes"}}">
+							{{#each @root.config.attributes}}
+								<option value="attribute.{{.}}"{{#if (eq . "str")}} selected{{/if}}>{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase .))}}</option>
+							{{/each}}
+						</optgroup>
+						<optgroup label="{{localize "FLBR.Skills"}}">
+							{{#each @root.config.skills}}
+								<option value="skill.{{.}}">{{localize (concat "FLBR.SKILL." (capitalize .))}}</option>
+							{{/each}}
+						</optgroup>
 					{{/select}}
 				</select>
 			</div>

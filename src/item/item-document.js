@@ -28,6 +28,10 @@ export default class BladeRunnerItem extends Item {
     return !foundry.utils.isObjectEmpty(this.props.modifiers);
   }
 
+  get rollable() {
+    return !!(this.props.rollable ?? false);
+  }
+
   /** 
    * The name with a quantity in parentheses.
    * @type {string}
@@ -83,4 +87,14 @@ export default class BladeRunnerItem extends Item {
       }
     }
   }//*/
+
+  /* ------------------------------------------ */
+  /*  Utility Functions                         */
+  /* ------------------------------------------ */
+
+  roll() {
+    if (!this.rollable) return;
+    if (!this.actor) return;
+    this.actor.rollStat(this.props.attribute, this.props.skill);
+  }
 }

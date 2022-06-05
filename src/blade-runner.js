@@ -37,7 +37,9 @@ import BladeRunnerItem from './item/item-document.js';
  */
 /** @__PURE__ */ (async () => {
   CONFIG.debug.hooks = true;
+  CONFIG.debug.dice = true;
   console.warn('HOOKS DEBUG ACTIVATED: ', CONFIG.debug.hooks);
+  console.warn('DICE DEBUG ACTIVATED: ', CONFIG.debug.dice);
 })();
 
 Hooks.once('init', () => {

@@ -1,5 +1,4 @@
 import BRRollHandler from 'src/components/roll/roller.js';
-import Modifier from '@system/modifier';
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES, CAPACITIES } from '@system/constants';
 import { capitalize } from '@utils/string-utils';
@@ -161,19 +160,6 @@ export default class BladeRunnerActor extends Actor {
         // // if (i.isPhysical && !i.isEquipped) continue;
         const mods = i.getModifiers();
         if (mods.length > 0) modifiers.push(...mods);
-        // TODO clean code (but commented code just above)
-        // // Iterates over each roll modifier.
-        // for (const m of Object.values(i.props.modifiers)) {
-        //   let mod = {};
-        //   try {
-        //     mod = new Modifier(m.name, m.value, i);
-        //   }
-        //   catch (error) {
-        //     ui.notifications.error(error.message, { permanent: true });
-        //     console.error(error);
-        //   }
-        //   modifiers.push(mod);
-        // }
       }
     }
     return modifiers;
