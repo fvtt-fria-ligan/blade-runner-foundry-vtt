@@ -4,24 +4,64 @@
   label {
     color: var(--color-blue);
   }
-  .sheet-header img {
-    @include utils.border-sheet;
-    width: 200px;
-    height: 200px;
+  .sheet-header {
+    .curriculum {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      column-gap: 4px;
+      row-gap: 4px;
+    }
+    .avatar {
+      background-color: var(--color-black);
+
+      img {
+        @include utils.border-sheet(2px);
+        width: 200px;
+        height: 200px;
+      }
+    }
+    .archetype input {
+      color: var(--color-blue);
+      font-family: var(--font-table);
+      font-size: var(--font-size--large);
+      font-weight: bold;
+      text-transform: uppercase;
+      writing-mode: vertical-lr;
+      text-align: center;
+      width: 100%;
+      padding-left: 6px;
+      background: none;
+      border: none;
+    }
+    .actor-name input {
+      @include utils.border-sheet(2px);
+      color: var(--color-blue-darker);
+      font-family: var(--font-header);
+      font-size: var(--font-size--small);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      height: auto;
+      padding: 4px;
+      margin: 4px 0 0 0;
+    }
+    .capacities > div {
+      @include utils.border-sheet;
+      padding: 4px;
+      margin-bottom: 4px;
+      background-color: var(--color-black);
+    }
   }
   .sheet-body .tab-bio {
-    overflow-y: auto;
-    max-height: 100%;
+    padding-top: 4px;
 
     .section {
-      @include utils.border-sheet(1px);
+      @include utils.border-sheet;
       background-color: var(--color-black);
       padding: 4px;
+    }
 
-      .editor {
-        max-height: 100px;
-        overflow-y: auto;
-      }
+    .section.bio-notes {
+      grid-column: 1/-1;
     }
 
     .section.years-on-the-force {
@@ -30,7 +70,6 @@
       align-items: center;
       width: 100%;
       grid-column: 1/-1;
-      margin-top: 4px;
 
       h4 { width: 100%; }
       input { width: 69px; }

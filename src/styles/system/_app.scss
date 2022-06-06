@@ -22,7 +22,7 @@ $gap: 4px;
   /* ------------------------------------------ */
 
   .editor {
-    @include utils.border-sheet;
+    @include utils.border-sheet(2px);
     @include utils.input-background;
     color: var(--color-black);
     font-family: var(--font-editor);
@@ -69,6 +69,12 @@ $gap: 4px;
   h4 { font-size: var(--font-size--small); }
   h5 { font-size: var(--font-size--very-small); }
   h6 { font-size: var(--font-size--extra-small); }
+  
+  /* ------------------------------------------ */
+
+  .capacity-boxes {
+    color: var(--color-green);
+  }
 
   /* ------------------------------------------ */
 

@@ -23,7 +23,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
-        initial: 'bio',
+        initial: 'inventory',
       }],
     });
   }

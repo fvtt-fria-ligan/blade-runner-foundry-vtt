@@ -1,5 +1,5 @@
-@mixin border-sheet($w: 2px) {
-  border: $w solid var(--color-border);
+@mixin border-sheet($x: 1px) {
+  border: $x solid var(--color-border);
   border-radius: 0;
 }
 

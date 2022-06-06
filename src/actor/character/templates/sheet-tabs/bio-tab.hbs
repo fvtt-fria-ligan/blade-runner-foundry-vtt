@@ -1,30 +1,38 @@
-<div class="bio-tab">
+<div class="container">
+	<div class="section bio-notes">
+		<h4>{{localize "FLBR.HEADER.Notes"}}</h4>
+		<div class="bio-editor">
+			{{editor content=data.description target="data.description" owner=owner button=true editable=editable}}
+		</div>
+	</div>
 	{{#if data.bio}}
-		<div class="container">
-			<div class="section years-on-the-force">
-				<h4>{{localize "FLBR.HEADER.YearsOnTheForce"}}</h4>
-				<input type="text" name="data.bio.yearsOnTheForce" value="{{data.bio.yearsOnTheForce}}" data-dtype="Number"/>
-			</div>
-			<div class="section">
-				<h4>{{localize "FLBR.HEADER.Appearance"}}</h4>
+		<div class="section years-on-the-force">
+			<h4>{{localize "FLBR.HEADER.YearsOnTheForce"}}</h4>
+			<input type="text" name="data.bio.yearsOnTheForce" value="{{data.bio.yearsOnTheForce}}" data-dtype="Number"/>
+		</div>
+		<div class="section">
+			<h4>{{localize "FLBR.HEADER.Appearance"}}</h4>
+			<div class="bio-editor">
 				{{editor content=data.bio.appearance target="data.bio.appearance" owner=owner button=true editable=editable}}
 			</div>
-			<div class="section">
-				<h4>{{localize "FLBR.HEADER.KeyMemory"}}</h4>
+		</div>
+		<div class="section">
+			<h4>{{localize "FLBR.HEADER.KeyMemory"}}</h4>
+			<div class="bio-editor">
 				{{editor content=data.bio.keyMemory target="data.bio.keyMemory" owner=owner button=true editable=editable}}
 			</div>
-			<div class="section">
-				<h4>{{localize "FLBR.HEADER.KeyRelationship"}}</h4>
+		</div>
+		<div class="section">
+			<h4>{{localize "FLBR.HEADER.KeyRelationship"}}</h4>
+			<div class="bio-editor">
 				{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=editable}}
 			</div>
-			<div class="section">
-				<h4>{{localize "FLBR.HEADER.Home"}}</h4>
+		</div>
+		<div class="section">
+			<h4>{{localize "FLBR.HEADER.Home"}}</h4>
+			<div class="bio-editor">
 				{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=editable}}
 			</div>
 		</div>
 	{{/if}}
-	<div class="section">
-		<h4>{{localize "FLBR.HEADER.Notes"}}</h4>
-		{{editor content=data.description target="data.description" owner=owner button=true editable=editable}}
-	</div>
 </div>
