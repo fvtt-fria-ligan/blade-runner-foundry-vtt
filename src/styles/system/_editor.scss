@@ -1,0 +1,12 @@
+.app.sheet .editor {
+  min-height: 55px;
+  height: 100%;
+
+  .editor-content {
+    height: 100%;
+  }
+  .tox-tinymce {
+    min-height: 200px;
+    height: 100%;
+  }
+}

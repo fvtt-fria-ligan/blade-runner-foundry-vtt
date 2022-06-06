@@ -1,0 +1,133 @@
+@use "../utils";
+$gap: 4px;
+
+.blade-runner {
+  &.window-app .window-content > * {
+    height: 100%;
+  }
+}
+
+.app.window-app.dialog,
+.app.window-app.journal-sheet,
+.app.window-app.blade-runner {
+  color: var(--color-foreground);
+  border: 1px solid var(--color-blue-darker);
+  border-radius: $gap;
+  background-image: url("./assets/character-sheet-background.webp");
+  background-position: top center;
+  background-size: cover; // 100% 100%
+  background-repeat: no-repeat;
+  background-color: var(--color-background);
+
+  /* ------------------------------------------ */
+
+  .editor {
+    @include utils.border-sheet;
+    @include utils.input-background;
+    color: var(--color-black);
+    font-family: var(--font-editor);
+    margin-top: $gap;
+    padding: $gap;
+  }
+  input,
+  select {
+    @include utils.input-background;
+    color: var(--color-black);
+    font-family: var(--font-table);
+    text-align: center;
+  }
+  select {
+    border: none;
+  }
+  label {
+    color: var(--color-green);
+    font-family: var(--font-table);
+    font-size: .8rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* ------------------------------------------ */
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-blue);
+    font-family: var(--font-header);
+    font-weight: 100;
+    // line-height: 1;
+    text-decoration: none;
+    margin: 0;
+    border: none;
+  }
+
+  h1, h2, h3, h4 {
+    text-transform: uppercase;
+  }
+
+  h1 { font-size: var(--font-size--extra-large); }
+  h2 { font-size: var(--font-size--large); }
+  h3 { font-size: var(--font-size--default); }
+  h4 { font-size: var(--font-size--small); }
+  h5 { font-size: var(--font-size--very-small); }
+  h6 { font-size: var(--font-size--extra-small); }
+
+  /* ------------------------------------------ */
+
+  .window-header {
+    border: none;
+
+    h4 {
+      // opacity: 0;
+    }
+    a.header-button {
+      // Thanks to Forbidden Lands FVTT Devs!
+      display: flex;
+      flex: none;
+      flex-flow: row-reverse;
+      max-width: 24px; // 34px;
+      height: 26px;
+      white-space: nowrap;
+      // line-height: 1;
+      overflow: hidden;
+      padding: 0 6px;
+      margin: 0 0 0 $gap;
+      color: transparent;
+      transition: max-width 1s ease;
+
+      &:hover {
+        max-width: 200px;
+        color: var(--color-blue);
+      }
+      & > i {
+        font-size: var(--font-size--small);
+        color: var(--color-blue);
+        margin: $gap 0 0 ($gap / 2);
+      }
+    }
+  }
+
+  /* ------------------------------------------ */
+
+  .window-content {
+    padding: $gap;
+    background: none;
+    overflow: hidden;
+
+    .sheet-tabs {
+      display: flex;
+      justify-content: space-around;
+      font-family: var(--font-header);
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: $gap;
+      margin-top: $gap;
+
+      .sheet-tab {
+        color: var(--color-blue);
+      }
+      .sheet-tab.active {
+        color: var(--color-red);
+        border-bottom: 2px solid var(--color-red);
+      }
+    }
+  }
+}

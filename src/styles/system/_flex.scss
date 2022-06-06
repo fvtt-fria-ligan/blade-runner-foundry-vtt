@@ -1,4 +1,4 @@
-$gap: 5px;
+@use "sass:math" as math;
 
 .blade-runner {
   .flex { display: flex; }
@@ -16,10 +16,28 @@ $gap: 5px;
   .justify-center { justify-content: center; }
   .justify-end { justify-content: flex-end; }
   .half { flex: 0 0 50% }
-  .margin { margin: $gap; }
-  .padding { padding: $gap; }
+  .margin { margin: 4px; }
+  .padding { padding: 4px; }
   .full {
     width: 100%;
     height: 100%;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4px;
+    row-gap: 4px;
+  }
+
+  /**
+   * Creates a range of styles from .col-1 to .col-12
+   * for placing flex elements like in a table.
+   */
+  @for $i from 1 through 12 {
+    .col-#{$i} {
+      flex: 0 0 auto;
+      width: math.round(($i / 12 * 100%));
+    }
   }
 }

@@ -1,0 +1,74 @@
+@use "../utils";
+$gap: 4px;
+
+.blade-runner.sheet.item {
+  // .editor {
+  //   @include utils.border-sheet;
+  //   @include utils.input-background;
+  //   color: var(--color-black);
+  //   font-family: var(--font-editor);
+  //   margin-top: $gap;
+  //   padding: $gap;
+  // }
+  // input,
+  // select {
+  //   @include utils.input-background;
+  //   color: var(--color-black);
+  //   font-family: var(--font-table);
+  //   text-align: center;
+  // }
+  // select {
+  //   border: none;
+  // }
+  .sheet-body {
+    overflow-y: auto;
+    max-height: 285px;
+  }
+  .sheet-header img {
+    @include utils.border-sheet;
+    width: 200px;
+    height: 200px;
+  }
+  .item-type {
+    color: var(--color-blue);
+    font-family: var(--font-table);
+    font-size: var(--font-size--large);
+    font-weight: bold;
+    text-transform: uppercase;
+    writing-mode: vertical-lr;
+    text-align: center;
+    width: 100%;
+    padding-left: 6px;
+  }
+  .item-name input {
+    @include utils.border-sheet;
+    color: var(--color-blue-darker);
+    font-family: var(--font-header);
+    font-size: var(--font-size--small);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    height: auto;
+    padding: $gap;
+    margin: $gap 0 0 0;
+  }
+  .item-property {
+    @include utils.border-sheet(1px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: $gap;
+    padding: $gap;
+
+    & > * {
+      flex: 1;
+    }
+
+    // label {
+    //   color: var(--color-green);
+    //   font-family: var(--font-table);
+    //   font-size: .8rem;
+    //   text-transform: uppercase;
+    //   text-align: center;
+    // }
+  }
+}
