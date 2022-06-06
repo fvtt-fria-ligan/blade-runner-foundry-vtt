@@ -139,6 +139,7 @@ export default class Modifier {
     // Gets the modifiers.
     let out = [];
     const mods = foundry.utils.getProperty(item, path);
+    if (!mods) return undefined;
     for (const mod of Object.values(mods)) {
       let m;
       try {
