@@ -96,7 +96,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     inputs.focus(ev => ev.currentTarget.select());
 
     // Item Management
-    html.find('.capacities .capacity-boxes').on('click contextmenu', this._onCapacityDecrease.bind(this));
+    html.find('.capacities .capacity-boxes').on('click contextmenu', this._onCapacityIncrease.bind(this));
     html.find('.meta-currencies .capacity-boxes').on('click contextmenu', this._onCapacityIncrease.bind(this));
     html.find('.item-create').click(this._onItemCreate.bind(this));
     html.find('.item-edit').click(this._onItemEdit.bind(this));
