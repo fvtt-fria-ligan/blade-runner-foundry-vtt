@@ -3,7 +3,7 @@
 	{{!-- SHEET HEADER --}}
 
 	<div class="sheet-header">
-		<div class="curriculum">
+		<div class="container-header">
 
 			<div class="avatar">
 				<img class="profile" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
@@ -13,13 +13,13 @@
 				{{#if data.health}}
 					<div class="capacity-health">
 						<h3>{{localize "FLBR.HEADER.Health"}} <span>{{data.health.value}}/{{data.health.max}}</span></h3>
-						{{boxes "data.health.value" value=(substract data.health.max data.health.value) min=0 max=data.health.max}}
+						{{boxes "data.health.value" value=data.health.value min=0 max=data.health.max}}
 					</div>
 				{{/if}}
 				{{#if data.resolve}}
 					<div class="capacity-resolve">
 						<h3>{{localize "FLBR.HEADER.Resolve"}} <span>{{data.resolve.value}}/{{data.resolve.max}}</span></h3>
-						{{boxes "data.resolve.value" value=(substract data.resolve.max data.resolve.value) min=0 max=data.resolve.max}}
+						{{boxes "data.resolve.value" value=data.resolve.value min=0 max=data.resolve.max}}
 					</div>
 				{{/if}}
 			</div>
@@ -33,16 +33,16 @@
 				</datalist>
 			</div>
 
-<div class="nature">
+{{!-- <div class="nature">
 	<select name="data.nature">
 		{{selectOptions config.natures selected=data.nature localize=true}}
 	</select>
-</div>
-				<div class="actor-name">
-					<input type="text" name="name" value="{{actor.name}}"/>
-				</div>
-		</div>
+</div> --}}
+			<div class="actor-name">
+				<input type="text" name="name" value="{{actor.name}}"/>
+			</div>
 
+		</div>
 	</div>
 
 	{{!-- SHEET TABS --}}

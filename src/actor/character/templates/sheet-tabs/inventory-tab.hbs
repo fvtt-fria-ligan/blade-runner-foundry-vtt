@@ -1,36 +1,38 @@
 <div class="inventory-tab">
 
 	{{#if isPC}}
-		<div class="favored-gear">
-			<h2>{{localize "FLBR.HEADER.FavoredGear"}}</h2>
-			<input type="text" name="data.favoredGear" value="{{data.favoredGear}}"/>
-		</div>
-		<div class="signature-item">
-			<h2>{{localize "FLBR.HEADER.SignatureItem"}}</h2>
-			<div class="flex row">
-				<input type="text" name="data.signatureItem.name" value="{{data.signatureItem.name}}" class="flex-1"/>
-				<input type="checkbox" name="data.signatureItem.used" title="{{localize "FLBR.SignatureItemUsedCheckboxHint"}}" {{checked data.signatureItem.used}}/>
+		<div class="container special-gear">
+			<div class="favored-gear">
+				<h3>{{localize "FLBR.HEADER.FavoredGear"}}</h3>
+				<input type="text" name="data.favoredGear" value="{{data.favoredGear}}"/>
+			</div>
+			<div class="signature-item">
+				<h3>{{localize "FLBR.HEADER.SignatureItem"}}</h3>
+				<div class="flex row">
+					<input type="text" name="data.signatureItem.name" value="{{data.signatureItem.name}}" class="flex-1"/>
+					<input type="checkbox" name="data.signatureItem.used" title="{{localize "FLBR.SignatureItemUsedCheckboxHint"}}" {{checked data.signatureItem.used}}/>
+				</div>
 			</div>
 		</div>
 	{{/if}}
 
 	<div class="inventory">
-		<h2>{{localize "FLBR.HEADER.Inventory"}}{{createNewItemButton "generic"}}</h2>
+		<h3>{{localize "FLBR.HEADER.Inventory"}}{{createNewItemButton "generic"}}</h3>
 {{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.generic wrap=true}}
 	</div>
 
 	{{#if isPC}}
 		<div class="meta-currencies flex row space-between">
 			<div class="meta-currency-promotion">
-				<h2>{{localize "FLBR.HEADER.PromotionPoints"}}</h2>
+				<h4>{{localize "FLBR.HEADER.PromotionPoints"}}</h4>
 				{{boxes "data.metaCurrencies.promotion" value=data.metaCurrencies.promotion min=0 max=config.maxPromotionPoints}}
 			</div>
 			<div class="meta-currency-humanity">
-				<h2>{{localize "FLBR.HEADER.HumanityPoints"}}</h2>
+				<h4>{{localize "FLBR.HEADER.HumanityPoints"}}</h4>
 				{{boxes "data.metaCurrencies.humanity" value=data.metaCurrencies.humanity min=0 max=config.maxHumanityPoints}}
 			</div>
 			<div class="meta-currency-chinyen">
-				<h2>{{localize "FLBR.HEADER.ChinyenPoints"}}</h2>
+				<h4>{{localize "FLBR.HEADER.ChinyenPoints"}}</h4>
 				{{boxes "data.metaCurrencies.chinyen" value=data.metaCurrencies.chinyen min=0 max=config.maxChinyenPoints}}
 			</div>
 		</div>
