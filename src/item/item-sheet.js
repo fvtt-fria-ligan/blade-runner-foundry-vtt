@@ -16,8 +16,9 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: [sysName, 'sheet', 'item'],
       width: 250, // window.innerWidth * 0.08 + 350,
-      resizable: true,
-      tabs: [{ navSelector: '.sheet-tabs', contentSelector: '.sheet-body', initial: 'features' }],
+      scrollY: ['.sheet-body'],
+      resizable: false,
+      tabs: [{ navSelector: '.sheet-tabs', contentSelector: '.sheet-body', initial: 'info' }],
     });
   }
 

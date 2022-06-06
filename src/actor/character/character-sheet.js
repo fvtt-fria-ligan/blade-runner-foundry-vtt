@@ -1,5 +1,5 @@
-import BladeRunnerActorSheet from '@actor/actor-sheet.js';
-import { SYSTEM_NAME, ACTOR_TYPES } from '@system/constants.js';
+import BladeRunnerActorSheet from '@actor/actor-sheet';
+import { SYSTEM_NAME, ACTOR_TYPES } from '@system/constants';
 
 /**
  * Blade Runner RPG Actor Sheet for Character.
@@ -15,15 +15,15 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   static get defaultOptions() {
     const sysName = game.system.data.name || SYSTEM_NAME;
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [sysName, 'sheet', 'actor'],
-      width: 700,
-      height: 780,
+      classes: [sysName, 'sheet', 'actor', 'character'],
+      width: 420,
+      height: 600,
       resizable: true,
-      scrollY: [],
+      scrollY: ['.tab-bio'],
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
-        initial: 'main',
+        initial: 'bio',
       }],
     });
   }
