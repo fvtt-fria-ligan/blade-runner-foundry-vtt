@@ -16,10 +16,10 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     const sysName = game.system.data.name || SYSTEM_NAME;
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: [sysName, 'sheet', 'actor', 'character'],
-      width: 420,
+      width: 430,
       height: 600,
       resizable: true,
-      scrollY: ['.tab-bio'],
+      // scrollY: ['.tab-bio'],
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
