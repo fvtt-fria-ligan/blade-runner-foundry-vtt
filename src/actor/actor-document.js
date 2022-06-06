@@ -1,7 +1,7 @@
 import BRRollHandler from 'src/components/roll/roller.js';
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES, CAPACITIES } from '@system/constants';
-import { capitalize } from '@utils/string-utils';
+import { capitalize } from '@utils/string-util';
 
 export default class BladeRunnerActor extends Actor {
 

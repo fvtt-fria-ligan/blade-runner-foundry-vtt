@@ -64,6 +64,7 @@
   "FLBR.InjuryLethal": "Lethal",
   "FLBR.InjuryPermanent": "Permanent",
   "FLBR.InventoryNoItem": "Empty.",
+  "FLBR.ItemAddModifier": "Add Modifier",
   "FLBR.ItemArmor": "Armor",
   "FLBR.ItemAttribute": "Attribute",
   "FLBR.ITEM_AVAILABILITY.Incidental": "Incidental",

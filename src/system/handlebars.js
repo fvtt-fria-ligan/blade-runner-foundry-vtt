@@ -1,4 +1,4 @@
-import { capitalize } from '@utils/string-utils.js';
+import { capitalize } from '@utils/string-util.js';
 import { FLBR } from './config.js';
 import { SYSTEM_NAME } from './constants';
 

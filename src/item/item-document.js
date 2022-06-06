@@ -1,5 +1,7 @@
 import { FLBR } from '@system/config.js';
 import Modifier from '@system/modifier.js';
+import BRRollHandler from 'src/components/roll/roller';
+import { capitalize } from '@utils/string-util';
 
 export default class BladeRunnerItem extends Item {
 
@@ -54,7 +56,8 @@ export default class BladeRunnerItem extends Item {
    * @returns {Modifier[]}
    */
   getModifiers(options = {}) {
-    return Modifier.getModifiers(this, 'data.data.modifiers', options);
+    const mods = Modifier.getModifiers(this, 'data.data.modifiers', options);
+    return mods ?? [];
   }
 
   /* ------------------------------------------- */
@@ -95,6 +98,28 @@ export default class BladeRunnerItem extends Item {
   roll() {
     if (!this.rollable) return;
     if (!this.actor) return;
-    this.actor.rollStat(this.props.attribute, this.props.skill);
+    // this.actor.rollStat(this.props.attribute, this.props.skill);
+
+    const attributeKey = this.props.attribute;
+    const skillKey = this.props.skill;
+    const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
+    const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`) : null;
+    const title = `${this.detailedName} (${skillKey ? skillName : attributeName})`;
+    const attributeValue = this.actor.getAttribute(attributeKey);
+    const skillValue = this.actor.getSkill(skillKey);
+
+    const dice = [];
+    if (attributeValue) dice.push(attributeValue);
+    if (skillValue) dice.push(skillValue);
+
+    const roller = new BRRollHandler({
+      title,
+      actor: this.actor,
+      attributeKey, skillKey, dice,
+      items: [this],
+      modifiers: this.actor.getRollModifiers(),
+      maxPush: FLBR.maxPushMap[this.actor.type],
+    });
+    return roller.render(true);
   }
 }

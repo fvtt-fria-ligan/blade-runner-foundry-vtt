@@ -91,7 +91,8 @@ Hooks.once('ready', () => {
   console.log('FLBR | READY!');
 
   // Debugging.
-  game.actors.getName('Bob')?.sheet?.render(true);
+  // game.actors.getName('Bob')?.sheet?.render(true);
+  game.items.getName('My Weapon')?.sheet?.render(true);
 });
 
 /* ------------------------------------------ */

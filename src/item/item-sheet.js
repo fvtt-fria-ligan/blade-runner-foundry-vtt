@@ -1,4 +1,4 @@
-import { SYSTEM_NAME } from '@system/constants.js';
+import { SYSTEM_NAME } from '@system/constants';
 
 /**
  * Blade Runner RPG Item Sheet.
@@ -15,7 +15,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     const sysName = game.system.data.name || SYSTEM_NAME;
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: [sysName, 'sheet', 'item'],
-      width: window.innerWidth * 0.08 + 350,
+      width: 250, // window.innerWidth * 0.08 + 350,
       resizable: true,
       tabs: [{ navSelector: '.sheet-tabs', contentSelector: '.sheet-body', initial: 'features' }],
     });

@@ -1,6 +1,6 @@
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES, ITEM_TYPES } from '@system/constants';
-import { capitalize } from '@utils/string-utils';
+import { capitalize } from '@utils/string-util';
 
 /**
  * Blade Runner RPG Actor Sheet.
