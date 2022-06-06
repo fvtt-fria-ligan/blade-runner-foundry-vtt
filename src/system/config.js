@@ -258,5 +258,6 @@ FLBR.Icons = {
     lethal: '<i class="fas fa-skull"></i>',
     // mental: '<i class="fas fa-brain"></i>',
     chat: '<i class="far fa-comment-dots"></i>',
+    roll: '<i class="fas fa-dice-d20"></i>',
   },
 };
