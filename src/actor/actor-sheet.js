@@ -103,7 +103,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     html.find('.item-delete').click(this._onItemDelete.bind(this));
     html.find('.item-delete-confirmed').click(this._onItemDeleteConfirmed.bind(this));
 
-    html.find('.embedded-item .rollable').click(this._onItemRoll.bind(this));
+    html.find('.embedded-item .item-roll').click(this._onItemRoll.bind(this));
 
     // // Owner-only listeners.
     // if (this.actor.isOwner) {
