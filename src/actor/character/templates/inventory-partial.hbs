@@ -4,7 +4,7 @@
 <div class="embedded-items flex {{#if wrap}}row wrap{{else}}column{{/if}}">
 	{{#each items}}
 		<div class="embedded-item flex row" data-item-id="{{id}}">
-			<div class="photo{{#if data.data.rollable}} rollable{{/if}}">
+			<div class="photo{{#if data.data.rollable}} item-roll rollable{{/if}}">
 				<img src="{{img}}" title="{{name}}" width="64" height="64"/>
 			</div>
 			<div class="details">
@@ -33,16 +33,21 @@
 						{{/if}}
 					{{/with}}
 				<div class="item-controls">
-					<a class="button item-edit" title="{{localize "FLBR.BUTTON.Edit"}}">
+					{{#if data.data.rollable}}
+						<a class="btn item-roll" title="{{localize "FLBR.BUTTON.Roll"}}">
+							{{{@root.config.Icons.buttons.roll}}}
+						</a>
+					{{/if}}
+					<a class="btn item-edit" title="{{localize "FLBR.BUTTON.Edit"}}">
 						{{{@root.config.Icons.buttons.edit}}}
 					</a>
-					<a class="button item-chat" title="{{localize "FLBR.BUTTON.ToChat"}}">
+					<a class="btn item-chat" title="{{localize "FLBR.BUTTON.ToChat"}}">
 						{{{@root.config.Icons.buttons.chat}}}
 					</a>
-					<a class="button item-delete" title="{{localize "FLBR.BUTTON.Delete"}}">
+					<a class="btn item-delete" title="{{localize "FLBR.BUTTON.Delete"}}">
 						{{{@root.config.Icons.buttons.times}}}
 					</a>
-					<a class="button item-delete-confirmed" style="display: none;" title="{{localize "FLBR.BUTTON.Delete"}}">
+					<a class="btn item-delete-confirmed" style="display: none;" title="{{localize "FLBR.BUTTON.Delete"}}">
 						{{{@root.config.Icons.buttons.delete}}}
 					</a>
 				</div>

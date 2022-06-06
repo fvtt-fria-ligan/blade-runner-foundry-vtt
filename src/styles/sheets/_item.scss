@@ -7,7 +7,7 @@ $gap: 4px;
     max-height: 285px;
   }
   .sheet-header img {
-    @include utils.border-sheet(2px);
+    @include utils.boxed-property(2px, 0);
     width: 200px;
     height: 200px;
   }
@@ -26,7 +26,7 @@ $gap: 4px;
     @include utils.border-sheet(2px);
     color: var(--color-blue-darker);
     font-family: var(--font-header);
-    font-size: var(--font-size--small);
+    font-size: var(--font-size--default);
     text-transform: uppercase;
     letter-spacing: 2px;
     height: auto;
@@ -34,13 +34,11 @@ $gap: 4px;
     margin: $gap 0 0 0;
   }
   .item-property {
-    @include utils.border-sheet;
-    background-color: var(--color-black);
+    @include utils.boxed-property(1px, 4px);
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-top: $gap;
-    padding: $gap;
 
     & > * {
       flex: 1;

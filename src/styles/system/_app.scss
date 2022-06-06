@@ -36,7 +36,7 @@ $gap: 4px;
     font-family: var(--font-table);
     text-align: center;
   }
-  select {
+  select, img {
     border: none;
   }
   label {
@@ -73,7 +73,17 @@ $gap: 4px;
   /* ------------------------------------------ */
 
   .capacity-boxes {
+    display: block;
     color: var(--color-green);
+    white-space: nowrap;
+    line-height: 0;
+  }
+  .rollable {
+    cursor: pointer;
+    &:hover {
+      text-shadow: 0 0 8px var(--color-shadow-primary);
+      box-shadow: 0 0 8px var(--color-shadow-primary);
+    }
   }
 
   /* ------------------------------------------ */
@@ -90,12 +100,12 @@ $gap: 4px;
       flex: none;
       flex-flow: row-reverse;
       max-width: 24px; // 34px;
-      height: 26px;
+      height: 32px;
       white-space: nowrap;
       // line-height: 1;
       overflow: hidden;
-      padding: 0 6px;
-      margin: 0 0 0 $gap;
+      padding: 0 4px;
+      margin: 0 0 0 2px;
       color: transparent;
       transition: max-width 1s ease;
 
@@ -106,7 +116,7 @@ $gap: 4px;
       & > i {
         font-size: var(--font-size--small);
         color: var(--color-blue);
-        margin: $gap 0 0 ($gap / 2);
+        margin: 8px 0 0 8px;
       }
     }
   }
@@ -117,6 +127,11 @@ $gap: 4px;
     padding: $gap;
     background: none;
     overflow: hidden;
+
+    .tab {
+      overflow-y: auto;
+      height: 100%;
+    }
 
     .sheet-tabs {
       display: flex;
@@ -134,6 +149,9 @@ $gap: 4px;
         color: var(--color-red);
         border-bottom: 2px solid var(--color-red);
       }
+    }
+    .sheet-body {
+      height: 100%;
     }
   }
 }
