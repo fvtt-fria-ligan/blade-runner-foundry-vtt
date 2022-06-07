@@ -16,7 +16,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     const sysName = game.system.data.name || SYSTEM_NAME;
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: [sysName, 'sheet', 'actor', 'character'],
-      width: 430,
+      width: 520,
       height: 600,
       resizable: true,
       // scrollY: ['.tab-bio'],
@@ -67,15 +67,14 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     if (!this.isEditable) return;
 
     // Stats Roll
-    html.find('.stat .rollable').click(this._onStatRoll.bind(this));
+    html.find('.stat-roll').click(this._onStatRoll.bind(this));
   }
 
   /* ------------------------------------------ */
 
   _onStatRoll(event) {
     event.preventDefault();
-    const elem = event.currentTarget;
-    const stat = elem.closest('.stat');
+    const stat = event.currentTarget;
     const attrKey = stat.dataset.attribute;
     const skillKey = stat.dataset.skill;
     return this.actor.rollStat(attrKey, skillKey);

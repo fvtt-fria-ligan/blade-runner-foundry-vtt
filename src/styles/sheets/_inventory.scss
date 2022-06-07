@@ -4,6 +4,7 @@
   gap: 4px;
   overflow-y: auto;
   max-height: 200px;
+  align-items: flex-start;
 
   .embedded-item {
     @include utils.input-background;
@@ -12,7 +13,7 @@
     font-family: var(--font-table);
     font-size: var(--font-size--very-small);
     color: var(--color-dark);
-    flex: 0 0 200px;
+    width: 200px;
     padding: 4px;
 
     .photo {
@@ -28,11 +29,6 @@
       &.rollable {
         border-style: groove;
       }
-
-      // img {
-      //   width: 64px;
-      //   height: 64px;
-      // }
     }
     .details {
       // display: flex;
@@ -44,25 +40,32 @@
       .item-detail.name {
         font-weight: bold;
         text-transform: uppercase;
-      }
-      .item-detail.special {
-        color: var(--color-blue-darker);
-        font-size: var(--font-size--extra-small);
-        font-style: italic;
-        // flex: 1;
-      }
-      .name {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         width: 120px;
       }
+      .item-detail.special {
+        color: var(--color-blue-darker);
+        font-size: var(--font-size--extra-small);
+        font-style: italic;
+      }
+      .item-detail.armor,
+      .item-detail.damage,
+      .item-detail.range {
+        color: var(--color-blue-darker);
+        font-size: var(--font-size--extra-small);
+      }
       .item-controls {
+        background-color: var(--color-blue-lighter);
+        border: 1px solid var(--color-blue-darker);
+        border-radius: 4px;
         display: none;
         position: absolute;
         bottom: 0;
         right: 0;
-        & a { margin-right: 2px; }
+        padding: 2px 4px;
+        & a + a { margin-left: 2px; }
       }
     }
     &:hover .item-controls {
