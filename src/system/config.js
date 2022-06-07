@@ -259,6 +259,7 @@ FLBR.Icons = {
     // reload: '<i class="fas fa-sync-alt"></i>',
     lethal: '<i class="fas fa-skull"></i>',
     // mental: '<i class="fas fa-brain"></i>',
+    vehicle: '<i class="fas fa-car"></i>',
     chat: '<i class="far fa-comment-dots"></i>',
     roll: '<i class="fas fa-dice-d20"></i>',
   },
