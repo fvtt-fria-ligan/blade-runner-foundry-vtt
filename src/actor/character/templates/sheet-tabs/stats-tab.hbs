@@ -1,58 +1,66 @@
-<div class="stats-tab">
-	<div class="attributes-and-skills">
-		<h1>{{localize "FLBR.HEADER.AttributesAndSkills"}}</h1>
-		<div class="stats-list flex row">
+<div class="attributes-and-skills">
+	<h3>{{localize "FLBR.HEADER.AttributesAndSkills"}}</h3>
+	<div class="stats-list">
 		{{#each data.attributes as | attribute attrKey |}}
 			<div class="stat-blok stat-blok-{{attrKey}}" data-attribute="{{attrKey}}">
-				<div class="stat-blok-header flex row align-end">
-					<h4 class="flex-1">{{localize "FLBR.HEADER.Rating"}}</h4>
-					<h4>{{{localize "FLBR.HEADER.DieSize"}}}</h4>
+				<h4 class="die-rating">{{localize "FLBR.HEADER.Rating"}}</h4>
+				<h4 class="die-size">{{{localize "FLBR.HEADER.DieSize"}}}</h4>
+				<div class="attribute-name">
+					<a>{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase attrKey))}}</a>
 				</div>
-				<div class="stat-blok-body">
-					<div class="stat stat-attribute flex row align-end" data-attribute="{{attrKey}}">
-						<h2 class="attribute-name rollable flex-1">{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase attrKey))}}</h2>
-						<div class="attribute-score">
-							{{scoreSelector (concat "data.attributes." attrKey ".value") selected=attribute.value}}
+				<div class="attribute-score">
+					{{scoreSelector (concat "data.attributes." attrKey ".value") selected=attribute.value}}
+				</div>
+				<div class="attribute-size rollable">
+					{{#if (lte attribute.value 0)}}
+						{{localize "FLBR.NO_VALUE"}}
+					{{else}}
+						{{localize "FLBR.D"}}{{attribute.value}}
+					{{/if}}
+				</div>
+				{{!-- Each skills under the attribute --}}
+				{{#each @root.data.skills as | skill skillKey |}}
+					{{#if (eq attrKey (lookup @root.config.skillMap skillKey))}}
+						<a class="skill-name" data-skill="{{skillKey}}" data-attribute="{{attrKey}}">{{localize (concat "FLBR.SKILL." (capitalize skillKey))}}</a>
+						<div class="skill-score">
+							{{scoreSelector (concat "data.skills." skillKey ".value") selected=skill.value}}
 						</div>
-						<div class="attribute-size rollable">
-							{{#if (lte attribute.value 0)}}
+						<div class="skill-size rollable">
+							{{#if (lte skill.value 0)}}
 								{{localize "FLBR.NO_VALUE"}}
 							{{else}}
-								{{localize "FLBR.D"}}{{attribute.value}}
+								{{localize "FLBR.D"}}{{skill.value}}
 							{{/if}}
 						</div>
-					</div>
-					{{!-- Each skills under the attribute --}}
-					{{#each @root.data.skills as | skill skillKey |}}
-						{{#if (eq attrKey (lookup @root.config.skillMap skillKey))}}
-							<div class="stat stat-skill skill-{{skillKey}} flex row align-end" data-skill="{{skillKey}}" data-attribute="{{attrKey}}">
-								<h2 class="skill-name rollable flex-1">{{localize (concat "FLBR.SKILL." (capitalize skillKey))}}</h2>
-								<div class="skill-score">
-									{{scoreSelector (concat "data.skills." skillKey ".value") selected=skill.value}}
-								</div>
-								<div class="skill-size rollable">
-									{{#if (lte skill.value 0)}}
-										{{localize "FLBR.NO_VALUE"}}
-									{{else}}
-										{{localize "FLBR.D"}}{{skill.value}}
-									{{/if}}
-								</div>
-							</div>
-						{{/if}}
-					{{/each}}
-				</div>
+					{{/if}}
+				{{/each}}
 			</div>
 		{{/each}}
+		{{!-- Finally, we add a last skill: Driving (no attribute) --}}
+		<div class="stat-blok stat-blok-{{config.vehicleAttribute}}">
+			<h4 class="die-rating">{{localize "FLBR.HEADER.Rating"}}</h4>
+			<h4 class="die-size">{{{localize "FLBR.HEADER.DieSize"}}}</h4>
+			<a class="skill-name" data-skill="{{config.vehicleSkill}}" data-attribute="{{config.vehicleAttribute}}">{{localize (concat "FLBR.SKILL." (capitalize config.vehicleSkill))}}</a>
+			<div class="skill-score">
+				{{scoreSelector (concat "data.skills." config.vehicleSkill ".value") selected=driving}}
+			</div>
+			<div class="skill-size rollable">
+				{{#if (lte driving 0)}}
+					{{localize "FLBR.NO_VALUE"}}
+				{{else}}
+					{{localize "FLBR.D"}}{{driving}}
+				{{/if}}
+			</div>
 		</div>
 	</div>
-	<div class="talents flex row">
-		<div class="specialties full">
-			<h2>{{localize "FLBR.HEADER.Specialties"}}{{createNewItemButton "specialty"}}</h2>
+</div>
+<div class="container">
+	<div class="specialties">
+		<h2>{{localize "FLBR.HEADER.Specialties"}}{{createNewItemButton "specialty"}}</h2>
 {{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.specialty wrap=true}}
-		</div>
-		<div class="augments full">
-			<h2>{{localize "FLBR.HEADER.Augments"}}{{createNewItemButton "upgrade"}}</h2>
+	</div>
+	<div class="augments">
+		<h2>{{localize "FLBR.HEADER.Augments"}}{{createNewItemButton "upgrade"}}</h2>
 {{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.upgrade wrap=true}}
-		</div>
 	</div>
 </div>

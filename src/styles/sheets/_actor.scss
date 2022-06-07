@@ -8,9 +8,7 @@
     color: var(--color-blue);
   }
   @for $i from 1 through 4 {
-    h#{$i} a.btn {
-      float: right;
-    }
+    h#{$i} a.btn { float: right; }
   }
 
   /* ------------------------------------------ */
@@ -33,9 +31,12 @@
         height: 200px;
       }
     }
+    .actor-name {
+      // grid-area: 2 / 1 / 3 / 4;
+      grid-column: 1 / -1;
+    }
     .actor-name input {
       @include utils.border-sheet(2px);
-      grid-column: 1 / -1;
       color: var(--color-blue-darker);
       font-family: var(--font-header);
       font-size: var(--font-size--default);
@@ -46,22 +47,28 @@
       padding: 4px;
       margin: 0;
     }
+    .archetype {
+      transform: rotate(90deg);
+      transform-origin: 25px;
+      position: absolute;
+      top: 45px;
+    }
     .archetype input {
       color: var(--color-blue);
       font-family: var(--font-table);
       font-size: var(--font-size--large);
       font-weight: bold;
       text-transform: uppercase;
-      writing-mode: vertical-lr;
+      // writing-mode: vertical-lr;
       text-align: left;
       width: 200px;
       // padding-left: 6px;
       background: none;
       border: none;
-      transform: rotate(90deg);
-      transform-origin: 25px;
-      position: absolute;
-      top: 45px;
+      // transform: rotate(90deg);
+      // transform-origin: 25px;
+      // position: absolute;
+      // top: 45px;
     }
     .capacities > div {
       @include utils.boxed-property;
@@ -77,6 +84,51 @@
   .sheet-body {
     padding-top: 4px;
 
+    // STATS TAB
+    .tab-stats {
+      .attributes-and-skills {
+        margin-bottom: 4px;
+      }
+      .stats-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .stat-blok {
+        @include utils.boxed-property;
+        flex: 0 0 200px;
+        display: grid;
+        grid-template-columns: 1fr 60px 60px;
+        // stretch ?
+
+        .die-rating {
+          grid-area: 1 / 1 / 2 / 3;
+          // grid-column: 1 / 3;
+        }
+        .attribute-size,
+        .skill-size {
+          @include utils.boxed-property;
+          @include utils.input-background;
+          // color: var(--color-black);
+          text-align: center;
+        }
+      }
+      .container > div {
+        @include utils.boxed-property;
+      }
+    }
+
+    // COMBAT TAB
+    .tab-combat {
+      .container > div {
+        @include utils.boxed-property;
+      }
+      .container .weapons {
+        grid-row: 1 / -1;
+      }
+    }
+
+    // INVENTORY TAB
     .tab-inventory {
       .special-gear {
         margin-bottom: 4px;
@@ -100,12 +152,14 @@
         }
       }
     }
+
+    // BIOGRAPHY TAB
     .tab-bio {
       .section {
         @include utils.boxed-property;
       }
       .section.bio-notes {
-        grid-column: 1/-1;
+        grid-column: 1 / -1;
       }
       .section.years-on-the-force {
         display: flex;

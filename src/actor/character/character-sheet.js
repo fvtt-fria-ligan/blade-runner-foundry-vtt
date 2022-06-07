@@ -23,7 +23,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
-        initial: 'inventory',
+        initial: 'stats',
       }],
     });
   }
@@ -49,6 +49,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     const sheetData = super.getData(options);
     sheetData.isPC = this.actor.type === ACTOR_TYPES.PC;
     sheetData.isNPC = this.actor.type === ACTOR_TYPES.NPC;
+    sheetData.driving = this.actor.skills.driving?.value;
     return sheetData;
   }
 
