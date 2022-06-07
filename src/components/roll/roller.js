@@ -325,24 +325,31 @@ export default class BRRollHandler extends FormApplication {
    * @async
    */
   static async pushRoll(message, { sendMessage = true } = {}) {
-    if (!message) return;
+    if (!message || !message.roll) return;
 
     /** @type {YearZeroRoll} */
-    let roll = message.roll;
-    if (!roll) return;
-
-    // Copies the roll.
-    roll = roll.duplicate();
-
-    // Pushes the roll.
+    const roll = message.roll.duplicate();
     await roll.push({ async: true });
+    await message.delete();
 
-    // No need to await the deletion.
-    message.delete();
-
-    // Sends the message.
     if (sendMessage) return roll.toMessage();
     return roll;
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * Cancel the push for a roll.
+   * @param {ChatMessage} message The message that contains the roll
+   * @returns {Promise.<ChatMessage>}
+   */
+  static async cancelPush(message) {
+    if (!message || !message.roll) return;
+    /** @type {YearZeroRoll} */
+    const roll = message.roll.duplicate();
+    roll.maxPush = 0;
+    await message.update({ roll });
+    return message;
   }
 
   /* ------------------------------------------ */
@@ -413,7 +420,7 @@ export default class BRRollHandler extends FormApplication {
    * Displays a dialog for requesting a die size.
    * @see {@link Dialog}
    * @param {number} [lowest=6] Value of the lowest die
-   * @returns {Promise.<number>} The desired die size
+   * @returns {Promise.<number|boolean>} The desired die size. Returns `false` when cancelled.
    * @static
    * @async
    */
