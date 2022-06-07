@@ -13,9 +13,9 @@
 						{{#if damage includeZero=true}}
 							<div class="item-detail damage">
 								{{#if blast}}
-									{{localize "FLBR.Blast"}}&nbsp;{{localize "FLBR.D"}}{{blast}}
+									{{localize "FLBR.Blast"}}&numsp;{{localize "FLBR.D"}}{{blast}}
 								{{else}}
-									{{localize "FLBR.WeaponDamage"}}&nbsp;{{damage}}, {{localize "FLBR.Crit"}}&nbsp;{{localize "FLBR.D"}}{{crit}}
+									{{localize "FLBR.WeaponDamage"}}&numsp;{{damage}}, {{localize "FLBR.Crit"}}&numsp;{{localize "FLBR.D"}}{{crit}}
 								{{/if}}
 							</div>
 							{{#if range.max includeZero=true}}
@@ -25,7 +25,7 @@
 							{{/if}}
 						{{else if armor includeZero=true}}
 							<div class="item-detail armor">
-								{{localize "ITEM.TypeArmor"}}&nbsp;{{localize "FLBR.D"}}{{armor}}
+								{{localize "ITEM.TypeArmor"}}&numsp;{{localize "FLBR.D"}}{{armor}}
 							</div>
 						{{/if}}
 						{{#if special}}
