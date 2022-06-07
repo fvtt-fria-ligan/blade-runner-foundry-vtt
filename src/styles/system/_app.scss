@@ -78,6 +78,15 @@ $gap: 4px;
     white-space: nowrap;
     line-height: 0;
   }
+  .boxed-value {
+    @include utils.boxed-property;
+    @include utils.input-background;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .boxed-property {
+    @include utils.boxed-property;
+  }
   .rollable {
     cursor: pointer;
     &:hover {
