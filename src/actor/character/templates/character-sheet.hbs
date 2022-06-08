@@ -8,6 +8,16 @@
 			<div class="avatar">
 				<img class="profile" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
 			</div>
+
+			<div class="actor-name">
+				<input type="text" name="name" value="{{actor.name}}"/>
+			</div>
+
+			<div class="nature">
+				<select name="data.nature">
+					{{selectOptions config.natures selected=data.nature localize=true}}
+				</select>
+			</div>
 			
 			<div class="capacities">
 				{{#if data.health}}
@@ -29,15 +39,6 @@
 				<datalist id="list-of-archetypes">
 					{{selectOptions config.archetypes localize=true}}
 				</datalist>
-			</div>
-
-{{!-- <div class="nature">
-	<select name="data.nature">
-		{{selectOptions config.natures selected=data.nature localize=true}}
-	</select>
-</div> --}}
-			<div class="actor-name">
-				<input type="text" name="name" value="{{actor.name}}"/>
 			</div>
 
 		</div>
