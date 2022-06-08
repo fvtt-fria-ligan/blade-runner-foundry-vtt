@@ -153,7 +153,7 @@ export default class BRRollHandler extends FormApplication {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: [sysName, 'roll-application'],
       width: '450',
-      height: 'auto',
+      // height: 'auto',
       resizable: false,
     });
   }
@@ -407,9 +407,9 @@ export default class BRRollHandler extends FormApplication {
     });
 
     // We need to bind the cancel button to the FormApplication's close method.
-    // html.find('#cancel').click(() => {
-    //   this.close();
-    // });
+    html.find('#cancel').click(() => {
+      this.close();
+    });
   }
 
   /* ------------------------------------------ */

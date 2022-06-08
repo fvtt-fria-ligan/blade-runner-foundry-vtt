@@ -1,16 +1,16 @@
 <form class="{{cssClass}}" autocomplete="off">
 
 	<div class="sheet-header">
-		<h1>{{title}}</h1>
+		<h2>{{title}}</h2>
 	</div>
 
 	<div class="sheet-body">
 		{{!-- Dice --}}
-		<div class="dice flex row full align-center">
+		<div class="dice flex row justify-center">
 			{{#each dice}}
 				<div class="die-box die-d{{.}}">{{localize "FLBR.D"}}{{.}}</div>
 			{{/each}}
-			{{#if (lte dice.length 2)}}
+			{{#if (lt dice.length config.maxRolledDice)}}
 				<div class="die-box empty">
 					<a class="button add-die" title="{{localize "FLBR.ROLLER.AddDie"}}">{{{@root.config.Icons.buttons.plus}}}</a>
 				</div>
@@ -18,21 +18,20 @@
 		</div>
 		<hr/>
 		{{!-- Modifiers --}}
-		<div class="form-group-stacked flex row wrap">
+		<div class="modifiers boxed-property">
+			<h3>{{localize "FLBR.HEADER.Modifiers"}}</h3>
 			{{#each modifiers}}
-				<label class="checkbox" title="{{description}}">
-					<input type="checkbox" class="modifier" data-id="{{id}}" {{checked active}}/>
-					{{label}}
-				</label>
+				<input type="checkbox" data-id="{{id}}" {{checked active}}/>
+				<label class="checkbox" title="{{description}}">{{label}}</label>
 			{{/each}}
-			<input type="text" value="{{localize "FLBR.ROLLER.TotalModifier" value=modifier}}" disabled/>
+			<input type="text" class="total" value="{{localize "FLBR.ROLLER.TotalModifier" value=modifier}}" disabled/>
 		</div>
 		<hr/>
 		{{!-- Max Pushes --}}
-		<div class="form-group">
-			<label>{{localize "FLBR.ROLLER.MaxPush"}}</label>
+		<div class="max-push boxed-property">
+			<h3>{{localize "FLBR.ROLLER.MaxPush"}}</h3>
 			<div class="flex row">
-				<label class="checkbox flex-1">
+				<label class="checkbox">
 					<input type="checkbox" name="options.unlimitedPush" {{checked options.unlimitedPush}}/>
 					{{localize "FLBR.ROLLER.UnlimitedPush"}}
 				</label>
@@ -41,8 +40,9 @@
 		</div>
 	</div>
 
-	<div class="sheet-footer flex row space-between">
-		<button id="roll" class="flbr-button" type="submit">
+	<div class="sheet-footer flex row space-around">
+		<button id="roll" type="submit">
+			{{{config.Icons.buttons.roll}}}&nbsp;
 			{{#if advantage}}
 				{{localize "FLBR.ROLLER.RollWithAdvantageButton"}}
 			{{else if disadvantage}}
@@ -50,6 +50,10 @@
 			{{else}}
 				{{localize "FLBR.ROLLER.RollButton"}}
 			{{/if}}
+		</button>
+		<button id="cancel" type="submi">
+			{{{config.Icons.buttons.times}}}&nbsp;
+			{{localize "FLBR.Cancel"}}
 		</button>
 	</div>
 

@@ -1,0 +1,51 @@
+@use "../utils";
+
+.blade-runner.roll-application {
+  .sheet-header {
+    color: var(--color-skin);
+    text-align: center;
+  }
+  .sheet-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .sheet-footer {}
+
+  /* ------------------------------------------ */
+
+  .dice {
+    grid-column: 1 / -1;
+
+    .die-box {
+      @include utils.boxed-property(1px, 0);
+      border-radius: 10px;
+      color: var(--color-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      $h: 100px;
+        height: $h;
+        width: $h * 2/3;
+      
+      @each $d in (6, 8, 10, 12) {
+        &.die-d#{$d} {
+          background-image: url("assets/dice/#{$d}.webp");
+        }
+      }
+
+      + .die-box { margin-left: 4px; }
+    }
+  }
+  .modifiers {
+    display: grid;
+    grid-template-columns: auto minmax(1fr, 200px);
+    gap: 4px;
+
+    h3,
+    .total {
+      grid-column: 1 / -1;
+    }
+  }
+  .max-push {}
+}
