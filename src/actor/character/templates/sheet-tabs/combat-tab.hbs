@@ -1,15 +1,13 @@
-<div class="container">
-	<div class="weapons">
-		<h3>{{localize "FLBR.HEADER.Weapons"}}{{createNewItemButton "weapon"}}</h3>
+<div class="weapons boxed-property">
+	<h3>{{localize "FLBR.HEADER.Weapons"}}{{createNewItemButton "weapon"}}</h3>
 {{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.weapon}}
 {{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.explosive}}
-	</div>
-	<div class="armors">
-		<h3>{{localize "FLBR.HEADER.Armors"}}{{createNewItemButton "armor"}}</h3>
+</div>
+<div class="armors boxed-property">
+	<h3>{{localize "FLBR.HEADER.Armors"}}{{createNewItemButton "armor"}}</h3>
 {{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.armor}}
-	</div>
-	<div class="injuries">
-		<h3>{{localize "FLBR.HEADER.Injuries"}}{{createNewItemButton "injury"}}</h3>
-	{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.injury}}
-	</div>
+</div>
+<div class="injuries boxed-property">
+	<h3>{{localize "FLBR.HEADER.Injuries"}}{{createNewItemButton "injury"}}</h3>
+{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.injury}}
 </div>

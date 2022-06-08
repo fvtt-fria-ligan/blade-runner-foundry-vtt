@@ -1,10 +1,10 @@
 {{#if isPC}}
 	<div class="container special-gear">
-		<div class="favored-gear">
+		<div class="favored-gear boxed-property">
 			<h3>{{localize "FLBR.HEADER.FavoredGear"}}</h3>
 			<input type="text" name="data.favoredGear" value="{{data.favoredGear}}"/>
 		</div>
-		<div class="signature-item">
+		<div class="signature-item boxed-property">
 			<h3>{{localize "FLBR.HEADER.SignatureItem"}}</h3>
 			<div class="flex row">
 				<input type="text" name="data.signatureItem.name" value="{{data.signatureItem.name}}" class="flex-1"/>
@@ -14,22 +14,22 @@
 	</div>
 {{/if}}
 
-<div class="inventory">
+<div class="inventory boxed-property">
 	<h3>{{localize "FLBR.HEADER.Inventory"}}{{createNewItemButton "generic"}}</h3>
 {{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.generic wrap=true}}
 </div>
 
 {{#if isPC}}
 	<div class="meta-currencies flex row space-between">
-		<div class="meta-currency-promotion">
+		<div class="meta-currency-promotion boxed-property">
 			<h4>{{localize "FLBR.HEADER.PromotionPoints"}}</h4>
 			{{boxes "data.metaCurrencies.promotion" value=data.metaCurrencies.promotion min=0 max=config.maxPromotionPoints}}
 		</div>
-		<div class="meta-currency-humanity">
+		<div class="meta-currency-humanity boxed-property">
 			<h4>{{localize "FLBR.HEADER.HumanityPoints"}}</h4>
 			{{boxes "data.metaCurrencies.humanity" value=data.metaCurrencies.humanity min=0 max=config.maxHumanityPoints}}
 		</div>
-		<div class="meta-currency-chinyen">
+		<div class="meta-currency-chinyen boxed-property">
 			<h4>{{localize "FLBR.HEADER.ChinyenPoints"}}</h4>
 			{{boxes "data.metaCurrencies.chinyen" value=data.metaCurrencies.chinyen min=0 max=config.maxChinyenPoints}}
 		</div>

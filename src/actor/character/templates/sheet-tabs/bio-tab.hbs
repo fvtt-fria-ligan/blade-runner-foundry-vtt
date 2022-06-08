@@ -1,38 +1,36 @@
-<div class="container">
-	<div class="section bio-notes">
-		<h3>{{localize "FLBR.HEADER.Notes"}}</h3>
+<div class="boxed-property bio-notes">
+	<h3>{{localize "FLBR.HEADER.Notes"}}</h3>
+	<div class="bio-editor">
+		{{editor content=data.description target="data.description" owner=owner button=true editable=editable}}
+	</div>
+</div>
+{{#if data.bio}}
+	<div class="boxed-property years-on-the-force">
+		<h3>{{localize "FLBR.HEADER.YearsOnTheForce"}}</h3>
+		<input type="text" name="data.bio.yearsOnTheForce" value="{{data.bio.yearsOnTheForce}}" data-dtype="Number"/>
+	</div>
+	<div class="boxed-property">
+		<h3>{{localize "FLBR.HEADER.Appearance"}}</h3>
 		<div class="bio-editor">
-			{{editor content=data.description target="data.description" owner=owner button=true editable=editable}}
+			{{editor content=data.bio.appearance target="data.bio.appearance" owner=owner button=true editable=editable}}
 		</div>
 	</div>
-	{{#if data.bio}}
-		<div class="section years-on-the-force">
-			<h3>{{localize "FLBR.HEADER.YearsOnTheForce"}}</h3>
-			<input type="text" name="data.bio.yearsOnTheForce" value="{{data.bio.yearsOnTheForce}}" data-dtype="Number"/>
+	<div class="boxed-property">
+		<h3>{{localize "FLBR.HEADER.KeyMemory"}}</h3>
+		<div class="bio-editor">
+			{{editor content=data.bio.keyMemory target="data.bio.keyMemory" owner=owner button=true editable=editable}}
 		</div>
-		<div class="section">
-			<h3>{{localize "FLBR.HEADER.Appearance"}}</h3>
-			<div class="bio-editor">
-				{{editor content=data.bio.appearance target="data.bio.appearance" owner=owner button=true editable=editable}}
-			</div>
+	</div>
+	<div class="boxed-property">
+		<h3>{{localize "FLBR.HEADER.KeyRelationship"}}</h3>
+		<div class="bio-editor">
+			{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=editable}}
 		</div>
-		<div class="section">
-			<h3>{{localize "FLBR.HEADER.KeyMemory"}}</h3>
-			<div class="bio-editor">
-				{{editor content=data.bio.keyMemory target="data.bio.keyMemory" owner=owner button=true editable=editable}}
-			</div>
+	</div>
+	<div class="boxed-property">
+		<h3>{{localize "FLBR.HEADER.Home"}}</h3>
+		<div class="bio-editor">
+			{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=editable}}
 		</div>
-		<div class="section">
-			<h3>{{localize "FLBR.HEADER.KeyRelationship"}}</h3>
-			<div class="bio-editor">
-				{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=editable}}
-			</div>
-		</div>
-		<div class="section">
-			<h3>{{localize "FLBR.HEADER.Home"}}</h3>
-			<div class="bio-editor">
-				{{editor content=data.bio.keyRelationship target="data.bio.keyRelationship" owner=owner button=true editable=editable}}
-			</div>
-		</div>
-	{{/if}}
-</div>
+	</div>
+{{/if}}

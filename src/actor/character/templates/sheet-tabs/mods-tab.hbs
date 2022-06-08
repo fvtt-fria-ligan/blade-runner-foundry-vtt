@@ -1,0 +1,8 @@
+<div class="specialties boxed-property">
+  <h3>{{localize "FLBR.HEADER.Specialties"}}{{createNewItemButton "specialty"}}</h3>
+{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.specialty}}
+</div>
+<div class="augments boxed-property">
+  <h3>{{localize "FLBR.HEADER.Augments"}}{{createNewItemButton "upgrade"}}</h3>
+{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.upgrade}}
+</div>
