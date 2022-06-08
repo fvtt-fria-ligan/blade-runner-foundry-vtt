@@ -169,6 +169,8 @@ $border-stat-dotted: 1px dotted var(--color-green);
       }
       .actions {
         grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
       }
       .weapons .embedded-items + .embedded-items {
         margin-top: 4px;
