@@ -49,6 +49,7 @@
 
 	<div class="sheet-tabs" data-group="primary">
 		<a class="sheet-tab" data-tab="stats">{{{config.Icons.tabs.stats}}}&nbsp;{{localize "FLBR.TAB.Stats"}}</a>
+		<a class="sheet-tab" data-tab="mods">{{{config.Icons.tabs.mods}}}&nbsp;{{localize "FLBR.TAB.Mods"}}</a>
 		<a class="sheet-tab" data-tab="combat">{{{config.Icons.tabs.combat}}}&nbsp;{{localize "FLBR.TAB.Combat"}}</a>
 		<a class="sheet-tab" data-tab="inventory">{{{config.Icons.tabs.inventory}}}&nbsp;{{localize "FLBR.TAB.Inventory"}}</a>
 		<a class="sheet-tab" data-tab="bio">{{{config.Icons.tabs.bio}}}&nbsp;{{localize "FLBR.TAB.Bio"}}</a>
@@ -61,6 +62,9 @@
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/stats-tab.hbs}}
 		</div>
 		<div class="tab tab-combat" data-group="primary" data-tab="combat">
+		<div class="tab tab-mods" data-group="primary" data-tab="mods">
+{{> systems/blade-runner/templates/actor/character/sheet-tabs/mods-tab.hbs}}
+		</div>
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/combat-tab.hbs}}
 		</div>
 		<div class="tab tab-inventory" data-group="primary" data-tab="inventory">
