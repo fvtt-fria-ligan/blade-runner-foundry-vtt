@@ -11,3 +11,8 @@
 	<h3>{{localize "FLBR.HEADER.Injuries"}}{{createNewItemButton "injury"}}</h3>
 {{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.injury}}
 </div>
+<div class="actions">
+	{{#each config.actionSkillMap as | action |}}
+		<a class="action-roll" data-skill="{{action.skill}}">{{localize action.label)}}</a>
+	{{/each}}
+</div>

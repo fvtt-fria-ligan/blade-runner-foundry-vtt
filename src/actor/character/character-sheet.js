@@ -1,5 +1,6 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet';
 import { SYSTEM_NAME, ACTOR_TYPES } from '@system/constants';
+import { FLBR } from '@system/config';
 
 /**
  * Blade Runner RPG Actor Sheet for Character.
@@ -68,15 +69,25 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
     // Stats Roll
     html.find('.stat-roll').click(this._onStatRoll.bind(this));
+    html.find('.action-roll').click(this._onActionRoll.bind(this));
   }
 
   /* ------------------------------------------ */
 
   _onStatRoll(event) {
     event.preventDefault();
-    const stat = event.currentTarget;
-    const attrKey = stat.dataset.attribute;
-    const skillKey = stat.dataset.skill;
+    const elem = event.currentTarget;
+    const attrKey = elem.dataset.attribute;
+    const skillKey = elem.dataset.skill;
     return this.actor.rollStat(attrKey, skillKey);
+  }
+
+  _onActionRoll(event) {
+    event.preventDefault();
+    const elem = event.currentTarget;
+    const skillKey = elem.dataset.skill;
+    const attrKey = FLBR.skillMap[skillKey];
+    const title = elem.content;
+    return this.actor.rollStat(attrKey, skillKey, { title });
   }
 }

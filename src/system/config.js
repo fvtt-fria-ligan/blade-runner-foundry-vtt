@@ -106,51 +106,51 @@ FLBR.pushTraumaMap = {
 
 FLBR.actionSkillMap = {
   [BR.COMBAT_ACTIONS.SPRINT]: {
-    label: 'FLBR.CombatAction.Sprint',
+    label: 'FLBR.COMBAT_ACTION.Sprint',
     skill: BR.SKILLS.MOBILITY,
   },
   [BR.COMBAT_ACTIONS.CRAWL]: {
-    label: 'FLBR.CombatAction.Crawl',
+    label: 'FLBR.COMBAT_ACTION.Crawl',
     skill: null,
   },
   [BR.COMBAT_ACTIONS.UNARMED_ATTACK]: {
-    label: 'FLBR.CombatAction.UnarmedAttack',
+    label: 'FLBR.COMBAT_ACTION.UnarmedAttack',
     skill: BR.SKILLS.CLOSE_COMBAT,
   },
   [BR.COMBAT_ACTIONS.MELEE_ATTACK]: {
-    label: 'FLBR.CombatAction.MeleeAttack',
+    label: 'FLBR.COMBAT_ACTION.MeleeAttack',
     skill: BR.SKILLS.CLOSE_COMBAT,
   },
   [BR.COMBAT_ACTIONS.GRAPPLE]: {
-    label: 'FLBR.CombatAction.Grapple',
+    label: 'FLBR.COMBAT_ACTION.Grapple',
     skill: BR.SKILLS.CLOSE_COMBAT,
   },
   [BR.COMBAT_ACTIONS.BREAK_FREE]: {
-    label: 'FLBR.CombatAction.BreakFree',
+    label: 'FLBR.COMBAT_ACTION.BreakFree',
     skill: BR.SKILLS.CLOSE_COMBAT,
   },
   [BR.COMBAT_ACTIONS.SHOOT_FIREARM]: {
-    label: 'FLBR.CombatAction.ShootFirearm',
+    label: 'FLBR.COMBAT_ACTION.ShootFirearm',
     skill: BR.SKILLS.FIREARMS,
   },
   [BR.COMBAT_ACTIONS.CAREFUL_AIM]: {
-    label: 'FLBR.CombatAction.CarefulAim',
+    label: 'FLBR.COMBAT_ACTION.CarefulAim',
     skill: null,
   },
   [BR.COMBAT_ACTIONS.THROW_WEAPON]: {
-    label: 'FLBR.CombatAction.ThrowWeapon',
+    label: 'FLBR.COMBAT_ACTION.ThrowWeapon',
     skill: BR.SKILLS.FIREARMS,
   },
   [BR.COMBAT_ACTIONS.FIRST_AID]: {
-    label: 'FLBR.CombatAction.FirstAid',
+    label: 'FLBR.COMBAT_ACTION.FirstAid',
     skill: BR.SKILLS.MEDICAL_AID,
   },
   [BR.COMBAT_ACTIONS.MANIPULATE]: {
-    label: 'FLBR.CombatAction.Manipulate',
+    label: 'FLBR.COMBAT_ACTION.Manipulate',
     skill: BR.SKILLS.MANIPULATION,
   },
   [BR.COMBAT_ACTIONS.USE_ITEM]: {
-    label: 'FLBR.CombatAction.UseItem',
+    label: 'FLBR.COMBAT_ACTION.UseItem',
     skill: 'any',
   },
 };
@@ -188,6 +188,7 @@ FLBR.blastPowerMap = {
   6: { damage: 1, crit: 6 },
 };
 
+FLBR.maxRolledDice = 3;
 FLBR.itemSpecialInputMaxLength = 80;
 
 // TODO

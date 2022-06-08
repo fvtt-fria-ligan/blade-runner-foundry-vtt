@@ -191,14 +191,16 @@ export default class BladeRunnerActor extends Actor {
 
   /**
    * Rolls a stat of this actor.
-   * @param {string}  attributeKey The identifier for the attribute
-   * @param {?string} skillkey     The identifier for the skill
+   * @param {string}   attributeKey  The identifier for the attribute
+   * @param {?string}  skillkey      The identifier for the skill
+   * @param {Object}  [options={}]   Additional options
+   * @param {string}   options.title Custom title
    * @returns {BRRollHandler}
    */
-  rollStat(attributeKey, skillKey) {
+  rollStat(attributeKey, skillKey, options = {}) {
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`) : null;
-    const title = skillName ?? attributeName;
+    const title = options.title ?? skillName ?? attributeName;
     const attributeValue = this.getAttribute(attributeKey);
     const skillValue = this.getSkill(skillKey);
 
