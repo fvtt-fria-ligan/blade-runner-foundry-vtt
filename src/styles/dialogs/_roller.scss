@@ -1,16 +1,19 @@
 @use "../utils";
 
 .blade-runner.roll-application {
-  .sheet-header {
-    color: var(--color-skin);
-    text-align: center;
-  }
+  // .sheet-header {
+  //   color: var(--color-skin);
+  //   text-align: center;
+  //   margin-bottom: 10px;
+  // }
   .sheet-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4px;
   }
-  .sheet-footer {}
+  .sheet-footer {
+    margin-top: 30px;
+  }
 
   /* ------------------------------------------ */
 
@@ -24,28 +27,46 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      $h: 100px;
+      $h: 80px;
         height: $h;
         width: $h * 2/3;
       
-      @each $d in (6, 8, 10, 12) {
-        &.die-d#{$d} {
-          background-image: url("assets/dice/#{$d}.webp");
-        }
-      }
+      // @each $d in (6, 8, 10, 12) {
+      //   &.die-d#{$d} {
+      //     background-image: url("../icons/svg/d#{$d}-grey.svg");
+      //   }
+      // }
 
       + .die-box { margin-left: 4px; }
     }
   }
   .modifiers {
     display: grid;
-    grid-template-columns: auto minmax(1fr, 200px);
+    grid-template-columns: 1fr auto 1fr;
     gap: 4px;
 
     h3,
     .total {
       grid-column: 1 / -1;
     }
+    h4:not(:first-of-type),
+    .modifier-value {
+      text-align: center;
+    }
+    .modifier-name,
+    .modifier-value {
+      color: var(--color-blue-lighter);
+      line-height: 1.8;
+    }
   }
-  .max-push {}
+  .max-push {
+    > div { margin-top: 4px; }
+    input[type=number] { width: 42px; }
+    input[type=checkbox] { margin-left: 10px; }
+    .checkbox-label {
+      font-family: var(--font-header);
+      color: var(--color-blue);
+      line-height: 1.8;
+    }
+  }
 }

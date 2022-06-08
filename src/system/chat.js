@@ -5,7 +5,7 @@ import BRRollHandler from 'src/components/roll/roller.js';
  * @param {JQuery} html
  */
 export function addChatListeners(html) {
-  html.on('click', '.dice-button.push', _onPushRoll);
+  html.on('click', '.roll-button', _onRollAction);
 }
 
 /* ------------------------------------------- */
@@ -13,11 +13,11 @@ export function addChatListeners(html) {
 /* ------------------------------------------- */
 
 /**
- * Triggers a push from the chat.
+ * Triggers an action on the ChatMessage's roll.
  * @param {Event} event
  * @returns {Promise<import('@lib/yzur').YearZeroRoll|ChatMessage>}
  */
-function _onPushRoll(event) {
+function _onRollAction(event) {
   event.preventDefault();
 
   // Disables the button to avoid any tricky double push.
@@ -28,7 +28,14 @@ function _onPushRoll(event) {
   const chatCard = event.currentTarget.closest('.chat-message');
   const messageId = chatCard.dataset.messageId;
   const message = game.messages.get(messageId);
-  return BRRollHandler.pushRoll(message);
+
+  // Gets the desired action.
+  const action = button.dataset.action;
+  switch (action) {
+    case 'push': return BRRollHandler.pushRoll(message);
+    case 'cancel-push': return BRRollHandler.cancelPush(message);
+    default: return null;
+  }
 }
 
 /* ------------------------------------------- */

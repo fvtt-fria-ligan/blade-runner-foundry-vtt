@@ -198,6 +198,10 @@ export default class BladeRunnerActor extends Actor {
    * @returns {BRRollHandler}
    */
   rollStat(attributeKey, skillKey, options = {}) {
+    if (!attributeKey) {
+      console.warn('No rollStat', attributeKey, skillKey, options);
+      return ui.notifications.warn('FLBR.NOTIF.NoAttribute', { localize: true });
+    }
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`) : null;
     const title = options.title ?? skillName ?? attributeName;

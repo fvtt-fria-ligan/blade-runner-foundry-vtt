@@ -153,7 +153,7 @@ export default class BRRollHandler extends FormApplication {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: [sysName, 'roll-application'],
       width: '450',
-      // height: 'auto',
+      // height: '450',
       resizable: false,
     });
   }
@@ -348,7 +348,7 @@ export default class BRRollHandler extends FormApplication {
     /** @type {YearZeroRoll} */
     const roll = message.roll.duplicate();
     roll.maxPush = 0;
-    await message.update({ roll });
+    await message.update({ roll: roll.toJSON() });
     return message;
   }
 
@@ -392,7 +392,7 @@ export default class BRRollHandler extends FormApplication {
     });
 
     // Listens to Modifier checkboxes.
-    html.find('input[type=checkbox].modifier').on('click', ev => {
+    html.find('.modifiers input[type=checkbox]').on('click', ev => {
       ev.preventDefault();
       const elem = ev.currentTarget;
       const modifierId = elem.dataset.id;
@@ -408,7 +408,7 @@ export default class BRRollHandler extends FormApplication {
 
     // We need to bind the cancel button to the FormApplication's close method.
     html.find('#cancel').click(() => {
-      this.close();
+      this.close({ submit: false });
     });
   }
 

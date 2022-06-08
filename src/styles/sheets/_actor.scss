@@ -3,8 +3,8 @@ $border-stat-solid: 1px solid var(--color-border);
 $border-stat-dotted: 1px dotted var(--color-green);
 
 .blade-runner.sheet.actor {
-  min-width: 350px;
-  min-height: 280px;
+  min-width: 400px;
+  min-height: 242px;
 
   label {
     color: var(--color-blue);
@@ -21,14 +21,14 @@ $border-stat-dotted: 1px dotted var(--color-green);
       grid-template-columns: 200px 1fr 50px;
       grid-template-rows: auto;
       grid-template-areas:
-        "avatar" "name"   "archetype"
-        "avatar" "nature" "archetype"
-        "avatar" "extra"  "archetype"
-        "avatar" "extra"  "archetype";
+        "avatar name   archetype"
+        "avatar nature archetype"
+        "avatar extra  archetype"
+        "avatar extra  archetype";
       gap: 4px;
     }
     .avatar {
-      grid-area: "avatar";
+      grid-area: avatar;
       @include utils.boxed-property(2px, 0);
       display: flex;
       align-items: center;
@@ -40,7 +40,7 @@ $border-stat-dotted: 1px dotted var(--color-green);
       }
     }
     .actor-name {
-      grid-area: "name";
+      grid-area: name;
     }
     .actor-name input {
       @include utils.border-sheet(2px);
@@ -55,7 +55,7 @@ $border-stat-dotted: 1px dotted var(--color-green);
       margin: 0;
     }
     .archetype {
-      grid-area: "archetype";
+      grid-area: archetype;
     }
     .archetype input {
       color: var(--color-blue);
@@ -75,7 +75,7 @@ $border-stat-dotted: 1px dotted var(--color-green);
       top: 45px;
     }
     .capacities {
-      grid-area: "extra";
+      grid-area: extra;
       > div { margin-bottom: 4px; }
     }
     .capacities span {
@@ -93,11 +93,10 @@ $border-stat-dotted: 1px dotted var(--color-green);
     padding-top: 4px;
 
     // STATS TAB
-    .tab-stats {
-      .stats-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
+    .stats-tab {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
       /* Stat Blok */
       .stat-blok {
         border: $border-stat-solid;
@@ -154,13 +153,14 @@ $border-stat-dotted: 1px dotted var(--color-green);
     }
 
     // MODS TAB
-    .tab-mods {
+    .mods-tab {
       display: grid;
+      gap: 4px;
       .embedded-item { width: 100%; }
     }
 
     // COMBAT TAB
-    .tab-combat {
+    .combat-tab {
       .weapons {
         grid-area: 1 / 1 / 3 / 2;
       }
@@ -170,7 +170,34 @@ $border-stat-dotted: 1px dotted var(--color-green);
       .actions {
         grid-column: 1 / -1;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        font-family: var(--font-table);
+        font-size: var(--font-size--very-small);
+        color: var(--color-green);
+
+        h4 {
+          grid-column: 1 / -1;
+        }
+        a {
+          padding: 0 4px;
+          border: 1px solid transparent;
+          border-radius: 2px;
+          white-space: nowrap;
+          i {
+            opacity: 0;
+            width: 0;
+            transition: width 250ms ease, opacity 0s;
+          }
+          &:hover {
+            border-color: var(--color-red);
+            color: var(--color-red);
+            i {
+              opacity: 1;
+              width: 15px;
+              transition: width 250ms ease, opacity 250ms ease .100ms;
+            }
+          }
+        }
       }
       .weapons .embedded-items + .embedded-items {
         margin-top: 4px;
@@ -179,7 +206,7 @@ $border-stat-dotted: 1px dotted var(--color-green);
     }
 
     // INVENTORY TAB
-    .tab-inventory {
+    .inventory-tab {
       .special-gear {
         margin-bottom: 4px;
         & input { text-align: left; }
@@ -197,11 +224,11 @@ $border-stat-dotted: 1px dotted var(--color-green);
     }
 
     // BIOGRAPHY TAB
-    .tab-bio {
-      .section.bio-notes {
+    .bio-tab {
+      .bio-notes {
         grid-column: 1 / -1;
       }
-      .section.years-on-the-force {
+      .years-on-the-force {
         grid-column: 1 / -1;
         display: flex;
         flex-direction: row;

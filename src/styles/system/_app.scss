@@ -28,6 +28,9 @@ $gap: 4px;
     font-family: var(--font-editor);
     margin-top: $gap;
     padding: $gap;
+    p {
+      color: var(--color-blue-darker);
+    }
   }
   input,
   select {
@@ -39,6 +42,9 @@ $gap: 4px;
   select, img {
     border: none;
   }
+  p {
+    color: var(--color-blue-lighter);
+  }
   label {
     color: var(--color-green);
     font-family: var(--font-table);
@@ -46,9 +52,10 @@ $gap: 4px;
     text-transform: uppercase;
     text-align: center;
   }
-  button,
-  .button {
+  .button,
+  .dialog-button {
     @include utils.boxed-property;
+    border-radius: 4px;
     font-family: var(--font-table);
     color: var(--color-green);
 
@@ -103,6 +110,9 @@ $gap: 4px;
   .boxed-property {
     @include utils.boxed-property;
   }
+  // .btn {
+  //   color: var(--color-blue);
+  // }
   .rollable {
     cursor: pointer;
     &:hover {
@@ -175,8 +185,8 @@ $gap: 4px;
       border-bottom: 2px solid var(--color-red);
     }
 
-    .sheet-body {
-      height: 100%;
-    }
+    // .sheet-body {
+    //   height: 100%;
+    // }
   }
 }

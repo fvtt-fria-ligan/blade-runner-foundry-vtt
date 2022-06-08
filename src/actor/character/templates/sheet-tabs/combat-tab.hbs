@@ -1,18 +1,21 @@
-<div class="weapons boxed-property">
-	<h3>{{localize "FLBR.HEADER.Weapons"}}{{createNewItemButton "weapon"}}</h3>
-{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.weapon}}
-{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.explosive}}
-</div>
-<div class="armors boxed-property">
-	<h3>{{localize "FLBR.HEADER.Armors"}}{{createNewItemButton "armor"}}</h3>
-{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.armor}}
-</div>
-<div class="injuries boxed-property">
-	<h3>{{localize "FLBR.HEADER.Injuries"}}{{createNewItemButton "injury"}}</h3>
-{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.injury}}
-</div>
-<div class="actions">
-	{{#each config.actionSkillMap as | action |}}
-		<a class="action-roll" data-skill="{{action.skill}}">{{localize action.label)}}</a>
-	{{/each}}
+<div class="combat-tab container">
+	<div class="weapons boxed-property">
+		<h3>{{localize "FLBR.HEADER.Weapons"}}{{createNewItemButton "weapon"}}</h3>
+	{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.weapon}}
+	{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.explosive}}
+	</div>
+	<div class="armors boxed-property">
+		<h3>{{localize "FLBR.HEADER.Armors"}}{{createNewItemButton "armor"}}</h3>
+	{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.armor}}
+	</div>
+	<div class="injuries boxed-property">
+		<h3>{{localize "FLBR.HEADER.Injuries"}}{{createNewItemButton "injury"}}</h3>
+	{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.injury}}
+	</div>
+	<div class="actions boxed-property">
+		<h4>{{localize "FLBR.HEADER.Actions"}}</h4>
+		{{#each config.actionSkillMap as | action |}}
+			<a class="action-roll" data-skill="{{action.skill}}">{{{@root.config.Icons.buttons.action}}}{{localize action.label}}</a>
+		{{/each}}
+	</div>
 </div>

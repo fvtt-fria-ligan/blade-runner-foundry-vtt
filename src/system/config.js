@@ -15,8 +15,8 @@ export const FLBR = {};
 /** @type {Map.<DieScoreString, DieSizeNumber>} */
 FLBR.scoreMap = new Map();
 FLBR.scoreMap.set('–', 0);
-for (const score in BR.DIE_SCORES) {
-  FLBR.scoreMap.set(score, BR.DIE_SCORES[score]);
+for (const [key, value] of Object.entries(BR.DIE_SCORES)) {
+  FLBR.scoreMap.set(key, value);
 }
 /** @type {Map.<DieSizeNumber, DieScoreString>} */
 FLBR.dieMap = new Map(Array.from(FLBR.scoreMap, ([n, v]) => [v, n]));
@@ -49,7 +49,7 @@ FLBR.startingSkillLevel = 6;
 
 /** @type {Object.<KeyString, TranslationString>} */
 FLBR.archetypes = {};
-for (const [key, val] in Object.entries(BR.ARCHETYPES)) {
+for (const [key, val] of Object.entries(BR.ARCHETYPES)) {
   FLBR.archetypes[val] = `FLBR.ARCHETYPE.${key}`;
 }
 
@@ -254,6 +254,7 @@ FLBR.Icons = {
     full: '<i class="fas fa-square"></i>',
   },
   buttons: {
+    action: '<i class="fas fa-play"></i>',
     edit: '<i class="fas fa-edit"></i>',
     delete: '<i class="fas fa-trash"></i>',
     remove: '<i class="fas fa-times"></i>',

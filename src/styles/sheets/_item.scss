@@ -2,6 +2,10 @@
 $gap: 4px;
 
 .blade-runner.sheet.item {
+  .btn {
+    float: right;
+  }
+
   .sheet-body {
     overflow-y: auto;
     max-height: 285px;
@@ -42,6 +46,23 @@ $gap: 4px;
 
     > * {
       flex: 1;
+    }
+  }
+  .item-modifiers {
+    margin-top: $gap;
+  }
+  .item-modifiers-list {
+    color: var(--color-blue-lighter);
+    display: grid;
+    grid-template-columns: 1fr 42px auto;
+    gap: 2px;
+
+    .button {
+      font-size: var(--font-size--extra-small);
+      height: fit-content;
+    }
+    .empty {
+      font-size: var(--font-size--very-small);
     }
   }
 }

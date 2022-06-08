@@ -1,6 +1,7 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet';
 import { SYSTEM_NAME, ACTOR_TYPES } from '@system/constants';
 import { FLBR } from '@system/config';
+import { capitalize } from '@utils/string-util';
 
 /**
  * Blade Runner RPG Actor Sheet for Character.
@@ -18,13 +19,13 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: [sysName, 'sheet', 'actor', 'character'],
       width: 520,
-      height: 600,
+      height: 610,
       resizable: true,
       // scrollY: ['.tab-bio'],
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
-        initial: 'stats',
+        initial: 'combat',
       }],
     });
   }
@@ -87,7 +88,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     const elem = event.currentTarget;
     const skillKey = elem.dataset.skill;
     const attrKey = FLBR.skillMap[skillKey];
-    const title = elem.content;
+    const title = `${elem.innerText} (${game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`)})`;
     return this.actor.rollStat(attrKey, skillKey, { title });
   }
 }

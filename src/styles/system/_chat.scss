@@ -8,3 +8,27 @@
 //   background-repeat: no-repeat;
 //   background-color: var(--color-background);
 // }
+
+.chat-message {
+  .yzur {
+    .dice-tooltip {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .tooltip-part + .tooltip-part {
+      margin-left: 10px;
+    }
+    .part-formula {
+      display: none;
+    }
+    .roll-controls {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+    .roll-button {
+      font-size: var(--font-size--small);
+    }
+  }
+}
