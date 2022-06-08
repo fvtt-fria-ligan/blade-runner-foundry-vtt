@@ -11,13 +11,13 @@
 			
 			<div class="capacities">
 				{{#if data.health}}
-					<div class="capacity-health">
+					<div class="capacity-health boxed-property">
 						<h3>{{localize "FLBR.HEADER.Health"}} <span>{{data.health.value}}/{{data.health.max}}</span></h3>
 						{{boxes "data.health.value" value=data.health.value min=0 max=data.health.max}}
 					</div>
 				{{/if}}
 				{{#if data.resolve}}
-					<div class="capacity-resolve">
+					<div class="capacity-resolve boxed-property">
 						<h3>{{localize "FLBR.HEADER.Resolve"}} <span>{{data.resolve.value}}/{{data.resolve.max}}</span></h3>
 						{{boxes "data.resolve.value" value=data.resolve.value min=0 max=data.resolve.max}}
 					</div>
@@ -27,9 +27,7 @@
 			<div class="archetype">
 				<input list="list-of-archetypes" type="text" name="data.archetype" value="{{data.archetype}}"/>
 				<datalist id="list-of-archetypes">
-					{{#each config.archetypes}}
-						<option value="{{.}}"></option>
-					{{/each}}
+					{{selectOptions config.archetypes localize=true}}
 				</datalist>
 			</div>
 

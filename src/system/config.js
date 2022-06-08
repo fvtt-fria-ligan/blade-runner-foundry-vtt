@@ -1,5 +1,10 @@
 import * as BR from './constants.js';
 
+/** @typedef {string} KeyString */
+/** @typedef {string} DieScoreString */
+/** @typedef {number} DieSizeNumber */
+/** @typedef {string} TranslationString */
+
 /**
  * The Blade Runner RPG configuration.
  * @constant
@@ -7,19 +12,19 @@ import * as BR from './constants.js';
  */
 export const FLBR = {};
 
-/** @type {Map.<string, number>} */
+/** @type {Map.<DieScoreString, DieSizeNumber>} */
 FLBR.scoreMap = new Map();
 FLBR.scoreMap.set('–', 0);
 for (const score in BR.DIE_SCORES) {
   FLBR.scoreMap.set(score, BR.DIE_SCORES[score]);
 }
-/** @type {Map.<number, string>} */
+/** @type {Map.<DieSizeNumber, DieScoreString>} */
 FLBR.dieMap = new Map(Array.from(FLBR.scoreMap, ([n, v]) => [v, n]));
 
 FLBR.vehicleSkill = BR.SKILLS.DRIVING;
 FLBR.vehicleAttribute = BR.ATTRIBUTES.VEHICLE_MANEUVERABILITY;
 
-FLBR.attributes = Object.values(BR.ATTRIBUTES).filter(v => v !== FLBR.vehicleAttribute);
+FLBR.attributes = Object.values(BR.ATTRIBUTES).filter(a => a !== FLBR.vehicleAttribute);
 
 FLBR.skillMap = {
   [BR.SKILLS.CLOSE_COMBAT]: BR.ATTRIBUTES.STRENGTH,
@@ -42,8 +47,11 @@ FLBR.skills = Object.keys(FLBR.skillMap);
 FLBR.startingAttributeLevel = 8;
 FLBR.startingSkillLevel = 6;
 
-// TODO
-FLBR.archetypes = Object.values(BR.ARCHETYPES);
+/** @type {Object.<KeyString, TranslationString>} */
+FLBR.archetypes = {};
+for (const [key, val] in Object.entries(BR.ARCHETYPES)) {
+  FLBR.archetypes[val] = `FLBR.ARCHETYPE.${key}`;
+}
 
 FLBR.maxPromotionPoints = 20;
 FLBR.maxHumanityPoints = 20;

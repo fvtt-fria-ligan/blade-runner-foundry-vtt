@@ -22,9 +22,6 @@ export const ATTRIBUTES = {
   VEHICLE_MANEUVERABILITY: 'mvr',
 };
 
-/** @type {string} *
-export const VEHICLE_MANEUVERABILITY = 'mvr';//*/
-
 /** @enum {string} */
 export const SKILLS = {
   CLOSE_COMBAT: 'closeCombat',
