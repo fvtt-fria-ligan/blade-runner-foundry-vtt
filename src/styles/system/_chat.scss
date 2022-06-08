@@ -1,10 +1,10 @@
 @use "../utils";
 
-.chat-card {
-  @include utils.border-sheet(2px);
-  background-image: url("./assets/character-sheet-background.webp");
-  background-position: top center;
-  background-size: cover; // 100% 100%
-  background-repeat: no-repeat;
-  background-color: var(--color-background);
-}
+// .chat-card {
+//   @include utils.border-sheet(2px);
+//   background-image: url("./assets/character-sheet-background.webp");
+//   background-position: top center;
+//   background-size: cover; // 100% 100%
+//   background-repeat: no-repeat;
+//   background-color: var(--color-background);
+// }

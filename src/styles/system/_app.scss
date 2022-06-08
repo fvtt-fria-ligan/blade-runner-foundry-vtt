@@ -42,9 +42,25 @@ $gap: 4px;
   label {
     color: var(--color-green);
     font-family: var(--font-table);
-    font-size: .8rem;
+    font-size: var(--font-size--very-small);
     text-transform: uppercase;
     text-align: center;
+  }
+  button,
+  .button {
+    @include utils.boxed-property;
+    font-family: var(--font-table);
+    color: var(--color-green);
+
+    &:hover {
+      border-color: var(--color-red);
+      color: var(--color-red);
+    }
+    &:disabled,
+    &.disabled {
+      border-color: var(--color-disabled);
+      color: var(--color-disabled);
+    }
   }
 
   /* ------------------------------------------ */
@@ -81,7 +97,7 @@ $gap: 4px;
   .boxed-value {
     @include utils.boxed-property;
     @include utils.input-background;
-    border-radius: 4px;
+    border-radius: $gap;
     text-align: center;
   }
   .boxed-property {
@@ -122,7 +138,7 @@ $gap: 4px;
         max-width: 200px;
         color: var(--color-blue);
       }
-      & > i {
+      > i {
         font-size: var(--font-size--small);
         color: var(--color-blue);
         margin: 8px 0 0 8px;
@@ -150,14 +166,13 @@ $gap: 4px;
       text-transform: uppercase;
       padding: $gap;
       margin-top: $gap;
-
-      .sheet-tab {
-        color: var(--color-blue);
-      }
-      .sheet-tab.active {
-        color: var(--color-red);
-        border-bottom: 2px solid var(--color-red);
-      }
+    }
+    .sheet-tab {
+      color: var(--color-blue);
+    }
+    .sheet-tab.active {
+      color: var(--color-red);
+      border-bottom: 2px solid var(--color-red);
     }
 
     .sheet-body {

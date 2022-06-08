@@ -40,7 +40,7 @@ $gap: 4px;
     align-items: center;
     margin-top: $gap;
 
-    & > * {
+    > * {
       flex: 1;
     }
   }
