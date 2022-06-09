@@ -83,6 +83,8 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     return this.actor.rollStat(attrKey, skillKey);
   }
 
+  /* ------------------------------------------ */
+
   _onActionRoll(event) {
     event.preventDefault();
     const elem = event.currentTarget;

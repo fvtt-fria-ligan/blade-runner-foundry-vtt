@@ -31,11 +31,11 @@
         height: $h;
         width: $h * 2/3;
       
-      // @each $d in (6, 8, 10, 12) {
-      //   &.die-d#{$d} {
-      //     background-image: url("../icons/svg/d#{$d}-grey.svg");
-      //   }
-      // }
+      @each $d in (6, 8, 10, 12) {
+        &.die-d#{$d} {
+          background-image: url("../icons/svg/d#{$d}-grey.svg");
+        }
+      }
 
       + .die-box { margin-left: 4px; }
     }
