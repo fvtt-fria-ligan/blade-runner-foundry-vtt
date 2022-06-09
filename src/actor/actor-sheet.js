@@ -98,12 +98,13 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     // Item Management
     html.find('.capacities .capacity-boxes').on('click contextmenu', this._onCapacityIncrease.bind(this));
     html.find('.meta-currencies .capacity-boxes').on('click contextmenu', this._onCapacityIncrease.bind(this));
+
     html.find('.item-create').click(this._onItemCreate.bind(this));
     html.find('.item-edit').click(this._onItemEdit.bind(this));
     html.find('.item-delete').click(this._onItemDelete.bind(this));
     html.find('.item-delete-confirmed').click(this._onItemDeleteConfirmed.bind(this));
-
-    html.find('.embedded-item .item-roll').click(this._onItemRoll.bind(this));
+    html.find('.item-roll').click(this._onItemRoll.bind(this));
+    html.find('.item-chat').click(this._onItemChat.bind(this));
     html.find('.embedded-item').on('contextmenu', this._onItemEdit.bind(this));
 
     // // Owner-only listeners.
@@ -168,6 +169,16 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const itemId = elem.closest('.embedded-item').dataset.itemId;
     const item = this.actor.items.get(itemId);
     if (item) return item.roll();
+  }
+
+  /* ------------------------------------------ */
+
+  _onItemChat(event) {
+    event.preventDefault();
+    const elem = event.currentTarget;
+    const itemId = elem.closest('.embedded-item').dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    if (item) return item.toMessage();
   }
 
   /* ------------------------------------------ */
