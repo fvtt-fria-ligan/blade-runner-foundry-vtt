@@ -11,8 +11,8 @@
 				<div class="die-box die-d{{.}}">{{localize "FLBR.D"}}{{.}}</div>
 			{{/each}}
 			{{#if (lt dice.length config.maxRolledDice)}}
-				<div class="die-box empty">
-					<a class="btn add-die" title="{{localize "FLBR.ROLLER.AddDie"}}">{{{@root.config.Icons.buttons.plus}}}</a>
+				<div class="die-box empty add-die rollable">
+					<a title="{{localize "FLBR.ROLLER.AddDie"}}">{{{@root.config.Icons.buttons.plus}}}</a>
 				</div>
 			{{/if}}
 		</div>
@@ -50,9 +50,6 @@
 			{{else}}
 				{{localize "FLBR.ROLLER.RollButton"}}
 			{{/if}}
-		</button>
-		<button id="cancel" class="dialog-button">
-			{{{config.Icons.buttons.times}}} {{localize "FLBR.Cancel"}}
 		</button>
 	</div>
 

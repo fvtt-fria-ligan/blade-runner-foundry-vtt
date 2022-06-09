@@ -70,6 +70,18 @@ export default class BRRollHandler extends FormApplication {
      */
     this.item = this.items[0];
 
+    /**
+     * The attribute's key.
+     * @type {string}
+     */
+    this.attributeKey = attributeKey;
+
+    /**
+     * The attribute's key.
+     * @type {string}
+     */
+    this.skillKey = skillKey;
+
     /** @typedef {import('@system/modifier').default} Modifier */
 
     /**
@@ -161,7 +173,7 @@ export default class BRRollHandler extends FormApplication {
   /** @override */
   get template() {
     const sysName = game.system.data.name || SYSTEM_NAME;
-    return this.options.template || `systems/${sysName}/templates/components/roll/roll-application.hbs`;
+    return this.options.template || `systems/${sysName}/templates/components/roll/roller.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -178,6 +190,9 @@ export default class BRRollHandler extends FormApplication {
       modifiers: this.modifiers,
       advantage: this.advantage,
       disadvantage: this.disadvantage,
+      attributeKey: this.attributeKey,
+      skillKey: this.skillKey,
+      rollMode: game.settings.get('core', 'rollMode'),
       // damage: this.damage,
       // attack: this.isAttack,
       // roll: this.roll,
@@ -214,7 +229,7 @@ export default class BRRollHandler extends FormApplication {
    * @description In this method we pass the formData onto the correct internal rollHandler.
    * @param {JQueryEventConstructor} event
    * @param {Object.<string|null>}   formData
-   * @returns private RollHandler //TODO what does it returns?
+   * @returns private RollHandler
    * @override Required
    * @async
    */
@@ -227,27 +242,24 @@ export default class BRRollHandler extends FormApplication {
 
   /**
    * Validates whether a form is empty and contains a valid artifact string (if any).
-   * @param {JQueryEventConstructor} event
-   * @param {Object.<string|null>}   formData
+   * @param {JQueryEventConstructor} _event
+   * @param {Object.<string|null>}   _formData
    * @returns {boolean} `true` when OK
    * @throws {Error} When formData is empty
    */
-  // TODO validateForm
-  _validateForm(event, formData) {
-    // const isEmpty = Object.values(formData).every(value => !value);
-    // if (isEmpty) {
-    //   const warning = game.i18n.localize('WARNING.NoDiceInput');
-    //   // TODO clean
-    //   // event.target.base.focus();
-    //   ui.notifications.warn(warning);
-    //   throw new Error(warning);
-    // }
+  _validateForm(_event, _formData) {
+    if (!this.dice.length) {
+      const msg = game.i18n.localize('WARNING.NoDiceInput');
+      ui.notifications.warn(msg);
+      throw new Error(msg);
+    }
     return true;
   }
 
   /* ------------------------------------------ */
 
-  _handleFormData(formData) {
+  _handleFormData(_formData) {
+    console.warn(_formData);
     // TODO do some stuff on our variables.
     // this.modifier = formData.modifier;
     // this.options.unlimitedPush = formData['options.unlimitedPush'];
@@ -290,7 +302,6 @@ export default class BRRollHandler extends FormApplication {
     }
     const dice = this.dice.map(d => { return { term: `${d}`, number: 1 }; });
     this.roll = YearZeroRoll.forge(dice, {}, this.getRollOptions());
-    // TODO remove // if (this.modifier) await this.roll.modify(this.modifier);
 
     await this.roll.roll({ async: true });
 
@@ -320,7 +331,7 @@ export default class BRRollHandler extends FormApplication {
    * Pushes a roll.
    * @param {ChatMessage} message           The message that contains the roll to push.
    * @param {boolean}    [sendMessage=true] Whether to send the pushed roll in a message.
-   * @returns {Promise.<YearZeroRoll|ChatMessage>}
+   * @returns {Promise.<ChatMessage|YearZeroRoll>}
    * @static
    * @async
    */
@@ -339,9 +350,9 @@ export default class BRRollHandler extends FormApplication {
   /* ------------------------------------------ */
 
   /**
-   * Cancel the push for a roll.
+   * Cancels the push for a roll.
    * @param {ChatMessage} message The message that contains the roll
-   * @returns {Promise.<ChatMessage>}
+   * @returns {Promise.<ChatMessage>} The updated message
    */
   static async cancelPush(message) {
     if (!message || !message.roll) return;
@@ -383,7 +394,7 @@ export default class BRRollHandler extends FormApplication {
 
       elem.style.display = 'none';
       const die = await BRRollHandler.askDie(lowestDie);
-      elem.style.display = 'block';
+      elem.style.display = 'flex';
 
       if (!die) return;
       this.modifiers.forEach(m => m.active = false);
@@ -428,7 +439,6 @@ export default class BRRollHandler extends FormApplication {
     const template = 'systems/blade-runner/templates/components/roll/roll-askdie-dialog.hbs';
     const content = await renderTemplate(template, { lowest });
     return new Promise(resolve => {
-      // Sets the data of the dialog.
       const data = {
         title: game.i18n.localize('FLBR.ROLLER.AddDie'),
         content,
@@ -445,7 +455,12 @@ export default class BRRollHandler extends FormApplication {
         default: 'normal',
         close: () => resolve(false),
       };
-      new Dialog(data, { width: 100 }).render(true);
+      const options = {
+        width: 100,
+        classes: ['blade-runner', 'dialog'],
+        minimizable: false,
+      };
+      new Dialog(data, options).render(true);
     });
   }
 }

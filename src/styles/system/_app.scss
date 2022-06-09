@@ -38,6 +38,10 @@ $gap: 4px;
     color: var(--color-black);
     font-family: var(--font-table);
     text-align: center;
+    &:disabled,
+    &.disabled {
+      color: var(--color-disabled);
+    }
   }
   select, img {
     border: none;

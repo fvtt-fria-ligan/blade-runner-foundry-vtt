@@ -1,4 +1,5 @@
 import * as BR from './constants.js';
+import { capitalize } from '@utils/string-util.js';
 
 /** @typedef {string} KeyString */
 /** @typedef {string} DieScoreString */
@@ -15,8 +16,8 @@ export const FLBR = {};
 /** @type {Map.<DieScoreString, DieSizeNumber>} */
 FLBR.scoreMap = new Map();
 FLBR.scoreMap.set('–', 0);
-for (const [key, value] of Object.entries(BR.DIE_SCORES)) {
-  FLBR.scoreMap.set(key, value);
+for (const [k, v] of Object.entries(BR.DIE_SCORES)) {
+  FLBR.scoreMap.set(k, v);
 }
 /** @type {Map.<DieSizeNumber, DieScoreString>} */
 FLBR.dieMap = new Map(Array.from(FLBR.scoreMap, ([n, v]) => [v, n]));
@@ -49,8 +50,8 @@ FLBR.startingSkillLevel = 6;
 
 /** @type {Object.<KeyString, TranslationString>} */
 FLBR.archetypes = {};
-for (const [key, val] of Object.entries(BR.ARCHETYPES)) {
-  FLBR.archetypes[val] = `FLBR.ARCHETYPE.${key}`;
+for (const [k, v] of Object.entries(BR.ARCHETYPES)) {
+  FLBR.archetypes[v] = `FLBR.ARCHETYPE.${k}`;
 }
 
 FLBR.maxPromotionPoints = 20;
@@ -191,6 +192,14 @@ FLBR.blastPowerMap = {
 FLBR.maxRolledDice = 3;
 FLBR.itemSpecialInputMaxLength = 80;
 
+/* ------------------------------------------ */
+
+/** @type {Object.<string, TranslationString>} */
+FLBR.rollModes = {};
+for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
+  FLBR.rollModes[v] = `CHAT.Roll${capitalize(k.toLowerCase())}`;
+}
+
 // TODO
 // FLBR.yearsOnTheForce = {
 //   [BR.YEARS_ON_THE_FORCE.ROOKIE]: {
@@ -258,7 +267,6 @@ FLBR.Icons = {
     edit: '<i class="fas fa-edit"></i>',
     delete: '<i class="fas fa-trash"></i>',
     remove: '<i class="fas fa-times"></i>',
-    times: '<i class="fas fa-times"></i>',
     plus: '<i class="fas fa-plus"></i>',
     minus: '<i class="fas fa-minus"></i>',
     equip: '<i class="fas fa-star"></i>',

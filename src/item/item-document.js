@@ -112,7 +112,7 @@ export default class BladeRunnerItem extends Item {
     const skillKey = this.props.skill;
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`) : null;
-    const title = `${this.detailedName} (${skillKey ? skillName : attributeName})`;
+    const title = `${this.detailedName} (${attributeName}${skillKey ? ` & ${skillName}` : ''})`;
     const attributeValue = this.actor.getAttribute(attributeKey);
     const skillValue = this.actor.getSkill(skillKey);
 
@@ -129,40 +129,50 @@ export default class BladeRunnerItem extends Item {
       attributeKey, skillKey, dice,
       items: [this],
       modifiers: this.actor.getRollModifiers({ targets }),
-      maxPush: FLBR.maxPushMap[this.actor.type],
+      maxPush: FLBR.maxPushMap[this.actor.nature],
     });
     return roller.render(true);
   }
 
   /* ------------------------------------------ */
 
+  // eslint-disable-next-line max-len
+  /** @typedef {import('@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData').ChatMessageDataConstructorData} ChatMessageDataConstructorData */
+
   /**
-   * Transform a Roll instance into a ChatMessage, displaying the roll result.
+   * Transforms an Item into a ChatMessage.
    * This function can either create the ChatMessage directly, or return the data object that will be used to create.
-   * @param {import('@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData').ChatMessageDataConstructorData} [messageData]
+   * @param {ChatMessageDataConstructorData} [messageData]
    *   The data object to use when creating the message
    * @return {Promise.<ChatMessage|ChatMessageData>} A promise which resolves to the created ChatMessage entity
    *   if create is true
    *   or the Object of prepared chatData otherwise.
    * @async
    */
-  // TODO rollMode ?
-  // TODO sounds ?
   async toMessage(messageData = {}, { rollMode = null, create = true } = {}) {
+    // Renders the template with item data.
     const content = await renderTemplate(this.constructor.CHAT_TEMPLATE, {
       name: this.name,
       img: this.img,
+      type: this.type,
       data: this.props,
     });
+
+    // Prepares chat data.
     messageData = foundry.utils.mergeObject({
       user: game.user.id,
       speaker: ChatMessage.getSpeaker(),
       content,
       sound: CONFIG.sounds.notification,
-      // type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     }, messageData);
 
-    if (create) return ChatMessage.create(messageData);
-    return messageData;
+    // Creates the message.
+    const cls = getDocumentClass('ChatMessage');
+    const msg = new cls(messageData);
+
+    // Sends the messages or returns its data.
+    if (create) return cls.create(msg.data, { rollMode });
+    if (rollMode) msg.applyRollMode(rollMode);
+    return msg.data.toObject();
   }
 }

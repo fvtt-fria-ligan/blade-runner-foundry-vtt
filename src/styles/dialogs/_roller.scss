@@ -21,22 +21,24 @@
     grid-column: 1 / -1;
 
     .die-box {
-      @include utils.boxed-property(1px, 0);
       border-radius: 10px;
-      color: var(--color-blue);
+      font-family: var(--font-table);
+      font-size: var(--font-size--large);
+      color: var(--color-blue-darker);
       display: flex;
       align-items: center;
       justify-content: center;
-      $h: 80px;
+      $h: 100px;
         height: $h;
         width: $h * 2/3;
       
       @each $d in (6, 8, 10, 12) {
         &.die-d#{$d} {
-          background-image: url("../icons/svg/d#{$d}-grey.svg");
+          background: center / contain no-repeat url("./assets/icons/d#{$d}-grey.svg");
         }
       }
 
+      &.empty { float: right; }
       + .die-box { margin-left: 4px; }
     }
   }

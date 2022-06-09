@@ -23,7 +23,7 @@ export default ({ watch = false, production = false } = {}) =>
       {
         name: 'external-files',
         setup(inBuild) {
-          inBuild.onResolve({ filter: /(\.\/assets|\.\/fonts|\/systems|\/svg)/ }, () => {
+          inBuild.onResolve({ filter: /(\.\/assets|\.\/fonts|\/systems)/ }, () => {
             return { external: true };
           });
         },

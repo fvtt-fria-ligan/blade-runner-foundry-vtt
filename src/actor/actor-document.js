@@ -127,7 +127,7 @@ export default class BladeRunnerActor extends Actor {
       // Proceeds if it exists in the character.
       if (capacity && capData) {
         // Gets the nature modifier.
-        const natureModifier = FLBR.natureModifierMap[this.type]?.[cap] ?? 0;
+        const natureModifier = FLBR.natureModifierMap[this.nature]?.[cap] ?? 0;
         // Gets any permanent loss.
         const permanentLoss = capacity.permanentLoss ?? 0;
 
@@ -204,7 +204,13 @@ export default class BladeRunnerActor extends Actor {
     }
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`) : null;
-    const title = options.title ?? skillName ?? attributeName;
+
+    // ? const title = options.title ?? skillName ?? attributeName;
+    let title;
+    if (options.title) title = options.title;
+    else if (skillName) title = `${skillName} (${attributeName})`;
+    else title = attributeName;
+
     const attributeValue = this.getAttribute(attributeKey);
     const skillValue = this.getSkill(skillKey);
 
@@ -220,7 +226,7 @@ export default class BladeRunnerActor extends Actor {
       actor: this,
       attributeKey, skillKey, dice,
       modifiers: this.getRollModifiers({ targets }),
-      maxPush: FLBR.maxPushMap[this.type],
+      maxPush: FLBR.maxPushMap[this.nature],
     });
     return roller.render(true);
   }

@@ -146,5 +146,6 @@
   "ITEM.TypeWeapon": "Weapon",
   "ITEM.TypeExplosive": "Explosive",
   "ITEM.TypeSpecialty": "Specialty",
-  "ITEM.TypeInjury": "Injury"
+  "ITEM.TypeInjury": "Injury",
+  "WARNING.NoDiceInput": "No dice to roll!"
 }
