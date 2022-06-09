@@ -135,7 +135,7 @@ export default class Modifier {
    * @returns {Modifier[]}
    * @static
    */
-  static getModifiers(item, path = 'data.data.modifiers', { targets = [], onlyActive = false }) {
+  static getModifiers(item, path = 'data.data.modifiers', { targets = [], onlyActive = false } = {}) {
     // Gets the modifiers.
     let out = [];
     const mods = foundry.utils.getProperty(item, path);

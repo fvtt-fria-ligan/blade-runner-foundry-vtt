@@ -150,7 +150,7 @@ export default class BladeRunnerActor extends Actor {
   /*  Roll Modifiers                             */
   /* ------------------------------------------- */
 
-  getRollModifiers() {
+  getRollModifiers(options) {
     const modifiers = [];
     // Iterates over each item owned by the actor.
     for (const i of this.items) {
@@ -158,7 +158,7 @@ export default class BladeRunnerActor extends Actor {
       if (i.hasModifier) {
         // // Physical items must be equipped to give their modifier.
         // // if (i.isPhysical && !i.isEquipped) continue;
-        const mods = i.getModifiers();
+        const mods = i.getModifiers(options);
         if (mods.length > 0) modifiers.push(...mods);
       }
     }
@@ -208,6 +208,9 @@ export default class BladeRunnerActor extends Actor {
     const attributeValue = this.getAttribute(attributeKey);
     const skillValue = this.getSkill(skillKey);
 
+    const targets = [attributeKey];
+    if (skillKey) targets.push(skillKey);
+
     const dice = [];
     if (attributeValue) dice.push(attributeValue);
     if (skillValue) dice.push(skillValue);
@@ -216,7 +219,7 @@ export default class BladeRunnerActor extends Actor {
       title,
       actor: this,
       attributeKey, skillKey, dice,
-      modifiers: this.getRollModifiers(),
+      modifiers: this.getRollModifiers({ targets }),
       maxPush: FLBR.maxPushMap[this.type],
     });
     return roller.render(true);
