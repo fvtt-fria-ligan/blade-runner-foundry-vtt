@@ -82,9 +82,9 @@ $border-stat-dotted: 1px dotted var(--color-green);
       font-size: var(--font-size--large);
       float: right;
     }
-    .capacities .capacity-boxes {
-      font-size: var(--font-size--large);
-    }
+    // .capacities .capacity-boxes {
+    //   font-size: var(--font-size--large);
+    // }
   }
 
   /* ------------------------------------------ */
@@ -213,8 +213,6 @@ $border-stat-dotted: 1px dotted var(--color-green);
       }
       .inventory {
         margin-bottom: 4px;
-        // max-height: 200px;
-        // overflow-y: auto;
       }
       .meta-currencies {
         display: grid;

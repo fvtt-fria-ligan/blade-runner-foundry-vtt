@@ -1,4 +1,4 @@
-import BRRollHandler from 'src/components/roll/roller.js';
+import BRRollHandler from '@components/roll/roller';
 
 /**
  * Adds Event Listeners to the Chat log.

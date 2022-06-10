@@ -1,7 +1,15 @@
-import BRRollHandler from 'src/components/roll/roller.js';
+import BRRollHandler from '@components/roll/roller';
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES, CAPACITIES } from '@system/constants';
 import { capitalize } from '@utils/string-util';
+
+/**
+ * @typedef {Object} ActorCapacity
+ * @property {number} value
+ * @property {number} max
+ * @property {number} mod
+ * @property {number} permanentLoss
+ */
 
 export default class BladeRunnerActor extends Actor {
 
@@ -117,6 +125,7 @@ export default class BladeRunnerActor extends Actor {
   /**
    * Sets the maxima for each capacities *(e.g. Health & Resolve)*
    * based on the character's attributes, nature and permanent losses.
+   * @see {ActorCapacity}
    * @private
    */
   _prepareCapacities() {
@@ -150,6 +159,11 @@ export default class BladeRunnerActor extends Actor {
   /*  Roll Modifiers                             */
   /* ------------------------------------------- */
 
+  /**
+   * Gets all the modifiers from this actor's items.
+   * @param {Object} options Filtering options
+   * @returns {Array.<import('@system/modifier').default>} An array of Modifiers
+   */
   getRollModifiers(options) {
     const modifiers = [];
     // Iterates over each item owned by the actor.
