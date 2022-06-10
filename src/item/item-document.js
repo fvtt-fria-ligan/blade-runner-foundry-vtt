@@ -1,7 +1,7 @@
 import { FLBR } from '@system/config';
-import { SYSTEM_NAME } from '@system/constants';
+import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
 import Modifier from '@system/modifier';
-import BRRollHandler from 'src/components/roll/roller';
+import BRRollHandler from '@components/roll/roller';
 import { capitalize } from '@utils/string-util';
 
 export default class BladeRunnerItem extends Item {
@@ -104,9 +104,15 @@ export default class BladeRunnerItem extends Item {
   /* ------------------------------------------ */
 
   roll() {
+    // this.actor.rollStat(this.props.attribute, this.props.skill);
+
+    switch (this.type) {
+      case ITEM_TYPES.ARMOR: return this._rollArmor();
+      case ITEM_TYPES.EXPLOSIVE: return this._rollExplosive();
+    }
+
     if (!this.rollable) return;
     if (!this.actor) return;
-    // this.actor.rollStat(this.props.attribute, this.props.skill);
 
     const attributeKey = this.props.attribute;
     const skillKey = this.props.skill;
@@ -132,6 +138,27 @@ export default class BladeRunnerItem extends Item {
       maxPush: FLBR.maxPushMap[this.actor.nature],
     });
     return roller.render(true);
+  }
+
+  /* ------------------------------------------ */
+
+  _rollArmor() { return this._rollSpecial(this.props.armor); }
+  _rollExplosive() { return this._rollSpecial(this.props.blast); }
+
+  async _rollSpecial(value) {
+    const execute = await Dialog.confirm({
+      title: game.i18n.localize(`ITEM.Type${capitalize(this.type)}`),
+      content: `<p>${this.name}</p>`,
+    });
+    if (!execute) return;
+
+    const roller = new BRRollHandler({
+      title: this.name,
+      dice: [value, value],
+      items: [this],
+      maxPush: 0,
+    });
+    return roller.executeRoll();
   }
 
   /* ------------------------------------------ */
