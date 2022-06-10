@@ -11,6 +11,7 @@
       "@item/*": ["./src/item/*"],
       "@system/*": ["./src/system/*"],
       "@utils/*": ["./src/utils/*"],
+      "@components/*": ["./src/components/*"],
     }
   },
   "include": ["src/**/*.js"],
