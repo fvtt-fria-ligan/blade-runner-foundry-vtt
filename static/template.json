@@ -123,6 +123,7 @@
     },
     "armor": {
       "templates": ["itemBase", "itemRoll", "itemDesc", "itemModifiers"],
+      "rollable": true,
       "armor": 6
     },
     "weapon": {
@@ -130,6 +131,7 @@
     },
     "explosive": {
       "templates": ["itemBase", "itemRoll", "itemDesc", "itemOffensive"],
+      "rollable": true,
       "blast": 8
     },
     "specialty": {
