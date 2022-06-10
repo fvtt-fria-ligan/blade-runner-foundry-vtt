@@ -1,4 +1,5 @@
 import { YearZeroRoll } from '@lib/yzur';
+import { FLBR } from '@system/config';
 import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
 
 /**
@@ -20,8 +21,6 @@ export default class BRRollHandler extends FormApplication {
    * @param {Modifier|Modifier[]} [modifiers]    A group of modifiers that can also be applied to the roll
    * @param {number}              [maxPush=1]    The maximum number of pushes (default is 1)
    * @param {Object}  [options] Additional options for the FormApplication instance
-   * @param {boolean} [options.askForOptions=true]  Whether to show a Dialog for roll options
-   * @param {boolean} [options.skipDialog=false]    Whether to force skip the Dialog for roll options
    * @param {boolean} [options.sendMessage=true]    Whether the message should be sent
    * @param {boolean} [options.unlimitedPush=false] Whether to allow unlimited roll pushes
    */
@@ -122,9 +121,6 @@ export default class BRRollHandler extends FormApplication {
      * @type {number}
      */
     this.damage = options.damage;
-
-    this.options.sendMessage = options.sendMessage ?? true;
-    this.options.unlimitedPush = options.unlimitedPush ?? false;
   }
 
   /* ------------------------------------------ */
@@ -202,8 +198,20 @@ export default class BRRollHandler extends FormApplication {
   }
 
   /* ------------------------------------------ */
-  /*  Form Methods                              */
+  /*  Static Methods                            */
   /* ------------------------------------------ */
+
+  /**
+   * Creates a Blade Runner Roll Handler FormApplication.
+   * @see {@link BRRollHandler} constructor
+   * @param {Object} [data]
+   * @param {Object} [options]
+   * @returns {BRRollHandler} Rendered instance of this FormApplication
+   * @static
+   */
+  static create(data = {}, options = {}) {
+    return new this(data, options).render(true);
+  }
 
   /**
    * Guesses the correct Actor making a roll.
@@ -213,7 +221,7 @@ export default class BRRollHandler extends FormApplication {
    * @param {string} [data.token] ID of its token
    * @returns {ActorData}
    */
-  static getSpeaker({ actor, scene, token } = {}) {
+  static getSpeaker({ actor, scene, token }) {
     if (scene && token) return game.scenes.get(scene)?.tokens.get(token)?.actor;
     return game.actors.get(actor);
   }
@@ -245,10 +253,11 @@ export default class BRRollHandler extends FormApplication {
    * @param {JQueryEventConstructor} _event
    * @param {Object.<string|null>}   _formData
    * @returns {boolean} `true` when OK
-   * @throws {Error} When formData is empty
+   * @throws {Error} When formData or dice is empty
    */
   _validateForm(_event, _formData) {
-    if (!this.dice.length) {
+    const nok = foundry.utils.isObjectEmpty(_formData) || !this.dice.length;
+    if (nok) {
       const msg = game.i18n.localize('WARNING.NoDiceInput');
       ui.notifications.warn(msg);
       throw new Error(msg);
@@ -259,7 +268,7 @@ export default class BRRollHandler extends FormApplication {
   /* ------------------------------------------ */
 
   _handleFormData(_formData) {
-    console.warn(_formData);
+    // console.warn(_formData);
     // TODO do some stuff on our variables.
     // this.modifier = formData.modifier;
     // this.options.unlimitedPush = formData['options.unlimitedPush'];
@@ -276,10 +285,10 @@ export default class BRRollHandler extends FormApplication {
       name: this.title,
       maxPush: unlimitedPush ? 1000 : this.maxPush,
       type: this.options.type,
-      actorId: this.options.actorId || this.actor.id,
-      actorType: this.options.actorType || this.actor.type,
+      actorId: this.options.actorId || this.actor?.id,
+      actorType: this.options.actorType || this.actor?.type,
+      attributeKey: this.attributeKey,
       // alias: this.options.alias,
-      // attribute: this.base.name,
       // chance: this.spell.chance,
       // isAttack: this.isAttack,
       // consumable: this.options.consumable,
@@ -310,25 +319,11 @@ export default class BRRollHandler extends FormApplication {
   }
 
   /* ------------------------------------------ */
-  /*  Static Methods                            */
+  /*  Roll <-> Chat Methods                     */
   /* ------------------------------------------ */
 
   /**
-   * Creates a Blade Runner Roll Handler FormApplication.
-   * @see {@link BRRollHandler} constructor
-   * @param {Object} [data]
-   * @param {Object} [options]
-   * @returns {BRRollHandler} Rendered instance of this FormApplication
-   * @static
-   */
-  static create(data = {}, options = {}) {
-    return new this(data, options).render(true);
-  }
-
-  /* ------------------------------------------ */
-
-  /**
-   * Pushes a roll.
+   * Handles the push of a roll in a chat message and updates the actor according to the banes rolled.
    * @param {ChatMessage} message           The message that contains the roll to push.
    * @param {boolean}    [sendMessage=true] Whether to send the pushed roll in a message.
    * @returns {Promise.<ChatMessage|YearZeroRoll>}
@@ -341,8 +336,11 @@ export default class BRRollHandler extends FormApplication {
     /** @type {YearZeroRoll} */
     const roll = message.roll.duplicate();
     await roll.push({ async: true });
-    await message.delete();
 
+    const speaker = this.getSpeaker(message.data.speaker);
+    if (speaker) await this.updateActor(roll, speaker);
+
+    await message.delete();
     if (sendMessage) return roll.toMessage();
     return roll;
   }
@@ -350,7 +348,7 @@ export default class BRRollHandler extends FormApplication {
   /* ------------------------------------------ */
 
   /**
-   * Cancels the push for a roll.
+   * Handles cancellation .
    * @param {ChatMessage} message The message that contains the roll
    * @returns {Promise.<ChatMessage>} The updated message
    */
@@ -361,6 +359,60 @@ export default class BRRollHandler extends FormApplication {
     roll.maxPush = 0;
     await message.update({ roll: roll.toJSON() });
     return message;
+  }
+
+  /* ------------------------------------------ */
+  /*  Update Actors after roll push             */
+  /* ------------------------------------------ */
+
+  /**
+   * Handles health and resolve damage to the actor.
+   * @param {YearZeroRoll} roll
+   * @param {ActorData} speaker
+   */
+  static async updateActor(roll, speaker) {
+    if (roll.baneCount) await this.applyDamage(roll, speaker);
+  }
+
+  /**
+   * Applies health and resolve damage to the actor.
+   * @param {YearZeroRoll} roll (destructured)
+   * @param {ActorData} speaker
+   * @returns {Promise.<number>} Remaining capacity value
+   */
+  static async applyDamage({ attributeTrauma, options: { attributeKey, damage } }, speaker) {
+    const currentDamage = attributeTrauma; // TODO damage from weapon
+
+    const nature = speaker?.nature;
+    if (!nature) {
+      return ui.notifications.error('WARNING.ApplyDamageNoNature', { localize: true });
+    }
+
+    // The nature & attribute key define which ActorCapacity (health or resolve) is affected.
+    const cap = FLBR.pushTraumaMap[nature]?.[attributeKey];
+    if (!cap) {
+      console.error(`FLBR | ApplyDamageNoCapacityKey → nature: ${nature}, attributeKey: ${attributeKey}`);
+      return ui.notifications.error('WARNING.ApplyDamageNoCapacityKey', { localize: true });
+    }
+
+    /** @type {import('@actor/actor-document').ActorCapacity} */
+    const capacity = speaker?.data.data[cap];
+    if (!capacity || foundry.utils.isObjectEmpty(capacity)) {
+      return ui.notifications.error('WARNING.ApplyDamageNoActorCapacity', { localize: true });
+    }
+
+    // TODO await this.modifyWillpower(speaker, currentDamage)
+
+    // eslint-disable-next-line prefer-const
+    let { value, max } = capacity;
+    value = Math.clamped(value - currentDamage, 0, max);
+
+    if (value === 0) {
+      ui.notifications.info('FLBR.YouAreBroken', { localize:true });
+    }
+
+    await speaker.update({ [`data.${cap}.value`]: value });
+    return value;
   }
 
   /* ------------------------------------------ */
