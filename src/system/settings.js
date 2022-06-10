@@ -14,21 +14,21 @@ export function registerSystemSettings() {
     default: '',
   });
 
-  game.settings.register(br, 'showTaskCheckOptions', {
-    config: true,
-    scope: 'client',
-    name: 'SETTINGS.showTaskCheckOptions.name',
-    hint: 'SETTINGS.showTaskCheckOptions.hint',
-    type: Boolean,
-    default: true,
-  });
+  // game.settings.register(br, 'showTaskCheckOptions', {
+  //   config: true,
+  //   scope: 'client',
+  //   name: 'SETTINGS.showTaskCheckOptions.name',
+  //   hint: 'SETTINGS.showTaskCheckOptions.hint',
+  //   type: Boolean,
+  //   default: true,
+  // });
 
-  game.settings.register(br, 'closeRollTooltipDelay', {
-    config: true,
-    scope: 'client',
-    name: 'SETTINGS.closeRollTooltipDelay.name',
-    hint: 'SETTINGS.closeRollTooltipDelay.hint',
-    type: Number,
-    default: 60,
-  });
+  // game.settings.register(br, 'closeRollTooltipDelay', {
+  //   config: true,
+  //   scope: 'client',
+  //   name: 'SETTINGS.closeRollTooltipDelay.name',
+  //   hint: 'SETTINGS.closeRollTooltipDelay.hint',
+  //   type: Number,
+  //   default: 60,
+  // });
 }
