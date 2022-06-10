@@ -139,26 +139,28 @@
 					<label>{{localize "FLBR.ItemRollable"}}</label>
 					<input type="checkbox" name="data.rollable" {{checked data.rollable}}/>
 				</div>
-				<div class="item-property item-property-attribute"{{#unless data.rollable}} style="display: none;"{{/unless}}>
-					<label>{{localize "FLBR.ItemAttribute"}}</label>
-					<select name="data.attribute">
-						{{#select data.attribute}}
-							{{#each @root.config.attributes}}
-								<option value="{{.}}">{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase .))}}</option>
-							{{/each}}
-						{{/select}}
-					</select>
-				</div>
-				<div class="item-property item-property-skill"{{#unless data.rollable}} style="display: none;"{{/unless}}>
-					<label>{{localize "FLBR.ItemSkill"}}</label>
-					<select name="data.skill">
-						{{#select data.skill}}
-							{{#each @root.config.skills}}
-								<option value="{{.}}">{{localize (concat "FLBR.SKILL." (capitalize .))}}</option>
-							{{/each}}
-						{{/select}}
-					</select>
-				</div>
+				{{#unless (eq item.type 'armor')}}
+					<div class="item-property item-property-attribute"{{#unless data.rollable}} style="display: none;"{{/unless}}>
+						<label>{{localize "FLBR.ItemAttribute"}}</label>
+						<select name="data.attribute">
+							{{#select data.attribute}}
+								{{#each @root.config.attributes}}
+									<option value="{{.}}">{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase .))}}</option>
+								{{/each}}
+							{{/select}}
+						</select>
+					</div>
+					<div class="item-property item-property-skill"{{#unless data.rollable}} style="display: none;"{{/unless}}>
+						<label>{{localize "FLBR.ItemSkill"}}</label>
+						<select name="data.skill">
+							{{#select data.skill}}
+								{{#each @root.config.skills}}
+									<option value="{{.}}">{{localize (concat "FLBR.SKILL." (capitalize .))}}</option>
+								{{/each}}
+							{{/select}}
+						</select>
+					</div>
+				{{/unless}}
 			</div>
 		{{/if}}
 	</div>
