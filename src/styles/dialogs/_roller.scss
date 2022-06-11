@@ -45,11 +45,16 @@
   .modifiers {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto auto 1fr;
+    align-items: center;
     gap: 4px;
 
     h3,
     .total {
       grid-column: 1 / -1;
+    }
+    .total {
+      align-self: end;
     }
     h4:not(:first-of-type),
     .modifier-value {
@@ -58,17 +63,15 @@
     .modifier-name,
     .modifier-value {
       color: var(--color-blue-lighter);
-      line-height: 1.8;
     }
   }
-  .max-push {
-    > div { margin-top: 4px; }
+  .roll-options {
+    gap: 4px;
     input[type=number] { width: 42px; }
     input[type=checkbox] { margin-left: 10px; }
     .checkbox-label {
       font-family: var(--font-header);
       color: var(--color-blue);
-      line-height: 1.8;
     }
   }
 }

@@ -23,34 +23,41 @@
 			<h4>{{localize "FLBR.ROLLER.ModifierName"}}</h4>
 			<h4>{{localize "FLBR.ROLLER.ModifierValue"}}</h4>
 			{{#each modifiers}}
-				<input type="checkbox" data-id="{{id}}" {{checked active}}/>
-				<div class="modifier-name" title="{{description}}">{{name}}</div>
+				<input type="checkbox" id="modifier-{{id}}" data-id="{{id}}" {{checked active}}/>
+				<label class="modifier-name" for="modifier-{{id}}" title="{{description}}">{{name}}</label>
 				<div class="modifier-value">{{signedValue}}</div>
 			{{/each}}
 			<input type="text" class="total" value="{{localize "FLBR.ROLLER.TotalModifier" value=modifier}}" disabled/>
 		</div>
-		{{!-- Max Pushes --}}
-		<div class="max-push boxed-property">
+		<div class="roll-options boxed-property flex column">
+			{{!-- Max Pushes --}}
 			<h3>{{localize "FLBR.ROLLER.MaxPush"}}</h3>
-			<div class="flex row">
-				<input type="number" name="maxPush" value="{{maxPush}}" disabled{{#if options.unlimitedPush}} style="display: none;"{{/if}}/>
-				<input type="checkbox" name="options.unlimitedPush" {{checked options.unlimitedPush}}/>
-				<div class="checkbox-label">{{localize "FLBR.ROLLER.UnlimitedPush"}}</div>
+			<div class="flex row align-center">
+				<input type="number" name="maxPush" value="{{maxPush}}"{{#if options.unlimitedPush}} style="display: none;"{{/if}}/>
+				<input type="checkbox" id="unlimitedPush" name="options.unlimitedPush" {{checked options.unlimitedPush}}/>
+				<label class="checkbox-label" for="unlimitedPush">{{localize "FLBR.ROLLER.UnlimitedPush"}}</label>
 			</div>
+			{{!-- RollMode --}}
+			<h3>{{localize "CHAT.RollDefault"}}</h3>
+			<select name="rollMode">
+				{{#select rollMode}}
+					{{#each config.rollModes}}
+						<option value="{{@key}}">{{localize .}}</option>
+					{{/each}}
+				{{/select}}
+			</select>
 		</div>
 	</div>
-	<div class="roll-mode"></div>
 
 	<div class="sheet-footer flex row space-around">
-		<button id="roll" class="dialog-button" type="submit">
-			{{{config.Icons.buttons.roll}}} 
-			{{#if advantage}}
-				{{localize "FLBR.ROLLER.RollWithAdvantageButton"}}
-			{{else if disadvantage}}
-				{{localize "FLBR.ROLLER.RollWithDisadvantageButton"}}
-			{{else}}
-				{{localize "FLBR.ROLLER.RollButton"}}
-			{{/if}}
+		<button id="advantage" class="dialog-button" type="submit"{{#if disadvantage}} disabled{{/if}}>
+			{{localize "FLBR.ROLLER.RollWithAdvantageButton"}}
+		</button>
+		<button id="roll" class="dialog-button" type="submit"{{#if (or advantage disadvantage)}} disabled{{/if}}>
+			{{localize "FLBR.ROLLER.RollButton"}}
+		</button>
+		<button id="disadvantage" class="dialog-button" type="submit"{{#if advantage}} disabled{{/if}}>
+			{{localize "FLBR.ROLLER.RollWithDisadvantageButton"}}
 		</button>
 	</div>
 

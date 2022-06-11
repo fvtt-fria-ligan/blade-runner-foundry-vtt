@@ -2,8 +2,24 @@
 $gap: 4px;
 
 .blade-runner {
-  &.window-app .window-content > * {
-    height: 100%;
+  // &.window-app .window-content > * {
+  //   height: 100%;
+  // }
+
+  .capacity-boxes {
+    display: block;
+    color: var(--color-green);
+    white-space: nowrap;
+    line-height: 0;
+  }
+  .boxed-value {
+    @include utils.boxed-property;
+    @include utils.input-background;
+    border-radius: $gap;
+    text-align: center;
+  }
+  .boxed-property {
+    @include utils.boxed-property;
   }
 }
 
@@ -49,13 +65,6 @@ $gap: 4px;
   p {
     color: var(--color-blue-lighter);
   }
-  label {
-    color: var(--color-green);
-    font-family: var(--font-table);
-    font-size: var(--font-size--very-small);
-    text-transform: uppercase;
-    text-align: center;
-  }
   .button,
   .dialog-button {
     @include utils.boxed-property;
@@ -99,24 +108,6 @@ $gap: 4px;
   
   /* ------------------------------------------ */
 
-  .capacity-boxes {
-    display: block;
-    color: var(--color-green);
-    white-space: nowrap;
-    line-height: 0;
-  }
-  .boxed-value {
-    @include utils.boxed-property;
-    @include utils.input-background;
-    border-radius: $gap;
-    text-align: center;
-  }
-  .boxed-property {
-    @include utils.boxed-property;
-  }
-  // .btn {
-  //   color: var(--color-blue);
-  // }
   .rollable {
     cursor: pointer;
     &:hover {
@@ -125,6 +116,8 @@ $gap: 4px;
     }
   }
 
+  /* ------------------------------------------ */
+  /*  Customizing the app-window content        */
   /* ------------------------------------------ */
 
   .window-header {
@@ -162,12 +155,11 @@ $gap: 4px;
   .window-content {
     padding: $gap;
     background: none;
-    overflow: hidden;
+    overflow: auto;
 
-    .tab {
-      overflow-y: auto;
-      height: 100%;
-    }
+    // .sheet-body {
+    //   overflow-x: auto;
+    // }
 
     .sheet-tabs {
       display: flex;
@@ -185,9 +177,17 @@ $gap: 4px;
       color: var(--color-red);
       border-bottom: 2px solid var(--color-red);
     }
+  }
+}
 
-    // .sheet-body {
-    //   height: 100%;
-    // }
+.blade-runner {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    border: 1px solid var(--color-black);
+    background-color: var(--color-blue-lighter);
   }
 }

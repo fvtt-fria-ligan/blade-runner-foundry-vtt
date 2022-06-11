@@ -45,18 +45,11 @@ FLBR.skillMap = {
 
 FLBR.skills = Object.keys(FLBR.skillMap);
 
-FLBR.startingAttributeLevel = 8;
-FLBR.startingSkillLevel = 6;
-
 /** @type {Object.<KeyString, TranslationString>} */
 FLBR.archetypes = {};
 for (const [k, v] of Object.entries(BR.ARCHETYPES)) {
   FLBR.archetypes[v] = `FLBR.ARCHETYPE.${k}`;
 }
-
-FLBR.maxPromotionPoints = 20;
-FLBR.maxHumanityPoints = 20;
-FLBR.maxChinyenPoints = 20;
 
 FLBR.capacitiesMap = {
   [BR.CAPACITIES.HEALTH]: {
@@ -156,9 +149,6 @@ FLBR.actionSkillMap = {
   },
 };
 
-FLBR.deathSaveTest = BR.SKILLS.STAMINA;
-FLBR.baselineTest = BR.SKILLS.INSIGHT;
-
 FLBR.physicalItems = [BR.ITEM_TYPES.GENERIC, BR.ITEM_TYPES.WEAPON, BR.ITEM_TYPES.ARMOR, BR.ITEM_TYPES.EXPLOSIVE];
 
 FLBR.ranges = {
@@ -188,6 +178,16 @@ FLBR.blastPowerMap = {
   8: { damage: 2, crit: 8 },
   6: { damage: 1, crit: 6 },
 };
+
+FLBR.startingAttributeLevel = 8;
+FLBR.startingSkillLevel = 6;
+
+FLBR.deathSaveTest = BR.SKILLS.STAMINA;
+FLBR.baselineTest = BR.SKILLS.INSIGHT;
+
+FLBR.maxPromotionPoints = 20;
+FLBR.maxHumanityPoints = 20;
+FLBR.maxChinyenPoints = 20;
 
 FLBR.maxRolledDice = 3;
 FLBR.itemSpecialInputMaxLength = 80;

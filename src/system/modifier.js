@@ -162,14 +162,3 @@ export default class Modifier {
     return out;
   }
 }
-
-/* ------------------------------------------ */
-
-// TODO remove
-// Modifier.ALLOWED_CATEGORIES = [
-//   'attribute',
-//   'skill',
-//   'action',
-//   'constant',
-//   'travel',
-// ];

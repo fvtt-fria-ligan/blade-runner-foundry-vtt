@@ -26,8 +26,7 @@
           "emp": { "value": 8 }
         },
         "skills": {},
-        "hasFastReflexes": false,
-        "isBroken": false
+        "hasFastReflexes": false
       },
       "actorHealth": {
         "health": { "value": 4, "max": 4, "mod": 0, "permanentLoss": 0 }

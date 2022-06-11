@@ -47,6 +47,29 @@ export default class BladeRunnerItem extends Item {
     return str;
   }
 
+  get modifiersDescription() {
+    if (!this.hasModifier) return undefined;
+
+    const out = [];
+    for (const m of Object.values(this.props.modifiers)) {
+      if (m && m.name) {
+        const [t, n] = m.name.split('.');
+        let str = 'FLBR.';
+        switch (t) {
+          case 'attribute':
+            str += `ATTRIBUTE.${n.toUpperCase()}`;
+            break;
+          case 'skill':
+            str += `SKILL.${capitalize(n)}`;
+        }
+        str = game.i18n.localize(str);
+        str += ` ${m.value}`;
+        out.push(str);
+      }
+    }
+    return out.join(', ');
+  }
+
   /* ------------------------------------------- */
 
   static get CHAT_TEMPLATE() {

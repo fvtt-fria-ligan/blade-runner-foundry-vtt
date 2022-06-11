@@ -78,6 +78,8 @@
   "FLBR.D": "D",
   "FLBR.NO_VALUE": "–",
   "FLBR.Blast": "Blast",
+  "FLBR.BrokenByDamage": "BROKEN BY DAMAGE",
+  "FLBR.BrokenByStress": "BROKEN BY STRESS",
   "FLBR.Cancel": "Cancel",
   "FLBR.CreateNewItem": "Create a new {type} item",
   "FLBR.Crit": "Crit",

@@ -184,8 +184,8 @@ export default class BRRollHandler extends FormApplication {
       maxPush: this.maxPush,
       modifier: this.modifier >= 0 ? `+${this.modifier}` : this.modifier,
       modifiers: this.modifiers,
-      advantage: this.advantage,
-      disadvantage: this.disadvantage,
+      advantage: this.disadvantage ? false : this.advantage,
+      disadvantage: this.advantage ? false : this.disadvantage,
       attributeKey: this.attributeKey,
       skillKey: this.skillKey,
       rollMode: game.settings.get('core', 'rollMode'),
@@ -194,6 +194,21 @@ export default class BRRollHandler extends FormApplication {
       // roll: this.roll,
       config: CONFIG.BLADE_RUNNER,
       options,
+    };
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * Generates Speaker data based on the actor passed in the FormApplication.
+   * @returns {{ alias: string, actor: string, token: string, scene: string }}
+   */
+  createSpeaker() {
+    return {
+      alias: this.options.alias || this.actor?.name,
+      actor: this.options.actorId || this.actor?.id,
+      token: this.options.tokenId || this.actor?.token?.id,
+      scene: this.options.sceneId || this.actor?.token?.parent.id,
     };
   }
 
@@ -219,7 +234,7 @@ export default class BRRollHandler extends FormApplication {
    * @param {string}  data.actor  ID of the actor
    * @param {string} [data.scene] ID of the scene
    * @param {string} [data.token] ID of its token
-   * @returns {ActorData}
+   * @returns {Actor}
    */
   static getSpeaker({ actor, scene, token }) {
     if (scene && token) return game.scenes.get(scene)?.tokens.get(token)?.actor;
@@ -243,7 +258,7 @@ export default class BRRollHandler extends FormApplication {
    */
   async _updateObject(event, formData) {
     this._validateForm(event, formData);
-    return this._handleFormData(formData);
+    return this._handleFormData(event, formData);
   }
 
   /* ------------------------------------------ */
@@ -251,12 +266,12 @@ export default class BRRollHandler extends FormApplication {
   /**
    * Validates whether a form is empty and contains a valid artifact string (if any).
    * @param {JQueryEventConstructor} _event
-   * @param {Object.<string|null>}   _formData
+   * @param {Object.<string|null>}   formData
    * @returns {boolean} `true` when OK
    * @throws {Error} When formData or dice is empty
    */
-  _validateForm(_event, _formData) {
-    const nok = foundry.utils.isObjectEmpty(_formData) || !this.dice.length;
+  _validateForm(_event, formData) {
+    const nok = foundry.utils.isObjectEmpty(formData) || !this.dice.length;
     if (nok) {
       const msg = game.i18n.localize('WARNING.NoDiceInput');
       ui.notifications.warn(msg);
@@ -267,12 +282,23 @@ export default class BRRollHandler extends FormApplication {
 
   /* ------------------------------------------ */
 
-  _handleFormData(_formData) {
-    // console.warn(_formData);
-    // TODO do some stuff on our variables.
-    // this.modifier = formData.modifier;
-    // this.options.unlimitedPush = formData['options.unlimitedPush'];
-    return this.executeRoll();
+  _handleFormData(event, formData) {
+    this.options.rollMode = formData.rollMode;
+    const modifier = this._handleModifier(event.submitter.id);
+    return this.executeRoll(modifier);
+  }
+
+  _handleModifier(buttonId) {
+    switch (buttonId) {
+      case 'roll': return 0;
+      case 'advantage':
+        if (this.dice.length > 2) return 0;
+        return 1;
+      case 'disadvantage':
+        if (this.dice.length < 2) return 0;
+        return -1;
+    }
+    return this.modifier;
   }
 
   /* ------------------------------------------ */
@@ -280,21 +306,22 @@ export default class BRRollHandler extends FormApplication {
   /* ------------------------------------------ */
 
   getRollOptions() {
+    const speaker = this.createSpeaker();
     const unlimitedPush = this.options.unlimitedPush;
     return {
       name: this.title,
       maxPush: unlimitedPush ? 1000 : this.maxPush,
-      type: this.options.type,
-      actorId: this.options.actorId || this.actor?.id,
-      actorType: this.options.actorType || this.actor?.type,
+      // type: this.options.type,
       attributeKey: this.attributeKey,
-      // alias: this.options.alias,
+      alias: speaker.alias,
+      actorId: speaker.actor,
+      actorType: this.options.actorType || this.actor?.type,
+      tokenId: speaker.token,
+      sceneId: speaker.scene,
       // chance: this.spell.chance,
       // isAttack: this.isAttack,
       // consumable: this.options.consumable,
       damage: this.damage,
-      tokenId: this.options.tokenId,
-      sceneId: this.options.sceneId,
       item: this.item?.name || this.items.map(i => i.name),
       itemId: this.item?.id || this.items.map(i => i.id),
       yzur: true,
@@ -303,10 +330,10 @@ export default class BRRollHandler extends FormApplication {
 
   /* ------------------------------------------ */
 
-  async executeRoll() {
-    if (this.modifier) {
+  async executeRoll(modifier) {
+    if (modifier) {
       const min = Math.min(...this.dice);
-      if (this.modifier > 0) this.dice.push(min);
+      if (modifier > 0) this.dice.push(min);
       else this.dice = this.dice.filter(d => d !== min);
     }
     const dice = this.dice.map(d => { return { term: `${d}`, number: 1 }; });
@@ -314,7 +341,13 @@ export default class BRRollHandler extends FormApplication {
 
     await this.roll.roll({ async: true });
 
-    if (this.options.sendMessage) return this.roll.toMessage();
+    if (this.options.sendMessage) {
+      return this.roll.toMessage({
+        speaker: this.createSpeaker(),
+      }, {
+        rollMode: this.options.rollMode,
+      });
+    }
     return this.roll;
   }
 
@@ -337,11 +370,12 @@ export default class BRRollHandler extends FormApplication {
     const roll = message.roll.duplicate();
     await roll.push({ async: true });
 
-    const speaker = this.getSpeaker(message.data.speaker);
+    const speakerData = message.data.speaker;
+    const speaker = this.getSpeaker(speakerData);
     if (speaker) await this.updateActor(roll, speaker);
 
     await message.delete();
-    if (sendMessage) return roll.toMessage();
+    if (sendMessage) return roll.toMessage({ speaker: speakerData });
     return roll;
   }
 
@@ -470,9 +504,9 @@ export default class BRRollHandler extends FormApplication {
     });
 
     // We need to bind the cancel button to the FormApplication's close method.
-    html.find('#cancel').click(() => {
-      this.close({ submit: false });
-    });
+    // html.find('#cancel').click(() => {
+    //   this.close({ submit: false });
+    // });
   }
 
   /* ------------------------------------------ */

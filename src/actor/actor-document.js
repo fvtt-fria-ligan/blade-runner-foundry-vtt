@@ -46,18 +46,14 @@ export default class BladeRunnerActor extends Actor {
   }
 
   get isBroken() {
-    return this.props.isBroken;
+    for (const cap of Object.values(CAPACITIES)) {
+      const capacity = this.props[cap];
+      if (capacity && capacity.value <= 0) return true;
+    }
+    return false;
   }
 
   // TODO
-  // get bio() {
-  //   return this.props.bio;
-  // }
-
-  // get metaCurrencies() {
-  //   return this.props.metaCurrencies;
-  // }
-
   // get rollData() {
   //   return this.getRollData();
   // }
@@ -131,7 +127,7 @@ export default class BladeRunnerActor extends Actor {
   _prepareCapacities() {
     // Rolls over each legal capacity.
     for (const cap of Object.values(CAPACITIES)) {
-      const capacity = this.data.data[cap];
+      const capacity = this.props[cap];
       const capData = FLBR.capacitiesMap[cap];
       // Proceeds if it exists in the character.
       if (capacity && capData) {
@@ -151,6 +147,7 @@ export default class BladeRunnerActor extends Actor {
 
         // Records the value in the actor data.
         capacity.max = max;
+        capacity.ratio = capacity.value / capacity.max;
       }
     }
   }

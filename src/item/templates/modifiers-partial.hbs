@@ -4,7 +4,7 @@
 			{{#select modifier.name}}
 				<optgroup label="{{localize "FLBR.Attributes"}}">
 					{{#each @root.config.attributes}}
-						<option value="attribute.{{.}}"{{#if (eq . "str")}} selected{{/if}}>{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase .))}}</option>
+						<option value="attribute.{{.}}">{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase .))}}</option>
 					{{/each}}
 				</optgroup>
 				<optgroup label="{{localize "FLBR.Skills"}}">
