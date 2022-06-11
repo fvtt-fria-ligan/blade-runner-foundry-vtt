@@ -265,13 +265,15 @@ export default class BRRollHandler extends FormApplication {
 
   /**
    * Validates whether a form is empty and contains a valid artifact string (if any).
-   * @param {JQueryEventConstructor} _event
+   * @param {JQueryEventConstructor} event
    * @param {Object.<string|null>}   formData
    * @returns {boolean} `true` when OK
    * @throws {Error} When formData or dice is empty
    */
-  _validateForm(_event, formData) {
-    const nok = foundry.utils.isObjectEmpty(formData) || !this.dice.length;
+  _validateForm(event, formData) {
+    const nok = foundry.utils.isObjectEmpty(formData)
+      || !this.dice.length
+      || !['roll', 'advantage', 'disadvantage'].includes(event.submitter.id);
     if (nok) {
       const msg = game.i18n.localize('WARNING.NoDiceInput');
       ui.notifications.warn(msg);

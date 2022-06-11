@@ -3,7 +3,7 @@
 {{!-- {boolean}  wrap  -  Whether to wrap items in rows or not. --}}
 <div class="embedded-items flex {{#if wrap}}row wrap{{else}}column{{/if}}">
 	{{#each items}}
-		<div class="embedded-item flex row" data-item-id="{{id}}">
+		<div class="embedded-item flex row {{type}}" data-item-id="{{id}}">
 			<div class="photo{{#if data.data.rollable}} item-roll rollable{{/if}}">
 				<img src="{{img}}" title="{{name}}" width="64" height="64"/>
 			</div>

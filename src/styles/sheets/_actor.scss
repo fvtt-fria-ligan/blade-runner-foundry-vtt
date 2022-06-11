@@ -171,10 +171,6 @@ $border-stat-dotted: 1px dotted var(--color-green);
     .mods-tab {
       display: grid;
       gap: 4px;
-      .embedded-item { width: 100%; }
-      .photo, .photo img { min-width: 36px; width: 36px; height: 36px; }
-      .details { width: 100%; }
-      .name { max-width: 316px; }
     }
 
     // COMBAT TAB
