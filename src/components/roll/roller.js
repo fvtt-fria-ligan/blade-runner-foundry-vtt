@@ -34,7 +34,7 @@ export default class BRRollHandler extends FormApplication {
     modifier = 0,
     modifiers = [],
     maxPush = 1,
-  }, options) {
+  }, options = {}) {
     super({}, options);
 
     /** 
