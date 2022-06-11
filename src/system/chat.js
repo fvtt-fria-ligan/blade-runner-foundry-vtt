@@ -47,7 +47,7 @@ function _onRollAction(event) {
  * @param {JQuery} html
  */
 export function hideChatActionButtons(html) {
-  const chatCard = html.find('.blade-runner.chat-card');
+  const chatCard = html.find('.yzur.chat-card');
 
   // Exits early if no chatCard were found.
   if (chatCard.length === 0) return;
