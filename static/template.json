@@ -116,7 +116,8 @@
       "armor": 6
     },
     "weapon": {
-      "templates": ["itemBase", "itemRoll", "itemDesc", "itemOffensive"]
+      "templates": ["itemBase", "itemRoll", "itemDesc", "itemOffensive"],
+      "rollable": true
     },
     "explosive": {
       "templates": ["itemBase", "itemRoll", "itemDesc", "itemOffensive"],

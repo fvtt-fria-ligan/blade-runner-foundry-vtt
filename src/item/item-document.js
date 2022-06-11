@@ -131,21 +131,22 @@ export default class BladeRunnerItem extends Item {
 
     switch (this.type) {
       case ITEM_TYPES.ARMOR: return this._rollArmor();
-      case ITEM_TYPES.EXPLOSIVE: return this._rollExplosive();
+      // Not this one ↓
+      // case ITEM_TYPES.EXPLOSIVE: return this._rollExplosive();
     }
 
     if (!this.rollable) return;
-    if (!this.actor) return;
 
     const attributeKey = this.props.attribute;
     const skillKey = this.props.skill;
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`) : null;
     const title = `${this.detailedName} (${attributeName}${skillKey ? ` & ${skillName}` : ''})`;
-    const attributeValue = this.actor.getAttribute(attributeKey);
-    const skillValue = this.actor.getSkill(skillKey);
+    const attributeValue = this.actor?.getAttribute(attributeKey);
+    const skillValue = this.actor?.getSkill(skillKey);
 
-    const targets = [attributeKey];
+    const targets = [];
+    if (attributeKey) targets.push(attributeKey);
     if (skillKey) targets.push(skillKey);
 
     const dice = [];
@@ -157,8 +158,10 @@ export default class BladeRunnerItem extends Item {
       actor: this.actor,
       attributeKey, skillKey, dice,
       items: [this],
-      modifiers: this.actor.getRollModifiers({ targets }),
-      maxPush: FLBR.maxPushMap[this.actor.nature],
+      modifiers: this.actor?.getRollModifiers({ targets }),
+      maxPush: this.actor?.maxPush,
+    }, {
+      unlimitedPush: this.actor?.data.flags.bladerunner?.unlimitedPush,
     });
     return roller.render(true);
   }

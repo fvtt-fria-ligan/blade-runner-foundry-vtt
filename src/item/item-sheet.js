@@ -1,4 +1,4 @@
-import { SYSTEM_NAME } from '@system/constants';
+import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
 
 /**
  * Blade Runner RPG Item Sheet.
@@ -53,6 +53,34 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       config: CONFIG.BLADE_RUNNER,
     };
     return sheetData;
+  }
+
+  /* ------------------------------------------ */
+  /*  Sheet Header Buttons                      */
+  /* ------------------------------------------ */
+
+  /** @override */
+  _getHeaderButtons() {
+    const originalButtons = super._getHeaderButtons();
+    const myButtons = [];
+
+    if (this.item.rollable && this.item.actor) {
+      myButtons.push({
+        label: game.i18n.localize('FLBR.SHEET_HEADER.ItemRoll'),
+        class: 'item-roll',
+        icon: this.item.type === ITEM_TYPES.ARMOR ? 'fas fa-shield-alt' : 'fas fa-dice',
+        onclick: () => this.item.roll(),
+      });
+    }
+    else if (this.item.type === ITEM_TYPES.EXPLOSIVE) {
+      myButtons.push({
+        label: game.i18n.localize('FLBR.SHEET_HEADER.BlastPowerRoll'),
+        class: 'blast-roll',
+        icon: 'fas fa-bomb',
+        onclick: () => this.item._rollExplosive(),
+      });
+    }
+    return myButtons.concat(originalButtons);
   }
 
   /* ------------------------------------------ */

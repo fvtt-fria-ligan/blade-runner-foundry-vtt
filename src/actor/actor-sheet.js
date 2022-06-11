@@ -101,7 +101,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const originalButtons = super._getHeaderButtons();
     const myButtons = [
       {
-        label: game.i18n.localize('FLBR.ROLLER.GenericRoll'),
+        label: game.i18n.localize('FLBR.SHEET_HEADER.GenericRoll'),
         class: 'custom-roll',
         icon: 'fas fa-dice',
         onclick: () => this.actor.rollStat(),
@@ -137,6 +137,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     html.find('.item-delete-confirmed').click(this._onItemDeleteConfirmed.bind(this));
     html.find('.item-roll').click(this._onItemRoll.bind(this));
     html.find('.item-chat').click(this._onItemChat.bind(this));
+    html.find('.blast-roll').click(this._onBlastRoll.bind(this));
     html.find('.embedded-item').on('contextmenu', this._onItemEdit.bind(this));
 
     // // Owner-only listeners.
@@ -201,6 +202,16 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const itemId = elem.closest('.embedded-item').dataset.itemId;
     const item = this.actor.items.get(itemId);
     if (item) return item.roll();
+  }
+
+  /* ------------------------------------------ */
+
+  _onBlastRoll(event) {
+    event.preventDefault();
+    const elem = event.currentTarget;
+    const itemId = elem.closest('.embedded-item').dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    if (item) return item._rollExplosive();
   }
 
   /* ------------------------------------------ */

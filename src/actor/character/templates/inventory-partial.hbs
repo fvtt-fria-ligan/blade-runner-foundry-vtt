@@ -48,9 +48,18 @@
 			</div>
 
 			<div class="item-controls">
+				{{#if data.data.blast}}
+					<a class="btn blast-roll" title="{{localize "FLBR.SHEET_HEADER.BlastPowerRoll"}}">
+						{{{@root.config.Icons.buttons.boom}}}
+					</a>
+				{{/if}}
 				{{#if data.data.rollable}}
 					<a class="btn item-roll" title="{{localize "FLBR.BUTTON.Roll"}}">
-						{{{@root.config.Icons.buttons.roll}}}
+						{{#if (eq type "armor")}}
+							{{{@root.config.Icons.buttons.armor}}}
+						{{else}}
+							{{{@root.config.Icons.buttons.roll}}}
+						{{/if}}
 					</a>
 				{{/if}}
 				<a class="btn item-edit" title="{{localize "FLBR.BUTTON.Edit"}}">
