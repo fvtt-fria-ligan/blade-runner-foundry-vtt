@@ -1,0 +1,55 @@
+<form class="{{cssClass}}{{#if actor.isBroken}} broken{{/if}}" autocomplete="off">
+
+
+	<div class="sheet-header">
+		<div class="container-header">
+
+			<div class="avatar">
+				<img class="profile" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+			</div>
+
+			<div class="actor-name">
+				<input type="text" name="name" value="{{actor.name}}"/>
+			</div>
+
+			<div class="nature">
+				<select {{#unless isGM}} disabled{{/unless}}>
+					<option selected>{{localize "FLBR.NATURE.Human"}} ?</option>
+				</select>
+			</div>
+			
+			<div class="capacities">
+				{{#if data.health}}
+					<div class="capacity-health boxed-property">
+						<h3>{{localize "FLBR.HEADER.Health"}}<span>?/?</span></h3>
+						<div class="capacity-boxes" style="color: var(--color-disabled);">
+							{{#times 4}}
+								{{{@root.config.Icons.boxes.empty}}}
+							{{/times}}
+						</div>
+					</div>
+				{{/if}}
+				{{#if data.resolve}}
+					<div class="capacity-resolve boxed-property">
+						<h3>{{localize "FLBR.HEADER.Resolve"}}<span>?/?</span></h3>
+						<div class="capacity-boxes" style="color: var(--color-disabled);">
+							{{#times 4}}
+								{{{@root.config.Icons.boxes.empty}}}
+							{{/times}}
+						</div>
+					</div>
+				{{/if}}
+			</div>
+
+			<div class="archetype">
+				<input type="text" value="???" disabled/>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="sheet-body">
+		{{editor content=data.description target="data.description" owner=owner button=true editable=editable}}
+	</div>
+
+</form>
