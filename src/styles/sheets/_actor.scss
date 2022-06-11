@@ -19,7 +19,7 @@ $border-stat-dotted: 1px dotted var(--color-green);
     .container-header {
       display: grid;
       grid-template-columns: 200px 1fr 50px;
-      grid-template-rows: auto;
+      grid-template-rows: auto auto auto 1fr;
       grid-template-areas:
         "avatar name   archetype"
         "avatar nature archetype"
