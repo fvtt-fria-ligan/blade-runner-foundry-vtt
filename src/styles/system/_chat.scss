@@ -9,6 +9,13 @@
 //   background-color: var(--color-background);
 // }
 
+.chat-message {
+  img {
+    border: none;
+    max-height: 100px;
+  }
+}
+
 .chat-message .yzur {
   .dice-tooltip {
     display: flex;

@@ -1,3 +1,4 @@
+import { FLBR } from '@system/config';
 import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
 
 /**
@@ -80,6 +81,12 @@ export default class BladeRunnerItemSheet extends ItemSheet {
         onclick: () => this.item._rollExplosive(),
       });
     }
+    myButtons.push({
+      label: game.i18n.localize('FLBR.SHEET_HEADER.ItemPost'),
+      class: 'item-post',
+      icon: 'far fa-comment-dots',
+      onclick: () => this.item.toMessage(),
+    });
     return myButtons.concat(originalButtons);
   }
 
@@ -104,6 +111,10 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     // Roll Modifiers
     html.find('.add-modifier').click(this._onAddModifier.bind(this));
     html.find('.delete-modifier').click(this._onDeleteModifier.bind(this));
+
+    if (this.item.type === ITEM_TYPES.EXPLOSIVE) {
+      html.find('.item-property-blast .score-selector').change(this._onBlastChange.bind(this));
+    }
   }
 
   /* ------------------------------------------ */
@@ -140,5 +151,18 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     if (this.item.data.data.modifiers[modifierId]) {
       this.item.update({ [`data.modifiers.-=${modifierId}`]: null });
     }
+  }
+
+  /* ------------------------------------------ */
+
+  _onBlastChange(event) {
+    event.preventDefault();
+    const blast = event.currentTarget.value;
+    if (!(blast in FLBR.blastPowerMap)) return;
+    const { damage, crit } = FLBR.blastPowerMap[blast];
+    return this.item.update({
+      'data.damage': damage,
+      'data.crit': crit,
+    });
   }
 }

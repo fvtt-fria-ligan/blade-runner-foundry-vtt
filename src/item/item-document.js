@@ -40,10 +40,9 @@ export default class BladeRunnerItem extends Item {
    * @type {string}
    */
   get detailedName() {
-    let str = this.name;
-    if (this.qty > 1) {
-      str += ` (${this.qty})`;
-    }
+    let str = '';
+    if (this.qty > 1) str += `${this.qty}x `;
+    str += this.name;
     return str;
   }
 
@@ -209,6 +208,8 @@ export default class BladeRunnerItem extends Item {
       img: this.img,
       type: this.type,
       data: this.props,
+      link: this.link,
+      inActor: !!this.actor,
     });
 
     // Prepares chat data.
@@ -222,6 +223,9 @@ export default class BladeRunnerItem extends Item {
     // Creates the message.
     const cls = getDocumentClass('ChatMessage');
     const msg = new cls(messageData);
+
+    // Gets the default roll mode if undef.
+    if (rollMode == undefined) rollMode = game.settings.get('core', 'rollMode');
 
     // Sends the messages or returns its data.
     if (create) return cls.create(msg.data, { rollMode });

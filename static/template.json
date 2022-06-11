@@ -122,6 +122,7 @@
     "explosive": {
       "templates": ["itemBase", "itemRoll", "itemDesc", "itemOffensive"],
       "rollable": true,
+      "damageType": 0,
       "blast": 8
     },
     "specialty": {

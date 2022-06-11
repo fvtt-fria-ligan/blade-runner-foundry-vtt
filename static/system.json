@@ -26,7 +26,7 @@
   "gridDistance": 1,
   "gridUnits": "m",
   "background": "assets/splash.jpg",
-  "primaryTokenAttribute": null,
+  "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": null,
   "url": "https://github.com/Stefouch/blade-runner-foundry-vtt",
   "socket": false,

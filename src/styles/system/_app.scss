@@ -1,6 +1,23 @@
 @use "../utils";
 $gap: 4px;
 
+/* ------------------------------------------ */
+/*  All Apps                                  */
+/* ------------------------------------------ */
+
+a.entity-link,
+a.inline-roll {
+  border: none;
+  background: transparent;
+  border-bottom: 1px dotted gray;
+  padding: 0;
+  text-indent: 0;
+}
+
+/* ------------------------------------------ */
+/*  Blade Runner Apps                         */
+/* ------------------------------------------ */
+
 .blade-runner {
   // &.window-app .window-content > * {
   //   height: 100%;
@@ -61,6 +78,9 @@ $gap: 4px;
   }
   select, img {
     border: none;
+  }
+  label {
+    color: var(--color-blue-lighter);
   }
   p {
     color: var(--color-blue-lighter);

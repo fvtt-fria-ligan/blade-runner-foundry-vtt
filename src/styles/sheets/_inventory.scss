@@ -30,8 +30,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    // min-width: 64px;
+    width: 64px;
+    height: 64px;
     margin-right: 4px;
+    // img { width: 64px; }
 
     &.rollable {
       border-color: var(--color-yellow);
@@ -63,7 +65,7 @@
   &.specialty,
   &.upgrade {
     width: 100%;
-    .photo, .photo img { min-width: 36px; width: 36px; height: 36px; }
+    .photo { width: 36px; height: 36px; /*img { width: 36px; }*/ }
     .details { width: 100%; }
     .name { max-width: 316px; }
   }

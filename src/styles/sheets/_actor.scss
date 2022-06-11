@@ -33,11 +33,9 @@ $border-stat-dotted: 1px dotted var(--color-green);
       display: flex;
       align-items: center;
       justify-content: center;
-
-      img {
-        width: 200px;
-        height: 200px;
-      }
+      width: 200px;
+      height: 200px;
+      // img { width: 200px; }
     }
     .actor-name {
       grid-area: name;

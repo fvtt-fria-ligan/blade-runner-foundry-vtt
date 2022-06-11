@@ -17,10 +17,15 @@ $gap: 4px;
     overflow-y: auto;
     max-height: 285px;
   }
-  .sheet-header img {
+
+  .photo {
     @include utils.boxed-property(2px, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 200px;
     height: 200px;
+    // img { width: 200px; }
   }
   .item-type {
     color: var(--color-blue);
@@ -30,7 +35,6 @@ $gap: 4px;
     text-transform: uppercase;
     writing-mode: vertical-lr;
     text-align: center;
-    width: 100%;
     padding-left: 6px;
   }
   .item-name input {

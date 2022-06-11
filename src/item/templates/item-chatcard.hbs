@@ -1,5 +1,16 @@
 <div class="blade-runner item-chat-card">
 	<h3>{{name}}</h3>
+	<hr/>
 	<div class="description">{{{data.description}}}</div>
-	<img src="{{img}}" width="32" height="32"/>
+	<hr/>
+	<div class="details">
+	</div>
+	<hr/>
+	<div class="photo center">
+		<img src="{{img}}"/>
+	</div>
+	{{#unless inActor}}
+		<hr/>
+		<small>{{link}}</small>
+	{{/unless}}
 </div>
