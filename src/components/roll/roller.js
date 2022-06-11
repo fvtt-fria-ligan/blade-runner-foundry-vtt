@@ -34,11 +34,7 @@ export default class BRRollHandler extends FormApplication {
     modifier = 0,
     modifiers = [],
     maxPush = 1,
-  },
-  options = {
-    sendMessage: true,
-    unlimitedPush: false,
-  }) {
+  }, options) {
     super({}, options);
 
     /** 
@@ -121,6 +117,9 @@ export default class BRRollHandler extends FormApplication {
      * @type {number}
      */
     this.damage = options.damage;
+
+    this.options.sendMessage = options.sendMessage ?? true;
+    this.options.unlimitedPush = options.unlimitedPush ?? false;
   }
 
   /* ------------------------------------------ */
@@ -273,6 +272,7 @@ export default class BRRollHandler extends FormApplication {
   _validateForm(event, formData) {
     const nok = foundry.utils.isObjectEmpty(formData)
       || !this.dice.length
+      || this.dice.includes('0')
       || !['roll', 'advantage', 'disadvantage'].includes(event.submitter.id);
     if (nok) {
       const msg = game.i18n.localize('WARNING.NoDiceInput');
