@@ -1,5 +1,5 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet';
-import { SYSTEM_NAME, ACTOR_TYPES } from '@system/constants';
+import { SYSTEM_NAME, ACTOR_TYPES, ACTOR_SUBTYPES } from '@system/constants';
 import { FLBR } from '@system/config';
 import { capitalize } from '@utils/string-util';
 
@@ -25,7 +25,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
-        initial: 'mods',
+        initial: 'stats',
       }],
     });
   }
@@ -34,12 +34,9 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   get template() {
     const sysName = game.system.data.name || SYSTEM_NAME;
     if (!game.user.isGM && this.actor.limited) {
-      return `systems/${sysName}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.PC}-limited-sheet.hbs`;
+      return `systems/${sysName}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-limited-sheet.hbs`;
     }
-    if (this.actor.type === ACTOR_TYPES.NPC) {
-      return `systems/${sysName}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.NPC}-sheet.hbs`;
-    }
-    return `systems/${sysName}/templates/actor/${ACTOR_TYPES.PC}/${ACTOR_TYPES.PC}-sheet.hbs`;
+    return `systems/${sysName}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-sheet.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -49,8 +46,8 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   /** @override */
   getData(options) {
     const sheetData = super.getData(options);
-    sheetData.isPC = this.actor.type === ACTOR_TYPES.PC;
-    sheetData.isNPC = this.actor.type === ACTOR_TYPES.NPC;
+    sheetData.isPC = this.actor.props.subtype === ACTOR_SUBTYPES.PC;
+    sheetData.isNPC = this.actor.props.subtype === ACTOR_SUBTYPES.NPC;
     sheetData.driving = this.actor.skills.driving?.value;
     return sheetData;
   }

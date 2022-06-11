@@ -1,0 +1,37 @@
+<form autocomplete="off">
+  {{#if (eq object.type "character")}}
+    <div class="form-group">
+      <label>{{localize "FLBR.SHEET_CONFIG.CharacterSubtype"}}</label>
+      <select name="data.subtype">
+        {{selectOptions types selected=object.data.subtype localize=true}}
+      </select>
+      <p class="notes">{{localize "FLBR.SHEET_CONFIG.CharacterSubtypeHint"}}</p>
+    </div>
+  {{/if}}
+
+  <div class="form-group">
+    <label>{{localize "FLBR.SHEET_CONFIG.UnlimitedPush"}}</label>
+    <input type="checkbox" name="flags.bladerunner.unlimitedPush" {{checked object.flags.bladerunner.unlimitedPush}} />
+    <p class="notes">{{localize "FLBR.SHEET_CONFIG.UnlimitedPushHint"}}</p>
+  </div>
+
+  <div class="form-group">
+    <label>{{localize "SHEETS.ThisSheet"}}</label>
+    <select name="sheetClass">
+      {{selectOptions sheetClasses selected=sheetClass blank=blankLabel}}
+    </select>
+    <p class="notes">{{localize "SHEETS.DocumentSheetHint"}}</p>
+  </div>
+
+  <div class="form-group">
+    <label>{{localize "Default"}} <strong>{{type}}</strong> {{localize "Sheet"}}</label>
+    <select name="defaultClass"{{#unless isGM}} disabled{{/unless}}>
+      {{selectOptions sheetClasses selected=defaultClass}}
+    </select>
+    <p class="notes">{{localize "SHEETS.TypeSheetHint"}}</p>
+  </div>
+
+  <button type="submit" name="submit" class="dialog-button">
+    <i class="fas fa-save"></i> {{localize "SHEETS.Save"}}
+  </button>
+</form>

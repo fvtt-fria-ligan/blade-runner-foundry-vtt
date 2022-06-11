@@ -6,7 +6,7 @@ export function registerSheets() {
   const br = game.system.data.name || SYSTEM_NAME;
 
   Actors.unregisterSheet('core', ActorSheet);
-  Actors.registerSheet(br, BladeRunnerCharacterSheet, { types: [ACTOR_TYPES.PC, ACTOR_TYPES.NPC], makeDefault: true });
+  Actors.registerSheet(br, BladeRunnerCharacterSheet, { types: [ACTOR_TYPES.CHAR], makeDefault: true });
   // Actors.registerSheet(br, undefined, { types: [ACTOR_TYPES.VEHICLE], makeDefault: true });
 
   Items.unregisterSheet('core', ItemSheet);

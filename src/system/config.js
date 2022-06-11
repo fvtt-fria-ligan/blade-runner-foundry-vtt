@@ -149,6 +149,11 @@ FLBR.actionSkillMap = {
   },
 };
 
+FLBR.characterSubtypes = {
+  [BR.ACTOR_SUBTYPES.PC]: 'ACTOR.SubtypePc',
+  [BR.ACTOR_SUBTYPES.NPC]: 'ACTOR.SubtypeNpc',
+};
+
 FLBR.physicalItems = [BR.ITEM_TYPES.GENERIC, BR.ITEM_TYPES.WEAPON, BR.ITEM_TYPES.ARMOR, BR.ITEM_TYPES.EXPLOSIVE];
 
 FLBR.ranges = {

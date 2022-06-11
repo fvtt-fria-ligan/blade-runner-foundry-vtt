@@ -53,6 +53,10 @@ export default class BladeRunnerActor extends Actor {
     return false;
   }
 
+  get maxPush() {
+    return FLBR.maxPushMap[this.nature];
+  }
+
   // TODO
   // get rollData() {
   //   return this.getRollData();
@@ -66,8 +70,7 @@ export default class BladeRunnerActor extends Actor {
   // static async create(data, options) {
   //   console.warn(data, options);
   //   switch (data.type) {
-  //     case ACTOR_TYPES.PC:
-  //     case ACTOR_TYPES.NPC:
+  //     case ACTOR_TYPES.CHAR:
   //       if (!data.data.attributes || !data.data.skills) {
   //         throw new TypeError(`FLBR | "${data.type}" has No attribute nor skill`);
   //       }
@@ -96,8 +99,7 @@ export default class BladeRunnerActor extends Actor {
     super.prepareData();
 
     switch (this.type) {
-      case ACTOR_TYPES.PC: this._prepareCharacterData(); break;
-      case ACTOR_TYPES.NPC: this._prepareNpcData(); break;
+      case ACTOR_TYPES.CHAR: this._prepareCharacterData(); break;
     }
   }
 
@@ -109,11 +111,6 @@ export default class BladeRunnerActor extends Actor {
   /** @private */
   _prepareCharacterData() {
     this._prepareCapacities();
-  }
-
-  /** @private */
-  _prepareNpcData() {
-    this._prepareCharacterData();
   }
 
   /* ----------------------------------------- */
@@ -202,16 +199,15 @@ export default class BladeRunnerActor extends Actor {
 
   /**
    * Rolls a stat of this actor.
-   * @param {string}   attributeKey  The identifier for the attribute
-   * @param {?string}  skillkey      The identifier for the skill
-   * @param {Object}  [options={}]   Additional options
-   * @param {string}   options.title Custom title
+   * @param {string}   attributeKey   The identifier for the attribute
+   * @param {?string}  skillkey       The identifier for the skill
+   * @param {Object}  [options={}]    Additional options
+   * @param {string}  [options.title] Custom title
    * @returns {BRRollHandler}
    */
   rollStat(attributeKey, skillKey, options = {}) {
     if (!attributeKey) {
-      console.warn('No rollStat', attributeKey, skillKey, options);
-      return ui.notifications.warn('FLBR.NOTIF.NoAttribute', { localize: true });
+      return this.rollBlank(options);
     }
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`) : null;
@@ -237,8 +233,24 @@ export default class BladeRunnerActor extends Actor {
       actor: this,
       attributeKey, skillKey, dice,
       modifiers: this.getRollModifiers({ targets }),
-      maxPush: FLBR.maxPushMap[this.nature],
+      maxPush: this.maxPush,
+    }, {
+      unlimitedPush: this.data.flags.bladerunner?.unlimitedPush,
     });
     return roller.render(true);
+  }
+
+  /* ------------------------------------------ */
+
+  rollBlank(options) {
+    return BRRollHandler.create({
+      title: options.title ?? game.i18n.localize('FLBR.ROLLER.GenericRoll'),
+      actor: this,
+      dice: [],
+      modifiers: this.getRollModifiers(),
+      maxPush: this.maxPush,
+    }, {
+      unlimitedPush: this.data.flags.bladerunner?.unlimitedPush,
+    });
   }
 }

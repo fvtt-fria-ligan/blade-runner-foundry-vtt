@@ -1,9 +1,7 @@
 {
   "Actor": {
     "types": [
-      "character",
-      "npc",
-      "vehicle"
+      "character"
     ],
     "templates": {
       "actorNature": { "nature": "human" },
@@ -60,16 +58,8 @@
         "actorResources",
         "actorDescription"
       ],
-      "favoredGear": ""
-    },
-    "npc": {
-      "templates": [
-        "actorAttributesAndSkills",
-        "actorNature",
-        "actorHealth",
-        "actorDescription"
-      ],
-      "bio": { "appearance": "", "goal": "" }
+      "favoredGear": "",
+      "subtype": "pc"
     },
     "vehicle": {
       "templates": ["actorDescription"],

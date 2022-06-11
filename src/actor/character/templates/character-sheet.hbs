@@ -14,7 +14,7 @@
 			</div>
 
 			<div class="nature">
-				<select name="data.nature"{{#unless isGM}} disabled{{/unless}}>
+				<select name="data.nature" title="{{localize "FLBR.NatureHint"}}"{{#unless isGM}} disabled{{/unless}}>
 					{{selectOptions config.natures selected=data.nature localize=true}}
 				</select>
 			</div>
@@ -32,7 +32,7 @@
 						{{boxes "data.health.value" value=data.health.value min=0 max=data.health.max}}
 					</div>
 				{{/if}}
-				{{#if data.resolve}}
+				{{#if (and data.resolve isPC)}}
 					<div class="capacity-resolve boxed-property{{#if (lte data.resolve.value 0)}} broken{{else if (lte data.resolve.ratio 0.5)}} half{{/if}}">
 						<h3>
 							{{localize "FLBR.HEADER.Resolve"}}
@@ -63,7 +63,14 @@
 		<a class="sheet-tab" data-tab="mods">{{{config.Icons.tabs.mods}}}&nbsp;{{localize "FLBR.TAB.Mods"}}</a>
 		<a class="sheet-tab" data-tab="combat">{{{config.Icons.tabs.combat}}}&nbsp;{{localize "FLBR.TAB.Combat"}}</a>
 		<a class="sheet-tab" data-tab="inventory">{{{config.Icons.tabs.inventory}}}&nbsp;{{localize "FLBR.TAB.Inventory"}}</a>
-		<a class="sheet-tab" data-tab="bio">{{{config.Icons.tabs.bio}}}&nbsp;{{localize "FLBR.TAB.Bio"}}</a>
+		<a class="sheet-tab" data-tab="bio">
+			{{{config.Icons.tabs.bio}}}&nbsp;
+			{{#if isPC}}
+				{{localize "FLBR.TAB.Bio"}}
+			{{else if isNPC}}
+				{{localize "FLBR.HEADER.Notes"}}
+			{{/if}}
+		</a>
 	</div>
 
 	{{!-- SHEET BODY --}}
@@ -81,9 +88,16 @@
 		<div class="tab" data-group="primary" data-tab="inventory">
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/inventory-tab.hbs}}
 		</div>
-		<div class="tab" data-group="primary" data-tab="bio">
+			<div class="tab" data-group="primary" data-tab="bio">
+				{{#if isPC}}
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/bio-tab.hbs}}
-		</div>
+				{{else if isNPC}}
+					<div class="boxed-property npc-notes">
+						{{editor content=data.description target="data.description" owner=owner button=true editable=editable}}
+					</div>
+				{{/if}}
+			</div>
+
 	</div>
 
 	{{!-- SHEET FOOTER --}}

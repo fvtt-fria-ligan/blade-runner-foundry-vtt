@@ -122,8 +122,7 @@ Hooks.on('createActor', async (actor, _data, _options) => {
   const actorData = actor.data.data;
   const updateData = {};
   switch (actor.type) {
-    case ACTOR_TYPES.PC:
-    case ACTOR_TYPES.NPC:
+    case ACTOR_TYPES.CHAR:
       if (!actorData.attributes || !actorData.skills) {
         throw new TypeError(`FLBR | "${actor.type}" has No attribute nor skill`);
       }

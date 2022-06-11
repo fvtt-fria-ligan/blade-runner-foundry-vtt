@@ -104,9 +104,14 @@ export const AVAILABILITIES = {
 
 /** @enum {string} */
 export const ACTOR_TYPES = {
-  PC: 'character',
-  NPC: 'npc',
+  CHAR: 'character',
   VEHICLE: 'vehicle',
+};
+
+/** @enum {string} */
+export const ACTOR_SUBTYPES = {
+  PC: 'pc',
+  NPC: 'npc',
 };
 
 /** @enum {string} */

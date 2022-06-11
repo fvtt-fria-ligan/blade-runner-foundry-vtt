@@ -1,6 +1,7 @@
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES, ITEM_TYPES } from '@system/constants';
 import { capitalize } from '@utils/string-util';
+import ActorSheetConfig from './actor-sheet-config';
 
 /**
  * Blade Runner RPG Actor Sheet.
@@ -54,8 +55,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const type = itemData.type;
     const alwaysAllowedItems = FLBR.physicalItems;
     const allowedItems = {
-      [ACTOR_TYPES.PC]: [ITEM_TYPES.SPECIALTY, ITEM_TYPES.SYNTHETIC_AUGMENTATION, ITEM_TYPES.CRITICAL_INJURY],
-      [ACTOR_TYPES.NPC]: [ITEM_TYPES.SPECIALTY],
+      [ACTOR_TYPES.CHAR]: [ITEM_TYPES.SPECIALTY, ITEM_TYPES.SYNTHETIC_AUGMENTATION, ITEM_TYPES.CRITICAL_INJURY],
       [ACTOR_TYPES.VEHICLE]: [],
     };
     let allowed = true;
@@ -76,6 +76,38 @@ export default class BladeRunnerActorSheet extends ActorSheet {
       return false;
     }
     return super._onDropItemCreate(itemData);
+  }
+
+  /* ------------------------------------------ */
+  /*  Custom Config Sheet                       */
+  /* ------------------------------------------ */
+
+  /** @override */
+  _onConfigureSheet(event) {
+    event.preventDefault();
+    new ActorSheetConfig(this.actor, {
+      // classes: ['blade-runner'],
+      top: this.position.top + 40,
+      left: this.position.left + (this.position.width - 400) / 2,
+    }).render(true);
+  }
+
+  /* ------------------------------------------ */
+  /*  Sheet Header Buttons                      */
+  /* ------------------------------------------ */
+
+  /** @override */
+  _getHeaderButtons() {
+    const originalButtons = super._getHeaderButtons();
+    const myButtons = [
+      {
+        label: game.i18n.localize('FLBR.ROLLER.GenericRoll'),
+        class: 'custom-roll',
+        icon: 'fas fa-dice',
+        onclick: () => this.actor.rollStat(),
+      },
+    ];
+    return myButtons.concat(originalButtons);
   }
 
   /* ------------------------------------------ */
