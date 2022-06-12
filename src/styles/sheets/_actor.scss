@@ -186,6 +186,7 @@ $border-stat-dotted: 1px dotted var(--color-green);
         grid-template-columns: repeat(4, 1fr);
         font-family: var(--font-table);
         font-size: var(--font-size--very-small);
+        font-weight: bold;
         color: var(--color-green);
 
         h4 {

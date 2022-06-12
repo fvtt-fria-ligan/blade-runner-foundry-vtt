@@ -267,6 +267,10 @@ FLBR.Icons = {
     empty: '<i class="far fa-square"></i>',
     full: '<i class="fas fa-square"></i>',
   },
+  dice: {
+    success: '<i class="fas fa-eye"></i>',
+    failure: '<i class="fas fa-horse-head"></i>',
+  },
   buttons: {
     action: '<i class="fas fa-play"></i>',
     edit: '<i class="fas fa-edit"></i>',

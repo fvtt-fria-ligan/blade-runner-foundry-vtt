@@ -4,33 +4,42 @@
 		<hr/>
 		<div class="description">{{{data.description}}}</div>
 	{{/if}}
-	<div class="details boxed-property">
-		{{#if (or (eq type "weapon") (eq type "explosive"))}}
-			{{#if (eq type "explosive")}}
-				<div>{{localize "FLBR.BlastPower"}}</div>
-				<div>2x{{localize "FLBR.D"}}{{data.blast}}</div>
-			{{/if}}
-			<div>{{localize "FLBR.WeaponDamage"}}</div>
-			<div>
-				{{data.damage}}&numsp;
-				<small>({{localize (lookup config.damageTypes data.damageType)}})</small>
-			</div>
-			<div>{{localize "FLBR.WeaponCrit"}}</div>
-			<div>{{localize "FLBR.D"}}{{data.crit}}</div>
-			<div>{{localize "FLBR.WeaponRange"}}</div>
-			<div>
-				{{#if (eq data.range.min data.range.max)}}
-					{{localize (lookup config.ranges data.range.min)}}
-				{{else}}
-					{{localize (lookup config.ranges data.range.min)}} –
-					{{localize (lookup config.ranges data.range.max)}}
+	{{log showProperties level="warn"}}
+	{{#if showProperties}}
+		<div class="details boxed-property">
+			{{#if (or (eq type "weapon") (eq type "explosive"))}}
+				{{#if (eq type "explosive")}}
+					<div>{{localize "FLBR.BlastPower"}}</div>
+					<div>2x{{localize "FLBR.D"}}{{data.blast}}</div>
 				{{/if}}
-			</div>
-		{{/if}}
-		{{#if data.special}}
-			<div class="special">{{data.special}}</div>
-		{{/if}}
-	</div>
+				<div>{{localize "FLBR.WeaponDamage"}}</div>
+				<div>
+					{{data.damage}}&numsp;
+					<small>({{localize (lookup config.damageTypes data.damageType)}})</small>
+				</div>
+				<div>{{localize "FLBR.WeaponCrit"}}</div>
+				<div>{{localize "FLBR.D"}}{{data.crit}}</div>
+				<div>{{localize "FLBR.WeaponRange"}}</div>
+				<div>
+					{{#if (eq data.range.min data.range.max)}}
+						{{localize (lookup config.ranges data.range.min)}}
+					{{else}}
+						{{localize (lookup config.ranges data.range.min)}} –
+						{{localize (lookup config.ranges data.range.max)}}
+					{{/if}}
+				</div>
+			{{else if (eq type "armor")}}
+				<div>{{localize "FLBR.ItemArmor"}}</div>
+				<div>{{localize "FLBR.D"}}{{data.armor}}</div>
+			{{else if hasModifier}}
+				<div class="modifiers">{{localize "FLBR.ItemModifier"}}</div>
+				<div class="modifiers">{{modifiersDescription}}</div>
+			{{/if}}
+			{{#if data.special}}
+				<div class="grid-column-all special">{{data.special}}</div>
+			{{/if}}
+		</div>
+	{{/if}}
 	{{!-- <hr/> --}}
 	<div class="photo center">
 		<img src="{{img}}"/>

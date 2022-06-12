@@ -110,6 +110,7 @@ a.inline-roll {
     @include utils.boxed-property;
     border-radius: 4px;
     font-family: var(--font-table);
+    font-weight: bold;
     color: var(--color-green);
 
     &:hover {

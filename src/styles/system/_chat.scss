@@ -13,6 +13,11 @@
 /*  All Chat Cards                            */
 /* ------------------------------------------ */
 
+#chat-form textarea {
+  @include utils.border-sheet;
+  @include utils.input-background;
+}
+
 .chat-message {
   font-family: var(--font-table);
   font-weight: bold;
@@ -52,15 +57,18 @@
   a.entity-link,
   a.content-link,
   a.inline-roll {
-    border: 1px solid var(--color-red);
+    border: 1px solid var(--color-blue-darker);
     border-radius: 4px / 12px;
-    background-color: var(--color-red-darker);
+    background-color: var(--color-black);
     font-weight: bold;
-    color: var(--color-black);
+    color: var(--color-green);
     letter-spacing: -1px;
-    padding: 0 6px;
-    i {
-      color: inherit;
+    padding: 2px 6px 0 6px;
+    i { color: inherit; }
+    &:hover {
+      border-color: var(--color-yellow);
+      color: var(--color-red);
+      i { color: var(--color-yellow); }
     }
   }
 
@@ -88,8 +96,10 @@
     column-gap: 16px;
     color: var(--color-green);
     border-color: var(--color-yellow);
+    .modifiers {
+      color: var(--color-blue)
+    }
     .special {
-      grid-column: 1 / -1;
       color: var(--color-red);
       text-shadow:
         -1px -1px 0 #000,
@@ -115,9 +125,18 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 4px;
   }
-  .tooltip-part + .tooltip-part {
-    margin-left: 10px;
+  .dice-formula,
+  .dice-total {
+    @include utils.boxed-property;
+  }
+  .dice-total { color: var(--color-disabled); }
+  .success { color: var(--color-green); }
+  .failure { color: var(--color-red); }
+  .tooltip-part {
+
   }
   .part-formula {
     display: none;

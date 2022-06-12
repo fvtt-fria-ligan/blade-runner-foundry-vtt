@@ -210,6 +210,9 @@ export default class BladeRunnerItem extends Item {
       data: this.props,
       link: this.link,
       inActor: !!this.actor,
+      showProperties: (this.type !== ITEM_TYPES.GENERIC || this.hasModifier),
+      hasModifier: this.hasModifier,
+      modifiersDescription: this.modifiersDescription,
       config: CONFIG.BLADE_RUNNER,
     });
 

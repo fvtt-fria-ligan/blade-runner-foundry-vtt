@@ -29,6 +29,10 @@
     gap: 4px;
   }
 
+  .grid-column-all {
+    grid-column: 1 / -1;
+  }
+
   /**
    * Creates a range of styles from .col-1 to .col-12
    * for placing flex elements like in a table.
