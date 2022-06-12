@@ -16,10 +16,11 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     const sysName = game.system.data.name || SYSTEM_NAME;
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: [sysName, 'sheet', 'item'],
-      width: 250, // window.innerWidth * 0.08 + 350,
+      width: 250,
       scrollY: ['.sheet-body'],
       resizable: false,
       tabs: [{ navSelector: '.sheet-tabs', contentSelector: '.sheet-body', initial: 'info' }],
+      top: 100,
     });
   }
 
