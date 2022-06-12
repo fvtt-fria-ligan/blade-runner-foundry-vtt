@@ -244,7 +244,7 @@ export default class BladeRunnerActor extends Actor {
 
   rollBlank(options) {
     return BRRollHandler.create({
-      title: options.title ?? game.i18n.localize('FLBR.ROLLER.GenericRoll'),
+      title: options.title ?? game.i18n.localize('FLBR.SHEET_HEADER.GenericRoll'),
       actor: this,
       dice: [],
       modifiers: this.getRollModifiers(),
