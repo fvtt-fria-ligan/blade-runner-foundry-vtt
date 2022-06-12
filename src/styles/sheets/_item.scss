@@ -9,6 +9,7 @@ $gap: 4px;
     color: var(--color-green);
     font-family: var(--font-table);
     font-size: var(--font-size--very-small);
+    font-weight: bold;
     text-transform: uppercase;
     text-align: center;
   }
@@ -40,7 +41,7 @@ $gap: 4px;
   .item-name input {
     @include utils.border-sheet(2px);
     color: var(--color-blue-darker);
-    font-family: var(--font-header);
+    font-family: var(--font-table);
     font-size: var(--font-size--default);
     text-transform: uppercase;
     letter-spacing: 2px;

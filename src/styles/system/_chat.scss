@@ -9,12 +9,106 @@
 //   background-color: var(--color-background);
 // }
 
+/* ------------------------------------------ */
+/*  All Chat Cards                            */
+/* ------------------------------------------ */
+
 .chat-message {
+  font-family: var(--font-table);
+  font-weight: bold;
+  color: var(--color-skin);
+  border: 1px solid var(--color-skin);
+  border-radius: 0;
+  background-image: url("./assets/chat-card-background.webp");
+  background-position: top center;
+  background-size: cover; // 100% 100%;
+  background-repeat: no-repeat;
+  background-color: var(--color-background);
+
+  /* ------------------------------------------ */
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-table);
+    color: var(--color-red);
+  }
+
+  h1, h2, h3 {
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
   img {
     border: none;
     max-height: 100px;
   }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--color-yellow);
+  }
+
+  /* ------------------------------------------ */
+  
+  a.entity-link,
+  a.content-link,
+  a.inline-roll {
+    border: 1px solid var(--color-red);
+    border-radius: 4px / 12px;
+    background-color: var(--color-red-darker);
+    font-weight: bold;
+    color: var(--color-black);
+    letter-spacing: -1px;
+    padding: 0 6px;
+    i {
+      color: inherit;
+    }
+  }
+
+  /* ------------------------------------------ */
+
+  .message-header {
+    color: var(--color-disabled);
+  }
+
+  .message-metadata {
+    opacity: 0;
+  }
+  &:hover .message-metadata {
+    opacity: 1;
+    transition: opacity 500ms ease;
+  }
+
+  .photo {
+    margin-top: 10px;
+  }
+
+  .details {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 16px;
+    color: var(--color-green);
+    border-color: var(--color-yellow);
+    .special {
+      grid-column: 1 / -1;
+      color: var(--color-red);
+      text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    }
+  }
+
+  .chat-card-footer {
+    color: var(--color-white);
+    font-size: var(--font-size--extra-small);
+    font-weight: normal;
+  }
 }
+
+/* ------------------------------------------ */
+/*  Roll Chat Cards                           */
+/* ------------------------------------------ */
 
 .chat-message .yzur {
   .dice-tooltip {

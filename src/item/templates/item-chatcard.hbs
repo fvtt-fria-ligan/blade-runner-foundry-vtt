@@ -1,16 +1,46 @@
 <div class="blade-runner item-chat-card">
 	<h3>{{name}}</h3>
-	<hr/>
-	<div class="description">{{{data.description}}}</div>
-	<hr/>
-	<div class="details">
+	{{#if data.description}}
+		<hr/>
+		<div class="description">{{{data.description}}}</div>
+	{{/if}}
+	<div class="details boxed-property">
+		{{#if (or (eq type "weapon") (eq type "explosive"))}}
+			{{#if (eq type "explosive")}}
+				<div>{{localize "FLBR.BlastPower"}}</div>
+				<div>2x{{localize "FLBR.D"}}{{data.blast}}</div>
+			{{/if}}
+			<div>{{localize "FLBR.WeaponDamage"}}</div>
+			<div>
+				{{data.damage}}&numsp;
+				<small>({{localize (lookup config.damageTypes data.damageType)}})</small>
+			</div>
+			<div>{{localize "FLBR.WeaponCrit"}}</div>
+			<div>{{localize "FLBR.D"}}{{data.crit}}</div>
+			<div>{{localize "FLBR.WeaponRange"}}</div>
+			<div>
+				{{#if (eq data.range.min data.range.max)}}
+					{{localize (lookup config.ranges data.range.min)}}
+				{{else}}
+					{{localize (lookup config.ranges data.range.min)}} –
+					{{localize (lookup config.ranges data.range.max)}}
+				{{/if}}
+			</div>
+		{{/if}}
+		{{#if data.special}}
+			<div class="special">{{data.special}}</div>
+		{{/if}}
 	</div>
-	<hr/>
+	{{!-- <hr/> --}}
 	<div class="photo center">
 		<img src="{{img}}"/>
 	</div>
-	{{#unless inActor}}
-		<hr/>
-		<small>{{link}}</small>
-	{{/unless}}
+	<hr/>
+	<div class="chat-card-footer">
+		{{#if data.availability}}
+			{{localize (lookup config.availabilities data.availability)}} 
+		{{/if}}
+		{{localize (concat "ITEM.Type" (capitalize type))}}
+		{{#unless inActor}} {{link}}{{/unless}}
+	</div>
 </div>

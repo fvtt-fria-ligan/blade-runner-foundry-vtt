@@ -43,7 +43,7 @@ $border-stat-dotted: 1px dotted var(--color-green);
     .actor-name input {
       @include utils.border-sheet(2px);
       color: var(--color-blue-darker);
-      font-family: var(--font-header);
+      font-family: var(--font-table);
       font-size: var(--font-size--default);
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -132,6 +132,7 @@ $border-stat-dotted: 1px dotted var(--color-green);
         a {
           font-family: var(--font-table);
           color: var(--color-green);
+          font-weight: bold;
           letter-spacing: 1px;
           &:hover { color: var(--color-red); }
         }

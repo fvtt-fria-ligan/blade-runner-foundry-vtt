@@ -5,7 +5,23 @@ $gap: 4px;
 /*  All Apps                                  */
 /* ------------------------------------------ */
 
+h1, h2, h3, h4, h5, h6 {
+  text-decoration: none;
+  border: none;
+  margin: 0;
+}
+
+h1 { font-size: var(--font-size--extra-large); }
+h2 { font-size: var(--font-size--large); }
+h3 { font-size: var(--font-size--default); }
+h4 { font-size: var(--font-size--small); }
+h5 { font-size: var(--font-size--very-small); }
+h6 { font-size: var(--font-size--extra-small); }
+
+/* ------------------------------------------ */
+
 a.entity-link,
+a.content-link,
 a.inline-roll {
   border: none;
   background: transparent;
@@ -33,6 +49,8 @@ a.inline-roll {
     @include utils.boxed-property;
     @include utils.input-background;
     border-radius: $gap;
+    font-family: var(--font-table);
+    font-weight: bold;
     text-align: center;
   }
   .boxed-property {
@@ -62,14 +80,16 @@ a.inline-roll {
     margin-top: $gap;
     padding: $gap;
     p {
-      color: var(--color-blue-darker);
+      color: var(--color-black);
     }
   }
+
   input,
   select {
     @include utils.input-background;
     color: var(--color-black);
     font-family: var(--font-table);
+    font-weight: bold;
     text-align: center;
     &:disabled,
     &.disabled {
@@ -108,23 +128,11 @@ a.inline-roll {
   h1, h2, h3, h4, h5, h6 {
     color: var(--color-blue);
     font-family: var(--font-header);
-    font-weight: 100;
-    // line-height: 1;
-    text-decoration: none;
-    margin: 0;
-    border: none;
   }
 
   h1, h2, h3, h4 {
     text-transform: uppercase;
   }
-
-  h1 { font-size: var(--font-size--extra-large); }
-  h2 { font-size: var(--font-size--large); }
-  h3 { font-size: var(--font-size--default); }
-  h4 { font-size: var(--font-size--small); }
-  h5 { font-size: var(--font-size--very-small); }
-  h6 { font-size: var(--font-size--extra-small); }
   
   /* ------------------------------------------ */
 

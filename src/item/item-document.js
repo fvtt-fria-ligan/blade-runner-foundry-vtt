@@ -210,6 +210,7 @@ export default class BladeRunnerItem extends Item {
       data: this.props,
       link: this.link,
       inActor: !!this.actor,
+      config: CONFIG.BLADE_RUNNER,
     });
 
     // Prepares chat data.

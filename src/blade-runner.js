@@ -92,7 +92,7 @@ Hooks.once('ready', () => {
 
   // Debugging.
   game.actors.getName('Bob')?.sheet?.render(true);
-  // game.items.getName('My Weapon')?.sheet?.render(true);
+  game.items.getName('TST ChemRail')?.sheet?.render(true);
 });
 
 /* ------------------------------------------ */
