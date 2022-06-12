@@ -12,7 +12,8 @@
 				<input type="text" name="name" value="{{actor.name}}"/>
 			</div>
 
-			<div class="nature">
+			<div class="nature boxed-property container">
+				<h3>{{localize "FLBR.Nature"}}</h3>
 				<select {{#unless isGM}} disabled{{/unless}}>
 					<option selected>{{localize "FLBR.NATURE.Human"}} ?</option>
 				</select>
