@@ -11,16 +11,23 @@
 					<h4 class="dice-total">{{total}}</h4>
 				{{else}}
 					<h4 class="dice-total">
-						{{#if roll.successCount}}
-							<span class="success">
-								{{{CONFIG.BLADE_RUNNER.Icons.dice.success}}}
-								{{roll.successCount}}
-							</span>
-						{{/if}}
-						{{#if (and roll.pushed roll.baneCount)}}
-							{{#if roll.successCount}}, {{/if}}
-							<span class="failure">{{roll.baneCount}}</span>
-						{{/if}}
+						{{#with roll}}
+							{{#if successCount}}
+								<span class="success">
+									{{#times successCount}}
+										<i class="fas fa-eye"></i>
+									{{/times}}
+								</span>
+							{{/if}}
+							{{#if baneCount}}
+								<span{{#if pushed}} class="failure"{{/if}}>
+									{{#times baneCount}}🦄{{/times}}
+								</span>
+							{{/if}}
+							{{#unless (or successCount baneCount)}}
+								<span>0</span>
+							{{/unless}}
+						{{/with}}
 					</h4>
 				{{/if}}
 			</div>
@@ -34,8 +41,14 @@
 		{{!-- Push button --}}
 		{{#if pushable}}
 			<div class="roll-controls">
-				<button class="roll-button" data-action="push">{{localize "YZUR.CHAT.ROLL.Push"}}</button>
-				<button class="roll-button" data-action="cancel-push">{{localize "YZUR.CHAT.ROLL.CancelPush"}}</button>
+				<button class="roll-button" data-action="push">
+					<i class="fas fa-dice"></i> 
+					{{localize "YZUR.CHAT.ROLL.Push"}}
+				</button>
+				<button class="roll-button" data-action="cancel-push">
+					<i class="fas fa-times"></i> 
+					{{localize "YZUR.CHAT.ROLL.CancelPush"}}
+				</button>
 			</div>
 		{{/if}}
 	</div>

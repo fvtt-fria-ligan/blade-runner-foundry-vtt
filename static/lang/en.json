@@ -116,6 +116,7 @@
   "FLBR.ItemRollable": "Rollable",
   "FLBR.ItemSkill": "Skill",
   "FLBR.ItemSpecial": "Special",
+  "FLBR.Nature": "Nature",
   "FLBR.NatureHint": "Character's Nature (Only GM)",
   "FLBR.NewItem": "New {type}",
   "FLBR.OK": "OK",

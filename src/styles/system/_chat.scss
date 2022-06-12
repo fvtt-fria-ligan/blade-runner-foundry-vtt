@@ -30,6 +30,15 @@
   background-repeat: no-repeat;
   background-color: var(--color-background);
 
+  &.message.whisper {
+    border: 1px solid var(--color-blue-lighter);
+    background-image: url("./assets/character-sheet-background.webp");
+    background-position: top center;
+    background-size: cover; // 100% 100%;
+    background-repeat: no-repeat;
+    color: var(--color-blue-lighter);
+  }
+
   /* ------------------------------------------ */
 
   h1, h2, h3, h4, h5, h6 {
@@ -72,6 +81,12 @@
     }
   }
 
+  a.nue-tab,
+  a.nue-action,
+  a[href] {
+    color: var(--color-blue);
+  }
+
   /* ------------------------------------------ */
 
   .message-header {
@@ -100,12 +115,8 @@
       color: var(--color-blue)
     }
     .special {
+      @include utils.stroke-text;
       color: var(--color-red);
-      text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
     }
   }
 
@@ -121,32 +132,69 @@
 /* ------------------------------------------ */
 
 .chat-message .yzur {
-  .dice-tooltip {
+  .dice-formula, .dice-total {
+    border-right: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+    background-color: #111; //var(--color-background);
+    box-shadow: none;
+    padding: 4px;
+  }
+  .dice-formula {
+    border-top: 1px solid var(--color-border);
+    border-bottom: none;
+    margin: 0;
+  }
+  .dice-total {
+    border-top: none;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-disabled);
+  }
+  .dice-result {
+    color: var(--color-blue);
+    cursor: pointer;
+  }
+  .success { color: var(--color-green); }
+  .failure { color: var(--color-red-darker); }
+
+  .tooltip-parts {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    padding: 4px;
+    gap: 4px;
+    padding: 10px;
+    background-color: var(--color-background);
+    border-left: 1px dashed var(--color-disabled);
+    border-right: 1px dashed var(--color-disabled);
   }
-  .dice-formula,
-  .dice-total {
-    @include utils.boxed-property;
-  }
-  .dice-total { color: var(--color-disabled); }
-  .success { color: var(--color-green); }
-  .failure { color: var(--color-red); }
-  .tooltip-part {
 
+  .part-header {
+    .part-formula {
+      display: none;
+    }
+    .part-flavor {
+      color: inherit;
+    }
+    .part-total {
+      color: var(--color-disabled);
+      &.success { color: var(--color-green); }
+    }
   }
-  .part-formula {
-    display: none;
+
+  .dice-rolls {
+    .roll.pushed { color: var(--color-skin); filter: none; }
+    .roll.discarded[style] { opacity: 0; }
   }
+
   .roll-controls {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    gap: 4px;
+    margin-top: 4px;
   }
   .roll-button {
-    font-size: var(--font-size--small);
+    font-size: var(--font-size--extra-small);
+    line-height: 1;
   }
 }

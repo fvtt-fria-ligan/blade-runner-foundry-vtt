@@ -58,6 +58,40 @@ a.inline-roll {
   }
 }
 
+/* ------------------------------------------ */
+
+.blade-runner,
+.chat-message,
+.window-app.dialog {
+  button,
+  .button,
+  .dialog-button {
+    @include utils.boxed-property;
+    border-radius: 4px;
+    font-family: var(--font-table);
+    font-weight: bold;
+    color: var(--color-green);
+    letter-spacing: -1px;
+    cursor: pointer;
+    transition: color 250ms linear;
+
+    &:hover {
+      border-color: var(--color-yellow);
+      color: var(--color-red);
+      i { color: var(--color-yellow); }
+    }
+    &:disabled,
+    &.disabled {
+      border-color: var(--color-disabled);
+      color: var(--color-disabled);
+    }
+  }
+}
+
+/* ------------------------------------------ */
+/*  Windowed Apps                             */
+/* ------------------------------------------ */
+
 .app.window-app.dialog,
 .app.window-app.journal-sheet,
 .app.window-app.blade-runner {
@@ -105,30 +139,13 @@ a.inline-roll {
   p {
     color: var(--color-blue-lighter);
   }
-  .button,
-  .dialog-button {
-    @include utils.boxed-property;
-    border-radius: 4px;
-    font-family: var(--font-table);
-    font-weight: bold;
-    color: var(--color-green);
-
-    &:hover {
-      border-color: var(--color-red);
-      color: var(--color-red);
-    }
-    &:disabled,
-    &.disabled {
-      border-color: var(--color-disabled);
-      color: var(--color-disabled);
-    }
-  }
 
   /* ------------------------------------------ */
 
   h1, h2, h3, h4, h5, h6 {
     color: var(--color-blue);
     font-family: var(--font-header);
+    letter-spacing: 1px;
   }
 
   h1, h2, h3, h4 {
