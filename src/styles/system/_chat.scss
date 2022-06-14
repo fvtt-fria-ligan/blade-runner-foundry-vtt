@@ -132,6 +132,14 @@
 /* ------------------------------------------ */
 
 .chat-message .yzur {
+  @each $d in (6, 8, 10, 12) {
+    .d#{$d}bladerunnerdie.min {
+      font-family: "Blade Runner Symbols";
+    }
+  }
+}
+
+.chat-message .yzur {
   .dice-formula, .dice-total {
     border-right: 1px solid var(--color-border);
     border-left: 1px solid var(--color-border);
@@ -154,7 +162,7 @@
     cursor: pointer;
   }
   .success { color: var(--color-green); }
-  .failure { color: var(--color-red-darker); }
+  .failure { color: var(--color-red); }
 
   .tooltip-parts {
     display: flex;
@@ -182,7 +190,7 @@
   }
 
   .dice-rolls {
-    .roll.pushed { color: var(--color-skin); filter: none; }
+    .roll.pushed { color: #555; filter: none; }
     .roll.discarded[style] { opacity: 0; }
   }
 

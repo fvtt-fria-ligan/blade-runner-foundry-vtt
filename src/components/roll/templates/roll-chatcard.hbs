@@ -20,8 +20,8 @@
 								</span>
 							{{/if}}
 							{{#if baneCount}}
-								<span{{#if pushed}} class="failure"{{/if}}>
-									{{#times baneCount}}🦄{{/times}}
+								<span class="blade-runner-symbols{{#if pushed}} failure{{/if}}">
+									{{#times baneCount}}F{{/times}}
 								</span>
 							{{/if}}
 							{{#unless (or successCount baneCount)}}

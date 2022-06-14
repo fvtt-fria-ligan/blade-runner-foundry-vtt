@@ -1,13 +1,26 @@
 /* ------------------------------------------ */
+// Blade Runner Symbols
+
+@font-face {
+  font-family: "Blade Runner Symbols";
+  src: url("./fonts/blade-runner-symbols.ttf");
+}
+
+.blade-runner-symbols {
+  font-family: "Blade Runner Symbols";
+  font-weight: normal;
+}
+
+/* ------------------------------------------ */
 // Foundry Gridnik
 
 @font-face {
-  font-family: 'Foundry Gridnik';
+  font-family: "Foundry Gridnik";
   src: url("./fonts/foundry-gridnik-regular.otf");
 }
 
 @font-face {
-  font-family: 'Foundry Gridnik';
+  font-family: "Foundry Gridnik";
   src: url("./fonts/foundry-gridnik-bold.otf");
   font-weight: bold;
 }

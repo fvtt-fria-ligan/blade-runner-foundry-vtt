@@ -50,13 +50,14 @@ Hooks.once('init', () => {
     'Roll.chatTemplate': 'systems/blade-runner/templates/components/roll/roll-chatcard.hbs',
     'Roll.tooltipTemplate': 'systems/blade-runner/templates/components/roll/roll-chatcard-tooltip-partial.hbs',
     'Roll.infosTemplate': 'systems/blade-runner/templates/components/roll/roll-chatcard-infos-partial.hbs',
+    'Icons.br.base.1': 'F',
   }, { index: 1 });
 
   // Creates a namespace within the game global.
   // Places our classes in their own namespace for later reference.
   game.bladerunner = {
     config: FLBR,
-    Roller: BRRollHandler,
+    roller: BRRollHandler,
   };
 
   // Records configuration values.
@@ -91,7 +92,7 @@ Hooks.once('ready', () => {
   console.log('FLBR | READY!');
 
   // Debugging.
-  game.actors.getName('Bob')?.sheet?.render(true);
+  // game.actors.getName('Bob')?.sheet?.render(true);
   // game.items.getName('TST ChemRail')?.sheet?.render(true);
 });
 
