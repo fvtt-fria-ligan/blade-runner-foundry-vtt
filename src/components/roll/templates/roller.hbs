@@ -25,9 +25,22 @@
 			{{#each modifiers}}
 				<input type="checkbox" id="modifier-{{id}}" data-id="{{id}}" {{checked active}}/>
 				<label class="modifier-name" for="modifier-{{id}}" title="{{description}}">{{name}}</label>
-				<div class="modifier-value">{{signedValue}}</div>
+				{{!-- <div class="modifier-value">{{signedValue}}</div> --}}
+				<div class="modifier-value">
+				{{#if (gt value 0)}}
+					<div class="modifier-value advantage" title="{{localize "FLBR.Advantage"}}">
+						{{{@root.config.Icons.buttons.advantage}}}
+					</div>
+				{{else if (lt value 0)}}
+					<div class="modifier-value disadvantage" title="{{localize "FLBR.Disadvantage"}}">
+						{{{@root.config.Icons.buttons.disadvantage}}}
+					</div>
+				{{else}}
+					<div class="modifier-value">{{localize "FLBR.NO_VALUE"}}</div>
+				{{/if}}
+				</div>
 			{{/each}}
-			<input type="text" class="total" value="{{localize "FLBR.ROLLER.TotalModifier" value=modifier}}" disabled/>
+			{{!-- <input type="text" class="total" value="{{localize "FLBR.ROLLER.TotalModifier" value=modifier}}" disabled/> --}}
 		</div>
 		<div class="roll-options boxed-property flex column">
 			{{!-- Max Pushes --}}

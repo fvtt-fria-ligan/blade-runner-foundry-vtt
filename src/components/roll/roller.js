@@ -116,7 +116,7 @@ export default class BRRollHandler extends FormApplication {
      * Quantity of damage brought with this roll.
      * @type {number}
      */
-    this.damage = options.damage;
+    this.damage = options.damage ?? this.item?.damage;
 
     this.options.sendMessage = options.sendMessage ?? true;
     this.options.unlimitedPush = options.unlimitedPush ?? false;
@@ -188,9 +188,8 @@ export default class BRRollHandler extends FormApplication {
       attributeKey: this.attributeKey,
       skillKey: this.skillKey,
       rollMode: game.settings.get('core', 'rollMode'),
-      // damage: this.damage,
-      // attack: this.isAttack,
-      // roll: this.roll,
+      attack: this.isAttack,
+      damage: this.damage,
       config: CONFIG.BLADE_RUNNER,
       options,
     };
@@ -338,7 +337,7 @@ export default class BRRollHandler extends FormApplication {
       if (modifier > 0) this.dice.push(min);
       else this.dice = this.dice.filter(d => d !== min);
     }
-    const dice = this.dice.map(d => { return { term: `${d}`, number: 1 }; });
+    const dice = this.dice.map(d => ({ term: `${d}`, number: 1 }));
     this.roll = YearZeroRoll.forge(dice, {}, this.getRollOptions());
 
     await this.roll.roll({ async: true });

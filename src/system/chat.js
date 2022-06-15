@@ -1,3 +1,4 @@
+import { FLBR } from './config';
 import BRRollHandler from '@components/roll/roller';
 
 /**
@@ -6,6 +7,33 @@ import BRRollHandler from '@components/roll/roller';
  */
 export function addChatListeners(html) {
   html.on('click', '.roll-button', _onRollAction);
+}
+
+/* ------------------------------------------- */
+
+/**
+ * Adds a context menu (right-clic) to Chat messages.
+ * @param {JQuery} html
+ * @param {Object} options Menu options
+ * @link https://www.youtube.com/watch?v=uBC5DSci0NI
+ */
+export function addChatMessageContextOptions(_html, options) {
+  // ? See Part 6, 6:55
+  // Allows only this menu option if we have selected some tokens
+  // & the message contains some damage.
+  const canDefend = li => canvas.tokens.controlled.length && li.find('.chat-card[data-damage]').length;
+  options.push({
+    name: game.i18n.localize('FLBR.CHAT_ACTION.ApplyDamage'),
+    icon: FLBR.Icons.buttons.attack,
+    condition: canDefend,
+    callback: li => _applyDamage(li[0]),
+  });
+  return options;
+}
+
+function _applyDamage(messageElem) {
+  const messageId = messageElem.dataset.messageId;
+  const message = game.messages.get(messageId);
 }
 
 /* ------------------------------------------- */

@@ -20,7 +20,7 @@ export function registerDiceSoNice(dice3d) {
   dice3d.addDicePreset({
     type: 'd6',
     labels: [
-      '1',
+      'systems/blade-runner/assets/icons/blade-runner-failure.webp',
       '2',
       '3',
       '4',
@@ -34,7 +34,7 @@ export function registerDiceSoNice(dice3d) {
   dice3d.addDicePreset({
     type: 'd8',
     labels: [
-      '1',
+      'systems/blade-runner/assets/icons/blade-runner-failure.webp',
       '2',
       '3',
       '4',
@@ -50,7 +50,7 @@ export function registerDiceSoNice(dice3d) {
   dice3d.addDicePreset({
     type: 'd10',
     labels: [
-      '1',
+      'systems/blade-runner/assets/icons/blade-runner-failure.webp',
       '2',
       '3',
       '4',
@@ -68,7 +68,7 @@ export function registerDiceSoNice(dice3d) {
   dice3d.addDicePreset({
     type: 'd12',
     labels: [
-      '1',
+      'systems/blade-runner/assets/icons/blade-runner-failure.webp',
       '2',
       '3',
       '4',

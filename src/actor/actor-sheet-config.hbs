@@ -1,5 +1,6 @@
 <form autocomplete="off">
   {{#if (eq object.type "character")}}
+
     <div class="form-group">
       <label>{{localize "FLBR.SHEET_CONFIG.CharacterSubtype"}}</label>
       <select name="data.subtype">
@@ -7,13 +8,44 @@
       </select>
       <p class="notes">{{localize "FLBR.SHEET_CONFIG.CharacterSubtypeHint"}}</p>
     </div>
+
+    <hr/>
+
+    <div class="form-group">
+      <label>{{localize "FLBR.SHEET_CONFIG.HealthMaxModifier"}}</label>
+      <input type="text" name="data.health.mod" value="{{numberFormat object.data.health.mod sign=true}}" data-dtype="Number"/>
+      <p class="notes">{{localize "FLBR.SHEET_CONFIG.HealthMaxModifierHint"}}</p>
+    </div>
+    {{!-- <div class="form-group">
+      <label>{{localize "FLBR.SHEET_CONFIG.HealthPermanentLoss"}}</label>
+      <input type="number" name="data.health.permanentLoss" value="{{object.data.health.permanentLoss}}" max="0"/>
+      <p class="notes">{{localize "FLBR.SHEET_CONFIG.HealthPermanentLossHint"}}</p>
+    </div> --}}
+
+    {{#if (eq object.data.subtype "pc")}}
+      <div class="form-group">
+        <label>{{localize "FLBR.SHEET_CONFIG.ResolveMaxModifier"}}</label>
+        <input type="text" name="data.resolve.mod" value="{{numberFormat object.data.resolve.mod sign=true}}" data-dtype="Number"/>
+        <p class="notes">{{localize "FLBR.SHEET_CONFIG.ResolveMaxModifierHint"}}</p>
+      </div>
+      <div class="form-group">
+        <label>{{localize "FLBR.SHEET_CONFIG.ResolvePermanentLoss"}}</label>
+        <input type="number" name="data.resolve.permanentLoss" value="{{object.data.resolve.permanentLoss}}" max="0"/>
+        <p class="notes">{{localize "FLBR.SHEET_CONFIG.ResolvePermanentLossHint"}}</p>
+      </div>
+    {{/if}}
+
   {{/if}}
+
+  <hr/>
 
   <div class="form-group">
     <label>{{localize "FLBR.SHEET_CONFIG.UnlimitedPush"}}</label>
     <input type="checkbox" name="flags.bladerunner.unlimitedPush" {{checked object.flags.bladerunner.unlimitedPush}} />
     <p class="notes">{{localize "FLBR.SHEET_CONFIG.UnlimitedPushHint"}}</p>
   </div>
+
+  <hr/>
 
   <div class="form-group">
     <label>{{localize "SHEETS.ThisSheet"}}</label>

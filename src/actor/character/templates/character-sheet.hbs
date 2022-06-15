@@ -28,9 +28,9 @@
 							{{#if (lte data.health.value 0)}}
 								<b>({{localize "FLBR.BrokenByDamage"}})</b>
 							{{/if}}
-							<span>{{data.health.value}}/{{data.health.max}}</span>
+							<span class="capacity-rating">{{data.health.value}}/{{data.health.max}}</span>
 						</h3>
-						{{boxes "data.health.value" value=data.health.value min=0 max=data.health.max}}
+						{{boxes "data.health.value" value=data.health.value min=0 max=data.health.max loss=data.health.permanentLoss}}
 					</div>
 				{{/if}}
 				{{#if (and data.resolve isPC)}}
@@ -40,9 +40,9 @@
 							{{#if (lte data.resolve.value 0)}}
 								<b>({{localize "FLBR.BrokenByStress"}})</b>
 							{{/if}}
-							<span>{{data.resolve.value}}/{{data.resolve.max}}</span>
+							<span class="capacity-rating">{{data.resolve.value}}/{{data.resolve.max}}</span>
 						</h3>
-						{{boxes "data.resolve.value" value=data.resolve.value min=0 max=data.resolve.max}}
+						{{boxes "data.resolve.value" value=data.resolve.value min=0 max=data.resolve.max loss=data.resolve.permanentLoss}}
 					</div>
 				{{/if}}
 			</div>

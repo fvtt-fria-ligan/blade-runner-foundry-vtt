@@ -92,7 +92,7 @@ Hooks.once('ready', () => {
   console.log('FLBR | READY!');
 
   // Debugging.
-  // game.actors.getName('Bob')?.sheet?.render(true);
+  game.actors.getName('Bob')?.sheet?.render(true);
   // game.items.getName('TST ChemRail')?.sheet?.render(true);
 });
 
@@ -109,6 +109,8 @@ Hooks.on('renderItemSheet', (app, _html) => {
 });
 
 /* ------------------------------------------ */
+
+Hooks.on('getChatLogEntryContext', Chat.addChatMessageContextOptions);
 
 Hooks.on('renderChatLog', (_app, html, _data) => Chat.addChatListeners(html));
 Hooks.on('renderChatMessage', (_msg, html, _data) => Chat.hideChatActionButtons(html));

@@ -1,4 +1,10 @@
-<div class="yzur chat-card" data-actor-id="{{roll.options.actorId}}">
+<div
+	class="yzur chat-card"
+	data-actor-id="{{roll.options.actorId}}"
+	{{#if roll.options.damage}}
+		data-damage="{{roll.options.damage}}"
+	{{/if}}
+>
 	<div class="card-content">
 		<div class="dice-roll">
 			{{#if flavor}}

@@ -14,12 +14,17 @@
 				</optgroup>
 			{{/select}}
 		</select>
-		<input type="text" name="data.modifiers.{{@key}}.value" value="{{modifier.value}}"/>
-		{{!-- <div class="item-modifier-controls"> --}}
-			<a class="button delete-modifier" data-modifier-id="{{@key}}">
-				{{{@root.config.Icons.buttons.delete}}}
-			</a>
-		{{!-- </div> --}}
+		{{!-- <input type="text" name="data.modifiers.{{@key}}.value" value="{{modifier.value}}"/> --}}
+		<select name="data.modifiers.{{@key}}.value" value="{{modifier.value}}">
+			{{#select modifier.value}}
+				<option value="0">{{localize "FLBR.NO_VALUE"}}</option>
+				<option value="+1">{{localize "FLBR.Advantage"}}</option>
+				<option value="-1">{{localize "FLBR.Disadvantage"}}</option>
+			{{/select}}
+		</select>
+		<a class="button delete-modifier" data-modifier-id="{{@key}}">
+			{{{@root.config.Icons.buttons.delete}}}
+		</a>
 	{{else}}
 		<div class="item-modifier empty">{{localize "FLBR.ItemNoModifier"}}</div>
 	{{/each}}

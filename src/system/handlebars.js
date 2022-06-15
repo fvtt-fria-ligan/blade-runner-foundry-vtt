@@ -128,11 +128,19 @@ function registerHandlebarsHelpers() {
     const value = Number(options.hash.value);
     const min = Number(options.hash.min);
     const max = Number(options.hash.max);
+    let loss = Number(options.hash.loss);
     let str = `<a class="capacity-boxes" data-field="${field}" data-min="${min}" data-max="${max}">`;
     for (let i = 0; i < max; i++) {
       if (i === 10) str += '<br/>';
       if (value > i) str += `${FLBR.Icons.boxes.full}`;
       else str += `${FLBR.Icons.boxes.empty}`;
+    }
+    if (loss < 0) {
+      str += '<span class="loss">';
+      for (;loss < 0; loss++) {
+        str += `${FLBR.Icons.boxes.lost}`;
+      }
+      str += '</span>';
     }
     str += '</a>';
     return new Handlebars.SafeString(str);

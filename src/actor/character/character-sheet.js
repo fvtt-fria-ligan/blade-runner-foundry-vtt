@@ -68,6 +68,9 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     // Stats Roll
     html.find('.stat-roll').click(this._onStatRoll.bind(this));
     html.find('.action-roll').click(this._onActionRoll.bind(this));
+
+    // Resolve Permanent Loss
+    html.find('.capacity-resolve .capacity-boxes').click(this._onResolveIncrease.bind(this));
   }
 
   /* ------------------------------------------ */
@@ -89,5 +92,14 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     const attrKey = FLBR.skillMap[skillKey];
     const title = `${elem.innerText} (${game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`)})`;
     return this.actor.rollStat(attrKey, skillKey, { title });
+  }
+
+  /* ------------------------------------------ */
+
+  _onResolveIncrease(event) {
+    event.preventDefault();
+    if (this.actor.data.data.subtype !== ACTOR_SUBTYPES.PC) return;
+    if (this.actor.resolve.value >= this.actor.resolve.max) return;
+    return this.actor.rollResolve();
   }
 }

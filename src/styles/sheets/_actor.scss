@@ -90,13 +90,13 @@ $border-stat-dotted: 1px dotted var(--color-green);
         .capacity-boxes { color: $broken-color; }
       }
     }
-    .capacities span {
+    .capacities .capacity-rating {
       font-size: var(--font-size--large);
       float: right;
     }
-    // .capacities .capacity-boxes {
-    //   font-size: var(--font-size--large);
-    // }
+    .capacities .loss {
+      color: #424242;
+    }
   }
 
   /* ------------------------------------------ */

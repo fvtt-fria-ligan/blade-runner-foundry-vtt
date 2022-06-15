@@ -124,7 +124,7 @@ export default class BladeRunnerActor extends Actor {
   _prepareCapacities() {
     // Rolls over each legal capacity.
     for (const cap of Object.values(CAPACITIES)) {
-      const capacity = this.props[cap];
+      const capacity = this.data.data[cap];
       const capData = FLBR.capacitiesMap[cap];
       // Proceeds if it exists in the character.
       if (capacity && capData) {
@@ -139,11 +139,12 @@ export default class BladeRunnerActor extends Actor {
           max += this.getAttribute(attribute);
         }
         // Performs some maths.
-        max = Math.ceil(max / 4) + natureModifier - permanentLoss;
+        max = Math.ceil(max / 4) + natureModifier + capacity.mod + permanentLoss;
         max = Math.clamped(max, 0, capData.max);
 
         // Records the value in the actor data.
         capacity.max = max;
+        if (capacity.value > max) capacity.value = max;
         capacity.ratio = capacity.value / capacity.max;
       }
     }
@@ -252,5 +253,38 @@ export default class BladeRunnerActor extends Actor {
     }, {
       unlimitedPush: this.data.flags.bladerunner?.unlimitedPush,
     });
+  }
+
+  /* ------------------------------------------ */
+
+  async rollResolve() {
+    const title = game.i18n.localize('FLBR.ROLLER.ResolveTest');
+    const execute = await Dialog.confirm({
+      title,
+      content: `<p>${game.i18n.localize('FLBR.ROLLER.ResolveTestHint')}</p>`,
+    });
+    if (!execute) return;
+
+    const roller = new BRRollHandler({
+      title,
+      actor: this,
+      dice: [this.attributes.emp.value],
+      maxPush: 0,
+    });
+
+    const { roll } = await roller.executeRoll();
+
+    if (roll.baneCount) {
+      ui.notifications.info(game.i18n.format('FLBR.ROLLER.ResolveTestFailed', {
+        name: this.name,
+      }), {
+        permanent: true,
+      });
+      let loss = +this.resolve.permanentLoss;
+      loss--;
+      await this.update({ 'data.resolve.permanentLoss': loss });
+      return -1;
+    }
+    return 0;
   }
 }

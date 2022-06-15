@@ -50,9 +50,11 @@
     gap: 4px;
 
     h3,
+    // TODO remove total
     .total {
       grid-column: 1 / -1;
     }
+    // TODO remove total
     .total {
       align-self: end;
     }
@@ -60,10 +62,9 @@
     .modifier-value {
       text-align: center;
     }
-    .modifier-name,
-    .modifier-value {
-      color: var(--color-blue-lighter);
-    }
+    .modifier-name { color: var(--color-blue-lighter); }
+    .modifier-value.advantage { color: var(--color-green); }
+    .modifier-value.disadvantage { color: var(--color-red); }
   }
   .roll-options {
     gap: 4px;
