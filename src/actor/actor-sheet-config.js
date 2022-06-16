@@ -16,6 +16,7 @@ export default class ActorSheetConfig extends EntitySheetConfig {
   getData() {
     return {
       ...super.getData(),
+      isGM: game.user.isGM,
       types: FLBR.characterSubtypes,
     };
   }
