@@ -26,8 +26,6 @@ Otherwise, discussion about the development of the Blade Runner RPG system can b
 
 5. [Pull Requests](#dart-pull-requests)
 
-6. [History Rewrite](#recycle-history-rewrite)
-
 ## :globe_with_meridians: Localization
 
 We are grateful for any and all localization support we can get. To localize the system you do not need to download or set up the system. To make it easier to help with localization we are using GitLocalize. All you need is a GitHub account. Then you can [head over to our GitLocalize page](https://gitlocalize.com/repo/XXXX) and start translating.
@@ -94,7 +92,6 @@ Once you have configured where your Foundry VTT Data-folder is, you can link the
 
 ```bash
 # Run the project linking command.
-
 npm run link-project
 ```
 
@@ -158,8 +155,8 @@ Following are some of the files and folders that you may be interested in editin
 │   ├── 📁 styles
 │   ├── 📁 system
 │   ├── 📁 utils
-│   ├── forbidden-lands.js
-│   └── forbidden-lands.scss
+│   ├── blade-runner.js
+│   └── blade-runner.scss
 ├── 📁 static
 │   ├── 📁 assets
 │   │   └── 📁 icons
@@ -172,6 +169,7 @@ Following are some of the files and folders that you may be interested in editin
 ├── .editorconfig
 ├── .eslintignore
 ├── .eslintrc
+├── .gitattributes
 ├── .gitignore
 ├── .prettierignore
 ├── .prettierrc
@@ -190,22 +188,30 @@ Following are some of the files and folders that you may be interested in editin
 1. `.husky/`: This is a git hooks enhancment tool. See [.Husky](#.husky)
 2. `dist/` \*_Generated_: The directory contains the output of the build process. It is not part of the git repository.
 3. `node_modules/` \*_Generated_: A directory generated when running the `npm install` command. It contains all the dependencies of the project.
-4. `src/`: This is the directory you want to focus most of your attention on. It contains the following subdirectories:
-   - `lang`: Language files. You may opt to do localization directly on the files. _**Note:** This is not the preferred way of doing localization._
-   - `module`: Javascript modules. The main file `forbidden-lands.js` imports the scripts in the subdirectories and configures the system.
-   - `styles`: The project uses SASS (SCSS). It is almost like CSS except it allows for modularization and more perks. `forbidden-lands.scss` only imports the various partial files.
-   - `templates`: This is the folder that contains all the html, or handlebars partials if you like. They are formatted as `.hbs`.
-5. `static/`: The static directory contains assets and the system- and template.json files. This directory rarely sees changes. Character generation datasets are contained in `assets/`.
-6. `.editorconfig`, `.eslintrc.json`, `.prettierrc.json`: These files achieve the same goal. They lint and format the code to comply with the style guide.
-7. `.eslintignore`, `.gitignore`, `.nvmrc`, `.prettierignore`: These are ignore files configured to ignore certain directories that do not require linting or configuring.
-8. `CHANGELOG.md`: This file contains changes made up until the latest release. It is automatically generated when one of the admins bumps the version of the system.
-9. `CONTRIBUTING.md`: You are reading it.
-10. `foundryconfig-example.json`: Rename this file `foundryconfig.json` and edit it to contain the absolute path to your `Foundry VTT/Data`-folder.
-11. `.jsconfig.json` and `gulpfile.js`: These files contains the configuration for the scripts used to build and watch the project as well as releases.
-12. `LICENSE`: The License file for the project.
-13. `package-lock.json` and `package.json`, as well as `.env`: These files are used by `npm` to configure the project, and track dependencies.
-14. `README.md`: The Readme and project page.
-15. `rollup-config.json`: The config file for javascript concatenation.
+4. `src/`: This is the directory you want to focus most of your attention on. It contains the following files and subdirectories:
+   - `actor/` & `item/`: Javascript documents, sheets and templates for the actors (character) and items. The subfolders `templates/` contains all the html, or handlebars partials if you like. They are formatted as `.hbs`.
+   - `plugins/`: Everything related to third-party modules goes there. _(e.g. Dice So Nice)_
+   - `styles/`: The project uses SASS (SCSS). It is almost like CSS except it allows for modularization and more perks.
+   - `system/`: Core Javascript modules for the game system.
+   - `utils/`: Collection of utilitary methods used in the game system.
+   - The main file `blade-runner.js` imports the scripts in the subdirectories and configures the system.
+   - The main style file `blade-runner.scss` only imports the various partial files.
+5. `static/`: The static directory contains assets and the system- and template.json files. This directory rarely sees changes. It contains the following subdirectories:
+   - `assets/`: Pictures, icons, and other assets.
+   - `fonts/`: Typography files.
+   - `lang/`: Language files. You may opt to do localization directly on the files. _**Note:** This is not the preferred way of doing localization._
+   - `lib/`: External libraries used by the game system _(e.g. [YZUR](https://stefouch.github.io/foundry-year-zero-roller/))_
+6. `tools/`: Other utilities not used by the game system.
+7. `.editorconfig`, `.eslintrc`, `.gitattributes`, `.prettierrc`: These files achieve the same goal. They lint and format the code to comply with the style guide.
+8. `.eslintignore`, `.gitignore`, `.prettierignore`: These are ignore files configured to ignore certain directories that do not require linting or configuring.
+9. `CHANGELOG.md`: This file contains changes made up until the latest release. It is automatically generated when one of the admins bumps the version of the system.
+10. `CONTRIBUTING.md`: You are reading it.
+11. `esbuild.config.js`: The config file for javascript concatenation.
+12. `foundryConfig-example.json`: Rename this file `foundryConfig.json` and edit it to contain the absolute path to your `Foundry VTT/Data`-folder.
+13. `.jsconfig.json` and `gulpfile.js`: These files contains the configuration for the scripts used to build and watch the project as well as releases.
+14. `LICENSE`: The License file for the project.
+15. `package-lock.json` and `package.json`: These files are used by `npm` to configure the project, and track dependencies.
+16. `README.md`: The Readme and project page.
 
 ## :hammer_and_wrench: How do I contribute?
 
@@ -237,44 +243,9 @@ We are always looking for someone who can help with the project or one of the ot
 
 When you are ready to submit a pull request, make sure you do a few things to help speed up the process.
 
-1.  Keep it tidy. Fewer commits with changes logically grouped together makes it easier to review them.
-2.  Make sure [Husky](#.husky) has done its job. E.g. check your commit messages to confirm that they follow [Conventional Commits Standards](https://www.conventionalcommits.org/en/v1.0.0-beta.2/).
-3.  Now you are ready to submit a Pull Request. The project contains two branches: `main`, and `localization`. When submitting a Pull Request make sure to point it to the `main` branch. Unless, you are pushing a **localization** change, then point to `localization` instead.
-4.  When creating the Pull Request consider prefacing the title with [an emoji that indicates the type of pull request](https://gitmoji.dev/).
-5.  Briefly describe the pull request and whether you have made any deletions or modifications that may be breaking.
-6.  That's it! Thank you so much for your help with improving this project:purple_heart:
-
-## :recycle: The History Rewrite
-
-> If you are new around here, this information is for already existing forks.
-
-### It all started when we got hold of a missing piece...
-
-of the history of this repository. The rewrite was necessary to reattach the missing piece. #74 details most of what happened.
-
-In short, on the 1st. of May a full git rewrite (filter-repo) was force pushed to the public repository. And so any forks, clones or otherwise made before that date are not compatible with the current repository.
-
-### I have a fork. What do I do?
-
-Ideally, wipe your local repo and clone this one as upstream, then run:
-
-```bash
-git push -f --prune --mirror
-```
-
-To force push the reset to your origin repository.
-
-### But I already have a downstream branch in development
-
-Recovering from this requires a bit more work. If you have only a few commits on the downstream branch [make a diff patch](https://git-scm.com/docs/diff-generate-patch) and run:
-
-```bash
-git branch --set-upstream-to upstream
-git reset hard @{u}
-```
-
-Then reapply the patch: `git apply /path/to/patch.diff` and push to your server like above.
-
-Even if you have several commits you may want to consider doing the above diff patch method. The alternative is a rebase. For guidance on this look at the easy and hard case [in this document](https://htmlpreview.github.io/?https://raw.githubusercontent.com/newren/git-filter-repo/docs/html/git-rebase.html). Try the easy case first (there has been no changes to the recent history beyond commit id changes), if this doesn't work get back to where you started and attempt the hard case. Good luck!
-
-Should you have any issues please open a discussion.
+1. Keep it tidy. Fewer commits with changes logically grouped together makes it easier to review them.
+2. Make sure [Husky](#.husky) has done its job. E.g. check your commit messages to confirm that they follow [Conventional Commits Standards](https://www.conventionalcommits.org/en/v1.0.0-beta.2/).
+3. Now you are ready to submit a Pull Request. The project contains two branches: `main`, and `localization`. When submitting a Pull Request make sure to point it to the `main` branch. Unless, you are pushing a **localization** change, then point to `localization` instead.
+4. When creating the Pull Request consider prefacing the title with [an emoji that indicates the type of pull request](https://gitmoji.dev/).
+5. Briefly describe the pull request and whether you have made any deletions or modifications that may be breaking.
+6. That's it! Thank you so much for your help with improving this project:purple_heart:
