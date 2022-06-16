@@ -306,6 +306,10 @@ export default class BRRollHandler extends FormApplication {
   /*  Roll Creation (YZUR)                      */
   /* ------------------------------------------ */
 
+  /**
+   * Gets all the options that will be passed into the roll.
+   * @returns {Object}
+   */
   getRollOptions() {
     const speaker = this.createSpeaker();
     const unlimitedPush = this.options.unlimitedPush;
@@ -331,7 +335,13 @@ export default class BRRollHandler extends FormApplication {
 
   /* ------------------------------------------ */
 
-  async executeRoll(modifier) {
+  /**
+   * Creates a roll from the dice pool and a modifier, evaluates the roll,
+   * and then sends it to the chat log.
+   * @param {number} [modifier] Modifier to the dice pool, if any
+   * @returns {Promise.<ChatMessage|YearZeroRoll>}
+   */
+  async executeRoll(modifier = 0) {
     if (modifier) {
       const min = Math.min(...this.dice);
       if (modifier > 0) this.dice.push(min);
@@ -386,6 +396,8 @@ export default class BRRollHandler extends FormApplication {
    * Handles cancellation .
    * @param {ChatMessage} message The message that contains the roll
    * @returns {Promise.<ChatMessage>} The updated message
+   * @static
+   * @async
    */
   static async cancelPush(message) {
     if (!message || !message.roll) return;

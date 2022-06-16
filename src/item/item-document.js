@@ -128,12 +128,16 @@ export default class BladeRunnerItem extends Item {
   /*  Utility Functions                         */
   /* ------------------------------------------ */
 
+  /**
+   * Rolls the item.
+   * @returns {BRRollHandler} Rendered RollHandler FormApplication
+   */
   roll() {
     // this.actor.rollStat(this.props.attribute, this.props.skill);
 
     switch (this.type) {
       case ITEM_TYPES.ARMOR: return this._rollArmor();
-      // Not this one ↓
+      // ! Not this one below ↓
       // case ITEM_TYPES.EXPLOSIVE: return this._rollExplosive();
     }
 

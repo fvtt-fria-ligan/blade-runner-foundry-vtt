@@ -198,12 +198,12 @@ export default class BladeRunnerActor extends Actor {
   /* ------------------------------------------ */
 
   /**
-   * Rolls a stat of this actor.
+   * Rolls a stat (attribute/skill) for this actor.
    * @param {string}   attributeKey   The identifier for the attribute
    * @param {?string}  skillkey       The identifier for the skill
    * @param {Object}  [options={}]    Additional options
    * @param {string}  [options.title] Custom title
-   * @returns {BRRollHandler}
+   * @returns {BRRollHandler} Rendered RollHandler FormApplication
    */
   rollStat(attributeKey, skillKey, options = {}) {
     if (!attributeKey) {
@@ -242,6 +242,12 @@ export default class BladeRunnerActor extends Actor {
 
   /* ------------------------------------------ */
 
+  /**
+   * Performs a roll from an empty dice pool.
+   * @param {Object} [options]       Additional options for the roll
+   * @param {string} [options.title] A custom title for the roll if you don't want to use the default
+   * @returns {BRRollHandler} Rendered RollHandler FormApplication
+   */
   rollBlank(options) {
     return BRRollHandler.create({
       title: options.title ?? game.i18n.localize('FLBR.SHEET_HEADER.GenericRoll'),
@@ -256,6 +262,11 @@ export default class BladeRunnerActor extends Actor {
 
   /* ------------------------------------------ */
 
+  /**
+   * Rolls the actor's empathy and marks a permanent loss in resolve if a bane was rolled.
+   * @returns {number} Quantity of resolve permanently lost, or 0
+   * @async
+   */
   async rollResolve() {
     const title = game.i18n.localize('FLBR.ROLLER.ResolveTest');
     const execute = await Dialog.confirm({
@@ -282,7 +293,7 @@ export default class BladeRunnerActor extends Actor {
       let loss = +this.resolve.permanentLoss;
       loss--;
       await this.update({ 'data.resolve.permanentLoss': loss });
-      return -1;
+      return loss;
     }
     return 0;
   }
