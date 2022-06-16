@@ -1,34 +1,24 @@
-// config: true (visible)
-// scope: world (gm), client (player)
+// ? scope: world (gm), client (player)
+// ? config: true (visible)
 
 import { SYSTEM_NAME } from './constants.js';
 
 export function registerSystemSettings() {
-  const br = game.system.data.name || SYSTEM_NAME;
+  const sysName = game.system.data.name || SYSTEM_NAME;
 
-  game.settings.register(br, 'systemMigrationVersion', {
-    config: false,
-    scope: 'world',
+  game.settings.register(sysName, 'systemMigrationVersion', {
     name: 'System Migration Version',
+    scope: 'world',
+    config: false,
     type: String,
     default: '',
   });
-
-  // game.settings.register(br, 'showTaskCheckOptions', {
-  //   config: true,
-  //   scope: 'client',
-  //   name: 'SETTINGS.showTaskCheckOptions.name',
-  //   hint: 'SETTINGS.showTaskCheckOptions.hint',
-  //   type: Boolean,
-  //   default: true,
-  // });
-
-  // game.settings.register(br, 'closeRollTooltipDelay', {
-  //   config: true,
-  //   scope: 'client',
-  //   name: 'SETTINGS.closeRollTooltipDelay.name',
-  //   hint: 'SETTINGS.closeRollTooltipDelay.hint',
-  //   type: Number,
-  //   default: 60,
-  // });
+  game.settings.register(sysName, 'messages', {
+    name: 'Displayed Messages',
+    hint: 'Used to track which messages have been displayed',
+    scope: 'world',
+    config: false,
+    type: Array,
+    default: [],
+  });
 }

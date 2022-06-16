@@ -1,7 +1,7 @@
 import semverComp from '../utils/semver-compare.js';
 
 export default async function displayMessages() {
-  const { messages } = await fetch('systems/forbidden-lands/assets/messages/messages.jsonc')
+  const { messages } = await fetch('systems/blade-runner/assets/messages/messages.jsonc')
     .then(resp => resp.text())
     .then(jsonc => JSON.parse(stripJSON(jsonc)));
 
@@ -36,7 +36,7 @@ const isCurrent = msg => {
 };
 
 const hasDisplayed = identifier => {
-  const settings = game.settings.get('forbidden-lands', 'messages');
+  const settings = game.settings.get('blade-runner', 'messages');
   if (settings?.includes(identifier)) return true;
   else return false;
 };
@@ -47,7 +47,7 @@ const displayPrompt = (title, content) => {
     title: title,
     content: content,
     label: 'Understood!',
-    options: { width: 600, height: 700 },
+    options: { width: 600, classes: ['blade-runner', 'dialog'] },
     callback: () => setDisplayed(title),
   });
 };
@@ -57,12 +57,12 @@ const sendToChat = (title, content) => {
   setDisplayed(title);
   return ChatMessage.create({
     title: title,
-    content: `<div class="forbidden-lands chat-item">${content}</div>`,
+    content: `<div class="blade-runner chat-item">${content}</div>`,
   });
 };
 
 const setDisplayed = async identifier => {
-  const settings = game.settings.get('forbidden-lands', 'messages');
+  const settings = game.settings.get('blade-runner', 'messages');
   settings.push(identifier);
-  await game.settings.set('forbidden-lands', 'messages', settings.flat());
+  await game.settings.set('blade-runner', 'messages', settings.flat());
 };

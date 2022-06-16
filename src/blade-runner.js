@@ -3,7 +3,7 @@
  * BLADE RUNNER RPG
  * Official website: https://frialigan.se/en/games/blade-runner/
  * ============================================================================
- * Contributing: https://github.com/Stefouch/blade-runner-foundry-vtt
+ * Contributing: https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt
  * ============================================================================
  * Creator: Stefouch
  * Patreon: https://www.patreon.com/Stefouch
@@ -18,15 +18,16 @@
 
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES } from '@system/constants';
-import * as YZUR from '@lib/yzur.js';
+import * as YZUR from '@lib/yzur';
 import * as Chat from '@system/chat';
-import BRRollHandler from './components/roll/roller.js';
-import { registerSheets } from './system/sheets.js';
-import { initializeHandlebars } from './system/handlebars.js';
-import { registerSystemSettings } from './system/settings.js';
+import BRRollHandler from '@components/roll/roller';
+import { registerSheets } from '@system/sheets';
+import { initializeHandlebars } from '@system/handlebars';
+import { registerSystemSettings } from '@system/settings';
 import { registerDiceSoNice } from './plugins/dice-so-nice.js';
-import BladeRunnerActor from './actor/actor-document.js';
-import BladeRunnerItem from './item/item-document.js';
+import BladeRunnerActor from '@actor/actor-document';
+import BladeRunnerItem from '@item/item-document';
+import displayMessages from '@components/messaging-system';
 
 /* ------------------------------------------ */
 /*  Foundry VTT Initialization                */
@@ -64,10 +65,12 @@ Hooks.once('init', () => {
   CONFIG.BLADE_RUNNER = FLBR;
   CONFIG.Actor.documentClass = BladeRunnerActor;
   CONFIG.Item.documentClass = BladeRunnerItem;
+  // TODO Combat
   // CONFIG.Combat.documentClass = BladeRunnerCombat;
   // CONFIG.Combatant.documentClass = BladeRunnerCombatant;
 
   // Patches Core functions.
+  // TODO use initiative cards
   CONFIG.Combat.initiative = {
     formula: '1d10 + (@attributes.agi.value / 100)',
     decimals: 2,
@@ -88,6 +91,9 @@ Hooks.once('ready', () => {
 
   // TODO Determines whether a system migration is required and feasible.
   // checkMigration();
+
+  // Displays system messages.
+  displayMessages();
 
   console.log('FLBR | READY!');
 
