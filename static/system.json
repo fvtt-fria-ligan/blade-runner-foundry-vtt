@@ -1,6 +1,6 @@
 {
   "name": "blade-runner",
-  "title": "Blade Runner RPG",
+  "title": "Blade Runner - The Roleplaying Game",
   "description": "",
   "version": "0.1.0",
   "minimumCoreVersion": 9,
@@ -10,7 +10,7 @@
   "contributors": "aMediocreDad",
   "localization": "",
   "allowBugReporter": true,
-  "bugs": "https://github.com/Stefouch/blade-runner-foundry-vtt/issues",
+  "bugs": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues",
   "media": [],
   "scripts": [],
   "esmodules": ["blade-runner.js"],
@@ -28,9 +28,9 @@
   "background": "assets/splash.jpg",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": null,
-  "url": "https://github.com/Stefouch/blade-runner-foundry-vtt",
+  "url": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt",
   "socket": false,
-  "manifest": "https://github.com/Stefouch/blade-runner-foundry-vtt/releases/latest/download/system.json",
-  "download": "https://github.com/Stefouch/blade-runner-foundry-vtt/releases/download/v0.1.0/main.zip",
+  "manifest": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/latest/download/system.json",
+  "download": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/v0.1.0/main.zip",
   "license": "LICENSE.txt"
 }
