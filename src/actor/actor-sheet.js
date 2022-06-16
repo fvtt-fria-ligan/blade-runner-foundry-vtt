@@ -98,6 +98,9 @@ export default class BladeRunnerActorSheet extends ActorSheet {
   /** @override */
   _getHeaderButtons() {
     const originalButtons = super._getHeaderButtons();
+
+    if (!game.user.isGM && this.actor.limited) return originalButtons;
+
     const myButtons = [
       {
         label: game.i18n.localize('FLBR.SHEET_HEADER.GenericRoll'),
