@@ -2,9 +2,9 @@
 
 .blade-runner .embedded-items {
   gap: 4px;
+  align-items: flex-start;
   overflow-y: auto;
   max-height: 200px;
-  align-items: flex-start;
 
   .empty-inventory {
     color: var(--color-blue-lighter);
@@ -16,10 +16,10 @@
   @include utils.input-background;
   @include utils.border-sheet(2px);
   border-radius: 2px;
+  color: var(--color-black);
   font-family: var(--font-table);
   font-size: var(--font-size--very-small);
   font-weight: bold;
-  color: var(--color-dark);
   width: 200px;
   padding: 4px;
   position: relative;

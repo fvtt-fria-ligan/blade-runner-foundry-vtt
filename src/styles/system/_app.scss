@@ -49,6 +49,7 @@ a.inline-roll {
     @include utils.boxed-property;
     @include utils.input-background;
     border-radius: $gap;
+    color: var(--color-black);
     font-family: var(--font-table);
     font-weight: bold;
     text-align: center;
@@ -63,6 +64,10 @@ a.inline-roll {
 .blade-runner,
 .chat-message,
 .window-app.dialog {
+  .window-content {
+    color: var(--color-foreground);
+  }
+
   button,
   .button,
   .dialog-button {
