@@ -2,7 +2,6 @@ import { FLBR } from '@system/config';
 import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
 import Modifier from '@system/modifier';
 import BRRollHandler from '@components/roll/roller';
-import { capitalize } from '@utils/string-util';
 
 export default class BladeRunnerItem extends Item {
 
@@ -63,7 +62,7 @@ export default class BladeRunnerItem extends Item {
             str += `ATTRIBUTE.${n.toUpperCase()}`;
             break;
           case 'skill':
-            str += `SKILL.${capitalize(n)}`;
+            str += `SKILL.${n.capitalize()}`;
         }
         str = game.i18n.localize(str);
         str += ` ${m.value}`;
@@ -143,7 +142,7 @@ export default class BladeRunnerItem extends Item {
     const attributeKey = this.props.attribute;
     const skillKey = this.props.skill;
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
-    const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`) : null;
+    const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`) : null;
     const title = `${this.detailedName} (${attributeName}${skillKey ? ` & ${skillName}` : ''})`;
     const attributeValue = this.actor?.getAttribute(attributeKey);
     const skillValue = this.actor?.getSkill(skillKey);
@@ -176,7 +175,7 @@ export default class BladeRunnerItem extends Item {
 
   async _rollSpecial(value) {
     const execute = await Dialog.confirm({
-      title: game.i18n.localize(`ITEM.Type${capitalize(this.type)}`),
+      title: game.i18n.localize(`ITEM.Type${this.type.capitalize()}`),
       content: `<p>${this.name}</p>`,
     });
     if (!execute) return;

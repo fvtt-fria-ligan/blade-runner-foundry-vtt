@@ -1,7 +1,6 @@
 import BRRollHandler from '@components/roll/roller';
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES, CAPACITIES } from '@system/constants';
-import { capitalize } from '@utils/string-util';
 
 /**
  * @typedef {Object} ActorCapacity
@@ -211,7 +210,7 @@ export default class BladeRunnerActor extends Actor {
       return this.rollBlank(options);
     }
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
-    const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`) : null;
+    const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`) : null;
 
     // ? const title = options.title ?? skillName ?? attributeName;
     let title;

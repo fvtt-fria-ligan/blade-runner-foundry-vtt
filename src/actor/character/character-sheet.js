@@ -1,7 +1,6 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet';
 import { SYSTEM_NAME, ACTOR_TYPES, ACTOR_SUBTYPES } from '@system/constants';
 import { FLBR } from '@system/config';
-import { capitalize } from '@utils/string-util';
 
 /**
  * Blade Runner RPG Actor Sheet for Character.
@@ -90,7 +89,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     const elem = event.currentTarget;
     const skillKey = elem.dataset.skill;
     const attrKey = FLBR.skillMap[skillKey];
-    const title = `${elem.innerText} (${game.i18n.localize(`FLBR.SKILL.${capitalize(skillKey)}`)})`;
+    const title = `${elem.innerText} (${game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`)})`;
     return this.actor.rollStat(attrKey, skillKey, { title });
   }
 

@@ -1,5 +1,4 @@
 import * as BR from './constants.js';
-import { capitalize } from '@utils/string-util.js';
 
 /** @typedef {string} KeyString */
 /** @typedef {string} DieScoreString */
@@ -202,7 +201,7 @@ FLBR.itemSpecialInputMaxLength = 80;
 /** @type {Object.<string, TranslationString>} */
 FLBR.rollModes = {};
 for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
-  FLBR.rollModes[v] = `CHAT.Roll${capitalize(k.toLowerCase())}`;
+  FLBR.rollModes[v] = `CHAT.Roll${k.toLowerCase().capitalize()}`;
 }
 
 // TODO

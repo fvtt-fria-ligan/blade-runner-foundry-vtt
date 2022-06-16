@@ -1,4 +1,3 @@
-import { capitalize } from '@utils/string-util.js';
 import { FLBR } from './config.js';
 import { SYSTEM_NAME } from './constants';
 
@@ -47,7 +46,8 @@ function registerHandlebarsHelpers() {
   });
 
   Handlebars.registerHelper('capitalize', function (str) {
-    return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.slice(1) : str;
+    // return typeof str === 'string' && str.length > 0 ? str[0].toUpperCase() + str.slice(1) : str;
+    return str.capitalize();
   });
 
   Handlebars.registerHelper('toLowerCase', function (str) {
@@ -148,7 +148,7 @@ function registerHandlebarsHelpers() {
 
   Handlebars.registerHelper('createNewItemButton', function (type) {
     const title = game.i18n.format('FLBR.CreateNewItem', {
-      type: game.i18n.localize(`ITEM.Type${capitalize(type)}`),
+      type: game.i18n.localize(`ITEM.Type${type.capitalize()}`),
     });
     const str = `<a class="btn item-create" data-type="${type}" title="${title}">${FLBR.Icons.buttons.plus}</a>`;
     return new Handlebars.SafeString(str);
