@@ -1,7 +1,6 @@
-import { SYSTEM_NAME } from '@system/constants';
 import semverComp from '@utils/semver-compare';
 
-const sysName = game.system.data.name || SYSTEM_NAME;
+const sysName = 'blade-runner';
 
 export default async function displayMessages() {
   const messages = await fetch(`systems/${sysName}/assets/messages/messages.jsonc`)
