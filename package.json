@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Stefouch/blade-runner-foundry-vtt.git"
+    "url": "git+https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt.git"
   },
   "keywords": [
     "Blade Runner",
@@ -37,13 +37,16 @@
     {
       "name": "Stefouch",
       "url": "https://stefouch.be"
+    },
+    {
+      "name": "aMediocreDad"
     }
   ],
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/Stefouch/blade-runner-foundry-vtt/issues"
+    "url": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues"
   },
-  "homepage": "https://github.com/Stefouch/blade-runner-foundry-vtt#readme",
+  "homepage": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt#readme",
   "dependencies": {
     "foundry-year-zero-roller": "github:Stefouch/foundry-year-zero-roller#v5.0.0"
   },

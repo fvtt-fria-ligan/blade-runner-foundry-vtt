@@ -20,7 +20,7 @@ const yzurDirectory = './static/lib';
 const templateExt = 'hbs';
 const staticFiles = ['lib', 'lang', 'assets', 'fonts', 'scripts', 'system.json', 'template.json', 'LICENSE'];
 const getDownloadURL = version =>
-  `https://github.com/Stefouch/blade-runner-foundry-vtt/releases/download/v${version}/flbr-fvtt_v${version}.zip`;
+  `https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/v${version}/blade-runner-fvtt_v${version}.zip`;
 const packageJson = JSON.parse(fs.readFileSync('package.json'));
 
 const stdio = 'inherit';
