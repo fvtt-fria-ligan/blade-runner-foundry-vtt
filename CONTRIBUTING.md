@@ -62,7 +62,7 @@ npm run dev
 
 To make sure that Foundry VTT will be able to detect the system so you can debug properly, you need to connect your dist folder with a symbolic link or folder junction in the `systems/`-folder in `FoundryVTT/Data`. You should make sure you do not have a pre-existing forbidden-lands installation in the `systems/`-folder.
 
-Configure a `foundryConfig.json`-file in the project's root folder it should contain information that looks like this:
+Configure a `foundryconfig.json`-file in the project's root folder it should contain information that looks like this:
 
 ```json
 {
@@ -176,7 +176,7 @@ Following are some of the files and folders that you may be interested in editin
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── esbuild.config.js
-├── foundryConfig-example.json
+├── foundryconfig-example.json
 ├── gulpfile.js
 ├── jsconfig.json
 ├── LICENSE
@@ -207,7 +207,7 @@ Following are some of the files and folders that you may be interested in editin
 9. `CHANGELOG.md`: This file contains changes made up until the latest release. It is automatically generated when one of the admins bumps the version of the system.
 10. `CONTRIBUTING.md`: You are reading it.
 11. `esbuild.config.js`: The config file for javascript concatenation.
-12. `foundryConfig-example.json`: Rename this file `foundryConfig.json` and edit it to contain the absolute path to your `Foundry VTT/Data`-folder.
+12. `foundryconfig-example.json`: Rename this file `foundryconfig.json` and edit it to contain the absolute path to your `Foundry VTT/Data`-folder.
 13. `.jsconfig.json` and `gulpfile.js`: These files contains the configuration for the scripts used to build and watch the project as well as releases.
 14. `LICENSE`: The License file for the project.
 15. `package-lock.json` and `package.json`: These files are used by `npm` to configure the project, and track dependencies.

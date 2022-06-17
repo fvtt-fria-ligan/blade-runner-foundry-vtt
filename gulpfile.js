@@ -101,13 +101,13 @@ async function cleanDist() {
 /* ------------------------------------------ */
 
 /**
- * Gets the data path of Foundry VTT based on what is configured in `foundryConfig.json`.
+ * Gets the data path of Foundry VTT based on what is configured in `foundryconfig.json`.
  * @returns {string} data path
  * @throws {Error} When user data path invalid (no data directory found)
- * @throws {Error} When no user data path defined in `foundryConfig.json`
+ * @throws {Error} When no user data path defined in `foundryconfig.json`
  */
 function getDataPath() {
-  const config = JSON.parse(fs.readFileSync('foundryConfig.json'));
+  const config = JSON.parse(fs.readFileSync('foundryconfig.json'));
 
   if (config?.dataPath) {
     if (!fs.existsSync(path.resolve(config.dataPath))) {
@@ -117,7 +117,7 @@ function getDataPath() {
     return path.resolve(config.dataPath);
   }
   else {
-    throw new Error('No User Data path defined in foundryConfig.json');
+    throw new Error('No User Data path defined in foundryconfig.json');
   }
 }
 

@@ -13,7 +13,7 @@ npm-debug.log
 *.log
 
 # Local Configuration
-foundryConfig.json
+foundryconfig.json
 jtmConfig.json
 /*.lock
 
