@@ -137,7 +137,7 @@ function registerHandlebarsHelpers() {
     }
     if (loss < 0) {
       str += '<span class="loss">';
-      for (;loss < 0; loss++) {
+      for (; loss < 0; loss++) {
         str += `${FLBR.Icons.boxes.lost}`;
       }
       str += '</span>';
