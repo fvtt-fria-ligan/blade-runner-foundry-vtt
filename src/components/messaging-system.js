@@ -1,7 +1,10 @@
-import semverComp from '../utils/semver-compare.js';
+import { SYSTEM_NAME } from '@system/constants';
+import semverComp from '@utils/semver-compare';
+
+const sysName = game.system.data.name || SYSTEM_NAME;
 
 export default async function displayMessages() {
-  const { messages } = await fetch('systems/blade-runner/assets/messages/messages.jsonc')
+  const messages = await fetch(`systems/${sysName}/assets/messages/messages.jsonc`)
     .then(resp => resp.text())
     .then(jsonc => JSON.parse(stripJSON(jsonc)));
 
@@ -36,7 +39,7 @@ const isCurrent = msg => {
 };
 
 const hasDisplayed = identifier => {
-  const settings = game.settings.get('blade-runner', 'messages');
+  const settings = game.settings.get(sysName, 'messages');
   if (settings?.includes(identifier)) return true;
   else return false;
 };
@@ -47,7 +50,7 @@ const displayPrompt = (title, content) => {
     title: title,
     content: content,
     label: 'Understood!',
-    options: { width: 600, classes: ['blade-runner', 'dialog'] },
+    options: { width: 600, classes: [sysName, 'dialog'] },
     callback: () => setDisplayed(title),
   });
 };
@@ -62,7 +65,7 @@ const sendToChat = (title, content) => {
 };
 
 const setDisplayed = async identifier => {
-  const settings = game.settings.get('blade-runner', 'messages');
+  const settings = game.settings.get(sysName, 'messages');
   settings.push(identifier);
-  await game.settings.set('blade-runner', 'messages', settings.flat());
+  await game.settings.set(sysName, 'messages', settings.flat());
 };
