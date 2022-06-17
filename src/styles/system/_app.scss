@@ -64,10 +64,6 @@ a.inline-roll {
 .blade-runner,
 .chat-message,
 .window-app.dialog {
-  .window-content {
-    color: var(--color-foreground);
-  }
-
   button,
   .button,
   .dialog-button {
@@ -204,6 +200,7 @@ a.inline-roll {
   /* ------------------------------------------ */
 
   .window-content {
+    color: var(--color-foreground);
     padding: $gap;
     background: none;
     overflow: auto;
