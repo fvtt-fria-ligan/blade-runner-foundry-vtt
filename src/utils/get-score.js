@@ -25,5 +25,3 @@ export function generateScores(data) {
   }
   return data;
 }
-
-const /* string[] */ bob /* :string[] */ = [];
