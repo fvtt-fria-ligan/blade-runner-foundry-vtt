@@ -20,6 +20,10 @@ export default class Modifier {
      * @constant
      */
     this.id = foundry.utils.randomID();
+    // Object.defineProperty(this, 'id', {
+    //   configurable: false,
+    //   value: foundry.utils.randomID(),
+    // });
 
     /**
      * The item that holds the modifier.
@@ -46,7 +50,7 @@ export default class Modifier {
 
     const keys = key.split('.');
     if (keys.length !== 2) {
-      throw new SyntaxError(`Modifier "${this.name}" | key#length not equal to 2: "${key}" | You must choose a name.`);
+      throw new SyntaxError(`Modifier "${this.name}" | Key invalid → key#length not equal to 2: "${key}"`);
     }
 
     /**
@@ -54,9 +58,6 @@ export default class Modifier {
      * @type {string}
      */
     this.category = keys[0];
-    // if (!this.constructor.ALLOWED_CATEGORIES.includes(this.category)) {
-    //   throw new TypeError(`Modifier "${this.name}" | Illegal target category: "${this.category}"`);
-    // }
 
     /**
      * The target that is modified by the modifier.
