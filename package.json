@@ -16,7 +16,7 @@
     "lint:fix": "eslint --ext .js --fix .",
     "format": "prettier --write \"./**/*.(js|json|scss)\"",
     "format:hbs": "prettier **/*.hbs --write --parser=glimmer",
-    "postinstall": "npx patch-package & npx husky install",
+    "postinstall": "npx patch-package & npx husky install & npm run import:yzur",
     "import:yzur": "gulp yzur",
     "upd": "npm list -g --depth=0 & npm outdated & npx npm-check -u",
     "test": "echo \"Error: no test specified\" && exit 1"
