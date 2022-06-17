@@ -10,6 +10,11 @@ import { ACTOR_TYPES, CAPACITIES } from '@system/constants';
  * @property {number} permanentLoss
  */
 
+/**
+ * Blade Runner Actor Document.
+ * @class
+ * @extends {Actor}
+ */
 export default class BladeRunnerActor extends Actor {
 
   /* ------------------------------------------ */
@@ -56,35 +61,23 @@ export default class BladeRunnerActor extends Actor {
     return FLBR.maxPushMap[this.nature];
   }
 
-  // TODO
-  // get rollData() {
-  //   return this.getRollData();
-  // }
+  get rollData() {
+    return this.getRollData();
+  }
 
-  /* ------------------------------------------ */
-  /*  Create                                    */
-  /* ------------------------------------------ */
+  /* ----------------------------------------- */
 
-  // /** @override */
-  // static async create(data, options) {
-  //   console.warn(data, options);
-  //   switch (data.type) {
-  //     case ACTOR_TYPES.CHAR:
-  //       if (!data.data.attributes || !data.data.skills) {
-  //         throw new TypeError(`FLBR | "${data.type}" has No attribute nor skill`);
-  //       }
-  //       // Sets the default starting value for attributes.
-  //       for (const attribute in data.data.attributes) {
-  //         data.data.attributes[attribute] = { value: FLBR.startingAttributeLevel };
-  //       }
-  //       // Builds the list of skills.
-  //       for (const skill in FLBR.skillMap) {
-  //         data.data.skills[skill] = { value: FLBR.startingSkillLevel };
-  //       }
-  //       break;
-  //   }
-  //   return super.create(data, options);
-  // }
+  /** @override */
+  getRollData() {
+    const rollData = super.getRollData();
+    for (const [k, v] of Object.entries(this.attributes)) {
+      rollData[k] = v.value;
+    }
+    for (const [k, v] of Object.entries(this.skills)) {
+      rollData[k] = v.value;
+    }
+    return rollData;
+  }
 
   /* ----------------------------------------- */
   /*  Data Preparation                         */
