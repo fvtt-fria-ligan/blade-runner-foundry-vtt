@@ -82,7 +82,7 @@ export default class Modifier {
    * @readonly
    */
   get name() {
-    return this._name ?? this.item?.name;
+    return this._name ?? this.item?.name ?? this.target;
   }
 
   /**
@@ -161,5 +161,33 @@ export default class Modifier {
       });
     }
     return out;
+  }
+
+  /* ------------------------------------------ */
+
+  static getRangedCombatModifiers() {
+    const category = 'combat';
+    return [
+      new Modifier(`${category}.outOfRange`, -1, {}, {
+        active: false,
+        name: game.i18n.localize('FLBR.RangedCombat.OutOfRange'),
+      }),
+      new Modifier(`${category}.smallTarget`, -1, {}, {
+        active: false,
+        name: game.i18n.localize('FLBR.RangedCombat.SmallTarget'),
+      }),
+      new Modifier(`${category}.largeTarget`, 1, {}, {
+        active: false,
+        name: game.i18n.localize('FLBR.RangedCombat.LargeTarget'),
+      }),
+      new Modifier(`${category}.targetBehindCover`, -1, {}, {
+        active: false,
+        name: game.i18n.localize('FLBR.RangedCombat.TargetBehindCover'),
+      }),
+      new Modifier(`${category}.unseenTarget`, -1, {}, {
+        active: false,
+        name: game.i18n.localize('FLBR.RangedCombat.UnseenTarget'),
+      }),
+    ];
   }
 }

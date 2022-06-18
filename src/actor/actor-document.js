@@ -1,6 +1,7 @@
+import Modifier from '@components/modifier';
 import BRRollHandler from '@components/roll/roller';
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, CAPACITIES } from '@system/constants';
+import { ACTOR_TYPES, CAPACITIES, SKILLS } from '@system/constants';
 
 /**
  * @typedef {Object} ActorCapacity
@@ -149,7 +150,7 @@ export default class BladeRunnerActor extends Actor {
   /**
    * Gets all the modifiers from this actor's items.
    * @param {Object} options Filtering options
-   * @returns {Array.<import('@system/modifier').default>} An array of Modifiers
+   * @returns {Array.<import('@components/modifier').default>} An array of Modifiers
    */
   getRollModifiers(options) {
     const modifiers = [];
@@ -221,11 +222,16 @@ export default class BladeRunnerActor extends Actor {
     if (attributeValue) dice.push(attributeValue);
     if (skillValue) dice.push(skillValue);
 
+    const modifiers = this.getRollModifiers({ targets });
+    if (skillKey === SKILLS.FIREARMS) {
+      modifiers.push(...Modifier.getRangedCombatModifiers());
+    }
+
     const roller = new BRRollHandler({
       title,
       actor: this,
       attributeKey, skillKey, dice,
-      modifiers: this.getRollModifiers({ targets }),
+      modifiers,
       maxPush: this.maxPush,
     }, {
       unlimitedPush: this.data.flags.bladerunner?.unlimitedPush,

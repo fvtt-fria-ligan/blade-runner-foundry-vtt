@@ -1,6 +1,6 @@
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
-import Modifier from '@system/modifier';
+import { ITEM_TYPES, SKILLS, SYSTEM_NAME } from '@system/constants';
+import Modifier from '@components/modifier';
 import BRRollHandler from '@components/roll/roller';
 
 export default class BladeRunnerItem extends Item {
@@ -133,8 +133,6 @@ export default class BladeRunnerItem extends Item {
    * @returns {BRRollHandler} Rendered RollHandler FormApplication
    */
   roll() {
-    // this.actor.rollStat(this.props.attribute, this.props.skill);
-
     switch (this.type) {
       case ITEM_TYPES.ARMOR: return this._rollArmor();
       // ! Not this one below ↓
@@ -159,12 +157,17 @@ export default class BladeRunnerItem extends Item {
     if (attributeValue) dice.push(attributeValue);
     if (skillValue) dice.push(skillValue);
 
+    const modifiers = this.actor?.getRollModifiers({ targets }) ?? [];
+    if (skillKey === SKILLS.FIREARMS) {
+      modifiers.push(...Modifier.getRangedCombatModifiers());
+    }
+
     const roller = new BRRollHandler({
       title,
       actor: this.actor,
       attributeKey, skillKey, dice,
       items: [this],
-      modifiers: this.actor?.getRollModifiers({ targets }),
+      modifiers,
       maxPush: this.actor?.maxPush,
     }, {
       unlimitedPush: this.actor?.data.flags.bladerunner?.unlimitedPush,
