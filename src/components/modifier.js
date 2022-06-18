@@ -170,23 +170,23 @@ export default class Modifier {
     return [
       new Modifier(`${category}.outOfRange`, -1, {}, {
         active: false,
-        name: game.i18n.localize('FLBR.RangedCombat.OutOfRange'),
+        name: game.i18n.localize('FLBR.RANGED_COMBAT.OutOfRange'),
       }),
       new Modifier(`${category}.smallTarget`, -1, {}, {
         active: false,
-        name: game.i18n.localize('FLBR.RangedCombat.SmallTarget'),
+        name: game.i18n.localize('FLBR.RANGED_COMBAT.SmallTarget'),
       }),
       new Modifier(`${category}.largeTarget`, 1, {}, {
         active: false,
-        name: game.i18n.localize('FLBR.RangedCombat.LargeTarget'),
+        name: game.i18n.localize('FLBR.RANGED_COMBAT.LargeTarget'),
       }),
       new Modifier(`${category}.targetBehindCover`, -1, {}, {
         active: false,
-        name: game.i18n.localize('FLBR.RangedCombat.TargetBehindCover'),
+        name: game.i18n.localize('FLBR.RANGED_COMBAT.TargetBehindCover'),
       }),
       new Modifier(`${category}.unseenTarget`, -1, {}, {
         active: false,
-        name: game.i18n.localize('FLBR.RangedCombat.UnseenTarget'),
+        name: game.i18n.localize('FLBR.RANGED_COMBAT.UnseenTarget'),
       }),
     ];
   }
