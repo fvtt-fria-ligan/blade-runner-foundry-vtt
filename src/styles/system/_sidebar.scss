@@ -1,0 +1,27 @@
+#sidebar {
+  #sidebar-tabs {
+    border-bottom: 1px solid var(--color-blue-lighter);
+    box-shadow: 0 0 10px var(--color-blue);
+  }
+  #sidebar-tabs > .item {
+    color: var(--color-blue-lighter);
+  }
+  #sidebar-tabs > .item.active {
+    color: var(--color-yellow);
+    border: 1px solid var(--color-blue);
+    border-bottom: none;
+    box-shadow: 0 0 6px inset var(--color-blue-lighter);
+  }
+
+  &.collapsed {
+    #sidebar-tabs > .item.active {
+      border-bottom: 1px solid var(--color-blue-lighter);
+    }
+  }
+}
+
+#sidebar, .sidebar-popout {
+  .action-buttons button {
+    line-height: 1;
+  }
+}
