@@ -537,29 +537,17 @@ export default class BRRollHandler extends FormApplication {
   static async askDie(lowest = 6) {
     const template = 'systems/blade-runner/templates/components/roll/roll-askdie-dialog.hbs';
     const content = await renderTemplate(template, { lowest });
-    return new Promise(resolve => {
-      const data = {
-        title: game.i18n.localize('FLBR.ROLLER.AddDie'),
-        content,
-        buttons: {
-          normal: {
-            label: game.i18n.localize('FLBR.OK'),
-            callback: html => resolve(html[0].querySelector('form').diesize.value),
-          },
-          cancel: {
-            label: game.i18n.localize('FLBR.Cancel'),
-            callback: () => resolve(false),
-          },
-        },
-        default: 'normal',
-        close: () => resolve(false),
-      };
-      const options = {
+    return Dialog.prompt({
+      title: game.i18n.localize('FLBR.ROLLER.AddDie'),
+      content,
+      label: game.i18n.localize('FLBR.OK'),
+      callback: html => html[0].querySelector('form').diesize.value,
+      rejectClose: false,
+      options: {
         width: 100,
         classes: ['blade-runner', 'dialog'],
         minimizable: false,
-      };
-      new Dialog(data, options).render(true);
+      },
     });
   }
 }
