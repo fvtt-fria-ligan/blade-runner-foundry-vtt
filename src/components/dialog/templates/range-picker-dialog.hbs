@@ -1,0 +1,9 @@
+<form autocomplete="off">
+	{{#if description}}
+		<p>{{{description}}}</p>
+	{{/if}}
+	<div class="flex boxed-property">
+		<input type="range" name="chooser" value="{{value}}" min="{{min}}" max="{{max}}" step="1"/>
+		<div class="boxed-value range-value">{{value}}</div>
+	</div>
+</form>
