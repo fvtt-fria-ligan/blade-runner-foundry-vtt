@@ -1,5 +1,7 @@
+import { ITEM_TYPES } from './constants';
 import { FLBR } from './config';
 import BRRollHandler from '@components/roll/roller';
+import BladeRunnerDialog from '@components/dialog/dialog';
 
 /* ------------------------------------------- */
 /*  Helper Methods                             */
@@ -36,7 +38,11 @@ export function addChatMessageContextOptions(_html, options) {
   // ? See Part 6, 6:55
   // Allows only this menu option if we have selected some tokens
   // & the message contains some damage.
-  const canDefend = li => canvas.tokens.controlled.length && li.find('.chat-card[data-damage]').length;
+  // Note: <li> is the chat message HTML element in the sidebar.
+  const canDefend = li => game.user.isGM
+    && canvas.tokens?.controlled?.length
+    && li.find('.chat-card[data-damage]').length;
+
   options.push({
     name: game.i18n.localize('FLBR.CHAT_ACTION.ApplyDamage'),
     icon: FLBR.Icons.buttons.attack,
@@ -46,9 +52,36 @@ export function addChatMessageContextOptions(_html, options) {
   return options;
 }
 
-function _applyDamage(messageElem) {
+async function _applyDamage(messageElem) {
   const messageId = messageElem.dataset.messageId;
   const message = game.messages.get(messageId);
+  const roll = message.roll;
+  let s = roll.successCount;
+  if (!s) return;
+
+  // For each selected tokens.
+  const defenderTokens = canvas.tokens.controlled;
+  for (const defenderToken of defenderTokens) {
+    if (!s) break;
+    let n = s;
+    // Prompts for assigning a qty of successes to tokens if more than one were selected.
+    if(defenderTokens.length > 1) {
+      n = await BladeRunnerDialog.rangePicker({
+        title: game.i18n.localize('FLBR.DIALOG.AssignSuccesses'),
+        description: game.i18n.format('FLBR.DIALOG.AssignSuccessesHint', {
+          name: `<b>${defenderToken.name}</b>`,
+        }),
+        value: s,
+      });
+      if (n) s -= n;
+      else continue;
+    }
+
+    // Computes damage.
+    const damage = n > 0 ? (roll.options.damage || 0) + 1 * (n - 1) : 0;
+    await defenderToken.actor.applyDamage(damage);
+  }
+
 }
 
 /* ------------------------------------------- */

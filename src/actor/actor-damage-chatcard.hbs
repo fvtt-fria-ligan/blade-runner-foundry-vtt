@@ -1,0 +1,19 @@
+<div class="blade-runner chat-card actor-damage">
+	<div class="card-content">
+		{{#if (gt damage 0)}}
+			<p>
+				{{localize "FLBR.CHAT.DamageDealt" name=name amount=damage}}
+				{{#if broken}}
+					<br/>
+					<span style="color: var(--color-red-darker); font-weight: bold;">
+						{{{config.Icons.buttons.lethal}}} {{localize "FLBR.Broken"}}
+					</span>
+				{{/if}}
+			</p>
+		{{else}}
+			<p>{{localize "FLBR.CHAT.NoDamageDealt" name=name}}</p>
+		{{/if}}
+		{{#if armors.length}}
+		{{/if}}
+	</div>
+</div>

@@ -1,7 +1,7 @@
+import { FLBR } from '@system/config';
+import { ACTOR_TYPES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_NAME } from '@system/constants';
 import Modifier from '@components/modifier';
 import BRRollHandler from '@components/roll/roller';
-import { FLBR } from '@system/config';
-import { ACTOR_TYPES, CAPACITIES, SKILLS } from '@system/constants';
 
 /**
  * @typedef {Object} ActorCapacity
@@ -295,5 +295,62 @@ export default class BladeRunnerActor extends Actor {
       return loss;
     }
     return 0;
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * Applies damage to one capacity of the actor (usually health).
+   * @param {number}  damage             Quantity of damage
+   * @param {string} [capacity='health'] Capacity to damage
+   * @returns {BladeRunnerActor} this
+   * @async
+   */
+  async applyDamage(damage, capacity = 'health') {
+    console.warn('FLBR | damage:', damage);
+    if (damage <= 0) return;
+    if (!(capacity in this.props)) {
+      throw new Error(`FLBR | BladeRunnerActor.applyDamage → Non-existent capacity "${capacity}"`);
+    }
+
+    // Rolls all armors, if any, and reduces damage, if success(es) were obtained.
+    let armorAblation = 0;
+    /** @type {Array.<import('@item/item-document').default>} */
+    const armors = this.itemTypes[ITEM_TYPES.ARMOR];
+    for (const armor of armors) {
+      const rollMessage = await armor._rollArmor();
+      armorAblation = rollMessage?.roll?.successCount ?? 0;
+    };
+
+    damage -= armorAblation;
+
+    if (damage > 0) {
+      const max = this.props[capacity].max;
+      const oldVal = this.props[capacity].value;
+      const newVal = Math.clamped(oldVal - damage, 0, max);
+      const diff = newVal - oldVal;
+
+      if (diff !== 0) await this.update({ [`data.${capacity}.value`]: newVal });
+    }
+
+    // Prepares the chat message.
+    const template = `systems/${SYSTEM_NAME}/templates/actor/actor-damage-chatcard.hbs`;
+    const content = await renderTemplate(template, {
+      name: this.name,
+      damage,
+      armors: armors.map(i => `${i.name} [${game.i18n.localize('FLBR.D')}${i.props.armor}]`),
+      broken: this.isBroken,
+      config: CONFIG.BLADE_RUNNER,
+    });
+    const chatData = {
+      content,
+      sound: CONFIG.sounds.notification,
+      speaker: ChatMessage.getSpeaker({ actor: this, token: this.token }),
+      user: game.user.id,
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get('core', 'rollMode'));
+    await ChatMessage.create(chatData);
+
+    return this;
   }
 }
