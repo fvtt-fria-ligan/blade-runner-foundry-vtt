@@ -189,6 +189,7 @@ export default class BladeRunnerItem extends Item {
 
     const roller = new BRRollHandler({
       title: this.name,
+      actor: this.actor,
       dice: [value, value],
       items: [this],
       maxPush: 0,
