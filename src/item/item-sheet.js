@@ -158,9 +158,10 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   _onBlastChange(event) {
     event.preventDefault();
-    const blast = event.currentTarget.value;
+    const blast = +event.currentTarget.value;
     if (!(blast in FLBR.blastPowerMap)) return;
     const { damage, crit } = FLBR.blastPowerMap[blast];
+    // TODO data.crit update not working properly in the item sheet, but values are all OK (tested).
     return this.item.update({
       'data.damage': damage,
       'data.crit': crit,
