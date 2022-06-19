@@ -35,10 +35,6 @@ a.inline-roll {
 /* ------------------------------------------ */
 
 .blade-runner {
-  // &.window-app .window-content > * {
-  //   height: 100%;
-  // }
-
   .capacity-boxes {
     display: block;
     color: var(--color-green);
@@ -124,7 +120,7 @@ a.inline-roll {
     }
   }
 
-  input,
+  input:not([type="range"]),
   select {
     @include utils.input-background;
     color: var(--color-black);
@@ -136,12 +132,19 @@ a.inline-roll {
       color: var(--color-disabled);
     }
   }
+
   select, img {
     border: none;
   }
+
+  // input[type="range"] {
+  //   // TODO https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
+  // }
+
   label {
     color: var(--color-blue-lighter);
   }
+
   p {
     color: var(--color-blue-lighter);
   }

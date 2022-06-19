@@ -5,7 +5,7 @@
 				{{localize "FLBR.CHAT.DamageDealt" name=name amount=damage}}
 				{{#if broken}}
 					<br/>
-					<span style="color: var(--color-red-darker); font-weight: bold;">
+					<span class="broken">
 						{{{config.Icons.buttons.lethal}}} {{localize "FLBR.Broken"}}
 					</span>
 				{{/if}}
@@ -13,7 +13,22 @@
 		{{else}}
 			<p>{{localize "FLBR.CHAT.NoDamageDealt" name=name}}</p>
 		{{/if}}
-		{{#if armors.length}}
+		{{#if armored}}
+			<hr/>
+			<p class="notes">
+				<small>
+					{{localize "FLBR.CHAT.InitialDamageDealt" damage=initialDamage}} 
+					{{#if (gt damage 0)}}
+						{{#if (eq damage initialDamage)}}
+							{{localize "FLBR.CHAT.ArmorNoEffect"}}
+						{{else}}
+							{{localize "FLBR.CHAT.ArmorDeflectedDamage" damage=deflectedDamage}}
+						{{/if}}
+					{{else}}
+						{{localize "FLBR.CHAT.ArmorDeflectedAllDamage"}}
+					{{/if}}
+				</small>
+			</p>
 		{{/if}}
 	</div>
 </div>

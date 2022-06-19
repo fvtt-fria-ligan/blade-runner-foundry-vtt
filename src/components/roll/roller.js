@@ -327,6 +327,7 @@ export default class BRRollHandler extends FormApplication {
       // isAttack: this.isAttack,
       // consumable: this.options.consumable,
       damage: this.damage,
+      isExplosive: this.item?.type === ITEM_TYPES.EXPLOSIVE,
       item: this.item?.name || this.items.map(i => i.name),
       itemId: this.item?.id || this.items.map(i => i.id),
       yzur: true,

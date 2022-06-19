@@ -52,6 +52,8 @@ export function addChatMessageContextOptions(_html, options) {
   return options;
 }
 
+/* ------------------------------------------- */
+
 async function _applyDamage(messageElem) {
   const messageId = messageElem.dataset.messageId;
   const message = game.messages.get(messageId);
@@ -59,13 +61,17 @@ async function _applyDamage(messageElem) {
   let s = roll.successCount;
   if (!s) return;
 
+  // Explosives special case.
+  const boom = roll.options.isExplosive;
+
   // For each selected tokens.
   const defenderTokens = canvas.tokens.controlled;
   for (const defenderToken of defenderTokens) {
     if (!s) break;
     let n = s;
     // Prompts for assigning a qty of successes to tokens if more than one were selected.
-    if(defenderTokens.length > 1) {
+    // Note: skip for explosives.
+    if(defenderTokens.length > 1 && !boom) {
       n = await BladeRunnerDialog.rangePicker({
         title: game.i18n.localize('FLBR.DIALOG.AssignSuccesses'),
         description: game.i18n.format('FLBR.DIALOG.AssignSuccessesHint', {

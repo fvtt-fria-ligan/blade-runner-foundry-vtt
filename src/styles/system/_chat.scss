@@ -119,6 +119,20 @@
 }
 
 /* ------------------------------------------ */
+/*  Actor Damage Chat Cards                   */
+/* ------------------------------------------ */
+
+.chat-message .actor-damage {
+  .broken {
+    color: var(--color-red-darker);
+  }
+  .notes {
+    font-weight: normal;
+    line-height: 1;
+  }
+}
+
+/* ------------------------------------------ */
 /*  Roll Chat Cards                           */
 /* ------------------------------------------ */
 

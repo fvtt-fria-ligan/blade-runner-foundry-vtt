@@ -307,11 +307,12 @@ export default class BladeRunnerActor extends Actor {
    * @async
    */
   async applyDamage(damage, capacity = 'health') {
-    console.warn('FLBR | damage:', damage);
     if (damage <= 0) return;
     if (!(capacity in this.props)) {
       throw new Error(`FLBR | BladeRunnerActor.applyDamage → Non-existent capacity "${capacity}"`);
     }
+
+    const initialDamage = damage;
 
     // Rolls all armors, if any, and reduces damage, if success(es) were obtained.
     let armorAblation = 0;
@@ -319,7 +320,7 @@ export default class BladeRunnerActor extends Actor {
     const armors = this.itemTypes[ITEM_TYPES.ARMOR];
     for (const armor of armors) {
       const rollMessage = await armor._rollArmor();
-      armorAblation = rollMessage?.roll?.successCount ?? 0;
+      armorAblation += rollMessage?.roll?.successCount ?? 0;
     };
 
     damage -= armorAblation;
@@ -337,8 +338,10 @@ export default class BladeRunnerActor extends Actor {
     const template = `systems/${SYSTEM_NAME}/templates/actor/actor-damage-chatcard.hbs`;
     const content = await renderTemplate(template, {
       name: this.name,
+      initialDamage,
       damage,
-      armors: armors.map(i => `${i.name} [${game.i18n.localize('FLBR.D')}${i.props.armor}]`),
+      deflectedDamage: initialDamage - damage,
+      armored: !!armors.length,
       broken: this.isBroken,
       config: CONFIG.BLADE_RUNNER,
     });
