@@ -428,8 +428,8 @@ export default class BRRollHandler extends FormApplication {
    * @param {ActorData} speaker
    * @returns {Promise.<number>} Remaining capacity value
    */
-  static async applyDamage({ attributeTrauma, options: { attributeKey, damage } }, speaker) {
-    const currentDamage = attributeTrauma; // TODO damage from weapon
+  static async applyDamage({ attributeTrauma, options: { attributeKey } }, speaker) {
+    const currentDamage = attributeTrauma;
 
     const nature = speaker?.nature;
     if (!nature) {
@@ -456,7 +456,7 @@ export default class BRRollHandler extends FormApplication {
     value = Math.clamped(value - currentDamage, 0, max);
 
     if (value === 0) {
-      ui.notifications.info('FLBR.YouAreBroken', { localize:true });
+      ui.notifications.info('FLBR.YouAreBroken', { localize: true });
     }
 
     await speaker.update({ [`data.${cap}.value`]: value });
