@@ -531,7 +531,7 @@ export default class BRRollHandler extends FormApplication {
    * Displays a dialog for requesting a die size.
    * @see {@link Dialog}
    * @param {number} [lowest=6] Value of the lowest die
-   * @returns {Promise.<number|boolean>} The desired die size. Returns `false` when cancelled.
+   * @returns {Promise.<number>} The desired die size
    * @static
    * @async
    */
