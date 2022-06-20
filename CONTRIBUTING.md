@@ -95,6 +95,16 @@ Once you have configured where your Foundry VTT Data-folder is, you can link the
 npm run link-project
 ```
 
+If the above didn't work, try a direct command instead:
+
+```bash
+# Unix
+ln -s dist/* /absolute/path/to/foundry/data/system-name
+
+# cmd
+mklink /J /absolute/path/to/link /absolute/path/to/this/repo/dist
+```
+
 ### 4. Test that it all works and start editing!
 
 You should now be able to open Foundry VTT and create a world using the Blade Runner RPG system.
