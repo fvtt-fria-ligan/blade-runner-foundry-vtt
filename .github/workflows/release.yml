@@ -28,6 +28,14 @@ jobs:
       - name: 🧱 Build Project
         run: npm run build
 
+      # Gets the game system name.
+      - name: 📄 Get Game System Name
+        id: game_system_name
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          path: dist/system.json
+          prop_path: name
+
       # Gets the version tag.
       - name: 🏷️ Get Version Tag
         id: version
@@ -44,14 +52,14 @@ jobs:
       - name: 📦 Create ZIP Archive
         run: |
           cd dist/
-          zip -r ../blade-runner-fvtt_${{ steps.version.outputs.tag }}.zip *
+          zip -r ../{{ steps.game_system_name.outputs.prop }}-fvtt_${{ steps.version.outputs.tag }}.zip *
       
       # Creates the release with its artifacts and description.
       - name: 🚀 Create Release
         uses: ncipollo/release-action@v1.10.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "./dist/system.json, blade-runner-fvtt_${{ steps.version.outputs.tag }}.zip"
+          artifacts: "./dist/system.json, {{ steps.game_system_name.outputs.prop }}-fvtt_${{ steps.version.outputs.tag }}.zip"
           body: ${{ steps.changelog.outputs.changelog }}
 
       # Publishes the release to the FoundryVTT's package repository.
