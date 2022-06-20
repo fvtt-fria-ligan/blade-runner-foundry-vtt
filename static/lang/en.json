@@ -172,6 +172,7 @@
   "FLBR.WEAPON_RANGE.Medium": "Medium",
   "FLBR.WEAPON_RANGE.Long": "Long",
   "FLBR.WEAPON_RANGE.Extreme": "Extreme",
+  "FLBR.YouAreBroken": "You are Broken!",
   "YZUR.CHAT.ROLL.Push": "Push",
   "YZUR.CHAT.ROLL.CancelPush": "Cancel Push",
   "YZUR.DIETERMS.D6BladeRunnerDie": "D6",
@@ -189,5 +190,8 @@
   "ITEM.TypeExplosive": "Explosive",
   "ITEM.TypeSpecialty": "Specialty",
   "ITEM.TypeInjury": "Injury",
+  "WARNING.ApplyDamageNoNature": "Apply Push Damage: Actor Nature Not Found!",
+  "WARNING.ApplyDamageNoCapacityKey": "Apply Push Damage: Nature-Capacity relation Not Found!",
+  "WARNING.ApplyDamageNoActorCapacity": "Apply Push Damage: Actor Capacity Not Found!",
   "WARNING.NoDiceInput": "No dice to roll!"
 }
