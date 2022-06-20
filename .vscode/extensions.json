@@ -2,7 +2,6 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "lokalise.i18n-ally",
-    "mohammed.json-translations-manager",
     "esbenp.prettier-vscode"
   ]
 }
