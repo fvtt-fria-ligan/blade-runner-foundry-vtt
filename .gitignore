@@ -1,13 +1,13 @@
+# OS
+.DS_Store
+
 # IDE
 /.vs
-/.vscode/*
-!/.vscode/extensions.json
-!/.vscode/i18n-ally-custom-framework.yml
+/.vscode/launch.json
 *.code-workspace
 
 # Node Modules
 /node_modules
-package-lock.json
 
 # Logs
 /logs
@@ -15,8 +15,7 @@ npm-debug.log
 *.log
 
 # Local Configuration
-foundryconfig.json
-jtmConfig.json
+pathconfig
 /*.lock
 
 # Distribution Files
