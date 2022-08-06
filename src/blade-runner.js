@@ -37,10 +37,10 @@ import displayMessages from '@components/messaging-system';
  * Debugging
  */
 /** @__PURE__ */ (async () => {
-  CONFIG.debug.hooks = true;
-  CONFIG.debug.dice = true;
-  console.warn('HOOKS DEBUG ACTIVATED: ', CONFIG.debug.hooks);
-  console.warn('DICE DEBUG ACTIVATED: ', CONFIG.debug.dice);
+  // CONFIG.debug.hooks = true;
+  // CONFIG.debug.dice = true;
+  // console.warn('HOOKS DEBUG ACTIVATED: ', CONFIG.debug.hooks);
+  // console.warn('DICE DEBUG ACTIVATED: ', CONFIG.debug.dice);
 })();
 
 Hooks.once('init', () => {
@@ -96,10 +96,6 @@ Hooks.once('ready', () => {
   displayMessages();
 
   console.log('FLBR | READY!');
-
-  // Debugging.
-  game.actors.getName('Bob')?.sheet?.render(true);
-  // game.items.getName('TST ChemRail')?.sheet?.render(true);
 });
 
 /* ------------------------------------------ */
