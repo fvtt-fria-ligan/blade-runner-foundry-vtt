@@ -1,8 +1,9 @@
 /* eslint-disable no-shadow */
+import { resolve } from 'node:path';
+import * as fs from 'fs-extra-plus';
 import gulp from 'gulp';
 import chalk from 'chalk';
-import * as fs from 'fs-extra-plus';
-import path from 'path';
+import yaml from 'gulp-yaml';
 import { execa } from 'execa';
 import semver from 'semver';
 import argv from './tools/args-parser.js';
@@ -13,12 +14,13 @@ import esBuild from './esbuild.config.js';
 /* ------------------------------------------ */
 
 const production = process.env.NODE_ENV === 'production';
-const repoName = path.basename(path.resolve('.'));
 const sourceDirectory = './src';
 const distDirectory = './dist';
 const yzurDirectory = './static/lib';
 const templateExt = 'hbs';
-const staticFiles = ['lib', 'lang', 'assets', 'fonts', 'scripts', 'system.json', 'template.json', 'LICENSE'];
+const langGlob = `${sourceDirectory}/lang/**/*.{yml,yaml}`;
+const staticFiles = ['lib', 'assets', 'fonts', 'scripts', 'system.json', 'template.json', 'LICENSE'];
+const manifestPath = 'static/system.json';
 const getDownloadURL = version =>
   `https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/v${version}/blade-runner-fvtt_v${version}.zip`;
 const packageJson = JSON.parse(fs.readFileSync('package.json'));
@@ -40,7 +42,7 @@ async function buildSource({ watch } = {}) {
 /* ------------------------------------------ */
 
 /**
- * Copies other source files.
+ * Copies all template files.
  * @async
  */
 async function pipeTemplates() {
@@ -53,6 +55,19 @@ async function pipeTemplates() {
       );
     }
   }
+}
+
+/* ------------------------------------------ */
+
+/**
+ * Creates the JSON translation files, from the Yaml ones.
+ * @async
+ */
+async function pipeTranslations() {
+  gulp
+    .src(langGlob)
+    .pipe(yaml({ safe: true }))
+    .pipe(gulp.dest('./dist/lang'));
 }
 
 /* ------------------------------------------ */
@@ -77,6 +92,7 @@ async function pipeStatics() {
 function buildWatch() {
   buildSource({ watch: true });
   gulp.watch(`${sourceDirectory}/**/*.${templateExt}`, { ignoreInitial: false }, pipeTemplates);
+  gulp.watch(langGlob, { ignoreInitial: false }, pipeTranslations);
   gulp.watch(
     staticFiles.map(file => `static/${file}`),
     { ignoreInitial: false },
@@ -97,61 +113,6 @@ async function cleanDist() {
 }
 
 /* ------------------------------------------ */
-/*  Link                                      */
-/* ------------------------------------------ */
-
-/**
- * Gets the data path of Foundry VTT based on what is configured in `foundryconfig.json`.
- * @returns {string} data path
- * @throws {Error} When user data path invalid (no data directory found)
- * @throws {Error} When no user data path defined in `foundryconfig.json`
- */
-function getDataPath() {
-  const config = JSON.parse(fs.readFileSync('foundryconfig.json'));
-
-  if (config?.dataPath) {
-    if (!fs.existsSync(path.resolve(config.dataPath))) {
-      throw new Error('User Data path invalid, no Data directory found');
-    }
-
-    return path.resolve(config.dataPath);
-  }
-  else {
-    throw new Error('No User Data path defined in foundryconfig.json');
-  }
-}
-
-/* ------------------------------------------ */
-
-/**
- * Links build to User Data folder.
- * @throws {Error} When could not find the `system.json`
- * @async
- */
-async function linkUserData() {
-  let destinationDirectory;
-  if (fs.existsSync(path.resolve('static/system.json'))) {
-    destinationDirectory = 'systems';
-  }
-  else {
-    throw new Error(`Could not find ${chalk.blueBright('system.json')}`);
-  }
-
-  const linkDirectory = path.resolve(getDataPath(), destinationDirectory, repoName);
-
-  if (argv.clean || argv.c) {
-    console.log(chalk.yellow(`Removing build in ${chalk.blueBright(linkDirectory)}.`));
-
-    await fs.remove(linkDirectory);
-  }
-  else if (!fs.existsSync(linkDirectory)) {
-    console.log(chalk.green(`Linking dist to ${chalk.blueBright(linkDirectory)}.`));
-    await fs.ensureDir(path.resolve(linkDirectory, '..'));
-    await fs.symlink(path.resolve(distDirectory), linkDirectory);
-  }
-}
-
-/* ------------------------------------------ */
 /*  Versioning                                */
 /* ------------------------------------------ */
 
@@ -160,8 +121,6 @@ async function linkUserData() {
  * @returns {object}
  */
 function getManifest() {
-  const manifestPath = 'static/system.json';
-
   if (fs.existsSync(manifestPath)) {
     return {
       file: JSON.parse(fs.readFileSync(manifestPath)),
@@ -272,8 +231,8 @@ async function bumpVersion(cb) {
  * @async
  */
 async function importYzur() {
-  const source = path.resolve('node_modules/foundry-year-zero-roller/dist/yzur.js');
-  const dest = path.resolve(`${yzurDirectory}/yzur.js`);
+  const source = resolve('node_modules/foundry-year-zero-roller/dist/yzur.js');
+  const dest = resolve(`${yzurDirectory}/yzur.js`);
   if (fs.existsSync(source)) {
     fs.copyFileSync(source, dest);
     console.log(chalk.greenBright('[🎲YZUR🎲] Copied 1 file', chalk.blueBright(dest)));
@@ -287,10 +246,9 @@ async function importYzur() {
 /*  Scripts                                   */
 /* ------------------------------------------ */
 
-const execBuild = gulp.parallel(buildSource, pipeTemplates, pipeStatics);
+const execBuild = gulp.parallel(buildSource, pipeTemplates, pipeTranslations, pipeStatics);
 
 export const clean = cleanDist;
-export const link = linkUserData;
 export const build = gulp.series(clean, execBuild);
 export const watch = gulp.series(buildWatch);
 export const bump = gulp.series(bumpVersion, changelog, clean, execBuild);
