@@ -1,0 +1,203 @@
+FLBR.Attributes: Attributes
+FLBR.ATTRIBUTE.STR: Strength
+FLBR.ATTRIBUTE.AGI: Agility
+FLBR.ATTRIBUTE.INT: Intelligence
+FLBR.ATTRIBUTE.EMP: Empathy
+FLBR.ATTRIBUTE.MVR: Maneuverability
+FLBR.Skills: Skills
+FLBR.SKILL.CloseCombat: Close Combat
+FLBR.SKILL.Force: Force
+FLBR.SKILL.Stamina: Stamina
+FLBR.SKILL.Firearms: Firearms
+FLBR.SKILL.Mobility: Mobility
+FLBR.SKILL.Stealth: Stealth
+FLBR.SKILL.MedicalAid: Medical Aid
+FLBR.SKILL.Observation: Observation
+FLBR.SKILL.Tech: Tech
+FLBR.SKILL.Connections: Connections
+FLBR.SKILL.Insight: Insight
+FLBR.SKILL.Manipulation: Manipulation
+FLBR.SKILL.Driving: Driving
+FLBR.NATURE.Human: Human
+FLBR.NATURE.Replicant: Replicant
+FLBR.ARCHETYPE.ANALYST: Analyst
+FLBR.ARCHETYPE.CITY_SPEAKER: City Speaker
+FLBR.ARCHETYPE.DOXIE: Doxie
+FLBR.ARCHETYPE.ENFORCER: Enforcer
+FLBR.ARCHETYPE.FIXER: Fixer
+FLBR.ARCHETYPE.INSPECTOR: Inspector
+FLBR.ARCHETYPE.SKIMMER: Skimmer
+FLBR.COMBAT_ACTION.Sprint: Sprint
+FLBR.COMBAT_ACTION.Crawl: Crawl
+FLBR.COMBAT_ACTION.UnarmedAttack: Unarmed Attack
+FLBR.COMBAT_ACTION.MeleeAttack: Melee Attack
+FLBR.COMBAT_ACTION.Grapple: Grapple
+FLBR.COMBAT_ACTION.BreakFree: Break Free
+FLBR.COMBAT_ACTION.ShootFirearm: Shoot Firearm
+FLBR.COMBAT_ACTION.CarefulAim: Careful Aim
+FLBR.COMBAT_ACTION.ThrowWeapon: Throw Weapon
+FLBR.COMBAT_ACTION.FirstAid: First Aid
+FLBR.COMBAT_ACTION.Manipulate: Manipulate
+FLBR.COMBAT_ACTION.UseItem: Use Item
+FLBR.BUTTON.Delete: Delete item
+FLBR.BUTTON.Edit: Edit item
+FLBR.BUTTON.Roll: Roll item
+FLBR.BUTTON.ToChat: Send item to chat
+FLBR.CHAT_ACTION.ApplyDamage: Apply damage to selected tokens
+FLBR.DIALOG.AssignSuccesses: Assign Success(es)
+FLBR.DIALOG.AssignSuccessesHint: Choose a number of successes to spent against {name}.
+FLBR.HEADER.Actions: Actions
+FLBR.HEADER.Appearance: Appearance
+FLBR.HEADER.Armors: Armors
+FLBR.HEADER.AttributesAndSkills: Attributes & Skills
+FLBR.HEADER.Augments: Augments
+FLBR.HEADER.ChinyenPoints: Chinyen Points
+FLBR.HEADER.DieSize: Base Die
+FLBR.HEADER.FavoredGear: Favored Gear
+FLBR.HEADER.Health: Health
+FLBR.HEADER.Home: Home
+FLBR.HEADER.HumanityPoints: Humanity Points
+FLBR.HEADER.Injuries: Injuries
+FLBR.HEADER.Inventory: Inventory
+FLBR.HEADER.Notes: Notes
+FLBR.HEADER.Modifiers: Modifiers
+FLBR.HEADER.PromotionPoints: Promotion Points
+FLBR.HEADER.Resolve: Resolve
+FLBR.HEADER.SignatureItem: Signature Item
+FLBR.HEADER.Specialties: Specialties
+FLBR.HEADER.KeyMemory: Key Memory
+FLBR.HEADER.KeyRelationship: Key Relationship
+FLBR.HEADER.Rating: Rating
+FLBR.HEADER.YearsOnTheForce: Years On The Force
+FLBR.HEADER.Weapons: Weapons
+FLBR.SHEET_CONFIG.CharacterSubtype: Subtype
+FLBR.SHEET_CONFIG.CharacterSubtypeHint: >-
+  Select whether this is a PC or NPC. The later provides a pared down character sheet and
+  added functionality for the GM to more easily run NPCs.
+FLBR.SHEET_CONFIG.HealthMaxModifier: Health max. modifier
+FLBR.SHEET_CONFIG.HealthMaxModifierHint: Modify the health capacity maximum (GM Only).
+FLBR.SHEET_CONFIG.HealthPermanentLoss: Health permanent loss
+FLBR.SHEET_CONFIG.HealthPermanentLossHint: Set how much health is permanently lost (GM Only).
+FLBR.SHEET_CONFIG.ResolveMaxModifier: Resolve max. modifier
+FLBR.SHEET_CONFIG.ResolveMaxModifierHint: Modify the resolve capacity maximum (GM Only).
+FLBR.SHEET_CONFIG.ResolvePermanentLoss: Resolve permanent loss
+FLBR.SHEET_CONFIG.ResolvePermanentLossHint: Set how much resolve is permanently lost (GM Only).
+FLBR.SHEET_CONFIG.UnlimitedPush: Allow Unlimited Pushed Rolls
+FLBR.SHEET_CONFIG.UnlimitedPushHint: >-
+  If your GM allows an unlimited number of pushed rolls.
+  Check this setting to display a push button on almost any roll.
+FLBR.SHEET_HEADER.ArmorRoll: Roll Armor
+FLBR.SHEET_HEADER.BlastPowerRoll: Roll Blast Power
+FLBR.SHEET_HEADER.GenericRoll: Generic Roll
+FLBR.SHEET_HEADER.ItemPost: Post Item
+FLBR.SHEET_HEADER.ItemRoll: Roll Item
+FLBR.TAB.Bio: Biography
+FLBR.TAB.Combat: Combat
+FLBR.TAB.Info: Info
+FLBR.TAB.Inventory: Inventory
+FLBR.TAB.Features: Features
+FLBR.TAB.Mods: Mods
+FLBR.TAB.Roll: Roll
+FLBR.TAB.Stats: Stats
+FLBR.D: D
+FLBR.NO_VALUE: '–'
+FLBR.Advantage: Advantage
+FLBR.Blast: Blast
+FLBR.BlastPower: Blast Power
+FLBR.Broken: BROKEN
+FLBR.BrokenByDamage: BROKEN BY DAMAGE
+FLBR.BrokenByStress: BROKEN BY STRESS
+FLBR.Cancel: Cancel
+FLBR.CHAT.DamageDealt: '{name} is dealt {amount} damage.'
+FLBR.CHAT.NoDamageDealt: No damage was dealt to {name}.
+FLBR.CHAT.InitialDamageDealt: The attack had an initial amount of {damage} damage.
+FLBR.CHAT.ArmorDeflectedDamage: Armor deflected {damage} damage.
+FLBR.CHAT.ArmorDeflectedAllDamage: Armor deflected all damage.
+FLBR.CHAT.ArmorNoEffect: Armor had no effect.
+FLBR.CreateNewItem: Create a new {type} item
+FLBR.Crit: Crit
+FLBR.Disadvantage: Disadvantage
+FLBR.InjuryCategory: Category
+FLBR.InjuryDeathSave: Death Save
+FLBR.InjuryHealing: Healing
+FLBR.InjuryLethal: Lethal
+FLBR.InjuryPermanent: Permanent
+FLBR.InventoryNoItem: Empty.
+FLBR.ItemAddModifier: Add a roll Modifier
+FLBR.ItemArmor: Armor
+FLBR.ItemAttribute: Attribute
+FLBR.ITEM_AVAILABILITY.Incidental: Incidental
+FLBR.ITEM_AVAILABILITY.Luxury: Luxury
+FLBR.ITEM_AVAILABILITY.Premium: Premium
+FLBR.ITEM_AVAILABILITY.Rare: Rare
+FLBR.ITEM_AVAILABILITY.Standard: Standard
+FLBR.ItemAvailability: Availability
+FLBR.ItemCost: Cost
+FLBR.ItemNoModifier: No modifier.
+FLBR.ItemModifier: Modifier
+FLBR.ItemQuantity: Quantity
+FLBR.ItemRollable: Rollable
+FLBR.ItemSkill: Skill
+FLBR.ItemSpecial: Special
+FLBR.Nature: Nature
+FLBR.NatureHint: Character's Nature (Only GM)
+FLBR.NewItem: New {type}
+FLBR.OK: OK
+FLBR.Range: Range
+FLBR.RANGED_COMBAT.OutOfRange: Out of range
+FLBR.RANGED_COMBAT.SmallTarget: Small target
+FLBR.RANGED_COMBAT.LargeTarget: Large target
+FLBR.RANGED_COMBAT.TargetBehindCover: Target behind cover
+FLBR.RANGED_COMBAT.UnseenTarget: Unseen target
+FLBR.ROLLER.AddDie: Add a die
+FLBR.ROLLER.MaxPush: Max. push
+FLBR.ROLLER.ModifierActive: Active
+FLBR.ROLLER.ModifierName: Name
+FLBR.ROLLER.ModifierValue: Value
+FLBR.ROLLER.TotalModifier: 'Total: {value}'
+FLBR.ROLLER.ResolveTest: Test for Permanent Loss of Resolve
+FLBR.ROLLER.ResolveTestHint: >-
+  When recovering a point of Resolve, no matter how,
+  you must roll one Base Die corresponding to your Empathy rating.
+  If you roll a one, the point of Resolve is permanently lost,
+  meaning your maximum Resolve is reduced one step.
+FLBR.ROLLER.ResolveTestFailed: '{name} failed their Empathy roll and permanently loses 1 point of resolve.'
+FLBR.ROLLER.RollButton: Roll
+FLBR.ROLLER.RollWithAdvantageButton: Advantage
+FLBR.ROLLER.RollWithDisadvantageButton: Disadvantage
+FLBR.ROLLER.UnlimitedPush: Unlimited
+FLBR.SignatureItemUsedCheckboxHint: Used?
+FLBR.WeaponDamage: Damage
+FLBR.WeaponCrit: Crit Die
+FLBR.WeaponDamageType: Damage Type
+FLBR.WEAPON_DAMAGE_TYPE.Crushing: Crushing
+FLBR.WEAPON_DAMAGE_TYPE.Piercing: Piercing
+FLBR.WeaponRange: Range
+FLBR.WeaponRangeMaxRange: '{range} range'
+FLBR.WEAPON_RANGE.Engaged: Engaged
+FLBR.WEAPON_RANGE.Short: Short
+FLBR.WEAPON_RANGE.Medium: Medium
+FLBR.WEAPON_RANGE.Long: Long
+FLBR.WEAPON_RANGE.Extreme: Extreme
+FLBR.YouAreBroken: You are Broken!
+YZUR.CHAT.ROLL.Push: Push
+YZUR.CHAT.ROLL.CancelPush: Cancel Push
+YZUR.DIETERMS.D6BladeRunnerDie: D6
+YZUR.DIETERMS.D8BladeRunnerDie: D8
+YZUR.DIETERMS.D10BladeRunnerDie: D10
+YZUR.DIETERMS.D12BladeRunnerDie: D12
+ACTOR.TypeCharacter: Character
+ACTOR.TypeVehicle: Vehicle
+ACTOR.SubtypePc: Player Character
+ACTOR.SubtypeNpc: Non-Player Character
+ITEM.TypeGeneric: Generic
+ITEM.TypeUpgrade: Augment
+ITEM.TypeArmor: Armor
+ITEM.TypeWeapon: Weapon
+ITEM.TypeExplosive: Explosive
+ITEM.TypeSpecialty: Specialty
+ITEM.TypeInjury: Injury
+WARNING.ApplyDamageNoNature: 'Apply Push Damage: Actor Nature Not Found!'
+WARNING.ApplyDamageNoCapacityKey: 'Apply Push Damage: Nature-Capacity relation Not Found!'
+WARNING.ApplyDamageNoActorCapacity: 'Apply Push Damage: Actor Capacity Not Found!'
+WARNING.NoDiceInput: No dice to roll!

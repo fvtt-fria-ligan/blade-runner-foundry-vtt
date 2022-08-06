@@ -1,0 +1,7 @@
+{
+  "wrap-console-log.format.wrap.prefixString": "$func('FLBR | $var:', $var);",
+  "i18n-ally.localesPaths": [
+    "src/lang",
+  ],
+  "i18n-ally.keystyle": "flat",
+}
