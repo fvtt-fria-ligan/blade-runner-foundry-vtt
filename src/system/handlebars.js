@@ -1,5 +1,4 @@
 import { FLBR } from './config.js';
-import { SYSTEM_NAME } from './constants';
 
 /**
  * Defines a set of template paths to pre-load.
@@ -7,19 +6,10 @@ import { SYSTEM_NAME } from './constants';
  * @returns {Promise}
  */
 function preloadHandlebarsTemplates() {
-  const sysName = game.system.data.name || SYSTEM_NAME;
-  const path = `systems/${sysName}/templates`;
-  return loadTemplates([
-    `${path}/actor/character/character-sheet.hbs`,
-    `${path}/actor/character/character-limited-sheet.hbs`,
-    `${path}/actor/character/sheet-tabs/stats-tab.hbs`,
-    `${path}/actor/character/sheet-tabs/mods-tab.hbs`,
-    `${path}/actor/character/sheet-tabs/combat-tab.hbs`,
-    `${path}/actor/character/sheet-tabs/inventory-tab.hbs`,
-    `${path}/actor/character/sheet-tabs/bio-tab.hbs`,
-    `${path}/actor/character/inventory-partial.hbs`,
-    `${path}/item/modifiers-partial.hbs`,
-  ]);
+  /* Esbuild defines the template paths for us at build time. */
+  // eslint-disable-next-line no-undef
+  const paths = TEMPLATE_PATHS;
+  return loadTemplates(paths);
 }
 
 /* ------------------------------------------ */

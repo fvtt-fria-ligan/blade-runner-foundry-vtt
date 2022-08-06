@@ -1,10 +1,28 @@
-import fs from 'fs-extra-plus';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { join, sep, posix } from 'node:path';
 
-(async function () {
-  const templatePaths = await fs.glob('./dist/templates/**/*.hbs');
-  if (templatePaths && templatePaths.length > 0) {
-    console.log(
-      templatePaths.map(templatePath => `systems/forbidden-lands/${templatePath.replace('./dist/', '')}`),
-    );
-  }
-})();
+const SYSTEM_OR_MODULE = 'system';
+const ROOT_NAME = JSON.parse(readFileSync('./static/system.json')).name;
+
+const getPaths = (path, ext) => {
+  const paths = [];
+  const files = readdirSync(path);
+  files.forEach(file => {
+    const filePath = join(path, file);
+    if (statSync(filePath).isDirectory()) {
+      paths.push(...getPaths(filePath, ext));
+    }
+    else if (!ext || file.endsWith(ext)) {
+      paths.push(filePath);
+    }
+  });
+  return paths;
+};
+
+export default (() =>
+  getPaths('./src', '.hbs')
+    .map(templatePath => {
+      templatePath = templatePath.split(sep).slice(1).join(posix.sep).replace('templates/', '');
+      return `${SYSTEM_OR_MODULE}s/${ROOT_NAME}/templates/${templatePath}`;
+    })
+)();
