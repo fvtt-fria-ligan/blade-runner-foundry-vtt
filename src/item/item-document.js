@@ -65,7 +65,7 @@ export default class BladeRunnerItem extends Item {
             str += `SKILL.${n.capitalize()}`;
         }
         str = game.i18n.localize(str);
-        str += ` ${m.value}`;
+        str += ' ' + Number(m.value) > 0 ? '+' : '−';
         out.push(str);
       }
     }
