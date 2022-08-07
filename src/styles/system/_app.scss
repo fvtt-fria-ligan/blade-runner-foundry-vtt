@@ -61,7 +61,7 @@ a.inline-roll {
 // .chat-message,
 // .window-app.dialog,
 .app:not(.form) {
-  button,
+  button:not(.tox-tbtn),
   .button,
   .dialog-button {
     @include utils.boxed-property;
@@ -146,7 +146,7 @@ a.inline-roll {
   }
 
   p {
-    color: var(--color-blue-lighter);
+    color: var(--color-blue-darker);
   }
 
   /* ------------------------------------------ */

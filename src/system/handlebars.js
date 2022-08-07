@@ -48,6 +48,16 @@ function registerHandlebarsHelpers() {
     return str.toUpperCase();
   });
 
+  Handlebars.registerHelper('trim', function (str, n) {
+    n = +n;
+    if (isNaN(n)) {
+      console.warn('Handlebars Helper [trim] → maxLength Not a Number!\nDefaulting to max 100.');
+      n = 100;
+    }
+    // return TextEditor.truncateText(str, { maxLength: n, splitWords: true });
+    return TextEditor.previewHTML(str, n);
+  });
+
   // TODO remove
   // Handlebars.registerHelper('flps_enrich', function(content) {
   //   // Enriches content.

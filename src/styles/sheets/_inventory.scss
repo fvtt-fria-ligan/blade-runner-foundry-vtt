@@ -33,8 +33,9 @@
     justify-content: center;
     width: 64px;
     height: 64px;
+    min-width: 64px;
+    min-height: 64px;
     margin-right: 4px;
-    // img { width: 64px; }
 
     &.rollable {
       border-color: var(--color-yellow);
@@ -42,6 +43,10 @@
   }
 
   .details {
+    .item-detail {
+      line-height: 1;
+      margin-bottom: 2px;
+    }
     .name {
       font-weight: bold;
       text-transform: uppercase;
@@ -49,6 +54,9 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       max-width: 116px; // Calculated precisely
+    }
+    .description {
+      color: var(--color-blue-darker);
     }
     .special {
       color: var(--color-blue-darker);
@@ -66,7 +74,7 @@
   &.specialty,
   &.upgrade {
     width: 100%;
-    .photo { width: 36px; height: 36px; /*img { width: 36px; }*/ }
+    .photo { width: 36px; height: 36px; min-width: 36px; min-height: 36px; }
     .details { width: 100%; }
     .name { max-width: 316px; }
   }

@@ -8,10 +8,15 @@
 				<img src="{{img}}" title="{{name}}"/>
 			</div>
 			<div class="details">
-				<div class="item-detail name">{{detailedName}}</div>
-				{{#if (or (eq type "specialty") (eq type "upgrade"))}}
+				<div class="{{!-- item-detail --}} name">
+					{{#if data.data.lethal}}
+						{{{@root.config.Icons.buttons.lethal}}}
+					{{/if}}
+					{{detailedName}}
+				</div>
+				{{#if (or (eq type "specialty") (eq type "upgrade") (eq type "injury") (eq type "generic"))}}
 					{{#if data.data.description}}
-						<div class="item-detail description">{{{data.data.description}}}</div>
+						<div class="item-detail description">{{trim data.data.description 100}}</div>
 					{{else}}
 						{{#if hasModifier}}
 							<div class="item-detail modifiers-description">{{modifiersDescription}}</div>
@@ -20,7 +25,7 @@
 							<div class="item-detail special">{{data.data.special}}</div>
 						{{/if}}
 					{{/if}}
-				{{else}}
+				{{else}} {{!-- Otherwise, it's an armor or weapon --}}
 					{{#with data.data}}
 						{{#if damage includeZero=true}}
 							<div class="item-detail damage">
@@ -38,6 +43,10 @@
 						{{else if armor includeZero=true}}
 							<div class="item-detail armor">
 								{{localize "ITEM.TypeArmor"}}&numsp;{{localize "FLBR.D"}}{{armor}}
+							</div>
+						{{else}}
+							<div class="item-detail description">
+								{{{availability}}}
 							</div>
 						{{/if}}
 						{{#if special}}
