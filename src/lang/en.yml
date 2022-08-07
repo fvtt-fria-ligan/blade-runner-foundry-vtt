@@ -5,7 +5,7 @@ FLBR.ATTRIBUTE.INT: Intelligence
 FLBR.ATTRIBUTE.EMP: Empathy
 FLBR.ATTRIBUTE.MVR: Maneuverability
 FLBR.Skills: Skills
-FLBR.SKILL.CloseCombat: Close Combat
+FLBR.SKILL.CloseCombat: Hand-to-Hand C.
 FLBR.SKILL.Force: Force
 FLBR.SKILL.Stamina: Stamina
 FLBR.SKILL.Firearms: Firearms
@@ -180,6 +180,7 @@ FLBR.WEAPON_RANGE.Medium: Medium
 FLBR.WEAPON_RANGE.Long: Long
 FLBR.WEAPON_RANGE.Extreme: Extreme
 FLBR.YouAreBroken: You are Broken!
+FLBR.ActorSheet.NotifWrongItemType: Actor {actor} cannot hold {type} items!
 YZUR.CHAT.ROLL.Push: Push
 YZUR.CHAT.ROLL.CancelPush: Cancel Push
 YZUR.DIETERMS.D6BladeRunnerDie: D6

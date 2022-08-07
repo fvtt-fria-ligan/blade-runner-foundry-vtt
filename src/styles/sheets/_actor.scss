@@ -134,7 +134,7 @@ $border-stat-dotted: 1px dotted var(--color-green);
           font-family: var(--font-table);
           color: var(--color-green);
           font-weight: bold;
-          letter-spacing: 1px;
+          // letter-spacing: 1px;
           &:hover { color: var(--color-red); }
         }
         .attribute-name,
