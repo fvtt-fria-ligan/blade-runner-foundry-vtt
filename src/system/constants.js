@@ -24,8 +24,8 @@ export const ATTRIBUTES = {
 
 /** @enum {string} */
 export const SKILLS = {
-  CLOSE_COMBAT: 'closeCombat',
   FORCE: 'force',
+  CLOSE_COMBAT: 'closeCombat',
   STAMINA: 'stamina',
   FIREARMS: 'firearms',
   MOBILITY: 'mobility',
@@ -123,4 +123,10 @@ export const ITEM_TYPES = {
   EXPLOSIVE: 'explosive',
   SPECIALTY: 'specialty',
   CRITICAL_INJURY: 'injury',
+};
+
+/** @enum {string} */
+export const SETTINGS_KEYS = {
+  SYSTEM_MIGRATION_VERSION: 'systemMigrationVersion',
+  DISPLAYED_MESSAGES: 'messages',
 };

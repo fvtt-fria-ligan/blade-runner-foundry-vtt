@@ -3,9 +3,9 @@ import { resolve } from 'node:path';
 import * as fs from 'fs-extra-plus';
 import gulp from 'gulp';
 import chalk from 'chalk';
+import semver from 'semver';
 import yaml from 'gulp-yaml';
 import { execa } from 'execa';
-import semver from 'semver';
 import argv from './tools/args-parser.js';
 import esBuild from './esbuild.config.js';
 
