@@ -1,5 +1,5 @@
 .github
 dist
-static/lib
+static
 .eslintrc
 package-lock.json
