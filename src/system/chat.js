@@ -1,4 +1,3 @@
-import { ITEM_TYPES } from './constants';
 import { FLBR } from './config';
 import BRRollHandler from '@components/roll/roller';
 import BladeRunnerDialog from '@components/dialog/dialog';

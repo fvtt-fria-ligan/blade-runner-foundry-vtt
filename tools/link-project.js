@@ -1,17 +1,18 @@
 import { existsSync, readFileSync, mkdirSync, rmSync, symlinkSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-
 import c from 'chalk';
 
-const MODULEPATH = 'static/module.json';
+const SYSTEM_OR_MODULE = 'system';
+
+const MANIFESTPATH = `static/${SYSTEM_OR_MODULE}.json`;
 const FILENAME = 'pathconfig';
-const BASEPATH = 'Data/modules';
+const BASEPATH = `Data/${SYSTEM_OR_MODULE}s`;
 let DATAPATH;
 let PKG;
 
 try {
   DATAPATH = readFileSync(`./${FILENAME}`, 'utf-8');
-  const temp = readFileSync(MODULEPATH);
+  const temp = readFileSync(MANIFESTPATH);
   PKG = JSON.parse(temp);
 }
 catch (error) {
