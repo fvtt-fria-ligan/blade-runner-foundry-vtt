@@ -19,7 +19,7 @@ const distDirectory = './dist';
 const yzurDirectory = './static/lib';
 const templateExt = 'hbs';
 const langGlob = `${sourceDirectory}/lang/**/*.{yml,yaml}`;
-const staticFiles = ['lib', 'assets', 'fonts', 'scripts', 'system.json', 'template.json', 'LICENSE'];
+const staticFiles = ['assets', 'fonts', 'scripts', 'system.json', 'template.json'];
 const manifestPath = 'static/system.json';
 const getDownloadURL = version =>
   `https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/v${version}/blade-runner-fvtt_v${version}.zip`;
@@ -82,6 +82,8 @@ async function pipeStatics() {
       await fs.copy(`static/${file}`, `${distDirectory}/${file}`);
     }
   }
+  await fs.copy('./README.md', `${distDirectory}/README.md`).catch(err => console.error(err));
+  await fs.copy('./LICENSE', `${distDirectory}/LICENSE`).catch(err => console.error(err));
 }
 
 /* ------------------------------------------ */
