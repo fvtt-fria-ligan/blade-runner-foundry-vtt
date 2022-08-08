@@ -18,7 +18,7 @@
 
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES } from '@system/constants';
-import * as YZUR from '@lib/yzur';
+import * as YZUR from 'foundry-year-zero-roller';
 import * as Chat from '@system/chat';
 import BRRollHandler from '@components/roll/roller';
 import { registerSheets } from '@system/sheets';
@@ -32,16 +32,6 @@ import displayMessages from '@components/messaging-system';
 /* ------------------------------------------ */
 /*  Foundry VTT Initialization                */
 /* ------------------------------------------ */
-
-/**
- * Debugging
- */
-/** @__PURE__ */ (async () => {
-  // CONFIG.debug.hooks = true;
-  // CONFIG.debug.dice = true;
-  // console.warn('HOOKS DEBUG ACTIVATED: ', CONFIG.debug.hooks);
-  // console.warn('DICE DEBUG ACTIVATED: ', CONFIG.debug.dice);
-})();
 
 Hooks.once('init', () => {
   console.log('FLBR | Initializing the Blade Runner RPG Game System');

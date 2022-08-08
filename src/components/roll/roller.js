@@ -1,4 +1,4 @@
-import { YearZeroRoll } from '@lib/yzur';
+import { YearZeroRoll } from 'foundry-year-zero-roller';
 import { FLBR } from '@system/config';
 import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
 
