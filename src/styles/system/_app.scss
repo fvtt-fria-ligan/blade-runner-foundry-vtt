@@ -52,6 +52,7 @@ a.inline-roll {
   }
   .boxed-property {
     @include utils.boxed-property;
+    p { color: var(--color-blue-lighter); }
   }
 }
 
@@ -145,10 +146,6 @@ a.inline-roll {
     color: var(--color-blue-lighter);
   }
 
-  p {
-    color: var(--color-blue-darker);
-  }
-
   /* ------------------------------------------ */
 
   h1, h2, h3, h4, h5, h6 {
@@ -235,6 +232,9 @@ a.inline-roll {
     }
   }
 }
+/* ------------------------------------------ */
+/*  Custom Scrollbar                          */
+/* ------------------------------------------ */
 
 .blade-runner {
   ::-webkit-scrollbar {
