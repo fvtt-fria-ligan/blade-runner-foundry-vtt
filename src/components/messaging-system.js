@@ -46,7 +46,7 @@ const displayPrompt = (title, content) => {
   content = content.replace('{name}', game.user.name);
   return Dialog.prompt({
     title: title,
-    content: content,
+    content: `<img src="systems/${SYSTEM_NAME}/assets/bladerunner-banner-small.webp"/>${content}`,
     label: 'Understood!',
     options: { width: 600, classes: [SYSTEM_NAME, 'dialog'] },
     callback: () => setDisplayed(title),
@@ -56,9 +56,13 @@ const displayPrompt = (title, content) => {
 const sendToChat = (title, content) => {
   content = content.replace('{name}', game.user.name);
   setDisplayed(title);
+  const footer = `<footer class="nue">${game.i18n.localize('NUE.FirstLaunchHint')}</footer>`;
   return ChatMessage.create({
+    whisper: [game.user.id],
+    speaker: { alias: 'Blade Runner RPG' },
+    flags: { core: { canPopout: true } },
     title: title,
-    content: `<div class="blade-runner chat-item">${content}</div>`,
+    content: `<div class="chat-card"><h3 class="nue">${title}</h3>${content}${footer}</div>`,
   });
 };
 
