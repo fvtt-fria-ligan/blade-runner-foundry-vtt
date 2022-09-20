@@ -1,4 +1,4 @@
-import { YearZeroRoll } from 'foundry-year-zero-roller';
+import { YearZeroRoll } from 'yzur';
 import { FLBR } from '@system/config';
 import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
 
@@ -269,7 +269,7 @@ export default class BRRollHandler extends FormApplication {
    * @throws {Error} When formData or dice is empty
    */
   _validateForm(event, formData) {
-    const nok = foundry.utils.isObjectEmpty(formData)
+    const nok = foundry.utils.isEmpty(formData)
       || !this.dice.length
       || this.dice.includes('0')
       || !['roll', 'advantage', 'disadvantage'].includes(event.submitter.id);
@@ -445,7 +445,7 @@ export default class BRRollHandler extends FormApplication {
 
     /** @type {import('@actor/actor-document').ActorCapacity} */
     const capacity = speaker?.data.data[cap];
-    if (!capacity || foundry.utils.isObjectEmpty(capacity)) {
+    if (!capacity || foundry.utils.isEmpty(capacity)) {
       return ui.notifications.error('WARNING.ApplyDamageNoActorCapacity', { localize: true });
     }
 

@@ -31,7 +31,7 @@ export default class BladeRunnerItem extends Item {
 
   get hasModifier() {
     if (!this.props.modifiers) return false;
-    return !foundry.utils.isObjectEmpty(this.props.modifiers);
+    return !foundry.utils.isEmpty(this.props.modifiers);
   }
 
   get rollable() {
