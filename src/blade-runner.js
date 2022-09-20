@@ -18,7 +18,7 @@
 
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES } from '@system/constants';
-import * as YZUR from 'foundry-year-zero-roller';
+import * as YZUR from 'yzur';
 import * as Chat from '@system/chat';
 import BRRollHandler from '@components/roll/roller';
 import { registerSheets } from '@system/sheets';
@@ -114,24 +114,23 @@ Hooks.on('renderChatMessage', (_msg, html, _data) => Chat.hideChatActionButtons(
 // });
 
 Hooks.on('createActor', async (actor, _data, _options) => {
-  const actorData = actor.data.data;
   const updateData = {};
   switch (actor.type) {
     case ACTOR_TYPES.CHAR:
-      if (!actorData.attributes || !actorData.skills) {
+      if (!actor.system.attributes || !actor.system.skills) {
         throw new TypeError(`FLBR | "${actor.type}" has No attribute nor skill`);
       }
       // Sets the default starting value for each attribute.
-      for (const attribute in actorData.attributes) {
-        updateData[`data.attributes.${attribute}.value`] = FLBR.startingAttributeLevel;
+      for (const attribute in actor.system.attributes) {
+        updateData[`system.attributes.${attribute}.value`] = FLBR.startingAttributeLevel;
       }
       // Builds the list of skills and sets their default values.
       for (const skill in FLBR.skillMap) {
-        updateData[`data.skills.${skill}.value`] = FLBR.startingSkillLevel;
+        updateData[`system.skills.${skill}.value`] = FLBR.startingSkillLevel;
       }
       break;
   }
-  if (!foundry.utils.isObjectEmpty(updateData)) {
+  if (!foundry.utils.isEmpty(updateData)) {
     await actor.update(updateData);
   }
 });

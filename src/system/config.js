@@ -8,7 +8,7 @@ import * as BR from './constants.js';
 /**
  * The Blade Runner RPG configuration.
  * @constant
- * @enum
+ * @enum {any}
  */
 export const FLBR = {};
 
