@@ -1,5 +1,4 @@
 /* eslint-disable no-shadow */
-import { resolve } from 'node:path';
 import * as fs from 'fs-extra-plus';
 import gulp from 'gulp';
 import chalk from 'chalk';
@@ -16,7 +15,6 @@ import esBuild from './esbuild.config.js';
 const production = process.env.NODE_ENV === 'production';
 const sourceDirectory = './src';
 const distDirectory = './dist';
-const yzurDirectory = './static/lib';
 const templateExt = 'hbs';
 const langGlob = `${sourceDirectory}/lang/**/*.{yml,yaml}`;
 const staticFiles = ['assets', 'fonts', 'scripts', 'system.json', 'template.json'];
@@ -225,26 +223,6 @@ async function bumpVersion(cb) {
 }
 
 /* ------------------------------------------ */
-/*  YZUR                                      */
-/* ------------------------------------------ */
-
-/**
- * Imports the latest YZUR library.
- * @async
- */
-async function importYzur() {
-  const source = resolve('node_modules/foundry-year-zero-roller/dist/yzur.js');
-  const dest = resolve(`${yzurDirectory}/yzur.js`);
-  if (fs.existsSync(source)) {
-    fs.copyFileSync(source, dest);
-    console.log(chalk.greenBright('[🎲YZUR🎲] Copied 1 file', chalk.blueBright(dest)));
-  }
-  else {
-    throw new Error(chalk.red(`[YZUR] 🎲 Library file Not Found in "${source}"`));
-  }
-};
-
-/* ------------------------------------------ */
 /*  Scripts                                   */
 /* ------------------------------------------ */
 
@@ -255,5 +233,3 @@ export const build = gulp.series(clean, execBuild);
 export const watch = gulp.series(buildWatch);
 export const bump = gulp.series(bumpVersion, changelog, clean, execBuild);
 export const release = commitTagPush;
-
-export const yzur = importYzur;

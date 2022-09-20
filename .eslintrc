@@ -15,7 +15,6 @@
     "jquery",
     "@typhonjs-fvtt/eslint-config-foundry.js/0.8.0",
     "prettier"
-    // "plugin:prettier/recommended"
   ],
   "plugins": [
     "prettier"

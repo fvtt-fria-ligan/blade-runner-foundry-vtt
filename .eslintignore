@@ -1,5 +1,6 @@
 .github
-dist
+dist/
 node_modules
-static/lib
 foundry.js
+static/system.json
+static/template.json
