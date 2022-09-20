@@ -11,7 +11,7 @@ let DATAPATH;
 let PKG;
 
 try {
-  DATAPATH = readFileSync(`./${FILENAME}`, 'utf-8');
+  DATAPATH = readFileSync(`./${FILENAME}`, 'utf-8').trim();
   const temp = readFileSync(MANIFESTPATH);
   PKG = JSON.parse(temp);
 }
@@ -26,8 +26,8 @@ if (!existsSync(resolve(DATAPATH))) {
 }
 
 try {
-  const symlink = () => symlinkSync(resolve('./dist'), resolve(join(DATAPATH, `${BASEPATH}/${PKG.name}`)));
-  const path = resolve(join(DATAPATH, `${BASEPATH}/${PKG.name}`));
+  const symlink = () => symlinkSync(resolve('./dist'), resolve(join(DATAPATH, `${BASEPATH}/${PKG.id}`)));
+  const path = resolve(join(DATAPATH, `${BASEPATH}/${PKG.id}`));
   if (!existsSync(resolve('./dist'))) mkdirSync(resolve('./dist'));
   if (existsSync(path)) {
     if (process.argv[2] !== '--force') {
@@ -52,7 +52,7 @@ catch (error) {
 console.info(
   c.green(
     `${c.bold('Success:')} ${c.gray(
-      `Symlink created at ${c.blue(resolve(join(DATAPATH, `${BASEPATH}/${PKG.name}`)))}`,
+      `Symlink created at ${c.blue(resolve(join(DATAPATH, `${BASEPATH}/${PKG.id}`)))}`,
     )}`,
   ),
 );
