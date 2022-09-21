@@ -210,7 +210,6 @@ Following are some of the files and folders that you may be interested in editin
    - `assets/`: Pictures, icons, and other assets.
    - `fonts/`: Typography files.
    - `lang/`: Language files. You may opt to do localization directly on the files. _**Note:** This is not the preferred way of doing localization._
-   - `lib/`: External libraries used by the game system _(e.g. [YZUR](https://stefouch.github.io/foundry-year-zero-roller/))_
 6. `tools/`: Other utilities not used by the game system.
 7. `.editorconfig`, `.eslintrc`, `.gitattributes`, `.prettierrc`: These files achieve the same goal. They lint and format the code to comply with the style guide.
 8. `.eslintignore`, `.gitignore`, `.prettierignore`: These are ignore files configured to ignore certain directories that do not require linting or configuring.

@@ -127,7 +127,7 @@ export function addChatListeners(html) {
 /**
  * Triggers an action on the ChatMessage's roll.
  * @param {Event} event
- * @returns {Promise.<import('foundry-year-zero-roller').YearZeroRoll|ChatMessage>}
+ * @returns {Promise.<import('yzur').YearZeroRoll|ChatMessage>}
  */
 function _onRollAction(event) {
   event.preventDefault();

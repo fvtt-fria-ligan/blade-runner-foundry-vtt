@@ -100,6 +100,10 @@ Hooks.on('renderItemSheet', (app, _html) => {
   app._element[0].style.height = 'auto';
 });
 
+// Hooks.on('renderActorSheet', (app, _html) => {
+//   app._element[0].style.height = 'auto';
+// });
+
 /* ------------------------------------------ */
 
 Hooks.on('getChatLogEntryContext', Chat.addChatMessageContextOptions);
@@ -108,10 +112,6 @@ Hooks.on('renderChatLog', (_app, html, _data) => Chat.addChatListeners(html));
 Hooks.on('renderChatMessage', (_msg, html, _data) => Chat.hideChatActionButtons(html));
 
 /* ------------------------------------------ */
-
-// Hooks.on('renderActorSheet', (app, _html) => {
-//   app._element[0].style.height = 'auto';
-// });
 
 Hooks.on('createActor', async (actor, _data, _options) => {
   const updateData = {};
