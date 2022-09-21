@@ -2,13 +2,13 @@
 <p align="center">
   <img alt="Version" src="https://img.shields.io/badge/dynamic/json?color=blue&label=version&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffvtt-fria-ligan%2Fblade-runner-foundry-vtt%2Fmain%2Fstatic%2Fsystem.json"/>
   <a href="https://foundryvtt.com" target="_blank">
-    <img alt="Foundry Version" src="https://img.shields.io/badge/dynamic/json?color=blue&label=Foundry&query=compatibleCoreVersion&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffvtt-fria-ligan%2Fblade-runner%2Fmaster%2Fsystem.json"/>
+    <img alt="Foundry Version" src="https://img.shields.io/badge/dynamic/json?color=blue&label=Foundry&query=compatibleCoreVersion&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffvtt-fria-ligan%2Fblade-runner%2Fmain%2Fstatic%2Fsystem.json"/>
   </a>
   <a href="https://foundryvtt.com/packages/blade-runner/" target="_blank">
     <img alt="Forge Installs" src="https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fblade-runner&colorB=4aa94a"/>
   </a>
   <a href="https://github.com/fvtt-fria-ligan/blade-runner/releases">
-    <img alt="Downloads" src="https://img.shields.io/github/downloads/fvtt-fria-ligan/blade-runner/latest/master.zip"/>
+    <img alt="Downloads" src="https://img.shields.io/github/downloads/fvtt-fria-ligan/blade-runner/latest/blade-runner.zip"/>
   </a>
   <a href="https://github.com/fvtt-fria-ligan/blade-runner/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"/>
