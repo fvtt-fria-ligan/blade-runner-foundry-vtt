@@ -1,5 +1,5 @@
 <div class="stats-tab">
-	{{#each data.attributes as | attribute attrKey |}}
+	{{#each system.attributes as | attribute attrKey |}}
 		<div class="stat-blok stat-blok-{{attrKey}}">
 			<h4 class="die-rating">{{localize "FLBR.HEADER.Rating"}}</h4>
 			<h4 class="die-size">{{localize "FLBR.HEADER.DieSize"}}</h4>
@@ -7,7 +7,7 @@
 				<a class="stat-roll" data-attribute="{{attrKey}}">{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase attrKey))}}</a>
 			</div>
 			<div class="attribute-score">
-				{{scoreSelector (concat "data.attributes." attrKey ".value") selected=attribute.value}}
+				{{scoreSelector (concat "system.attributes." attrKey ".value") selected=attribute.value}}
 			</div>
 			<div class="attribute-size">
 				<div class="boxed-value stat-roll rollable" data-attribute="{{attrKey}}">
@@ -19,13 +19,13 @@
 				</div>
 			</div>
 			{{!-- Each skills under the attribute --}}
-			{{#each @root.data.skills as | skill skillKey |}}
+			{{#each @root.system.skills as | skill skillKey |}}
 				{{#if (eq attrKey (lookup @root.config.skillMap skillKey))}}
 					<div class="skill-name">
 						<a class="stat-roll" data-skill="{{skillKey}}" data-attribute="{{attrKey}}">{{localize (concat "FLBR.SKILL." (capitalize skillKey))}}</a>
 					</div>
 					<div class="skill-score">
-						{{scoreSelector (concat "data.skills." skillKey ".value") selected=skill.value}}
+						{{scoreSelector (concat "system.skills." skillKey ".value") selected=skill.value}}
 					</div>
 					<div class="skill-size">
 						<div class="boxed-value stat-roll rollable" data-skill="{{skillKey}}" data-attribute="{{attrKey}}">
@@ -46,7 +46,7 @@
 			<a class="stat-roll" title="{{localize "FLBR.ATTRIBUTE.MVR"}}" data-skill="{{config.vehicleSkill}}" data-attribute="{{config.vehicleAttribute}}">*{{localize (concat "FLBR.SKILL." (capitalize config.vehicleSkill))}} {{{config.Icons.buttons.vehicle}}}</a>
 		</div>
 		<div class="skill-score">
-			{{scoreSelector (concat "data.skills." config.vehicleSkill ".value") selected=driving}}
+			{{scoreSelector (concat "system.skills." config.vehicleSkill ".value") selected=driving}}
 		</div>
 		<div class="skill-size">
 			<div class="boxed-value stat-roll rollable" data-skill="{{config.vehicleSkill}}" data-attribute="{{config.vehicleAttribute}}">

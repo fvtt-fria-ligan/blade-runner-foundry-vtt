@@ -1,6 +1,7 @@
 import { FLBR } from '@system/config';
 import { SYSTEM_NAME } from '@system/constants';
 
+// TODO deprecated class
 /**
  * Configuration Sheet for the Actor sheet.
  * @extends {EntitySheetConfig} Foundry

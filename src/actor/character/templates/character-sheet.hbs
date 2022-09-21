@@ -15,40 +15,40 @@
 
 			<div class="nature boxed-property container">
 				<h3>{{localize "FLBR.Nature"}}</h3>
-				<select name="data.nature" title="{{localize "FLBR.NatureHint"}}"{{#unless isGM}} disabled{{/unless}}>
-					{{selectOptions config.natures selected=data.nature localize=true}}
+				<select name="system.nature" title="{{localize "FLBR.NatureHint"}}"{{#unless isGM}} disabled{{/unless}}>
+					{{selectOptions config.natures selected=system.nature localize=true}}
 				</select>
 			</div>
 			
 			<div class="capacities">
-				{{#if data.health}}
-					<div class="capacity-health boxed-property{{#if (lte data.health.value 0)}} broken{{else if (lte data.health.ratio 0.5)}} half{{/if}}">
+				{{#if system.health}}
+					<div class="capacity-health boxed-property{{#if (lte system.health.value 0)}} broken{{else if (lte system.health.ratio 0.5)}} half{{/if}}">
 						<h3>
 							{{localize "FLBR.HEADER.Health"}}
-							{{#if (lte data.health.value 0)}}
+							{{#if (lte system.health.value 0)}}
 								<b>({{localize "FLBR.BrokenByDamage"}})</b>
 							{{/if}}
-							<span class="capacity-rating">{{data.health.value}}/{{data.health.max}}</span>
+							<span class="capacity-rating">{{system.health.value}}/{{system.health.max}}</span>
 						</h3>
-						{{boxes "data.health.value" value=data.health.value min=0 max=data.health.max loss=data.health.permanentLoss}}
+						{{boxes "system.health.value" value=system.health.value min=0 max=system.health.max loss=system.health.permanentLoss}}
 					</div>
 				{{/if}}
-				{{#if (and data.resolve isPC)}}
-					<div class="capacity-resolve boxed-property{{#if (lte data.resolve.value 0)}} broken{{else if (lte data.resolve.ratio 0.5)}} half{{/if}}">
+				{{#if (and system.resolve isPC)}}
+					<div class="capacity-resolve boxed-property{{#if (lte system.resolve.value 0)}} broken{{else if (lte system.resolve.ratio 0.5)}} half{{/if}}">
 						<h3>
 							{{localize "FLBR.HEADER.Resolve"}}
-							{{#if (lte data.resolve.value 0)}}
+							{{#if (lte system.resolve.value 0)}}
 								<b>({{localize "FLBR.BrokenByStress"}})</b>
 							{{/if}}
-							<span class="capacity-rating">{{data.resolve.value}}/{{data.resolve.max}}</span>
+							<span class="capacity-rating">{{system.resolve.value}}/{{system.resolve.max}}</span>
 						</h3>
-						{{boxes "data.resolve.value" value=data.resolve.value min=0 max=data.resolve.max loss=data.resolve.permanentLoss}}
+						{{boxes "system.resolve.value" value=system.resolve.value min=0 max=system.resolve.max loss=system.resolve.permanentLoss}}
 					</div>
 				{{/if}}
 			</div>
 
 			<div class="archetype">
-				<input list="list-of-archetypes" type="text" name="data.archetype" value="{{data.archetype}}"/>
+				<input list="list-of-archetypes" type="text" name="system.archetype" value="{{system.archetype}}"/>
 				<datalist id="list-of-archetypes">
 					{{selectOptions config.archetypes localize=true}}
 				</datalist>
@@ -94,7 +94,7 @@
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/bio-tab.hbs}}
 				{{else if isNPC}}
 					<div class="boxed-property npc-notes">
-						{{editor content=data.description target="data.description" owner=owner button=true editable=editable}}
+						{{editor content=system.description target="system.description" owner=owner button=true editable=editable}}
 					</div>
 				{{/if}}
 			</div>

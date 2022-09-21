@@ -32,7 +32,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
       options: this.options,
       isGM: game.user.isGM,
       actor: baseData.actor,
-      data: baseData.actor.data.data,
+      system: baseData.actor.system,
       items: baseData.items,
       effects: baseData.effects,
       rollData: this.rollData,
@@ -240,7 +240,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const field = elem.dataset.field;
     if (!field) return;
 
-    let count = foundry.utils.getProperty(this.actor, `data.${field}`) ?? 0;
+    let count = foundry.utils.getProperty(this.actor, field) ?? 0;
 
     if (event.type === 'click') count += mod;
     else count -= mod; // contextmenu

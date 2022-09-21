@@ -45,8 +45,8 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   /** @override */
   getData(options) {
     const sheetData = super.getData(options);
-    sheetData.isPC = this.actor.props.subtype === ACTOR_SUBTYPES.PC;
-    sheetData.isNPC = this.actor.props.subtype === ACTOR_SUBTYPES.NPC;
+    sheetData.isPC = this.actor.system.subtype === ACTOR_SUBTYPES.PC;
+    sheetData.isNPC = this.actor.system.subtype === ACTOR_SUBTYPES.NPC;
     sheetData.driving = this.actor.skills.driving?.value;
     return sheetData;
   }
@@ -97,7 +97,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
   _onResolveIncrease(event) {
     event.preventDefault();
-    if (this.actor.data.data.subtype !== ACTOR_SUBTYPES.PC) return;
+    if (this.actor.system.subtype !== ACTOR_SUBTYPES.PC) return;
     if (this.actor.resolve.value >= this.actor.resolve.max) return;
     return this.actor.rollResolve();
   }

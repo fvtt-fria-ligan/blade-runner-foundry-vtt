@@ -381,7 +381,7 @@ export default class BRRollHandler extends FormApplication {
     /** @type {YearZeroRoll} */
     const roll = message.roll.duplicate();
     await roll.push({ async: true });
-
+    // TODO verify data
     const speakerData = message.data.speaker;
     const speaker = this.getSpeaker(speakerData);
     if (speaker) await this.updateActor(roll, speaker);
@@ -444,7 +444,7 @@ export default class BRRollHandler extends FormApplication {
     }
 
     /** @type {import('@actor/actor-document').ActorCapacity} */
-    const capacity = speaker?.data.data[cap];
+    const capacity = speaker?.system[cap];
     if (!capacity || foundry.utils.isEmpty(capacity)) {
       return ui.notifications.error('WARNING.ApplyDamageNoActorCapacity', { localize: true });
     }
@@ -459,7 +459,7 @@ export default class BRRollHandler extends FormApplication {
       ui.notifications.info('FLBR.YouAreBroken', { localize: true });
     }
 
-    await speaker.update({ [`data.${cap}.value`]: value });
+    await speaker.update({ [`system.${cap}.value`]: value });
     return value;
   }
 

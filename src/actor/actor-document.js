@@ -230,7 +230,7 @@ export default class BladeRunnerActor extends Actor {
       modifiers,
       maxPush: this.maxPush,
     }, {
-      unlimitedPush: this.data.flags.bladerunner?.unlimitedPush,
+      unlimitedPush: this.flags.bladerunner?.unlimitedPush,
     });
     return roller.render(true);
   }
@@ -287,7 +287,7 @@ export default class BladeRunnerActor extends Actor {
       });
       let loss = +this.resolve.permanentLoss;
       loss--;
-      await this.update({ 'data.resolve.permanentLoss': loss });
+      await this.update({ 'system.resolve.permanentLoss': loss });
       return loss;
     }
     return 0;
@@ -304,7 +304,7 @@ export default class BladeRunnerActor extends Actor {
    */
   async applyDamage(damage, capacity = 'health') {
     if (damage <= 0) return;
-    if (!(capacity in this.props)) {
+    if (!(capacity in this.system)) {
       throw new Error(`FLBR | BladeRunnerActor.applyDamage → Non-existent capacity "${capacity}"`);
     }
 

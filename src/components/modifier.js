@@ -33,7 +33,7 @@ export default class Modifier {
 
     this._name = name ?? item.name;
     this._type = type ?? item.type;
-    this._description = description ?? item.data?.data?.description;
+    this._description = description ?? item.system?.description;
 
     /**
      * The key that will be parsed to identify the modifier.
@@ -120,7 +120,7 @@ export default class Modifier {
    * @readonly
    */
   get description() {
-    const str = this._description ?? this.item.data?.data?.description ?? '';
+    const str = this._description ?? this.item.system?.description ?? '';
     return str.replace(/<[^>]*>?/gm, '');
   }
 
@@ -129,14 +129,14 @@ export default class Modifier {
   /**
    * Creates an array with all the modifiers in the corresponding item.
    * @param {Item}             item              The item containing the modifiers
-   * @param {string}          [path='data.data.modifiers'] The path to the object within the item
+   * @param {string}          [path='system.modifiers'] The path to the object within the item
    *   that contains the modifiers data
    * @param {string|string[]} [targets=[]]       Additional filter based on targets
    * @param {boolean}         [onlyActive=false] Whether to return only active modifiers
    * @returns {Modifier[]}
    * @static
    */
-  static getModifiers(item, path = 'data.data.modifiers', { targets = [], onlyActive = false } = {}) {
+  static getModifiers(item, path = 'system.modifiers', { targets = [], onlyActive = false } = {}) {
     // Gets the modifiers.
     let out = [];
     const mods = foundry.utils.getProperty(item, path);

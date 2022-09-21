@@ -48,9 +48,9 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       isOffensive: this.item.isOffensive,
       // inVehicle: this.item.actor?.type === 'vehicle',
       item: baseData.item,
-      data: baseData.item.data.data,
+      system: baseData.item.system,
       // effects: baseData.effects,
-      rollable: this.item.props.rollable != undefined ? true : false,
+      rollable: this.item.system.rollable != undefined ? true : false,
       rollData: this.item.getRollData(),
       config: CONFIG.BLADE_RUNNER,
     };
@@ -130,7 +130,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     const value = input.value;
     if (value[0] === '+' || value[0] === '-') {
       const delta = parseFloat(value);
-      input.value = foundry.utils.getProperty(this.item.data, input.name) + delta;
+      input.value = foundry.utils.getProperty(this.item, input.name) + delta;
     }
     else if (value[0] === '=') {
       input.value = value.slice(1);
@@ -141,16 +141,16 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   _onAddModifier(event) {
     event.preventDefault();
-    const modifiers = foundry.utils.duplicate(this.item.data.data.modifiers ?? {});
+    const modifiers = foundry.utils.duplicate(this.item.system.modifiers ?? {});
     const modifierId = Math.max(-1, ...Object.getOwnPropertyNames(modifiers)) + 1;
-    return this.item.update({ [`data.modifiers.${modifierId}`]: { name: '', value: '+1' } });
+    return this.item.update({ [`system.modifiers.${modifierId}`]: { name: '', value: '+1' } });
   }
 
   _onDeleteModifier(event) {
     event.preventDefault();
     const modifierId = event.currentTarget.dataset.modifierId;
-    if (this.item.data.data.modifiers[modifierId]) {
-      this.item.update({ [`data.modifiers.-=${modifierId}`]: null });
+    if (this.item.system.modifiers[modifierId]) {
+      this.item.update({ [`system.modifiers.-=${modifierId}`]: null });
     }
   }
 
@@ -161,10 +161,10 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     const blast = +event.currentTarget.value;
     if (!(blast in FLBR.blastPowerMap)) return;
     const { damage, crit } = FLBR.blastPowerMap[blast];
-    // TODO data.crit update not working properly in the item sheet, but values are all OK (tested).
+    // TODO system.crit update not working properly in the item sheet, but values are all OK (tested).
     return this.item.update({
-      'data.damage': damage,
-      'data.crit': crit,
+      'system.damage': damage,
+      'system.crit': crit,
     });
   }
 }
