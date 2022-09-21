@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SKILLS, SYSTEM_NAME } from '@system/constants';
+import { ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/modifier';
 import BRRollHandler from '@components/roll/roller';
 
@@ -71,8 +71,8 @@ export default class BladeRunnerItem extends Item {
   /* ------------------------------------------- */
 
   static get CHAT_TEMPLATE() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
-    return `systems/${sysName}/templates/item/item-chatcard.hbs`;
+    const sysId = game.system.id || SYSTEM_ID;
+    return `systems/${sysId}/templates/item/item-chatcard.hbs`;
   }
 
   /* ------------------------------------------- */
@@ -239,10 +239,9 @@ export default class BladeRunnerItem extends Item {
     if (rollMode == undefined) rollMode = game.settings.get('core', 'rollMode');
 
     // Sends the messages or returns its data.
-    // TODO verify message.data
-    if (create) return cls.create(msg.data, { rollMode });
+    if (create) return cls.create(msg, { rollMode });
     if (rollMode) msg.applyRollMode(rollMode);
-    // TODO verify message.data
-    return msg.data.toObject();
+
+    return msg.toObject();
   }
 }

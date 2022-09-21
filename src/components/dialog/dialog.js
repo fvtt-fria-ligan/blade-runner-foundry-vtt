@@ -1,11 +1,11 @@
-import { SYSTEM_NAME } from '@system/constants';
+import { SYSTEM_ID } from '@system/constants';
 
 export default class BladeRunnerDialog extends Dialog {
 
   static get defaultOptions() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
+    const sysId = game.system.id || SYSTEM_ID;
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [sysName, 'dialog'],
+      classes: [sysId, 'dialog'],
     });
   }
 

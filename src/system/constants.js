@@ -3,7 +3,7 @@
  */
 
 /** @enum {string} */
-export const SYSTEM_NAME = 'blade-runner';
+export const SYSTEM_ID = 'blade-runner';
 
 /** @enum {number} */
 export const DIE_SCORES = {

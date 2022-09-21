@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
+import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
 
 /**
  * Blade Runner RPG Item Sheet.
@@ -13,9 +13,9 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   /** @override */
   static get defaultOptions() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
+    const sysId = game.system.id || SYSTEM_ID;
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [sysName, 'sheet', 'item'],
+      classes: [sysId, 'sheet', 'item'],
       width: 250,
       scrollY: ['.sheet-body'],
       resizable: false,
@@ -26,8 +26,8 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
-    return `systems/${sysName}/templates/item/item-sheet.hbs`;
+    const sysId = game.system.id || SYSTEM_ID;
+    return `systems/${sysId}/templates/item/item-sheet.hbs`;
   }
 
   /* ------------------------------------------ */

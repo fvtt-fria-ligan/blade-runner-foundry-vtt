@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_NAME } from '@system/constants';
+import { ACTOR_TYPES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/modifier';
 import BRRollHandler from '@components/roll/roller';
 
@@ -277,7 +277,8 @@ export default class BladeRunnerActor extends Actor {
       maxPush: 0,
     });
 
-    const { roll } = await roller.executeRoll();
+    const msg = await roller.executeRoll();
+    const roll = msg.rolls[0];
 
     if (roll.baneCount) {
       ui.notifications.info(game.i18n.format('FLBR.ROLLER.ResolveTestFailed', {
@@ -331,7 +332,7 @@ export default class BladeRunnerActor extends Actor {
     }
 
     // Prepares the chat message.
-    const template = `systems/${SYSTEM_NAME}/templates/actor/actor-damage-chatcard.hbs`;
+    const template = `systems/${SYSTEM_ID}/templates/actor/actor-damage-chatcard.hbs`;
     const content = await renderTemplate(template, {
       name: this.name,
       initialDamage,

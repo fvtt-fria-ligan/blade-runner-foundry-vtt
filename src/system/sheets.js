@@ -1,9 +1,9 @@
 import BladeRunnerCharacterSheet from '@actor/character/character-sheet.js';
 import BladeRunnerItemSheet from '@item/item-sheet.js';
-import { ACTOR_TYPES, SYSTEM_NAME, ITEM_TYPES } from './constants.js';
+import { ACTOR_TYPES, SYSTEM_ID, ITEM_TYPES } from './constants.js';
 
 export function registerSheets() {
-  const br = game.system.data.name || SYSTEM_NAME;
+  const br = game.system.id || SYSTEM_ID;
 
   Actors.unregisterSheet('core', ActorSheet);
   Actors.registerSheet(br, BladeRunnerCharacterSheet, { types: [ACTOR_TYPES.CHAR], makeDefault: true });

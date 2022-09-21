@@ -1,8 +1,8 @@
 import semverComp from '@utils/semver-compare';
-import { SETTINGS_KEYS, SYSTEM_NAME } from '@system/constants';
+import { SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
 
 export default async function displayMessages() {
-  const messages = await fetch(`systems/${SYSTEM_NAME}/assets/messages/messages.jsonc`)
+  const messages = await fetch(`systems/${SYSTEM_ID}/assets/messages/messages.jsonc`)
     .then(resp => resp.text())
     .then(jsonc => JSON.parse(stripJSON(jsonc)));
 
@@ -29,7 +29,7 @@ const isCurrent = msg => {
     foundry.utils.isNewerVersion(game.version, msg['min-core-version'] ?? '0.0.0');
   const correctSysVersion = semverComp(
     msg['min-sys-version'] ?? '0.0.0',
-    game.system.data.version,
+    game.system.version,
     msg['max-sys-version'] ?? '100.0.0',
     { gEqMin: true },
   );
@@ -37,7 +37,7 @@ const isCurrent = msg => {
 };
 
 const hasDisplayed = identifier => {
-  const settings = game.settings.get(SYSTEM_NAME, SETTINGS_KEYS.DISPLAYED_MESSAGES);
+  const settings = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.DISPLAYED_MESSAGES);
   if (settings?.includes(identifier)) return true;
   else return false;
 };
@@ -46,9 +46,9 @@ const displayPrompt = (title, content) => {
   content = content.replace('{name}', game.user.name);
   return Dialog.prompt({
     title: title,
-    content: `<img src="systems/${SYSTEM_NAME}/assets/bladerunner-banner-small.webp"/>${content}`,
+    content: `<img src="systems/${SYSTEM_ID}/assets/bladerunner-banner-small.webp"/>${content}`,
     label: 'Understood!',
-    options: { width: 600, classes: [SYSTEM_NAME, 'dialog'] },
+    options: { width: 600, classes: [SYSTEM_ID, 'dialog'] },
     callback: () => setDisplayed(title),
   });
 };
@@ -67,7 +67,7 @@ const sendToChat = (title, content) => {
 };
 
 const setDisplayed = async identifier => {
-  const settings = game.settings.get(SYSTEM_NAME, SETTINGS_KEYS.DISPLAYED_MESSAGES);
+  const settings = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.DISPLAYED_MESSAGES);
   settings.push(identifier);
-  await game.settings.set(SYSTEM_NAME, SETTINGS_KEYS.DISPLAYED_MESSAGES, settings.flat());
+  await game.settings.set(SYSTEM_ID, SETTINGS_KEYS.DISPLAYED_MESSAGES, settings.flat());
 };

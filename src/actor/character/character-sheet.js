@@ -1,5 +1,5 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet';
-import { SYSTEM_NAME, ACTOR_TYPES, ACTOR_SUBTYPES } from '@system/constants';
+import { SYSTEM_ID, ACTOR_TYPES, ACTOR_SUBTYPES } from '@system/constants';
 import { FLBR } from '@system/config';
 
 /**
@@ -14,9 +14,9 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
   /** @override */
   static get defaultOptions() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
+    const sysId = game.system.id || SYSTEM_ID;
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [sysName, 'sheet', 'actor', 'character'],
+      classes: [sysId, 'sheet', 'actor', 'character'],
       width: 520,
       height: 616,
       resizable: true,
@@ -31,11 +31,11 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
   /** @override */
   get template() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
+    const sysId = game.system.id || SYSTEM_ID;
     if (!game.user.isGM && this.actor.limited) {
-      return `systems/${sysName}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-limited-sheet.hbs`;
+      return `systems/${sysId}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-limited-sheet.hbs`;
     }
-    return `systems/${sysName}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-sheet.hbs`;
+    return `systems/${sysId}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-sheet.hbs`;
   }
 
   /* ------------------------------------------ */

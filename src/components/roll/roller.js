@@ -1,6 +1,6 @@
 import { YearZeroRoll } from 'yzur';
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
+import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
 
 /**
  * A Form Application that mimics Dialog,
@@ -156,9 +156,9 @@ export default class BRRollHandler extends FormApplication {
 
   /** @override */
   static get defaultOptions() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
+    const sysId = game.system.id || SYSTEM_ID;
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [sysName, 'roll-application'],
+      classes: [sysId, 'roll-application'],
       width: '450',
       // height: '450',
       resizable: false,
@@ -167,8 +167,8 @@ export default class BRRollHandler extends FormApplication {
 
   /** @override */
   get template() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
-    return this.options.template || `systems/${sysName}/templates/components/roll/roller.hbs`;
+    const sysId = game.system.id || SYSTEM_ID;
+    return this.options.template || `systems/${sysId}/templates/components/roll/roller.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -381,8 +381,7 @@ export default class BRRollHandler extends FormApplication {
     /** @type {YearZeroRoll} */
     const roll = message.rolls[0].duplicate();
     await roll.push({ async: true });
-    // TODO verify data
-    const speakerData = message.data.speaker;
+    const speakerData = message.speaker;
     const speaker = this.getSpeaker(speakerData);
     if (speaker) await this.updateActor(roll, speaker);
 

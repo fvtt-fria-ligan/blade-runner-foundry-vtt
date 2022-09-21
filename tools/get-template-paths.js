@@ -2,7 +2,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, sep, posix } from 'node:path';
 
 const SYSTEM_OR_MODULE = 'system';
-const ROOT_NAME = JSON.parse(readFileSync('./static/system.json')).name;
+const ROOT_ID = JSON.parse(readFileSync('./static/system.json')).id;
 
 const getPaths = (path, ext) => {
   const paths = [];
@@ -23,6 +23,6 @@ export default (() =>
   getPaths('./src', '.hbs')
     .map(templatePath => {
       templatePath = templatePath.split(sep).slice(1).join(posix.sep).replace('templates/', '');
-      return `${SYSTEM_OR_MODULE}s/${ROOT_NAME}/templates/${templatePath}`;
+      return `${SYSTEM_OR_MODULE}s/${ROOT_ID}/templates/${templatePath}`;
     })
 )();

@@ -1,16 +1,17 @@
 import { FLBR } from '@system/config';
-import { SYSTEM_NAME } from '@system/constants';
+import { SYSTEM_ID } from '@system/constants';
 
 // TODO deprecated class
 /**
  * Configuration Sheet for the Actor sheet.
- * @extends {EntitySheetConfig} Foundry
+ * @extends {DocumentSheetConfig} Foundry
  */
-export default class ActorSheetConfig extends EntitySheetConfig {
+// eslint-disable-next-line no-undef
+export default class ActorSheetConfig extends DocumentSheetConfig {
   static get defaultOptions() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
+    const sysId = game.system.id || SYSTEM_ID;
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: `systems/${sysName}/templates/actor/actor-sheet-config.hbs`,
+      template: `systems/${sysId}/templates/actor/actor-sheet-config.hbs`,
     });
   }
 
