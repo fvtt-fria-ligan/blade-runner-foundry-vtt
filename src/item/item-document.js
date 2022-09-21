@@ -214,7 +214,7 @@ export default class BladeRunnerItem extends Item {
       name: this.name,
       img: this.img,
       type: this.type,
-      data: this.system,
+      system: this.system,
       link: this.link,
       inActor: !!this.actor,
       showProperties: (this.type !== ITEM_TYPES.GENERIC || this.hasModifier),
