@@ -56,7 +56,7 @@ export function addChatMessageContextOptions(_html, options) {
 async function _applyDamage(messageElem) {
   const messageId = messageElem.dataset.messageId;
   const message = game.messages.get(messageId);
-  const roll = message.roll;
+  const roll = message.rolls[0];
   let s = roll.successCount;
   if (!s) return;
 

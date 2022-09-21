@@ -376,10 +376,10 @@ export default class BRRollHandler extends FormApplication {
    * @async
    */
   static async pushRoll(message, { sendMessage = true } = {}) {
-    if (!message || !message.roll) return;
+    if (!message || !message.rolls.length) return;
 
     /** @type {YearZeroRoll} */
-    const roll = message.roll.duplicate();
+    const roll = message.rolls[0].duplicate();
     await roll.push({ async: true });
     // TODO verify data
     const speakerData = message.data.speaker;
@@ -401,11 +401,11 @@ export default class BRRollHandler extends FormApplication {
    * @async
    */
   static async cancelPush(message) {
-    if (!message || !message.roll) return;
+    if (!message || !message.rolls.length) return;
     /** @type {YearZeroRoll} */
-    const roll = message.roll.duplicate();
+    const roll = message.rolls[0].duplicate();
     roll.maxPush = 0;
-    await message.update({ roll: roll.toJSON() });
+    await message.update({ rolls: [roll.toJSON()] });
     return message;
   }
 
