@@ -150,7 +150,7 @@ function registerHandlebarsHelpers() {
     const title = game.i18n.format('FLBR.CreateNewItem', {
       type: game.i18n.localize(`ITEM.Type${type.capitalize()}`),
     });
-    const str = `<a class="btn item-create" data-type="${type}" title="${title}">${FLBR.Icons.buttons.plus}</a>`;
+    const str = `<a class="btn item-create" data-type="${type}" data-tooltip="${title}">${FLBR.Icons.buttons.plus}</a>`;
     return new Handlebars.SafeString(str);
   });
 }

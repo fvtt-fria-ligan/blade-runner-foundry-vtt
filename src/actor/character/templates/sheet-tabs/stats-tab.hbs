@@ -43,7 +43,7 @@
 	{{!-- Finally, we add a last skill: Driving (no attribute) --}}
 	<div class="stat-blok stat-blok-{{config.vehicleAttribute}}">
 		<div class="skill-name last">
-			<a class="stat-roll" title="{{localize "FLBR.ATTRIBUTE.MVR"}}" data-skill="{{config.vehicleSkill}}" data-attribute="{{config.vehicleAttribute}}">*{{localize (concat "FLBR.SKILL." (capitalize config.vehicleSkill))}} {{{config.Icons.buttons.vehicle}}}</a>
+			<a class="stat-roll" data-tooltip="{{localize "FLBR.ATTRIBUTE.MVR"}}" data-skill="{{config.vehicleSkill}}" data-attribute="{{config.vehicleAttribute}}">*{{localize (concat "FLBR.SKILL." (capitalize config.vehicleSkill))}} {{{config.Icons.buttons.vehicle}}}</a>
 		</div>
 		<div class="skill-score">
 			{{scoreSelector (concat "system.skills." config.vehicleSkill ".value") selected=driving}}

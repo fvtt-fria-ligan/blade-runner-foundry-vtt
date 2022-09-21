@@ -5,7 +5,7 @@
 	<div class="sheet-header">
 		<div class="flex row align-center">
 			<div class="photo">
-				<img src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+				<img src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}"/>
 			</div>
 			<div class="item-type">{{localize (concat "ITEM.Type" (capitalize item.type))}}</div>
 		</div>
@@ -125,7 +125,7 @@
 				<div class="item-modifiers boxed-property">
 					<h4>
 						{{localize "FLBR.HEADER.Modifiers"}}
-						<a class="btn add-modifier" title="{{localize "FLBR.ItemAddModifier"}}">
+						<a class="btn add-modifier" data-tooltip="{{localize "FLBR.ItemAddModifier"}}">
 							{{{@root.config.Icons.buttons.plus}}}
 						</a>
 					</h4>
