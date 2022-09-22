@@ -48,7 +48,7 @@ FLBR.DIALOG.AssignSuccesses: Assign Success(es)
 FLBR.DIALOG.AssignSuccessesHint: Choose a number of successes to spent against {name}.
 FLBR.HEADER.Actions: Actions
 FLBR.HEADER.Appearance: Appearance
-FLBR.HEADER.Armors: Armors
+FLBR.HEADER.Armor: Armor
 FLBR.HEADER.AttributesAndSkills: Attributes & Skills
 FLBR.HEADER.Augments: Augments
 FLBR.HEADER.ChinyenPoints: Chinyen Points
@@ -157,10 +157,9 @@ FLBR.ROLLER.ModifierValue: Value
 FLBR.ROLLER.TotalModifier: 'Total: {value}'
 FLBR.ROLLER.ResolveTest: Test for Permanent Loss of Resolve
 FLBR.ROLLER.ResolveTestHint: >-
-  When recovering a point of Resolve, no matter how,
-  you must roll one Base Die corresponding to your Empathy rating.
-  If you roll a one, the point of Resolve is permanently lost,
-  meaning your maximum Resolve is reduced one step.
+  When you are Broken by stress, you must roll one Base Die corresponding
+  to your Empathy rating. If you roll a one, 1 point of Resolve is
+  permanently lost, meaning your maximum Resolve is reduced one step.
 FLBR.ROLLER.ResolveTestFailed: '{name} failed their Empathy roll and permanently loses 1 point of resolve.'
 FLBR.ROLLER.RollButton: Roll
 FLBR.ROLLER.RollWithAdvantageButton: Advantage

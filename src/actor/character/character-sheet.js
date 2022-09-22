@@ -69,7 +69,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     html.find('.action-roll').click(this._onActionRoll.bind(this));
 
     // Resolve Permanent Loss
-    html.find('.capacity-resolve .capacity-boxes').click(this._onResolveIncrease.bind(this));
+    html.find('.capacity-resolve .capacity-boxes').on('contextmenu', this._onResolveDecrease.bind(this));
   }
 
   /* ------------------------------------------ */
@@ -95,10 +95,10 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
   /* ------------------------------------------ */
 
-  _onResolveIncrease(event) {
+  _onResolveDecrease(event) {
     event.preventDefault();
     if (this.actor.system.subtype !== ACTOR_SUBTYPES.PC) return;
-    if (this.actor.resolve.value >= this.actor.resolve.max) return;
+    if (this.actor.resolve.value > 1) return;
     return this.actor.rollResolve();
   }
 }
