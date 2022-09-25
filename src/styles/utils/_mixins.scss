@@ -21,3 +21,29 @@
     (-$x) $x 0 #000,
     $x $x 0 #000;
 }
+
+@mixin header-button {
+  // Thanks to Forbidden Lands FVTT Devs!
+  display: flex;
+  flex: none;
+  flex-flow: row-reverse;
+  max-width: 24px; // 34px;
+  height: 32px;
+  white-space: nowrap;
+  // line-height: 1;
+  overflow: hidden;
+  padding: 0 4px;
+  margin: 0 0 0 2px;
+  color: transparent;
+  transition: max-width 1s ease;
+
+  &:hover {
+    max-width: 200px;
+    color: var(--color-blue);
+  }
+  > i {
+    font-size: var(--font-size--small);
+    color: var(--color-blue);
+    margin: 8px 0 0 8px;
+  }
+}
