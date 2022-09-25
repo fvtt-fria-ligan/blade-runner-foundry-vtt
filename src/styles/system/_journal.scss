@@ -1,0 +1,86 @@
+@use "../utils";
+
+/* ------------------------------------------ */
+/*  Journal Entry Window Apps                 */
+/* ------------------------------------------ */
+
+.app.journal-entry {
+  border: 1px solid var(--color-blue-darker);
+  border-radius: 4px;
+
+  /* ------------------------------------------ */
+  // HEADER
+  .window-header {
+    border: none;
+
+    .window-title {
+      font-family: var(--font-header);
+      color: var(--color-blue);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .header-button {
+      @include utils.header-button;
+    }
+  }
+
+  /* ------------------------------------------ */
+  // SIDEBAR
+  .journal-sidebar {
+    color: var(--color-blue);
+
+    .directory-header .header-search input {
+      @include utils.input-background;
+      color: var(--color-black);
+      font-family: var(--font-table);
+      font-weight: bold;
+      text-align: center;
+      &:disabled,
+      &.disabled {
+        color: var(--color-disabled);
+      }
+    }
+
+    .pages-list .directory-item {
+      // &.active {
+      //   border-color: var(--color-blue-lighter);
+      // }
+      &.active:first-of-type,
+      &.active + :not(.active),
+      &:not(.active) + .active {
+        border-top-color: var(--color-blue-lighter);
+      }
+      &.active:last-of-type {
+        border-bottom-color: var(--color-blue-lighter);
+      }
+    }
+  }
+
+  .directory .action-buttons button {
+    line-height: 1;
+  }
+}
+
+/* ------------------------------------------ */
+/*  Journal Entry Content                     */
+/* ------------------------------------------ */
+
+.app.journal-entry .journal-entry-content {
+  background: none;
+  color: #FFF2DE;
+
+  .journal-header {
+    margin: 4px;
+
+    .title {
+      font-family: var(--font-header);
+      color: var(--color-blue-darker);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      background: transparent;
+    }
+  }
+
+  .journal-entry-page {}
+}
