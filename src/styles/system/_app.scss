@@ -30,6 +30,10 @@ a.inline-roll {
   text-indent: 0;
 }
 
+a.content-link.broken {
+  color: var(--color-red);
+}
+
 /* ------------------------------------------ */
 /*  Blade Runner Apps                         */
 /* ------------------------------------------ */
