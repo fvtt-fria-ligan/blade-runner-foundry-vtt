@@ -17,7 +17,7 @@
  */
 
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES } from '@system/constants';
+import { ACTOR_TYPES, SYSTEM_ID } from '@system/constants';
 import * as YZUR from 'yzur';
 import * as Chat from '@system/chat';
 import BRRollHandler from '@components/roll/roller';
@@ -34,7 +34,7 @@ import displayMessages from '@components/messaging-system';
 /* ------------------------------------------ */
 
 Hooks.once('init', () => {
-  console.log('FLBR | Initializing the Blade Runner RPG Game System');
+  console.log('Blade Runner RPG | Initializing the Game System');
 
   // Registers dice.
   YZUR.YearZeroRollManager.register('br', {
@@ -66,6 +66,14 @@ Hooks.once('init', () => {
     decimals: 2,
   };
 
+  // Register fonts
+  CONFIG.fontDefinitions['Blade Runner Symbols'] = {
+    editor: true,
+    fonts: [
+      { urls: [`systems/${SYSTEM_ID}/fonts/blade-runner-symbols.ttf`] },
+    ],
+  };
+
   registerSheets();
   initializeHandlebars();
   registerSystemSettings();
@@ -85,7 +93,7 @@ Hooks.once('ready', () => {
   // Displays system messages.
   displayMessages();
 
-  console.log('FLBR | READY!');
+  console.log('Blade Runner RPG | Ready!');
 });
 
 /* ------------------------------------------ */
