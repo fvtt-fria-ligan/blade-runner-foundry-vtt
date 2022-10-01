@@ -1,5 +1,6 @@
 import { FLBR } from '@system/config';
 import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
+import { enrichTextFields } from '@utils/string-util';
 
 /**
  * Blade Runner RPG Item Sheet.
@@ -35,7 +36,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
   /* ------------------------------------------ */
 
   /** @override */
-  getData(options) {
+  async getData(options) {
     const baseData = super.getData(options);
     const sheetData = {
       cssClass: this.isEditable ? 'editable' : 'locked',
@@ -48,12 +49,15 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       isOffensive: this.item.isOffensive,
       // inVehicle: this.item.actor?.type === 'vehicle',
       item: baseData.item,
-      system: baseData.item.system,
+      system: foundry.utils.duplicate(baseData.item.system),
       // effects: baseData.effects,
       rollable: this.item.system.rollable != undefined ? true : false,
       rollData: this.item.getRollData(),
       config: CONFIG.BLADE_RUNNER,
     };
+
+    await enrichTextFields(sheetData, ['system.description']);
+
     return sheetData;
   }
 

@@ -1,6 +1,7 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet';
 import { SYSTEM_ID, ACTOR_TYPES, ACTOR_SUBTYPES } from '@system/constants';
 import { FLBR } from '@system/config';
+import { enrichTextFields } from '@utils/string-util';
 
 /**
  * Blade Runner RPG Actor Sheet for Character.
@@ -43,11 +44,21 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   /* ------------------------------------------ */
 
   /** @override */
-  getData(options) {
-    const sheetData = super.getData(options);
+  async getData(options) {
+    const sheetData = await super.getData(options);
     sheetData.isPC = this.actor.system.subtype === ACTOR_SUBTYPES.PC;
     sheetData.isNPC = this.actor.system.subtype === ACTOR_SUBTYPES.NPC;
     sheetData.driving = this.actor.skills.driving?.value;
+
+    if (this.actor.system.subtype === ACTOR_SUBTYPES.PC) {
+      await enrichTextFields(sheetData, [
+        'system.bio.keyMemory',
+        'system.bio.keyRelationship',
+        'system.bio.home',
+        'system.bio.appearance',
+      ]);
+    }
+
     return sheetData;
   }
 

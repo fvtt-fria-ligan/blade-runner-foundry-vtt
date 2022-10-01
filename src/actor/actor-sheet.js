@@ -1,5 +1,6 @@
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES, ITEM_TYPES } from '@system/constants';
+import { enrichTextFields } from '@utils/string-util';
 import ActorSheetConfig from './actor-sheet-config';
 
 /**
@@ -21,7 +22,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
   /* ------------------------------------------ */
 
   /** @override */
-  getData(options) {
+  async getData(options) {
     const isOwner = this.actor.isOwner;
     const baseData = super.getData(options);
     const sheetData = {
@@ -32,12 +33,15 @@ export default class BladeRunnerActorSheet extends ActorSheet {
       options: this.options,
       isGM: game.user.isGM,
       actor: baseData.actor,
-      system: baseData.actor.system,
+      system: foundry.utils.duplicate(baseData.actor.system),
       items: baseData.items,
       effects: baseData.effects,
       rollData: this.rollData,
       config: CONFIG.BLADE_RUNNER,
     };
+
+    await enrichTextFields(sheetData, ['system.description']);
+
     return sheetData;
   }
 
