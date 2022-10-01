@@ -171,6 +171,7 @@ FLBR.WeaponCrit: Crit Die
 FLBR.WeaponDamageType: Damage Type
 FLBR.WEAPON_DAMAGE_TYPE.Crushing: Crushing
 FLBR.WEAPON_DAMAGE_TYPE.Piercing: Piercing
+FLBR.WEAPON_DAMAGE_TYPE.Stress: Stress
 FLBR.WeaponRange: Range
 FLBR.WeaponRangeMaxRange: '{range} range'
 FLBR.WEAPON_RANGE.Engaged: Engaged

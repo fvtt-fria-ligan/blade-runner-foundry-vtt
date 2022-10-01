@@ -91,6 +91,7 @@ export const COMBAT_ACTIONS = {
 export const DAMAGE_TYPES = {
   CRUSHING: 0,
   PIERCING: 1,
+  STRESS: 2,
 };
 
 /** @enum {number} */
