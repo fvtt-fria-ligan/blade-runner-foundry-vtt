@@ -44,6 +44,19 @@ Hooks.once('init', () => {
     'Icons.br.base.1': 'F',
   }, { index: 1 });
 
+  // TODO Temporary fix
+  Roll.prototype.constructor.create = function (formula, data = {}, options = {}) {
+    const isYZURFormula = options.yzur ?? (
+      'game' in data ||
+      'game' in options ||
+      'maxPush' in options ||
+      /np|p(?:\d+|@maxPush)/i.test(formula)
+    );
+    const n = isYZURFormula ? 1 : 0;
+    const cls = CONFIG.Dice.rolls[n];
+    return new cls(formula, data, options);
+  };
+
   // Creates a namespace within the game global.
   // Places our classes in their own namespace for later reference.
   game.bladerunner = {

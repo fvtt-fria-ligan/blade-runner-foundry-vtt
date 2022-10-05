@@ -73,6 +73,7 @@ export default class BladeRunnerActor extends Actor {
     for (const [k, v] of Object.entries(this.skills)) {
       rollData[k] = v.value;
     }
+    rollData.maxPush = FLBR.maxPushMap[this.nature] ?? 1;
     return rollData;
   }
 
