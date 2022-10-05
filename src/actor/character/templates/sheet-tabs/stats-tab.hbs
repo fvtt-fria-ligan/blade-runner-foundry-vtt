@@ -1,5 +1,6 @@
 <div class="stats-tab">
 	{{#each system.attributes as | attribute attrKey |}}
+	{{#unless (eq attrKey "mvr")}}
 		<div class="stat-blok stat-blok-{{attrKey}}">
 			<h4 class="die-rating">{{localize "FLBR.HEADER.Rating"}}</h4>
 			<h4 class="die-size">{{localize "FLBR.HEADER.DieSize"}}</h4>
@@ -39,6 +40,7 @@
 				{{/if}}
 			{{/each}}
 		</div>
+	{{/unless}}
 	{{/each}}
 	{{!-- Finally, we add a last skill: Driving (no attribute) --}}
 	<div class="stat-blok stat-blok-{{config.vehicleAttribute}}">

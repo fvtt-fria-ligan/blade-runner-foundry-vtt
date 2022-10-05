@@ -82,6 +82,8 @@ FLBR.SHEET_CONFIG.ResolveMaxModifier: Resolve max. modifier
 FLBR.SHEET_CONFIG.ResolveMaxModifierHint: Modify the resolve capacity maximum (GM Only).
 FLBR.SHEET_CONFIG.ResolvePermanentLoss: Resolve permanent loss
 FLBR.SHEET_CONFIG.ResolvePermanentLossHint: Set how much resolve is permanently lost (GM Only).
+FLBR.SHEET_CONFIG.Maneuverability: Vehicle Maneuverability
+FLBR.SHEET_CONFIG.ManeuverabilityHint: Set the maneuverability of the vehicle driven by this character, if applicable.
 FLBR.SHEET_CONFIG.UnlimitedPush: Allow Unlimited Pushed Rolls
 FLBR.SHEET_CONFIG.UnlimitedPushHint: >-
   If your GM allows an unlimited number of pushed rolls.
