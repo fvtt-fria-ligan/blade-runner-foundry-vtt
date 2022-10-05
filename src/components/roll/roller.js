@@ -381,12 +381,13 @@ export default class BRRollHandler extends FormApplication {
     /** @type {YearZeroRoll} */
     const roll = message.rolls[0].duplicate();
     await roll.push({ async: true });
+    const flavor = message.flavor;
     const speakerData = message.speaker;
     const speaker = this.getSpeaker(speakerData);
     if (speaker) await this.updateActor(roll, speaker);
 
     await message.delete();
-    if (sendMessage) return roll.toMessage({ speaker: speakerData });
+    if (sendMessage) return roll.toMessage({ flavor, speaker: speakerData });
     return roll;
   }
 
