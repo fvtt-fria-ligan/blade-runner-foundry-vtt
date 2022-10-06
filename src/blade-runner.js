@@ -24,6 +24,7 @@ import BRRollHandler from '@components/roll/roller';
 import { registerSheets } from '@system/sheets';
 import { initializeHandlebars } from '@system/handlebars';
 import { registerSystemSettings } from '@system/settings';
+import { enrichTextEditors } from '@system/enricher.js';
 import { registerDiceSoNice } from './plugins/dice-so-nice.js';
 import BladeRunnerActor from '@actor/actor-document';
 import BladeRunnerItem from '@item/item-document';
@@ -103,6 +104,9 @@ Hooks.once('ready', () => {
   // TODO Determines whether a system migration is required and feasible.
   // checkMigration();
 
+  // Enriches the text editor.
+  enrichTextEditors();
+
   // Displays system messages.
   displayMessages();
 
@@ -153,5 +157,26 @@ Hooks.on('createActor', async (actor, _data, _options) => {
   }
   if (!foundry.utils.isEmpty(updateData)) {
     await actor.update(updateData);
+  }
+});
+
+
+/* -------------------------------------------- */
+/*  Chat Commands                               */
+/* -------------------------------------------- */
+
+Hooks.on('chatMessage', async (_chatlog, content, _chatData) => {
+  const regex = /^\/([a-z]+?)(?: (.+))?/i;
+  if (content.match(regex)) {
+    const [, command, args] = regex.exec(content);
+
+    if (command === 'table' || command === 't') {
+      const table = game.tables.getName(args);
+      if (table) {
+        await table.draw();
+        return false;
+      }
+    }
+    return true;
   }
 });
