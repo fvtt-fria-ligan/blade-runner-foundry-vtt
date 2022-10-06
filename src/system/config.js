@@ -272,6 +272,11 @@ FLBR.Icons = {
     success: '<i class="fas fa-eye"></i>',
     failure: '<i class="fas fa-horse-head"></i>',
   },
+  links: {
+    choice: '<i class="fa-solid fa-list-ol"></i>',
+    rolltable: '<i class="fas fa-dice-d20"></i>',
+    drawtable: '<i class="fa-solid fa-pen"></i>',
+  },
   buttons: {
     action: '<i class="fas fa-play"></i>',
     edit: '<i class="fas fa-edit"></i>',

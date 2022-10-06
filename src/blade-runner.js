@@ -166,12 +166,13 @@ Hooks.on('createActor', async (actor, _data, _options) => {
 /* -------------------------------------------- */
 
 Hooks.on('chatMessage', async (_chatlog, content, _chatData) => {
-  const regex = /^\/([a-z]+?)(?: (.+))?/i;
+  const regex = /^\/([a-z]+)(?: (.+))?$/i;
   if (content.match(regex)) {
     const [, command, args] = regex.exec(content);
 
     if (command === 'table' || command === 't') {
-      const table = game.tables.getName(args);
+      let table = game.tables.get(args);
+      if (!table) table = game.tables.getName(args);
       if (table) {
         await table.draw();
         return false;
