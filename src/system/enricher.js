@@ -153,12 +153,12 @@ async function weaponEnricher(match, _options) {
 
   const htmlFormat =
 `<div class="flexrow">
-  <div class="flbr-box blue">
-    <h3 style="position: absolute; top: 0; left: 0;">${title}</h3>
-    <img src="${item.img}" style="max-height: 100px; padding: 1em;"/>
+  <div class="flbr-sector-box" style="height: initial; padding: 0;">
+    <h3 style="position: absolute; left: 1em;">@UUID[Item.${item.id}]{${title}}</h3>
+    <img src="${item.img}" style="padding: 0 1em;"/>
     <div>${sys.description}</div>
   </div>
-  <div class="flbr-table green">
+  <div class="flbr-table green" style="height: initial; max-width: 40%;">
     <table>
       <tbody>
         <tr><td>DAMAGE: <b>${sys.damage}</b></td></tr>
