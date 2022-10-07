@@ -1,4 +1,11 @@
+import { ITEM_TYPES } from '@system/constants';
 import { FLBR } from '@system/config';
+
+/* ------------------------------------------ */
+/*  ROLL TABLE                                */
+/*   Adds a button that draws a table         */
+/*   and displays the result in the chat      */
+/* ------------------------------------------ */
 
 /**
  * - $1: Table name or ID
@@ -13,7 +20,7 @@ function rollTableEnricher(match, _options) {
   let table = game.tables.get(match[1]);
   if (!table) table = game.tables.getName(match[1]);
   if (!table) {
-    tableDoc.innerHTML = _createBrokenLink('entity-link', match[2] ?? 'table?');
+    tableDoc.innerHTML = _createBrokenLink('entity-link', match[2] ?? '[table?]');
     return tableDoc;
   };
 
@@ -33,6 +40,10 @@ function rollTableEnricher(match, _options) {
 }
 
 /* ------------------------------------------ */
+/*  DRAW TABLE                                */
+/*   Draws the result of a table              */
+/*   and displays it in the text              */
+/* ------------------------------------------ */
 
 /**
  * - $1: Table name or ID
@@ -48,7 +59,7 @@ async function drawTableEnricher(match, options) {
   let table = game.tables.get(match[1]);
   if (!table) table = game.tables.getName(match[1]);
   if (!table) {
-    tableDoc.innerHTML = _createBrokenLink('entity-link', match[2] || 'table?');
+    tableDoc.innerHTML = _createBrokenLink('entity-link', match[2] || '[table?]');
     return tableDoc;
   };
 
@@ -60,7 +71,7 @@ async function drawTableEnricher(match, options) {
   const drawResult = await table.draw(tableDrawOptions);
   const result = drawResult.results[0];
   if (!result) {
-    tableDoc.innerHTML = _createBrokenLink('entity-link', match[2] || 'result?');
+    tableDoc.innerHTML = _createBrokenLink('entity-link', match[2] || '[result?]');
     return tableDoc;
   }
 
@@ -73,19 +84,19 @@ async function drawTableEnricher(match, options) {
   }
   else {
     const uuid = `${result.documentCollection}.${result.documentId}`;
-    const uuidStr = `@UUID[${uuid}]${title ? `{${title}}` : ''}`;
-    htmlFormat += await TextEditor.enrichHTML(
-      uuidStr,
-      { async: true },
-    );
+    htmlFormat += `@UUID[${uuid}]${title ? `{${title}}` : ''}`;
   }
 
   htmlFormat += '</a>';
-  tableDoc.innerHTML = htmlFormat;
 
+  tableDoc.innerHTML = await TextEditor.enrichHTML(htmlFormat, { rollData: options.rollData, async: true });
   return tableDoc;
 }
 
+/* ------------------------------------------ */
+/*  CHOOSER                                   */
+/*   Chooses a random result among            */
+/*   a list of choices                        */
 /* ------------------------------------------ */
 
 /**
@@ -96,7 +107,7 @@ async function drawTableEnricher(match, options) {
  */
 const CHOOSER_PATTERN = /\[\[choose: (.+?) ?#(.+?)\]\](?:{(.+?)})?/gm;
 
-async function choiceEnricher(match, options) {
+async function chooserEnricher(match, options) {
   const chooseDoc = document.createElement('span');
 
   const roll = Roll.create(match[1], options.rollData);
@@ -113,6 +124,57 @@ async function choiceEnricher(match, options) {
 >${FLBR.Icons.links.choice}${result}</a>`;
 
   return chooseDoc;
+}
+
+/* ------------------------------------------ */
+/*  BLADE RUNNER WEAPON                       */
+/*   Creates a HTML box that displays         */
+/*   the weapon stats                         */
+/* ------------------------------------------ */
+
+/**
+ * - $1: Weapon's name or ID
+ * - $2: Given name overriding the default one
+ */
+const WEAPON_PATTERN = /@BladeRunnerWeapon\[(.+?)\](?:{(.+?)})?/gm;
+
+async function weaponEnricher(match, _options) {
+  const itemDoc = document.createElement('span');
+
+  let item = game.items.get(match[1]);
+  if (!item) item = game.items.getName(match[1]);
+  if (!item && item.type !== ITEM_TYPES.WEAPON) {
+    itemDoc.innerHTML = _createBrokenLink('entity-link', match[2] || '[weapon?]');
+    return itemDoc;
+  }
+
+  const title = match[2] || item.name;
+  const sys = item.system;
+
+  const htmlFormat =
+`<div class="flexrow">
+  <div class="flbr-box blue">
+    <h3 style="position: absolute; top: 0; left: 0;">${title}</h3>
+    <img src="${item.img}" style="max-height: 100px; padding: 1em;"/>
+    <div>${sys.description}</div>
+  </div>
+  <div class="flbr-table green">
+    <table>
+      <tbody>
+        <tr><td>DAMAGE: <b>${sys.damage}</b></td></tr>
+        <tr><td>CRIT DIE: D<b>${sys.crit}</b></td></tr>
+        <tr><td>TYPE: <b>${game.i18n.localize(FLBR.damageTypes[sys.damageType])}</b></td></tr>
+        <tr><td>MIN. RANGE: <b>${game.i18n.localize(FLBR.ranges[sys.range.min])}</b></td></tr>
+        <tr><td>MAX. RANGE: <b>${game.i18n.localize(FLBR.ranges[sys.range.max])}</b></td></tr>
+        <tr><td>AVAILABILITY: <b>${game.i18n.localize(FLBR.availabilities[sys.availability])}</b></td></tr>
+        <tr><td>COST: <b>${sys.cost}</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>`;
+  // itemDoc.setAttribute('style', 'flexrow');
+  itemDoc.innerHTML = await TextEditor.enrichHTML(htmlFormat, { async: true });
+  return itemDoc;
 }
 
 /* ------------------------------------------ */
@@ -138,7 +200,11 @@ export function enrichTextEditors() {
     },
     {
       pattern: CHOOSER_PATTERN,
-      enricher: choiceEnricher,
+      enricher: chooserEnricher,
+    },
+    {
+      pattern: WEAPON_PATTERN,
+      enricher: weaponEnricher,
     },
   );
 }
