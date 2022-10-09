@@ -22,7 +22,8 @@ h6 { font-size: var(--font-size--extra-small); }
 
 a.entity-link,
 a.content-link,
-a.inline-roll {
+a.inline-roll,
+a.inline-table {
   border: none;
   background: transparent;
   border-bottom: 1px dotted gray;

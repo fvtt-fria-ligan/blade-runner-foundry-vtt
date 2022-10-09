@@ -28,12 +28,10 @@ function rollTableEnricher(match, _options) {
 
   tableDoc.innerHTML =
 `<a
-  class="content-link"
-  draggable="true"
-  data-id="null"
-  data-uuid="null"
+  class="inline-table"
+  data-id="${table.id}"
+  onclick="game.tables.get('${table.id}').draw();"
   data-tooltip="Draw from table <b>${table.name}</b>"
-  onclick="game.tables.get('${table.id}').draw({ displayChat: true, async: true });"
 >${FLBR.Icons.links.rolltable}${title}</a>`;
 
   return tableDoc;
@@ -75,7 +73,7 @@ async function drawTableEnricher(match, options) {
     return tableDoc;
   }
 
-  let htmlFormat = '<a class="entity-link" draggable="false" '
+  let htmlFormat = '<a class="entity-link" '
     + `data-tooltip="${table.name}: ${drawResult.roll.formula} (${drawResult.roll.total})">`
     + `<img src="${result.img}" style="vertical-align: top; height: 1em;"/>&nbsp;`;
 
@@ -155,7 +153,7 @@ async function weaponEnricher(match, _options) {
 `<div class="flexrow">
   <div class="flbr-sector-box" style="height: initial; padding: 0;">
     <h3 style="position: absolute; left: 1em;">@UUID[Item.${item.id}]{${title}}</h3>
-    <img src="${item.img}" style="padding: 0 1em;"/>
+    <img class="nopopout" src="${item.img}" style="padding: 0 1em;"/>
     <div>${sys.description}</div>
   </div>
   <div class="flbr-table green" style="height: initial; max-width: 40%;">
