@@ -63,6 +63,7 @@ Hooks.once('init', () => {
   game.bladerunner = {
     config: FLBR,
     roller: BRRollHandler,
+    macros: {},
   };
 
   // Records configuration values.
@@ -76,7 +77,7 @@ Hooks.once('init', () => {
   // Patches Core functions.
   // TODO use initiative cards
   CONFIG.Combat.initiative = {
-    formula: '1d10 + (@attributes.agi.value / 100)',
+    formula: '1d10 + (@agi / 100)',
     decimals: 2,
   };
 
@@ -110,7 +111,7 @@ Hooks.once('ready', () => {
   // Displays system messages.
   displayMessages();
 
-  console.log('Blade Runner RPG | Ready!');
+  console.warn('Blade Runner RPG | Ready!');
 });
 
 /* ------------------------------------------ */
@@ -139,19 +140,25 @@ Hooks.on('renderChatMessage', (_msg, html, _data) => Chat.hideChatActionButtons(
 /* ------------------------------------------ */
 
 Hooks.on('createActor', async (actor, _data, _options) => {
-  const updateData = {};
+  const updateData = {
+    'prototypeToken.displayName': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+    'prototypeToken.displayBars': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+  };
+
   switch (actor.type) {
     case ACTOR_TYPES.CHAR:
       if (!actor.system.attributes || !actor.system.skills) {
         throw new TypeError(`FLBR | "${actor.type}" has No attribute nor skill`);
       }
-      // Sets the default starting value for each attribute.
-      for (const attribute in actor.system.attributes) {
-        updateData[`system.attributes.${attribute}.value`] = FLBR.startingAttributeLevel;
-      }
-      // Builds the list of skills and sets their default values.
-      for (const skill in FLBR.skillMap) {
-        updateData[`system.skills.${skill}.value`] = FLBR.startingSkillLevel;
+      if (foundry.utils.isEmpty(actor.system.skills)) {
+        // Sets the default starting value for each attribute.
+        for (const attribute in actor.system.attributes) {
+          updateData[`system.attributes.${attribute}.value`] = FLBR.startingAttributeLevel;
+        }
+        // Builds the list of skills and sets their default values.
+        for (const skill in FLBR.skillMap) {
+          updateData[`system.skills.${skill}.value`] = FLBR.startingSkillLevel;
+        }
       }
       break;
   }
