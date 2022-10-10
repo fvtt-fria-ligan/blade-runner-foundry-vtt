@@ -141,7 +141,7 @@ async function weaponEnricher(match, _options) {
 
   let item = game.items.get(match[1]);
   if (!item) item = game.items.getName(match[1]);
-  if (!item && item.type !== ITEM_TYPES.WEAPON) {
+  if (!item || item.type !== ITEM_TYPES.WEAPON) {
     itemDoc.innerHTML = _createBrokenLink('entity-link', match[2] || '[weapon?]');
     return itemDoc;
   }
@@ -151,10 +151,10 @@ async function weaponEnricher(match, _options) {
 
   const htmlFormat =
 `<div class="flexrow">
-  <div class="flbr-sector-box" style="height: initial; padding: 0;">
+  <div class="flbr-sector-box" style="height: initial; padding: 0; background-color: rgba(0,0,0,.4);">
     <h3 style="position: absolute; left: 1em;">@UUID[Item.${item.id}]{${title}}</h3>
-    <img class="nopopout" src="${item.img}" style="padding: 0 1em;"/>
-    <div>${sys.description}</div>
+    <img class="nopopout" src="${item.img}" style="padding: 3em 1em 0 1em;"/>
+    <div class="flbr-weapon-description">${sys.description}</div>
   </div>
   <div class="flbr-table green" style="height: initial; max-width: 40%;">
     <table>

@@ -30,7 +30,8 @@
 			{{else if (eq type "armor")}}
 				<div>{{localize "FLBR.ItemArmor"}}</div>
 				<div>{{localize "FLBR.D"}}{{system.armor}}</div>
-			{{else if hasModifier}}
+			{{/if}}
+			{{#if hasModifier}}
 				<div class="modifiers">{{localize "FLBR.ItemModifier"}}</div>
 				<div class="modifiers">{{modifiersDescription}}</div>
 			{{/if}}
