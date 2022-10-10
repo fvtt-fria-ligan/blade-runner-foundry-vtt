@@ -22,7 +22,7 @@ export default class BladeRunnerItem extends Item {
   }
 
   get isOffensive() {
-    return this.damage != null;
+    return typeof this.damage !== 'undefined';
   }
 
   get hasModifier() {
