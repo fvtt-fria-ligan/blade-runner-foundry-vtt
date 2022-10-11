@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { ITEM_TYPES } from '@system/constants';
 import { FLBR } from '@system/config';
 
@@ -137,7 +138,7 @@ async function chooserEnricher(match, options) {
 const WEAPON_PATTERN = /@BladeRunnerWeapon\[(.+?)\](?:{(.+?)})?/gm;
 
 async function weaponEnricher(match, _options) {
-  const itemDoc = document.createElement('span');
+  const itemDoc = document.createElement('div');
 
   let item = game.items.get(match[1]);
   if (!item) item = game.items.getName(match[1]);
@@ -150,27 +151,27 @@ async function weaponEnricher(match, _options) {
   const sys = item.system;
 
   const htmlFormat =
-`<div class="flexrow">
-  <div class="flbr-sector-box" style="height: initial; padding: 0; background-color: rgba(0,0,0,.4);">
-    <h3 style="position: absolute; left: 1em;">@UUID[Item.${item.id}]{${title}}</h3>
-    <img class="nopopout" src="${item.img}" style="padding: 3em 1em 0 1em;"/>
-    <div class="flbr-weapon-description">${sys.description}</div>
-  </div>
-  <div class="flbr-table green" style="height: initial; max-width: 40%;">
-    <table>
-      <tbody>
-        <tr><td>DAMAGE: <b>${sys.damage}</b></td></tr>
-        <tr><td>CRIT DIE: D<b>${sys.crit}</b></td></tr>
-        <tr><td>TYPE: <b>${game.i18n.localize(FLBR.damageTypes[sys.damageType])}</b></td></tr>
-        <tr><td>MIN. RANGE: <b>${game.i18n.localize(FLBR.ranges[sys.range.min])}</b></td></tr>
-        <tr><td>MAX. RANGE: <b>${game.i18n.localize(FLBR.ranges[sys.range.max])}</b></td></tr>
-        <tr><td>AVAILABILITY: <b>${game.i18n.localize(FLBR.availabilities[sys.availability])}</b></td></tr>
-        <tr><td>COST: <b>${sys.cost}</b></td></tr>
-      </tbody>
-    </table>
-  </div>
+`<div class="flbr-sector-box" style="display: flex; flex-direction: column; justify-content: space-between; height: initial; padding: 0; background-color: rgba(0,0,0,.4);">
+  <h3 style="padding: .5em">@UUID[Item.${item.id}]{${title}}</h3>
+  <img class="nopopout" src="${item.img}" style="align-self: center; padding: 0 1em; max-height: 200px;"/>
+  <div class="flbr-weapon-description">${sys.description}</div>
+</div>
+<div class="flbr-table green" style="height: initial; max-width: 40%;">
+  <table>
+    <tbody>
+      <tr><td>DAMAGE: <b>${sys.damage}</b></td></tr>
+      <tr><td>CRIT DIE: D<b>${sys.crit}</b></td></tr>
+      <tr><td>TYPE: <b>${game.i18n.localize(FLBR.damageTypes[sys.damageType])}</b></td></tr>
+      <tr><td>MIN. RANGE: <b>${game.i18n.localize(FLBR.ranges[sys.range.min])}</b></td></tr>
+      <tr><td>MAX. RANGE: <b>${game.i18n.localize(FLBR.ranges[sys.range.max])}</b></td></tr>
+      <tr><td>AVAILABILITY: <b>${game.i18n.localize(FLBR.availabilities[sys.availability])}</b></td></tr>
+      <tr><td>COST: <b>${sys.cost}</b></td></tr>
+    </tbody>
+  </table>
 </div>`;
-  // itemDoc.setAttribute('style', 'flexrow');
+
+  itemDoc.className = 'flexrow';
+  itemDoc.style.flexWrap = 'nowrap';
   itemDoc.innerHTML = await TextEditor.enrichHTML(htmlFormat, { async: true });
   return itemDoc;
 }
