@@ -98,7 +98,7 @@
       "itemOffensive": {
         "damage": 1,
         "crit": 6,
-        "damageType": 1,
+        "damageType": 2,
         "range": { "min": 0, "max": 1 }
       },
       "itemModifiers": { "modifiers": {} }
@@ -121,7 +121,7 @@
     "explosive": {
       "templates": ["itemBase", "itemRoll", "itemDesc", "itemOffensive"],
       "rollable": true,
-      "damageType": 0,
+      "damageType": 2,
       "blast": 8
     },
     "specialty": {

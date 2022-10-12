@@ -171,6 +171,7 @@ FLBR.SignatureItemUsedCheckboxHint: Used?
 FLBR.WeaponDamage: Damage
 FLBR.WeaponCrit: Crit Die
 FLBR.WeaponDamageType: Damage Type
+FLBR.WEAPON_DAMAGE_TYPE.None: '–'
 FLBR.WEAPON_DAMAGE_TYPE.Crushing: Crushing
 FLBR.WEAPON_DAMAGE_TYPE.Piercing: Piercing
 FLBR.WEAPON_DAMAGE_TYPE.Stress: Stress
