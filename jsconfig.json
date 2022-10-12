@@ -3,10 +3,10 @@
     "module": "ES6",
     "target": "ESNext",
     "moduleResolution": "Node",
+    // "checkJs": true,
     "baseUrl": ".",
     "paths": {
       "*": ["./src"],
-      "@lib/*": ["./static/lib/*"],
       "@actor/*": ["./src/actor/*"],
       "@item/*": ["./src/item/*"],
       "@system/*": ["./src/system/*"],

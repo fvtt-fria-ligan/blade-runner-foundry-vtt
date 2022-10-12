@@ -3,7 +3,7 @@
  */
 
 /** @enum {string} */
-export const SYSTEM_NAME = 'blade-runner';
+export const SYSTEM_ID = 'blade-runner';
 
 /** @enum {number} */
 export const DIE_SCORES = {
@@ -89,8 +89,10 @@ export const COMBAT_ACTIONS = {
 
 /** @enum {number} */
 export const DAMAGE_TYPES = {
-  CRUSHING: 0,
-  PIERCING: 1,
+  NONE: 0,
+  CRUSHING: 1,
+  PIERCING: 2,
+  STRESS: 3,
 };
 
 /** @enum {number} */

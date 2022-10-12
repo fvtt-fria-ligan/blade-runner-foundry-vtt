@@ -5,7 +5,7 @@
 	<div class="sheet-header">
 		<div class="flex row align-center">
 			<div class="photo">
-				<img src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+				<img src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}"/>
 			</div>
 			<div class="item-type">{{localize (concat "ITEM.Type" (capitalize item.type))}}</div>
 		</div>
@@ -29,7 +29,7 @@
 	<div class="sheet-body">
 
 		<div class="tab tab-info" data-group="primary" data-tab="info">
-			{{editor content=data.description target="data.description" owner=owner button=true editable=editable}}
+			{{{editor system.description target="system.description" button=true editable=editable}}}
 		</div>
 
 		<div class="tab tab-features" data-group="primary" data-tab="features">
@@ -37,80 +37,80 @@
 			{{#if (eq item.type "injury")}}
 				<div class="item-property item-property-category">
 					<label>{{localize "FLBR.InjuryCategory"}}</label>
-					<select name="data.category">
-						{{selectOptions config.damageTypes selected=data.category localize=true}}
+					<select name="system.category">
+						{{selectOptions config.damageTypes selected=system.category localize=true}}
 					</select>
 				</div>
 				<div class="item-property item-property-lethal">
 					<label>{{localize "FLBR.InjuryLethal"}}</label>
-					<input type="checkbox" name="data.lethal" {{checked data.lethal}}/>
+					<input type="checkbox" name="system.lethal" {{checked system.lethal}}/>
 				</div>
 				<div class="item-property item-property-permanent">
 					<label>{{localize "FLBR.InjuryPermanent"}}</label>
-					<input type="checkbox" name="data.permanent" {{checked data.permanent}}/>
+					<input type="checkbox" name="system.permanent" {{checked system.permanent}}/>
 				</div>
 				<div class="item-property item-property-death-save">
 					<label>{{localize "FLBR.InjuryDeathSave"}}</label>
-					<input type="text" name="data.deathSave" value="{{data.deathSave}}"/>
+					<input type="text" name="system.deathSave" value="{{system.deathSave}}"/>
 				</div>
 				<div class="item-property item-property-healing">
 					<label>{{localize "FLBR.InjuryHealing"}}</label>
-					<input type="text" name="data.healing" value="{{data.healing}}"/>
+					<input type="text" name="system.healing" value="{{system.healing}}"/>
 				</div>
 			{{else if (eq item.type "specialty")}}
 				{{!-- NOTHING for SPECIALTY --}}
 			{{else}}
 				<div class="item-property item-property-quantity">
 					<label>{{localize "FLBR.ItemQuantity"}}</label>
-					<input type="text" name="data.qty" value="{{data.qty}}" data-dtype="Number"/>
+					<input type="text" name="system.qty" value="{{system.qty}}" data-dtype="Number"/>
 				</div>
 				<div class="item-property item-property-cost">
 					<label>{{localize "FLBR.ItemCost"}}</label>
-					<input type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number"/>
+					<input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
 				</div>
 				<div class="item-property item-property-availability">
 					<label>{{localize "FLBR.ItemAvailability"}}</label>
-					<select name="data.availability">
-						{{selectOptions config.availabilities selected=data.availability localize=true}}
+					<select name="system.availability">
+						{{selectOptions config.availabilities selected=system.availability localize=true}}
 					</select>
 				</div>
 
 				{{#if (eq item.type "armor")}}
 					<div class="item-property item-property-armor">
-						<label>{{localize "FLBR.ItemArmor"}} ({{localize "FLBR.D"}}{{data.armor}})</label>
-						{{scoreSelector "data.armor" selected=data.armor}}
+						<label>{{localize "FLBR.ItemArmor"}} ({{localize "FLBR.D"}}{{system.armor}})</label>
+						{{scoreSelector "system.armor" selected=system.armor}}
 					</div>
 				{{/if}}
 
 				{{#if isOffensive}}
 					{{#if (eq item.type "explosive")}}
 						<div class="item-property item-property-blast">
-							<label>{{localize "FLBR.Blast"}} ({{localize "FLBR.D"}}{{data.blast}})</label>
-							{{scoreSelector "data.blast" selected=data.blast}}
+							<label>{{localize "FLBR.Blast"}} ({{localize "FLBR.D"}}{{system.blast}})</label>
+							{{scoreSelector "system.blast" selected=system.blast}}
 						</div>
 					{{/if}}
 					<div class="item-property item-property-damage">
 						<label>{{localize "FLBR.WeaponDamage"}}</label>
-						<input type="text" name="data.damage" value="{{data.damage}}" data-dtype="Number"/>
+						<input type="text" name="system.damage" value="{{system.damage}}" data-dtype="Number"/>
 					</div>
 					<div class="item-property item-property-crit">
-						<label>{{localize "FLBR.WeaponCrit"}} ({{localize "FLBR.D"}}{{data.crit}})</label>
-						{{scoreSelector "data.crit" selected=data.crit}}
+						<label>{{localize "FLBR.WeaponCrit"}} ({{localize "FLBR.D"}}{{system.crit}})</label>
+						{{scoreSelector "system.crit" selected=system.crit}}
 					</div>
 					<div class="item-property item-property-damage-type">
 						<label>{{localize "FLBR.WeaponDamageType"}}</label>
-						<select name="data.damageType">
-							{{selectOptions config.damageTypes selected=data.damageType localize=true}}
+						<select name="system.damageType">
+							{{selectOptions config.damageTypes selected=system.damageType localize=true}}
 						</select>
 					</div>
 					<div class="item-property item-property-range">
 						<label>{{localize "FLBR.WeaponRange"}}</label>
 						<div class="ranges-min-max flex row">
-							<select name="data.range.min">
-								{{selectOptions config.ranges selected=data.range.min localize=true}}
+							<select name="system.range.min">
+								{{selectOptions config.ranges selected=system.range.min localize=true}}
 							</select>
-							<select name="data.range.max" style="margin-left: 4px;">
-								{{selectOptions config.ranges selected=data.range.max localize=true}}
+							<select name="system.range.max" style="margin-left: 4px;">
+								{{selectOptions config.ranges selected=system.range.max localize=true}}
 							</select>
 						</div>
 					</div>
@@ -118,14 +118,14 @@
 			{{/if}}
 			
 			<div class="item-property item-property-special">
-				<input type="text" name="data.special" value="{{data.special}}" maxlength="{{config.itemSpecialInputMaxLength}}" placeholder="{{localize "FLBR.ItemSpecial"}}"/>
+				<input type="text" name="system.special" value="{{system.special}}" maxlength="{{config.itemSpecialInputMaxLength}}" placeholder="{{localize "FLBR.ItemSpecial"}}"/>
 			</div>
 
-			{{#if data.modifiers}}
+			{{#if system.modifiers}}
 				<div class="item-modifiers boxed-property">
 					<h4>
 						{{localize "FLBR.HEADER.Modifiers"}}
-						<a class="btn add-modifier" title="{{localize "FLBR.ItemAddModifier"}}">
+						<a class="btn add-modifier" data-tooltip="{{localize "FLBR.ItemAddModifier"}}">
 							{{{@root.config.Icons.buttons.plus}}}
 						</a>
 					</h4>
@@ -139,23 +139,23 @@
 			<div class="tab tab-roll" data-group="primary" data-tab="roll">
 				<div class="item-property item-property-rollable">
 					<label>{{localize "FLBR.ItemRollable"}}</label>
-					<input type="checkbox" name="data.rollable" {{checked data.rollable}}/>
+					<input type="checkbox" name="system.rollable" {{checked system.rollable}}/>
 				</div>
 				{{#unless (eq item.type 'armor')}}
-					<div class="item-property item-property-attribute"{{#unless data.rollable}} style="display: none;"{{/unless}}>
+					<div class="item-property item-property-attribute"{{#unless system.rollable}} style="display: none;"{{/unless}}>
 						<label>{{localize "FLBR.ItemAttribute"}}</label>
-						<select name="data.attribute">
-							{{#select data.attribute}}
+						<select name="system.attribute">
+							{{#select system.attribute}}
 								{{#each @root.config.attributes}}
 									<option value="{{.}}">{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase .))}}</option>
 								{{/each}}
 							{{/select}}
 						</select>
 					</div>
-					<div class="item-property item-property-skill"{{#unless data.rollable}} style="display: none;"{{/unless}}>
+					<div class="item-property item-property-skill"{{#unless system.rollable}} style="display: none;"{{/unless}}>
 						<label>{{localize "FLBR.ItemSkill"}}</label>
-						<select name="data.skill">
-							{{#select data.skill}}
+						<select name="system.skill">
+							{{#select system.skill}}
 								{{#each @root.config.skills}}
 									<option value="{{.}}">{{localize (concat "FLBR.SKILL." (capitalize .))}}</option>
 								{{/each}}

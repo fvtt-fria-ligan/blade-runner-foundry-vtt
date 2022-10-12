@@ -8,7 +8,7 @@ import * as BR from './constants.js';
 /**
  * The Blade Runner RPG configuration.
  * @constant
- * @enum
+ * @enum {any}
  */
 export const FLBR = {};
 
@@ -172,8 +172,10 @@ FLBR.availabilities = {
 };
 
 FLBR.damageTypes = {
+  [BR.DAMAGE_TYPES.NONE]: 'FLBR.WEAPON_DAMAGE_TYPE.None',
   [BR.DAMAGE_TYPES.CRUSHING]: 'FLBR.WEAPON_DAMAGE_TYPE.Crushing',
   [BR.DAMAGE_TYPES.PIERCING]: 'FLBR.WEAPON_DAMAGE_TYPE.Piercing',
+  [BR.DAMAGE_TYPES.STRESS]: 'FLBR.WEAPON_DAMAGE_TYPE.Stress',
 };
 
 FLBR.blastPowerMap = {
@@ -270,6 +272,11 @@ FLBR.Icons = {
   dice: {
     success: '<i class="fas fa-eye"></i>',
     failure: '<i class="fas fa-horse-head"></i>',
+  },
+  links: {
+    choice: '<i class="fa-solid fa-list-ol"></i>',
+    rolltable: '<i class="fas fa-dice-d20"></i>',
+    drawtable: '<i class="fa-solid fa-pen"></i>',
   },
   buttons: {
     action: '<i class="fas fa-play"></i>',

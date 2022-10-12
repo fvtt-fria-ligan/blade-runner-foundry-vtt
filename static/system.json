@@ -1,19 +1,27 @@
 {
-  "name": "blade-runner",
-  "title": "Blade Runner - The Roleplaying Game",
+  "id": "blade-runner",
+  "title": "🦄 Blade Runner - The Roleplaying Game",
   "description": "A neon-noir wonderland that’ll take your breath away. One way or another. An evocative world of conflicts and contrasts that dares to ask the hard questions and investigate the powers of empathy, the poisons of fear, and the burdens of being human during inhumane times. An iconic and unforgiving playground of endless possibilities that picks you up, slaps you in the face, and tells you to wake up. Time to live. Or time to die.",
-  "version": "0.2.0",
-  "minimumCoreVersion": 9,
-  "compatibleCoreVersion": 9,
+  "version": "0.3.0",
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.285",
+    "maximum": 10
+  },
   "author": "Stefouch",
   "authors": [
     {
       "name": "Stefouch",
+      "url": "https://github.com/Stefouch",
       "discord": "Stefouch#5202",
-      "url": "https://github.com/Stefouch"
+      "twitter": "@stefouch"
+    },
+    {
+      "name": "Free League Developer Community",
+      "url": "https://github.com/orgs/fvtt-fria-ligan"
     }
   ],
-  "contributors": ["aMediocreDad", "FloRad"],
+  "contributors": ["aMediocreDad"],
   "localization": "",
   "allowBugReporter": true,
   "bugs": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues",
@@ -31,7 +39,7 @@
   ],
   "gridDistance": 1,
   "gridUnits": "m",
-  "background": "assets/splash.jpg",
+  "background": "systems/blade-runner/assets/splash.jpg",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": null,
   "url": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt",
@@ -39,5 +47,5 @@
   "license": "LICENSE.txt",
   "socket": false,
   "manifest": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/latest/download/system.json",
-  "download": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/v0.1.0/main.zip"
+  "download": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/latest/download/blade-runner.zip"
 }

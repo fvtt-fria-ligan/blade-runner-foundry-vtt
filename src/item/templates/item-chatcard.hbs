@@ -1,42 +1,42 @@
 <div class="blade-runner item-chat-card">
 	<h3>{{name}}</h3>
-	{{#if data.description}}
+	{{#if system.description}}
 		<hr/>
-		<div class="description">{{{data.description}}}</div>
+		<div class="description">{{{system.description}}}</div>
 	{{/if}}
-	{{log showProperties level="warn"}}
 	{{#if showProperties}}
 		<div class="details boxed-property">
 			{{#if (or (eq type "weapon") (eq type "explosive"))}}
 				{{#if (eq type "explosive")}}
 					<div>{{localize "FLBR.BlastPower"}}</div>
-					<div>2x{{localize "FLBR.D"}}{{data.blast}}</div>
+					<div>2x{{localize "FLBR.D"}}{{system.blast}}</div>
 				{{/if}}
 				<div>{{localize "FLBR.WeaponDamage"}}</div>
 				<div>
-					{{data.damage}}&numsp;
-					<small>({{localize (lookup config.damageTypes data.damageType)}})</small>
+					{{system.damage}}&numsp;
+					<small>({{localize (lookup config.damageTypes system.damageType)}})</small>
 				</div>
 				<div>{{localize "FLBR.WeaponCrit"}}</div>
-				<div>{{localize "FLBR.D"}}{{data.crit}}</div>
+				<div>{{localize "FLBR.D"}}{{system.crit}}</div>
 				<div>{{localize "FLBR.WeaponRange"}}</div>
 				<div>
-					{{#if (eq data.range.min data.range.max)}}
-						{{localize (lookup config.ranges data.range.min)}}
+					{{#if (eq system.range.min system.range.max)}}
+						{{localize (lookup config.ranges system.range.min)}}
 					{{else}}
-						{{localize (lookup config.ranges data.range.min)}} –
-						{{localize (lookup config.ranges data.range.max)}}
+						{{localize (lookup config.ranges system.range.min)}} –
+						{{localize (lookup config.ranges system.range.max)}}
 					{{/if}}
 				</div>
 			{{else if (eq type "armor")}}
 				<div>{{localize "FLBR.ItemArmor"}}</div>
-				<div>{{localize "FLBR.D"}}{{data.armor}}</div>
-			{{else if hasModifier}}
+				<div>{{localize "FLBR.D"}}{{system.armor}}</div>
+			{{/if}}
+			{{#if hasModifier}}
 				<div class="modifiers">{{localize "FLBR.ItemModifier"}}</div>
 				<div class="modifiers">{{modifiersDescription}}</div>
 			{{/if}}
-			{{#if data.special}}
-				<div class="grid-column-all special">{{data.special}}</div>
+			{{#if system.special}}
+				<div class="grid-column-all special">{{system.special}}</div>
 			{{/if}}
 		</div>
 	{{/if}}
@@ -46,8 +46,8 @@
 	</div>
 	<hr/>
 	<div class="chat-card-footer">
-		{{#if data.availability}}
-			{{localize (lookup config.availabilities data.availability)}} 
+		{{#if system.availability}}
+			{{localize (lookup config.availabilities system.availability)}} 
 		{{/if}}
 		{{localize (concat "ITEM.Type" (capitalize type))}}
 		{{#unless inActor}} {{link}}{{/unless}}

@@ -53,10 +53,10 @@
   }
 
   /* ------------------------------------------ */
-  
-  a.entity-link,
+
   a.content-link,
-  a.inline-roll {
+  a.inline-roll,
+  a.inline-table {
     border: 1px solid var(--color-blue-darker);
     border-radius: 4px / 12px;
     background-color: var(--color-black);

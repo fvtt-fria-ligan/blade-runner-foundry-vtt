@@ -1,8 +1,8 @@
 import semverComp from '@utils/semver-compare';
-import { SETTINGS_KEYS, SYSTEM_NAME } from '@system/constants';
+import { SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
 
 export default async function displayMessages() {
-  const messages = await fetch(`systems/${SYSTEM_NAME}/assets/messages/messages.jsonc`)
+  const messages = await fetch(`systems/${SYSTEM_ID}/assets/messages/messages.jsonc`)
     .then(resp => resp.text())
     .then(jsonc => JSON.parse(stripJSON(jsonc)));
 
@@ -29,7 +29,7 @@ const isCurrent = msg => {
     foundry.utils.isNewerVersion(game.version, msg['min-core-version'] ?? '0.0.0');
   const correctSysVersion = semverComp(
     msg['min-sys-version'] ?? '0.0.0',
-    game.system.data.version,
+    game.system.version,
     msg['max-sys-version'] ?? '100.0.0',
     { gEqMin: true },
   );
@@ -37,7 +37,7 @@ const isCurrent = msg => {
 };
 
 const hasDisplayed = identifier => {
-  const settings = game.settings.get(SYSTEM_NAME, SETTINGS_KEYS.DISPLAYED_MESSAGES);
+  const settings = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.DISPLAYED_MESSAGES);
   if (settings?.includes(identifier)) return true;
   else return false;
 };
@@ -46,9 +46,9 @@ const displayPrompt = (title, content) => {
   content = content.replace('{name}', game.user.name);
   return Dialog.prompt({
     title: title,
-    content: content,
+    content: `<img src="systems/${SYSTEM_ID}/assets/bladerunner-banner-small.webp"/>${content}`,
     label: 'Understood!',
-    options: { width: 600, classes: [SYSTEM_NAME, 'dialog'] },
+    options: { width: 600, classes: [SYSTEM_ID, 'dialog'] },
     callback: () => setDisplayed(title),
   });
 };
@@ -56,14 +56,18 @@ const displayPrompt = (title, content) => {
 const sendToChat = (title, content) => {
   content = content.replace('{name}', game.user.name);
   setDisplayed(title);
+  const footer = `<footer class="nue">${game.i18n.localize('NUE.FirstLaunchHint')}</footer>`;
   return ChatMessage.create({
+    whisper: [game.user.id],
+    speaker: { alias: 'Blade Runner RPG' },
+    flags: { core: { canPopout: true } },
     title: title,
-    content: `<div class="blade-runner chat-item">${content}</div>`,
+    content: `<div class="chat-card"><h3 class="nue">${title}</h3>${content}${footer}</div>`,
   });
 };
 
 const setDisplayed = async identifier => {
-  const settings = game.settings.get(SYSTEM_NAME, SETTINGS_KEYS.DISPLAYED_MESSAGES);
+  const settings = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.DISPLAYED_MESSAGES);
   settings.push(identifier);
-  await game.settings.set(SYSTEM_NAME, SETTINGS_KEYS.DISPLAYED_MESSAGES, settings.flat());
+  await game.settings.set(SYSTEM_ID, SETTINGS_KEYS.DISPLAYED_MESSAGES, settings.flat());
 };

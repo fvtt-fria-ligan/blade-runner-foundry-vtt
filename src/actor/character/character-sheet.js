@@ -1,6 +1,7 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet';
-import { SYSTEM_NAME, ACTOR_TYPES, ACTOR_SUBTYPES } from '@system/constants';
+import { SYSTEM_ID, ACTOR_TYPES, ACTOR_SUBTYPES } from '@system/constants';
 import { FLBR } from '@system/config';
+import { enrichTextFields } from '@utils/string-util';
 
 /**
  * Blade Runner RPG Actor Sheet for Character.
@@ -14,9 +15,9 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
   /** @override */
   static get defaultOptions() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
+    const sysId = game.system.id || SYSTEM_ID;
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [sysName, 'sheet', 'actor', 'character'],
+      classes: [sysId, 'sheet', 'actor', 'character'],
       width: 520,
       height: 616,
       resizable: true,
@@ -31,11 +32,11 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
   /** @override */
   get template() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
+    const sysId = game.system.id || SYSTEM_ID;
     if (!game.user.isGM && this.actor.limited) {
-      return `systems/${sysName}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-limited-sheet.hbs`;
+      return `systems/${sysId}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-limited-sheet.hbs`;
     }
-    return `systems/${sysName}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-sheet.hbs`;
+    return `systems/${sysId}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-sheet.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -43,11 +44,21 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   /* ------------------------------------------ */
 
   /** @override */
-  getData(options) {
-    const sheetData = super.getData(options);
-    sheetData.isPC = this.actor.props.subtype === ACTOR_SUBTYPES.PC;
-    sheetData.isNPC = this.actor.props.subtype === ACTOR_SUBTYPES.NPC;
+  async getData(options) {
+    const sheetData = await super.getData(options);
+    sheetData.isPC = this.actor.system.subtype === ACTOR_SUBTYPES.PC;
+    sheetData.isNPC = this.actor.system.subtype === ACTOR_SUBTYPES.NPC;
     sheetData.driving = this.actor.skills.driving?.value;
+
+    if (this.actor.system.subtype === ACTOR_SUBTYPES.PC) {
+      await enrichTextFields(sheetData, [
+        'system.bio.keyMemory',
+        'system.bio.keyRelationship',
+        'system.bio.home',
+        'system.bio.appearance',
+      ]);
+    }
+
     return sheetData;
   }
 
@@ -69,7 +80,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     html.find('.action-roll').click(this._onActionRoll.bind(this));
 
     // Resolve Permanent Loss
-    html.find('.capacity-resolve .capacity-boxes').click(this._onResolveIncrease.bind(this));
+    html.find('.capacity-resolve .capacity-boxes').on('contextmenu', this._onResolveDecrease.bind(this));
   }
 
   /* ------------------------------------------ */
@@ -95,10 +106,10 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
   /* ------------------------------------------ */
 
-  _onResolveIncrease(event) {
+  _onResolveDecrease(event) {
     event.preventDefault();
-    if (this.actor.data.data.subtype !== ACTOR_SUBTYPES.PC) return;
-    if (this.actor.resolve.value >= this.actor.resolve.max) return;
+    if (this.actor.system.subtype !== ACTOR_SUBTYPES.PC) return;
+    if (this.actor.resolve.value > 1) return;
     return this.actor.rollResolve();
   }
 }

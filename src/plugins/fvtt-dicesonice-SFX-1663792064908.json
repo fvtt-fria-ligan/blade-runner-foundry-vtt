@@ -1,0 +1,96 @@
+{
+  "sfxList": [
+    {
+      "diceType": "d6",
+      "onResult": [
+        "6"
+      ],
+      "specialEffect": "PlayAnimationParticleSpiral",
+      "options": {
+        "isGlobal": false
+      }
+    },
+    {
+      "diceType": "d8",
+      "onResult": [
+        "6",
+        "7",
+        "8"
+      ],
+      "specialEffect": "PlayAnimationParticleSpiral",
+      "options": {
+        "isGlobal": false
+      }
+    },
+    {
+      "diceType": "d10",
+      "onResult": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "specialEffect": "PlayAnimationParticleSpiral",
+      "options": {
+        "isGlobal": false
+      }
+    },
+    {
+      "diceType": "d12",
+      "onResult": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "specialEffect": "PlayAnimationParticleSpiral",
+      "options": {
+        "isGlobal": false
+      }
+    },
+    {
+      "diceType": "d6",
+      "onResult": [
+        "1"
+      ],
+      "specialEffect": "PlayAnimationImpact",
+      "options": {
+        "isGlobal": false
+      }
+    },
+    {
+      "diceType": "d8",
+      "onResult": [
+        "1"
+      ],
+      "specialEffect": "PlayAnimationImpact",
+      "options": {
+        "isGlobal": false
+      }
+    },
+    {
+      "diceType": "d10",
+      "onResult": [
+        "1"
+      ],
+      "specialEffect": "PlayAnimationImpact",
+      "options": {
+        "isGlobal": false
+      }
+    },
+    {
+      "diceType": "d12",
+      "onResult": [
+        "1"
+      ],
+      "specialEffect": "PlayAnimationImpact",
+      "options": {
+        "isGlobal": false
+      }
+    }
+  ]
+}

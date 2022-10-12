@@ -20,7 +20,7 @@ $gap: 4px;
   }
 
   .photo {
-    @include utils.boxed-property(2px, 0);
+    @include utils.boxed-property(2px, 4px);
     display: flex;
     align-items: center;
     justify-content: center;

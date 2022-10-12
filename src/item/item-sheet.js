@@ -1,5 +1,6 @@
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
+import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
+import { enrichTextFields } from '@utils/string-util';
 
 /**
  * Blade Runner RPG Item Sheet.
@@ -13,9 +14,9 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   /** @override */
   static get defaultOptions() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
+    const sysId = game.system.id || SYSTEM_ID;
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [sysName, 'sheet', 'item'],
+      classes: [sysId, 'sheet', 'item'],
       width: 250,
       scrollY: ['.sheet-body'],
       resizable: false,
@@ -26,8 +27,8 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
-    return `systems/${sysName}/templates/item/item-sheet.hbs`;
+    const sysId = game.system.id || SYSTEM_ID;
+    return `systems/${sysId}/templates/item/item-sheet.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -35,7 +36,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
   /* ------------------------------------------ */
 
   /** @override */
-  getData(options) {
+  async getData(options) {
     const baseData = super.getData(options);
     const sheetData = {
       cssClass: this.isEditable ? 'editable' : 'locked',
@@ -48,12 +49,15 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       isOffensive: this.item.isOffensive,
       // inVehicle: this.item.actor?.type === 'vehicle',
       item: baseData.item,
-      data: baseData.item.data.data,
+      system: foundry.utils.duplicate(baseData.item.system),
       // effects: baseData.effects,
-      rollable: this.item.props.rollable != undefined ? true : false,
+      rollable: this.item.system.rollable != undefined ? true : false,
       rollData: this.item.getRollData(),
       config: CONFIG.BLADE_RUNNER,
     };
+
+    await enrichTextFields(sheetData, ['system.description']);
+
     return sheetData;
   }
 
@@ -130,7 +134,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     const value = input.value;
     if (value[0] === '+' || value[0] === '-') {
       const delta = parseFloat(value);
-      input.value = foundry.utils.getProperty(this.item.data, input.name) + delta;
+      input.value = foundry.utils.getProperty(this.item, input.name) + delta;
     }
     else if (value[0] === '=') {
       input.value = value.slice(1);
@@ -141,16 +145,16 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   _onAddModifier(event) {
     event.preventDefault();
-    const modifiers = foundry.utils.duplicate(this.item.data.data.modifiers ?? {});
+    const modifiers = foundry.utils.duplicate(this.item.system.modifiers ?? {});
     const modifierId = Math.max(-1, ...Object.getOwnPropertyNames(modifiers)) + 1;
-    return this.item.update({ [`data.modifiers.${modifierId}`]: { name: '', value: '+1' } });
+    return this.item.update({ [`system.modifiers.${modifierId}`]: { name: '', value: '+1' } });
   }
 
   _onDeleteModifier(event) {
     event.preventDefault();
     const modifierId = event.currentTarget.dataset.modifierId;
-    if (this.item.data.data.modifiers[modifierId]) {
-      this.item.update({ [`data.modifiers.-=${modifierId}`]: null });
+    if (this.item.system.modifiers[modifierId]) {
+      this.item.update({ [`system.modifiers.-=${modifierId}`]: null });
     }
   }
 
@@ -161,10 +165,10 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     const blast = +event.currentTarget.value;
     if (!(blast in FLBR.blastPowerMap)) return;
     const { damage, crit } = FLBR.blastPowerMap[blast];
-    // TODO data.crit update not working properly in the item sheet, but values are all OK (tested).
+    // TODO system.crit update not working properly in the item sheet, but values are all OK (tested).
     return this.item.update({
-      'data.damage': damage,
-      'data.crit': crit,
+      'system.damage': damage,
+      'system.crit': crit,
     });
   }
 }

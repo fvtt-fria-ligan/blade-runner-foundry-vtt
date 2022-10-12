@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SKILLS, SYSTEM_NAME } from '@system/constants';
+import { ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/modifier';
 import BRRollHandler from '@components/roll/roller';
 
@@ -9,12 +9,8 @@ export default class BladeRunnerItem extends Item {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
-  get props() {
-    return this.data.data;
-  }
-
   get qty() {
-    return this.props.qty;
+    return this.system.qty;
   }
 
   get isPhysical() {
@@ -22,20 +18,20 @@ export default class BladeRunnerItem extends Item {
   }
 
   get damage() {
-    return this.props.damage;
+    return this.system.damage;
   }
 
   get isOffensive() {
-    return this.damage != null;
+    return typeof this.damage !== 'undefined';
   }
 
   get hasModifier() {
-    if (!this.props.modifiers) return false;
-    return !foundry.utils.isObjectEmpty(this.props.modifiers);
+    if (!this.system.modifiers) return false;
+    return !foundry.utils.isEmpty(this.system.modifiers);
   }
 
   get rollable() {
-    return !!(this.props.rollable ?? false);
+    return !!(this.system.rollable ?? false);
   }
 
   /** 
@@ -53,7 +49,7 @@ export default class BladeRunnerItem extends Item {
     if (!this.hasModifier) return undefined;
 
     const out = [];
-    for (const m of Object.values(this.props.modifiers)) {
+    for (const m of Object.values(this.system.modifiers)) {
       if (m && m.name) {
         const [t, n] = m.name.split('.');
         let str = 'FLBR.';
@@ -75,8 +71,8 @@ export default class BladeRunnerItem extends Item {
   /* ------------------------------------------- */
 
   static get CHAT_TEMPLATE() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
-    return `systems/${sysName}/templates/item/item-chatcard.hbs`;
+    const sysId = game.system.id || SYSTEM_ID;
+    return `systems/${sysId}/templates/item/item-chatcard.hbs`;
   }
 
   /* ------------------------------------------- */
@@ -89,7 +85,7 @@ export default class BladeRunnerItem extends Item {
    * @returns {Modifier[]}
    */
   getModifiers(options = {}) {
-    const mods = Modifier.getModifiers(this, 'data.data.modifiers', options);
+    const mods = Modifier.getModifiers(this, 'system.modifiers', options);
     return mods ?? [];
   }
 
@@ -107,14 +103,14 @@ export default class BladeRunnerItem extends Item {
       // When creating an injury in a character.
       if (this.type === 'injury') {
         // If there is a heal time set.
-        let healTime = this.data.data.healTime;
+        let healTime = this.system.healTime;
         if (healTime) {
           try {
             const roll = Roll.create(healTime);
             await roll.evaluate({ async: true });
             healTime = roll.terms.reduce((sum, t) => sum + t.values.reduce((tot, v) => tot + v, 0), 0);
             healTime = `${healTime} ${game.i18n.localize(`T2K4E.InjurySheet.day${healTime > 1 ? 's' : ''}`)}`;
-            this.update({ 'data.healTime': healTime });
+            this.update({ 'system.healTime': healTime });
           }
           catch (e) {
             console.warn('t2k4 | Item#_onCreate | Invalid formula for Injury heal time roll.');
@@ -141,8 +137,8 @@ export default class BladeRunnerItem extends Item {
 
     if (!this.rollable) return;
 
-    const attributeKey = this.props.attribute;
-    const skillKey = this.props.skill;
+    const attributeKey = this.system.attribute;
+    const skillKey = this.system.skill;
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`) : null;
     const title = `${this.detailedName} (${attributeName}${skillKey ? ` & ${skillName}` : ''})`;
@@ -170,15 +166,15 @@ export default class BladeRunnerItem extends Item {
       modifiers,
       maxPush: this.actor?.maxPush,
     }, {
-      unlimitedPush: this.actor?.data.flags.bladerunner?.unlimitedPush,
+      unlimitedPush: this.actor?.flags.bladerunner?.unlimitedPush,
     });
     return roller.render(true);
   }
 
   /* ------------------------------------------ */
 
-  _rollArmor() { return this._rollSpecial(this.props.armor); }
-  _rollExplosive() { return this._rollSpecial(this.props.blast); }
+  _rollArmor() { return this._rollSpecial(this.system.armor); }
+  _rollExplosive() { return this._rollSpecial(this.system.blast); }
 
   async _rollSpecial(value) {
     const execute = await Dialog.confirm({
@@ -218,7 +214,7 @@ export default class BladeRunnerItem extends Item {
       name: this.name,
       img: this.img,
       type: this.type,
-      data: this.props,
+      system: this.system,
       link: this.link,
       inActor: !!this.actor,
       showProperties: (this.type !== ITEM_TYPES.GENERIC || this.hasModifier),
@@ -243,8 +239,9 @@ export default class BladeRunnerItem extends Item {
     if (rollMode == undefined) rollMode = game.settings.get('core', 'rollMode');
 
     // Sends the messages or returns its data.
-    if (create) return cls.create(msg.data, { rollMode });
+    if (create) return cls.create(msg, { rollMode });
     if (rollMode) msg.applyRollMode(rollMode);
-    return msg.data.toObject();
+
+    return msg.toObject();
   }
 }

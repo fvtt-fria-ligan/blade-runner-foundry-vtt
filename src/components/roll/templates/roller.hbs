@@ -12,7 +12,7 @@
 			{{/each}}
 			{{#if (lt dice.length config.maxRolledDice)}}
 				<div class="die-box empty add-die rollable">
-					<a title="{{localize "FLBR.ROLLER.AddDie"}}">{{{@root.config.Icons.buttons.plus}}}</a>
+					<a data-tooltip="{{localize "FLBR.ROLLER.AddDie"}}">{{{@root.config.Icons.buttons.plus}}}</a>
 				</div>
 			{{/if}}
 		</div>
@@ -24,15 +24,15 @@
 			<h4>{{localize "FLBR.ROLLER.ModifierValue"}}</h4>
 			{{#each modifiers}}
 				<input type="checkbox" id="modifier-{{id}}" data-id="{{id}}" {{checked active}}/>
-				<label class="modifier-name" for="modifier-{{id}}" title="{{description}}">{{name}}</label>
+				<label class="modifier-name" for="modifier-{{id}}" data-tooltip="{{description}}">{{name}}</label>
 				{{!-- <div class="modifier-value">{{signedValue}}</div> --}}
 				<div class="modifier-value">
 				{{#if (gt value 0)}}
-					<div class="modifier-value advantage" title="{{localize "FLBR.Advantage"}}">
+					<div class="modifier-value advantage" data-tooltip="{{localize "FLBR.Advantage"}}">
 						{{{@root.config.Icons.buttons.advantage}}}
 					</div>
 				{{else if (lt value 0)}}
-					<div class="modifier-value disadvantage" title="{{localize "FLBR.Disadvantage"}}">
+					<div class="modifier-value disadvantage" data-tooltip="{{localize "FLBR.Disadvantage"}}">
 						{{{@root.config.Icons.buttons.disadvantage}}}
 					</div>
 				{{else}}

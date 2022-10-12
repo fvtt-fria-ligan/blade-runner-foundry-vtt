@@ -1,6 +1,6 @@
-import { YearZeroRoll } from 'foundry-year-zero-roller';
+import { YearZeroRoll } from 'yzur';
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SYSTEM_NAME } from '@system/constants';
+import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
 
 /**
  * A Form Application that mimics Dialog,
@@ -156,9 +156,9 @@ export default class BRRollHandler extends FormApplication {
 
   /** @override */
   static get defaultOptions() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
+    const sysId = game.system.id || SYSTEM_ID;
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: [sysName, 'roll-application'],
+      classes: [sysId, 'roll-application'],
       width: '450',
       // height: '450',
       resizable: false,
@@ -167,8 +167,8 @@ export default class BRRollHandler extends FormApplication {
 
   /** @override */
   get template() {
-    const sysName = game.system.data.name || SYSTEM_NAME;
-    return this.options.template || `systems/${sysName}/templates/components/roll/roller.hbs`;
+    const sysId = game.system.id || SYSTEM_ID;
+    return this.options.template || `systems/${sysId}/templates/components/roll/roller.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -269,7 +269,7 @@ export default class BRRollHandler extends FormApplication {
    * @throws {Error} When formData or dice is empty
    */
   _validateForm(event, formData) {
-    const nok = foundry.utils.isObjectEmpty(formData)
+    const nok = foundry.utils.isEmpty(formData)
       || !this.dice.length
       || this.dice.includes('0')
       || !['roll', 'advantage', 'disadvantage'].includes(event.submitter.id);
@@ -376,18 +376,18 @@ export default class BRRollHandler extends FormApplication {
    * @async
    */
   static async pushRoll(message, { sendMessage = true } = {}) {
-    if (!message || !message.roll) return;
+    if (!message || !message.rolls.length) return;
 
     /** @type {YearZeroRoll} */
-    const roll = message.roll.duplicate();
+    const roll = message.rolls[0].duplicate();
     await roll.push({ async: true });
-
-    const speakerData = message.data.speaker;
+    const flavor = message.flavor;
+    const speakerData = message.speaker;
     const speaker = this.getSpeaker(speakerData);
     if (speaker) await this.updateActor(roll, speaker);
 
     await message.delete();
-    if (sendMessage) return roll.toMessage({ speaker: speakerData });
+    if (sendMessage) return roll.toMessage({ flavor, speaker: speakerData });
     return roll;
   }
 
@@ -401,11 +401,11 @@ export default class BRRollHandler extends FormApplication {
    * @async
    */
   static async cancelPush(message) {
-    if (!message || !message.roll) return;
+    if (!message || !message.rolls.length) return;
     /** @type {YearZeroRoll} */
-    const roll = message.roll.duplicate();
+    const roll = message.rolls[0].duplicate();
     roll.maxPush = 0;
-    await message.update({ roll: roll.toJSON() });
+    await message.update({ rolls: [roll.toJSON()] });
     return message;
   }
 
@@ -444,8 +444,8 @@ export default class BRRollHandler extends FormApplication {
     }
 
     /** @type {import('@actor/actor-document').ActorCapacity} */
-    const capacity = speaker?.data.data[cap];
-    if (!capacity || foundry.utils.isObjectEmpty(capacity)) {
+    const capacity = speaker?.system[cap];
+    if (!capacity || foundry.utils.isEmpty(capacity)) {
       return ui.notifications.error('WARNING.ApplyDamageNoActorCapacity', { localize: true });
     }
 
@@ -459,7 +459,7 @@ export default class BRRollHandler extends FormApplication {
       ui.notifications.info('FLBR.YouAreBroken', { localize: true });
     }
 
-    await speaker.update({ [`data.${cap}.value`]: value });
+    await speaker.update({ [`system.${cap}.value`]: value });
     return value;
   }
 

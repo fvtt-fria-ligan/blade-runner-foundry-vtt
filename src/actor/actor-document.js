@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_NAME } from '@system/constants';
+import { ACTOR_TYPES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/modifier';
 import BRRollHandler from '@components/roll/roller';
 
@@ -22,37 +22,33 @@ export default class BladeRunnerActor extends Actor {
   /*  Properties                                */
   /* ------------------------------------------ */
 
-  get props() {
-    return this.data.data;
-  }
-
   get attributes() {
-    return this.props.attributes;
+    return this.system.attributes;
   }
 
   get skills() {
-    return this.props.skills;
+    return this.system.skills;
   }
 
   get archetype() {
-    return this.props.archetype;
+    return this.system.archetype;
   }
 
   get nature() {
-    return this.props.nature;
+    return this.system.nature;
   }
 
   get health() {
-    return this.props.health;
+    return this.system.health;
   }
 
   get resolve() {
-    return this.props.resolve;
+    return this.system.resolve;
   }
 
   get isBroken() {
     for (const cap of Object.values(CAPACITIES)) {
-      const capacity = this.props[cap];
+      const capacity = this.system[cap];
       if (capacity && capacity.value <= 0) return true;
     }
     return false;
@@ -77,6 +73,7 @@ export default class BladeRunnerActor extends Actor {
     for (const [k, v] of Object.entries(this.skills)) {
       rollData[k] = v.value;
     }
+    rollData.maxPush = FLBR.maxPushMap[this.nature] ?? 1;
     return rollData;
   }
 
@@ -117,7 +114,7 @@ export default class BladeRunnerActor extends Actor {
   _prepareCapacities() {
     // Rolls over each legal capacity.
     for (const cap of Object.values(CAPACITIES)) {
-      const capacity = this.data.data[cap];
+      const capacity = this.system[cap];
       const capData = FLBR.capacitiesMap[cap];
       // Proceeds if it exists in the character.
       if (capacity && capData) {
@@ -234,7 +231,7 @@ export default class BladeRunnerActor extends Actor {
       modifiers,
       maxPush: this.maxPush,
     }, {
-      unlimitedPush: this.data.flags.bladerunner?.unlimitedPush,
+      unlimitedPush: this.flags.bladerunner?.unlimitedPush,
     });
     return roller.render(true);
   }
@@ -255,7 +252,7 @@ export default class BladeRunnerActor extends Actor {
       modifiers: this.getRollModifiers(),
       maxPush: this.maxPush,
     }, {
-      unlimitedPush: this.data.flags.bladerunner?.unlimitedPush,
+      unlimitedPush: this.flags.bladerunner?.unlimitedPush,
     });
   }
 
@@ -281,7 +278,8 @@ export default class BladeRunnerActor extends Actor {
       maxPush: 0,
     });
 
-    const { roll } = await roller.executeRoll();
+    const msg = await roller.executeRoll();
+    const roll = msg.rolls[0];
 
     if (roll.baneCount) {
       ui.notifications.info(game.i18n.format('FLBR.ROLLER.ResolveTestFailed', {
@@ -291,7 +289,7 @@ export default class BladeRunnerActor extends Actor {
       });
       let loss = +this.resolve.permanentLoss;
       loss--;
-      await this.update({ 'data.resolve.permanentLoss': loss });
+      await this.update({ 'system.resolve.permanentLoss': loss });
       return loss;
     }
     return 0;
@@ -308,7 +306,7 @@ export default class BladeRunnerActor extends Actor {
    */
   async applyDamage(damage, capacity = 'health') {
     if (damage <= 0) return;
-    if (!(capacity in this.props)) {
+    if (!(capacity in this.system)) {
       throw new Error(`FLBR | BladeRunnerActor.applyDamage → Non-existent capacity "${capacity}"`);
     }
 
@@ -326,16 +324,16 @@ export default class BladeRunnerActor extends Actor {
     damage -= armorAblation;
 
     if (damage > 0) {
-      const max = this.props[capacity].max;
-      const oldVal = this.props[capacity].value;
+      const max = this.system[capacity].max;
+      const oldVal = this.system[capacity].value;
       const newVal = Math.clamped(oldVal - damage, 0, max);
       const diff = newVal - oldVal;
 
-      if (diff !== 0) await this.update({ [`data.${capacity}.value`]: newVal });
+      if (diff !== 0) await this.update({ [`system.${capacity}.value`]: newVal });
     }
 
     // Prepares the chat message.
-    const template = `systems/${SYSTEM_NAME}/templates/actor/actor-damage-chatcard.hbs`;
+    const template = `systems/${SYSTEM_ID}/templates/actor/actor-damage-chatcard.hbs`;
     const content = await renderTemplate(template, {
       name: this.name,
       initialDamage,
