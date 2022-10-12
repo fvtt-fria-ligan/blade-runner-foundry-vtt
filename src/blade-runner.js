@@ -92,6 +92,7 @@ Hooks.once('init', () => {
   registerSheets();
   initializeHandlebars();
   registerSystemSettings();
+  enrichTextEditors();
 });
 
 /* ------------------------------------------ */
@@ -104,9 +105,6 @@ Hooks.once('ready', () => {
 
   // TODO Determines whether a system migration is required and feasible.
   // checkMigration();
-
-  // Enriches the text editor.
-  enrichTextEditors();
 
   // Displays system messages.
   displayMessages();
