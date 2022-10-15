@@ -8,7 +8,9 @@
 
 .blade-runner-symbols {
   font-family: "Blade Runner Symbols";
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: normal;
   line-height: 0;
+  position: relative;
+  bottom: -0.125em; // -2px / 16px
 }
