@@ -34,7 +34,7 @@ import displayMessages from '@components/messaging-system';
 /*  Foundry VTT Initialization                */
 /* ------------------------------------------ */
 
-Hooks.once('init', () => {
+Hooks.once('init', async () => {
   console.log('Blade Runner RPG | Initializing the Game System');
 
   // Registers dice.
@@ -90,9 +90,12 @@ Hooks.once('init', () => {
   };
 
   registerSheets();
-  initializeHandlebars();
   registerSystemSettings();
   enrichTextEditors();
+  await initializeHandlebars();
+
+  console.log('Blade Runner RPG | Ready!');
+  Hooks.call('bladeRunnerReady', game.bladerunner, CONFIG.BLADE_RUNNER);
 });
 
 /* ------------------------------------------ */
@@ -108,8 +111,6 @@ Hooks.once('ready', () => {
 
   // Displays system messages.
   displayMessages();
-
-  console.warn('Blade Runner RPG | Ready!');
 });
 
 /* ------------------------------------------ */

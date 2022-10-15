@@ -155,7 +155,7 @@ function registerHandlebarsHelpers() {
   });
 }
 
-export function initializeHandlebars() {
-  preloadHandlebarsTemplates();
+export async function initializeHandlebars() {
+  await preloadHandlebarsTemplates();
   registerHandlebarsHelpers();
 }
