@@ -35,11 +35,12 @@ export function getChatCardActor(card) {
  */
 export function addChatMessageContextOptions(_html, options) {
   // ? See Part 6, 6:55
-  // Allows only this menu option if we have selected some tokens
+  // Allows only this menu option if we have targeted some tokens
   // & the message contains some damage.
   // Note: <li> is the chat message HTML element in the sidebar.
   const canDefend = li => game.user.isGM
-    && canvas.tokens?.controlled?.length
+    // ? && canvas.tokens?.controlled?.length
+    && game.user.targets.size
     && li.find('.chat-card[data-damage]').length;
 
   options.push({
@@ -63,14 +64,15 @@ async function _applyDamage(messageElem) {
   // Explosives special case.
   const boom = roll.options.isExplosive;
 
-  // For each selected tokens.
-  const defenderTokens = canvas.tokens.controlled;
+  // For each targeted tokens.
+  // ? const defenderTokens = canvas.tokens.controlled;
+  const defenderTokens = game.user.targets;
   for (const defenderToken of defenderTokens) {
     if (!s) break;
     let n = s;
-    // Prompts for assigning a qty of successes to tokens if more than one were selected.
+    // Prompts for assigning a qty of successes to tokens if more than one were targeted.
     // Note: skip for explosives.
-    if(defenderTokens.length > 1 && !boom) {
+    if(defenderTokens.size > 1 && !boom) {
       n = await BladeRunnerDialog.rangePicker({
         title: game.i18n.localize('FLBR.DIALOG.AssignSuccesses'),
         description: game.i18n.format('FLBR.DIALOG.AssignSuccessesHint', {
