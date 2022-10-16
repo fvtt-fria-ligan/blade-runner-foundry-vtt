@@ -39,7 +39,7 @@
   ],
   "gridDistance": 1,
   "gridUnits": "m",
-  "background": "systems/blade-runner/assets/splash.jpg",
+  "background": "systems/blade-runner/assets/splash.webp",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": null,
   "url": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt",
