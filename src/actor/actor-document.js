@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
+import { ACTOR_SUBTYPES, ACTOR_TYPES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/modifier';
 import BRRollHandler from '@components/roll/roller';
 
@@ -55,7 +55,10 @@ export default class BladeRunnerActor extends Actor {
   }
 
   get maxPush() {
-    return FLBR.maxPushMap[this.nature];
+    if (this.type === ACTOR_TYPES.CHAR) {
+      return this.system.subtype === ACTOR_SUBTYPES.PC ? FLBR.maxPushMap[this.nature] : 0;
+    }
+    return 1;
   }
 
   get rollData() {
