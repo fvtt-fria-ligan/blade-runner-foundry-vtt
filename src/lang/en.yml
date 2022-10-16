@@ -72,8 +72,8 @@ FLBR.HEADER.YearsOnTheForce: Years On The Force
 FLBR.HEADER.Weapons: Weapons
 FLBR.SHEET_CONFIG.CharacterSubtype: Subtype
 FLBR.SHEET_CONFIG.CharacterSubtypeHint: >-
-  Select whether this is a PC or NPC. The later provides a pared down character sheet and
-  added functionality for the GM to more easily run NPCs.
+  Select whether this is a PC or NPC. The later provides a pared down character
+  sheet and added functionality for the GM to more easily run NPCs.
 FLBR.SHEET_CONFIG.HealthMaxModifier: Health max. modifier
 FLBR.SHEET_CONFIG.HealthMaxModifierHint: Modify the health capacity maximum (GM Only).
 FLBR.SHEET_CONFIG.HealthPermanentLoss: Health permanent loss
@@ -83,11 +83,12 @@ FLBR.SHEET_CONFIG.ResolveMaxModifierHint: Modify the resolve capacity maximum (G
 FLBR.SHEET_CONFIG.ResolvePermanentLoss: Resolve permanent loss
 FLBR.SHEET_CONFIG.ResolvePermanentLossHint: Set how much resolve is permanently lost (GM Only).
 FLBR.SHEET_CONFIG.Maneuverability: Vehicle Maneuverability
-FLBR.SHEET_CONFIG.ManeuverabilityHint: Set the maneuverability of the vehicle driven by this character, if applicable.
+FLBR.SHEET_CONFIG.ManeuverabilityHint: >-
+  Set the maneuverability of the vehicle driven by this character, if applicable.
 FLBR.SHEET_CONFIG.UnlimitedPush: Allow Unlimited Pushed Rolls
 FLBR.SHEET_CONFIG.UnlimitedPushHint: >-
-  If your GM allows an unlimited number of pushed rolls.
-  Check this setting to display a push button on almost any roll.
+  If your GM allows an unlimited number of pushed rolls. Check this setting to
+  display a push button on almost any roll.
 FLBR.SHEET_HEADER.ArmorRoll: Roll Armor
 FLBR.SHEET_HEADER.BlastPowerRoll: Roll Blast Power
 FLBR.SHEET_HEADER.GenericRoll: Generic Roll
@@ -102,7 +103,7 @@ FLBR.TAB.Mods: Mods
 FLBR.TAB.Roll: Roll
 FLBR.TAB.Stats: Stats
 FLBR.D: D
-FLBR.NO_VALUE: '–'
+FLBR.NO_VALUE: –
 FLBR.Advantage: Advantage
 FLBR.Blast: Blast
 FLBR.BlastPower: Blast Power
@@ -141,6 +142,11 @@ FLBR.ItemQuantity: Quantity
 FLBR.ItemRollable: Rollable
 FLBR.ItemSkill: Skill
 FLBR.ItemSpecial: Special
+FLBR.MACRO.MultipleItems: >-
+  Your controlled Actor {actor} has more than one Item with name {item}. The first matched item will be chosen.
+FLBR.MACRO.NoActor: Your controlled Actor {actor} was not found.
+FLBR.MACRO.NoItem: Your controlled Actor {actor} does not have an item named {item}.
+FLBR.MACRO.RollStat: Roll {stat}
 FLBR.Nature: Nature
 FLBR.NatureHint: Character's Nature (Only GM)
 FLBR.NewItem: New {type}
@@ -159,9 +165,9 @@ FLBR.ROLLER.ModifierValue: Value
 FLBR.ROLLER.TotalModifier: 'Total: {value}'
 FLBR.ROLLER.ResolveTest: Test for Permanent Loss of Resolve
 FLBR.ROLLER.ResolveTestHint: >-
-  When you are Broken by stress, you must roll one Base Die corresponding
-  to your Empathy rating. If you roll a one, 1 point of Resolve is
-  permanently lost, meaning your maximum Resolve is reduced one step.
+  When you are Broken by stress, you must roll one Base Die corresponding to
+  your Empathy rating. If you roll a one, 1 point of Resolve is permanently
+  lost, meaning your maximum Resolve is reduced one step.
 FLBR.ROLLER.ResolveTestFailed: '{name} failed their Empathy roll and permanently loses 1 point of resolve.'
 FLBR.ROLLER.RollButton: Roll
 FLBR.ROLLER.RollWithAdvantageButton: Advantage
@@ -171,7 +177,7 @@ FLBR.SignatureItemUsedCheckboxHint: Used?
 FLBR.WeaponDamage: Damage
 FLBR.WeaponCrit: Crit Die
 FLBR.WeaponDamageType: Damage Type
-FLBR.WEAPON_DAMAGE_TYPE.None: '–'
+FLBR.WEAPON_DAMAGE_TYPE.None: –
 FLBR.WEAPON_DAMAGE_TYPE.Crushing: Crushing
 FLBR.WEAPON_DAMAGE_TYPE.Piercing: Piercing
 FLBR.WEAPON_DAMAGE_TYPE.Stress: Stress

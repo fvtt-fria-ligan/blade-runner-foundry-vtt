@@ -82,6 +82,30 @@ export default class BladeRunnerActorSheet extends ActorSheet {
   }
 
   /* ------------------------------------------ */
+  /*  Custom Drag Data                          */
+  /* ------------------------------------------ */
+
+  /** @override */
+  _onDragStart(event) {
+    const elem = event.currentTarget;
+    const data = elem.dataset;
+
+    if (typeof data.attribute !== 'undefined' || typeof data.skill !== 'undefined') {
+      const dragData = {
+        actorId: this.actor.id,
+        sceneId: this.actor.isToken ? canvas.scene?.id : null,
+        tokenId: this.actor.isToken ? this.actor.token.id : null,
+        uuid: this.actor.uuid,
+        type: 'Stat',
+        attribute: data.attribute,
+        skill: data.skill,
+      };
+      return event.dataTransfer.setData('text/plain', JSON.stringify(dragData));
+    }
+    return super._onDragStart(event);
+  }
+
+  /* ------------------------------------------ */
   /*  Custom Config Sheet                       */
   /* ------------------------------------------ */
 
@@ -146,14 +170,17 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     html.find('.blast-roll').click(this._onBlastRoll.bind(this));
     html.find('.embedded-item').on('contextmenu', this._onItemEdit.bind(this));
 
-    // // Owner-only listeners.
-    // if (this.actor.isOwner) {
-    //   html.find('.item-roll').click(this._onItemRoll.bind(this));
-    //   html.find('.item[data-item-id]').each((index, elem) => {
-    //     elem.setAttribute('draggable', true);
-    //     elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);
-    //   });
-    // }
+    // Owner-only listeners.
+    if (this.actor.isOwner) {
+      html.find('.stat-roll[data-attribute]').each((_index, elem) => {
+        elem.setAttribute('draggable', true);
+        elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);
+      });
+      html.find('.embedded-item[data-item-id]').each((_index, elem) => {
+        elem.setAttribute('draggable', true);
+        elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);
+      });
+    }
   }
 
   /* ------------------------------------------ */

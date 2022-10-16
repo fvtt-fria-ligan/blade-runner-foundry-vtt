@@ -12,6 +12,8 @@ import * as BR from './constants.js';
  */
 export const FLBR = {};
 
+FLBR.systemMacroFolder = 'Blade Runner Macros';
+
 /** @type {Map.<DieScoreString, DieSizeNumber>} */
 FLBR.scoreMap = new Map();
 FLBR.scoreMap.set('–', 0);

@@ -21,6 +21,7 @@ import { ACTOR_TYPES, SYSTEM_ID } from '@system/constants';
 import * as YZUR from 'yzur';
 import * as Chat from '@system/chat';
 import BRRollHandler from '@components/roll/roller';
+import { createBladeRunnerMacro, rollItem, rollStat, setupMacroFolder, showRollDialog } from '@system/macros.js';
 import { registerSheets } from '@system/sheets';
 import { initializeHandlebars } from '@system/handlebars';
 import { registerSystemSettings } from '@system/settings';
@@ -63,7 +64,11 @@ Hooks.once('init', async () => {
   game.bladerunner = {
     config: FLBR,
     roller: BRRollHandler,
-    macros: {},
+    macros: {
+      rollDice: showRollDialog,
+      rollItem,
+      rollStat,
+    },
   };
 
   // Records configuration values.
@@ -103,8 +108,9 @@ Hooks.once('init', async () => {
 /* ------------------------------------------ */
 
 Hooks.once('ready', () => {
-  // TODO Wait to register hotbar drop hook on ready so that modules could register earlier if they want to.
-  // Hooks.on('hotbarDrop', (bar, data, slot) => createT2KMacro(data, slot));
+  // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to.
+  setupMacroFolder();
+  Hooks.on('hotbarDrop', (_bar, data, slot) => createBladeRunnerMacro(data, slot));
 
   // TODO Determines whether a system migration is required and feasible.
   // checkMigration();
