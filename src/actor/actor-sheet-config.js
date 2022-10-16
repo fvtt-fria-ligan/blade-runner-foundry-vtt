@@ -1,7 +1,7 @@
 import { FLBR } from '@system/config';
 import { SYSTEM_ID } from '@system/constants';
 
-// TODO deprecated class
+// TODO Fix deprecated class
 /**
  * Configuration Sheet for the Actor sheet.
  * @extends {DocumentSheetConfig} Foundry

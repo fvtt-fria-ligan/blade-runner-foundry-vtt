@@ -93,5 +93,4 @@ See the [changelog](https://github.com/fvtt-fria-ligan/blade-runner/blob/master/
 - **Source Code:** All source code _(javascript, hbs, scss, as well as system templates and the like)_ are Copyright © 2022 [Stefouch](https://github.com/Stefouch), and licenced under the [GNU General Public License v3.0](https://github.com/fvtt-fria-ligan/blade-runner/blob/master/LICENSE).
 - **Foundry VTT:** The project is created following the Foundry VTT [Limited License Agreement for module development](https://foundryvtt.com/article/license/).
 - **Icons:** Icons in the `.static/assets/icons/` folder are courtesy of [Game-icons.net](https://game-icons.net/) and licenced under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
-- **Fonts:** The fonts used in this project carry their own licences:
-  - XXX
+- **Fonts:** The fonts used in this project carry their own licences.

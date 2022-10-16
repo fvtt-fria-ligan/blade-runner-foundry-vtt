@@ -58,13 +58,6 @@ function registerHandlebarsHelpers() {
     return TextEditor.previewHTML(str, n);
   });
 
-  // TODO remove
-  // Handlebars.registerHelper('flps_enrich', function(content) {
-  //   // Enriches content.
-  //   content = TextEditor.enrichHTML(content, { documents: true });
-  //   return new Handlebars.SafeString(content);
-  // });
-
   Handlebars.registerHelper('times', function (n, content) {
     let str = '';
     for (let i = 0; i < n; i++) {
