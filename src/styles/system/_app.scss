@@ -155,6 +155,10 @@ a.entity-link {
     border: none;
   }
 
+  img {
+    max-height: 100%;
+  }
+
   label {
     color: var(--color-blue-lighter);
   }
