@@ -1,0 +1,700 @@
+/* ------------------------------------------ */
+/*  Mixins                                    */
+/* ------------------------------------------ */
+
+$marg: 20px;
+$pad: 25px;
+
+@mixin text-stroke($color) {
+  text-shadow: 1px 0 0 $color, 0 -1px 0 $color, 0 1px 0 $color, -1px 0 0 $color;
+}
+
+@mixin bg($url) {
+  background-image: url($url);
+  background-position: top center;
+  background-size: cover;
+}
+
+@mixin bg-text() {
+  @include bg('./assets/textures/page-text-zone-background.webp');
+  border: 1px solid var(--color-border--core-box-beige);
+}
+
+@mixin bg-table() {
+  @include bg('../../systems/blade-runner/assets/journal-sheet-background.webp');
+  border: 1px solid var(--color-border--core-box-beige);
+}
+
+@mixin bg-yellow() {
+  @include bg('../../systems/blade-runner/assets/journal-sheet-background.webp');
+  border: 1px solid var(--color-border--core-box-beige);
+}
+
+@mixin bg-dust() {
+  // @include bg('./assets/textures/dust-gray-background.webp');
+  background-color: var(--color-background--gray-dust);
+}
+
+@mixin flbr-tab-heading() {
+  flex: 0;
+  font-family: var(--font-gridnik);
+  writing-mode: vertical-rl;
+  height: fit-content;
+  padding: (.5 * $marg) (.25 * $marg) (2 * $marg) (.25 * $marg);
+  background-color: rgba(88, 88, 88, .25);
+  border: 1px solid var(--color-border--core-box-beige);
+  border-bottom-left-radius: 99px;
+  @include text-stroke(#000);
+}
+
+@mixin flbr-box() {
+  margin-bottom: $marg;
+  padding: $pad;
+  height: fit-content;
+  min-width: 300px;
+  @include bg-yellow();
+  h3 {
+    font-family: var(--font-gridnik);
+    padding-bottom: .5em;
+  }
+  p, li {
+    font-family: var(--font-gridnik);
+    font-size: var(--font-size--small);
+    // font-weight: bold;
+    line-height: 1.67;
+    margin: 0;
+    & + p { text-indent: 1.5em;}
+  }
+  ul li::marker {
+    color: var(--color-gold);
+  }
+  &.blue {
+    color: var(--color-blue-lighter);
+    border-color: var(--color-border--core-box-blue);
+    background-image: url('./assets/textures/page-text-zone-background-blue-lighter.webp');
+    ul li::marker {
+      color: var(--color-blue-lighter);
+    }
+  }
+  &.green {
+    color: var(--color-green);
+    border-color: var(--color-border--core-box-blue);
+    background-image: url('./assets/textures/page-text-zone-background-blue-lighter.webp');
+    ul li::marker {
+      color: var(--color-green);
+    }
+  }
+  &.yellow-white {
+    h3 {
+      color: var(--color-yellow);
+    }
+    p, li {
+      color: var(--color-white);
+    }
+  }
+}
+
+@mixin flbr-table($border-color) {
+  font-family: var(--font-gridnik);
+  border-bottom: none;
+  letter-spacing: 1px;
+  // border-top: 1px solid $border-color;
+  border: none;
+  margin: 0;
+
+  th {
+    font-weight: normal;
+    text-align: left;
+  }
+
+  td {
+    font-size: var(--font-size--small);
+  }
+
+  td, th {
+    padding: (.3 * $pad) (.5 * $pad);
+  }
+
+  tr:not(:first-of-type) {
+    border-top: 1px solid $border-color;
+  }
+
+  tr:nth-child(even) {
+    background-color: initial;
+  }
+
+  li {
+    font-family: var(--font-gridnik);
+  }
+}
+
+/* ------------------------------------------ */
+/*  Root                                      */
+/* ------------------------------------------ */
+
+:root {
+  --font-gridnik: "Foundry Gridnik", "Consolas", sans-serif;
+  --font-urwdin: "URW DIN Condensed", sans-serif;
+  --color-border--core-box-orange: #F3742A;
+  --color-border--core-box-beige: rgba(255,229,189,.7);
+  --color-border--core-box-blue: rgba(197,220,225,.7);
+  --color-background--gray-dust: rgba(0,0,0,.4);
+}
+
+.font-gridnik {
+  font-family: var(--font-gridnik) !important;
+}
+
+.font-urwdin {
+  font-family: var(--font-urwdin) !important;
+}
+
+/* ------------------------------------------ */
+/*  Fonts Definitions                         */
+/* ------------------------------------------ */
+
+/* ------------------------------------------ */
+// Goudy Old Style
+
+@font-face {
+  font-family: "Goudy Old Style";
+  src: url("./fonts/GOUDOS.TTF");
+}
+
+@font-face {
+  font-family: "Goudy Old Style";
+  src: url("./fonts/GOUDOSB.TTF");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Goudy Old Style";
+  src: url("./fonts/GOUDOSI.TTF");
+  font-style: italic;
+}
+
+/* ------------------------------------------ */
+// Identikal Sans
+
+@font-face {
+  font-family: "IdentikalSans";
+  src: url("./fonts/IDENSS_.TTF");
+}
+
+/* ------------------------------------------ */
+// Foundry Gridnik
+
+@font-face {
+  font-family: "Foundry Gridnik";
+  src: url("./fonts/FoundryGridnik-Medium.otf");
+}
+
+@font-face {
+  font-family: "Foundry Gridnik";
+  src: url("./fonts/FoundryGridnik-Bold.otf");
+  font-weight: bold;
+}
+
+/* ------------------------------------------ */
+// URW DIN Condensed
+
+@font-face {
+  font-family: "URW DIN Condensed";
+  src: url("./fonts/urwdin-cond-regular.ttf");
+}
+
+// @font-face {
+//   font-family: "URW DIN Condensed";
+//   src: url("./fonts/urwdin-cond-medium.ttf");
+//   font-weight: bold;
+// }
+
+@font-face {
+  font-family: "URW DIN Condensed";
+  src: url("./fonts/urwdin-cond-black.ttf");
+  font-weight: bold;
+}
+
+/* ------------------------------------------ */
+// Square Things
+
+@font-face {
+  font-family: "Square Things";
+  src: url("./fonts/squarethings.ttf");
+}
+
+/* ------------------------------------------ */
+/*  Journal Styles                            */
+/*   - Chapter Quote                          */
+/*   - Definition Block                       */
+/*   - Generic Zone of Text                   */
+/*   - Text Box                               */
+/*   - Table Box                              */
+/*   - etc.                                   */
+/* ------------------------------------------ */
+
+.app.journal-entry .journal-entry-content .journal-entry-page {
+
+  .flexrow.colgap {
+    column-gap: $marg;
+  }
+
+  // img {
+  //   margin-bottom: $marg;
+  // }
+
+  /* ------------------------------------------ */
+  /*  Chapter Quote                             */
+  /* ------------------------------------------ */
+
+  .flbr-chapter-quote {
+    font-family: var(--font-gridnik);
+    color: var(--color-skin);
+    text-align: center;
+    margin-bottom: $marg;
+
+    &.blue {
+      color: var(--color-blue-lighter);
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Definition Block                          */
+  /* ------------------------------------------ */
+
+  .flbr-definition {
+    margin: 2.5 * $marg;
+
+    p {
+      line-height: 1.25;
+      margin: 0 0 1.25em 0;
+      @include text-stroke(#000);
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Generic Zone of Text                      */
+  /* ------------------------------------------ */
+
+  .flbr-text {
+    color: var(--color-black);
+    margin-bottom: $marg;
+    padding: $pad;
+    height: fit-content;
+    @include bg-text;
+
+    p, li {
+      font-weight: bold;
+      line-height: 1.2;
+      margin: 0;
+      & + p { text-indent: 1.5em; }
+    }
+
+    p.no-indent {
+      text-indent: 0;
+      margin-top: $marg;
+    }
+
+    &.blue {
+      background-image: url('./assets/textures/page-text-zone-background-blue.webp');
+
+      h2,
+      .flbr-inline-heading {
+        color: var(--color-blue-darker);
+      }
+
+      ul li::marker {
+        color: var(--color-blue-darker);
+      }
+
+      ol li::marker {
+        color: var(--color-blue-darker);
+      }
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Text Box                                  */
+  /* ------------------------------------------ */
+
+  .flbr-box {
+    color: var(--color-skin);
+    @include flbr-box();
+  }
+
+  .flbr-archetype-boxes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $marg;
+
+    & > * {
+      margin: 0 !important;
+    }
+  }
+
+  .flbr-archetype-skill-box {
+    margin-bottom: $marg;
+    padding: $pad;
+    border: 1px solid var(--color-border--core-box-blue);
+
+    p {
+      font-family: var(--font-gridnik);
+      color: var(--color-green);
+      padding: 1em 4px;
+
+      &:not(:last-of-type) {
+        border-bottom: 1px solid var(--color-green);
+      }
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Text Box with Tab                         */
+  /* ------------------------------------------ */
+
+  .flbr-tab-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    h3 {
+      color: var(--color-white);
+      @include flbr-tab-heading();
+    }
+
+    div {
+      color: var(--color-white);
+      min-height: 200px;
+      min-height: 300px;
+      @include flbr-box();
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Sector Box                                */
+  /* ------------------------------------------ */
+
+  .flbr-sector-box {
+    margin-bottom: $marg;
+    padding: $pad;
+    border: 1px solid var(--color-border--core-box-blue);
+
+    h3, p, li {
+      color: var(--color-blue-lighter);
+      font-family: var(--font-gridnik);
+    }
+    ul li::marker {
+      color: var(--color-blue-lighter);
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Character Box                             */
+  /* ------------------------------------------ */
+
+  .flbr-character-box {
+    margin-bottom: $marg;
+    padding: $pad;
+    border: 1px solid var(--color-green);
+
+    img {
+      border: 1px solid var(--color-green);
+    }
+
+    h3 {
+      color: var(--color-green);
+    }
+
+    p {
+      color: var(--color-green);
+      font-family: var(--font-gridnik);
+    }
+
+    table {
+      @include flbr-table(var(--color-green));
+      color: var(--color-green);
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Item Box                                  */
+  /* ------------------------------------------ */
+
+  .flbr-item-box {
+    margin-bottom: $marg;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    border: 1px solid var(--color-border--core-box-blue);
+    min-width: 300px;
+    @include bg-dust();
+
+    .item-image {
+      padding: $pad;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .item-features {
+      max-width: 40%;
+      padding: .5 * $pad;
+      border-left: 1px solid var(--color-border--core-box-blue);
+      border-right: 1px solid var(--color-border--core-box-blue);
+      @include bg('./assets/textures/page-text-zone-background-blue-lighter.webp');
+
+      table {
+        color: var(--color-gold);
+        @include text-stroke(#000);
+        @include flbr-table(#000);
+        border-top: none;
+
+        td {
+          font-size: var(--font-size--very-small);
+        }
+
+        tr:not(:first-of-type) {
+          border-top: 3px dotted var(--color-gold);
+        }
+
+        td:first-child {
+          .boxed {
+            color: var(--color-gold);
+            font-family: var(--font-gridnik);
+            font-size: var(--font-size--very-small);
+            text-align: center;
+            @include text-stroke(#000);
+            line-height: 2.5;
+            width: 2.5em;
+            border: 1px solid var(--color-border--core-box-orange);
+            background-color: rgba(237,108,28,.3);
+          }
+        }
+      }
+    }
+
+    img {
+      align-self: center;
+      padding: 0 $marg;
+    }
+    
+    & > div {
+      margin-bottom: 0;
+      height: auto;
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Table Box                                 */
+  /* ------------------------------------------ */
+
+  .flbr-table {
+    color: var(--color-skin);
+    margin-bottom: $marg;
+    padding: $pad;
+    height: fit-content;
+    @include bg-table();
+
+    h3 {
+      font-family: var(--font-gridnik);
+      padding-left: .5 * $pad;
+      // padding-bottom: .5em;
+    }
+
+    p {
+      font-family: var(--font-gridnik);
+      font-size: var(--font-size--small);
+      line-height: 1.67;
+      padding-left: .5 * $pad;
+      margin-bottom: 1.5em;
+    }
+
+    table {
+      @include flbr-table(var(--color-gold));
+    }
+
+    &.green {
+      border-color: var(--color-border--core-box-blue);
+      background-image: url('./assets/textures/page-text-zone-background-blue-lighter.webp');
+
+      h3, p, ul li::marker {
+        color: var(--color-green);
+      }
+
+      table {
+        color: var(--color-green);
+        border-color: var(--color-green);
+
+        tr {
+          border-color: var(--color-green);
+        }
+      }
+    }
+
+    table + p {
+      font-family: var(--font-gridnik);
+      font-size: var(--font-size--very-small);
+      padding-left: .5 * $pad;
+      padding-top: .5em;
+      border-top: 1px solid var(--color-gold);
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Example Box                               */
+  /* ------------------------------------------ */
+
+  .flbr-example {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    h3 {
+      color: var(--color-gold);
+      @include flbr-tab-heading();
+    }
+
+    div {
+      color: var(--color-gold);
+      min-height: 200px;
+      @include flbr-box();
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Work That Crime Scene                     */
+  /* ------------------------------------------ */
+
+  .flbr-work-that-crime-scene {
+    margin-bottom: $marg;
+    padding: $pad;
+    border: 1px solid var(--color-border--core-box-blue);
+
+    .crime-scene-tip {
+      display: flex;
+      flex-direction: row;
+      padding-bottom: $pad;
+
+      &:not(:first-child) {
+        border-top: 2px dotted var(--color-green);
+      }
+    }
+
+    .crime-scene-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: .5 * $pad;
+      margin-top: .5 * $pad;
+      padding: 4px;
+      min-width: 50px;
+      width: 50px;
+      height: 50px;
+      border: 2px double var(--color-border--core-box-orange);
+
+      img {
+        max-width: 100%;
+      }
+    }
+
+    p {
+      font-family: var(--font-gridnik);
+      font-size: var(--font-size--small);
+      color: var(--color-green);
+      margin-top: .5 * $pad;
+    }
+  }
+
+  /* ------------------------------------------ */
+  /*  Other Styles                              */
+  /* ------------------------------------------ */
+
+  .flbr-inline-heading {
+    font-family: var(--font-gridnik);
+    font-weight: bold;
+    color: var(--color-red-darker);
+    text-transform: uppercase;
+  }
+
+  .color-white {
+    color: var(--color-white) !important;
+  }
+
+  .color-red {
+    color: var(--color-red-darker) !important;
+  }
+
+  .color-green {
+    color: var(--color-green) !important;
+  }
+
+  .color-blue {
+    color: var(--color-blue-lighter) !important;
+  }
+
+  .color-yellow {
+    color: var(--color-gold) !important;
+  }
+
+  .smallcaps {
+    font-variant: small-caps;
+    font-style: normal;
+    font-weight: normal;
+    font-size: .95em;
+  }
+
+  .small {
+    font-size: var(--font-size--extra-small);
+  }
+
+  ul li {
+    padding-left: 1em;
+
+    &::marker {
+      color: var(--color-red-darker);
+      font-family: "Square Things";
+      font-size: var(--font-size--extra-small);
+      font-weight: normal;
+      content: "b";
+    }
+
+    &.full-square-marker::marker {
+      content: "B";
+    }
+  }
+
+  ol li {
+    padding-left: 1em;
+
+    &::marker {
+      color: var(--color-red-darker);
+      font-weight: bold;
+    }
+  }
+
+  /* ------------------------------------------ */
+  
+  .flbr-boxed-number {
+    flex: 0;
+    height: fit-content;
+    margin-right: 0.5 * $marg;
+    background-color: var(--color-blue-lighter);
+
+    p {
+      font-family: var(--font-gridnik);
+      font-size: var(--font-size--large);
+      font-weight: bold;
+      color: var(--color-black);
+      margin: .4em .6em;
+      @include text-stroke(#000);
+    }
+
+    &.red {
+      background-color: var(--color-red-darker);
+      p {
+        color: var(--color-skin);
+      }
+    }
+  }
+}
