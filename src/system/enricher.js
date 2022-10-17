@@ -177,6 +177,22 @@ async function weaponEnricher(match, _options) {
 }
 
 /* ------------------------------------------ */
+/*  FONT AWESOME ICON                         */
+/*   Generate a FontAwesome icon HTML text    */
+/* ------------------------------------------ */
+
+/**
+ * - $1: Icon classes
+ */
+const FONT_AWESOME_ICON_PATTERN = /@FontAwesomeIcon\[(.+?)\]/gm;
+
+async function fontAwesomeIconEnricher(match, _options) {
+  const iconDoc = document.createElement('i');
+  iconDoc.className = match[1];
+  return iconDoc;
+}
+
+/* ------------------------------------------ */
 
 function _createBrokenLink(type, title) {
   return `<a class="${type} broken" data-id="null">`
@@ -204,6 +220,10 @@ export function enrichTextEditors() {
     {
       pattern: WEAPON_PATTERN,
       enricher: weaponEnricher,
+    },
+    {
+      pattern: FONT_AWESOME_ICON_PATTERN,
+      enricher: fontAwesomeIconEnricher,
     },
   );
 }
