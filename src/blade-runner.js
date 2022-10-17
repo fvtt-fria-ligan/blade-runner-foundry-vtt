@@ -17,7 +17,7 @@
  */
 
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, SYSTEM_ID } from '@system/constants';
+import { ACTOR_SUBTYPES, ACTOR_TYPES, CAPACITIES, SYSTEM_ID } from '@system/constants';
 import * as YZUR from 'yzur';
 import * as Chat from '@system/chat';
 import BRRollHandler from '@components/roll/roller';
@@ -147,11 +147,15 @@ Hooks.on('renderChatMessage', (_msg, html, _data) => Chat.hideChatActionButtons(
 Hooks.on('createActor', async (actor, _data, _options) => {
   const updateData = {
     'prototypeToken.displayName': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
-    'prototypeToken.displayBars': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+    'prototypeToken.displayBars': CONST.TOKEN_DISPLAY_MODES.OWNER,
   };
 
   switch (actor.type) {
     case ACTOR_TYPES.CHAR:
+      if (actor.system.subtype === ACTOR_SUBTYPES.PC) {
+        // updateData['prototypeToken.actorLink'] = true;
+        updateData['prototypeToken.bar2'] = CAPACITIES.RESOLVE;
+      }
       if (!actor.system.attributes || !actor.system.skills) {
         throw new TypeError(`FLBR | "${actor.type}" has No attribute nor skill`);
       }
