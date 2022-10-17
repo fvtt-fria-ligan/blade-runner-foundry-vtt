@@ -46,7 +46,7 @@ const displayPrompt = (title, content) => {
   content = content.replace('{name}', game.user.name);
   return Dialog.prompt({
     title: title,
-    content: `<img src="systems/${SYSTEM_ID}/assets/bladerunner-banner-small.webp"/>${content}`,
+    content: `<img src="systems/${SYSTEM_ID}/assets/${SYSTEM_ID}-banner-small.webp"/>${content}`,
     label: 'Understood!',
     options: { width: 600, classes: [SYSTEM_ID, 'dialog'] },
     callback: () => setDisplayed(title),
@@ -67,7 +67,7 @@ const sendToChat = (title, content) => {
 };
 
 const setDisplayed = async identifier => {
-  const settings = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.DISPLAYED_MESSAGES);
+  const settings = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.DISPLAYED_MESSAGES) || [];
   settings.push(identifier);
   await game.settings.set(SYSTEM_ID, SETTINGS_KEYS.DISPLAYED_MESSAGES, settings.flat());
 };
