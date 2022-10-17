@@ -119,10 +119,12 @@
     }
 
     h3 {
+      color: var(--color-red-darker);
+      font-family: var(--font-headline);
       font-size: 1.3rem;
       line-height: 1.15;
-      word-spacing: 23.5 * 2 * .01em;
-      letter-spacing: .2em;
+      // word-spacing: 23.5 * 2 * .01em;
+      letter-spacing: .1em;
       text-transform: uppercase;
     }
 
@@ -132,9 +134,11 @@
     }
 
     code {
-      outline: 1px solid var(--color-text-dark-3);
-      background-color: var(--color-black);
+      font-family: inherit;
+      font-weight: normal;
       padding: 0 4px;
+      background-color: var(--color-border-light-2);
+      border-radius: 4px;
     }
   }
 
