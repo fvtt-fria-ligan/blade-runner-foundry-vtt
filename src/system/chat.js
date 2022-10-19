@@ -47,15 +47,15 @@ export function addChatMessageContextOptions(_html, options) {
     name: game.i18n.localize('FLBR.CHAT_ACTION.ApplyDamage'),
     icon: FLBR.Icons.buttons.attack,
     condition: canDefend,
-    callback: li => _applyDamage(li[0]),
+    callback: li => distributeDamageFromMessage(li[0].dataset.messageId),
   });
   return options;
 }
 
 /* ------------------------------------------- */
 
-async function _applyDamage(messageElem) {
-  const messageId = messageElem.dataset.messageId;
+export async function distributeDamageFromMessage(messageId) {
+  // const messageId = messageElem.dataset.messageId;
   const message = game.messages.get(messageId);
   const roll = message.rolls[0];
   let s = roll.successCount;
