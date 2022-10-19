@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
+import { ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/modifier';
 import BRRollHandler from '@components/roll/roller';
 
@@ -146,7 +146,11 @@ export default class BladeRunnerItem extends Item {
   _rollExplosive() { return this._rollSpecial(this.system.blast); }
 
   async _rollSpecial(value) {
-    const execute = await Dialog.confirm({
+    const autoArmorRoll =
+      this.type === ITEM_TYPES.ARMOR &&
+      game.settings.get(game.system.id, SETTINGS_KEYS.AUTO_ARMOR_ROLL);
+
+    const execute = autoArmorRoll || await Dialog.confirm({
       title: game.i18n.localize(`ITEM.Type${this.type.capitalize()}`),
       content: `<p>${this.name}</p>`,
     });

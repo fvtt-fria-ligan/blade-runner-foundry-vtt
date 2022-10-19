@@ -131,4 +131,6 @@ export const ITEM_TYPES = {
 export const SETTINGS_KEYS = {
   SYSTEM_MIGRATION_VERSION: 'systemMigrationVersion',
   DISPLAYED_MESSAGES: 'messages',
+  AUTO_APPLY_DAMAGE: 'autoApplyDamage',
+  AUTO_ARMOR_ROLL: 'autoArmorRoll',
 };
