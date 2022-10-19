@@ -1,6 +1,6 @@
 {
   "name": "blade-runner-foundry-vtt",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "description": "Foundry VTT game System for Fria Ligan's Blade Runner RPG",
   "repository": {
@@ -57,7 +57,7 @@
     "chalk": "^5.1.2",
     "cross-env": "7.0.3",
     "devmoji": "2.3.0",
-    "esbuild": "^0.15.11",
+    "esbuild": "^0.15.12",
     "esbuild-sass-plugin": "^2.3.3",
     "eslint": "^8.25.0",
     "eslint-config-jquery": "^3.0.0",
