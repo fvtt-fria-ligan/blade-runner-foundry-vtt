@@ -183,13 +183,46 @@ async function weaponEnricher(match, _options) {
 
 /**
  * - $1: Icon classes
+ * @example "@FontAwesomeIcon[fas fa-cog]"
  */
 const FONT_AWESOME_ICON_PATTERN = /@FontAwesomeIcon\[(.+?)\]/gm;
 
 async function fontAwesomeIconEnricher(match, _options) {
   const iconDoc = document.createElement('i');
+  iconDoc.style.textIndent = 0; // Fix for inherited <p> indent
   iconDoc.className = match[1];
   return iconDoc;
+}
+
+/* ------------------------------------------ */
+/*  INLINE ICON IMAGE                         */
+/*   Generate a small inline icon             */
+/*   from an image                            */
+/* ------------------------------------------ */
+
+/**
+ * - $1: Path to the image
+ * - $2: Tooltip text
+ * @example "@IconImage[icons/svg/dice-target.svg]{Dice Target}"
+ */
+const INLINE_ICON_IMAGE = /@IconImage\[(.+?)\](?:{(.+?)})?/gm;
+
+async function iconImageEnricher(match, _options) {
+  const imgDoc = document.createElement('img');
+  imgDoc.setAttribute('src', match[1]);
+  // imgDoc.setAttribute('width', 16);
+  // imgDoc.setAttribute('height', 16);
+  imgDoc.style.width = '1em';
+  imgDoc.style.height = '1em';
+  imgDoc.style.verticalAlign = 'middle';
+  // imgDoc.style.lineHeight = 0;
+  imgDoc.className = 'nopopout';
+
+  if (match[2]) {
+    imgDoc.setAttribute('data-tooltip', match[2]);
+  }
+
+  return imgDoc;
 }
 
 /* ------------------------------------------ */
@@ -204,26 +237,23 @@ function _createBrokenLink(type, title) {
 /* ------------------------------------------ */
 
 export function enrichTextEditors() {
-  CONFIG.TextEditor.enrichers.push(
-    {
-      pattern: ROLL_TABLE_PATTERN,
-      enricher: rollTableEnricher,
-    },
-    {
-      pattern: DRAW_TABLE_PATTERN,
-      enricher: drawTableEnricher,
-    },
-    {
-      pattern: CHOOSER_PATTERN,
-      enricher: chooserEnricher,
-    },
-    {
-      pattern: WEAPON_PATTERN,
-      enricher: weaponEnricher,
-    },
-    {
-      pattern: FONT_AWESOME_ICON_PATTERN,
-      enricher: fontAwesomeIconEnricher,
-    },
-  );
+  CONFIG.TextEditor.enrichers.push({
+    pattern: ROLL_TABLE_PATTERN,
+    enricher: rollTableEnricher,
+  }, {
+    pattern: DRAW_TABLE_PATTERN,
+    enricher: drawTableEnricher,
+  }, {
+    pattern: CHOOSER_PATTERN,
+    enricher: chooserEnricher,
+  }, {
+    pattern: WEAPON_PATTERN,
+    enricher: weaponEnricher,
+  }, {
+    pattern: FONT_AWESOME_ICON_PATTERN,
+    enricher: fontAwesomeIconEnricher,
+  }, {
+    pattern: INLINE_ICON_IMAGE,
+    enricher: iconImageEnricher,
+  });
 }
