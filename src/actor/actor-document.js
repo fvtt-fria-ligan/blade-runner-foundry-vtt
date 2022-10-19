@@ -247,7 +247,7 @@ export default class BladeRunnerActor extends Actor {
    * @param {string} [options.title] A custom title for the roll if you don't want to use the default
    * @returns {BRRollHandler} Rendered RollHandler FormApplication
    */
-  rollBlank(options) {
+  rollBlank(options = {}) {
     return BRRollHandler.create({
       title: options.title ?? game.i18n.localize('FLBR.SHEET_HEADER.GenericRoll'),
       actor: this,
@@ -321,7 +321,7 @@ export default class BladeRunnerActor extends Actor {
     const armors = this.itemTypes[ITEM_TYPES.ARMOR];
     for (const armor of armors) {
       const rollMessage = await armor._rollArmor();
-      armorAblation += rollMessage?.roll?.successCount ?? 0;
+      armorAblation += rollMessage?.rolls[0]?.successCount ?? 0;
     };
 
     damage -= armorAblation;
