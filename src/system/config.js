@@ -99,6 +99,11 @@ FLBR.pushTraumaMap = {
   },
 };
 
+/**
+ * Action Map
+ * - The action property name is added in "data-action"
+ * - The callback takes the actor as an argument
+ */
 FLBR.actionSkillMap = {
   [BR.COMBAT_ACTIONS.SPRINT]: {
     label: 'FLBR.COMBAT_ACTION.Sprint',
@@ -107,6 +112,7 @@ FLBR.actionSkillMap = {
   [BR.COMBAT_ACTIONS.CRAWL]: {
     label: 'FLBR.COMBAT_ACTION.Crawl',
     skill: null,
+    callback: () => ui.notifications.warn('Not implemented yet.'),
   },
   [BR.COMBAT_ACTIONS.UNARMED_ATTACK]: {
     label: 'FLBR.COMBAT_ACTION.UnarmedAttack',
@@ -131,6 +137,7 @@ FLBR.actionSkillMap = {
   [BR.COMBAT_ACTIONS.CAREFUL_AIM]: {
     label: 'FLBR.COMBAT_ACTION.CarefulAim',
     skill: null,
+    callback: () => ui.notifications.warn('Not implemented yet.'),
   },
   [BR.COMBAT_ACTIONS.THROW_WEAPON]: {
     label: 'FLBR.COMBAT_ACTION.ThrowWeapon',
@@ -146,7 +153,8 @@ FLBR.actionSkillMap = {
   },
   [BR.COMBAT_ACTIONS.USE_ITEM]: {
     label: 'FLBR.COMBAT_ACTION.UseItem',
-    skill: 'any',
+    skill: null,
+    callback: () => ui.notifications.warn('Not implemented yet.'),
   },
 };
 

@@ -20,13 +20,13 @@ import { FLBR } from '@system/config';
 import { ACTOR_SUBTYPES, ACTOR_TYPES, CAPACITIES, SYSTEM_ID } from '@system/constants';
 import * as YZUR from 'yzur';
 import * as Chat from '@system/chat';
+import * as BRMacro from '@system/macros';
 import BRRollHandler from '@components/roll/roller';
-import { createBladeRunnerMacro, rollItem, rollStat, setupMacroFolder, showRollDialog } from '@system/macros.js';
 import { registerSheets } from '@system/sheets';
 import { initializeHandlebars } from '@system/handlebars';
 import { registerSystemSettings } from '@system/settings';
-import { enrichTextEditors } from '@system/enricher.js';
-import { registerDiceSoNice } from './plugins/dice-so-nice.js';
+import { enrichTextEditors } from '@system/enricher';
+import { registerDiceSoNice } from './plugins/dice-so-nice';
 import BladeRunnerActor from '@actor/actor-document';
 import BladeRunnerItem from '@item/item-document';
 import displayMessages from '@components/messaging-system';
@@ -65,9 +65,10 @@ Hooks.once('init', async () => {
     config: FLBR,
     roller: BRRollHandler,
     macros: {
-      rollDice: showRollDialog,
-      rollItem,
-      rollStat,
+      rollAction: BRMacro.rollAction,
+      rollDice: BRMacro.showRollDialog,
+      rollItem: BRMacro.rollItem,
+      rollStat: BRMacro.rollStat,
     },
   };
 
@@ -109,8 +110,8 @@ Hooks.once('init', async () => {
 
 Hooks.once('ready', () => {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to.
-  setupMacroFolder();
-  Hooks.on('hotbarDrop', (_bar, data, slot) => createBladeRunnerMacro(data, slot));
+  BRMacro.setupMacroFolder();
+  Hooks.on('hotbarDrop', (_bar, data, slot) => BRMacro.createBladeRunnerMacro(data, slot));
 
   // TODO Determines whether a system migration is required and feasible.
   // checkMigration();

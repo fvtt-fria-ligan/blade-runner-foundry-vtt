@@ -90,15 +90,20 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const elem = event.currentTarget;
     const data = elem.dataset;
 
-    if (typeof data.attribute !== 'undefined' || typeof data.skill !== 'undefined') {
+    if (
+      typeof data.attribute !== 'undefined' ||
+      typeof data.skill !== 'undefined' ||
+      typeof data.action !== 'undefined'
+    ) {
       const dragData = {
         actorId: this.actor.id,
         sceneId: this.actor.isToken ? canvas.scene?.id : null,
         tokenId: this.actor.isToken ? this.actor.token.id : null,
         uuid: this.actor.uuid,
-        type: 'Stat',
+        type: data.action ? 'Action' : 'Stat',
         attribute: data.attribute,
         skill: data.skill,
+        action: data.action,
       };
       return event.dataTransfer.setData('text/plain', JSON.stringify(dragData));
     }

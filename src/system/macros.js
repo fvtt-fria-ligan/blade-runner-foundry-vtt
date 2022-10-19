@@ -1,4 +1,5 @@
 import { FLBR } from './config';
+import { getActiveActor } from '@utils/get-actor';
 
 /**
  * Creates a Macro from an Item or stat (attribute/skill) drop.
@@ -11,6 +12,10 @@ export function createBladeRunnerMacro(data, slot) {
   if (data.type === 'Stat') {
     // ! Do not use await or conflict with Foundry
     _createBladeRunnerStatMacro(data, slot);
+    return false;
+  }
+  if (data.type === 'Action') {
+    _createBladeRunnerActionMacro(data, slot);
     return false;
   }
   if (data.type === 'Item' && typeof data.uuid === 'string') {
@@ -78,6 +83,31 @@ async function _createBladeRunnerStatMacro(data, slot) {
   game.user.assignHotbarMacro(macro, slot);
 }
 
+async function _createBladeRunnerActionMacro(data, slot) {
+  const folder = game.folders.find(f => f.type === 'Macro' && f.name === FLBR.systemMacroFolder);
+  const command = `game.bladerunner.macros.rollAction("${data.action}");`;
+  const actor = await fromUuid(data.uuid);
+  if (!actor) return;
+
+  const commandName = game.i18n.format('FLBR.MACRO.RollAction', {
+    action: game.i18n.localize(FLBR.actionSkillMap[data.action].label),
+  });
+
+  let macro = findMacro(commandName, command);
+  if (!macro) {
+    macro = await Macro.create({
+      name: commandName,
+      type: 'script',
+      img: 'icons/svg/dice-target.svg',
+      command: command,
+      flags: { 'bladerunner.actionMacro': true },
+      folder: folder.id,
+      'ownership.default': CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER,
+    });
+  }
+  game.user.assignHotbarMacro(macro, slot);
+}
+
 async function _createBladeRunnerItemMacro(item, slot) {
   const folder = game.folders.find(f => f.type === 'Macro' && f.name === FLBR.systemMacroFolder);
   const command = `game.bladerunner.macros.rollItem("${item.name}");`;
@@ -102,18 +132,32 @@ async function _createBladeRunnerItemMacro(item, slot) {
  * Rolls a stat.
  * @param {string} attributeKey
  * @param {string} skillKey
+ * @param {Object} options
  */
-export async function rollStat(attributeKey, skillKey) {
-  const speaker = ChatMessage.getSpeaker();
-  let actor;
-  if (speaker.token) actor = game.actors.tokens[speaker.token];
-  if (!actor) actor = game.actors.get(speaker.actor);
-  if (!actor) {
-    return ui.notifications.warn(game.i18n.format('FLBR.MACRO.NoActor', {
-      actor: JSON.stringify(speaker),
-    }));
+export async function rollStat(attributeKey, skillKey, options) {
+  const actor = await getActiveActor();
+  if (actor) return actor.rollStat(attributeKey, skillKey, options);
+}
+
+/* ------------------------------------------ */
+
+/**
+ * Performs an action.
+ * @param {string} actionKey
+ */
+export async function rollAction(actionKey) {
+  const action = FLBR.actionSkillMap[actionKey];
+  if (!action) return;
+  if (typeof action.callback === 'function') {
+    return action.callback(await getActiveActor());
   }
-  return actor.rollStat(attributeKey, skillKey);
+
+  const skillKey = action.skill;
+  const attributeKey = FLBR.skillMap[skillKey];
+  const title = game.i18n.localize(action.label)
+    + ` (${game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`)})`;
+
+  return rollStat(attributeKey, skillKey, { title });
 }
 
 /* ------------------------------------------ */
@@ -123,15 +167,7 @@ export async function rollStat(attributeKey, skillKey) {
  * @param {string} itemName
  */
 export async function rollItem(itemName) {
-  const speaker = ChatMessage.getSpeaker();
-  let actor;
-  if (speaker.token) actor = game.actors.tokens[speaker.token];
-  if (!actor) actor = game.actors.get(speaker.actor);
-  if (!actor) {
-    return ui.notifications.warn(game.i18n.format('FLBR.MACRO.NoActor', {
-      actor: speaker,
-    }));
-  }
+  const actor = await getActiveActor();
 
   // Gets matching items.
   const items = actor ? actor.items.filter(i => i.name === itemName) : [];
@@ -139,8 +175,7 @@ export async function rollItem(itemName) {
     ui.notifications.warn(game.i18n.format('FLBR.MACRO.MultipleItems', {
       actor: actor.name,
       item: itemName,
-    }),
-    );
+    }));
   }
   else if (items.length === 0) {
     return ui.notifications.warn(game.i18n.format('FLBR.MACRO.NoItem', {
@@ -161,7 +196,7 @@ export async function rollItem(itemName) {
 export function showRollDialog(data = {}) {
   return game.bladerunner.roller.create({
     title: 'Generic Roll',
-    actor: null,
+    actor: game.user.character,
     attributeKey: null,
     skillKey: null,
     dice: [],

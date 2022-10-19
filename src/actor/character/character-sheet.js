@@ -81,6 +81,14 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
     // Resolve Permanent Loss
     html.find('.capacity-resolve .capacity-boxes').on('contextmenu', this._onResolveDecrease.bind(this));
+
+    // Owner-only listeners.
+    if (this.actor.isOwner) {
+      html.find('.action-roll[data-action]').each((_index, elem) => {
+        elem.setAttribute('draggable', true);
+        elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);
+      });
+    }
   }
 
   /* ------------------------------------------ */
@@ -98,7 +106,11 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   _onActionRoll(event) {
     event.preventDefault();
     const elem = event.currentTarget;
-    const skillKey = elem.dataset.skill;
+    const actionKey = elem.dataset.action;
+    const action = FLBR.actionSkillMap[actionKey];
+    if (typeof action.callback === 'function') return action.callback(this.actor);
+
+    const skillKey = action.skill;
     const attrKey = FLBR.skillMap[skillKey];
     const title = `${elem.innerText} (${game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`)})`;
     return this.actor.rollStat(attrKey, skillKey, { title });

@@ -43,7 +43,7 @@ FLBR.BUTTON.Delete: Delete item
 FLBR.BUTTON.Edit: Edit item
 FLBR.BUTTON.Roll: Roll item
 FLBR.BUTTON.ToChat: Send item to chat
-FLBR.CHAT_ACTION.ApplyDamage: Apply damage to selected tokens
+FLBR.CHAT_ACTION.ApplyDamage: Apply damage to targeted tokens
 FLBR.DIALOG.AssignSuccesses: Assign Success(es)
 FLBR.DIALOG.AssignSuccessesHint: Choose a number of successes to spent against {name}.
 FLBR.HEADER.Actions: Actions
@@ -142,10 +142,13 @@ FLBR.ItemQuantity: Quantity
 FLBR.ItemRollable: Rollable
 FLBR.ItemSkill: Skill
 FLBR.ItemSpecial: Special
+FLBR.MACRO.GetActorTitle: Choose an Actor
+FLBR.MACRO.GetActorHint: You have selected multiple tokens. Please choose one of them.
 FLBR.MACRO.MultipleItems: >-
   Your controlled Actor {actor} has more than one Item with name {item}. The first matched item will be chosen.
 FLBR.MACRO.NoActor: Your controlled Actor {actor} was not found.
 FLBR.MACRO.NoItem: Your controlled Actor {actor} does not have an item named {item}.
+FLBR.MACRO.RollAction: Action {action}
 FLBR.MACRO.RollStat: Roll {stat}
 FLBR.Nature: Nature
 FLBR.NatureHint: Character's Nature (Only GM)
@@ -207,6 +210,10 @@ ITEM.TypeWeapon: Weapon
 ITEM.TypeExplosive: Explosive
 ITEM.TypeSpecialty: Specialty
 ITEM.TypeInjury: Injury
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatic Apply Damage
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Whether to automatically apply damage from rolls to targeted tokens.
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatic Armor Roll
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Whether to automatically roll the armor.
 WARNING.ApplyDamageNoNature: 'Apply Push Damage: Actor Nature Not Found!'
 WARNING.ApplyDamageNoCapacityKey: 'Apply Push Damage: Nature-Capacity relation Not Found!'
 WARNING.ApplyDamageNoActorCapacity: 'Apply Push Damage: Actor Capacity Not Found!'
