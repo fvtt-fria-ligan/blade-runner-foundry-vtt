@@ -107,11 +107,12 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     event.preventDefault();
     const elem = event.currentTarget;
     const actionKey = elem.dataset.action;
-    const action = FLBR.actionSkillMap[actionKey];
+    const action = FLBR.Actions.find(a => a.id === actionKey);
+    if (!action) return;
     if (typeof action.callback === 'function') return action.callback(this.actor);
 
     const skillKey = action.skill;
-    const attrKey = FLBR.skillMap[skillKey];
+    const attrKey = action.attribute || FLBR.skillMap[skillKey];
     const title = `${elem.innerText} (${game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`)})`;
     return this.actor.rollStat(attrKey, skillKey, { title });
   }

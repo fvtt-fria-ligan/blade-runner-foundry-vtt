@@ -14,8 +14,8 @@
 	</div>
 	<div class="actions boxed-property">
 		<h4>{{localize "FLBR.HEADER.Actions"}}</h4>
-		{{#each config.actionSkillMap as | action actionName |}}
-			<a class="action-roll" data-action="{{actionName}}">{{{@root.config.Icons.buttons.action}}}{{localize action.label}}</a>
+		{{#each config.Actions as | action |}}
+			<a class="action-roll" data-action="{{action.id}}">{{{@root.config.Icons.buttons.action}}}{{localize action.label}}</a>
 		{{/each}}
 	</div>
 </div>

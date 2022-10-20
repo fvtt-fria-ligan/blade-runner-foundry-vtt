@@ -104,59 +104,71 @@ FLBR.pushTraumaMap = {
  * - The action property name is added in "data-action"
  * - The callback takes the actor as an argument
  */
-FLBR.actionSkillMap = {
-  [BR.COMBAT_ACTIONS.SPRINT]: {
+FLBR.Actions = [
+  {
+    id: BR.COMBAT_ACTIONS.SPRINT,
     label: 'FLBR.COMBAT_ACTION.Sprint',
     skill: BR.SKILLS.MOBILITY,
+    attribute: null,
+    callback: null,
   },
-  [BR.COMBAT_ACTIONS.CRAWL]: {
+  {
+    id: BR.COMBAT_ACTIONS.CRAWL,
     label: 'FLBR.COMBAT_ACTION.Crawl',
     skill: null,
     callback: () => ui.notifications.warn('Not implemented yet.'),
   },
-  [BR.COMBAT_ACTIONS.UNARMED_ATTACK]: {
+  {
+    id: BR.COMBAT_ACTIONS.UNARMED_ATTACK,
     label: 'FLBR.COMBAT_ACTION.UnarmedAttack',
     skill: BR.SKILLS.CLOSE_COMBAT,
   },
-  [BR.COMBAT_ACTIONS.MELEE_ATTACK]: {
+  {
+    id: BR.COMBAT_ACTIONS.MELEE_ATTACK,
     label: 'FLBR.COMBAT_ACTION.MeleeAttack',
     skill: BR.SKILLS.CLOSE_COMBAT,
   },
-  [BR.COMBAT_ACTIONS.GRAPPLE]: {
+  {
+    id: BR.COMBAT_ACTIONS.GRAPPLE,
     label: 'FLBR.COMBAT_ACTION.Grapple',
     skill: BR.SKILLS.CLOSE_COMBAT,
   },
-  [BR.COMBAT_ACTIONS.BREAK_FREE]: {
+  {
+    id: BR.COMBAT_ACTIONS.BREAK_FREE,
     label: 'FLBR.COMBAT_ACTION.BreakFree',
     skill: BR.SKILLS.CLOSE_COMBAT,
   },
-  [BR.COMBAT_ACTIONS.SHOOT_FIREARM]: {
+  {
+    id: BR.COMBAT_ACTIONS.SHOOT_FIREARM,
     label: 'FLBR.COMBAT_ACTION.ShootFirearm',
     skill: BR.SKILLS.FIREARMS,
   },
-  [BR.COMBAT_ACTIONS.CAREFUL_AIM]: {
+  {
+    id: BR.COMBAT_ACTIONS.CAREFUL_AIM,
     label: 'FLBR.COMBAT_ACTION.CarefulAim',
-    skill: null,
     callback: () => ui.notifications.warn('Not implemented yet.'),
   },
-  [BR.COMBAT_ACTIONS.THROW_WEAPON]: {
+  {
+    id: BR.COMBAT_ACTIONS.THROW_WEAPON,
     label: 'FLBR.COMBAT_ACTION.ThrowWeapon',
     skill: BR.SKILLS.FIREARMS,
   },
-  [BR.COMBAT_ACTIONS.FIRST_AID]: {
+  {
+    id: BR.COMBAT_ACTIONS.FIRST_AID,
     label: 'FLBR.COMBAT_ACTION.FirstAid',
     skill: BR.SKILLS.MEDICAL_AID,
   },
-  [BR.COMBAT_ACTIONS.MANIPULATE]: {
+  {
+    id: BR.COMBAT_ACTIONS.MANIPULATE,
     label: 'FLBR.COMBAT_ACTION.Manipulate',
     skill: BR.SKILLS.MANIPULATION,
   },
-  [BR.COMBAT_ACTIONS.USE_ITEM]: {
+  {
+    id: BR.COMBAT_ACTIONS.USE_ITEM,
     label: 'FLBR.COMBAT_ACTION.UseItem',
-    skill: null,
     callback: () => ui.notifications.warn('Not implemented yet.'),
   },
-};
+];
 
 FLBR.characterSubtypes = {
   [BR.ACTOR_SUBTYPES.PC]: 'ACTOR.SubtypePc',

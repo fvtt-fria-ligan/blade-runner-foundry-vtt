@@ -89,8 +89,9 @@ async function _createBladeRunnerActionMacro(data, slot) {
   const actor = await fromUuid(data.uuid);
   if (!actor) return;
 
+  const action = FLBR.Actions.find(a => a.id === data.action);
   const commandName = game.i18n.format('FLBR.MACRO.RollAction', {
-    action: game.i18n.localize(FLBR.actionSkillMap[data.action].label),
+    action: game.i18n.localize(action?.label),
   });
 
   let macro = findMacro(commandName, command);
@@ -146,14 +147,14 @@ export async function rollStat(attributeKey, skillKey, options) {
  * @param {string} actionKey
  */
 export async function rollAction(actionKey) {
-  const action = FLBR.actionSkillMap[actionKey];
+  const action = FLBR.Actions.find(a => a.id === actionKey);
   if (!action) return;
   if (typeof action.callback === 'function') {
     return action.callback(await getActiveActor());
   }
 
   const skillKey = action.skill;
-  const attributeKey = FLBR.skillMap[skillKey];
+  const attributeKey = action.attribute || FLBR.skillMap[skillKey];
   const title = game.i18n.localize(action.label)
     + ` (${game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`)})`;
 
