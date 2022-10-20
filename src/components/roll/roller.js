@@ -187,7 +187,7 @@ export default class BRRollHandler extends FormApplication {
       disadvantage: this.advantage ? false : this.disadvantage,
       attributeKey: this.attributeKey,
       skillKey: this.skillKey,
-      rollMode: game.settings.get('core', 'rollMode'),
+      rollMode: this.options.rollMode ?? game.settings.get('core', 'rollMode'),
       attack: this.isAttack,
       damage: this.damage,
       config: CONFIG.BLADE_RUNNER,

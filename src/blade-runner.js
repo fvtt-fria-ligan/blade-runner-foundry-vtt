@@ -30,6 +30,7 @@ import { registerDiceSoNice } from './plugins/dice-so-nice';
 import BladeRunnerActor from '@actor/actor-document';
 import BladeRunnerItem from '@item/item-document';
 import displayMessages from '@components/messaging-system';
+import { getActiveActor } from '@utils/get-actor';
 
 /* ------------------------------------------ */
 /*  Foundry VTT Initialization                */
@@ -118,6 +119,35 @@ Hooks.once('ready', () => {
 
   // Displays system messages.
   displayMessages();
+
+  // TODO Move in its own file.
+  // Replaces the a.inline listener with our own.
+  const body = $('body');
+  body.off('click', 'a.inline-roll'); // Disables Foundry listener.
+  body.on('click', 'a.inline-roll', async event => {
+    event.preventDefault();
+    const a = event.currentTarget;
+    const formula = a.dataset.formula;
+    if (/np|p(?:\d+|@maxPush)/i.test(formula)) {
+      const actor = await getActiveActor();
+      const roll = Roll.create(formula, actor.getRollData());
+      await roll.roll();
+      const dice = roll.terms
+        .filter(t => t instanceof DiceTerm)
+        .flatMap(t => new Array(t.number).fill(t.faces));
+      return game.bladerunner.roller.create({
+        title: a.dataset.flavor || `${actor.name}: ${formula}`,
+        actor,
+        dice,
+        maxPush: roll.maxPush,
+      }, {
+        rollMode: a.dataset.mode,
+      });
+    }
+    else {
+      return TextEditor._onClickInlineRoll(event);
+    }
+  });
 });
 
 /* ------------------------------------------ */
