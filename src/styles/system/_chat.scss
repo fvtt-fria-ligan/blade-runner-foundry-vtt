@@ -15,7 +15,7 @@
   border: 1px solid var(--color-blue-lighter);
   border-radius: 0;
   background-color: var(--color-background);
-  background-image: url("./assets/character-sheet-background.webp");
+  background-image: url("./assets/textures/character-sheet-background.webp");
   background-position: top center;
   background-size: cover; // 100% 100%;
   background-repeat: no-repeat;
@@ -23,7 +23,7 @@
 
   &.message.whisper {
     border: 1px solid var(--color-skin);
-    background-image: url("./assets/chat-card-background.webp");
+    background-image: url("./assets/textures/chat-card-background.webp");
     background-position: top center;
     background-size: cover; // 100% 100%;
     background-repeat: no-repeat;

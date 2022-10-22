@@ -21,12 +21,12 @@ $pad: 25px;
 }
 
 @mixin bg-table() {
-  @include bg('../../systems/blade-runner/assets/journal-sheet-background.webp');
+  @include bg('./assets/textures/journal-sheet-background.webp');
   border: 1px solid var(--color-border--core-box-beige);
 }
 
 @mixin bg-yellow() {
-  @include bg('../../systems/blade-runner/assets/journal-sheet-background.webp');
+  @include bg('./assets/textures/journal-sheet-background.webp');
   border: 1px solid var(--color-border--core-box-beige);
 }
 
@@ -135,10 +135,6 @@ $pad: 25px;
 :root {
   --font-gridnik: "Foundry Gridnik", "Consolas", sans-serif;
   --font-urwdin: "URW DIN Condensed", sans-serif;
-  --color-border--core-box-orange: #F3742A;
-  --color-border--core-box-beige: rgba(255,229,189,.7);
-  --color-border--core-box-blue: rgba(197,220,225,.7);
-  --color-background--gray-dust: rgba(0,0,0,.4);
 }
 
 .font-gridnik {
@@ -156,52 +152,52 @@ $pad: 25px;
 /* ------------------------------------------ */
 // Goudy Old Style
 
-@font-face {
-  font-family: "Goudy Old Style";
-  src: url("./fonts/GOUDOS.TTF");
-}
+// @font-face {
+//   font-family: "Goudy Old Style";
+//   src: url("./fonts/GOUDOS.TTF");
+// }
 
-@font-face {
-  font-family: "Goudy Old Style";
-  src: url("./fonts/GOUDOSB.TTF");
-  font-weight: bold;
-}
+// @font-face {
+//   font-family: "Goudy Old Style";
+//   src: url("./fonts/GOUDOSB.TTF");
+//   font-weight: bold;
+// }
 
-@font-face {
-  font-family: "Goudy Old Style";
-  src: url("./fonts/GOUDOSI.TTF");
-  font-style: italic;
-}
+// @font-face {
+//   font-family: "Goudy Old Style";
+//   src: url("./fonts/GOUDOSI.TTF");
+//   font-style: italic;
+// }
 
 /* ------------------------------------------ */
 // Identikal Sans
 
-@font-face {
-  font-family: "IdentikalSans";
-  src: url("./fonts/IDENSS_.TTF");
-}
+// @font-face {
+//   font-family: "IdentikalSans";
+//   src: url("./fonts/IDENSS_.TTF");
+// }
 
 /* ------------------------------------------ */
 // Foundry Gridnik
 
-@font-face {
-  font-family: "Foundry Gridnik";
-  src: url("./fonts/FoundryGridnik-Medium.otf");
-}
+// @font-face {
+//   font-family: "Foundry Gridnik";
+//   src: url("./fonts/FoundryGridnik-Medium.otf");
+// }
 
-@font-face {
-  font-family: "Foundry Gridnik";
-  src: url("./fonts/FoundryGridnik-Bold.otf");
-  font-weight: bold;
-}
+// @font-face {
+//   font-family: "Foundry Gridnik";
+//   src: url("./fonts/FoundryGridnik-Bold.otf");
+//   font-weight: bold;
+// }
 
 /* ------------------------------------------ */
 // URW DIN Condensed
 
-@font-face {
-  font-family: "URW DIN Condensed";
-  src: url("./fonts/urwdin-cond-regular.ttf");
-}
+// @font-face {
+//   font-family: "URW DIN Condensed";
+//   src: url("./fonts/urwdin-cond-regular.ttf");
+// }
 
 // @font-face {
 //   font-family: "URW DIN Condensed";
@@ -209,19 +205,19 @@ $pad: 25px;
 //   font-weight: bold;
 // }
 
-@font-face {
-  font-family: "URW DIN Condensed";
-  src: url("./fonts/urwdin-cond-black.ttf");
-  font-weight: bold;
-}
+// @font-face {
+//   font-family: "URW DIN Condensed";
+//   src: url("./fonts/urwdin-cond-black.ttf");
+//   font-weight: bold;
+// }
 
 /* ------------------------------------------ */
 // Square Things
 
-@font-face {
-  font-family: "Square Things";
-  src: url("./fonts/squarethings.ttf");
-}
+// @font-face {
+//   font-family: "Square Things";
+//   src: url("./fonts/squarethings.ttf");
+// }
 
 /* ------------------------------------------ */
 /*  Journal Styles                            */
