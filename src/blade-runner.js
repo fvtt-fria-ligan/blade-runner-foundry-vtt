@@ -88,14 +88,6 @@ Hooks.once('init', async () => {
     decimals: 2,
   };
 
-  // Register fonts
-  CONFIG.fontDefinitions['Blade Runner Symbols'] = {
-    editor: true,
-    fonts: [
-      { urls: [`systems/${SYSTEM_ID}/fonts/blade-runner-symbols.ttf`] },
-    ],
-  };
-
   registerSheets();
   registerSystemSettings();
   enrichTextEditors();

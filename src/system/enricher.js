@@ -177,8 +177,26 @@ async function weaponEnricher(match, _options) {
 }
 
 /* ------------------------------------------ */
+/*  BLADE RUNNER SYMBOL                       */
+/*   Generates a Blade Runner symbol          */
+/* ------------------------------------------ */
+
+/**
+ * - $1: Symbol
+ * @example "[[S]] or [[F]]"
+ */
+const BLADERUNNER_SYMBOL_PATTERN = /\[\[([SF]+)\]\]/gm;
+
+async function bladeRunnerSymbolEnricher(match) {
+  const symbolDoc = document.createElement('span');
+  symbolDoc.className = 'blade-runner-symbols';
+  symbolDoc.innerHTML = match[1];
+  return symbolDoc;
+}
+
+/* ------------------------------------------ */
 /*  FONT AWESOME ICON                         */
-/*   Generate a FontAwesome icon HTML text    */
+/*   Generates a FontAwesome icon HTML text   */
 /* ------------------------------------------ */
 
 /**
@@ -187,7 +205,7 @@ async function weaponEnricher(match, _options) {
  */
 const FONT_AWESOME_ICON_PATTERN = /@FontAwesomeIcon\[(.+?)\]/gm;
 
-async function fontAwesomeIconEnricher(match, _options) {
+async function fontAwesomeIconEnricher(match) {
   const iconDoc = document.createElement('i');
   iconDoc.style.textIndent = 0; // Fix for inherited <p> indent
   iconDoc.className = match[1];
@@ -196,7 +214,7 @@ async function fontAwesomeIconEnricher(match, _options) {
 
 /* ------------------------------------------ */
 /*  INLINE ICON IMAGE                         */
-/*   Generate a small inline icon             */
+/*   Generates a small inline icon            */
 /*   from an image                            */
 /* ------------------------------------------ */
 
@@ -207,7 +225,7 @@ async function fontAwesomeIconEnricher(match, _options) {
  */
 const INLINE_ICON_IMAGE = /@IconImage\[(.+?)\](?:{(.+?)})?/gm;
 
-async function iconImageEnricher(match, _options) {
+async function iconImageEnricher(match) {
   const imgDoc = document.createElement('img');
   imgDoc.setAttribute('src', match[1]);
   // imgDoc.setAttribute('width', 16);
@@ -249,6 +267,9 @@ export function enrichTextEditors() {
   }, {
     pattern: WEAPON_PATTERN,
     enricher: weaponEnricher,
+  }, {
+    pattern: BLADERUNNER_SYMBOL_PATTERN,
+    enricher: bladeRunnerSymbolEnricher,
   }, {
     pattern: FONT_AWESOME_ICON_PATTERN,
     enricher: fontAwesomeIconEnricher,
