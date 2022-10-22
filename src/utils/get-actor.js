@@ -1,6 +1,6 @@
 export async function getActiveActor() {
   let actor;
-  if (canvas.tokens.controlled.length > 1) {
+  if (game.user.isGM && canvas.tokens.controlled.length > 1) {
     return chooseActor(canvas.tokens.controlled.map(t => t.actor), {
       title: game.i18n.localize('FLBR.MACRO.GetActorTitle'),
       notes: game.i18n.localize('FLBR.MACRO.GetActorHint'),
@@ -11,7 +11,7 @@ export async function getActiveActor() {
   if (!actor) actor = game.actors.get(speaker.actor);
   if (!actor) {
     ui.notifications.warn(game.i18n.format('FLBR.MACRO.NoActor', {
-      actor: JSON.stringify(speaker),
+      actor: speaker.alias,
     }));
     return;
   }

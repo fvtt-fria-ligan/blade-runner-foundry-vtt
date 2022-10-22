@@ -21,6 +21,7 @@ export default class BRRollHandler extends FormApplication {
    * @param {Modifier|Modifier[]} [modifiers]    A group of modifiers that can also be applied to the roll
    * @param {number}              [maxPush=1]    The maximum number of pushes (default is 1)
    * @param {Object}  [options] Additional options for the FormApplication instance
+   * @param {string}  [options.rollMode]            The default roll mode to use
    * @param {boolean} [options.sendMessage=true]    Whether the message should be sent
    * @param {boolean} [options.unlimitedPush=false] Whether to allow unlimited roll pushes
    */
