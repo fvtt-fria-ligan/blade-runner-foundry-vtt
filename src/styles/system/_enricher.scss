@@ -112,4 +112,16 @@ $border: 1px solid var(--color-border--core-box-blue);
       margin-top: .5 * $marg;
     }
   }
+
+  .flbr-enriched-handout {
+    display: flex;
+    flex-direction: column;
+
+    img {
+      align-self: center;
+      max-height: initial;
+      margin-top: .5 * $marg;
+      border: $border;
+    }
+  }
 }

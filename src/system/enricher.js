@@ -281,6 +281,38 @@ async function weaponEnricher(match, _options) {
 }
 
 /* ------------------------------------------ */
+/*  BLADE RUNNER ACTOR                        */
+/*   Creates an HTML box that displays        */
+/*   the actor stats                          */
+/* ------------------------------------------ */
+
+/**
+ * - $1: The Page's UUID that contains the image
+ * - $2: Given name overriding the default one
+ */
+const HANDOUT_PATTERN = /@BladeRunnerHandout\[(.+?)\](?:{(.+?)})?/gm;
+
+async function handoutEnricher(match) {
+  const divDoc = document.createElement('div');
+
+  const page = await fromUuid(match[1]);
+  if (!page || page.type !== 'image') {
+    divDoc.innerHTML = _createBrokenLink('entity-link', match[2] || '[handout?]');
+    return divDoc;
+  }
+
+  const title = match[2] || page.name;
+
+  const htmlFormat =
+`<h3>@UUID[${page.uuid}]{${title}}</h3>
+<img src="${page.src}"/>`;
+
+  divDoc.className = 'flbr-enriched-handout flbr-tab-box handout';
+  divDoc.innerHTML = await TextEditor.enrichHTML(htmlFormat, { async: true });
+  return divDoc;
+}
+
+/* ------------------------------------------ */
 /*  BLADE RUNNER SYMBOL                       */
 /*   Generates a Blade Runner symbol          */
 /* ------------------------------------------ */
@@ -359,29 +391,41 @@ function _createBrokenLink(type, title) {
 /* ------------------------------------------ */
 
 export function enrichTextEditors() {
-  CONFIG.TextEditor.enrichers.push({
-    pattern: ROLL_TABLE_PATTERN,
-    enricher: rollTableEnricher,
-  }, {
-    pattern: DRAW_TABLE_PATTERN,
-    enricher: drawTableEnricher,
-  }, {
-    pattern: CHOOSER_PATTERN,
-    enricher: chooserEnricher,
-  }, {
-    pattern: ACTOR_PATTERN,
-    enricher: actorEnricher,
-  }, {
-    pattern: WEAPON_PATTERN,
-    enricher: weaponEnricher,
-  }, {
-    pattern: BLADERUNNER_SYMBOL_PATTERN,
-    enricher: bladeRunnerSymbolEnricher,
-  }, {
-    pattern: FONT_AWESOME_ICON_PATTERN,
-    enricher: fontAwesomeIconEnricher,
-  }, {
-    pattern: INLINE_ICON_IMAGE,
-    enricher: iconImageEnricher,
-  });
+  CONFIG.TextEditor.enrichers.push(
+    {
+      pattern: ROLL_TABLE_PATTERN,
+      enricher: rollTableEnricher,
+    },
+    {
+      pattern: DRAW_TABLE_PATTERN,
+      enricher: drawTableEnricher,
+    },
+    {
+      pattern: CHOOSER_PATTERN,
+      enricher: chooserEnricher,
+    },
+    {
+      pattern: ACTOR_PATTERN,
+      enricher: actorEnricher,
+    },
+    {
+      pattern: WEAPON_PATTERN,
+      enricher: weaponEnricher,
+    },
+    {
+      pattern: HANDOUT_PATTERN,
+      enricher: handoutEnricher,
+    },
+    {
+      pattern: BLADERUNNER_SYMBOL_PATTERN,
+      enricher: bladeRunnerSymbolEnricher,
+    },
+    {
+      pattern: FONT_AWESOME_ICON_PATTERN,
+      enricher: fontAwesomeIconEnricher,
+    },
+    {
+      pattern: INLINE_ICON_IMAGE,
+      enricher: iconImageEnricher,
+    });
 }
