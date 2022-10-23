@@ -190,7 +190,7 @@ async function actorEnricher(match, _options) {
 
   const htmlFormat =
 `<h3>@UUID[${actor.uuid}]{${title}}</h3>
-<div class="actor-description">${sys.description}</div>
+${sys.description ? `<div class="actor-description">${sys.description}</div>` : ''}
 <div class="actor-stats">
   <table>
     <tbody>
