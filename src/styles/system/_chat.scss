@@ -106,7 +106,7 @@
       color: var(--color-blue)
     }
     .special {
-      @include utils.stroke-text;
+      @include utils.text-stroke;
       color: var(--color-red);
     }
   }

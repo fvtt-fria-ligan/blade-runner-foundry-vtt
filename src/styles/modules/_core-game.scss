@@ -1,13 +1,11 @@
+@use '../utils';
+
 /* ------------------------------------------ */
 /*  Mixins                                    */
 /* ------------------------------------------ */
 
 $marg: 20px;
 $pad: 25px;
-
-@mixin text-stroke($color) {
-  text-shadow: 1px 0 0 $color, 0 -1px 0 $color, 0 1px 0 $color, -1px 0 0 $color;
-}
 
 @mixin bg($url) {
   background-image: url($url);
@@ -44,7 +42,7 @@ $pad: 25px;
   background-color: rgba(88, 88, 88, .25);
   border: 1px solid var(--color-border--core-box-beige);
   border-bottom-left-radius: 99px;
-  @include text-stroke(#000);
+  @include utils.text-stroke(#000);
 }
 
 @mixin flbr-box() {
@@ -54,6 +52,7 @@ $pad: 25px;
   min-width: 300px;
   @include bg-yellow();
   h3 {
+    color: inherit;
     font-family: var(--font-gridnik);
     padding-bottom: .5em;
   }
@@ -72,6 +71,9 @@ $pad: 25px;
     color: var(--color-blue-lighter);
     border-color: var(--color-border--core-box-blue);
     background-image: url('./assets/textures/page-text-zone-background-blue-lighter.webp');
+    h3 {
+      color: var(--color-blue-lighter);
+    }
     ul li::marker {
       color: var(--color-blue-lighter);
     }
@@ -80,6 +82,9 @@ $pad: 25px;
     color: var(--color-green);
     border-color: var(--color-border--core-box-blue);
     background-image: url('./assets/textures/page-text-zone-background-blue-lighter.webp');
+    h3 {
+      color: var(--color-green);
+    }
     ul li::marker {
       color: var(--color-green);
     }
@@ -229,7 +234,7 @@ $pad: 25px;
 /*   - etc.                                   */
 /* ------------------------------------------ */
 
-.app.journal-entry .journal-entry-content .journal-entry-page {
+.app.journal-entry .journal-entry-content {
 
   .flexrow.colgap {
     column-gap: $marg;
@@ -264,7 +269,7 @@ $pad: 25px;
     p {
       line-height: 1.25;
       margin: 0 0 1.25em 0;
-      @include text-stroke(#000);
+      @include utils.text-stroke(#000);
     }
   }
 
@@ -318,6 +323,19 @@ $pad: 25px;
     @include flbr-box();
   }
 
+  .flbr-box-warning {
+    color: var(--color-red-darker);
+    margin-bottom: $marg;
+    padding: $pad;
+    height: fit-content;
+    border: 1px solid var(--color-red-darker);
+
+    h3, p {
+      font-family: var(--font-gridnik);
+      font-weight: bold;
+    }
+  }
+
   .flbr-archetype-boxes-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -363,6 +381,18 @@ $pad: 25px;
       min-height: 200px;
       min-height: 300px;
       @include flbr-box();
+    }
+    
+    &.handout {
+      h3 {
+        color: var(--color-border--core-box-blue);
+        font-size: 80%;
+        border-color: var(--color-border--core-box-blue);
+      }
+      img {
+        border: 1px solid var(--color-border--core-box-blue);
+        margin-bottom: $marg;
+      }
     }
   }
 
@@ -442,7 +472,7 @@ $pad: 25px;
 
       table {
         color: var(--color-gold);
-        @include text-stroke(#000);
+        @include utils.text-stroke(#000);
         @include flbr-table(#000);
         border-top: none;
 
@@ -460,7 +490,7 @@ $pad: 25px;
             font-family: var(--font-gridnik);
             font-size: var(--font-size--very-small);
             text-align: center;
-            @include text-stroke(#000);
+            @include utils.text-stroke(#000);
             line-height: 2.5;
             width: 2.5em;
             border: 1px solid var(--color-border--core-box-orange);
@@ -493,6 +523,7 @@ $pad: 25px;
     @include bg-table();
 
     h3 {
+      color: var(--color-skin);
       font-family: var(--font-gridnik);
       padding-left: .5 * $pad;
       // padding-bottom: .5em;
@@ -683,7 +714,7 @@ $pad: 25px;
       font-weight: bold;
       color: var(--color-black);
       margin: .4em .6em;
-      @include text-stroke(#000);
+      @include utils.text-stroke(#000);
     }
 
     &.red {

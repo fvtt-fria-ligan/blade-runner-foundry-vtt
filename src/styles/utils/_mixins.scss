@@ -14,7 +14,7 @@
   background-size: 100% 100%;
 }
 
-@mixin stroke-text($x: 1px) {
+@mixin text-stroke($x: 1px) {
   text-shadow:
     (-$x) (-$x) 0 #000,
     $x (-$x) 0 #000,

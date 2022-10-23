@@ -57,7 +57,7 @@ $border-stat-dotted: 1px dotted var(--color-green);
       // z-index: -10;
     }
     .archetype input {
-      @include utils.stroke-text;
+      @include utils.text-stroke;
       color: var(--color-blue);
       font-family: var(--font-table);
       font-size: var(--font-size--large);

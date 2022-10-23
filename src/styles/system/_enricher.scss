@@ -1,0 +1,115 @@
+$marg: 20px;
+$pad: 25px;
+$border: 1px solid var(--color-border--core-box-blue);
+
+.flbr-enriched-actor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'title title'
+    'description description'
+    'stats img';
+
+  h3 { grid-area: title; }
+  .actor-description { grid-area: description; }
+  .actor-stats { grid-area: stats; }
+  img {
+    grid-area: img;
+    align-self: center;
+    justify-self: center;
+  }
+
+  a.content-link {
+    white-space: initial;
+    word-break: keep-all;
+  }
+}
+
+.app.journal-entry .journal-entry-content {
+
+  /* ------------------------------------------ */
+  /*  Blade Runner Actor Enricher               */
+  /* ------------------------------------------ */
+
+  .flbr-enriched-actor {
+    margin-bottom: $marg;
+    border: $border;
+    background-color: rgba(0,0,0,.4);
+
+    & > *:not(img) {
+      padding: $pad;
+    }
+
+    h3 {
+      font-family: var(--font-gridnik);
+      font-weight: bold;
+      color: var(--color-blue-lighter);
+    }
+
+    .actor-description {
+      border-top: $border;
+      border-bottom: $border;
+      background-image: url('./assets/textures/page-text-zone-background-blue-lighter.webp');
+      background-position: top center;
+      background-size: cover;
+
+      p {
+        font-family: var(--font-table);
+        color: var(--color-green);
+      }
+    }
+
+    .actor-stats {
+      border-right: $border;
+    }
+
+    table {
+      font-family: var(--font-table);
+      color: var(--color-blue-lighter);
+      border: none;
+      
+      tbody {
+        vertical-align: top;
+      }
+
+      tr {
+        background: none;
+      }
+
+      tr:not(:first-child) {
+        border-top: 2px solid var(--color-green);
+      }
+
+      tr td:first-of-type {
+        font-weight: bold;
+      }
+
+      tr td:nth-child(2) {
+        font-size: 1.125em;
+        text-align: right;
+        letter-spacing: .1em;
+        word-spacing: .2em;
+      }
+    }
+  }
+}
+
+.chat-message {
+  .flbr-enriched-actor {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'title'
+      'img'
+      'description'
+      'stats';
+
+    .actor-stats {
+      display: none;
+    }
+
+    img {
+      max-height: 150px;
+      margin-top: .5 * $marg;
+    }
+  }
+}
