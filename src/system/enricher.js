@@ -126,8 +126,112 @@ async function chooserEnricher(match, options) {
 }
 
 /* ------------------------------------------ */
+/*  BLADE RUNNER ACTOR                        */
+/*   Creates an HTML box that displays        */
+/*   the actor stats                          */
+/* ------------------------------------------ */
+
+/**
+ * - $1: Actor's name or ID
+ * - $2: Given name overriding the default one
+ */
+const ACTOR_PATTERN = /@BladeRunnerActor\[(.+?)\](?:{(.+?)})?/gm;
+
+async function actorEnricher(match, _options) {
+  const actorDoc = document.createElement('div');
+
+  let actor = game.actors.get(match[1]);
+  if (!actor) actor = game.actors.getName(match[1]);
+  if (!actor) {
+    actorDoc.innerHTML = _createBrokenLink('entity-link', match[2] || '[actor?]');
+    return actorDoc;
+  }
+
+  const title = match[2] || actor.name;
+  const sys = actor.system;
+
+  // Builds attributes.
+  const attributes = [];
+  for (const attr of FLBR.attributes) {
+    const value = sys.attributes[attr].value;
+    const text = game.i18n.localize(`FLBR.ATTRIBUTE.${attr.toUpperCase()}`)
+      + ` ${FLBR.dieMap.get(+value)}`;
+    attributes.push(text);
+  }
+
+  // Builds skills.
+  const skills = [];
+  for (const sk of FLBR.skills) {
+    const value = sys.skills[sk].value;
+    if (value <= 6) continue;
+    const text = game.i18n.localize(`FLBR.SKILL.${sk.capitalize()}`)
+      + ` ${FLBR.dieMap.get(+value)}`;
+    skills.push(text);
+  }
+
+  // Builds specialties.
+  const specialties = [];
+  for (const item of actor.items) {
+    if (item.type === ITEM_TYPES.SPECIALTY) specialties.push(`@UUID[${item.uuid}]`);
+  }
+  if (specialties.length === 0) specialties.push('—');
+
+  // Builds gear.
+  const gear = [];
+  for (const item of actor.items) {
+    if (item.isPhysical) {
+      const text = (item.qty > 1 ? `${item.qty}X ` : '')
+        + `@UUID[${item.uuid}]`;
+      gear.push(text);
+    }
+  }
+  if (sys.signatureItem?.name) gear.push(sys.signatureItem.name);
+  if (gear.length === 0) gear.push('—');
+
+  const htmlFormat =
+`<h3>@UUID[${actor.uuid}]{${title}}</h3>
+<div class="actor-description">${sys.description}</div>
+<div class="actor-stats">
+  <table>
+    <tbody>
+      <tr>
+        <td>Attributes</td>
+        <td>${attributes.join('<br/>')}</td>
+      </tr>
+      <tr>
+        <td>Health</td>
+        <td>${sys.health.max}</td>
+      </tr>
+      <tr>
+        <td>Resolve</td>
+        <td>${sys.resolve.max}</td>
+      </tr>
+      <tr>
+        <td>Skills</td>
+        <td>${skills.join('<br/>')}</td>
+      </tr>
+      <tr>
+        <td>Specialties</td>
+        <td>${specialties.join('<br/>')}</td>
+      </tr>
+      <tr>
+        <td>Gear</td>
+        <td>${gear.join('<br/>')}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<img src="${actor.img}"/>`;
+
+  actorDoc.className = 'flbr-enriched-actor';
+  // actorDoc.style.flexWrap = 'nowrap';
+  actorDoc.innerHTML = await TextEditor.enrichHTML(htmlFormat, { async: true });
+  return actorDoc;
+}
+
+/* ------------------------------------------ */
 /*  BLADE RUNNER WEAPON                       */
-/*   Creates a HTML box that displays         */
+/*   Creates an HTML box that displays        */
 /*   the weapon stats                         */
 /* ------------------------------------------ */
 
@@ -152,7 +256,7 @@ async function weaponEnricher(match, _options) {
 
   const htmlFormat =
 `<div class="flbr-sector-box" style="display: flex; flex-direction: column; justify-content: space-between; height: initial; padding: 0; background-color: rgba(0,0,0,.4);">
-  <h3 style="padding: .5em">@UUID[Item.${item.id}]{${title}}</h3>
+  <h3 style="padding: .5em">@UUID[${item.uuid}]{${title}}</h3>
   <img class="nopopout" src="${item.img}" style="align-self: center; padding: 0 1em; max-height: 200px;"/>
   <div class="flbr-weapon-description">${sys.description}</div>
 </div>
@@ -170,7 +274,7 @@ async function weaponEnricher(match, _options) {
   </table>
 </div>`;
 
-  itemDoc.className = 'flexrow';
+  itemDoc.className = 'flbr-enriched-weapon flexrow';
   itemDoc.style.flexWrap = 'nowrap';
   itemDoc.innerHTML = await TextEditor.enrichHTML(htmlFormat, { async: true });
   return itemDoc;
@@ -264,6 +368,9 @@ export function enrichTextEditors() {
   }, {
     pattern: CHOOSER_PATTERN,
     enricher: chooserEnricher,
+  }, {
+    pattern: ACTOR_PATTERN,
+    enricher: actorEnricher,
   }, {
     pattern: WEAPON_PATTERN,
     enricher: weaponEnricher,
