@@ -1,6 +1,6 @@
 export async function getActiveActor() {
   let actor;
-  if (game.user.isGM && canvas.tokens.controlled.length > 1) {
+  if (game.user.isGM && canvas.ready && canvas.tokens.controlled.length > 1) {
     return chooseActor(canvas.tokens.controlled.map(t => t.actor), {
       title: game.i18n.localize('FLBR.MACRO.GetActorTitle'),
       notes: game.i18n.localize('FLBR.MACRO.GetActorHint'),
