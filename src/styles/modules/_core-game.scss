@@ -668,6 +668,14 @@ $pad: 25px;
     color: var(--color-blue-lighter) !important;
   }
 
+  .color-blue-darker {
+    color: var(--color-blue-darker) !important;
+  }
+
+  .color-skin {
+    color: var(--color-skin) !important;
+  }
+
   .color-yellow {
     color: var(--color-gold) !important;
   }
@@ -696,6 +704,14 @@ $pad: 25px;
 
     &.full-square-marker::marker {
       content: "B";
+    }
+
+    ul {
+      padding-left: 1em;
+
+      li::marker {
+        content: "a";
+      }
     }
   }
 
