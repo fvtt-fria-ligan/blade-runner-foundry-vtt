@@ -82,11 +82,11 @@ function _createTitle(formula, flavor, actor, attributeKey, skillKey) {
     if (skill) out += skill;
     if (flavor) out += ')';
   }
-  else {
-    if (actor && !flavor) out += ': ';
-    else if (flavor) out += ' | ';
-    out += formula;
-  }
+  // else {
+  //   if (actor && !flavor) out += ': ';
+  //   else if (flavor) out += ' | ';
+  //   out += formula;
+  // }
   if (!out) out = formula || 'Roll';
   return out;
 }
