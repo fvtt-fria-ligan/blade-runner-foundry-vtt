@@ -18,6 +18,13 @@ export function registerDiceSoNice(dice3d) {
   }, 'default');
 
   dice3d.addDicePreset({
+    type: 'd3',
+    labels: ['1', '2', '3'],
+    system: 'blade-runner',
+    colorset: 'blade-runner-base-die',
+  }, 'd3');
+
+  dice3d.addDicePreset({
     type: 'd6',
     labels: [
       'systems/blade-runner/assets/dice/d6/br_d6_1.webp',
