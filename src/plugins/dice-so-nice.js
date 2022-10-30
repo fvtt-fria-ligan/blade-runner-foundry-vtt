@@ -18,11 +18,25 @@ export function registerDiceSoNice(dice3d) {
   }, 'default');
 
   dice3d.addDicePreset({
+    type: 'd2',
+    labels: range(2),
+    system: 'blade-runner',
+    colorset: 'blade-runner-base-die',
+  }, 'd2');
+
+  dice3d.addDicePreset({
     type: 'd3',
-    labels: ['1', '2', '3'],
+    labels: range(3),
     system: 'blade-runner',
     colorset: 'blade-runner-base-die',
   }, 'd3');
+
+  dice3d.addDicePreset({
+    type: 'd4',
+    labels: range(4),
+    system: 'blade-runner',
+    colorset: 'blade-runner-base-die',
+  }, 'd4');
 
   dice3d.addDicePreset({
     type: 'd6',
@@ -123,4 +137,28 @@ export function registerDiceSoNice(dice3d) {
     system: 'blade-runner',
     colorset: 'blade-runner-base-die',
   }, 'd12');
+
+  dice3d.addDicePreset({
+    type: 'd20',
+    labels: range(20),
+    system: 'blade-runner',
+    colorset: 'blade-runner-base-die',
+  }, 'd20');
+
+  dice3d.addDicePreset({
+    type: 'd100',
+    labels: range(9).map(i => `${(+i) * 10}`).concat('00'),
+    system: 'blade-runner',
+    colorset: 'blade-runner-base-die',
+  }, 'd100');
+}
+
+/**
+ * Creates a range of labels between two numbers.
+ * @param {number}  size       Maximum
+ * @param {number} [startAt=1] Minimum
+ * @returns {string[]}
+ */
+function range(size, startAt = 1) {
+  return [...Array(size).keys()].map(i => `${i + startAt}`);
 }
