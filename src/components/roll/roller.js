@@ -100,6 +100,7 @@ export default class BRRollHandler extends FormApplication {
      * @type {number[]}
      */
     this.dice = !Array.isArray(dice) ? [dice] : dice;
+    this.dice = this.dice.filter(d => d > 0);
 
     /**
      * The roll in this FormApplication.
@@ -543,7 +544,7 @@ export default class BRRollHandler extends FormApplication {
       title: game.i18n.localize('FLBR.ROLLER.AddDie'),
       content,
       label: game.i18n.localize('FLBR.OK'),
-      callback: html => html[0].querySelector('form').diesize.value,
+      callback: html => Number(html[0].querySelector('form').diesize.value),
       rejectClose: false,
       options: {
         width: 100,
