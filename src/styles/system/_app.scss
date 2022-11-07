@@ -43,6 +43,11 @@ a.inline-table {
   }
 }
 
+a.content-link {
+  white-space: initial;
+  word-break: keep-all;
+}
+
 a.entity-link {
   cursor: help;
   user-select: text;

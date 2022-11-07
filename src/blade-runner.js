@@ -149,10 +149,11 @@ Hooks.on('createActor', async (actor, _data, _options) => {
 
   switch (actor.type) {
     case ACTOR_TYPES.CHAR:
-      if (actor.system.subtype === ACTOR_SUBTYPES.PC) {
-        // updateData['prototypeToken.actorLink'] = true;
-        updateData['prototypeToken.bar2'] = CAPACITIES.RESOLVE;
-      }
+      // TODO clean code
+      // if (actor.system.subtype === ACTOR_SUBTYPES.PC) {
+      //   // updateData['prototypeToken.actorLink'] = true;
+      //   // updateData['prototypeToken.bar2.attribute'] = CAPACITIES.RESOLVE;
+      // }
       if (!actor.system.attributes || !actor.system.skills) {
         throw new TypeError(`FLBR | "${actor.type}" has No attribute nor skill`);
       }

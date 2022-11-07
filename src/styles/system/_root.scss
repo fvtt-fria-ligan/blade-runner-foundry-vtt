@@ -29,4 +29,6 @@
   --font-size--default: 1rem;
   --font-size--large: 1.5rem;
   --font-size--extra-large: 2rem;
+  // Foundry override
+  --color-text-hyperlink: var(--color-red-darker);
 }
