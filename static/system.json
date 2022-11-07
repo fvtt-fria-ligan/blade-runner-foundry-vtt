@@ -29,7 +29,16 @@
   "scripts": [],
   "esmodules": ["blade-runner.js"],
   "styles": ["blade-runner.css"],
-  "packs": [],
+  "packs": [
+    {
+      "name": "blade-runner-rpg-system",
+      "label": "Blade Runner RPG - System",
+      "path": "packs/blade-runner-rpg-system.db",
+      "type": "JournalEntry",
+      "system": "blade-runner",
+      "private": false
+    }
+  ],
   "languages": [
     {
       "lang": "en",

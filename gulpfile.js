@@ -17,7 +17,7 @@ const sourceDirectory = './src';
 const distDirectory = './dist';
 const templateExt = 'hbs';
 const langGlob = `${sourceDirectory}/lang/**/*.{yml,yaml}`;
-const staticFiles = ['assets', 'fonts', 'scripts', 'system.json', 'template.json'];
+const staticFiles = ['assets', 'fonts', 'packs', 'scripts', 'system.json', 'template.json'];
 const manifestPath = 'static/system.json';
 const getDownloadURL = version =>
   `https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/v${version}/blade-runner-fvtt_v${version}.zip`;

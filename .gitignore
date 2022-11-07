@@ -16,6 +16,7 @@ npm-debug.log
 
 # Local Configuration
 pathconfig
+copy-packs.bat
 /*.lock
 
 # Distribution Files
