@@ -44,7 +44,7 @@
     "lint:fix": "eslint --ext .js --fix .",
     "format": "prettier-eslint \"**/*.{hbs,js,json,scss}\" --write",
     "postinstall": "npx patch-package & npx husky install",
-    "upd": "npm list -g --depth=0 & npm outdated & npx npm-check -u",
+    "upd": "npm list -g --depth=0 & npm outdated -g & npm outdated & npx npm-check -u",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
