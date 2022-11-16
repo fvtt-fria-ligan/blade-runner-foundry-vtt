@@ -4,7 +4,7 @@
 <div class="embedded-items flex {{#if wrap}}row wrap{{else}}column{{/if}}">
 	{{#each items}}
 		<div class="embedded-item flex row {{type}}" data-item-id="{{id}}">
-			<div class="photo{{#if system.rollable}} item-roll rollable{{/if}}">
+			<div class="photo{{#if rollable}} item-roll rollable{{/if}}">
 				<img src="{{img}}" data-tooltip="{{name}}"/>
 			</div>
 			<div class="details">

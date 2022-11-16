@@ -60,22 +60,47 @@ $gap: 4px;
       flex: 1;
     }
   }
+
+  .item-attacks,
   .item-modifiers {
     margin-top: $gap;
   }
+
   .item-modifiers-list {
     color: var(--color-blue-lighter);
     display: grid;
     // grid-template-columns: 1fr 42px auto;
     grid-template-columns: 130px 69px auto;
     gap: 2px;
+  }
 
-    .button {
-      font-size: var(--font-size--extra-small);
-      height: fit-content;
-    }
-    .empty {
-      font-size: var(--font-size--very-small);
-    }
+  .item-attacks-list {
+    color: var(--color-blue-lighter);
+  }
+
+  details label {
+    font-size: var(--font-size--extra-small);
+  }
+
+  summary a {
+    font-size: x-small;
+  }
+
+  .button.delete-action {
+    flex: 0;
+    margin-left: $gap * .5;
+  }
+
+  .item-action + .item-action {
+    margin-top: $gap;
+  }
+
+  .button {
+    font-size: var(--font-size--extra-small);
+    text-align: center;
+    height: fit-content;
+  }
+  .empty {
+    font-size: var(--font-size--very-small);
   }
 }

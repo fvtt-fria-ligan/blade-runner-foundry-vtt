@@ -1,0 +1,47 @@
+{{#each system.actions as | action |}}
+	<div class="item-action boxed-property">
+		<div class="form-group item-property-action-name">
+			<div class="flexrow">
+				<input type="text" name="system.actions.{{@key}}.name" value="{{action.name}}"/placeholder="{{localize "FLBR.ItemActionName"}}">
+				<a class="button delete-action" data-action-id="{{@key}}" data-tooltip="{{localize 'FLBR.ItemDeleteAction'}}">
+					{{{@root.config.Icons.buttons.delete}}}
+				</a>
+			</div>
+		</div>
+		<div class="form-group item-property-action-type">
+			<label>{{localize "FLBR.ItemActionType"}}</label>
+			<select name="system.actions.{{@key}}.type" data-dtype="number">
+				{{#select action.type}}
+					<option value="skill">{{localize "FLBR.ItemActionTypeRollSkill"}}</option>
+					<option value="macro">{{localize "FLBR.ItemActionTypeRunMacro"}}</option>
+				{{/select}}
+			</select>
+		</div>
+		{{#if (eq action.type "skill")}}
+			<div class="form-group item-property-action-attribute">
+				<label>{{localize "FLBR.ItemActionAttribute"}}</label>
+				<select name="system.actions.{{@key}}.attribute">
+					{{#select action.attribute}}
+						{{#each @root.config.attributes}}
+							<option value="{{.}}">{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase .))}}</option>
+						{{/each}}
+					{{/select}}
+				</select>
+			</div>
+			<div class="form-group item-property-action-skill">
+				<label>{{localize "FLBR.ItemActionSkill"}}</label>
+				<select name="system.actions.{{@key}}.skill">
+					{{#select action.skill}}
+						{{#each @root.config.skills}}
+							<option value="{{.}}">{{localize (concat "FLBR.SKILL." (capitalize .))}}</option>
+						{{/each}}
+					{{/select}}
+				</select>
+			</div>
+		{{else if (eq action.type "macro")}}
+			<div class="form-group item-property-action-macro">
+				<input type="text" name="system.actions.{{@key}}.macro" value="{{action.macro}}"/>
+			</div>
+		{{/if}}
+	</div>
+{{/each}}

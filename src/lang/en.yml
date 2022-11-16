@@ -46,9 +46,12 @@ FLBR.BUTTON.ToChat: Send item to chat
 FLBR.CHAT_ACTION.ApplyDamage: Apply damage to targeted tokens
 FLBR.DIALOG.AssignSuccesses: Assign Success(es)
 FLBR.DIALOG.AssignSuccessesHint: Choose a number of successes to spent against {name}.
+FLBR.DIALOG.ChooseAction: Choose Action
+FLBR.DIALOG.ChooseAttack: Choose Attack
 FLBR.HEADER.Actions: Actions
 FLBR.HEADER.Appearance: Appearance
 FLBR.HEADER.Armor: Armor
+FLBR.HEADER.Attacks: Attack Modes
 FLBR.HEADER.AttributesAndSkills: Attributes & Skills
 FLBR.HEADER.Augments: Augments
 FLBR.HEADER.ChinyenPoints: Chinyen Points
@@ -94,13 +97,13 @@ FLBR.SHEET_HEADER.BlastPowerRoll: Roll Blast Power
 FLBR.SHEET_HEADER.GenericRoll: Generic Roll
 FLBR.SHEET_HEADER.ItemPost: Post Item
 FLBR.SHEET_HEADER.ItemRoll: Roll Item
+FLBR.TAB.Actions: Actions
 FLBR.TAB.Bio: Biography
 FLBR.TAB.Combat: Combat
 FLBR.TAB.Info: Info
 FLBR.TAB.Inventory: Inventory
 FLBR.TAB.Features: Features
 FLBR.TAB.Mods: Mods
-FLBR.TAB.Roll: Roll
 FLBR.TAB.Stats: Stats
 FLBR.D: D
 FLBR.NO_VALUE: –
@@ -126,9 +129,17 @@ FLBR.InjuryHealing: Healing
 FLBR.InjuryLethal: Lethal
 FLBR.InjuryPermanent: Permanent
 FLBR.InventoryNoItem: Empty.
+FLBR.ItemAddAction: Add Action
+FLBR.ItemAddAttack: Add Attack
 FLBR.ItemAddModifier: Add a roll Modifier
+FLBR.ItemActionAttribute: Attribute
+FLBR.ItemActionName: Action name
+FLBR.ItemActionSkill: Skill
+FLBR.ItemActionType: Action type
+FLBR.ItemActionTypeRollSkill: Roll skill
+FLBR.ItemActionTypeRunMacro: Run macro
+FLBR.ItemAttackName: Attack Name
 FLBR.ItemArmor: Armor
-FLBR.ItemAttribute: Attribute
 FLBR.ITEM_AVAILABILITY.Incidental: Incidental
 FLBR.ITEM_AVAILABILITY.Luxury: Luxury
 FLBR.ITEM_AVAILABILITY.Premium: Premium
@@ -136,11 +147,16 @@ FLBR.ITEM_AVAILABILITY.Rare: Rare
 FLBR.ITEM_AVAILABILITY.Standard: Standard
 FLBR.ItemAvailability: Availability
 FLBR.ItemCost: Cost
+FLBR.ItemDeleteAction: Remove action
+FLBR.ItemDeleteAttack: Remove attack
+FLBR.ItemDeleteModifier: Remove modifier
+FLBR.ItemNewAction: New action
+FLBR.ItemNewAttack: New attack
+FLBR.ItemNoAttack: No attack mode defined.
 FLBR.ItemNoModifier: No modifier.
 FLBR.ItemModifier: Modifier
 FLBR.ItemQuantity: Quantity
 FLBR.ItemRollable: Rollable
-FLBR.ItemSkill: Skill
 FLBR.ItemSpecial: Special
 FLBR.MACRO.GetActorTitle: Choose an Actor
 FLBR.MACRO.GetActorHint: You have selected multiple tokens. Please choose one of them.

@@ -2,6 +2,8 @@ import { FLBR } from '@system/config';
 import { ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
+import BladeRunnerDialog from '@components/dialog/dialog';
+import BladeRunnerActionChooserDialog from '@components/dialog/action-chooser-dialog';
 
 export default class BladeRunnerItem extends Item {
 
@@ -17,21 +19,17 @@ export default class BladeRunnerItem extends Item {
     return FLBR.physicalItems.includes(this.type);
   }
 
-  get damage() {
-    return this.system.damage;
+  get isOffensive() {
+    return !!this.system.attacks;
   }
 
-  get isOffensive() {
-    return typeof this.damage !== 'undefined';
+  get rollable() {
+    return this.type === ITEM_TYPES.ARMOR || !!this.system.actions;
   }
 
   get hasModifier() {
     if (!this.system.modifiers) return false;
     return !foundry.utils.isEmpty(this.system.modifiers);
-  }
-
-  get rollable() {
-    return !!(this.system.rollable ?? false);
   }
 
   /** 
@@ -77,6 +75,32 @@ export default class BladeRunnerItem extends Item {
 
   /* ------------------------------------------- */
 
+  /** @override */
+  prepareDerivedData() {
+    // Prepares actions.
+    if (this.rollable) {
+      const itemActions = [];
+      // eslint-disable-next-line no-shadow
+      for (const [id, { type, name }] of Object.entries(this.system.actions)) {
+        itemActions.push({ id, type, name });
+      }
+      this.actions = itemActions;
+    }
+
+    // Prepares attacks.
+    if (this.type === ITEM_TYPES.WEAPON || this.type === ITEM_TYPES.EXPLOSIVE) {
+      const itemAttacks = [];
+      for (const atk in this.system.attacks) {
+        itemAttacks.push({
+          id: atk,
+          name: this.system.attacks[atk].name,
+        });
+      }
+      this.attacks = itemAttacks;
+    }
+  }
+  /* ------------------------------------------- */
+
   /**
    * Gets an array of modifiers in this item.
    * @param {Object}         [options]           Additional options to filter the returned array of modifiers
@@ -95,9 +119,9 @@ export default class BladeRunnerItem extends Item {
 
   /**
    * Rolls the item.
-   * @returns {BRRollHandler} Rendered RollHandler FormApplication
+   * @returns {Promise.<BRRollHandler>} Rendered RollHandler FormApplication
    */
-  roll() {
+  async roll() {
     switch (this.type) {
       case ITEM_TYPES.ARMOR: return this._rollArmor();
       // ! Not this one below ↓
@@ -106,11 +130,41 @@ export default class BladeRunnerItem extends Item {
 
     if (!this.rollable) return;
 
-    const attributeKey = this.system.attribute;
-    const skillKey = this.system.skill;
+    // Gets the action.
+    let actionId;
+    if (this.actions.length > 1) {
+      actionId = await BladeRunnerDialog.actionChooser(
+        this.actions,
+        `${this.detailedName}: ${game.i18n.localize('FLBR.DIALOG.ChooseAction')}`,
+      );
+    }
+    else {
+      actionId = this.actions[0].id;
+    }
+    const action = this.system.actions[actionId];
+
+    // Gets the attack.
+    let attack;
+    if (this.isOffensive) {
+      let attackId;
+      if (this.attacks.length > 1) {
+        attackId = await BladeRunnerDialog.actionChooser(
+          this.attacks,
+          `${this.detailedName}: ${game.i18n.localize('FLBR.DIALOG.ChooseAttack')}`,
+        );
+      }
+      else {
+        attackId = this.attacks[0].id;
+      }
+      attack = this.system.attacks[attackId];
+    }
+
+    const attributeKey = action.attribute;
+    const skillKey = action.skill;
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`) : null;
-    const title = `${this.detailedName} (${attributeName}${skillKey ? ` & ${skillName}` : ''})`;
+    const title = `${this.detailedName} (${attributeName}${skillKey ? ` & ${skillName}` : ''})`
+      + (attack ? ` - ${attack.name}` : '');
     const attributeValue = this.actor?.getAttribute(attributeKey);
     const skillValue = this.actor?.getSkill(skillKey);
 
@@ -135,6 +189,7 @@ export default class BladeRunnerItem extends Item {
       modifiers,
       maxPush: this.actor?.maxPush,
     }, {
+      damage: attack?.damage,
       unlimitedPush: this.actor?.flags.bladerunner?.unlimitedPush,
     });
     return roller.render(true);
@@ -191,6 +246,8 @@ export default class BladeRunnerItem extends Item {
       link: this.link,
       inActor: !!this.actor,
       showProperties: (this.type !== ITEM_TYPES.GENERIC || this.hasModifier),
+      isOffensive: this.isOffensive,
+      hasAttack: this.isOffensive && !foundry.utils.isEmpty(this.system.attacks),
       hasModifier: this.hasModifier,
       modifiersDescription: this.modifiersDescription,
       config: CONFIG.BLADE_RUNNER,

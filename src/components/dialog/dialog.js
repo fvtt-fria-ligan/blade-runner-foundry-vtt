@@ -39,8 +39,6 @@ export default class BladeRunnerDialog extends Dialog {
    * @param {string} [config.title]       Window title
    * @param {string} [config.description] Window description/message
    * @returns {Promise.<number>} The returned value
-   * @static
-   * @async
    */
   static async rangePicker({ value = 1, min = 1, max, title, description }) {
     max = max ?? value;
@@ -54,6 +52,40 @@ export default class BladeRunnerDialog extends Dialog {
       label: game.i18n.localize('FLBR.OK'),
       callback: html => html[0].querySelector('form').chooser.value,
       rejectClose: false,
+    });
+  }
+
+  /**
+   * Displays a dialog for choosing an action.
+   * @see {@link Dialog}
+   * @param {{ id: string, name: string }[]} actions
+   * @param {string}   title
+   * @returns {Promise.<string>}
+   */
+  static async actionChooser(actions, title) {
+    const template = 'systems/blade-runner/templates/components/dialog/action-chooser-dialog.hbs';
+    const content = await renderTemplate(template, { actions });
+    return new Promise(resolve => {
+      const data = {
+        title,
+        content,
+        buttons: {
+          ok: {
+            label: game.i18n.localize('FLBR.OK'),
+            callback: html => resolve(
+              html[0].querySelector('form').action.value,
+            ),
+          },
+          cancel: {
+            label: game.i18n.localize('FLBR.Cancel'),
+            callback: () => Promise.reject('action-chooser-dialog: cancelled'),
+          },
+        },
+        default: 'ok',
+        // close: () => Promise.reject('Aborted'),
+      };
+      // Renders the dialog.
+      new this(data).render(true);
     });
   }
 }

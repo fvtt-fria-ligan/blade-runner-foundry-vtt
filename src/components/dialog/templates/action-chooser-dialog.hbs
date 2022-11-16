@@ -1,0 +1,10 @@
+<form autocomplete="off">
+	<div class="flexrow" style="margin: 5% 10%">
+		<select name="action">
+			{{log actions level="warn"}}
+			{{#each actions}}
+				<option value="{{id}}">{{name}}</option>
+			{{/each}}
+		</select>
+	</div>
+</form>

@@ -118,7 +118,7 @@ export default class BRRollHandler extends FormApplication {
      * Quantity of damage brought with this roll.
      * @type {number}
      */
-    this.damage = options.damage ?? this.item?.damage;
+    this.damage = options.damage ?? this.item?.attacks?.[0]?.damage;
 
     this.options.sendMessage = options.sendMessage ?? true;
     this.options.unlimitedPush = options.unlimitedPush ?? false;

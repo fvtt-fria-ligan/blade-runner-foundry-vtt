@@ -278,6 +278,7 @@ for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
 
 FLBR.Icons = {
   tabs: {
+    action: '<i class="fas fa-dice-six"></i>',
     bio: '<i class="fas fa-align-left"></i>',
     combat: '<i class="fas fa-fist-raised"></i>',
     features: '<i class="fas fa-briefcase"></i>',
