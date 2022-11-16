@@ -64,11 +64,11 @@ export const ARCHETYPES = {
 
 /** @enum {string} */
 export const RANGES = {
-  ENGAGED: 'engaged',
-  SHORT: 'short',
-  MEDIUM: 'medium',
-  LONG: 'long',
-  EXTREME: 'extreme',
+  ENGAGED: 0,
+  SHORT: 1,
+  MEDIUM: 2,
+  LONG: 3,
+  EXTREME: 4,
 };
 
 /** @enum {string} */
