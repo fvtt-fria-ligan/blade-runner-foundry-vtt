@@ -3,7 +3,7 @@ import { ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants'
 import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
 import BladeRunnerDialog from '@components/dialog/dialog';
-import BladeRunnerActionChooserDialog from '@components/dialog/action-chooser-dialog';
+import Action from '@components/item-action';
 
 export default class BladeRunnerItem extends Item {
 
@@ -24,7 +24,15 @@ export default class BladeRunnerItem extends Item {
   }
 
   get rollable() {
-    return this.type === ITEM_TYPES.ARMOR || !!this.system.actions;
+    return !!this.system.actions;
+  }
+
+  get hasAttack() {
+    return this.isOffensive && this.attacks.length > 0;
+  }
+
+  get hasAction() {
+    return this.rollable && this.actions.length > 0;
   }
 
   get hasModifier() {
@@ -78,7 +86,7 @@ export default class BladeRunnerItem extends Item {
   /** @override */
   prepareDerivedData() {
     // Prepares actions.
-    if (this.rollable) {
+    if (this.system.actions) {
       const itemActions = [];
       // eslint-disable-next-line no-shadow
       for (const [id, { type, name }] of Object.entries(this.system.actions)) {
@@ -139,9 +147,16 @@ export default class BladeRunnerItem extends Item {
       );
     }
     else {
-      actionId = this.actions[0].id;
+      actionId = this.actions[0]?.id;
     }
     const action = this.system.actions[actionId];
+
+    if (action.type === Action.Types.RUN_MACRO) {
+      let macro = game.macros.get(action.macro);
+      if (!macro) macro = game.macros.getName(action.macro);
+      if (!macro) return;
+      return macro.execute();
+    }
 
     // Gets the attack.
     let attack;
@@ -154,7 +169,7 @@ export default class BladeRunnerItem extends Item {
         );
       }
       else {
-        attackId = this.attacks[0].id;
+        attackId = this.attacks[0]?.id;
       }
       attack = this.system.attacks[attackId];
     }

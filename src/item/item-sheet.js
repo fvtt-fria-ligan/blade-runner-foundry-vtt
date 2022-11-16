@@ -55,7 +55,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       item: baseData.item,
       system: foundry.utils.duplicate(baseData.item.system),
       // effects: baseData.effects,
-      rollable: this.item.type !== ITEM_TYPES.ARMOR && this.item.rollable,
+      rollable: this.item.rollable,
       rollData: this.item.getRollData(),
       collapsibleStates: this.collapsibleStates,
       config: CONFIG.BLADE_RUNNER,
@@ -79,7 +79,15 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       myButtons.push({
         label: game.i18n.localize('FLBR.SHEET_HEADER.ItemRoll'),
         class: 'item-roll',
-        icon: this.item.type === ITEM_TYPES.ARMOR ? 'fas fa-shield-alt' : 'fas fa-dice',
+        icon: 'fas fa-dice',
+        onclick: () => this.item.roll(),
+      });
+    }
+    if (this.item.type === ITEM_TYPES.ARMOR) {
+      myButtons.push({
+        label: game.i18n.localize('FLBR.SHEET_HEADER.ArmorRoll'),
+        class: 'item-roll',
+        icon: 'fas fa-shield-alt',
         onclick: () => this.item.roll(),
       });
     }

@@ -25,7 +25,7 @@ export function createBladeRunnerMacro(data, slot) {
     // eslint-disable-next-line no-undef
     const item = fromUuidSync(data.uuid);
     if (!item) return;
-    if (!item.system.rollable) return;
+    if (!item.rollable) return;
 
     // ! Do not use await or conflict with Foundry
     _createBladeRunnerItemMacro(item, slot);
