@@ -78,7 +78,7 @@ export default class BRRollHandler extends FormApplication {
      */
     this.skillKey = skillKey;
 
-    /** @typedef {import('@components/modifier').default} Modifier */
+    /** @typedef {import('@components/item-modifier').default} Modifier */
 
     /**
      * A group of modifiers that can also be applied to the roll.

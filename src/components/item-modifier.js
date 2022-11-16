@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 /**
  * A class representing a roll modifier with many properties and automatic label.
- * @class
  */
 export default class Modifier {
   /**

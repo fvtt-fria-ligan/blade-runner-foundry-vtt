@@ -1,6 +1,6 @@
 import { FLBR } from '@system/config';
 import { ACTOR_SUBTYPES, ACTOR_TYPES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
-import Modifier from '@components/modifier';
+import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
 
 /**
@@ -150,7 +150,7 @@ export default class BladeRunnerActor extends Actor {
   /**
    * Gets all the modifiers from this actor's items.
    * @param {Object} options Filtering options
-   * @returns {Array.<import('@components/modifier').default>} An array of Modifiers
+   * @returns {Array.<import('@components/item-modifier').default>} An array of Modifiers
    */
   getRollModifiers(options) {
     const modifiers = [];

@@ -1,6 +1,6 @@
 import { FLBR } from '@system/config';
 import { ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
-import Modifier from '@components/modifier';
+import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
 
 export default class BladeRunnerItem extends Item {
