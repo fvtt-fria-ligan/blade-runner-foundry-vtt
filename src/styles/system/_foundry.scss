@@ -1,0 +1,37 @@
+@use "sass:math";
+
+/* ------------------------------------------ */
+/*  Foundry Overrides                         */
+/* ------------------------------------------ */
+
+/* -------------------------------------------- */
+/*  Logo & Pause Spinner Styles                 */
+/* -------------------------------------------- */
+
+#logo {
+  content: url("./assets/icons/blade-runner-failure.svg");
+  width: 100px; // 100px
+  height: 100px; // 50px
+}
+
+// #ui-top.offset {
+//   margin-left: -10px; // -90px
+// }
+
+$pause-h: 200px;
+$pause-w: math.div(341px * $pause-h, 500px);
+
+#pause>img {
+  // 341x500
+  content: url("../../modules/blade-runner-core-game/assets/items/lapd_br_badge.webp");
+  width: $pause-w;
+  height: $pause-h;
+  top: -50px;
+  left: calc(50% - ($pause-w * .5));
+  opacity: .7;
+  --fa-animation-duration: 42s;
+}
+
+#pause figcaption {
+  font-family: var(--font-header);
+}
