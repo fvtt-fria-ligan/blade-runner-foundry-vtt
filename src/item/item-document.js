@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
+import { ITEM_TYPES, RANGES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
 import BladeRunnerDialog from '@components/dialog/dialog';
@@ -19,8 +19,18 @@ export default class BladeRunnerItem extends Item {
     return FLBR.physicalItems.includes(this.type);
   }
 
+  get isConsumable() {
+    return typeof this.system.consumable !== 'undefined';
+  }
+
   get isOffensive() {
     return !!this.system.attacks;
+  }
+
+  get melee() {
+    if (!this.isOffensive) return false;
+    const atk = this.attacks[0] || {};
+    return atk.min === atk.max === RANGES.ENGAGED;
   }
 
   get rollable() {
@@ -107,6 +117,7 @@ export default class BladeRunnerItem extends Item {
       this.attacks = itemAttacks;
     }
   }
+
   /* ------------------------------------------- */
 
   /**
@@ -121,6 +132,34 @@ export default class BladeRunnerItem extends Item {
     return mods ?? [];
   }
 
+  /* ------------------------------------------- */
+
+  /**
+   * Consumes 1 unit of the item's quantity.
+   * @param {number} [qty=1] Quantity to consume
+   */
+  consumeUnit(qty = 1) {
+    return this.modifyNumberedProperty('qty', -qty);
+  }
+
+  /* ------------------------------------------- */
+
+  /**
+   * Modifies a numbered property in the item.
+   * @param {string}  key  Name of the property in `system` to change
+   * @param {number}  mod  Modifier
+   * @param {number} [min=0]        Minimum allowed
+   * @param {number} [max=Infinity] Maximum allowed
+   * @returns {Promise.<number>} The difference
+   */
+  async modifyNumberedProperty(key, mod, min = 0, max = Infinity) {
+    const currentValue = +foundry.utils.getProperty(this.system, key);
+    if (typeof currentValue !== 'number') return;
+    const newValue = Math.clamped(currentValue + mod, min, max);
+    await this.update({ [`system.${key}`]: newValue });
+    return newValue - currentValue;
+  }
+
   /* ------------------------------------------ */
   /*  Utility Functions                         */
   /* ------------------------------------------ */
@@ -130,6 +169,25 @@ export default class BladeRunnerItem extends Item {
    * @returns {Promise.<BRRollHandler>} Rendered RollHandler FormApplication
    */
   async roll() {
+    // Quantity consumption.
+    if (this.system.consumable) {
+      if (this.qty <= 0) {
+        ui.notifications.error(
+          game.i18n.format('WARNING.NoItemUnit', {
+            name: this.name,
+          }),
+        );
+        return;
+      }
+      const consumed = -await this.consumeUnit();
+      ui.notifications.info(
+        game.i18n.format('FLBR.ItemConsumeNotif', {
+          name: this.name,
+          qty: consumed,
+        }),
+      );
+    }
+
     switch (this.type) {
       case ITEM_TYPES.ARMOR: return this._rollArmor();
       // ! Not this one below ↓
@@ -151,10 +209,22 @@ export default class BladeRunnerItem extends Item {
     }
     const action = this.system.actions[actionId];
 
+    if (!action) {
+      ui.notifications.warn('WARNING.NoItemAction', { localize: true });
+      return;
+    }
+
     if (action.type === Action.Types.RUN_MACRO) {
       let macro = game.macros.get(action.macro);
       if (!macro) macro = game.macros.getName(action.macro);
-      if (!macro) return;
+      if (!macro) {
+        ui.notifications.warn(
+          game.i18n.format('WARNING.ItemActionMacroNotFound', {
+            macro: action.macro,
+          }),
+        );
+        return;
+      }
       return macro.execute();
     }
 
@@ -251,18 +321,18 @@ export default class BladeRunnerItem extends Item {
    *   or the Object of prepared chatData otherwise.
    * @async
    */
-  async toMessage(messageData = {}, { rollMode = null, create = true } = {}) {
+  async toMessage(messageData = {}, { rollMode, create = true } = {}) {
     // Renders the template with item data.
     const content = await renderTemplate(this.constructor.CHAT_TEMPLATE, {
       name: this.name,
       img: this.img,
       type: this.type,
-      system: this.system,
+      system: foundry.utils.duplicate(this.system),
       link: this.link,
       inActor: !!this.actor,
       showProperties: (this.type !== ITEM_TYPES.GENERIC || this.hasModifier),
       isOffensive: this.isOffensive,
-      hasAttack: this.isOffensive && !foundry.utils.isEmpty(this.system.attacks),
+      hasAttack: this.hasAttack,
       hasModifier: this.hasModifier,
       modifiersDescription: this.modifiersDescription,
       config: CONFIG.BLADE_RUNNER,
@@ -282,10 +352,10 @@ export default class BladeRunnerItem extends Item {
 
     // Gets the default roll mode if undef.
     if (rollMode == undefined) rollMode = game.settings.get('core', 'rollMode');
+    if (rollMode) msg.applyRollMode(rollMode);
 
     // Sends the messages or returns its data.
-    if (create) return cls.create(msg, { rollMode });
-    if (rollMode) msg.applyRollMode(rollMode);
+    if (create) return cls.create(msg);
 
     return msg.toObject();
   }
