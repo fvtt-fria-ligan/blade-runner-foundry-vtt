@@ -183,6 +183,10 @@ export default class Modifier {
         active: false,
         name: game.i18n.localize('FLBR.RANGED_COMBAT.TargetBehindCover'),
       }),
+      new Modifier(`${category}.carefulAim`, 1, {}, {
+        active: false,
+        name: game.i18n.localize('FLBR.RANGED_COMBAT.CarefulAim'),
+      }),
       new Modifier(`${category}.unseenTarget`, -1, {}, {
         active: false,
         name: game.i18n.localize('FLBR.RANGED_COMBAT.UnseenTarget'),
