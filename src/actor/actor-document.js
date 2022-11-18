@@ -318,9 +318,10 @@ export default class BladeRunnerActor extends Actor {
     // Rolls all armors, if any, and reduces damage, if success(es) were obtained.
     let armorAblation = 0;
     /** @type {Array.<import('@item/item-document').default>} */
-    const armors = this.itemTypes[ITEM_TYPES.ARMOR];
+    const armors = this.itemTypes[ITEM_TYPES.ARMOR]
+      .filter(i => i.qty > 0);
     for (const armor of armors) {
-      const rollMessage = await armor._rollArmor();
+      const rollMessage = await armor.roll();
       armorAblation += rollMessage?.rolls[0]?.successCount ?? 0;
     };
 

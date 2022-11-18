@@ -10,6 +10,12 @@ import { enrichTextFields } from '@utils/string-util';
  */
 export default class BladeRunnerItemSheet extends ItemSheet {
 
+  /**
+   * Used to store the state of collapsible menus in an accordion
+   * to keep it open between each sheet update.
+   * @author FloRad (Savage Worlds)
+   * @type {Object.<string, boolean>}
+   */
   collapsibleStates = {};
 
   /* ------------------------------------------ */
@@ -51,6 +57,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       isGM: game.user.isGM,
       inActor: !!this.item.actor,
       isOffensive: this.item.isOffensive,
+      isConsumable: this.item.isConsumable,
       // inVehicle: this.item.actor?.type === 'vehicle',
       item: baseData.item,
       system: foundry.utils.duplicate(baseData.item.system),

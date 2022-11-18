@@ -17,6 +17,9 @@
 				<div class="modifiers">{{localize "FLBR.ItemModifier"}}</div>
 				<div class="modifiers">{{modifiersDescription}}</div>
 			{{/if}}
+			{{#if system.consumable}}
+				<div class="grid-column-all">{{localize "FLBR.ItemConsumable"}}</div>
+			{{/if}}
 			{{#if system.special}}
 				<div class="grid-column-all special">{{system.special}}</div>
 			{{/if}}

@@ -90,26 +90,30 @@
         "description": "",
         "special": ""
       },
+      "itemConsumable": {
+        "consumable": false
+      },
       "itemAttacks": { "attacks": {} },
       "itemActions": { "actions": {} },
       "itemModifiers": { "modifiers": {} }
     },
     "generic": {
-      "templates": ["itemBase", "itemActions", "itemDesc", "itemModifiers"]
+      "templates": ["itemBase", "itemActions", "itemDesc", "itemModifiers", "itemConsumable"]
     },
     "upgrade": {
       "templates": ["itemBase", "itemActions", "itemDesc", "itemModifiers"]
     },
     "armor": {
-      "templates": ["itemBase", "itemDesc", "itemModifiers"],
+      "templates": ["itemBase", "itemDesc", "itemModifiers", "itemConsumable"],
       "armor": 6
     },
     "weapon": {
-      "templates": ["itemBase", "itemAttacks", "itemActions", "itemDesc", "itemOffensive"]
+      "templates": ["itemBase", "itemAttacks", "itemActions", "itemDesc", "itemOffensive", "itemConsumable"]
     },
     "explosive": {
-      "templates": ["itemBase", "itemAttacks", "itemActions", "itemDesc", "itemOffensive"],
-      "blast": 8
+      "templates": ["itemBase", "itemAttacks", "itemActions", "itemDesc", "itemOffensive", "itemConsumable"],
+      "blast": 8,
+      "consumable": true
     },
     "specialty": {
       "templates": ["itemDesc", "itemActions", "itemModifiers"]
