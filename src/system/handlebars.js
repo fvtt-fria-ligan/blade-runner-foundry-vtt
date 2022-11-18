@@ -96,6 +96,12 @@ function registerHandlebarsHelpers() {
     return (a / b) * 100;
   });
 
+  // Handlebars.registerHelper('enrichContent', function (content) {
+  //   // Enriches content.
+  //   content = TextEditor.enrichHTML(content, { documents: true, async: false });
+  //   return new Handlebars.SafeString(content);
+  // });
+
   /**
    * Templates for a die Score selector.
    * Parameters:
@@ -111,7 +117,7 @@ function registerHandlebarsHelpers() {
       selectOptions.push(opt);
     }
     return new Handlebars.SafeString(
-      `<select name="${target}" class="score-selector">
+      `<select name="${target}" class="score-selector" data-dtype="Number">
       ${selectOptions.join('\n')}
       </select>`,
     );

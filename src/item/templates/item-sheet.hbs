@@ -70,7 +70,7 @@
 				</div>
 				<div class="item-property item-property-availability">
 					<label>{{localize "FLBR.ItemAvailability"}}</label>
-					<select name="system.availability">
+					<select name="system.availability" data-dtype="Number">
 						{{selectOptions config.availabilities selected=system.availability localize=true}}
 					</select>
 				</div>
@@ -81,6 +81,13 @@
 						{{scoreSelector "system.armor" selected=system.armor}}
 					</div>
 				{{/if}}
+			{{/if}}
+
+			{{#if isConsumable}}
+				<div class="item-property item-property-consumable">
+					<label>{{localize "FLBR.ItemConsumable"}}</label>
+					<input type="checkbox" name="system.consumable" {{checked system.consumable}}/>
+				</div>
 			{{/if}}
 			
 			<div class="item-property item-property-special">
