@@ -1,5 +1,7 @@
 @use "../utils";
 
+$embed-width: 230px;
+
 .blade-runner .embedded-items {
   gap: 4px;
   align-items: flex-start;
@@ -16,11 +18,7 @@
   @include utils.input-background;
   @include utils.border-sheet(2px);
   border-radius: 2px;
-  color: var(--color-black);
-  font-family: var(--font-table);
-  font-size: var(--font-size--very-small);
-  font-weight: bold;
-  width: 200px;
+  width: $embed-width;
   padding: 4px;
   position: relative;
 
@@ -44,31 +42,41 @@
   }
 
   .details {
+    font-family: var(--font-editor);
+    font-size: var(--font-size--default);
+    color: var(--color-black);
+
     .item-detail {
       line-height: 1;
       margin-bottom: 2px;
     }
     .name {
+      color: var(--color-black);
+      font-family: var(--font-table);
+      font-size: var(--font-size--small);
       font-weight: bold;
-      text-transform: uppercase;
+      // text-transform: uppercase;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 116px; // Calculated precisely
-    }
-    .description {
-      color: var(--color-blue-darker);
+      max-width: 116px + ($embed-width - 200px); // Calculated precisely
     }
     .special {
-      color: var(--color-blue-darker);
-      font-size: var(--font-size--extra-small);
-      font-style: italic;
+      font-weight: bold;
     }
-    .armor,
-    .damage,
-    .range {
-      color: var(--color-blue-darker);
-      font-size: var(--font-size--extra-small);
+    .damage {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      column-gap: 8px;
+      i { font-size: 90%; }
+    }
+    .description {
+      p, li { color: var(--color-black); }
+      p, ul, ol {
+        // &:first-child {
+          margin: 0;
+        // }
+      }
     }
   }
 
@@ -81,6 +89,7 @@
   }
 
   .item-controls {
+    color: var(--color-black);
     background-color: var(--color-blue-lighter);
     border: 1px solid var(--color-blue-darker);
     border-radius: 4px;
