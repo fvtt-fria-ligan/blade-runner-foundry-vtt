@@ -199,10 +199,11 @@ export default class BladeRunnerItem extends Item {
     // Gets the action.
     let actionId;
     if (this.actions.length > 1) {
-      actionId = await BladeRunnerDialog.actionChooser(
-        this.actions,
+      actionId = await BladeRunnerDialog.choose(
+        this.actions.map(a => [a.id, a.name]),
         `${this.detailedName}: ${game.i18n.localize('FLBR.DIALOG.ChooseAction')}`,
       );
+      console.warn('actionId', actionId);
     }
     else {
       actionId = this.actions[0]?.id;
@@ -233,8 +234,8 @@ export default class BladeRunnerItem extends Item {
     if (this.isOffensive) {
       let attackId;
       if (this.attacks.length > 1) {
-        attackId = await BladeRunnerDialog.actionChooser(
-          this.attacks,
+        attackId = await BladeRunnerDialog.choose(
+          this.attacks.map(a => [a.id, a.name]),
           `${this.detailedName}: ${game.i18n.localize('FLBR.DIALOG.ChooseAttack')}`,
         );
       }

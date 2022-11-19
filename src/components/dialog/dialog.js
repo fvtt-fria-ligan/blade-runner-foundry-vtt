@@ -55,37 +55,32 @@ export default class BladeRunnerDialog extends Dialog {
     });
   }
 
+  /* ------------------------------------------ */
+
   /**
-   * Displays a dialog for choosing an action.
-   * @see {@link Dialog}
-   * @param {{ id: string, name: string }[]} actions
-   * @param {string}   title
-   * @returns {Promise.<string>}
+   * Displays a dialog with multiple choice buttons.
+   * @param {[string, string][]} choices  [returned id, button label]
+   * @param {string}  title     The title of the dialog
+   * @param {string} [content]  Additional content
    */
-  static async actionChooser(actions, title) {
-    const template = 'systems/blade-runner/templates/components/dialog/action-chooser-dialog.hbs';
-    const content = await renderTemplate(template, { actions });
-    return new Promise(resolve => {
-      const data = {
-        title,
-        content,
-        buttons: {
-          ok: {
-            label: game.i18n.localize('FLBR.OK'),
-            callback: html => resolve(
-              html[0].querySelector('form').action.value,
-            ),
-          },
-          cancel: {
-            label: game.i18n.localize('FLBR.Cancel'),
-            callback: () => Promise.reject('action-chooser-dialog: cancelled'),
-          },
-        },
-        default: 'ok',
-        // close: () => Promise.reject('Aborted'),
+  static async choose(choices, title, content) {
+    const buttons = choices.reduce((btns, [id, label]) => {
+      btns[id] = {
+        label,
+        icon: '<i class="fa-solid fa-play"></i>',
+        callback: () => id,
       };
-      // Renders the dialog.
-      new this(data).render(true);
+      return btns;
+    }, {});
+
+    return this.wait({
+      title,
+      content,
+      buttons,
+      default: choices[0][0],
+      // close: () => Promise.resolve(),
+    }, {}, {
+      classes: ['blade-runner', 'dialog', 'choice-dialog'],
     });
   }
 }
