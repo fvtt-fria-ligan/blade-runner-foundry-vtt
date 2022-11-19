@@ -60,6 +60,10 @@ $embed-width: 230px;
       text-overflow: ellipsis;
       white-space: nowrap;
       max-width: 116px + ($embed-width - 200px); // Calculated precisely
+
+      &.empty-item {
+        text-decoration: line-through;
+      }
     }
     .special {
       font-weight: bold;
