@@ -2,7 +2,7 @@
 /**
  * A class representing an item's attack mode.
  */
-export default class Attack {
+export default class ItemAttack {
   /**
    * @param {Object}    options
    * @param {Item}      options.item
@@ -33,6 +33,18 @@ export default class Attack {
 
   get actor() {
     return this.item?.actor;
+  }
+
+  get title() {
+    return `<u>${this.name}</u><br/><span class="attack-description">[ `
+      + `${game.i18n.localize('FLBR.WeaponDamage')}: `
+      + `<code>${this.damage}</code> `
+      + `<em>${game.i18n.localize(CONFIG.BLADE_RUNNER.damageTypes[this.damageType])}</em>,&nbsp;&nbsp;`
+      + `${game.i18n.localize('FLBR.Crit')}: `
+      + `<code>${game.i18n.localize('FLBR.D')}${this.crit}</code>,&nbsp;&nbsp;`
+      + `${game.i18n.localize('FLBR.Range')}: `
+      + `<code>${game.i18n.localize(CONFIG.BLADE_RUNNER.ranges[this.range.max])}</code>`
+      + ' ]</span>';
   }
 
   toObject() {

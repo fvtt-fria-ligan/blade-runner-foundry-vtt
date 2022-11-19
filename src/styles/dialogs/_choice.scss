@@ -4,4 +4,20 @@
     gap: 8px;
     margin: 5% 10%;
   }
+  .dialog-button {
+    line-height: 1.20;
+
+    .attack-description {
+      font-weight: normal;
+      font-size: 90%;
+
+      code {
+        font-weight: bold;
+        color: var(--color-blue);
+      }
+      em {
+        color: var(--color-blue);
+      }
+    }
+  }
 }

@@ -2,7 +2,7 @@
 /**
  * A class representing an item's action.
  */
-export default class Action {
+export default class ItemAction {
   /**
    * @param {number} type The type of action
    * @param {Object} options
@@ -20,22 +20,35 @@ export default class Action {
      */
     this.id = foundry.utils.randomID(8);
 
-    this.type = type || Action.Types.ROLL_SKILL;
+    this.type = type || ItemAction.Types.ROLL_SKILL;
     this.name = name;
     this.item = item;
 
     switch (this.type) {
-      case Action.Types.ROLL_SKILL:
+      case ItemAction.Types.ROLL_SKILL:
         this.attribute = attribute || 'str';
         this.skill = skill || 'closeCombat';
         break;
-      case Action.Types.RUN_MACRO:
+      case ItemAction.Types.RUN_MACRO:
         this.macro = macro;
     }
   }
 
   get actor() {
     return this.item?.actor;
+  }
+
+  get title() {
+    switch (this.type) {
+      case ItemAction.Types.ROLL_SKILL:
+        return this.name + ' ('
+          + game.i18n.localize(`FLBR.ATTRIBUTE.${this.attribute.toUpperCase()}`)
+          + ' + '
+          + game.i18n.localize(`FLBR.SKILL.${this.skill.capitalize()}`)
+          + ')';
+      default:
+        return this.name;
+    }
   }
 
   toObject() {
@@ -52,7 +65,7 @@ export default class Action {
 }
 
 /** @enum {number} */
-Action.Types = {
+ItemAction.Types = {
   ROLL_SKILL: 'skill',
   RUN_MACRO: 'macro',
 };

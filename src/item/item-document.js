@@ -3,7 +3,8 @@ import { ITEM_TYPES, RANGES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/co
 import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
 import BladeRunnerDialog from '@components/dialog/dialog';
-import Action from '@components/item-action';
+import ItemAction from '@components/item-action';
+import ItemAttack from '@components/item-attack';
 
 export default class BladeRunnerItem extends Item {
 
@@ -200,7 +201,11 @@ export default class BladeRunnerItem extends Item {
     let actionId;
     if (this.actions.length > 1) {
       actionId = await BladeRunnerDialog.choose(
-        this.actions.map(a => [a.id, a.name]),
+        this.actions.map(a => {
+          const actData = this.system.actions[a.id];
+          const itemAction = new ItemAction(actData.type, actData);
+          return [a.id, itemAction.title];
+        }),
         `${this.detailedName}: ${game.i18n.localize('FLBR.DIALOG.ChooseAction')}`,
       );
       console.warn('actionId', actionId);
@@ -215,7 +220,7 @@ export default class BladeRunnerItem extends Item {
       return;
     }
 
-    if (action.type === Action.Types.RUN_MACRO) {
+    if (action.type === ItemAction.Types.RUN_MACRO) {
       let macro = game.macros.get(action.macro);
       if (!macro) macro = game.macros.getName(action.macro);
       if (!macro) {
@@ -235,7 +240,10 @@ export default class BladeRunnerItem extends Item {
       let attackId;
       if (this.attacks.length > 1) {
         attackId = await BladeRunnerDialog.choose(
-          this.attacks.map(a => [a.id, a.name]),
+          this.attacks.map(a => {
+            const atk = new ItemAttack(this.system.attacks[a.id]);
+            return [a.id, atk.title];
+          }),
           `${this.detailedName}: ${game.i18n.localize('FLBR.DIALOG.ChooseAttack')}`,
         );
       }

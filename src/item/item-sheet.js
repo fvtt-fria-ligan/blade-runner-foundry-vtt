@@ -1,5 +1,5 @@
-import Action from '@components/item-action';
-import Attack from '@components/item-attack';
+import ItemAction from '@components/item-action';
+import ItemAttack from '@components/item-attack';
 import { FLBR } from '@system/config';
 import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
 import { enrichTextFields } from '@utils/string-util';
@@ -174,7 +174,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   _onAddItemAction(event) {
     event.preventDefault();
-    const itemAction = new Action(null, {
+    const itemAction = new ItemAction(null, {
       name: game.i18n.localize('FLBR.ItemNewAction'),
       // item: this,
     });
@@ -193,7 +193,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   _onAddItemAttack(event) {
     event.preventDefault();
-    const itemAttack = new Attack({
+    const itemAttack = new ItemAttack({
       name: game.i18n.localize('FLBR.ItemNewAttack'),
       // item: this,
     });
