@@ -208,7 +208,6 @@ export default class BladeRunnerItem extends Item {
         }),
         `${this.detailedName}: ${game.i18n.localize('FLBR.DIALOG.ChooseAction')}`,
       );
-      console.warn('actionId', actionId);
     }
     else {
       actionId = this.actions[0]?.id;
@@ -284,6 +283,8 @@ export default class BladeRunnerItem extends Item {
       maxPush: this.actor?.maxPush,
     }, {
       damage: attack?.damage,
+      damageType: attack?.damageType,
+      crit: attack?.crit,
       unlimitedPush: this.actor?.flags.bladerunner?.unlimitedPush,
     });
     return roller.render(true);

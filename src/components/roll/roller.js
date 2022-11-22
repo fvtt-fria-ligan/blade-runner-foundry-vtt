@@ -120,6 +120,18 @@ export default class BRRollHandler extends FormApplication {
      */
     this.damage = options.damage ?? this.item?.attacks?.[0]?.damage;
 
+    /**
+     * The type of damage.
+     * @type {number}
+     */
+    this.damageType = options.damageType ?? this.item?.attacks?.[0]?.damageType;
+
+    /**
+     * The crit die
+     * @type {number}
+     */
+    this.crit = options.crit ?? this.item?.attacks?.[0]?.crit;
+
     this.options.sendMessage = options.sendMessage ?? true;
     this.options.unlimitedPush = options.unlimitedPush ?? false;
   }
@@ -329,6 +341,9 @@ export default class BRRollHandler extends FormApplication {
       // isAttack: this.isAttack,
       // consumable: this.options.consumable,
       damage: this.damage,
+      damageType: this.damageType,
+      damageTypeName: FLBR.damageTypes[this.damageType],
+      crit: this.crit,
       isExplosive: this.item?.type === ITEM_TYPES.EXPLOSIVE,
       item: this.item?.name || this.items.map(i => i.name),
       itemId: this.item?.id || this.items.map(i => i.id),

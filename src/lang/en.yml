@@ -258,6 +258,8 @@ FLBR.WEAPON_RANGE.Long: Long
 FLBR.WEAPON_RANGE.Extreme: Extreme
 FLBR.YouAreBroken: You are Broken!
 FLBR.ActorSheet.NotifWrongItemType: Actor {actor} cannot hold {type} items!
+YZUR.CHAT.ROLL.Infos: Infos
+YZUR.CHAT.ROLL.Damage: Base Damage
 YZUR.CHAT.ROLL.Push: Push
 YZUR.CHAT.ROLL.CancelPush: Cancel Push
 YZUR.DIETERMS.D6BladeRunnerDie: D6
@@ -281,7 +283,7 @@ SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Whether to automatically apply d
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatic Armor Roll
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Whether to automatically roll the armor.
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Open First Weapon Attack
-SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Whether to open the collapsible of the first weapon attack when the Item sheet is rendered.
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Whether to open the collapsible of the first weapon attack when the Item sheet is displayed.
 WARNING.ApplyDamageNoNature: 'Apply Push Damage: Actor Nature Not Found!'
 WARNING.ApplyDamageNoCapacityKey: 'Apply Push Damage: Nature-Capacity relation Not Found!'
 WARNING.ApplyDamageNoActorCapacity: 'Apply Push Damage: Actor Capacity Not Found!'
