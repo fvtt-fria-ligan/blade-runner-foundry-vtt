@@ -133,4 +133,5 @@ export const SETTINGS_KEYS = {
   DISPLAYED_MESSAGES: 'messages',
   AUTO_APPLY_DAMAGE: 'autoApplyDamage',
   AUTO_ARMOR_ROLL: 'autoArmorRoll',
+  OPEN_FIRST_WEAPON_ATTACK: 'openFirstWeaponAttack',
 };

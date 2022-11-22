@@ -1,7 +1,7 @@
 import ItemAction from '@components/item-action';
 import ItemAttack from '@components/item-attack';
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
+import { ITEM_TYPES, SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
 import { enrichTextFields } from '@utils/string-util';
 
 /**
@@ -248,9 +248,16 @@ export default class BladeRunnerItemSheet extends ItemSheet {
   _setupAccordions() {
     this.form
       ?.querySelectorAll('.item-attacks-list details')
-      .forEach(el => {
+      .forEach((el, i) => {
         const id = el.dataset.actionId;
-        if (this.collapsibleStates[id]) el.open = true;
+
+        if (i === 0 && game.settings.get(SYSTEM_ID, SETTINGS_KEYS.OPEN_FIRST_WEAPON_ATTACK)) {
+          el.open = true;
+        }
+        else if (this.collapsibleStates[id]) {
+          el.open = true;
+        }
+
         el.querySelector('summary')?.addEventListener('click', () => {
           this.collapsibleStates[id] = !this.collapsibleStates[id];
         });

@@ -34,6 +34,29 @@
 
 		<div class="tab tab-features" data-group="primary" data-tab="features">
 
+			{{#if isOffensive}}
+				<div class="item-attacks boxed-property">
+					<h4>
+						{{localize "FLBR.HEADER.Attacks"}}
+						<a class="btn add-attack" data-tooltip="{{localize "FLBR.ItemAddAttack"}}">
+							{{{@root.config.Icons.buttons.plus}}}
+						</a>
+					</h4>
+{{> systems/blade-runner/templates/item/attacks-partial.hbs}}
+				</div>
+				{{#if (eq item.type "explosive")}}
+					<div class="item-property item-property-blast">
+						<label>{{localize "FLBR.Blast"}} ({{localize "FLBR.D"}}{{system.blast}})</label>
+						{{scoreSelector "system.blast" selected=system.blast}}
+					</div>
+				{{/if}}
+			{{else if (eq item.type "armor")}}
+				<div class="item-property item-property-armor">
+					<label>{{localize "FLBR.ItemArmor"}} ({{localize "FLBR.D"}}{{system.armor}})</label>
+					{{scoreSelector "system.armor" selected=system.armor}}
+				</div>
+			{{/if}}
+
 			{{#if (eq item.type "injury")}}
 				<div class="item-property item-property-category">
 					<label>{{localize "FLBR.InjuryCategory"}}</label>
@@ -74,13 +97,6 @@
 						{{selectOptions config.availabilities selected=system.availability localize=true}}
 					</select>
 				</div>
-
-				{{#if (eq item.type "armor")}}
-					<div class="item-property item-property-armor">
-						<label>{{localize "FLBR.ItemArmor"}} ({{localize "FLBR.D"}}{{system.armor}})</label>
-						{{scoreSelector "system.armor" selected=system.armor}}
-					</div>
-				{{/if}}
 			{{/if}}
 
 			{{#if isConsumable}}
@@ -93,24 +109,6 @@
 			<div class="item-property item-property-special">
 				<input type="text" name="system.special" value="{{system.special}}" maxlength="{{config.itemSpecialInputMaxLength}}" placeholder="{{localize "FLBR.ItemSpecial"}}"/>
 			</div>
-
-			{{#if isOffensive}}
-				{{#if (eq item.type "explosive")}}
-					<div class="item-property item-property-blast">
-						<label>{{localize "FLBR.Blast"}} ({{localize "FLBR.D"}}{{system.blast}})</label>
-						{{scoreSelector "system.blast" selected=system.blast}}
-					</div>
-				{{/if}}
-				<div class="item-attacks boxed-property">
-					<h4>
-						{{localize "FLBR.HEADER.Attacks"}}
-						<a class="btn add-attack" data-tooltip="{{localize "FLBR.ItemAddAttack"}}">
-							{{{@root.config.Icons.buttons.plus}}}
-						</a>
-					</h4>
-{{> systems/blade-runner/templates/item/attacks-partial.hbs}}
-				</div>
-			{{/if}}
 
 			{{#if system.modifiers}}
 				<div class="item-modifiers boxed-property">
