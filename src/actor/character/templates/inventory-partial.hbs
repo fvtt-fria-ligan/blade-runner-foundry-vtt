@@ -8,7 +8,7 @@
 				<img src="{{img}}" data-tooltip="{{name}}"/>
 			</div>
 
-			<div class="details"{{#if isPhysical}} data-tooltip="{{system.description}}"{{/if}}>
+			<div class="details"{{#if isPhysical}} data-tooltip='{{{enrichDocumentName system.description}}}'{{/if}}>
 				<div class="name{{#if (lte system.qty 0)}} empty-item{{/if}}">
 					{{#if system.lethal}}
 						{{{@root.config.Icons.buttons.lethal}}}
@@ -63,7 +63,7 @@
 				{{#if system.description}}
 					{{#unless isPhysical}}
 						<div class="item-detail description">
-							{{{system.description}}}
+							{{{enrichDocumentName system.description}}}
 						</div>
 					{{/unless}}
 				{{else if hasModifier}}
