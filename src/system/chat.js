@@ -122,6 +122,10 @@ export function hideChatActionButtons(html) {
  */
 export function addChatListeners(html) {
   html.on('click', '.roll-button', _onRollAction);
+
+  html.on('click', '.blade-runner-display-manual', () => {
+    game.bladerunner.macros.displayManual();
+  });
 }
 
 /* ------------------------------------------- */

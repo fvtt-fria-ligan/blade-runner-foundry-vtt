@@ -28,6 +28,7 @@ import { registerSystemSettings } from '@system/settings';
 import { enrichTextEditors } from '@system/enricher';
 import { registerDiceSoNice } from './plugins/dice-so-nice';
 import { overrideInlineRollListener } from '@components/roll/inline-roll';
+import { getManual } from '@utils/get-manual';
 import BladeRunnerActor from '@actor/actor-document';
 import BladeRunnerItem from '@item/item-document';
 import displayMessages from '@components/messaging-system';
@@ -70,6 +71,7 @@ Hooks.once('init', async () => {
       rollDice: BRMacro.showRollDialog,
       rollItem: BRMacro.rollItem,
       rollStat: BRMacro.rollStat,
+      displayManual: async () => (await getManual()).sheet.render(true),
     },
   };
 
