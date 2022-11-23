@@ -1,6 +1,6 @@
 {
   "name": "blade-runner-foundry-vtt",
-  "version": "0.6.0",
+  "version": "10.0.0",
   "type": "module",
   "description": "Foundry VTT game System for Fria Ligan's Blade Runner RPG",
   "repository": {
@@ -68,7 +68,7 @@
     "gulp": "^4.0.2",
     "gulp-yaml": "2.0.4",
     "husky": "^8.0.2",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.0",
     "prettier-eslint-cli": "^7.1.0",
     "semver": "^7.3.8",
     "standard-version": "^9.3.2"
