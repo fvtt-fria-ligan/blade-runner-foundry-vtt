@@ -40,11 +40,17 @@ jobs:
           prop_path: id
 
       # Gets the version tag.
-      - name: 🏷️ Get Version Tag
+      - name: 📄 Get Version
         id: version
-        uses: ncipollo/semantic-version-action@v1.0.1
+        uses: notiz-dev/github-action-json-property@release
         with:
-          tag: ${{ github.event.release.tag_name }}
+          path: dist/${{ env.TYPE }}.json
+          prop_path: version
+      # - name: 🏷️ Get Version Tag
+      #   id: version
+      #   uses: ncipollo/semantic-version-action@v1.0.1
+      #   with:
+      #     tag: ${{ github.event.release.tag_name }}
 
       # Substitute the Manifest and Download URLs in the module.json
       - name: 📝 Substitute Manifest and Download Links For Versioned Ones
@@ -53,9 +59,9 @@ jobs:
         with:
           files: dist/${{ env.TYPE }}.json
         env:
-          version: ${{ steps.version.outputs.tag }}
+          # version: ${{ steps.version.outputs.prop }}
           manifest: https://github.com/${{ github.repository }}/releases/latest/download/${{ env.TYPE }}.json
-          download: https://github.com/${{ github.repository }}/releases/download/${{ steps.version.outputs.tag }}/${{ steps.name.outputs.prop }}.zip
+          download: https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/${{ steps.name.outputs.prop }}-fvtt_v${{ steps.version.outputs.prop }}.zip
 
       # Generates the changelog.
       # - name: 📜 Generate Changelog
@@ -68,7 +74,7 @@ jobs:
       - name: 📦 Create ZIP Archive
         run: |
           cd dist/
-          zip -r ../${{ steps.name.outputs.prop }}_${{ steps.version.outputs.tag }}.zip *
+          zip -r ../${{ steps.name.outputs.prop }}-fvtt_v${{ steps.version.outputs.prop }}.zip *
 
       # Creates the release with its artifacts and description.
       - name: 🚀 Update Release with Artifacts
@@ -80,23 +86,8 @@ jobs:
           prerelease: false
           tag: ${{ steps.version.outputs.tag }}
           body: ${{ github.event.release.body }}
-          artifacts: './dist/${{ env.TYPE }}.json, ${{ steps.name.outputs.prop }}.zip'
+          artifacts: './${{ steps.name.outputs.prop }}-fvtt_v${{ steps.version.outputs.prop }}.zip, ./dist/${{ env.TYPE }}.json'
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      # Update the 'latest' release
-      # - name: 🚀 Create Release
-      #   id: create_latest_release
-      #   uses: ncipollo/release-action@v1.10.0
-      #   if: endsWith(github.ref, 'main')
-      #   with:
-      #     allowUpdates: true
-      #     name: Latest
-      #     draft: false
-      #     prerelease: false
-      #     tag: latest
-      #     body: ${{ github.event.release.body }}
-      #     artifacts: './dist/${{ env.TYPE }}.json, ${{ steps.name.outputs.prop }}.zip'
-      #     token: ${{ secrets.GITHUB_TOKEN }}
 
       # Publishes the release to the FoundryVTT's package repository.
       # - name: 🚩 Publish Module to FoundryVTT Website
