@@ -6,27 +6,9 @@
 	{{/if}}
 	{{#if showProperties}}
 		<div class="details boxed-property">
-			{{#if (or (eq type "weapon") (eq type "explosive"))}}
-				{{#if (eq type "explosive")}}
-					<div>{{localize "FLBR.BlastPower"}}</div>
-					<div>2x{{localize "FLBR.D"}}{{system.blast}}</div>
-				{{/if}}
-				<div>{{localize "FLBR.WeaponDamage"}}</div>
-				<div>
-					{{system.damage}}&numsp;
-					<small>({{localize (lookup config.damageTypes system.damageType)}})</small>
-				</div>
-				<div>{{localize "FLBR.WeaponCrit"}}</div>
-				<div>{{localize "FLBR.D"}}{{system.crit}}</div>
-				<div>{{localize "FLBR.WeaponRange"}}</div>
-				<div>
-					{{#if (eq system.range.min system.range.max)}}
-						{{localize (lookup config.ranges system.range.min)}}
-					{{else}}
-						{{localize (lookup config.ranges system.range.min)}} –
-						{{localize (lookup config.ranges system.range.max)}}
-					{{/if}}
-				</div>
+			{{#if (eq type "explosive")}}
+				<div>{{localize "FLBR.BlastPower"}}</div>
+				<div>2x{{localize "FLBR.D"}}{{system.blast}}</div>
 			{{else if (eq type "armor")}}
 				<div>{{localize "FLBR.ItemArmor"}}</div>
 				<div>{{localize "FLBR.D"}}{{system.armor}}</div>
@@ -35,10 +17,38 @@
 				<div class="modifiers">{{localize "FLBR.ItemModifier"}}</div>
 				<div class="modifiers">{{modifiersDescription}}</div>
 			{{/if}}
+			{{#if system.consumable}}
+				<div class="grid-column-all">{{localize "FLBR.ItemConsumable"}}</div>
+			{{/if}}
 			{{#if system.special}}
 				<div class="grid-column-all special">{{system.special}}</div>
 			{{/if}}
 		</div>
+		{{#if hasAttack}}
+			{{#each system.attacks as | atk |}}
+				<fieldset class="item-attack">
+					<legend>{{atk.name}}</legend>
+					<div class="details">
+						<div>{{localize "FLBR.WeaponDamage"}}</div>
+						<div>
+							{{atk.damage}}&numsp;
+							<small>({{localize (lookup @root.config.damageTypes atk.damageType)}})</small>
+						</div>
+						<div>{{localize "FLBR.WeaponCrit"}}</div>
+						<div>{{localize "FLBR.D"}}{{atk.crit}}</div>
+						<div>{{localize "FLBR.WeaponRange"}}</div>
+						<div>
+							{{#if (eq atk.range.min atk.range.max)}}
+								{{localize (lookup @root.config.ranges atk.range.min)}}
+							{{else}}
+								{{localize (lookup @root.config.ranges atk.range.min)}} –
+								{{localize (lookup @root.config.ranges atk.range.max)}}
+							{{/if}}
+						</div>
+					</div>
+				</fieldset>
+			{{/each}}
+		{{/if}}
 	{{/if}}
 	{{!-- <hr/> --}}
 	<div class="photo center">

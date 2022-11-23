@@ -1,6 +1,9 @@
 <div
 	class="yzur chat-card"
 	data-actor-id="{{roll.options.actorId}}"
+	{{#if roll.options.itemId}}
+		data-item-id="{{roll.options.itemId}}"
+	{{/if}}
 	{{#if roll.options.damage}}
 		data-damage="{{roll.options.damage}}"
 	{{/if}}

@@ -17,7 +17,7 @@
  */
 
 import { FLBR } from '@system/config';
-import { ACTOR_SUBTYPES, ACTOR_TYPES, CAPACITIES, SYSTEM_ID } from '@system/constants';
+import { ACTOR_TYPES } from '@system/constants';
 import * as YZUR from 'yzur';
 import * as Chat from '@system/chat';
 import * as BRMacro from '@system/macros';
@@ -195,3 +195,32 @@ Hooks.on('chatMessage', async (_chatlog, content, _chatData) => {
     return true;
   }
 });
+
+// async function fixNumbers() {
+//   const items = [];
+//   game.items.contents.forEach(i => items.push(i));
+//   game.actors.contents.forEach(a => items.push(...a.items));
+//   console.warn(items);
+//   for (const item of items) {
+//     const updateData = {};
+//     const sys = item.system;
+//     if (sys.availability != undefined) {
+//       updateData['system.availability'] = +sys.availability;
+//     }
+//     if (sys.blast != undefined) {
+//       updateData['system.blast'] = +sys.blast;
+//     }
+//     if (item.isOffensive) {
+//       for (const atk of item.attacks) {
+//         updateData[`system.attacks.${atk.id}.damageType`] = +sys.attacks[atk.id].damageType;
+//         updateData[`system.attacks.${atk.id}.crit`] = +sys.attacks[atk.id].crit;
+//         updateData[`system.attacks.${atk.id}.range.min`] = +sys.attacks[atk.id].range.min;
+//         updateData[`system.attacks.${atk.id}.range.max`] = +sys.attacks[atk.id].range.max;
+//       }
+//     }
+//     if (!foundry.utils.isEmpty(updateData)) {
+//       console.warn('Updating item', item.name, 'with data', updateData);
+//       await item.update(updateData);
+//     }
+//   }
+// }

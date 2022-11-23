@@ -1,0 +1,45 @@
+<div class="item-attacks-list">
+	{{#each system.attacks as | atk |}}
+		<details class="item-attack" data-attack-id="{{@key}}"{{#if (lookup @root.collapsibleStates @key)}} open{{/if}}>
+			<summary>{{atk.name}}&nbsp;
+				<a class="delete-attack" data-attack-id="{{@key}}" data-tooltip="{{localize 'FLBR.ItemDeleteAttack'}}">
+					{{{@root.config.Icons.buttons.delete}}}
+				</a>
+			</summary>
+			<span class="content">
+				<div class="form-group item-attack-name">
+					<label>{{localize "FLBR.ItemAttackName"}}</label>
+					<input type="text" name="system.attacks.{{@key}}.name" value="{{atk.name}}"/>
+				</div>
+				<div class="form-group item-attack-damage">
+					<label>{{localize "FLBR.WeaponDamage"}}</label>
+					<input type="text" name="system.attacks.{{@key}}.damage" value="{{atk.damage}}" data-dtype="Number"/>
+				</div>
+				<div class="form-group item-attack-crit">
+					<label>{{localize "FLBR.WeaponCrit"}} ({{localize "FLBR.D"}}{{atk.crit}})</label>
+					{{scoreSelector (concat "system.attacks." @key ".crit") selected=atk.crit}}
+				</div>
+				<div class="form-group item-attack-damage-type">
+					<label>{{localize "FLBR.WeaponDamageType"}}</label>
+					<select name="system.attacks.{{@key}}.damageType" data-dtype="Number">
+						{{selectOptions @root.config.damageTypes selected=atk.damageType localize=true}}
+					</select>
+				</div>
+				<div class="form-group item-attack-range">
+					<label>{{localize "FLBR.WeaponRange"}}</label>
+					<div class="ranges-min-max flex row">
+						<select name="system.attacks.{{@key}}.range.min" data-dtype="Number">
+							{{selectOptions @root.config.ranges selected=atk.range.min localize=true}}
+						</select>
+						<select name="system.attacks.{{@key}}.range.max" data-dtype="Number" style="margin-left: 4px;">
+							{{selectOptions @root.config.ranges selected=atk.range.max localize=true}}
+						</select>
+					</div>
+				</div>
+			</span>
+			<hr/>
+		</details>
+	{{else}}
+		<div class="item-modifier empty">{{localize "FLBR.ItemNoAttack"}}</div>
+	{{/each}}
+</div>

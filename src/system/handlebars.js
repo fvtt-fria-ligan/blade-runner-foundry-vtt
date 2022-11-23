@@ -96,6 +96,23 @@ function registerHandlebarsHelpers() {
     return (a / b) * 100;
   });
 
+  Handlebars.registerHelper('enrichText', function (text) {
+    // Enriches content.
+    text = TextEditor.enrichHTML(text, { documents: true, async: false });
+    return new Handlebars.SafeString(text);
+  });
+
+  Handlebars.registerHelper('enrichDocumentName', function (text) {
+    const rgx = /@UUID\[(.+?)\](?:{(.+?)})?/gm;
+    text = text.replace(rgx, (_match, p1, p2) => {
+      // eslint-disable-next-line no-undef
+      const title = p2 ?? fromUuidSync(p1)?.name ?? '{undefined}';
+      return `<b>${title}</b>`;
+    });
+    text = TextEditor.enrichHTML(text, { documents: true, async: false });
+    return new Handlebars.SafeString(text);
+  });
+
   /**
    * Templates for a die Score selector.
    * Parameters:
@@ -111,7 +128,7 @@ function registerHandlebarsHelpers() {
       selectOptions.push(opt);
     }
     return new Handlebars.SafeString(
-      `<select name="${target}" class="score-selector">
+      `<select name="${target}" class="score-selector" data-dtype="Number">
       ${selectOptions.join('\n')}
       </select>`,
     );

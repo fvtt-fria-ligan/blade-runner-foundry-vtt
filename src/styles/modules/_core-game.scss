@@ -376,19 +376,19 @@ $pad: 25px;
       @include flbr-tab-heading();
     }
 
-    div {
-      color: var(--color-white);
-      min-height: 200px;
-      min-height: 300px;
-      @include flbr-box();
-    }
-
-    a.content-link {
+    h3 a.content-link {
       border-bottom: none;
       i {
         margin-right: 0;
         margin-bottom: .25em;
       }
+    }
+
+    div {
+      color: var(--color-white);
+      min-height: 200px;
+      min-height: 300px;
+      @include flbr-box();
     }
     
     &.handout {

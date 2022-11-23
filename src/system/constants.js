@@ -64,11 +64,11 @@ export const ARCHETYPES = {
 
 /** @enum {string} */
 export const RANGES = {
-  ENGAGED: 'engaged',
-  SHORT: 'short',
-  MEDIUM: 'medium',
-  LONG: 'long',
-  EXTREME: 'extreme',
+  ENGAGED: 0,
+  SHORT: 1,
+  MEDIUM: 2,
+  LONG: 3,
+  EXTREME: 4,
 };
 
 /** @enum {string} */
@@ -133,4 +133,5 @@ export const SETTINGS_KEYS = {
   DISPLAYED_MESSAGES: 'messages',
   AUTO_APPLY_DAMAGE: 'autoApplyDamage',
   AUTO_ARMOR_ROLL: 'autoArmorRoll',
+  OPEN_FIRST_WEAPON_ATTACK: 'openFirstWeaponAttack',
 };

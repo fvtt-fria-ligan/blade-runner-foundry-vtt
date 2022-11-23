@@ -138,7 +138,7 @@ a.entity-link {
     font-family: var(--font-editor);
     margin-top: $gap;
     padding: $gap;
-    p {
+    p, li {
       color: var(--color-black);
       font-size: var(--font-size--default);
     }

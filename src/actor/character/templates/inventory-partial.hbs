@@ -4,71 +4,87 @@
 <div class="embedded-items flex {{#if wrap}}row wrap{{else}}column{{/if}}">
 	{{#each items}}
 		<div class="embedded-item flex row {{type}}" data-item-id="{{id}}">
-			<div class="photo{{#if system.rollable}} item-roll rollable{{/if}}">
+			<div class="photo{{#if hasAction}} item-roll rollable{{/if}}">
 				<img src="{{img}}" data-tooltip="{{name}}"/>
 			</div>
-			<div class="details">
-				<div class="{{!-- item-detail --}} name">
+
+			<div class="details"{{#if isPhysical}} data-tooltip='{{{enrichDocumentName system.description}}}'{{/if}}>
+				<div class="name{{#if (lte system.qty 0)}} empty-item{{/if}}">
 					{{#if system.lethal}}
 						{{{@root.config.Icons.buttons.lethal}}}
 					{{/if}}
 					{{detailedName}}
 				</div>
-				{{#if (or (eq type "specialty") (eq type "upgrade") (eq type "injury") (eq type "generic"))}}
-					{{#if system.description}}
-						<div class="item-detail description">{{trim system.description 100}}</div>
-					{{else}}
-						{{#if hasModifier}}
-							<div class="item-detail modifiers-description">{{modifiersDescription}}</div>
-						{{/if}}
-						{{#if system.special}}
-							<div class="item-detail special">{{system.special}}</div>
-						{{/if}}
-					{{/if}}
-				{{else}} {{!-- Otherwise, it's an armor or weapon --}}
-					{{#with system}}
-						{{#if damage includeZero=true}}
-							<div class="item-detail damage">
-								{{#if blast}}
-									{{localize "FLBR.Blast"}}&numsp;{{localize "FLBR.D"}}{{blast}}
+
+				{{#if system.special}}
+					<div class="item-detail special">{{system.special}}</div>
+				{{/if}}
+
+				{{!-- Weapons & Explosives --}}
+				{{#if isOffensive}}
+					{{#if (eq type "explosive")}}
+						<div class="item-detail explosive">
+							{{localize "FLBR.Blast"}}&nbsp;{{localize "FLBR.D"}}{{system.blast}}
+						</div>
+					{{else if hasAttack}}
+						<div class="item-detail damage">
+						{{#each system.attacks}}
+							<div>
+								{{#if (eq damageType 1)}}
+									{{{@root.config.Icons.buttons.crush}}}{{damage}}
+								{{else if (eq damageType 2)}}
+									{{{@root.config.Icons.buttons.pierce}}}{{damage}}
+								{{else if (eq damageType 3)}}
+									{{{@root.config.Icons.buttons.stress}}}{{damage}}
 								{{else}}
-									{{localize "FLBR.WeaponDamage"}}&numsp;{{damage}}, {{localize "FLBR.Crit"}}&numsp;{{localize "FLBR.D"}}{{crit}}
+									{{damage}}
 								{{/if}}
 							</div>
-							{{#if range.max includeZero=true}}
-								<div class="item-detail range">
-									{{localize "FLBR.WeaponRangeMaxRange" range=(localize (lookup @root.config.ranges range.max))}}
-								</div>
-							{{/if}}
-						{{else if armor includeZero=true}}
-							<div class="item-detail armor">
-								{{localize "ITEM.TypeArmor"}}&numsp;{{localize "FLBR.D"}}{{armor}}
+							<div>
+								{{#unless (eq crit 0)}}
+									{{{@root.config.Icons.buttons.crit}}}{{localize "FLBR.D"}}{{crit}}
+								{{/unless}}
 							</div>
-						{{else}}
-							<div class="item-detail description">
-								{{{availability}}}
+							<div>
+								{{#if (gt range.max 0)}}
+									{{{@root.config.Icons.buttons.range}}}{{localize (lookup @root.config.ranges range.max)}}
+								{{/if}}
 							</div>
-						{{/if}}
-						{{#if special}}
-							<div class="item-detail special">{{special}}</div>
-						{{/if}}
-					{{/with}}
+						{{/each}}
+						</div>
+					{{/if}}
+				{{!-- Armors --}}
+				{{else if system.armor includeZero=true}}
+					<div class="item-detail armor">
+						{{localize "ITEM.TypeArmor"}}&nbsp;{{localize "FLBR.D"}}{{system.armor}}
+					</div>
+				{{/if}}
+
+				{{#if system.description}}
+					{{#unless isPhysical}}
+						<div class="item-detail description">
+							{{{enrichDocumentName system.description}}}
+						</div>
+					{{/unless}}
+				{{else if hasModifier}}
+					<div class="item-detail modifiers-description">{{modifiersDescription}}</div>
 				{{/if}}
 			</div>
 
 			<div class="item-controls">
 				{{#if system.blast}}
 					<a class="btn blast-roll" data-tooltip="{{localize "FLBR.SHEET_HEADER.BlastPowerRoll"}}">
-						{{{@root.config.Icons.buttons.boom}}}
+						{{{@root.config.Icons.buttons.bomb}}}
 					</a>
 				{{/if}}
-				{{#if system.rollable}}
+				{{#if (eq type "armor")}}
+					<a class="btn item-roll" data-tooltip="{{localize "FLBR.SHEET_HEADER.ArmorRoll"}}">
+						{{{@root.config.Icons.buttons.armor}}}
+					</a>
+				{{/if}}
+				{{#if hasAction}}
 					<a class="btn item-roll" data-tooltip="{{localize "FLBR.BUTTON.Roll"}}">
-						{{#if (eq type "armor")}}
-							{{{@root.config.Icons.buttons.armor}}}
-						{{else}}
-							{{{@root.config.Icons.buttons.roll}}}
-						{{/if}}
+						{{{@root.config.Icons.buttons.roll}}}
 					</a>
 				{{/if}}
 				<a class="btn item-edit" data-tooltip="{{localize "FLBR.BUTTON.Edit"}}">

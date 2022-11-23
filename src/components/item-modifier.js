@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 /**
  * A class representing a roll modifier with many properties and automatic label.
- * @class
  */
 export default class Modifier {
   /**
@@ -183,6 +182,10 @@ export default class Modifier {
       new Modifier(`${category}.targetBehindCover`, -1, {}, {
         active: false,
         name: game.i18n.localize('FLBR.RANGED_COMBAT.TargetBehindCover'),
+      }),
+      new Modifier(`${category}.carefulAim`, 1, {}, {
+        active: false,
+        name: game.i18n.localize('FLBR.RANGED_COMBAT.CarefulAim'),
       }),
       new Modifier(`${category}.unseenTarget`, -1, {}, {
         active: false,

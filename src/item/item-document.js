@@ -1,7 +1,10 @@
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
-import Modifier from '@components/modifier';
+import { ITEM_TYPES, RANGES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
+import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
+import BladeRunnerDialog from '@components/dialog/dialog';
+import ItemAction from '@components/item-action';
+import ItemAttack from '@components/item-attack';
 
 export default class BladeRunnerItem extends Item {
 
@@ -17,21 +20,35 @@ export default class BladeRunnerItem extends Item {
     return FLBR.physicalItems.includes(this.type);
   }
 
-  get damage() {
-    return this.system.damage;
+  get isConsumable() {
+    return typeof this.system.consumable !== 'undefined';
   }
 
   get isOffensive() {
-    return typeof this.damage !== 'undefined';
+    return !!this.system.attacks;
+  }
+
+  get melee() {
+    if (!this.isOffensive) return false;
+    const atk = this.attacks[0] || {};
+    return atk.min === atk.max === RANGES.ENGAGED;
+  }
+
+  get rollable() {
+    return !!this.system.actions;
+  }
+
+  get hasAttack() {
+    return this.isOffensive && this.attacks.length > 0;
+  }
+
+  get hasAction() {
+    return this.rollable && this.actions.length > 0;
   }
 
   get hasModifier() {
     if (!this.system.modifiers) return false;
     return !foundry.utils.isEmpty(this.system.modifiers);
-  }
-
-  get rollable() {
-    return !!(this.system.rollable ?? false);
   }
 
   /** 
@@ -77,6 +94,33 @@ export default class BladeRunnerItem extends Item {
 
   /* ------------------------------------------- */
 
+  /** @override */
+  prepareDerivedData() {
+    // Prepares actions.
+    if (this.system.actions) {
+      const itemActions = [];
+      // eslint-disable-next-line no-shadow
+      for (const [id, { type, name }] of Object.entries(this.system.actions)) {
+        itemActions.push({ id, type, name });
+      }
+      this.actions = itemActions;
+    }
+
+    // Prepares attacks.
+    if (this.type === ITEM_TYPES.WEAPON || this.type === ITEM_TYPES.EXPLOSIVE) {
+      const itemAttacks = [];
+      for (const atk in this.system.attacks) {
+        itemAttacks.push({
+          id: atk,
+          name: this.system.attacks[atk].name,
+        });
+      }
+      this.attacks = itemAttacks;
+    }
+  }
+
+  /* ------------------------------------------- */
+
   /**
    * Gets an array of modifiers in this item.
    * @param {Object}         [options]           Additional options to filter the returned array of modifiers
@@ -89,15 +133,62 @@ export default class BladeRunnerItem extends Item {
     return mods ?? [];
   }
 
+  /* ------------------------------------------- */
+
+  /**
+   * Consumes 1 unit of the item's quantity.
+   * @param {number} [qty=1] Quantity to consume
+   */
+  consumeUnit(qty = 1) {
+    return this.modifyNumberedProperty('qty', -qty);
+  }
+
+  /* ------------------------------------------- */
+
+  /**
+   * Modifies a numbered property in the item.
+   * @param {string}  key  Name of the property in `system` to change
+   * @param {number}  mod  Modifier
+   * @param {number} [min=0]        Minimum allowed
+   * @param {number} [max=Infinity] Maximum allowed
+   * @returns {Promise.<number>} The difference
+   */
+  async modifyNumberedProperty(key, mod, min = 0, max = Infinity) {
+    const currentValue = +foundry.utils.getProperty(this.system, key);
+    if (typeof currentValue !== 'number') return;
+    const newValue = Math.clamped(currentValue + mod, min, max);
+    await this.update({ [`system.${key}`]: newValue });
+    return newValue - currentValue;
+  }
+
   /* ------------------------------------------ */
   /*  Utility Functions                         */
   /* ------------------------------------------ */
 
   /**
    * Rolls the item.
-   * @returns {BRRollHandler} Rendered RollHandler FormApplication
+   * @returns {Promise.<BRRollHandler>} Rendered RollHandler FormApplication
    */
-  roll() {
+  async roll() {
+    // Quantity consumption.
+    if (this.system.consumable) {
+      if (this.qty <= 0) {
+        ui.notifications.error(
+          game.i18n.format('WARNING.NoItemUnit', {
+            name: this.name,
+          }),
+        );
+        return;
+      }
+      const consumed = -await this.consumeUnit();
+      ui.notifications.info(
+        game.i18n.format('FLBR.ItemConsumeNotif', {
+          name: this.name,
+          qty: consumed,
+        }),
+      );
+    }
+
     switch (this.type) {
       case ITEM_TYPES.ARMOR: return this._rollArmor();
       // ! Not this one below ↓
@@ -106,11 +197,67 @@ export default class BladeRunnerItem extends Item {
 
     if (!this.rollable) return;
 
-    const attributeKey = this.system.attribute;
-    const skillKey = this.system.skill;
+    // Gets the action.
+    let actionId;
+    if (this.actions.length > 1) {
+      actionId = await BladeRunnerDialog.choose(
+        this.actions.map(a => {
+          const actData = this.system.actions[a.id];
+          const itemAction = new ItemAction(actData.type, actData);
+          return [a.id, itemAction.title];
+        }),
+        `${this.detailedName}: ${game.i18n.localize('FLBR.DIALOG.ChooseAction')}`,
+      );
+    }
+    else {
+      actionId = this.actions[0]?.id;
+    }
+    const action = this.system.actions[actionId];
+
+    if (!action) {
+      ui.notifications.warn('WARNING.NoItemAction', { localize: true });
+      return;
+    }
+
+    if (action.type === ItemAction.Types.RUN_MACRO) {
+      let macro = game.macros.get(action.macro);
+      if (!macro) macro = game.macros.getName(action.macro);
+      if (!macro) {
+        ui.notifications.warn(
+          game.i18n.format('WARNING.ItemActionMacroNotFound', {
+            macro: action.macro,
+          }),
+        );
+        return;
+      }
+      return macro.execute();
+    }
+
+    // Gets the attack.
+    let attack;
+    if (this.isOffensive) {
+      let attackId;
+      if (this.attacks.length > 1) {
+        attackId = await BladeRunnerDialog.choose(
+          this.attacks.map(a => {
+            const atk = new ItemAttack(this.system.attacks[a.id]);
+            return [a.id, atk.title];
+          }),
+          `${this.detailedName}: ${game.i18n.localize('FLBR.DIALOG.ChooseAttack')}`,
+        );
+      }
+      else {
+        attackId = this.attacks[0]?.id;
+      }
+      attack = this.system.attacks[attackId];
+    }
+
+    const attributeKey = action.attribute;
+    const skillKey = action.skill;
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`) : null;
-    const title = `${this.detailedName} (${attributeName}${skillKey ? ` & ${skillName}` : ''})`;
+    const title = `${this.detailedName} (${attributeName}${skillKey ? ` & ${skillName}` : ''})`
+      + (attack ? ` - ${attack.name}` : '');
     const attributeValue = this.actor?.getAttribute(attributeKey);
     const skillValue = this.actor?.getSkill(skillKey);
 
@@ -135,6 +282,9 @@ export default class BladeRunnerItem extends Item {
       modifiers,
       maxPush: this.actor?.maxPush,
     }, {
+      damage: attack?.damage,
+      damageType: attack?.damageType,
+      crit: attack?.crit,
       unlimitedPush: this.actor?.flags.bladerunner?.unlimitedPush,
     });
     return roller.render(true);
@@ -181,16 +331,18 @@ export default class BladeRunnerItem extends Item {
    *   or the Object of prepared chatData otherwise.
    * @async
    */
-  async toMessage(messageData = {}, { rollMode = null, create = true } = {}) {
+  async toMessage(messageData = {}, { rollMode, create = true } = {}) {
     // Renders the template with item data.
     const content = await renderTemplate(this.constructor.CHAT_TEMPLATE, {
       name: this.name,
       img: this.img,
       type: this.type,
-      system: this.system,
+      system: foundry.utils.duplicate(this.system),
       link: this.link,
       inActor: !!this.actor,
       showProperties: (this.type !== ITEM_TYPES.GENERIC || this.hasModifier),
+      isOffensive: this.isOffensive,
+      hasAttack: this.hasAttack,
       hasModifier: this.hasModifier,
       modifiersDescription: this.modifiersDescription,
       config: CONFIG.BLADE_RUNNER,
@@ -210,10 +362,10 @@ export default class BladeRunnerItem extends Item {
 
     // Gets the default roll mode if undef.
     if (rollMode == undefined) rollMode = game.settings.get('core', 'rollMode');
+    if (rollMode) msg.applyRollMode(rollMode);
 
     // Sends the messages or returns its data.
-    if (create) return cls.create(msg, { rollMode });
-    if (rollMode) msg.applyRollMode(rollMode);
+    if (create) return cls.create(msg);
 
     return msg.toObject();
   }

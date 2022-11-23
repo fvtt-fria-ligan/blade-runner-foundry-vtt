@@ -39,6 +39,51 @@ FLBR.COMBAT_ACTION.ThrowWeapon: Throw Weapon
 FLBR.COMBAT_ACTION.FirstAid: First Aid
 FLBR.COMBAT_ACTION.Manipulate: Manipulate
 FLBR.COMBAT_ACTION.UseItem: Use Item
+FLBR.COMBAT_ACTION_HINT.Sprint: >-
+  You can make additional moves (as
+  described above) in a single Round by using the sprint
+  action. This will then count as your action for the Round,
+  meaning you can perform no other action.
+  Roll <span class="smallcaps">MOBILITY</span> –
+  for each <span class="blade-runner-symbols">S</span> rolled,
+  you can make one more move, in addition to your free move.
+  If you fail the roll, you fall (before the second move)
+  and cannot get up until your next turn.
+FLBR.COMBAT_ACTION_HINT.Crawl: >-
+  If you need to move while being prone, you must crawl.
+  This works like a move but counts as your action for the Round.
+  You can get up at the end of your crawl (free action).
+FLBR.COMBAT_ACTION_HINT.UnarmedAttack: Strength + Close Combat
+FLBR.COMBAT_ACTION_HINT.MeleeAttack: Strength + Close Combat
+FLBR.COMBAT_ACTION_HINT.Grapple: >-
+  If you grapple your opponent as a special attack 
+  in close combat, both you and your opponent fall
+  to the ground. The opponent drops any weapon
+  they were holding and cannot move. The only
+  action they can perform is an attempt to break
+  free – which is an action that succeeds if the
+  opponent wins an opposed
+  <span class="smallcaps">CLOSE COMBAT</span> roll against
+  you. While you are grappling, the only action you
+  can perform (until you release your opponent) is
+  a grapple attack. This works as a normal unarmed
+  attack, but your target counts as restrained and
+  thus cannot defend themselves.
+FLBR.COMBAT_ACTION_HINT.BreakFree: Strength + Hand-to-hand Combat
+FLBR.COMBAT_ACTION_HINT.ShootFirearm: Agility + Firearms
+FLBR.COMBAT_ACTION_HINT.CarefulAim: >-
+  If you take your time to aim carefully
+  before squeezing the trigger, you get an advantage to your
+  attack roll. Aiming, however, is an action in itself. You
+  cannot aim carefully and fire in the same Round. If you
+  do anything else except shoot your weapon after you have
+  aimed, or if you are hit by an attack, you lose the effect
+  of the aim and you need to spend another action to aim
+  carefully again.
+FLBR.COMBAT_ACTION_HINT.ThrowWeapon: Agility + Firearms
+FLBR.COMBAT_ACTION_HINT.FirstAid: Intelligence + Medical Aid
+FLBR.COMBAT_ACTION_HINT.Manipulate: Empathy + Manipulation
+FLBR.COMBAT_ACTION_HINT.UseItem: Use Item
 FLBR.BUTTON.Delete: Delete item
 FLBR.BUTTON.Edit: Edit item
 FLBR.BUTTON.Roll: Roll item
@@ -46,9 +91,12 @@ FLBR.BUTTON.ToChat: Send item to chat
 FLBR.CHAT_ACTION.ApplyDamage: Apply damage to targeted tokens
 FLBR.DIALOG.AssignSuccesses: Assign Success(es)
 FLBR.DIALOG.AssignSuccessesHint: Choose a number of successes to spent against {name}.
+FLBR.DIALOG.ChooseAction: Choose Action
+FLBR.DIALOG.ChooseAttack: Choose Attack
 FLBR.HEADER.Actions: Actions
 FLBR.HEADER.Appearance: Appearance
 FLBR.HEADER.Armor: Armor
+FLBR.HEADER.Attacks: Attack Modes
 FLBR.HEADER.AttributesAndSkills: Attributes & Skills
 FLBR.HEADER.Augments: Augments
 FLBR.HEADER.ChinyenPoints: Chinyen Points
@@ -72,8 +120,9 @@ FLBR.HEADER.YearsOnTheForce: Years On The Force
 FLBR.HEADER.Weapons: Weapons
 FLBR.SHEET_CONFIG.CharacterSubtype: Subtype
 FLBR.SHEET_CONFIG.CharacterSubtypeHint: >-
-  Select whether this is a PC or NPC. The later provides a pared down character
-  sheet and added functionality for the GM to more easily run NPCs.
+  Select whether this is a PC or NPC.
+  The later provides a pared down character sheet and
+  added functionality for the GM to more easily run NPCs.
 FLBR.SHEET_CONFIG.HealthMaxModifier: Health max. modifier
 FLBR.SHEET_CONFIG.HealthMaxModifierHint: Modify the health capacity maximum (GM Only).
 FLBR.SHEET_CONFIG.HealthPermanentLoss: Health permanent loss
@@ -84,23 +133,24 @@ FLBR.SHEET_CONFIG.ResolvePermanentLoss: Resolve permanent loss
 FLBR.SHEET_CONFIG.ResolvePermanentLossHint: Set how much resolve is permanently lost (GM Only).
 FLBR.SHEET_CONFIG.Maneuverability: Vehicle Maneuverability
 FLBR.SHEET_CONFIG.ManeuverabilityHint: >-
-  Set the maneuverability of the vehicle driven by this character, if applicable.
+  Set the maneuverability of the vehicle driven
+  by this character, if applicable.
 FLBR.SHEET_CONFIG.UnlimitedPush: Allow Unlimited Pushed Rolls
 FLBR.SHEET_CONFIG.UnlimitedPushHint: >-
-  If your GM allows an unlimited number of pushed rolls. Check this setting to
-  display a push button on almost any roll.
+  If your GM allows an unlimited number of pushed rolls.
+  Check this setting to display a push button on almost any roll.
 FLBR.SHEET_HEADER.ArmorRoll: Roll Armor
 FLBR.SHEET_HEADER.BlastPowerRoll: Roll Blast Power
 FLBR.SHEET_HEADER.GenericRoll: Generic Roll
 FLBR.SHEET_HEADER.ItemPost: Post Item
 FLBR.SHEET_HEADER.ItemRoll: Roll Item
+FLBR.TAB.Actions: Actions
 FLBR.TAB.Bio: Biography
 FLBR.TAB.Combat: Combat
 FLBR.TAB.Info: Info
 FLBR.TAB.Inventory: Inventory
 FLBR.TAB.Features: Features
 FLBR.TAB.Mods: Mods
-FLBR.TAB.Roll: Roll
 FLBR.TAB.Stats: Stats
 FLBR.D: D
 FLBR.NO_VALUE: –
@@ -126,21 +176,36 @@ FLBR.InjuryHealing: Healing
 FLBR.InjuryLethal: Lethal
 FLBR.InjuryPermanent: Permanent
 FLBR.InventoryNoItem: Empty.
+FLBR.ItemAddAction: Add Action
+FLBR.ItemAddAttack: Add Attack
 FLBR.ItemAddModifier: Add a roll Modifier
+FLBR.ItemActionAttribute: Attribute
+FLBR.ItemActionName: Action name
+FLBR.ItemActionSkill: Skill
+FLBR.ItemActionType: Action type
+FLBR.ItemActionTypeRollSkill: Roll skill
+FLBR.ItemActionTypeRunMacro: Run macro
+FLBR.ItemAttackName: Attack Name
 FLBR.ItemArmor: Armor
-FLBR.ItemAttribute: Attribute
 FLBR.ITEM_AVAILABILITY.Incidental: Incidental
 FLBR.ITEM_AVAILABILITY.Luxury: Luxury
 FLBR.ITEM_AVAILABILITY.Premium: Premium
 FLBR.ITEM_AVAILABILITY.Rare: Rare
 FLBR.ITEM_AVAILABILITY.Standard: Standard
 FLBR.ItemAvailability: Availability
+FLBR.ItemConsumable: Consumable
+FLBR.ItemConsumeNotif: Consumed {qty} unit of {name}
 FLBR.ItemCost: Cost
+FLBR.ItemDeleteAction: Remove action
+FLBR.ItemDeleteAttack: Remove attack
+FLBR.ItemDeleteModifier: Remove modifier
+FLBR.ItemNewAction: New action
+FLBR.ItemNewAttack: New attack
+FLBR.ItemNoAttack: No attack mode defined.
 FLBR.ItemNoModifier: No modifier.
 FLBR.ItemModifier: Modifier
 FLBR.ItemQuantity: Quantity
 FLBR.ItemRollable: Rollable
-FLBR.ItemSkill: Skill
 FLBR.ItemSpecial: Special
 FLBR.MACRO.GetActorTitle: Choose an Actor
 FLBR.MACRO.GetActorHint: You have selected multiple tokens. Please choose one of them.
@@ -159,6 +224,7 @@ FLBR.RANGED_COMBAT.OutOfRange: Out of range
 FLBR.RANGED_COMBAT.SmallTarget: Small target
 FLBR.RANGED_COMBAT.LargeTarget: Large target
 FLBR.RANGED_COMBAT.TargetBehindCover: Target behind cover
+FLBR.RANGED_COMBAT.CarefulAim: Careful aim
 FLBR.RANGED_COMBAT.UnseenTarget: Unseen target
 FLBR.ROLLER.AddDie: Add a die
 FLBR.ROLLER.MaxPush: Max. push
@@ -185,7 +251,6 @@ FLBR.WEAPON_DAMAGE_TYPE.Crushing: Crushing
 FLBR.WEAPON_DAMAGE_TYPE.Piercing: Piercing
 FLBR.WEAPON_DAMAGE_TYPE.Stress: Stress
 FLBR.WeaponRange: Range
-FLBR.WeaponRangeMaxRange: '{range} range'
 FLBR.WEAPON_RANGE.Engaged: Engaged
 FLBR.WEAPON_RANGE.Short: Short
 FLBR.WEAPON_RANGE.Medium: Medium
@@ -193,6 +258,8 @@ FLBR.WEAPON_RANGE.Long: Long
 FLBR.WEAPON_RANGE.Extreme: Extreme
 FLBR.YouAreBroken: You are Broken!
 FLBR.ActorSheet.NotifWrongItemType: Actor {actor} cannot hold {type} items!
+YZUR.CHAT.ROLL.Infos: Infos
+YZUR.CHAT.ROLL.Damage: Base Damage
 YZUR.CHAT.ROLL.Push: Push
 YZUR.CHAT.ROLL.CancelPush: Cancel Push
 YZUR.DIETERMS.D6BladeRunnerDie: D6
@@ -210,11 +277,17 @@ ITEM.TypeWeapon: Weapon
 ITEM.TypeExplosive: Explosive
 ITEM.TypeSpecialty: Specialty
 ITEM.TypeInjury: Injury
+GAME.Paused: Investigation Paused
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatic Apply Damage
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Whether to automatically apply damage from rolls to targeted tokens.
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatic Armor Roll
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Whether to automatically roll the armor.
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Open First Weapon Attack
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Whether to open the collapsible of the first weapon attack when the Item sheet is displayed.
 WARNING.ApplyDamageNoNature: 'Apply Push Damage: Actor Nature Not Found!'
 WARNING.ApplyDamageNoCapacityKey: 'Apply Push Damage: Nature-Capacity relation Not Found!'
 WARNING.ApplyDamageNoActorCapacity: 'Apply Push Damage: Actor Capacity Not Found!'
 WARNING.NoDiceInput: No dice to roll!
+WARNING.NoItemAction: No item action defined!
+WARNING.ItemActionMacroNotFound: Macro "{macro}" not found!
+WARNING.NoItemUnit: 'Cannot use {name}: no unit left!'

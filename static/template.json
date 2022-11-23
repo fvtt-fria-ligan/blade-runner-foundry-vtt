@@ -81,11 +81,6 @@
       "injury"
     ],
     "templates": {
-      "itemRoll": {
-        "rollable": false,
-        "attribute": "str",
-        "skill": "closeCombat"
-      },
       "itemBase": {
         "qty": 1,
         "cost": 0,
@@ -95,37 +90,33 @@
         "description": "",
         "special": ""
       },
-      "itemOffensive": {
-        "damage": 1,
-        "crit": 6,
-        "damageType": 2,
-        "range": { "min": 0, "max": 1 }
+      "itemConsumable": {
+        "consumable": false
       },
+      "itemAttacks": { "attacks": {} },
+      "itemActions": { "actions": {} },
       "itemModifiers": { "modifiers": {} }
     },
     "generic": {
-      "templates": ["itemBase", "itemRoll", "itemDesc", "itemModifiers"]
+      "templates": ["itemBase", "itemActions", "itemDesc", "itemModifiers", "itemConsumable"]
     },
     "upgrade": {
-      "templates": ["itemBase", "itemRoll", "itemDesc", "itemModifiers"]
+      "templates": ["itemBase", "itemActions", "itemDesc", "itemModifiers"]
     },
     "armor": {
-      "templates": ["itemBase", "itemRoll", "itemDesc", "itemModifiers"],
-      "rollable": true,
+      "templates": ["itemBase", "itemDesc", "itemModifiers", "itemConsumable"],
       "armor": 6
     },
     "weapon": {
-      "templates": ["itemBase", "itemRoll", "itemDesc", "itemOffensive"],
-      "rollable": true
+      "templates": ["itemBase", "itemAttacks", "itemActions", "itemDesc", "itemOffensive", "itemConsumable"]
     },
     "explosive": {
-      "templates": ["itemBase", "itemRoll", "itemDesc", "itemOffensive"],
-      "rollable": true,
-      "damageType": 2,
-      "blast": 8
+      "templates": ["itemBase", "itemAttacks", "itemActions", "itemDesc", "itemOffensive", "itemConsumable"],
+      "blast": 8,
+      "consumable": true
     },
     "specialty": {
-      "templates": ["itemDesc", "itemRoll", "itemModifiers"]
+      "templates": ["itemDesc", "itemActions", "itemModifiers"]
     },
     "injury": {
       "templates": ["itemDesc", "itemModifiers"],

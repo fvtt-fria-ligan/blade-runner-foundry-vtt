@@ -1,5 +1,7 @@
+import ItemAction from '@components/item-action';
+import ItemAttack from '@components/item-attack';
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
+import { ITEM_TYPES, SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
 import { enrichTextFields } from '@utils/string-util';
 
 /**
@@ -7,6 +9,14 @@ import { enrichTextFields } from '@utils/string-util';
  * @extends {ItemSheet} Extends the basic ItemSheet
  */
 export default class BladeRunnerItemSheet extends ItemSheet {
+
+  /**
+   * Used to store the state of collapsible menus in an accordion
+   * to keep it open between each sheet update.
+   * @author FloRad (Savage Worlds)
+   * @type {Object.<string, boolean>}
+   */
+  collapsibleStates = {};
 
   /* ------------------------------------------ */
   /*  Sheet Properties                          */
@@ -47,12 +57,14 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       isGM: game.user.isGM,
       inActor: !!this.item.actor,
       isOffensive: this.item.isOffensive,
+      isConsumable: this.item.isConsumable,
       // inVehicle: this.item.actor?.type === 'vehicle',
       item: baseData.item,
       system: foundry.utils.duplicate(baseData.item.system),
       // effects: baseData.effects,
-      rollable: this.item.system.rollable != undefined ? true : false,
+      rollable: this.item.rollable,
       rollData: this.item.getRollData(),
+      collapsibleStates: this.collapsibleStates,
       config: CONFIG.BLADE_RUNNER,
     };
 
@@ -74,7 +86,15 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       myButtons.push({
         label: game.i18n.localize('FLBR.SHEET_HEADER.ItemRoll'),
         class: 'item-roll',
-        icon: this.item.type === ITEM_TYPES.ARMOR ? 'fas fa-shield-alt' : 'fas fa-dice',
+        icon: 'fas fa-dice',
+        onclick: () => this.item.roll(),
+      });
+    }
+    if (this.item.type === ITEM_TYPES.ARMOR) {
+      myButtons.push({
+        label: game.i18n.localize('FLBR.SHEET_HEADER.ArmorRoll'),
+        class: 'item-roll',
+        icon: 'fas fa-shield-alt',
         onclick: () => this.item.roll(),
       });
     }
@@ -102,6 +122,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
+    this._setupAccordions();
 
     // Editable-only Listeners
     if (!game.user.isGM && this.actor.limited) return;
@@ -112,6 +133,14 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     const inputs = html.find('input');
     inputs.focus(ev => ev.currentTarget.select());
     inputs.addBack().find('[data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
+
+    // Item Actions
+    html.find('.add-action').click(this._onAddItemAction.bind(this));
+    html.find('.delete-action').click(this._onDeleteItemAction.bind(this));
+
+    // Item Attacks
+    html.find('.add-attack').click(this._onAddItemAttack.bind(this));
+    html.find('.delete-attack').click(this._onDeleteItemAttack.bind(this));
 
     // Roll Modifiers
     html.find('.add-modifier').click(this._onAddModifier.bind(this));
@@ -143,6 +172,45 @@ export default class BladeRunnerItemSheet extends ItemSheet {
 
   /* ------------------------------------------ */
 
+  _onAddItemAction(event) {
+    event.preventDefault();
+    const itemAction = new ItemAction(null, {
+      name: game.i18n.localize('FLBR.ItemNewAction'),
+      // item: this,
+    });
+    return this.item.update({ [`system.actions.${itemAction.id}`]: itemAction.toObject() });
+  }
+
+  _onDeleteItemAction(event) {
+    event.preventDefault();
+    const itemActionId = event.currentTarget.dataset.actionId;
+    if (this.item.system.actions[itemActionId]) {
+      this.item.update({ [`system.actions.-=${itemActionId}`]: null });
+    }
+  }
+
+  /* ------------------------------------------ */
+
+  _onAddItemAttack(event) {
+    event.preventDefault();
+    const itemAttack = new ItemAttack({
+      name: game.i18n.localize('FLBR.ItemNewAttack'),
+      // item: this,
+    });
+    this.collapsibleStates[itemAttack.id] = true;
+    return this.item.update({ [`system.attacks.${itemAttack.id}`]: itemAttack.toObject() });
+  }
+
+  _onDeleteItemAttack(event) {
+    event.preventDefault();
+    const itemAttackId = event.currentTarget.dataset.attackId;
+    if (this.item.system.attacks[itemAttackId]) {
+      this.item.update({ [`system.attacks.-=${itemAttackId}`]: null });
+    }
+  }
+
+  /* ------------------------------------------ */
+
   _onAddModifier(event) {
     event.preventDefault();
     const modifiers = foundry.utils.duplicate(this.item.system.modifiers ?? {});
@@ -164,11 +232,35 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     event.preventDefault();
     const blast = +event.currentTarget.value;
     if (!(blast in FLBR.blastPowerMap)) return;
+    if (this.item.attacks.length <= 0) return;
     const { damage, crit } = FLBR.blastPowerMap[blast];
     // TODO system.crit update not working properly in the item sheet, but values are all OK (tested).
-    return this.item.update({
-      'system.damage': damage,
-      'system.crit': crit,
-    });
+    const updatedAttacks = foundry.utils.duplicate(this.item.system.attacks);
+    for (const id in updatedAttacks) {
+      updatedAttacks[id].damage = damage;
+      updatedAttacks[id].crit = crit;
+    }
+    return this.item.update({ 'system.attacks': updatedAttacks });
+  }
+
+  /* ------------------------------------------ */
+
+  _setupAccordions() {
+    this.form
+      ?.querySelectorAll('.item-attacks-list details')
+      .forEach((el, i) => {
+        const id = el.dataset.actionId;
+
+        if (i === 0 && game.settings.get(SYSTEM_ID, SETTINGS_KEYS.OPEN_FIRST_WEAPON_ATTACK)) {
+          el.open = true;
+        }
+        else if (this.collapsibleStates[id]) {
+          el.open = true;
+        }
+
+        el.querySelector('summary')?.addEventListener('click', () => {
+          this.collapsibleStates[id] = !this.collapsibleStates[id];
+        });
+      });
   }
 }

@@ -20,7 +20,7 @@
 		<a class="sheet-tab" data-tab="info">{{{config.Icons.tabs.bio}}}&nbsp;{{localize "FLBR.TAB.Info"}}</a>
 		<a class="sheet-tab" data-tab="features">{{{config.Icons.tabs.features}}}&nbsp;{{localize "FLBR.TAB.Features"}}</a>
 		{{#if rollable}}
-			<a class="sheet-tab" data-tab="roll">{{{config.Icons.tabs.roll}}}&nbsp;{{localize "FLBR.TAB.Roll"}}</a>
+			<a class="sheet-tab" data-tab="action">{{{config.Icons.tabs.action}}}&nbsp;{{localize "FLBR.TAB.Actions"}}</a>
 		{{/if}}
 	</div>
 
@@ -33,6 +33,29 @@
 		</div>
 
 		<div class="tab tab-features" data-group="primary" data-tab="features">
+
+			{{#if isOffensive}}
+				<div class="item-attacks boxed-property">
+					<h4>
+						{{localize "FLBR.HEADER.Attacks"}}
+						<a class="btn add-attack" data-tooltip="{{localize "FLBR.ItemAddAttack"}}">
+							{{{@root.config.Icons.buttons.plus}}}
+						</a>
+					</h4>
+{{> systems/blade-runner/templates/item/attacks-partial.hbs}}
+				</div>
+				{{#if (eq item.type "explosive")}}
+					<div class="item-property item-property-blast">
+						<label>{{localize "FLBR.Blast"}} ({{localize "FLBR.D"}}{{system.blast}})</label>
+						{{scoreSelector "system.blast" selected=system.blast}}
+					</div>
+				{{/if}}
+			{{else if (eq item.type "armor")}}
+				<div class="item-property item-property-armor">
+					<label>{{localize "FLBR.ItemArmor"}} ({{localize "FLBR.D"}}{{system.armor}})</label>
+					{{scoreSelector "system.armor" selected=system.armor}}
+				</div>
+			{{/if}}
 
 			{{#if (eq item.type "injury")}}
 				<div class="item-property item-property-category">
@@ -70,51 +93,17 @@
 				</div>
 				<div class="item-property item-property-availability">
 					<label>{{localize "FLBR.ItemAvailability"}}</label>
-					<select name="system.availability">
+					<select name="system.availability" data-dtype="Number">
 						{{selectOptions config.availabilities selected=system.availability localize=true}}
 					</select>
 				</div>
+			{{/if}}
 
-				{{#if (eq item.type "armor")}}
-					<div class="item-property item-property-armor">
-						<label>{{localize "FLBR.ItemArmor"}} ({{localize "FLBR.D"}}{{system.armor}})</label>
-						{{scoreSelector "system.armor" selected=system.armor}}
-					</div>
-				{{/if}}
-
-				{{#if isOffensive}}
-					{{#if (eq item.type "explosive")}}
-						<div class="item-property item-property-blast">
-							<label>{{localize "FLBR.Blast"}} ({{localize "FLBR.D"}}{{system.blast}})</label>
-							{{scoreSelector "system.blast" selected=system.blast}}
-						</div>
-					{{/if}}
-					<div class="item-property item-property-damage">
-						<label>{{localize "FLBR.WeaponDamage"}}</label>
-						<input type="text" name="system.damage" value="{{system.damage}}" data-dtype="Number"/>
-					</div>
-					<div class="item-property item-property-crit">
-						<label>{{localize "FLBR.WeaponCrit"}} ({{localize "FLBR.D"}}{{system.crit}})</label>
-						{{scoreSelector "system.crit" selected=system.crit}}
-					</div>
-					<div class="item-property item-property-damage-type">
-						<label>{{localize "FLBR.WeaponDamageType"}}</label>
-						<select name="system.damageType">
-							{{selectOptions config.damageTypes selected=system.damageType localize=true}}
-						</select>
-					</div>
-					<div class="item-property item-property-range">
-						<label>{{localize "FLBR.WeaponRange"}}</label>
-						<div class="ranges-min-max flex row">
-							<select name="system.range.min">
-								{{selectOptions config.ranges selected=system.range.min localize=true}}
-							</select>
-							<select name="system.range.max" style="margin-left: 4px;">
-								{{selectOptions config.ranges selected=system.range.max localize=true}}
-							</select>
-						</div>
-					</div>
-				{{/if}}
+			{{#if isConsumable}}
+				<div class="item-property item-property-consumable">
+					<label>{{localize "FLBR.ItemConsumable"}}</label>
+					<input type="checkbox" name="system.consumable" {{checked system.consumable}}/>
+				</div>
 			{{/if}}
 			
 			<div class="item-property item-property-special">
@@ -136,33 +125,11 @@
 		</div>
 
 		{{#if rollable}}
-			<div class="tab tab-roll" data-group="primary" data-tab="roll">
-				<div class="item-property item-property-rollable">
-					<label>{{localize "FLBR.ItemRollable"}}</label>
-					<input type="checkbox" name="system.rollable" {{checked system.rollable}}/>
+			<div class="tab tab-action" data-group="primary" data-tab="action">
+				<div style="text-align: right;">
+					<a class="add-action" style="color: #aaa">{{{@root.config.Icons.buttons.plus}}}&nbsp;{{localize "FLBR.ItemAddAction"}}</a>
 				</div>
-				{{#unless (eq item.type 'armor')}}
-					<div class="item-property item-property-attribute"{{#unless system.rollable}} style="display: none;"{{/unless}}>
-						<label>{{localize "FLBR.ItemAttribute"}}</label>
-						<select name="system.attribute">
-							{{#select system.attribute}}
-								{{#each @root.config.attributes}}
-									<option value="{{.}}">{{localize (concat "FLBR.ATTRIBUTE." (toUpperCase .))}}</option>
-								{{/each}}
-							{{/select}}
-						</select>
-					</div>
-					<div class="item-property item-property-skill"{{#unless system.rollable}} style="display: none;"{{/unless}}>
-						<label>{{localize "FLBR.ItemSkill"}}</label>
-						<select name="system.skill">
-							{{#select system.skill}}
-								{{#each @root.config.skills}}
-									<option value="{{.}}">{{localize (concat "FLBR.SKILL." (capitalize .))}}</option>
-								{{/each}}
-							{{/select}}
-						</select>
-					</div>
-				{{/unless}}
+{{> systems/blade-runner/templates/item/actions-partial.hbs}}
 			</div>
 		{{/if}}
 	</div>

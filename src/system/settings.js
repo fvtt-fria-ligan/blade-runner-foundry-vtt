@@ -35,4 +35,11 @@ export function registerSystemSettings() {
     type: Boolean,
     default: false,
   });
+  game.settings.register(sysId, SETTINGS_KEYS.OPEN_FIRST_WEAPON_ATTACK, {
+    name: 'SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName',
+    hint: 'SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint',
+    config: true,
+    type: Boolean,
+    default: true,
+  });
 }

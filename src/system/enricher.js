@@ -253,6 +253,7 @@ async function weaponEnricher(match, _options) {
 
   const title = match[2] || item.name;
   const sys = item.system;
+  const atk = sys.attacks[item.attacks[0]?.id] || {};
 
   const htmlFormat =
 `<div class="flbr-sector-box" style="display: flex; flex-direction: column; justify-content: space-between; height: initial; padding: 0; background-color: rgba(0,0,0,.4);">
@@ -263,11 +264,11 @@ async function weaponEnricher(match, _options) {
 <div class="flbr-table green" style="height: initial; max-width: 40%;">
   <table>
     <tbody>
-      <tr><td>DAMAGE: <b>${sys.damage}</b></td></tr>
-      <tr><td>CRIT DIE: D<b>${sys.crit}</b></td></tr>
-      <tr><td>TYPE: <b>${game.i18n.localize(FLBR.damageTypes[sys.damageType])}</b></td></tr>
-      <tr><td>MIN. RANGE: <b>${game.i18n.localize(FLBR.ranges[sys.range.min])}</b></td></tr>
-      <tr><td>MAX. RANGE: <b>${game.i18n.localize(FLBR.ranges[sys.range.max])}</b></td></tr>
+      <tr><td>DAMAGE: <b>${atk.damage}</b></td></tr>
+      <tr><td>CRIT DIE: D<b>${atk.crit}</b></td></tr>
+      <tr><td>TYPE: <b>${game.i18n.localize(FLBR.damageTypes[atk.damageType])}</b></td></tr>
+      <tr><td>MIN. RANGE: <b>${game.i18n.localize(FLBR.ranges[atk.range?.min])}</b></td></tr>
+      <tr><td>MAX. RANGE: <b>${game.i18n.localize(FLBR.ranges[atk.range?.max])}</b></td></tr>
       <tr><td>AVAILABILITY: <b>${game.i18n.localize(FLBR.availabilities[sys.availability])}</b></td></tr>
       <tr><td>COST: <b>${sys.cost}</b></td></tr>
     </tbody>

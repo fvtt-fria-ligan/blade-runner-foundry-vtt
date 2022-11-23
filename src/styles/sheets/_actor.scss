@@ -3,8 +3,8 @@ $border-stat-solid: 1px solid var(--color-border);
 $border-stat-dotted: 1px dotted var(--color-green);
 
 .blade-runner.sheet.actor {
-  min-width: 400px;
-  min-height: 242px;
+  min-width: 500px;
+  min-height: 250px;
 
   label {
     color: var(--color-blue);
@@ -224,7 +224,13 @@ $border-stat-dotted: 1px dotted var(--color-green);
     .inventory-tab {
       .special-gear {
         margin-bottom: 4px;
-        & input { text-align: left; }
+
+        input {
+          font-family: var(--font-editor);
+          font-size: var(--font-size--default);
+          font-weight: normal;
+          text-align: left;
+        }
       }
       .inventory {
         margin-bottom: 4px;
