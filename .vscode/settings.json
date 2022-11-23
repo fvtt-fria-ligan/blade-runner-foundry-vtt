@@ -4,4 +4,7 @@
     "src/lang",
   ],
   "i18n-ally.keystyle": "flat",
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-issue-config.json": "file:///d%3A/GITHUB/blade-runner-foundry-vtt/.github/ISSUE_TEMPLATE/config.yml"
+  },
 }
