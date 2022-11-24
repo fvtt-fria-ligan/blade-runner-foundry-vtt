@@ -23,7 +23,7 @@ $pause-w: math.div(341px * $pause-h, 500px);
 
 #pause>img {
   // 341x500
-  content: url("../../modules/blade-runner-core-game/assets/items/lapd_br_badge.webp");
+  content: url("./assets/logos/lapd_br_badge.webp");
   width: $pause-w;
   height: $pause-h;
   top: -50px;
