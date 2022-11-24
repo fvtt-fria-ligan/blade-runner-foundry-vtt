@@ -3,19 +3,19 @@
 <p align="center">
   <img alt="Version" src="https://img.shields.io/badge/dynamic/json?color=blue&label=version&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffvtt-fria-ligan%2Fblade-runner-foundry-vtt%2Fmain%2Fstatic%2Fsystem.json"/>
   <a href="https://foundryvtt.com" target="_blank">
-    <img alt="Foundry Version" src="https://img.shields.io/badge/dynamic/json?color=blue&label=Foundry&query=compatibleCoreVersion&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffvtt-fria-ligan%2Fblade-runner-foundry-vtt%2Fmain%2Fstatic%2Fsystem.json"/>
+    <img alt="Foundry Version" src="https://img.shields.io/badge/dynamic/json?color=blue&label=Foundry&query=compatibility.minimum&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffvtt-fria-ligan%2Fblade-runner-foundry-vtt%2Fmain%2Fstatic%2Fsystem.json"/>
   </a>
-  <a href="https://foundryvtt.com/packages/blade-runner-foundry-vtt/" target="_blank">
+  <a href="https://foundryvtt.com/packages/blade-runner/" target="_blank">
     <img alt="Forge Installs" src="https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fblade-runner&colorB=4aa94a"/>
   </a>
   <a href="https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases">
-    <img alt="Downloads" src="https://img.shields.io/github/downloads/fvtt-fria-ligan/blade-runner-foundry-vtt/latest/system"/>
+    <img alt="Downloads" src="https://img.shields.io/github/downloads/fvtt-fria-ligan/blade-runner-foundry-vtt/latest/blade-runner-fvtt_v10.0.0.zip"/>
   </a>
   <a href="https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"/>
   </a>
-  <a href="https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/blob/master/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/fvtt-fria-ligan/blade-runner-foundry-vtt"/>
+  <a href="https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/blob/main/LICENSE" target="_blank">
+    <img alt="License: GPLv3" src="https://img.shields.io/badge/License-GPLv3-orange"/>
   </a>
   <a href="https://www.patreon.com/Stefouch">
     <img src="https://img.shields.io/badge/donate-patreon-F96854.svg" alt="Patreon">
