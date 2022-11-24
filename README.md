@@ -1,19 +1,20 @@
+<center><img src="https://raw.githubusercontent.com/fvtt-fria-ligan/blade-runner-foundry-vtt/main/static/assets/blade-runner-banner-small.webp"/></center>
 <h1 align="center"><b>Blade Runner - The Roleplaying Game</b><br/><small>🎲 <i>Foundry VTT</i> 🎲</small></h1>
 <p align="center">
   <img alt="Version" src="https://img.shields.io/badge/dynamic/json?color=blue&label=version&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffvtt-fria-ligan%2Fblade-runner-foundry-vtt%2Fmain%2Fstatic%2Fsystem.json"/>
   <a href="https://foundryvtt.com" target="_blank">
     <img alt="Foundry Version" src="https://img.shields.io/badge/dynamic/json?color=blue&label=Foundry&query=compatibleCoreVersion&url=https%3A%2F%2Fraw.githubusercontent.com%2Ffvtt-fria-ligan%2Fblade-runner-foundry-vtt%2Fmain%2Fstatic%2Fsystem.json"/>
   </a>
-  <a href="https://foundryvtt.com/packages/blade-runner/" target="_blank">
+  <a href="https://foundryvtt.com/packages/blade-runner-foundry-vtt/" target="_blank">
     <img alt="Forge Installs" src="https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fblade-runner&colorB=4aa94a"/>
   </a>
-  <a href="https://github.com/fvtt-fria-ligan/blade-runner/releases">
+  <a href="https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases">
     <img alt="Downloads" src="https://img.shields.io/github/downloads/fvtt-fria-ligan/blade-runner-foundry-vtt/latest/system"/>
   </a>
-  <a href="https://github.com/fvtt-fria-ligan/blade-runner/graphs/commit-activity" target="_blank">
+  <a href="https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"/>
   </a>
-  <a href="https://github.com/fvtt-fria-ligan/blade-runner/blob/master/LICENSE" target="_blank">
+  <a href="https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/blob/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/github/license/fvtt-fria-ligan/blade-runner-foundry-vtt"/>
   </a>
   <a href="https://www.patreon.com/Stefouch">
@@ -26,6 +27,8 @@
     <img alt="Twitter: stefouch" src="https://img.shields.io/twitter/follow/stefouch.svg?style=social"/>
   </a>
 </p>
+
+> The **OFFICIAL** game system for the **Blade Runner RPG** on Foundry VTT.
 
 # 📦 What's in the Box?
 
@@ -51,25 +54,26 @@ The core system features no content. It only provides support for various mechan
 # 🧩 Supported Modules
 
 - [Dice So Nice](https://foundryvtt.com/packages/dice-so-nice/)
+- [Reverse Initiative Order](https://foundryvtt.com/packages/reverse-initiative-order)
 - [Year Zero Actions](https://foundryvtt.com/packages/alien-actions)
+
+# 🛠️ Contributing
+
+If you want to contribute to the project, download and build it for something else, or if you simply have an issue, please read [our contributing guide](https://github.com/fvtt-fria-ligan/blade-runner/blob/main/CONTRIBUTING.md) to learn more about how we accept contributions and how to set up the development version of the project.
+
+### Top contributors
+
+- @aMediocreDad
 
 # 👤 Author
 
 <p align="center">
   <a href="https://stefouch.be" target="_blank">
-    <img src="./static/assets/logos/BSL-D6_bannerlogo_H150.png" alt="Stefouch Gaming Lab" style="width: auto; height: auto; max-height: 100px;"/>
+    <img src="https://raw.githubusercontent.com/fvtt-fria-ligan/blade-runner-foundry-vtt/main/static/assets/logos/BSL-D6_bannerlogo_H150.png" alt="Stefouch Gaming Lab" style="width: auto; height: auto; max-height: 100px;"/>
   </a>
   <br/>
   <i>Built by a fan, for the fans.</i>
 </p>
-
-# 🙏 Contributors
-
-- @aMediocreDad
-
-# 🛠️ Contributing
-
-If you want to contribute to the project, download and build it for something else, or if you simply have an issue, please read [our contributing guide](https://github.com/fvtt-fria-ligan/blade-runner/blob/main/CONTRIBUTING.md) to learn more about how we accept contributions and how to set up the development version of the project.
 
 # 🔗 See Also
 
