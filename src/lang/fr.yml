@@ -205,3 +205,22 @@ YZUR.DIETERMS.D10BladeRunnerDie: D10
 YZUR.DIETERMS.D12BladeRunnerDie: D12
 ACTOR.TypeCharacter: Personnage
 ACTOR.TypeVehicle: Véhicule
+FLBR.Attributes: Attributs
+FLBR.ATTRIBUTE.STR: Force
+FLBR.ATTRIBUTE.AGI: Agilité
+FLBR.ATTRIBUTE.INT: Intelligence
+FLBR.ATTRIBUTE.EMP: Empathie
+FLBR.Skills: Compétences
+FLBR.SKILL.CloseCombat: Combat Rapproché
+FLBR.SKILL.Stamina: Endurance
+FLBR.SKILL.Stealth: Furtivité
+FLBR.SKILL.MedicalAid: Soins Médicaux
+FLBR.SKILL.Observation: Observation
+FLBR.SKILL.Driving: Conduite
+FLBR.NATURE.Human: Humain
+FLBR.SKILL.Insight: Intuition
+FLBR.SKILL.Manipulation: Manipulation
+FLBR.ARCHETYPE.ANALYST: Analyste
+FLBR.ARCHETYPE.INSPECTOR: Inspecteur
+FLBR.SKILL.Mobility: Mobilité
+FLBR.NATURE.Replicant: Réplicant
