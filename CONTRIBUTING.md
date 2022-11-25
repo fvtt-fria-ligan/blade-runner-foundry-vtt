@@ -1,4 +1,4 @@
-<img src="" alt="Logo" style="max-width:100%;" />
+<center><img src="https://raw.githubusercontent.com/fvtt-fria-ligan/blade-runner-foundry-vtt/main/static/assets/blade-runner-banner-small.webp"/></center>
 <p align="center">Thank you for wanting to contribute to this project!</p>
 <br>
 
@@ -28,9 +28,9 @@ Otherwise, discussion about the development of the Blade Runner RPG system can b
 
 ## :globe_with_meridians: Localization
 
-We are grateful for any and all localization support we can get. To localize the system you do not need to download or set up the system. To make it easier to help with localization we are using GitLocalize. All you need is a GitHub account. Then you can [head over to our GitLocalize page](https://gitlocalize.com/repo/XXXX) and start translating.
+We are grateful for any and all localization support we can get. To localize the system you do not need to download or set up the system. To make it easier to help with localization we are using the [Weblate's Foundry VTT Hub](https://weblate.foundryvtt-hub.com/). All you need is a Weblate account. Then you can [head over to our Weblate page](https://weblate.foundryvtt-hub.com/engage/blade-runner/) and start translating.
 
-Once you are done, click the yellow button that says "Create Review Request" and GitLocalize will handle the rest on your behalf.
+<!-- Once you are done, click the yellow button that says "Create Review Request" and GitLocalize will handle the rest on your behalf. -->
 
 ### But I don't see my language in the list!
 
