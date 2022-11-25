@@ -18,17 +18,11 @@
     <img alt="License: GPLv3" src="https://img.shields.io/badge/License-GPLv3-orange"/>
   </a>
   <a href="https://www.patreon.com/Stefouch">
-    <img src="https://img.shields.io/badge/donate-patreon-F96854.svg" alt="Patreon">
-  </a>
-  <a href="https://twitter.com/freeleaguepub" target="_blank">
-    <img alt="Twitter: FreeLeaguePub" src="https://img.shields.io/twitter/follow/freeleaguepub.svg?style=social"/>
-  </a>
-  <a href="https://twitter.com/stefouch" target="_blank">
-    <img alt="Twitter: stefouch" src="https://img.shields.io/twitter/follow/stefouch.svg?style=social"/>
+    <img src="https://img.shields.io/badge/Donate-Patreon-F96854.svg" alt="Patreon">
   </a>
 </p>
 
-> The **OFFICIAL** game system for the **Blade Runner RPG** on Foundry VTT.
+> The **OFFICIAL** game system for the **Blade Runner RPG** on Foundry VTT!
 
 # 📦 What's in the Box?
 
@@ -47,9 +41,28 @@ The core system features no content. It only provides support for various mechan
 
 # 🚀 Install
 
-1. Go to the setup page and choose `Game Systems`.
-2. Click the `Install System`, and paste in this [manifest link](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/latest/download/system.json)
-3. Create a `Game World` using the Blade Runner system.
+## System
+
+> **Warning**: The game system is **V10** compatible only. If you are still playing under V9, you must update your Foundry client before being able to install the game system.
+
+1. Go to the setup page in Foundry and choose `Game Systems`
+2. Click the `Install System` and search for "Blade Runner", or paste in this [manifest link](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/latest/download/system.json)
+3. Create a `Game World` using the Blade Runner system and start it
+4. Read the _Game System's Manual_ Journal Entry in the system's compedium
+5. _Enjoy!_
+
+## Premium Modules
+
+> **Note**: Premium modules are not mandatory to play the game as the game system is free to use, but they will save you _weeks_ of preparation.
+
+1. Get the premium modules at [Free League's shop](https://freeleaguepublishing.com/en/store/)
+2. Retrieve your codes in your mail box _(contact Free League if you did not recieve anything after 15 minutes, also check your spam box)_
+3. Activate the codes in your Foundry account: visit [foundryvtt.com](https://foundryvtt.com/), go to your account settings, in _"Purchased Content"_, and paste in the codes
+4. Launch the Foundry client _(and make sure you have updated Foundry to V10)_
+5. Install the Blade Runner premium modules and some of the recommended third-party modules _(optional, see below)_
+6. Create a new World with the Blade Runner system and start it
+7. In the options, activate the modules
+8. Refresh and import the content. _Have fun!_
 
 # 🧩 Supported Modules
 
