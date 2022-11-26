@@ -1,11 +1,11 @@
 FLBR.COMBAT_ACTION.MeleeAttack: Attaque en mêlée
 FLBR.COMBAT_ACTION.BreakFree: Se libérer
-FLBR.COMBAT_ACTION_HINT.Sprint: Vous pouvez effectuer des mouvements supplémentaires (comme décrit ci-dessus) au cours d'un même Round en utilisant l'action sprint. Cela comptera alors comme votre action pour le Round, ce qui signifie que vous ne pouvez effectuer aucune autre action. Ceci comptera alors comme votre action pour le round, ce qui signifie que vous ne pouvez effectuer aucune autre action. Lancer le dé <span class="smallcaps"> MOBILITÉ </span> pour chaque<span class="blade-runner-symbols"> S </span>  , vous pouvez effectuer un mouvement supplémentaire, en plus de votre mouvement libre. Si vous ratez le jet, vous tombez (avant le deuxième mouvement) et ne pouvez pas vous relever avant votre prochain tour.
+FLBR.COMBAT_ACTION_HINT.Sprint: Vous pouvez effectuer des mouvements supplémentaires (comme décrit ci-dessus) au cours d'un même Round en utilisant l'action sprint. Cela comptera alors comme votre action pour le Round, ce qui signifie que vous ne pouvez effectuer aucune autre action. Ceci comptera alors comme votre action pour le round, ce qui signifie que vous ne pouvez effectuer aucune autre action. Lancer le dé <span class="smallcaps"> MOBILITÉ </span> pour chaque<span class="blade-runner-symbols"> S </span> , vous pouvez effectuer un mouvement supplémentaire, en plus de votre mouvement libre. Si vous ratez le jet, vous tombez (avant le deuxième mouvement) et ne pouvez pas vous relever avant votre prochain tour.
 FLBR.COMBAT_ACTION_HINT.BreakFree: Force + Combat au corps à corps
 FLBR.COMBAT_ACTION_HINT.CarefulAim: Si vous prenez le temps de bien viser avant d'appuyer sur la gâchette, vous bénéficiez d'un avantage sur votre jet d'attaque. Viser, cependant, est une action en soi. Vous ne pouvez pas viser soigneusement et tirer dans le même round. Si vous faites autre chose que tirer avec votre arme après avoir visé, ou si vous êtes touché par une attaque, vous perdez l'effet de la visée et vous devez dépenser une autre action pour viser à nouveau avec soin.
 FLBR.COMBAT_ACTION_HINT.Manipulate: Empathie + Manipulation
 FLBR.COMBAT_ACTION_HINT.Grapple: Si vous agrippez votre adversaire comme attaque spéciale en combat rapproché, vous et votre adversaire tombez au sol. L'adversaire lâche toute arme qu'il tenait et ne peut plus bouger. La seule action qu'il peut effectuer est une tentative de se libérer - qui est une action qui réussit si l'adversaire remporte une opposition.<span class="smallcaps">COMBAT RAPPROCHE</span> jet contre vous. Pendant que vous êtes au grappin, la seule action que vous pouvez effectuer (jusqu'à ce que vous libériez votre adversaire) est une attaque au grappin. Cela fonctionne comme une attaque normale sans arme, mais votre cible est considérée comme étant attachée et ne peut donc pas se défendre.
-FLBR.BUTTON.ToChat: Envoyer un élément dans le chat
+FLBR.BUTTON.ToChat: Envoyer un objet dans le chat
 FLBR.CHAT_ACTION.ApplyDamage: Appliquer des dommages aux jetons ciblés
 FLBR.DIALOG.AssignSuccessesHint: Choisissez un nombre de succès à dépenser contre {name}.
 FLBR.DIALOG.ChooseAction: Choisir l'action
@@ -49,16 +49,16 @@ FLBR.COMBAT_ACTION.CarefulAim: Visée prudente
 FLBR.COMBAT_ACTION.ThrowWeapon: Arme de jet
 FLBR.COMBAT_ACTION.FirstAid: Premiers secours
 FLBR.COMBAT_ACTION.Manipulate: Manipuler
-FLBR.COMBAT_ACTION.UseItem: Utiliser un élément
+FLBR.COMBAT_ACTION.UseItem: Utiliser un objet
 FLBR.COMBAT_ACTION_HINT.Crawl: Si vous devez vous déplacer tout en étant couché, vous devez ramper. Cela fonctionne comme un mouvement mais compte comme votre action pour le round. Vous pouvez vous relever à la fin de votre rampement (action libre).
 FLBR.COMBAT_ACTION_HINT.UnarmedAttack: Force + Combat rapproché
 FLBR.COMBAT_ACTION_HINT.MeleeAttack: Force + Combat rapproché
 FLBR.COMBAT_ACTION_HINT.ShootFirearm: Agilité + armes à feu
 FLBR.COMBAT_ACTION_HINT.ThrowWeapon: Agilité + armes à feu
 FLBR.COMBAT_ACTION_HINT.FirstAid: Intelligence + Aide médicale
-FLBR.BUTTON.Delete: Supprimer un élément
-FLBR.COMBAT_ACTION_HINT.UseItem: Utiliser un élément
-FLBR.BUTTON.Edit: Modifier un élément
+FLBR.BUTTON.Delete: Supprimer un objet
+FLBR.COMBAT_ACTION_HINT.UseItem: Utiliser un objet
+FLBR.BUTTON.Edit: Modifier un objet
 FLBR.DIALOG.AssignSuccesses: Attribuer le(s) succès
 FLBR.DIALOG.ChooseAttack: Choisir l'attaque
 FLBR.HEADER.Actions: Actions
@@ -84,11 +84,11 @@ FLBR.HEADER.YearsOnTheForce: Des années dans la police
 FLBR.HEADER.Weapons: Armes
 FLBR.SHEET_CONFIG.CharacterSubtype: Sous-type
 FLBR.SHEET_CONFIG.CharacterSubtypeHint: Choisissez s'il s'agit d'un PC ou d'un PNJ. Cette dernière option fournit une feuille de personnage allégée et des fonctionnalités supplémentaires permettant au MJ de gérer plus facilement les PNJ.
-FLBR.SHEET_CONFIG.HealthMaxModifier: Modificateur de santé max.
+FLBR.SHEET_CONFIG.HealthMaxModifier: Modificateur de santé max
 FLBR.SHEET_CONFIG.HealthMaxModifierHint: Modifier le maximum de la capacité de santé (MJ seulement).
 FLBR.SHEET_CONFIG.HealthPermanentLoss: Santé - perte permanente
 FLBR.SHEET_CONFIG.HealthPermanentLossHint: Définit la quantité de santé perdue de façon permanente (réservé aux MJ).
-FLBR.SHEET_CONFIG.ResolveMaxModifier: Résoudre le modificateur max.
+FLBR.SHEET_CONFIG.ResolveMaxModifier: Résoudre le modificateur max
 FLBR.SHEET_CONFIG.ResolveMaxModifierHint: Modifier le maximum de la capacité de résolution (MJ uniquement).
 FLBR.SHEET_CONFIG.ResolvePermanentLoss: Perte permanente d'enquête
 FLBR.SHEET_CONFIG.ResolvePermanentLossHint: Définit la quantité de résolution perdue de façon permanente (réservé aux MJ).
@@ -116,7 +116,7 @@ FLBR.CHAT.InitialDamageDealt: L'attaque avait un montant initial de {damage} de 
 FLBR.CHAT.ArmorDeflectedDamage: L'armure a dévié les dommages de {damage}.
 FLBR.CHAT.ArmorDeflectedAllDamage: L'armure a dévié tous les dégâts.
 FLBR.CHAT.ArmorNoEffect: L'armure n'a eu aucun effet.
-FLBR.CreateNewItem: Créer un nouvel élément {type}
+FLBR.CreateNewItem: Créer un nouvel objet {type}
 FLBR.Crit: Crit
 FLBR.Disadvantage: Désavantage
 FLBR.InjuryCategory: Catégorie
@@ -143,7 +143,7 @@ FLBR.ITEM_AVAILABILITY.Rare: Rare
 FLBR.ITEM_AVAILABILITY.Standard: Standard
 FLBR.ItemAvailability: Disponibilité
 FLBR.ItemConsumable: Consommable
-FLBR.ItemConsumeNotif: Consommé {qty} unité de {name}.
+FLBR.ItemConsumeNotif: Consommé {qty} unité de {name}
 FLBR.ItemDeleteAction: Supprimer l'action
 FLBR.ItemDeleteAttack: Supprimer l'attaque
 FLBR.ItemDeleteModifier: Supprimer le modificateur
@@ -167,7 +167,7 @@ FLBR.RANGED_COMBAT.UnseenTarget: Cible non visible
 FLBR.ROLLER.AddDie: Ajouter un dé
 FLBR.ROLLER.ModifierActive: Active
 FLBR.ROLLER.ModifierValue: Valeur
-FLBR.ROLLER.TotalModifier: 'Total: {value}'
+FLBR.ROLLER.TotalModifier: 'Total : {value}'
 FLBR.ROLLER.ResolveTestFailed: "{name} a raté son jet d'empathie et perd définitivement 1 point de résolution."
 FLBR.ROLLER.ResolveTest: Test pour la perte permanente de resolution
 FLBR.ROLLER.RollButton: Lancer
@@ -211,7 +211,7 @@ FLBR.ATTRIBUTE.AGI: Agilité
 FLBR.ATTRIBUTE.INT: Intelligence
 FLBR.ATTRIBUTE.EMP: Empathie
 FLBR.Skills: Compétences
-FLBR.SKILL.CloseCombat: Combat Rapproché
+FLBR.SKILL.CloseCombat: Combat rapproché
 FLBR.SKILL.Stamina: Endurance
 FLBR.SKILL.Stealth: Furtivité
 FLBR.SKILL.MedicalAid: Soins Médicaux
@@ -224,3 +224,26 @@ FLBR.ARCHETYPE.ANALYST: Analyste
 FLBR.ARCHETYPE.INSPECTOR: Inspecteur
 FLBR.SKILL.Mobility: Mobilité
 FLBR.NATURE.Replicant: Réplicant
+FLBR.ARCHETYPE.DOXIE: Doxie
+FLBR.BUTTON.Roll: jet d'objet
+FLBR.HEADER.SignatureItem: Objet signature
+FLBR.SHEET_HEADER.ArmorRoll: Jet d'armure
+FLBR.SHEET_HEADER.BlastPowerRoll: Jet de puissance de l'explosion
+FLBR.SHEET_HEADER.GenericRoll: Jet générique
+FLBR.SHEET_HEADER.ItemPost: Déposer objet
+FLBR.SHEET_HEADER.ItemRoll: Jet d'objet
+ITEM.TypeInjury: Blessure
+GAME.Paused: Enquête en pause
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Application automatique des dommages
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Si l'on veut appliquer automatiquement les dégâts des jets aux jetons ciblés.
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Jet d'armure automatique
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Si l'on veut que le jet d'armure soit fait automatiquement.
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Commencer la première attaque d'armes
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: S'il faut ouvrir le rétractable de la première attaque d'arme lorsque la feuille d'éléments est affichée.
+WARNING.ApplyDamageNoNature: 'Appliquez des dégâts de poussée : Acteur Nature non trouvé !'
+WARNING.ApplyDamageNoCapacityKey: 'Appliquer les dégâts de la poussée : Relation Nature-Capacité introuvable !'
+WARNING.ApplyDamageNoActorCapacity: "Appliquez des dégâts de poussée : Capacité d'acteur non trouvée !"
+WARNING.NoDiceInput: Pas de dés à lancer !
+WARNING.NoItemAction: Aucune action définie !
+WARNING.ItemActionMacroNotFound: Macro "{macro}" non trouvée !
+WARNING.NoItemUnit: "Impossible d'utiliser {name} : il n'y a plus d'unité !"
