@@ -1,1 +1,207 @@
-{}
+FLBR.COMBAT_ACTION.MeleeAttack: Attaque en mêlée
+FLBR.COMBAT_ACTION.BreakFree: Se libérer
+FLBR.COMBAT_ACTION_HINT.Sprint: Vous pouvez effectuer des mouvements supplémentaires (comme décrit ci-dessus) au cours d'un même Round en utilisant l'action sprint. Cela comptera alors comme votre action pour le Round, ce qui signifie que vous ne pouvez effectuer aucune autre action. Ceci comptera alors comme votre action pour le round, ce qui signifie que vous ne pouvez effectuer aucune autre action. Lancer le dé <span class="smallcaps"> MOBILITÉ </span> pour chaque<span class="blade-runner-symbols"> S </span>  , vous pouvez effectuer un mouvement supplémentaire, en plus de votre mouvement libre. Si vous ratez le jet, vous tombez (avant le deuxième mouvement) et ne pouvez pas vous relever avant votre prochain tour.
+FLBR.COMBAT_ACTION_HINT.BreakFree: Force + Combat au corps à corps
+FLBR.COMBAT_ACTION_HINT.CarefulAim: Si vous prenez le temps de bien viser avant d'appuyer sur la gâchette, vous bénéficiez d'un avantage sur votre jet d'attaque. Viser, cependant, est une action en soi. Vous ne pouvez pas viser soigneusement et tirer dans le même round. Si vous faites autre chose que tirer avec votre arme après avoir visé, ou si vous êtes touché par une attaque, vous perdez l'effet de la visée et vous devez dépenser une autre action pour viser à nouveau avec soin.
+FLBR.COMBAT_ACTION_HINT.Manipulate: Empathie + Manipulation
+FLBR.COMBAT_ACTION_HINT.Grapple: Si vous agrippez votre adversaire comme attaque spéciale en combat rapproché, vous et votre adversaire tombez au sol. L'adversaire lâche toute arme qu'il tenait et ne peut plus bouger. La seule action qu'il peut effectuer est une tentative de se libérer - qui est une action qui réussit si l'adversaire remporte une opposition.<span class="smallcaps">COMBAT RAPPROCHE</span> jet contre vous. Pendant que vous êtes au grappin, la seule action que vous pouvez effectuer (jusqu'à ce que vous libériez votre adversaire) est une attaque au grappin. Cela fonctionne comme une attaque normale sans arme, mais votre cible est considérée comme étant attachée et ne peut donc pas se défendre.
+FLBR.BUTTON.ToChat: Envoyer un élément dans le chat
+FLBR.CHAT_ACTION.ApplyDamage: Appliquer des dommages aux jetons ciblés
+FLBR.DIALOG.AssignSuccessesHint: Choisissez un nombre de succès à dépenser contre {name}.
+FLBR.DIALOG.ChooseAction: Choisir l'action
+FLBR.HEADER.Armor: Armure
+FLBR.HEADER.Attacks: Modes d'attaque
+FLBR.HEADER.PromotionPoints: Points de promotion
+FLBR.SHEET_CONFIG.ManeuverabilityHint: Définissez la maniabilité du véhicule conduit par ce personnage, le cas échéant.
+FLBR.SHEET_CONFIG.UnlimitedPushHint: Si votre MJ autorise un nombre illimité de jets poussés. Cochez ce paramètre pour afficher un bouton poussoir sur presque tous les jets.
+ACTOR.SubtypeNpc: Personnage non-joueur
+FLBR.TAB.Features: Caractéristiques
+FLBR.ItemCost: Coût
+FLBR.ItemNoAttack: Aucun mode d'attaque défini.
+FLBR.ItemQuantity: Quantité
+FLBR.MACRO.GetActorTitle: Choisir un acteur
+FLBR.MACRO.GetActorHint: Vous avez sélectionné plusieurs jetons. Veuillez en choisir un.
+FLBR.MACRO.MultipleItems: Votre acteur contrôlé {actor} a plus d'un élément avec le nom {item}. Le premier élément correspondant sera choisi.
+FLBR.MACRO.NoItem: L'acteur {actor} que vous contrôlez ne possède pas d'objet nommé {item}.
+FLBR.Nature: Nature
+FLBR.NatureHint: Nature du personnage (uniquement pour le MJ)
+FLBR.RANGED_COMBAT.OutOfRange: Hors de portée
+FLBR.ROLLER.MaxPush: Poussée maximale
+FLBR.ROLLER.ModifierName: Nom
+FLBR.ROLLER.ResolveTestHint: Lorsque vous êtes brisé par le stress, vous devez lancer un dé de base correspondant à votre valeur d'empathie. Si vous obtenez un 1, 1 point de Résolution est définitivement perdu, ce qui signifie que votre Résolution maximale est réduite d'un cran.
+FLBR.WEAPON_RANGE.Extreme: Extrême
+ACTOR.SubtypePc: Personnage du joueur
+FLBR.ATTRIBUTE.MVR: Manœuvrabilité
+FLBR.SKILL.Force: Force
+FLBR.SKILL.Firearms: Armes à feu
+FLBR.SKILL.Tech: Technologie
+FLBR.SKILL.Connections: Connexion
+FLBR.ARCHETYPE.CITY_SPEAKER: Orateur de la ville
+FLBR.ARCHETYPE.ENFORCER: homme de main
+FLBR.ARCHETYPE.FIXER: Réparateur
+FLBR.COMBAT_ACTION.Sprint: Course
+FLBR.COMBAT_ACTION.Crawl: Ramper
+FLBR.ARCHETYPE.SKIMMER: Ecumeur
+FLBR.COMBAT_ACTION.UnarmedAttack: Attaque sans arme
+FLBR.COMBAT_ACTION.Grapple: Grappin
+FLBR.COMBAT_ACTION.ShootFirearm: Tirer avec une arme à feu
+FLBR.COMBAT_ACTION.CarefulAim: Visée prudente
+FLBR.COMBAT_ACTION.ThrowWeapon: Arme de jet
+FLBR.COMBAT_ACTION.FirstAid: Premiers secours
+FLBR.COMBAT_ACTION.Manipulate: Manipuler
+FLBR.COMBAT_ACTION.UseItem: Utiliser un élément
+FLBR.COMBAT_ACTION_HINT.Crawl: Si vous devez vous déplacer tout en étant couché, vous devez ramper. Cela fonctionne comme un mouvement mais compte comme votre action pour le round. Vous pouvez vous relever à la fin de votre rampement (action libre).
+FLBR.COMBAT_ACTION_HINT.UnarmedAttack: Force + Combat rapproché
+FLBR.COMBAT_ACTION_HINT.MeleeAttack: Force + Combat rapproché
+FLBR.COMBAT_ACTION_HINT.ShootFirearm: Agilité + armes à feu
+FLBR.COMBAT_ACTION_HINT.ThrowWeapon: Agilité + armes à feu
+FLBR.COMBAT_ACTION_HINT.FirstAid: Intelligence + Aide médicale
+FLBR.BUTTON.Delete: Supprimer un élément
+FLBR.COMBAT_ACTION_HINT.UseItem: Utiliser un élément
+FLBR.BUTTON.Edit: Modifier un élément
+FLBR.DIALOG.AssignSuccesses: Attribuer le(s) succès
+FLBR.DIALOG.ChooseAttack: Choisir l'attaque
+FLBR.HEADER.Actions: Actions
+FLBR.HEADER.Appearance: Apparition
+FLBR.HEADER.AttributesAndSkills: Attributs et compétences
+FLBR.HEADER.Augments: Augmentations
+FLBR.HEADER.ChinyenPoints: Points Chinyen
+FLBR.HEADER.DieSize: Dé de base
+FLBR.HEADER.FavoredGear: Équipement favori
+FLBR.HEADER.Health: Santé
+FLBR.HEADER.Home: Accueil
+FLBR.HEADER.HumanityPoints: Points d'humanité
+FLBR.HEADER.Injuries: Blessures
+FLBR.HEADER.Inventory: Inventaire
+FLBR.HEADER.Notes: Notes
+FLBR.HEADER.Modifiers: Modificateurs
+FLBR.HEADER.Resolve: Résoudre
+FLBR.HEADER.Specialties: Spécialités
+FLBR.HEADER.KeyMemory: Mémoire clé
+FLBR.HEADER.KeyRelationship: Relation clé
+FLBR.HEADER.Rating: Classement
+FLBR.HEADER.YearsOnTheForce: Des années dans la police
+FLBR.HEADER.Weapons: Armes
+FLBR.SHEET_CONFIG.CharacterSubtype: Sous-type
+FLBR.SHEET_CONFIG.CharacterSubtypeHint: Choisissez s'il s'agit d'un PC ou d'un PNJ. Cette dernière option fournit une feuille de personnage allégée et des fonctionnalités supplémentaires permettant au MJ de gérer plus facilement les PNJ.
+FLBR.SHEET_CONFIG.HealthMaxModifier: Modificateur de santé max.
+FLBR.SHEET_CONFIG.HealthMaxModifierHint: Modifier le maximum de la capacité de santé (MJ seulement).
+FLBR.SHEET_CONFIG.HealthPermanentLoss: Santé - perte permanente
+FLBR.SHEET_CONFIG.HealthPermanentLossHint: Définit la quantité de santé perdue de façon permanente (réservé aux MJ).
+FLBR.SHEET_CONFIG.ResolveMaxModifier: Résoudre le modificateur max.
+FLBR.SHEET_CONFIG.ResolveMaxModifierHint: Modifier le maximum de la capacité de résolution (MJ uniquement).
+FLBR.SHEET_CONFIG.ResolvePermanentLoss: Perte permanente d'enquête
+FLBR.SHEET_CONFIG.ResolvePermanentLossHint: Définit la quantité de résolution perdue de façon permanente (réservé aux MJ).
+FLBR.SHEET_CONFIG.Maneuverability: Manœuvrabilité des véhicules
+FLBR.SHEET_CONFIG.UnlimitedPush: Permettre un nombre illimité de jets poussés
+FLBR.TAB.Actions: Actions
+FLBR.TAB.Bio: Biographie
+FLBR.TAB.Combat: Combat
+FLBR.TAB.Info: Info
+FLBR.TAB.Inventory: Inventaire
+FLBR.TAB.Mods: Modificateurs
+FLBR.TAB.Stats: Stats
+FLBR.D: D
+FLBR.NO_VALUE: '-'
+FLBR.Advantage: Avantage
+FLBR.Blast: Explosion
+FLBR.BlastPower: Puissance de l'explosion
+FLBR.BrokenByDamage: BRISÉ PAR DES DOMMAGES
+FLBR.Broken: BRISÉ
+FLBR.BrokenByStress: BRISÉ PAR LE STRESS
+FLBR.Cancel: Annuler
+FLBR.CHAT.DamageDealt: '{name} subit {amount} de dégâts.'
+FLBR.CHAT.NoDamageDealt: Aucun dommage n'a été infligé à {name}.
+FLBR.CHAT.InitialDamageDealt: L'attaque avait un montant initial de {damage} de dégâts.
+FLBR.CHAT.ArmorDeflectedDamage: L'armure a dévié les dommages de {damage}.
+FLBR.CHAT.ArmorDeflectedAllDamage: L'armure a dévié tous les dégâts.
+FLBR.CHAT.ArmorNoEffect: L'armure n'a eu aucun effet.
+FLBR.CreateNewItem: Créer un nouvel élément {type}
+FLBR.Crit: Crit
+FLBR.Disadvantage: Désavantage
+FLBR.InjuryCategory: Catégorie
+FLBR.InjuryDeathSave: Sauvegarde contre la mort
+FLBR.InjuryHealing: Guérison
+FLBR.InjuryLethal: Létal
+FLBR.InjuryPermanent: Permanent
+FLBR.InventoryNoItem: Vide.
+FLBR.ItemAddAction: Ajouter une action
+FLBR.ItemAddAttack: Ajouter une attaque
+FLBR.ItemAddModifier: Ajouter un modificateur de jet
+FLBR.ItemActionAttribute: Attribut
+FLBR.ItemActionName: Nom de l'action
+FLBR.ItemActionSkill: Compétence
+FLBR.ItemActionType: Type d'action
+FLBR.ItemActionTypeRollSkill: Jet de compétence
+FLBR.ItemActionTypeRunMacro: Exécuter la macro
+FLBR.ItemAttackName: Nom de l'attaque
+FLBR.ItemArmor: Armure
+FLBR.ITEM_AVAILABILITY.Incidental: Accessoirement
+FLBR.ITEM_AVAILABILITY.Luxury: Luxe
+FLBR.ITEM_AVAILABILITY.Premium: Premium
+FLBR.ITEM_AVAILABILITY.Rare: Rare
+FLBR.ITEM_AVAILABILITY.Standard: Standard
+FLBR.ItemAvailability: Disponibilité
+FLBR.ItemConsumable: Consommable
+FLBR.ItemConsumeNotif: Consommé {qty} unité de {name}.
+FLBR.ItemDeleteAction: Supprimer l'action
+FLBR.ItemDeleteAttack: Supprimer l'attaque
+FLBR.ItemDeleteModifier: Supprimer le modificateur
+FLBR.ItemNewAction: Nouvelle action
+FLBR.ItemNewAttack: Nouvelle attaque
+FLBR.ItemNoModifier: Pas de modificateur.
+FLBR.ItemModifier: Modificateur
+FLBR.ItemRollable: Roulant
+FLBR.ItemSpecial: Spécial
+FLBR.MACRO.NoActor: Votre acteur contrôlé {actor} n'a pas été trouvé.
+FLBR.MACRO.RollAction: Action {action}
+FLBR.MACRO.RollStat: Lancez {stat}
+FLBR.NewItem: Nouveau {type}
+FLBR.OK: OK
+FLBR.Range: Portée
+FLBR.RANGED_COMBAT.SmallTarget: Petite cible
+FLBR.RANGED_COMBAT.LargeTarget: Grande cible
+FLBR.RANGED_COMBAT.TargetBehindCover: Cible à couvert
+FLBR.RANGED_COMBAT.CarefulAim: Viser juste
+FLBR.RANGED_COMBAT.UnseenTarget: Cible non visible
+FLBR.ROLLER.AddDie: Ajouter un dé
+FLBR.ROLLER.ModifierActive: Active
+FLBR.ROLLER.ModifierValue: Valeur
+FLBR.ROLLER.TotalModifier: 'Total: {value}'
+FLBR.ROLLER.ResolveTestFailed: "{name} a raté son jet d'empathie et perd définitivement 1 point de résolution."
+FLBR.ROLLER.ResolveTest: Test pour la perte permanente de resolution
+FLBR.ROLLER.RollButton: Lancer
+FLBR.ROLLER.RollWithAdvantageButton: Avantage
+FLBR.ROLLER.RollWithDisadvantageButton: Désavantage
+FLBR.ROLLER.UnlimitedPush: Illimité
+FLBR.SignatureItemUsedCheckboxHint: Utilisé ?
+ITEM.TypeGeneric: Générique
+ITEM.TypeUpgrade: Augmenter
+ITEM.TypeArmor: Armure
+ITEM.TypeWeapon: Armes
+ITEM.TypeExplosive: Explosif
+ITEM.TypeSpecialty: Spécialité
+FLBR.WeaponDamage: Dégâts
+FLBR.WeaponCrit: Dé critique
+FLBR.WeaponDamageType: Type de dommage
+FLBR.WEAPON_DAMAGE_TYPE.None: '-'
+FLBR.WEAPON_DAMAGE_TYPE.Crushing: Broyage
+FLBR.WEAPON_DAMAGE_TYPE.Piercing: Percer
+FLBR.WEAPON_DAMAGE_TYPE.Stress: Stress
+FLBR.WeaponRange: Porté
+FLBR.WEAPON_RANGE.Engaged: Engagé
+FLBR.WEAPON_RANGE.Short: Court
+FLBR.WEAPON_RANGE.Medium: Moyen
+FLBR.WEAPON_RANGE.Long: Long
+FLBR.YouAreBroken: Tu es brisé !
+FLBR.ActorSheet.NotifWrongItemType: L'acteur {actor} ne peut pas détenir les objets de {type} !
+YZUR.CHAT.ROLL.Infos: Infos
+YZUR.CHAT.ROLL.Damage: Dommages de base
+YZUR.CHAT.ROLL.Push: Pousser
+YZUR.CHAT.ROLL.CancelPush: Annuler la pousser
+YZUR.DIETERMS.D6BladeRunnerDie: D6
+YZUR.DIETERMS.D8BladeRunnerDie: D8
+YZUR.DIETERMS.D10BladeRunnerDie: D10
+YZUR.DIETERMS.D12BladeRunnerDie: D12
+ACTOR.TypeCharacter: Personnage
+ACTOR.TypeVehicle: Véhicule
