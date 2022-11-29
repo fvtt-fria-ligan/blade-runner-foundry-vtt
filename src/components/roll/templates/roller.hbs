@@ -24,7 +24,7 @@
 			<h4>{{localize "FLBR.ROLLER.ModifierValue"}}</h4>
 			{{#each modifiers}}
 				<input type="checkbox" id="modifier-{{id}}" data-id="{{id}}" {{checked active}}/>
-				<label class="modifier-name" for="modifier-{{id}}" data-tooltip="{{description}}">{{name}}</label>
+				<label class="modifier-name" for="modifier-{{id}}" data-tooltip='{{enrichDocumentName description}}'>{{name}}</label>
 				{{!-- <div class="modifier-value">{{signedValue}}</div> --}}
 				<div class="modifier-value">
 				{{#if (gt value 0)}}

@@ -20,7 +20,7 @@ const langGlob = `${sourceDirectory}/lang/**/*.{yml,yaml}`;
 const staticFiles = ['assets', 'fonts', 'packs', 'scripts', 'system.json', 'template.json'];
 const manifestPath = 'static/system.json';
 const getDownloadURL = version =>
-  `https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/v${version}/blade-runner-fvtt_v${version}.zip`;
+  `https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/${version}/blade-runner-fvtt_v${version}.zip`;
 const packageJson = JSON.parse(fs.readFileSync('package.json'));
 
 const stdio = 'inherit';
