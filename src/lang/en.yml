@@ -40,8 +40,7 @@ FLBR.COMBAT_ACTION.FirstAid: First Aid
 FLBR.COMBAT_ACTION.Manipulate: Manipulate
 FLBR.COMBAT_ACTION.UseItem: Use Item
 FLBR.COMBAT_ACTION_HINT.Sprint: >-
-  You can make additional moves (as
-  described above) in a single Round by using the sprint
+  You can make additional moves in a single Round by using the sprint
   action. This will then count as your action for the Round,
   meaning you can perform no other action.
   Roll <span class="smallcaps">MOBILITY</span> –
@@ -56,7 +55,7 @@ FLBR.COMBAT_ACTION_HINT.Crawl: >-
 FLBR.COMBAT_ACTION_HINT.UnarmedAttack: Strength + Close Combat
 FLBR.COMBAT_ACTION_HINT.MeleeAttack: Strength + Close Combat
 FLBR.COMBAT_ACTION_HINT.Grapple: >-
-  If you grapple your opponent as a special attack 
+  If you grapple your opponent as a special attack
   in close combat, both you and your opponent fall
   to the ground. The opponent drops any weapon
   they were holding and cannot move. The only
@@ -205,7 +204,6 @@ FLBR.ItemNoAttack: No attack mode defined.
 FLBR.ItemNoModifier: No modifier.
 FLBR.ItemModifier: Modifier
 FLBR.ItemQuantity: Quantity
-FLBR.ItemRollable: Rollable
 FLBR.ItemSpecial: Special
 FLBR.MACRO.GetActorTitle: Choose an Actor
 FLBR.MACRO.GetActorHint: You have selected multiple tokens. Please choose one of them.
