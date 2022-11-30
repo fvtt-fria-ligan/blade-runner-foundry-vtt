@@ -66,7 +66,7 @@ FLBR.HEADER.Appearance: Apparence
 FLBR.HEADER.AttributesAndSkills: Attributs & Compétences
 FLBR.HEADER.Augments: Augmentations
 FLBR.HEADER.ChinyenPoints: Points Chinyen
-FLBR.HEADER.DieSize: Dé de base
+FLBR.HEADER.DieSize: Base
 FLBR.HEADER.FavoredGear: Équipement favori
 FLBR.HEADER.Health: Santé
 FLBR.HEADER.Home: Domicile
@@ -182,7 +182,7 @@ ITEM.TypeWeapon: Arme
 ITEM.TypeExplosive: Explosif
 ITEM.TypeSpecialty: Spécialité
 FLBR.WeaponDamage: Dégâts
-FLBR.WeaponCrit: Dé critique
+FLBR.WeaponCrit: Dé Crit.
 FLBR.WeaponDamageType: Type de dégats
 FLBR.WEAPON_DAMAGE_TYPE.None: '–'
 FLBR.WEAPON_DAMAGE_TYPE.Crushing: Ecrasant
