@@ -169,6 +169,10 @@ a.entity-link {
     color: var(--color-blue-lighter);
   }
 
+  form .notes, form .hint {
+    color: var(--color-green);
+  }
+
   /* ------------------------------------------ */
 
   h1, h2, h3, h4, h5, h6 {
