@@ -233,6 +233,32 @@ a.entity-link {
     }
   }
 }
+
+/* ------------------------------------------ */
+/*  Update Dialog (for modules)               */
+/* ------------------------------------------ */
+
+.blade-runner.dialog.update-log {
+  .boxed-property {
+    margin: 4px 0;
+
+    h1, h2, h3 {
+      color: var(--color-gold);
+    }
+    
+    h4 {
+      color: var(--color-green);
+    }
+  }
+
+  .update-document-type {
+    color: var(--color-blue-lighter);
+  }
+  .update-document-description {
+    color: #ccc;
+  }
+}
+
 /* ------------------------------------------ */
 /*  Custom Scrollbar                          */
 /* ------------------------------------------ */
