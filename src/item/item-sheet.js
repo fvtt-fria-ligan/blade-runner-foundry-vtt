@@ -82,7 +82,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     const originalButtons = super._getHeaderButtons();
     const myButtons = [];
 
-    if (this.item.rollable && this.item.actor) {
+    if (this.item.hasAction && this.item.actor) {
       myButtons.push({
         label: game.i18n.localize('FLBR.SHEET_HEADER.ItemRoll'),
         class: 'item-roll',
