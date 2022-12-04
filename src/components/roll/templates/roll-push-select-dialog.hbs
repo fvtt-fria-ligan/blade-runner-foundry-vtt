@@ -1,0 +1,21 @@
+<form autocomplete="off">
+	{{#each dice as | die |}}
+		{{#each die.results}}
+			{{#if active}}
+				<div class="boxed-property form-group">
+					<label class="checkbox-label">
+						<input
+							type="checkbox"
+							name="{{@../index}}.{{indexResult}}"
+							{{checked (and (gt result 1) (lt result 6))}}
+							{{#if (and (gte die.faces 10) (gte result 6) (lt result 10))}}
+							{{else}}disabled{{/if}}
+						/>
+						{{!-- <img src="systems/blade-runner/assets/icons/d{{die.faces}}-grey.svg" width="24" height="24"/> --}}
+						<span>{{localize "FLBR.D"}}{{die.faces}}&nbsp;&nbsp;&nbsp;( {{result}} )</span>
+					</label>
+				</div>
+			{{/if}}
+		{{/each}}
+	{{/each}}
+</form>

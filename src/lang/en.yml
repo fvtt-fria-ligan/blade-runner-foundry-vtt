@@ -239,6 +239,7 @@ FLBR.ROLLER.ResolveTestFailed: '{name} failed their Empathy roll and permanently
 FLBR.ROLLER.RollButton: Roll
 FLBR.ROLLER.RollWithAdvantageButton: Advantage
 FLBR.ROLLER.RollWithDisadvantageButton: Disadvantage
+FLBR.ROLLER.SelectDiceToPush: Select dice to push
 FLBR.ROLLER.UnlimitedPush: Unlimited
 FLBR.SignatureItemUsedCheckboxHint: Used?
 FLBR.WeaponDamage: Damage
@@ -259,7 +260,7 @@ FLBR.ActorSheet.NotifWrongItemType: Actor {actor} cannot hold {type} items!
 YZUR.CHAT.ROLL.Infos: Infos
 YZUR.CHAT.ROLL.Damage: Base Damage
 YZUR.CHAT.ROLL.Push: Push
-YZUR.CHAT.ROLL.CancelPush: Cancel Push
+YZUR.CHAT.ROLL.CancelPush: Accept
 YZUR.DIETERMS.D6BladeRunnerDie: D6
 YZUR.DIETERMS.D8BladeRunnerDie: D8
 YZUR.DIETERMS.D10BladeRunnerDie: D10
