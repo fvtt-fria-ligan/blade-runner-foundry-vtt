@@ -630,7 +630,7 @@ export default class BRRollHandler extends FormApplication {
           callback: html => html[0].querySelector('form'),
         },
         cancel: {
-          label: game.i18n.localize('Cancel'),
+          label: game.i18n.localize('FLBR.Cancel'),
           icon: '<i class="fas fa-times"></i>',
           callback: () => false,
         },

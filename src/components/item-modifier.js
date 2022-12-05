@@ -53,7 +53,7 @@ export default class Modifier {
     }
 
     /**
-     * The category of the target. Either "attribute", "skill", "action", or "constant".
+     * The category of the target. Either "attribute", "skill", "capacity", "action", or "constant".
      * @type {string}
      */
     this.category = keys[0];

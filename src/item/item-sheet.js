@@ -215,7 +215,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
     event.preventDefault();
     const modifiers = foundry.utils.duplicate(this.item.system.modifiers ?? {});
     const modifierId = Math.max(-1, ...Object.getOwnPropertyNames(modifiers)) + 1;
-    return this.item.update({ [`system.modifiers.${modifierId}`]: { name: '', value: '+1' } });
+    return this.item.update({ [`system.modifiers.${modifierId}`]: { name: 'attribute.str', value: '+1' } });
   }
 
   _onDeleteModifier(event) {

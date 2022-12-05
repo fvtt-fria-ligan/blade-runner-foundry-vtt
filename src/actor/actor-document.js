@@ -131,8 +131,15 @@ export default class BladeRunnerActor extends Actor {
         for (const attribute of capData.attributes) {
           max += this.getAttribute(attribute);
         }
+
         // Performs some maths.
         max = Math.ceil(max / 4) + natureModifier + capacity.mod + permanentLoss;
+
+        // Adds the modifiers from items.
+        max += this.getRollModifiers({ targets: [cap] })
+          .reduce((tot, m) => tot + m.value, 0);
+
+        // Clamps within margins defined in the config.
         max = Math.clamped(max, 0, capData.max);
 
         // Records the value in the actor data.
