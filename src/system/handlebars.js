@@ -96,6 +96,15 @@ function registerHandlebarsHelpers() {
     return (a / b) * 100;
   });
 
+  // Handlebars.registerHelper('isPushable', function (die, result) {
+  //   const lockedValues = CONFIG.YZUR.Dice.DIE_TERMS[`brD${die}`]?.LOCKED_VALUES;
+  //   if (Array.isArray(lockedValues)) {
+  //     result = Number(result);
+  //     return !lockedValues.some(v => v === result);
+  //   }
+  //   return undefined;
+  // });
+
   Handlebars.registerHelper('enrichText', function (text) {
     // Enriches content.
     text = TextEditor.enrichHTML(text, { documents: true, async: false });

@@ -234,7 +234,6 @@ export default class BRRollHandler extends FormApplication {
    * @param {Object} [data]
    * @param {Object} [options]
    * @returns {BRRollHandler} Rendered instance of this FormApplication
-   * @static
    */
   static create(data = {}, options = {}) {
     return new this(data, options).render(true);
@@ -266,7 +265,6 @@ export default class BRRollHandler extends FormApplication {
    * @param {Object.<string|null>}   formData
    * @returns private RollHandler
    * @override Required
-   * @async
    */
   async _updateObject(event, formData) {
     this._validateForm(event, formData);
@@ -389,22 +387,62 @@ export default class BRRollHandler extends FormApplication {
    * @param {ChatMessage} message           The message that contains the roll to push.
    * @param {boolean}    [sendMessage=true] Whether to send the pushed roll in a message.
    * @returns {Promise.<ChatMessage|YearZeroRoll>}
-   * @static
-   * @async
    */
   static async pushRoll(message, { sendMessage = true } = {}) {
     if (!message || !message.rolls.length) return;
 
     /** @type {YearZeroRoll} */
     const roll = message.rolls[0].duplicate();
+
+    // Checks whether to perform selective push.
+    const doSelect = roll.dice.some(d =>
+      d.faces >= 10 &&
+      d.pushable &&
+      d.values.some(v => v >= 6 && v < 10),
+    );
+    if (doSelect) {
+      // 1. Ask for which dice to push and gets their indexes.
+      const pushSelections = await BRRollHandler.selectPush(roll.dice);
+
+      // 2. Processes the inputs (checkboxes).
+      if (pushSelections) {
+        for (const el of pushSelections) {
+          const [x, y] = el.name.split('.');
+          const result = roll.dice[x].results.find(r => r.active && r.indexResult === Number(y));
+          if (!result) throw new Error(`Push Selection | No result found for index ${el.name}`);
+
+          // 2.1. Finds the pushable dice the user don't want to push, and locks them.
+          if (!el.disabled && !el.checked) {
+            result.locked = true;
+          }
+          else if (result.locked) {
+            result.locked = false;
+          }
+        }
+      }
+      else {
+        // Refresh the message to reset the re-enable the push button.
+        game.messages.directory.updateMessage(message);
+        return roll;
+      }
+    }
+
+    // Pushes the roll.
     await roll.push({ async: true });
+
+    // Prepares the message.
     const flavor = message.flavor;
     const speakerData = message.speaker;
     const speaker = this.getSpeaker(speakerData);
+
+    // Updates the actor with damage & stress from banes.
     if (speaker) await this.updateActor(roll, speaker);
 
-    await message.delete();
-    if (sendMessage) return roll.toMessage({ flavor, speaker: speakerData });
+    // Sends the message.
+    if (sendMessage) {
+      await message.delete();
+      return roll.toMessage({ flavor, speaker: speakerData });
+    }
     return roll;
   }
 
@@ -414,8 +452,6 @@ export default class BRRollHandler extends FormApplication {
    * Handles cancellation .
    * @param {ChatMessage} message The message that contains the roll
    * @returns {Promise.<ChatMessage>} The updated message
-   * @static
-   * @async
    */
   static async cancelPush(message) {
     if (!message || !message.rolls.length) return;
@@ -549,8 +585,6 @@ export default class BRRollHandler extends FormApplication {
    * @see {@link Dialog}
    * @param {number} [lowest=6] Value of the lowest die
    * @returns {Promise.<number>} The desired die size
-   * @static
-   * @async
    */
   static async askDie(lowest = 6) {
     const template = 'systems/blade-runner/templates/components/roll/roll-askdie-dialog.hbs';
@@ -566,6 +600,38 @@ export default class BRRollHandler extends FormApplication {
         classes: ['blade-runner', 'dialog'],
         minimizable: false,
       },
+    });
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * Displays a dialog for choosing the dice to push.
+   * @see {@link Dialog}
+   * @param {Object.<string, DiceTerm>} dice
+   * @returns {Promise.<HTMLInputElement[]>}
+   */
+  static async selectPush(dice) {
+    return Dialog.wait({
+      title: game.i18n.localize('FLBR.ROLLER.SelectDiceToPush'),
+      content: await renderTemplate(
+        'systems/blade-runner/templates/components/roll/roll-push-select-dialog.hbs',
+        { dice },
+      ),
+      buttons: {
+        ok: {
+          label: game.i18n.localize('YZUR.CHAT.ROLL.Push'),
+          icon: '<i class="fas fa-dice"></i>',
+          callback: html => html[0].querySelector('form'),
+        },
+        cancel: {
+          label: game.i18n.localize('Cancel'),
+          icon: '<i class="fas fa-times"></i>',
+          callback: () => false,
+        },
+      },
+    }, {}, {
+      classes: ['blade-runner', 'dialog', 'dice-push-select'],
     });
   }
 }

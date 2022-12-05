@@ -76,3 +76,9 @@
     }
   }
 }
+
+.blade-runner.dialog.dice-push-select {
+  input:disabled + span {
+    color: var(--color-disabled);
+  } 
+}
