@@ -1,0 +1,56 @@
+@use "../utils";
+
+.blade-runner.sheet.loot {
+  min-width: 400px;
+  min-height: 600px;
+
+  .loot-container {
+    display: grid;
+    gap: 4px;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "name   name"
+      "avatar notes"
+      "loot  loot";
+  }
+
+  .loot-name {
+    grid-area: name;
+
+    input {
+      @include utils.border-sheet(2px);
+      color: var(--color-blue-darker);
+      font-family: var(--font-table);
+      font-size: var(--font-size--default);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      width: 100%;
+      height: auto;
+      padding: 4px;
+      margin: 0;
+    }
+  }
+  .avatar {
+    grid-area: avatar;
+    @include utils.boxed-property(1px, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100%;
+  }
+  .loot-notes {
+    grid-area: notes;
+  }
+  .loot-inventory {
+    grid-area: loot;
+  }
+
+  .embedded-items {
+    max-height: 100%;
+  }
+  .embedded-item {
+    width: 100%;
+  }
+}
