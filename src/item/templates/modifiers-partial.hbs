@@ -12,14 +12,24 @@
 						<option value="skill.{{.}}">{{localize (concat "FLBR.SKILL." (capitalize .))}}</option>
 					{{/each}}
 				</optgroup>
+				<optgroup label="{{localize "FLBR.Capacities"}}">
+					{{#each @root.config.capacitiesMap as | v cap |}}
+						<option value="capacity.{{cap}}">{{localize (concat "FLBR.HEADER." (capitalize cap))}}</option>
+					{{/each}}
+				</optgroup>
 			{{/select}}
 		</select>
 		{{!-- <input type="text" name="system.modifiers.{{@key}}.value" value="{{modifier.value}}"/> --}}
 		<select name="system.modifiers.{{@key}}.value" value="{{modifier.value}}">
 			{{#select modifier.value}}
 				<option value="0">{{localize "FLBR.NO_VALUE"}}</option>
-				<option value="+1">{{localize "FLBR.Advantage"}}</option>
-				<option value="-1">{{localize "FLBR.Disadvantage"}}</option>
+				{{#if (or (eq modifier.name "capacity.health") (eq modifier.name "capacity.resolve"))}}
+					<option value="+1">+1</option>
+					<option value="-1">−1</option>
+				{{else}}
+					<option value="+1">{{localize "FLBR.Advantage"}}</option>
+					<option value="-1">{{localize "FLBR.Disadvantage"}}</option>
+				{{/if}}
 			{{/select}}
 		</select>
 		<a class="button delete-modifier" data-modifier-id="{{@key}}" data-tooltip="{{localize 'FLBR.ItemDeleteModifier'}}">

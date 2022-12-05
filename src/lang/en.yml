@@ -154,6 +154,7 @@ FLBR.TAB.Stats: Stats
 FLBR.D: D
 FLBR.NO_VALUE: –
 FLBR.Advantage: Advantage
+FLBR.Capacities: Health & Resolve
 FLBR.Blast: Blast
 FLBR.BlastPower: Blast Power
 FLBR.Broken: BROKEN
