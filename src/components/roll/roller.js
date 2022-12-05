@@ -407,33 +407,42 @@ export default class BRRollHandler extends FormApplication {
       // 2. Processes the inputs (checkboxes).
       if (pushSelections) {
         for (const el of pushSelections) {
-          // 2.1. Finds the pushable dice the user don't want to push.
+          const [x, y] = el.name.split('.');
+          const result = roll.dice[x].results.find(r => r.active && r.indexResult === Number(y));
+          if (!result) throw new Error(`Push Selection | No result found for index ${el.name}`);
+
+          // 2.1. Finds the pushable dice the user don't want to push, and locks them.
           if (!el.disabled && !el.checked) {
-            const [x, y] = el.name.split('.');
-            const result = roll.dice[x].results.find(r => r.active && r.indexResult === Number(y));
-
-            if (!result) throw new Error(`Push Selection | No result found for index ${el.name}`);
-
-            // 2.2. Disables the push of that result.
             result.locked = true;
+          }
+          else if (result.locked) {
+            result.locked = false;
           }
         }
       }
       else {
-        // Refresh the message to reset the button status.
+        // Refresh the message to reset the re-enable the push button.
         game.messages.directory.updateMessage(message);
         return roll;
       }
     }
+
+    // Pushes the roll.
     await roll.push({ async: true });
 
+    // Prepares the message.
     const flavor = message.flavor;
     const speakerData = message.speaker;
     const speaker = this.getSpeaker(speakerData);
+
+    // Updates the actor with damage & stress from banes.
     if (speaker) await this.updateActor(roll, speaker);
 
-    await message.delete();
-    if (sendMessage) return roll.toMessage({ flavor, speaker: speakerData });
+    // Sends the message.
+    if (sendMessage) {
+      await message.delete();
+      return roll.toMessage({ flavor, speaker: speakerData });
+    }
     return roll;
   }
 
