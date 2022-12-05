@@ -1,0 +1,25 @@
+<form class="{{cssClass}}" autocomplete="off">
+	<div class="loot-container">
+
+		<div class="loot-name">
+			<input type="text" name="name" value="{{actor.name}}"/>
+		</div>
+
+		<div class="avatar">
+			<img class="profile" src="{{actor.img}}" data-edit="img" data-tooltip="{{actor.name}}"/>
+		</div>
+
+		<div class="loot-notes boxed-property">
+			<h3>{{localize "FLBR.HEADER.Notes"}}</h3>
+			<div>
+				{{{editor system.description target="system.description" button=true editable=editable}}}
+			</div>
+		</div>
+
+		<div class="loot-inventory boxed-property">
+			<h3>{{localize "FLBR.HEADER.Inventory"}}</h3>
+{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.items.contents}}
+		</div>
+
+	</div>
+</form>
