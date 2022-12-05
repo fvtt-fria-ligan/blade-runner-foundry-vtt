@@ -29,7 +29,10 @@
 The core system features no content. It only provides support for various mechanics required to play the game:
 
 - Dice roller
-- Character sheets
+- Actor sheets:
+  - Character (PC & NPC)
+  - Vehicle
+  - Loot (item pile)
 - Item sheets:
   - Generic
   - Armor

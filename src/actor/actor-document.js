@@ -70,11 +70,13 @@ export default class BladeRunnerActor extends Actor {
   /** @override */
   getRollData() {
     const rollData = super.getRollData();
-    for (const [k, v] of Object.entries(this.attributes)) {
-      rollData[k] = v.value;
-    }
-    for (const [k, v] of Object.entries(this.skills)) {
-      rollData[k] = v.value;
+    if (this.type === ACTOR_TYPES.CHAR) {
+      for (const [k, v] of Object.entries(this.attributes)) {
+        rollData[k] = v.value;
+      }
+      for (const [k, v] of Object.entries(this.skills)) {
+        rollData[k] = v.value;
+      }
     }
     rollData.maxPush = FLBR.maxPushMap[this.nature] ?? 1;
     return rollData;
@@ -184,7 +186,7 @@ export default class BladeRunnerActor extends Actor {
    * @returns {number}
    */
   getAttribute(attributeKey) {
-    return +this.attributes[attributeKey]?.value;
+    return +this.attributes?.[attributeKey]?.value;
   }
 
   /**
@@ -193,7 +195,7 @@ export default class BladeRunnerActor extends Actor {
    * @returns {number}
    */
   getSkill(skillKey) {
-    return +this.skills[skillKey]?.value;
+    return +this.skills?.[skillKey]?.value;
   }
 
   /* ------------------------------------------ */
