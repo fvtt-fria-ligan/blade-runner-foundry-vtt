@@ -163,10 +163,10 @@ async function changelog() {
  */
 async function commitTagPush() {
   const { version } = packageJson;
-  const commitMsg = `chore(release): Release ${version}`;
+  const commitMsg = `chore(release): 🚀 Release v${version}`;
   await execa('git', ['add', '-A'], { stdio });
   await execa('git', ['commit', '--message', commitMsg], { stdio });
-  await execa('git', ['tag', `v${version}`], { stdio });
+  await execa('git', ['tag', `${version}`], { stdio });
   await execa('git', ['push', 'upstream'], { stdio });
   await execa('git', ['push', 'upstream', '--tag'], { stdio });
 }
