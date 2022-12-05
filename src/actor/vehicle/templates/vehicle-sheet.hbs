@@ -1,0 +1,36 @@
+<form class="{{cssClass}}{{#if actor.isBroken}} broken{{/if}}" autocomplete="off">
+
+	{{!-- SHEET HEADER --}}
+
+	<div class="sheet-header">
+		<div class="container-header">
+
+			<div class="vehicle-name">
+				<input type="text" name="name" value="{{actor.name}}"/>
+			</div>
+
+			<div class="avatar">
+				<img class="profile" src="{{actor.img}}" data-edit="img" data-tooltip="{{actor.name}}"/>
+			</div>
+
+			<div class="vehicle-stats flexrow">
+				<div class="vehicle-property vehicle-property-maneuverability"></div>
+				<div class="hull boxed-property {{#if (lte system.hull.value 0)}} broken{{else if (lte (ratio system.hull.value system.hull.max) 50)}} half{{/if}}">
+					<h3>
+						{{localize "FLBR.HEADER.HULL"}}
+						{{#if (lte system.hull.value 0)}}
+							<b>({{localize "FLBR.Wrecked"}})</b>
+						{{/if}}
+						<span class="capacity-rating">{{system.hull.value}}/{{system.hull.max}}</span>
+					</h3>
+					{{boxes "system.hull.value" value=system.hull.value min=0 max=system.hull.max}}
+				</div>
+				<div class="vehicle-property vehicle-property-armor"></div>
+				<div class="vehicle-property vehicle-property-availability"></div>
+				<div class="vehicle-property vehicle-property-cost"></div>
+			</div>
+
+		</div>
+	</div>
+
+</form>

@@ -60,6 +60,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const allowedItems = {
       [ACTOR_TYPES.CHAR]: [ITEM_TYPES.SPECIALTY, ITEM_TYPES.SYNTHETIC_AUGMENTATION, ITEM_TYPES.CRITICAL_INJURY],
       [ACTOR_TYPES.VEHICLE]: [],
+      [ACTOR_TYPES.LOOT]: [],
     };
     let allowed = true;
 

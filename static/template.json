@@ -2,6 +2,7 @@
   "Actor": {
     "types": [
       "character",
+      "vehicle",
       "loot"
     ],
     "templates": {
@@ -68,7 +69,11 @@
       "hull": { "value": 2, "max": 2 },
       "armor": 0,
       "availability": 2,
-      "cost": 5
+      "cost": 5,
+      "components": {
+        "engine": 1
+      },
+      "mountedWeapons": {}
     },
     "loot": {
       "templates": ["actorDescription"]

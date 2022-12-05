@@ -46,10 +46,19 @@ export default class BladeRunnerActor extends Actor {
     return this.system.resolve;
   }
 
+  get hull() {
+    return this.system.hull;
+  }
+
   get isBroken() {
-    for (const cap of Object.values(CAPACITIES)) {
-      const capacity = this.system[cap];
-      if (capacity && capacity.value <= 0) return true;
+    switch (this.type) {
+      case ACTOR_TYPES.VEHICLE:
+        return this.system.hull.value <= 0;
+      case ACTOR_TYPES.CHAR:
+        for (const cap of Object.values(CAPACITIES)) {
+          const capacity = this.system[cap];
+          if (capacity && capacity.value <= 0) return true;
+        }
     }
     return false;
   }

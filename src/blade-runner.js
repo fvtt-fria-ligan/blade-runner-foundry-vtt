@@ -170,6 +170,10 @@ Hooks.on('createActor', async (actor, _data, _options) => {
         }
       }
       break;
+    case ACTOR_TYPES.VEHICLE:
+      updateData['prototypeToken.bar1.attribute'] = 'hull';
+      // updateData['prototypeToken.bar2.attribute'] = null;
+      break;
   }
   if (!foundry.utils.isEmpty(updateData)) {
     await actor.update(updateData);
