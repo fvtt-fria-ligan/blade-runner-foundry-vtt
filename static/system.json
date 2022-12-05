@@ -65,6 +65,7 @@
   "readme": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/blob/main/README.md",
   "license": "LICENSE.txt",
   "socket": false,
+  "changelog": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases",
   "manifest": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/latest/download/system.json",
   "download": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/10.0.1/blade-runner-fvtt_v10.0.1.zip"
 }
