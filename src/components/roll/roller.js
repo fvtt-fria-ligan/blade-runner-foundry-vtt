@@ -360,8 +360,13 @@ export default class BRRollHandler extends FormApplication {
   async executeRoll(modifier = 0) {
     if (modifier) {
       const min = Math.min(...this.dice);
-      if (modifier > 0) this.dice.push(min);
-      else this.dice = this.dice.filter(d => d !== min);
+      if (modifier > 0) {
+        this.dice.push(min);
+      }
+      else {
+        const index = this.dice.indexOf(min);
+        this.dice = this.dice.filter((_d, i) => i !== index);
+      }
     }
     const dice = this.dice.map(d => ({ term: `${d}`, number: 1 }));
     this.roll = YearZeroRoll.forge(dice, {}, this.getRollOptions());
