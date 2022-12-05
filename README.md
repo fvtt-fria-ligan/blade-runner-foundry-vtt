@@ -9,7 +9,7 @@
     <img alt="Forge Installs" src="https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fblade-runner&colorB=4aa94a"/>
   </a>
   <a href="https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases">
-    <img alt="Downloads" src="https://img.shields.io/github/downloads/fvtt-fria-ligan/blade-runner-foundry-vtt/latest/blade-runner-fvtt_v10.0.1.zip"/>
+    <img alt="Downloads" src="https://img.shields.io/github/downloads/fvtt-fria-ligan/blade-runner-foundry-vtt/latest/blade-runner-fvtt_v10.0.2.zip"/>
   </a>
   <a href="https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"/>
