@@ -247,3 +247,5 @@ WARNING.NoDiceInput: Aucun dé à lancer !
 WARNING.NoItemAction: Aucune action définie !
 WARNING.ItemActionMacroNotFound: Macro "{macro}" pas trouvée !
 WARNING.NoItemUnit: "Impossible d'utiliser {name} : pas d'unité restante !"
+FLBR.ROLLER.SelectDiceToPush: Sélectionnez les dés à relancer
+FLBR.Capacities: Capacités
