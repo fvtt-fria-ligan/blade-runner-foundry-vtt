@@ -1,16 +1,16 @@
 <div class="combat-tab container">
 	<div class="weapons boxed-property">
 		<h3>{{localize "FLBR.HEADER.Weapons"}}{{createNewItemButton "weapon"}}</h3>
-	{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.weapon}}
-	{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.explosive}}
+	{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=actor.itemTypes.weapon}}
+	{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=actor.itemTypes.explosive}}
 	</div>
 	<div class="armors boxed-property">
 		<h3>{{localize "FLBR.HEADER.Armor"}}{{createNewItemButton "armor"}}</h3>
-	{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.armor}}
+	{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=actor.itemTypes.armor}}
 	</div>
 	<div class="injuries boxed-property">
 		<h3>{{localize "FLBR.HEADER.Injuries"}}{{createNewItemButton "injury"}}</h3>
-	{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.injury}}
+	{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=actor.itemTypes.injury}}
 	</div>
 	<div class="actions boxed-property">
 		<h4>{{localize "FLBR.HEADER.Actions"}}</h4>
