@@ -104,6 +104,7 @@ export default class BladeRunnerActor extends Actor {
 
     switch (this.type) {
       case ACTOR_TYPES.CHAR: this._prepareCharacterData(); break;
+      case ACTOR_TYPES.VEHICLE: this._prepareVehicleData(); break;
     }
   }
 
@@ -159,6 +160,22 @@ export default class BladeRunnerActor extends Actor {
         capacity.ratio = capacity.value / capacity.max;
       }
     }
+  }
+
+  /* ----------------------------------------- */
+  /*  Data Preparation                         */
+  /*   → Vehicles                              */
+  /* ----------------------------------------- */
+
+  /** @private */
+  _prepareVehicleData() {
+    this._prepareMountedWeapons();
+  }
+
+  /* ----------------------------------------- */
+
+  _prepareMountedWeapons() {
+    this.mountedWeapons = this.items.filter(i => this.system.mountedWeapons.includes(i.id));
   }
 
   /* ------------------------------------------- */
@@ -336,8 +353,7 @@ export default class BladeRunnerActor extends Actor {
     // Rolls all armors, if any, and reduces damage, if success(es) were obtained.
     let armorAblation = 0;
     /** @type {Array.<import('@item/item-document').default>} */
-    const armors = this.itemTypes[ITEM_TYPES.ARMOR]
-      .filter(i => i.qty > 0);
+    const armors = this.itemTypes[ITEM_TYPES.ARMOR].filter(i => i.qty > 0);
     for (const armor of armors) {
       const rollMessage = await armor.roll();
       armorAblation += rollMessage?.rolls[0]?.successCount ?? 0;
