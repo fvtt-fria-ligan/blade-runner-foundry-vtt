@@ -55,7 +55,7 @@ The core system features no content. It only provides support for various mechan
 
 > **Note**: Premium modules are not mandatory to play the game as the game system is free to use, but they will save you _weeks_ of preparation.
 
-1. Get the premium modules at [Free League's shop](https://freeleaguepublishing.com/en/store/)
+1. Get the premium modules at [Free League's shop](https://freeleaguepublishing.com/en/store/?collection_id=405939749122)
 2. Retrieve your codes in your mail box _(contact Free League if you did not recieve anything after 15 minutes, also check your spam box)_
 3. Activate the codes in your Foundry account: visit [foundryvtt.com](https://foundryvtt.com/), go to your account settings, in _"Purchased Content"_, and paste in the codes
 4. Launch the Foundry client _(and make sure you have updated Foundry to V10)_
