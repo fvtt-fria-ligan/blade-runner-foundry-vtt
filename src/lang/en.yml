@@ -252,6 +252,7 @@ FLBR.VehicleCreateActor: Create Actor?
 FLBR.VehicleCreateActorHint: >-
   Actor {name} is marked as an NPC.
   Do you want to duplicate it before crewing it?
+FLBR.VehicleCrew: Crew
 FLBR.VehicleManeuverability: Maneuvr.
 FLBR.VehicleMountedWeapons: Mounted Weapons
 FLBR.VehicleNotifCrewFull: No more free seat!

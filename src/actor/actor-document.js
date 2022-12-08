@@ -158,7 +158,10 @@ export default class BladeRunnerActor extends Actor {
 
         // Records the value in the actor data.
         capacity.max = max;
-        if (capacity.value > max) capacity.value = max;
+        if (capacity.value > max) {
+          capacity.value = max;
+          // this.updateSource({ [`system.${cap}.value`]: max });
+        }
         capacity.ratio = capacity.value / capacity.max;
       }
     }
@@ -171,7 +174,18 @@ export default class BladeRunnerActor extends Actor {
 
   /** @private */
   _prepareVehicleData() {
+    this._prepareHull();
     this._prepareCrew();
+  }
+
+  /* ----------------------------------------- */
+
+  _prepareHull() {
+    const hull = this.system.hull;
+    if (hull.value > hull.max) {
+      hull.value = hull.max;
+      this.updateSource({ 'system.hull.value': hull.max });
+    }
   }
 
   /* ----------------------------------------- */

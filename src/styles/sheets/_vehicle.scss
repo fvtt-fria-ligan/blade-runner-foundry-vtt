@@ -22,7 +22,6 @@
     text-transform: uppercase;
     writing-mode: vertical-lr;
     text-align: center;
-    padding-left: 6px;
   }
 
   .vehicle-name {
@@ -83,15 +82,8 @@
   }
 
   .vehicle-property {
-    @include utils.boxed-property(1px, 2px);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 4px;
-
-    > * {
-      flex: 1;
-    }
+    display: grid;
+    grid-template-columns: 2fr 1fr;
 
     label {
       color: var(--color-green);
@@ -106,6 +98,13 @@
   .vehicle-crew {
     grid-area: crew;
   }
+
+  .embedded-items {
+    height: 100%;
+  }
+  .embedded-item {
+    width: 100%;
+  }
 }
 
 .vehicle-crew {
@@ -113,6 +112,13 @@
   flex-direction: row;
   gap: 4px;
   // overflow-x: auto;
+
+  h4 {
+    font-size: small;
+    writing-mode: vertical-lr;
+    text-align: center;
+    transform: rotate(180deg);
+  }
 
   .vehicle-seat {
     display: flex;

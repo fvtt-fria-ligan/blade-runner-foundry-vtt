@@ -32,7 +32,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
       tabs: [{
         navSelector: '.sheet-tabs',
         contentSelector: '.sheet-body',
-        initial: 'stats',
+        initial: 'combat',
       }],
     });
   }
@@ -53,8 +53,10 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
   /** @override */
   async getData(options) {
     const sheetData = await super.getData(options);
-    const [items, mountedWeapons] = sheetData.items.partition(i => i.system.mounted);
-    sheetData.items = items;
+    // Note: the double '!!' is to turn undefined to a boolean
+    //  because .partition() does fail on undefined.
+    const [otherItems, mountedWeapons] = this.vehicle.items.contents.partition(i => !!i.system.mounted);
+    sheetData.trunk = otherItems;
     sheetData.mountedWeapons = mountedWeapons;
     sheetData.crew = this.vehicle.crew.contents;
     return sheetData;
@@ -125,6 +127,26 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     // Stats Roll
     html.find('.stat-roll').click(this._onStatRoll.bind(this));
     html.find('.action-roll').click(this._onActionRoll.bind(this));
+
+    // Hull
+    new ContextMenu(html, '.hull', [
+      {
+        name: 'Increase Hull',
+        icon: FLBR.Icons.buttons.plus,
+        callback: () => this.vehicle.update({
+          'system.hull.max': this.vehicle.system.hull.max + 1,
+        }),
+        condition: () => this.vehicle.system.hull.max < FLBR.capacitiesMap.health.max,
+      },
+      {
+        name: 'Decrease Hull',
+        icon: FLBR.Icons.buttons.minus,
+        callback: () => this.vehicle.update({
+          'system.hull.max': this.vehicle.system.hull.max - 1,
+        }),
+        condition: () => this.vehicle.system.hull.max > 1,
+      },
+    ]);
 
     // Crew
     html.find('.vehicle-seat.rollable').click(this._onCrewAction.bind(this));

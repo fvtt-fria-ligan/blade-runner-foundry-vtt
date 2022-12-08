@@ -16,7 +16,7 @@
 			<div class="vehicle-stats">
 				<div class="stat-blok stat-blok-mvr">
 					<div class="attribute-name">
-						<a class="stat-roll" data-attribute="mvr">{{localize "FLBR.VehicleManeuverability"}}</a>
+						<a class="stat-roll" data-attribute="mvr">{{trim (localize "FLBR.ATTRIBUTE.MVR") 7}}</a>
 					</div>
 					{{#with system.maneuverability}}
 						<div class="attribute-score">
@@ -45,25 +45,34 @@
 						{{boxes "system.hull.value" value=system.hull.value min=0 max=system.hull.max}}
 					</div>
 				</div>
-				<div class="vehicle-property vehicle-property-armor">
-					<label>{{localize "FLBR.ItemArmor"}} ({{localize "FLBR.D"}}{{system.armor}})</label>
-					{{scoreSelector "system.armor" selected=system.armor}}
-				</div>
-				<div class="vehicle-property vehicle-property-availability">
-					<label>{{localize "FLBR.ItemAvailability"}}</label>
-					<select name="system.availability" data-dtype="Number">
-						{{selectOptions config.availabilities selected=system.availability localize=true}}
-					</select>
-				</div>
-				<div class="vehicle-property vehicle-property-cost">
-					<label>{{localize "FLBR.ItemCost"}}</label>
-					<input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
+				<div class="vehicle-properties boxed-property">
+					<div class="vehicle-property vehicle-property-armor">
+						<label>
+							<a class="roll-vehicle-armor">
+								{{localize "FLBR.ItemArmor"}} ({{localize "FLBR.D"}}{{system.armor}})
+							</a>
+						</label>
+						{{scoreSelector "system.armor" selected=system.armor}}
+					</div>
+					<hr/>
+					<div class="vehicle-property vehicle-property-availability">
+						<label>{{localize "FLBR.ItemAvailability"}}</label>
+						<select name="system.availability" data-dtype="Number">
+							{{selectOptions config.availabilities selected=system.availability localize=true}}
+						</select>
+					</div>
+					<hr/>
+					<div class="vehicle-property vehicle-property-cost">
+						<label>{{localize "FLBR.ItemCost"}}</label>
+						<input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
+					</div>
 				</div>
 			</div>
 
 			<div class="vehicle-type">{{localize "ACTOR.TypeVehicle"}}</div>
 
 			<div class="vehicle-crew boxed-property">
+				<h4>{{trim (localize "FLBR.VehicleCrew") 7}}</h4>
 				{{#times system.passengers}}
 {{> systems/blade-runner/templates/actor/vehicle/vehicle-seat-partial.hbs occupant=(lookup ../crew (add @index -1)) seat=@index}}
 				{{/times}}
@@ -76,7 +85,7 @@
 	{{!-- SHEET TABS --}}
 
 	<div class="sheet-tabs" data-group="primary">
-		<a class="sheet-tab" data-tab="combat">{{{config.Icons.tabs.combat}}}&nbsp;{{localize "FLBR.TAB.Combat"}}</a>
+		<a class="sheet-tab" data-tab="combat">{{{config.Icons.buttons.range}}}&nbsp;{{localize "FLBR.TAB.Combat"}}</a>
 		<a class="sheet-tab" data-tab="inventory">{{{config.Icons.tabs.inventory}}}&nbsp;{{localize "FLBR.TAB.Inventory"}}</a>
 		<a class="sheet-tab" data-tab="bio">{{{config.Icons.tabs.bio}}}&nbsp;{{localize "FLBR.HEADER.Notes"}}</a>
 	</div>
@@ -94,8 +103,7 @@
 
 		<div class="tab" data-group="primary" data-tab="inventory">
 			<div class="vehicle-inventory boxed-property">
-				<h3>{{localize "FLBR.HEADER.Inventory"}}</h3>
-{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=items wrap=true}}
+{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=trunk wrap=true}}
 			</div>
 		</div>
 

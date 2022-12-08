@@ -34,7 +34,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
       isGM: game.user.isGM,
       actor: baseData.actor,
       system: foundry.utils.duplicate(baseData.actor.system),
-      items: baseData.items,
+      // items: baseData.items,
       effects: baseData.effects,
       rollData: this.rollData,
       config: CONFIG.BLADE_RUNNER,
@@ -72,8 +72,8 @@ export default class BladeRunnerActorSheet extends ActorSheet {
 
     if (!allowed) {
       const msg = game.i18n.format('FLBR.ActorSheet.NotifWrongItemType', {
-        type: game.i18n.localize(`FLBR.ItemTypes.${type}`),
-        actor: game.i18n.localize(`FLBR.ActorTypes.${this.actor.type}`),
+        type: game.i18n.localize(`ITEM.Type${type.capitalize()}`),
+        actor: game.i18n.localize(`ACTOR.Type${this.actor.type.capitalize()}`),
       });
       console.warn(`FLBR | ${msg}`);
       ui.notifications.warn(msg);
@@ -119,7 +119,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
   _onConfigureSheet(event) {
     event.preventDefault();
     new ActorSheetConfig(this.actor, {
-      // classes: ['blade-runner'],
+      // classes: ['blade-runner', 'dialog'],
       top: this.position.top + 40,
       left: this.position.left + (this.position.width - 400) / 2,
     }).render(true);
