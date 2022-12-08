@@ -6,7 +6,32 @@
 
   /* ------------------------------------------ */
 
-  .sheet-header {
+  .sheet-header {}
+
+  .capacities {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .half {
+      $half-color: var(--color-yellow);
+      border-color: $half-color;
+      h3 { color: $half-color; }
+      .capacity-boxes { color: $half-color; }
+    }
+    .broken {
+      $broken-color: var(--color-red-darker);
+      border-color: $broken-color;
+      h3 { color: $broken-color; }
+      .capacity-boxes { color: $broken-color; }
+    }
+  }
+  .capacities .capacity-rating {
+    font-size: var(--font-size--large);
+    float: right;
+  }
+  .capacities .loss {
+    color: #424242;
   }
 
   /* ------------------------------------------ */

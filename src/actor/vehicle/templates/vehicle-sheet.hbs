@@ -13,24 +13,88 @@
 				<img class="profile" src="{{actor.img}}" data-edit="img" data-tooltip="{{actor.name}}"/>
 			</div>
 
-			<div class="vehicle-stats flexrow">
-				<div class="vehicle-property vehicle-property-maneuverability"></div>
-				<div class="hull boxed-property {{#if (lte system.hull.value 0)}} broken{{else if (lte (ratio system.hull.value system.hull.max) 50)}} half{{/if}}">
-					<h3>
-						{{localize "FLBR.HEADER.HULL"}}
-						{{#if (lte system.hull.value 0)}}
-							<b>({{localize "FLBR.Wrecked"}})</b>
-						{{/if}}
-						<span class="capacity-rating">{{system.hull.value}}/{{system.hull.max}}</span>
-					</h3>
-					{{boxes "system.hull.value" value=system.hull.value min=0 max=system.hull.max}}
+			<div class="vehicle-stats">
+				<div class="stat-blok stat-blok-mvr">
+					<div class="attribute-name">
+						<a class="stat-roll" data-attribute="mvr">{{localize "FLBR.VehicleManeuverability"}}</a>
+					</div>
+					{{#with system.maneuverability}}
+						<div class="attribute-score">
+							{{scoreSelector "system.maneuverability" selected=this}}
+						</div>
+						<div class="attribute-size">
+							<div class="boxed-value stat-roll rollable" data-attribute="mvr">
+								{{#if (lte this 0)}}
+									{{localize "FLBR.NO_VALUE"}}
+								{{else}}
+									{{localize "FLBR.D"}}{{this}}
+								{{/if}}
+							</div>
+						</div>
+					{{/with}}
 				</div>
-				<div class="vehicle-property vehicle-property-armor"></div>
-				<div class="vehicle-property vehicle-property-availability"></div>
-				<div class="vehicle-property vehicle-property-cost"></div>
+				<div class="capacities">
+					<div class="hull boxed-property {{#if (lte system.hull.value 0)}} broken{{else if (lte (ratio system.hull.value system.hull.max) 50)}} half{{/if}}">
+						<h3>
+							{{localize "FLBR.HEADER.Hull"}}
+							{{#if (lte system.hull.value 0)}}
+								<b>({{localize "FLBR.Wrecked"}})</b>
+							{{/if}}
+							<span class="capacity-rating">{{system.hull.value}}/{{system.hull.max}}</span>
+						</h3>
+						{{boxes "system.hull.value" value=system.hull.value min=0 max=system.hull.max}}
+					</div>
+				</div>
+				<div class="vehicle-property vehicle-property-armor">
+					<label>{{localize "FLBR.ItemArmor"}} ({{localize "FLBR.D"}}{{system.armor}})</label>
+					{{scoreSelector "system.armor" selected=system.armor}}
+				</div>
+				<div class="vehicle-property vehicle-property-availability">
+					<label>{{localize "FLBR.ItemAvailability"}}</label>
+					<select name="system.availability" data-dtype="Number">
+						{{selectOptions config.availabilities selected=system.availability localize=true}}
+					</select>
+				</div>
+				<div class="vehicle-property vehicle-property-cost">
+					<label>{{localize "FLBR.ItemCost"}}</label>
+					<input type="text" name="system.cost" value="{{system.cost}}" data-dtype="Number"/>
+				</div>
+			</div>
+
+			<div class="vehicle-type">{{localize "ACTOR.TypeVehicle"}}</div>
+
+			<div class="vehicle-crew boxed-property">
+				{{#times system.passengers}}
+{{> systems/blade-runner/templates/actor/vehicle/vehicle-seat-partial.hbs occupant=(lookup ../crew (add @index -1)) seat=@index}}
+				{{/times}}
+{{> systems/blade-runner/templates/actor/vehicle/vehicle-seat-partial.hbs seat=-1}}
 			</div>
 
 		</div>
+	</div>
+
+	{{!-- SHEET TABS --}}
+
+	<div class="sheet-tabs" data-group="primary">
+		<a class="sheet-tab" data-tab="combat">{{{config.Icons.tabs.combat}}}&nbsp;{{localize "FLBR.TAB.Combat"}}</a>
+		<a class="sheet-tab" data-tab="inventory">{{{config.Icons.tabs.inventory}}}&nbsp;{{localize "FLBR.TAB.Inventory"}}</a>
+		<a class="sheet-tab" data-tab="bio">{{{config.Icons.tabs.bio}}}&nbsp;{{localize "FLBR.HEADER.Notes"}}</a>
+	</div>
+
+	{{!-- SHEET BODY --}}
+
+	<div class="sheet-body">
+
+		<div class="tab" data-group="primary" data-tab="combat"></div>
+
+		<div class="tab" data-group="primary" data-tab="inventory"></div>
+
+		<div class="tab" data-group="primary" data-tab="bio">
+			<div class="boxed-property">
+				{{{editor system.description target="system.description" button=true editable=editable}}}
+			</div>
+		</div>
+
 	</div>
 
 </form>

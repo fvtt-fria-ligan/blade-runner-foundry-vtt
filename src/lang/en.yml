@@ -103,6 +103,7 @@ FLBR.HEADER.DieSize: Base Die
 FLBR.HEADER.FavoredGear: Favored Gear
 FLBR.HEADER.Health: Health
 FLBR.HEADER.Home: Home
+FLBR.HEADER.Hull: Hull
 FLBR.HEADER.HumanityPoints: Humanity Points
 FLBR.HEADER.Injuries: Injuries
 FLBR.HEADER.Inventory: Inventory
@@ -215,7 +216,7 @@ FLBR.MACRO.NoItem: Your controlled Actor {actor} does not have an item named {it
 FLBR.MACRO.RollAction: Action {action}
 FLBR.MACRO.RollStat: Roll {stat}
 FLBR.Nature: Nature
-FLBR.NatureHint: Character's Nature (Only GM)
+FLBR.NatureHint: Character's Nature (GM only)
 FLBR.NewItem: New {type}
 FLBR.OK: OK
 FLBR.Range: Range
@@ -243,6 +244,15 @@ FLBR.ROLLER.RollWithDisadvantageButton: Disadvantage
 FLBR.ROLLER.SelectDiceToPush: Select dice to push
 FLBR.ROLLER.UnlimitedPush: Unlimited
 FLBR.SignatureItemUsedCheckboxHint: Used?
+FLBR.VehicleAddSeat: Increase crew size (GM only)
+FLBR.VehicleCreateActor: Create Actor?
+FLBR.VehicleCreateActorHint: >-
+  Actor {name} is marked as an NPC.
+  Do you want to duplicate it before crewing it?
+FLBR.VehicleManeuverability: Maneuvr.
+FLBR.VehicleNotifCrewFull: No more free seat!
+FLBR.VehicleNotifDropCrewVehicle: Vehicles inceptions are not allowed!
+FLBR.VehicleNotifDropCrewLoot: Put your trashes in the trunk instead!
 FLBR.WeaponDamage: Damage
 FLBR.WeaponCrit: Crit Die
 FLBR.WeaponDamageType: Damage Type
@@ -256,6 +266,7 @@ FLBR.WEAPON_RANGE.Short: Short
 FLBR.WEAPON_RANGE.Medium: Medium
 FLBR.WEAPON_RANGE.Long: Long
 FLBR.WEAPON_RANGE.Extreme: Extreme
+FLBR.Wrecked: Wrecked
 FLBR.YouAreBroken: You are Broken!
 FLBR.ActorSheet.NotifWrongItemType: Actor {actor} cannot hold {type} items!
 YZUR.CHAT.ROLL.Infos: Infos

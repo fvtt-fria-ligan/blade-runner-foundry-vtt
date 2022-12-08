@@ -1,0 +1,21 @@
+{{#with occupant}}
+  <div class="vehicle-seat occupied rollable" data-action="roll-occupant" data-occupant-id="{{id}}" data-tooltip="{{name}}" data-tooltip-direction="UP">
+    <img src="{{img}}"/>
+  </div>
+{{else}}
+  {{#if (and @root.isGM (eq seat -1))}}
+    <div class="vehicle-seat empty button rollable" data-action="add-occupant" data-tooltip="{{localize "FLBR.VehicleAddSeat"}}" data-tooltip-direction="UP">
+      <div class="seat-icon">{{{@root.config.Icons.buttons.plus}}}</div>
+    </div>
+  {{else}}
+    <div class="vehicle-seat empty">
+      <div class="seat-icon">
+        {{#if (eq seat 1)}}
+          {{{@root.config.Icons.buttons.wheel}}}
+        {{else}}
+          {{{@root.config.Icons.buttons.seat}}}
+        {{/if}}
+      </div>
+    </div>
+  {{/if}}
+{{/with}}

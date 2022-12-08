@@ -61,6 +61,8 @@ function registerHandlebarsHelpers() {
   Handlebars.registerHelper('times', function (n, content) {
     let str = '';
     for (let i = 0; i < n; i++) {
+      content.data.first = i === 0;
+      content.data.last = i === n - 1;
       content.data.max = n;
       content.data.index = i + 1;
       str += content.fn(i);

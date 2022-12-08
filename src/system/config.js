@@ -342,6 +342,8 @@ FLBR.Icons = {
     lethal: '<i class="fas fa-skull"></i>',
     // mental: '<i class="fas fa-brain"></i>',
     vehicle: '<i class="fas fa-car"></i>',
+    wheel: '<i class="fa-regular fa-steering-wheel"></i>',
+    seat: '<i class="fa-regular fa-person-seat-reclined"></i>',
     chat: '<i class="far fa-comment-dots"></i>',
     roll: '<i class="fas fa-dice-d20"></i>',
   },

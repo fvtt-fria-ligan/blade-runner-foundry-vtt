@@ -71,9 +71,10 @@
       "availability": 2,
       "cost": 5,
       "components": {
-        "engine": 1
+        "engine": true
       },
-      "mountedWeapons": {}
+      "mountedWeapons": [],
+      "crew": []
     },
     "loot": {
       "templates": ["actorDescription"]

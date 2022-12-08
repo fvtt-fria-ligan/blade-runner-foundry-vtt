@@ -1,7 +1,8 @@
 import { FLBR } from '@system/config';
-import { ACTOR_SUBTYPES, ACTOR_TYPES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
+import { ACTOR_SUBTYPES, ACTOR_TYPES, ATTRIBUTES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
+import CrewCollection from '@components/vehicle-crew';
 
 /**
  * @typedef {Object} ActorCapacity
@@ -164,18 +165,99 @@ export default class BladeRunnerActor extends Actor {
 
   /* ----------------------------------------- */
   /*  Data Preparation                         */
-  /*   → Vehicles                              */
+  /*   → Vehicle                               */
   /* ----------------------------------------- */
 
   /** @private */
   _prepareVehicleData() {
     this._prepareMountedWeapons();
+    this._prepareCrew();
   }
 
   /* ----------------------------------------- */
 
+  /**
+   * Creates a shortcut array to mounted weapons.
+   * @private
+   */
   _prepareMountedWeapons() {
-    this.mountedWeapons = this.items.filter(i => this.system.mountedWeapons.includes(i.id));
+    // Uses a Set for lazyness.
+    const mountedWeapons = new Set(this.system.mountedWeapons);
+
+    // Cleanses old entries.
+    for (const weaponId of mountedWeapons) {
+      if (!this.items.has(weaponId)) {
+        mountedWeapons.delete(weaponId);
+      }
+    }
+    if (mountedWeapons.size !== this.system.mountedWeapons.length) {
+      this.updateSource({ 'system.mountedWeapons': [...mountedWeapons] });
+    }
+
+    // Creates an shortcut array for mounted weapons.
+    this.mountedWeapons = this.items.filter(i => mountedWeapons.has(i.id));
+  }
+
+  /* ----------------------------------------- */
+
+  /**
+   * Sets an embedded collection for occupants in the vehicle.
+   * @private
+   */
+  _prepareCrew() {
+    if (!Object.hasOwn(this, 'crew')) {
+      const c = new CrewCollection(
+        this,
+        'system.crew',
+        'system.passengers',
+      );
+      Object.defineProperty(this, 'crew', {
+        value: c,
+        writable: false,
+      });
+    }
+    this.crew.update();
+  }
+
+  /* ----------------------------------------- */
+  /*  Crew Management (Vehicles only)          */
+  /* ----------------------------------------- */
+
+  /**
+   * @param {BladeRunnerActor} actor
+   */
+  async addVehicleOccupant(actor) {
+    if (this.type !== ACTOR_TYPES.VEHICLE) return;
+    if (this.crew.full) return;
+    const occupantData = {
+      id: actor.id,
+    };
+    const crew = this.system.crew;
+    crew.push(occupantData);
+    await this.update({ 'system.crew': crew });
+    await actor.updateCharacterManeuverability(this.system.maneuverability);
+    return crew;
+  }
+
+  /* ----------------------------------------- */
+
+  async removeVehicleOccupant(occupantId) {
+    if (this.type !== ACTOR_TYPES.VEHICLE) return;
+    const crew = this.system.crew.filter(c => c.id !== occupantId);
+    await this.update({ 'system.crew': crew });
+    await game.actors.get(occupantId)?.updateCharacterManeuverability(0);
+    return crew;
+  }
+
+  /* ----------------------------------------- */
+
+  async updateCharacterManeuverability(value) {
+    if (this.type !== ACTOR_TYPES.CHAR) return;
+    if (this.attributes[ATTRIBUTES.VEHICLE_MANEUVERABILITY]?.value !== value) {
+      await this.update({
+        [`system.attributes.${ATTRIBUTES.VEHICLE_MANEUVERABILITY}.value`]: value,
+      });
+    }
   }
 
   /* ------------------------------------------- */

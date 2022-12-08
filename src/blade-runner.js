@@ -95,6 +95,15 @@ Hooks.once('init', async () => {
   enrichTextEditors();
   await initializeHandlebars();
 
+  // Adds a shortcut directory for vehicle actors.
+  Object.defineProperty(game, 'vehicles', {
+    enumerable: true,
+    get: () => new Collection(game.actors
+      .filter(a => a.type === ACTOR_TYPES.VEHICLE)
+      .map(a => [a.id, a]),
+    ),
+  });
+
   console.log('Blade Runner RPG | Ready!');
   Hooks.call('bladeRunnerReady', game.bladerunner, CONFIG.BLADE_RUNNER);
 });
