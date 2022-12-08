@@ -105,6 +105,13 @@
 					<input type="checkbox" name="system.consumable" {{checked system.consumable}}/>
 				</div>
 			{{/if}}
+
+			{{#if inVehicle}}
+				<div class="item-property item-property-mounted">
+					<label>{{localize "FLBR.ItemMounted"}}</label>
+					<input type="checkbox" name="system.mounted" {{checked system.mounted}}/>
+				</div>
+			{{/if}}
 			
 			<div class="item-property item-property-special">
 				<input type="text" name="system.special" value="{{system.special}}" maxlength="{{config.itemSpecialInputMaxLength}}" placeholder="{{localize "FLBR.ItemSpecial"}}"/>

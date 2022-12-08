@@ -53,6 +53,9 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
   /** @override */
   async getData(options) {
     const sheetData = await super.getData(options);
+    const [items, mountedWeapons] = sheetData.items.partition(i => i.system.mounted);
+    sheetData.items = items;
+    sheetData.mountedWeapons = mountedWeapons;
     sheetData.crew = this.vehicle.crew.contents;
     return sheetData;
   }

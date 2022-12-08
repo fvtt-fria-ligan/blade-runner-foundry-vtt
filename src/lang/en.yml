@@ -85,8 +85,10 @@ FLBR.COMBAT_ACTION_HINT.Manipulate: Empathy + Manipulation
 FLBR.COMBAT_ACTION_HINT.UseItem: Use Item
 FLBR.BUTTON.Delete: Delete item
 FLBR.BUTTON.Edit: Edit item
+FLBR.BUTTON.Mount: Mount item
 FLBR.BUTTON.Roll: Roll item
 FLBR.BUTTON.ToChat: Send item to chat
+FLBR.BUTTON.Unmount: Unmount item
 FLBR.CHAT_ACTION.ApplyDamage: Apply damage to targeted tokens
 FLBR.DIALOG.AssignSuccesses: Assign Success(es)
 FLBR.DIALOG.AssignSuccessesHint: Choose a number of successes to spent against {name}.
@@ -205,6 +207,7 @@ FLBR.ItemNewAttack: New attack
 FLBR.ItemNoAttack: No attack mode defined.
 FLBR.ItemNoModifier: No modifier.
 FLBR.ItemModifier: Modifier
+FLBR.ItemMounted: Mounted
 FLBR.ItemQuantity: Quantity
 FLBR.ItemSpecial: Special
 FLBR.MACRO.GetActorTitle: Choose an Actor
@@ -250,6 +253,7 @@ FLBR.VehicleCreateActorHint: >-
   Actor {name} is marked as an NPC.
   Do you want to duplicate it before crewing it?
 FLBR.VehicleManeuverability: Maneuvr.
+FLBR.VehicleMountedWeapons: Mounted Weapons
 FLBR.VehicleNotifCrewFull: No more free seat!
 FLBR.VehicleNotifDropCrewVehicle: Vehicles inceptions are not allowed!
 FLBR.VehicleNotifDropCrewLoot: Put your trashes in the trunk instead!
@@ -279,7 +283,7 @@ YZUR.DIETERMS.D10BladeRunnerDie: D10
 YZUR.DIETERMS.D12BladeRunnerDie: D12
 ACTOR.TypeCharacter: Character
 ACTOR.TypeVehicle: Vehicle
-ACTOR.TypeLoot: Item Pile (Loot)
+ACTOR.TypeLoot: Loot
 ACTOR.SubtypePc: Player Character
 ACTOR.SubtypeNpc: Non-Player Character
 ITEM.TypeGeneric: Generic
@@ -296,6 +300,10 @@ SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatic Armor Roll
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Whether to automatically roll the armor.
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Open First Weapon Attack
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Whether to open the collapsible of the first weapon attack when the Item sheet is displayed.
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewName: Update Maneuverability on Crew
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewHint: Whether to update the actor's maneuverability when crewed into a vehicle.
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewName: Update Maneuverability on Uncrew
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewHint: Whether to update the actor's maneuverability when removed from a vehicle.
 WARNING.ApplyDamageNoNature: 'Apply Push Damage: Actor Nature Not Found!'
 WARNING.ApplyDamageNoCapacityKey: 'Apply Push Damage: Nature-Capacity relation Not Found!'
 WARNING.ApplyDamageNoActorCapacity: 'Apply Push Damage: Actor Capacity Not Found!'

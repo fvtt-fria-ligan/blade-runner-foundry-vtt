@@ -1,5 +1,6 @@
 import { FLBR } from '@system/config';
-import { ACTOR_SUBTYPES, ACTOR_TYPES, ATTRIBUTES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
+import { ACTOR_SUBTYPES, ACTOR_TYPES, ATTRIBUTES,
+  CAPACITIES, ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
 import CrewCollection from '@components/vehicle-crew';
@@ -170,32 +171,7 @@ export default class BladeRunnerActor extends Actor {
 
   /** @private */
   _prepareVehicleData() {
-    this._prepareMountedWeapons();
     this._prepareCrew();
-  }
-
-  /* ----------------------------------------- */
-
-  /**
-   * Creates a shortcut array to mounted weapons.
-   * @private
-   */
-  _prepareMountedWeapons() {
-    // Uses a Set for lazyness.
-    const mountedWeapons = new Set(this.system.mountedWeapons);
-
-    // Cleanses old entries.
-    for (const weaponId of mountedWeapons) {
-      if (!this.items.has(weaponId)) {
-        mountedWeapons.delete(weaponId);
-      }
-    }
-    if (mountedWeapons.size !== this.system.mountedWeapons.length) {
-      this.updateSource({ 'system.mountedWeapons': [...mountedWeapons] });
-    }
-
-    // Creates an shortcut array for mounted weapons.
-    this.mountedWeapons = this.items.filter(i => mountedWeapons.has(i.id));
   }
 
   /* ----------------------------------------- */
@@ -235,7 +211,9 @@ export default class BladeRunnerActor extends Actor {
     const crew = this.system.crew;
     crew.push(occupantData);
     await this.update({ 'system.crew': crew });
-    await actor.updateCharacterManeuverability(this.system.maneuverability);
+    if (game.settings.get(SYSTEM_ID, SETTINGS_KEYS.UPDATE_ACTOR_MANEUVERABILITY_ON_CREW)) {
+      await actor.updateCharacterManeuverability(this.system.maneuverability);
+    }
     return crew;
   }
 
@@ -245,7 +223,9 @@ export default class BladeRunnerActor extends Actor {
     if (this.type !== ACTOR_TYPES.VEHICLE) return;
     const crew = this.system.crew.filter(c => c.id !== occupantId);
     await this.update({ 'system.crew': crew });
-    await game.actors.get(occupantId)?.updateCharacterManeuverability(0);
+    if (game.settings.get(SYSTEM_ID, SETTINGS_KEYS.UPDATE_ACTOR_MANEUVERABILITY_ON_UNCREW)) {
+      await game.actors.get(occupantId)?.updateCharacterManeuverability(0);
+    }
     return crew;
   }
 

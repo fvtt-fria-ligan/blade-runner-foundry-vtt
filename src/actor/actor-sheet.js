@@ -171,6 +171,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     html.find('.item-edit').click(this._onItemEdit.bind(this));
     html.find('.item-delete').click(this._onItemDelete.bind(this));
     html.find('.item-delete-confirmed').click(this._onItemDeleteConfirmed.bind(this));
+    html.find('.item-mount').click(this._onItemMount.bind(this));
     html.find('.item-roll').click(this._onItemRoll.bind(this));
     html.find('.item-chat').click(this._onItemChat.bind(this));
     html.find('.blast-roll').click(this._onBlastRoll.bind(this));
@@ -231,6 +232,17 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const elem = event.currentTarget;
     const itemId = elem.closest('.embedded-item').dataset.itemId;
     return this.actor.deleteEmbeddedDocuments('Item', [itemId]);
+  }
+
+  /* ------------------------------------------ */
+
+  _onItemMount(event) {
+    event.preventDefault();
+    const elem = event.currentTarget;
+    const toMount = elem.dataset.action === 'mount';
+    const itemId = elem.closest('.embedded-item').dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    return item.update({ 'system.mounted': toMount });
   }
 
   /* ------------------------------------------ */

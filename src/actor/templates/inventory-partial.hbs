@@ -71,6 +71,8 @@
 				{{/if}}
 			</div>
 
+			{{!-- Item Controls --}}
+
 			<div class="item-controls">
 				{{#if system.blast}}
 					<a class="btn blast-roll" data-tooltip="{{localize "FLBR.SHEET_HEADER.BlastPowerRoll"}}">
@@ -86,6 +88,17 @@
 					<a class="btn item-roll" data-tooltip="{{localize "FLBR.BUTTON.Roll"}}">
 						{{{@root.config.Icons.buttons.roll}}}
 					</a>
+				{{/if}}
+				{{#if (and hasAttack (eq @root.actor.type "vehicle"))}}
+					{{#if system.mounted}}
+						<a class="btn item-mount" data-action="unmount" data-tooltip="{{localize "FLBR.BUTTON.Unmount"}}">
+							{{{@root.config.Icons.buttons.unmount}}}
+						</a>
+					{{else}}
+						<a class="btn item-mount" data-action="mount" data-tooltip="{{localize "FLBR.BUTTON.Mount"}}">
+							{{{@root.config.Icons.buttons.mount}}}
+						</a>
+					{{/if}}
 				{{/if}}
 				<a class="btn item-edit" data-tooltip="{{localize "FLBR.BUTTON.Edit"}}">
 					{{{@root.config.Icons.buttons.edit}}}

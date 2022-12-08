@@ -7,12 +7,12 @@
   .loot-container {
     display: grid;
     gap: 4px;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: auto auto auto;
     grid-template-areas:
-      "name   name"
-      "avatar notes"
-      "loot  loot";
+      "name   name  type"
+      "avatar notes type"
+      "loot   loot  loot";
   }
 
   .loot-name {
@@ -40,9 +40,23 @@
     width: 100px;
     height: 100%;
   }
+
   .loot-notes {
     grid-area: notes;
   }
+
+  .loot-type {
+    grid-area: type;
+    color: var(--color-blue);
+    font-family: var(--font-table);
+    font-size: var(--font-size--large);
+    font-weight: bold;
+    text-transform: uppercase;
+    writing-mode: vertical-lr;
+    text-align: center;
+    padding-left: 6px;
+  }
+
   .loot-inventory {
     grid-area: loot;
   }

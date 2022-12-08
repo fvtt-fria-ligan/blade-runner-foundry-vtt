@@ -135,4 +135,6 @@ export const SETTINGS_KEYS = {
   /** @type {'autoApplyDamage'} */ AUTO_APPLY_DAMAGE: 'autoApplyDamage',
   /** @type {'autoArmorRoll'} */ AUTO_ARMOR_ROLL: 'autoArmorRoll',
   /** @type {'openFirstWeaponAttack'} */ OPEN_FIRST_WEAPON_ATTACK: 'openFirstWeaponAttack',
+  /** @type {'updateActorMvrOnCrew'} */ UPDATE_ACTOR_MANEUVERABILITY_ON_CREW: 'updateActorMvrOnCrew',
+  /** @type {'updateActorMvrOnUncrew'} */ UPDATE_ACTOR_MANEUVERABILITY_ON_UNCREW: 'updateActorMvrOnUncrew',
 };

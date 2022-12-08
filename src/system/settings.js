@@ -42,4 +42,18 @@ export function registerSystemSettings() {
     type: Boolean,
     default: true,
   });
+  game.settings.register(sysId, SETTINGS_KEYS.UPDATE_ACTOR_MANEUVERABILITY_ON_CREW, {
+    name: 'SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewName',
+    hint: 'SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewHint',
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+  game.settings.register(sysId, SETTINGS_KEYS.UPDATE_ACTOR_MANEUVERABILITY_ON_UNCREW, {
+    name: 'SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewName',
+    hint: 'SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewHint',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
 }

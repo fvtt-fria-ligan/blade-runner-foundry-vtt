@@ -1,7 +1,7 @@
 import ItemAction from '@components/item-action';
 import ItemAttack from '@components/item-attack';
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
+import { ACTOR_TYPES, ITEM_TYPES, SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
 import { enrichTextFields } from '@utils/string-util';
 
 /**
@@ -58,7 +58,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       inActor: !!this.item.actor,
       isOffensive: this.item.isOffensive,
       isConsumable: this.item.isConsumable,
-      // inVehicle: this.item.actor?.type === 'vehicle',
+      inVehicle: this.item.actor?.type === ACTOR_TYPES.VEHICLE,
       item: baseData.item,
       system: foundry.utils.duplicate(baseData.item.system),
       // effects: baseData.effects,

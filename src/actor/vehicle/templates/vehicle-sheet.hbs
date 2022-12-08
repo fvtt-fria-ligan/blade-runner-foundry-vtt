@@ -85,9 +85,19 @@
 
 	<div class="sheet-body">
 
-		<div class="tab" data-group="primary" data-tab="combat"></div>
+		<div class="tab" data-group="primary" data-tab="combat">
+			<div class="mounted-weapons boxed-property">
+				<h3>{{localize "FLBR.VehicleMountedWeapons"}}</h3>
+{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=mountedWeapons wrap=true}}
+			</div>
+		</div>
 
-		<div class="tab" data-group="primary" data-tab="inventory"></div>
+		<div class="tab" data-group="primary" data-tab="inventory">
+			<div class="vehicle-inventory boxed-property">
+				<h3>{{localize "FLBR.HEADER.Inventory"}}</h3>
+{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=items wrap=true}}
+			</div>
+		</div>
 
 		<div class="tab" data-group="primary" data-tab="bio">
 			<div class="boxed-property">
