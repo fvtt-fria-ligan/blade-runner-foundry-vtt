@@ -72,7 +72,7 @@
 			<div class="vehicle-type">{{localize "ACTOR.TypeVehicle"}}</div>
 
 			<div class="vehicle-crew boxed-property">
-				<h4>{{trim (localize "FLBR.VehicleCrew") 7}}</h4>
+				<h4>{{trim (localize "FLBR.VEHICLE.Crew") 7}}</h4>
 				{{#times system.passengers}}
 {{> systems/blade-runner/templates/actor/vehicle/vehicle-seat-partial.hbs occupant=(lookup ../crew (add @index -1)) seat=@index}}
 				{{/times}}
@@ -96,7 +96,7 @@
 
 		<div class="tab" data-group="primary" data-tab="combat">
 			<div class="mounted-weapons boxed-property">
-				<h3>{{localize "FLBR.VehicleMountedWeapons"}}</h3>
+				<h3>{{localize "FLBR.VEHICLE.MountedWeapons"}}</h3>
 {{> systems/blade-runner/templates/actor/inventory-partial.hbs items=mountedWeapons wrap=true}}
 			</div>
 		</div>

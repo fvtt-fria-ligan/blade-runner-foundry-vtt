@@ -13,7 +13,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
   /* ------------------------------------------ */
 
   /**
-   * A convenient shortcut to this actor.
+   * A convenient shortcut to the actor in this sheet.
    * @type {import('@actor/actor-document').default}
    */
   get vehicle() {
@@ -53,8 +53,8 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
   /** @override */
   async getData(options) {
     const sheetData = await super.getData(options);
-    // Note: the double '!!' is to turn undefined to a boolean
-    //  because .partition() does fail on undefined.
+    // ? Note: the double '!!' turns undefined into a boolean
+    // ?   because .partition() fails on undefined.
     const [otherItems, mountedWeapons] = this.vehicle.items.contents.partition(i => !!i.system.mounted);
     sheetData.trunk = otherItems;
     sheetData.mountedWeapons = mountedWeapons;
@@ -89,30 +89,30 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
    */
   async dropCrew(actor) {
     if (this.vehicle.crew.full) {
-      return ui.notifications.info('FLBR.VehicleNotifCrewFull', { localize: true });
+      return ui.notifications.info('FLBR.VEHICLE.NotifCrewFull', { localize: true });
     }
     if (
       actor.system.subtype === ACTOR_SUBTYPES.NPC ||
       !actor.prototypeToken.actorLink
     ) {
-      const clone = await Dialog.confirm({
-        title: game.i18n.localize('FLBR.VehicleCreateActor'),
-        content: game.i18n.format('FLBR.VehicleCreateActorHint', {
+      const toCopy = await Dialog.confirm({
+        title: game.i18n.localize('FLBR.VEHICLE.CreateActor'),
+        content: game.i18n.format('FLBR.VEHICLE.CreateActorHint', {
           name: actor.name,
         }),
         defaultYes: true,
       });
-      if (clone) {
+      if (toCopy) {
         const actorData = actor.toObject();
         actorData.name = `${actor.name} (in ${this.vehicle.name})`;
-        actor = await Actor.create(actorData);
+        actor = await Actor.create(actorData); // This creates a new actor with a new ID
       }
     }
     await this.vehicle.addVehicleOccupant(actor);
   }
 
   /* ------------------------------------------ */
-  /*  Sheet Listeners                           */
+  /*  Sheet Listeners & Context Menus           */
   /* ------------------------------------------ */
 
   /** @override */
@@ -131,7 +131,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     // Hull
     new ContextMenu(html, '.hull', [
       {
-        name: 'Increase Hull',
+        name: game.i18n.localize('FLBR.VEHICLE.IncreaseHull'),
         icon: FLBR.Icons.buttons.plus,
         callback: () => this.vehicle.update({
           'system.hull.max': this.vehicle.system.hull.max + 1,
@@ -139,7 +139,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
         condition: () => this.vehicle.system.hull.max < FLBR.capacitiesMap.health.max,
       },
       {
-        name: 'Decrease Hull',
+        name: game.i18n.localize('FLBR.VEHICLE.DecreaseHull'),
         icon: FLBR.Icons.buttons.minus,
         callback: () => this.vehicle.update({
           'system.hull.max': this.vehicle.system.hull.max - 1,
@@ -152,19 +152,19 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     html.find('.vehicle-seat.rollable').click(this._onCrewAction.bind(this));
     new ContextMenu(html, '.vehicle-seat:not(.button)', [
       {
-        name: 'Edit Crew',
+        name: game.i18n.localize('FLBR.VEHICLE.EditPassenger'),
         icon: FLBR.Icons.buttons.edit,
         callback: el => game.actors.get(el.data('occupant-id'))?.sheet.render(true),
         condition: el => el.hasClass('occupied'),
       },
       {
-        name: 'Remove Crew',
+        name: game.i18n.localize('FLBR.VEHICLE.RemovePassenger'),
         icon: FLBR.Icons.buttons.delete,
         callback: el => this.vehicle.removeVehicleOccupant(el.data('occupant-id')),
         condition: el => el.hasClass('occupied'),
       },
       {
-        name: 'Delete Seat',
+        name: game.i18n.localize('FLBR.VEHICLE.DeleteSeat'),
         icon: FLBR.Icons.buttons.remove,
         callback: () => this.vehicle.update({
           'system.passengers': this.vehicle.system.passengers - 1,
@@ -190,14 +190,14 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     const action = elem.dataset.action;
 
     if (action === 'add-occupant') {
-      const seats = this.vehicle.system.passengers;
-      return this.vehicle.update({ 'system.passengers': seats + 1 });
+      return this.vehicle.update({
+        'system.passengers': this.vehicle.system.passengers + 1,
+      });
     }
     else if (action === 'roll-occupant') {
-      const actor = game.actors.get(elem.dataset.occupantId);
-      if (actor) {
-        actor.rollStat(ATTRIBUTES.VEHICLE_MANEUVERABILITY, SKILLS.DRIVING);
-      }
+      return this.vehicle.crew
+        .get(elem.dataset.occupantId)
+        ?.rollStat(ATTRIBUTES.VEHICLE_MANEUVERABILITY, SKILLS.DRIVING);
     }
   }
 

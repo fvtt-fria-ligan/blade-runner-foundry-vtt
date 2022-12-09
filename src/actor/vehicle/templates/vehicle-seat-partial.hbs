@@ -4,7 +4,7 @@
   </div>
 {{else}}
   {{#if (and @root.isGM (eq seat -1))}}
-    <div class="vehicle-seat empty button rollable" data-action="add-occupant" data-tooltip="{{localize "FLBR.VehicleAddSeat"}}" data-tooltip-direction="UP">
+    <div class="vehicle-seat empty button rollable" data-action="add-occupant" data-tooltip="{{localize "FLBR.VEHICLE.AddSeat"}}" data-tooltip-direction="UP">
       <div class="seat-icon">{{{@root.config.Icons.buttons.plus}}}</div>
     </div>
   {{else}}
