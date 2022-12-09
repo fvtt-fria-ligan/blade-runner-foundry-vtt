@@ -489,7 +489,7 @@ export default class BRRollHandler extends FormApplication {
   static async applyDamage({ attributeTrauma, options: { attributeKey } }, speaker) {
     const currentDamage = attributeTrauma;
 
-    const nature = speaker?.nature;
+    const nature = speaker?.system.nature;
     if (!nature) {
       return ui.notifications.error('WARNING.ApplyDamageNoNature', { localize: true });
     }

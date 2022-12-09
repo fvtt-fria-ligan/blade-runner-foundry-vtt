@@ -32,26 +32,6 @@ export default class BladeRunnerActor extends Actor {
     return this.system.skills;
   }
 
-  get archetype() {
-    return this.system.archetype;
-  }
-
-  get nature() {
-    return this.system.nature;
-  }
-
-  get health() {
-    return this.system.health;
-  }
-
-  get resolve() {
-    return this.system.resolve;
-  }
-
-  get hull() {
-    return this.system.hull;
-  }
-
   get isBroken() {
     switch (this.type) {
       case ACTOR_TYPES.VEHICLE:
@@ -67,7 +47,7 @@ export default class BladeRunnerActor extends Actor {
 
   get maxPush() {
     if (this.type === ACTOR_TYPES.CHAR) {
-      return this.system.subtype === ACTOR_SUBTYPES.PC ? FLBR.maxPushMap[this.nature] : 0;
+      return this.system.subtype === ACTOR_SUBTYPES.PC ? FLBR.maxPushMap[this.system.nature] : 0;
     }
     return 1;
   }
@@ -89,7 +69,7 @@ export default class BladeRunnerActor extends Actor {
         rollData[k] = v.value;
       }
     }
-    rollData.maxPush = FLBR.maxPushMap[this.nature] ?? 1;
+    rollData.maxPush = FLBR.maxPushMap[this.system.nature] ?? 1;
     return rollData;
   }
 
@@ -136,7 +116,7 @@ export default class BladeRunnerActor extends Actor {
       // Proceeds if it exists in the character.
       if (capacity && capData) {
         // Gets the nature modifier.
-        const natureModifier = FLBR.natureModifierMap[this.nature]?.[cap] ?? 0;
+        const natureModifier = FLBR.natureModifierMap[this.system.nature]?.[cap] ?? 0;
         // Gets any permanent loss.
         const permanentLoss = capacity.permanentLoss ?? 0;
 
@@ -191,7 +171,7 @@ export default class BladeRunnerActor extends Actor {
   /* ----------------------------------------- */
 
   /**
-   * Sets an embedded collection for occupants in the vehicle.
+   * Sets a collection for occupants in the vehicle.
    * @private
    */
   _prepareCrew() {
@@ -248,7 +228,7 @@ export default class BladeRunnerActor extends Actor {
   async updateCharacterManeuverability(value) {
     if (this.type !== ACTOR_TYPES.CHAR) return;
     if (this.attributes[ATTRIBUTES.VEHICLE_MANEUVERABILITY]?.value !== value) {
-      await this.update({
+      await this.updateSource({
         [`system.attributes.${ATTRIBUTES.VEHICLE_MANEUVERABILITY}.value`]: value,
       });
     }
@@ -401,7 +381,7 @@ export default class BladeRunnerActor extends Actor {
       }), {
         permanent: true,
       });
-      let loss = +this.resolve.permanentLoss;
+      let loss = +this.system.resolve.permanentLoss;
       loss--;
       await this.update({ 'system.resolve.permanentLoss': loss });
       return loss;

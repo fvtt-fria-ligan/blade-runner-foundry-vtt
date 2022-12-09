@@ -122,7 +122,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   _onResolveDecrease(event) {
     event.preventDefault();
     if (this.actor.system.subtype !== ACTOR_SUBTYPES.PC) return;
-    if (this.actor.resolve.value > 1) return;
+    if (this.actor.system.resolve.value > 1) return;
     return this.actor.rollResolve();
   }
 }
