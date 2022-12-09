@@ -75,33 +75,33 @@
 
 			<div class="item-controls">
 				{{#if system.blast}}
-					<a class="btn blast-roll" data-tooltip="{{localize "FLBR.SHEET_HEADER.BlastPowerRoll"}}">
+					<a class="btn item-control" data-action="blast" data-tooltip="{{localize "FLBR.SHEET_HEADER.BlastPowerRoll"}}">
 						{{{@root.config.Icons.buttons.bomb}}}
 					</a>
 				{{/if}}
 				{{#if (eq type "armor")}}
-					<a class="btn item-roll" data-tooltip="{{localize "FLBR.SHEET_HEADER.ArmorRoll"}}">
+					<a class="btn item-control" data-action="roll" data-tooltip="{{localize "FLBR.SHEET_HEADER.ArmorRoll"}}">
 						{{{@root.config.Icons.buttons.armor}}}
 					</a>
 				{{/if}}
 				{{#if hasAction}}
-					<a class="btn item-roll" data-tooltip="{{localize "FLBR.BUTTON.Roll"}}">
+					<a class="btn item-control" data-action="roll" data-tooltip="{{localize "FLBR.BUTTON.Roll"}}">
 						{{{@root.config.Icons.buttons.roll}}}
 					</a>
 				{{/if}}
-				<a class="btn item-edit" data-tooltip="{{localize "FLBR.BUTTON.Edit"}}">
+				<a class="btn item-control" data-action="edit" data-tooltip="{{localize "FLBR.BUTTON.Edit"}}">
 					{{{@root.config.Icons.buttons.edit}}}
 				</a>
-				<a class="btn item-chat" data-tooltip="{{localize "FLBR.BUTTON.ToChat"}}">
+				<a class="btn item-control" data-action="chat" data-tooltip="{{localize "FLBR.BUTTON.ToChat"}}">
 					{{{@root.config.Icons.buttons.chat}}}
 				</a>
 				{{#if (and hasAttack (eq @root.actor.type "vehicle"))}}
 					{{#if system.mounted}}
-						<a class="btn item-mount" data-action="unmount" data-tooltip="{{localize "FLBR.BUTTON.Unmount"}}">
+						<a class="btn item-control" data-action="unmount" data-tooltip="{{localize "FLBR.BUTTON.Unmount"}}">
 							{{{@root.config.Icons.buttons.unmount}}}
 						</a>
 					{{else}}
-						<a class="btn item-mount" data-action="mount" data-tooltip="{{localize "FLBR.BUTTON.Mount"}}">
+						<a class="btn item-control" data-action="mount" data-tooltip="{{localize "FLBR.BUTTON.Mount"}}">
 							{{{@root.config.Icons.buttons.mount}}}
 						</a>
 					{{/if}}

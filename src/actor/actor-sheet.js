@@ -165,16 +165,11 @@ export default class BladeRunnerActorSheet extends ActorSheet {
 
     // Item Management
     html.find('.capacities .capacity-boxes').on('click contextmenu', this._onCapacityIncrease.bind(this));
-    html.find('.meta-currencies .capacity-boxes').on('click contextmenu', this._onCapacityIncrease.bind(this));
 
     html.find('.item-create').click(this._onItemCreate.bind(this));
-    html.find('.item-edit').click(this._onItemEdit.bind(this));
     html.find('.item-delete').click(this._onItemDelete.bind(this));
     html.find('.item-delete-confirmed').click(this._onItemDeleteConfirmed.bind(this));
-    html.find('.item-mount').click(this._onItemMount.bind(this));
-    html.find('.item-roll').click(this._onItemRoll.bind(this));
-    html.find('.item-chat').click(this._onItemChat.bind(this));
-    html.find('.blast-roll').click(this._onBlastRoll.bind(this));
+    html.find('.item-control').click(this._onItemControl.bind(this));
     html.find('.embedded-item').on('contextmenu', this._onItemEdit.bind(this));
 
     // Owner-only listeners.
@@ -209,13 +204,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
       });
   }
 
-  _onItemEdit(event) {
-    event.preventDefault();
-    const elem = event.currentTarget;
-    const itemId = elem.closest('.embedded-item').dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    return item.sheet.render(true);
-  }
+  /* ------------------------------------------ */
 
   /** @param {MouseEvent} event */
   _onItemDelete(event) {
@@ -236,43 +225,27 @@ export default class BladeRunnerActorSheet extends ActorSheet {
 
   /* ------------------------------------------ */
 
-  _onItemMount(event) {
+  _onItemEdit(event) {
     event.preventDefault();
-    const elem = event.currentTarget;
-    const toMount = elem.dataset.action === 'mount';
-    const itemId = elem.closest('.embedded-item').dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    return item.update({ 'system.mounted': toMount });
+    event.currentTarget.dataset.action = 'edit';
+    return this._onItemControl(event);
   }
 
-  /* ------------------------------------------ */
-
-  _onItemRoll(event) {
+  _onItemControl(event) {
     event.preventDefault();
     const elem = event.currentTarget;
     const itemId = elem.closest('.embedded-item').dataset.itemId;
     const item = this.actor.items.get(itemId);
-    if (item) return item.roll();
-  }
+    if (!item) return;
 
-  /* ------------------------------------------ */
-
-  _onBlastRoll(event) {
-    event.preventDefault();
-    const elem = event.currentTarget;
-    const itemId = elem.closest('.embedded-item').dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    if (item) return item._rollExplosive();
-  }
-
-  /* ------------------------------------------ */
-
-  _onItemChat(event) {
-    event.preventDefault();
-    const elem = event.currentTarget;
-    const itemId = elem.closest('.embedded-item').dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    if (item) return item.toMessage();
+    switch (elem.dataset.action) {
+      case 'edit': return item.sheet.render(true);
+      case 'roll': return item.roll();
+      case 'blast': return item._rollExplosive();
+      case 'mount': return item.update({ 'system.mounted': true });
+      case 'unmount': return item.update({ 'system.mounted': false });
+      case 'chat': return item.toMessage();
+    }
   }
 
   /* ------------------------------------------ */
