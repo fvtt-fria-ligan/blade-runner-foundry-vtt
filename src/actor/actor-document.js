@@ -14,6 +14,11 @@ import CrewCollection from '@components/vehicle-crew';
  */
 
 /**
+ * @typedef {Object} VehicleOccupant
+ * @property {string} id
+ */
+
+/**
  * Blade Runner Actor Document.
  * @class
  * @extends {Actor}
@@ -160,6 +165,7 @@ export default class BladeRunnerActor extends Actor {
 
   /* ----------------------------------------- */
 
+  /** @private */
   _prepareHull() {
     const hull = this.system.hull;
     if (hull.value > hull.max) {
@@ -170,11 +176,9 @@ export default class BladeRunnerActor extends Actor {
 
   /* ----------------------------------------- */
 
-  /**
-   * Sets a collection for occupants in the vehicle.
-   * @private
-   */
+  /** @private */
   _prepareCrew() {
+    // Creates the crew collection if it does not exist yet.
     if (!Object.hasOwn(this, 'crew')) {
       const c = new CrewCollection(
         this,
@@ -186,6 +190,14 @@ export default class BladeRunnerActor extends Actor {
         writable: false,
       });
     }
+
+    // Cleanses the source array of old entries.
+    const [, updatedCrew] = this.system.crew.partition(c => game.actors.has(c.id));
+    if (this.system.crew.length !== updatedCrew.length) {
+      this.updateSource({ 'system.crew': updatedCrew });
+    }
+
+    // Updates the crew collection (builds actors).
     this.crew.update();
   }
 
@@ -194,37 +206,57 @@ export default class BladeRunnerActor extends Actor {
   /* ----------------------------------------- */
 
   /**
-   * @param {BladeRunnerActor} actor
+   * Adds an actor to the vehicle's crew.
+   * @param {BladeRunnerActor} actor The actor to add to the crew
+   *   (its ID is used, and its MVR is updated)
+   * @returns {Promise.<VehicleOccupant[]>} The crew
    */
   async addVehicleOccupant(actor) {
     if (this.type !== ACTOR_TYPES.VEHICLE) return;
     if (this.crew.full) return;
-    const occupantData = {
+
+    /** @type {VehicleOccupant} */
+    const occupant = {
       id: actor.id,
     };
+
     const crew = this.system.crew;
-    crew.push(occupantData);
+    crew.push(occupant);
     await this.update({ 'system.crew': crew });
+
     if (game.settings.get(SYSTEM_ID, SETTINGS_KEYS.UPDATE_ACTOR_MANEUVERABILITY_ON_CREW)) {
       await actor.updateCharacterManeuverability(this.system.maneuverability);
     }
+
     return crew;
   }
 
   /* ----------------------------------------- */
 
+  /**
+   * Removes an actor from the vehicle's crew.
+   * @param {string} occupantId The id of the actor to remove from the crew
+   * @returns {Promise.<VehicleOccupant[]>} The crew
+   */
   async removeVehicleOccupant(occupantId) {
     if (this.type !== ACTOR_TYPES.VEHICLE) return;
+
     const crew = this.system.crew.filter(c => c.id !== occupantId);
     await this.update({ 'system.crew': crew });
+
     if (game.settings.get(SYSTEM_ID, SETTINGS_KEYS.UPDATE_ACTOR_MANEUVERABILITY_ON_UNCREW)) {
       await game.actors.get(occupantId)?.updateCharacterManeuverability(0);
     }
+
     return crew;
   }
 
   /* ----------------------------------------- */
 
+  /**
+   * Updates the character's maneuverability (MVR) with a new value.
+   * @param {number} value New MVR value
+   */
   async updateCharacterManeuverability(value) {
     if (this.type !== ACTOR_TYPES.CHAR) return;
     if (this.attributes[ATTRIBUTES.VEHICLE_MANEUVERABILITY]?.value !== value) {

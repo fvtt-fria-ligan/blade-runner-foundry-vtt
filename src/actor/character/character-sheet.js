@@ -80,6 +80,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     html.find('.action-roll').click(this._onActionRoll.bind(this));
 
     // Resolve Permanent Loss
+    html.find('.meta-currencies .capacity-boxes').on('click contextmenu', super._onCapacityIncrease.bind(this));
     html.find('.capacity-resolve .capacity-boxes').on('contextmenu', this._onResolveDecrease.bind(this));
 
     // Owner-only listeners.
