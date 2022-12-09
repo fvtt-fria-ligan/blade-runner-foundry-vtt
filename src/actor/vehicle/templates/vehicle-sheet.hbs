@@ -16,14 +16,18 @@
 			<div class="vehicle-stats">
 				<div class="stat-blok stat-blok-mvr">
 					<div class="attribute-name">
-						<a class="stat-roll" data-attribute="mvr">{{trim (localize "FLBR.ATTRIBUTE.MVR") 7}}</a>
+						<label>
+							<a class="mvr-roll">
+								{{trim (localize "FLBR.ATTRIBUTE.MVR") 7}}
+							</a>
+						</label>
 					</div>
 					{{#with system.maneuverability}}
 						<div class="attribute-score">
 							{{scoreSelector "system.maneuverability" selected=this}}
 						</div>
 						<div class="attribute-size">
-							<div class="boxed-value stat-roll rollable" data-attribute="mvr">
+							<div class="boxed-value mvr-roll rollable">
 								{{#if (lte this 0)}}
 									{{localize "FLBR.NO_VALUE"}}
 								{{else}}

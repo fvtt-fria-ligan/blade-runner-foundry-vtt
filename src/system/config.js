@@ -228,6 +228,7 @@ FLBR.baselineTest = BR.SKILLS.INSIGHT;
 FLBR.maxPromotionPoints = 20;
 FLBR.maxHumanityPoints = 20;
 FLBR.maxChinyenPoints = 20;
+FLBR.maxVehicleHull = 10;
 
 FLBR.maxRolledDice = 3;
 FLBR.itemSpecialInputMaxLength = 80;

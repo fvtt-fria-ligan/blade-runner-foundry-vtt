@@ -3,6 +3,26 @@ import { FLBR } from '@system/config';
 import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
 
 /**
+ * @typedef {Object} RollHandlerData
+ * @property {string}              [title]        The title of the roll
+ * @property {Actor}               [actor={}]     The actor who rolled the dice, if any
+ * @property {Item|Item[]}         [items]        The item(s) used to roll the dice, if any
+ * @property {string}              [attributeKey] The identifier of the attribute used (important for modifiers)
+ * @property {string}              [skillKey]     The identifier of the skill used (important for modifiers)
+ * @property {number|number[]}     [dice=[6]]     An array of die faces used to forge the roll
+ * @property {number}              [modifier]     Additional value for the final numeric modifier
+ * @property {Modifier|Modifier[]} [modifiers]    A group of modifiers that can also be applied to the roll
+ * @property {number}              [maxPush=1]    The maximum number of pushes (default is 1)
+ */
+
+/**
+ * @typedef {Object} RollHandlerOptions Additional options for the FormApplication instance
+ * @param {string}  [options.rollMode]            The default roll mode to use
+ * @param {boolean} [options.sendMessage=true]    Whether the message should be sent
+ * @param {boolean} [options.unlimitedPush=false] Whether to allow unlimited roll pushes
+*/
+
+/**
  * A Form Application that mimics Dialog,
  * but provides more functionality in terms of data binds and handling of a roll object.
  * Supports Blade Runner standard rolls.
@@ -11,19 +31,8 @@ import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
  */
 export default class BRRollHandler extends FormApplication {
   /**
-   * @param {string}              [title]        The title of the roll
-   * @param {Actor}               [actor={}]     The actor who rolled the dice, if any
-   * @param {Item|Item[]}         [items]        The item(s) used to roll the dice, if any
-   * @param {string}              [attributeKey] The identifier of the attribute used (important for modifiers)
-   * @param {string}              [skillKey]     The identifier of the skill used (important for modifiers)
-   * @param {number|number[]}     [dice=[6]]     An array of die faces used to forge the roll
-   * @param {number}              [modifier]     Additional value for the final numeric modifier
-   * @param {Modifier|Modifier[]} [modifiers]    A group of modifiers that can also be applied to the roll
-   * @param {number}              [maxPush=1]    The maximum number of pushes (default is 1)
-   * @param {Object}  [options] Additional options for the FormApplication instance
-   * @param {string}  [options.rollMode]            The default roll mode to use
-   * @param {boolean} [options.sendMessage=true]    Whether the message should be sent
-   * @param {boolean} [options.unlimitedPush=false] Whether to allow unlimited roll pushes
+   * @param {BladeRunnerRollHandlerData} rollData
+   * @param {BladeRunnerRollHandlerOptions} options
    */
   constructor({
     title = 'Blade Runner RPG',

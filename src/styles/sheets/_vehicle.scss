@@ -63,17 +63,9 @@
     display: grid;
     grid-template-columns: 1fr auto 50px;
 
-    a {
-      font-family: var(--font-table);
-      color: var(--color-green);
-      font-weight: bold;
-      // letter-spacing: 1px;
-      &:hover { color: var(--color-red); }
-    }
     .attribute-name {
       display: flex;
       align-items: center;
-      text-transform: uppercase;
       padding-left: 1px;
     }
     .attribute-score, .attribute-size {
@@ -81,18 +73,31 @@
     }
   }
 
-  .vehicle-property {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+  .vehicle-properties hr {
+    border-top-color: var(--color-green);
+    border-bottom-color: var(--color-green);
+  }
 
-    label {
-      color: var(--color-green);
-      font-family: var(--font-table);
-      font-size: var(--font-size--very-small);
-      font-weight: bold;
-      text-transform: uppercase;
-      text-align: center;
-    }
+  .vehicle-property {
+    display: flex;
+  }
+
+  label {
+    color: var(--color-green);
+    font-family: var(--font-table);
+    font-size: var(--font-size--very-small);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  a.mvr-roll,
+  a.roll-vehicle-armor {
+    font-family: var(--font-table);
+    color: var(--color-green);
+    font-weight: bold;
+    // letter-spacing: 1px;
+    &:hover { color: var(--color-red); }
   }
 
   .vehicle-crew {

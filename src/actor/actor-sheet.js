@@ -140,7 +140,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
         label: game.i18n.localize('FLBR.SHEET_HEADER.GenericRoll'),
         class: 'custom-roll',
         icon: 'fas fa-dice',
-        onclick: () => this.actor.rollStat(),
+        onclick: () => this.actor.roll(),
       },
     ];
     return myButtons.concat(originalButtons);

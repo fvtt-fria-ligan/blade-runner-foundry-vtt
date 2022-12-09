@@ -125,7 +125,8 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     if (!this.isEditable) return;
 
     // Stats Roll
-    html.find('.stat-roll').click(this._onStatRoll.bind(this));
+    html.find('.mvr-roll').click(this._onManeuverabilityRoll.bind(this));
+    html.find('.roll-vehicle-armor').click(this._onVehicleArmorRoll.bind(this));
     html.find('.action-roll').click(this._onActionRoll.bind(this));
 
     // Hull
@@ -136,7 +137,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
         callback: () => this.vehicle.update({
           'system.hull.max': this.vehicle.system.hull.max + 1,
         }),
-        condition: () => this.vehicle.system.hull.max < FLBR.capacitiesMap.health.max,
+        condition: () => this.vehicle.system.hull.max < FLBR.maxVehicleHull,
       },
       {
         name: game.i18n.localize('FLBR.VEHICLE.DecreaseHull'),
@@ -203,12 +204,21 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
 
   /* ------------------------------------------ */
 
-  _onStatRoll(event) {
+  _onManeuverabilityRoll(event) {
     event.preventDefault();
-    const elem = event.currentTarget;
-    const attrKey = elem.dataset.attribute;
-    const skillKey = elem.dataset.skill;
-    return this.actor.rollStat(attrKey, skillKey);
+    return this.vehicle.roll({
+      title: game.i18n.localize('FLBR.ATTRIBUTE.MVR'),
+    });
+  }
+
+  /* ------------------------------------------ */
+
+  _onVehicleArmorRoll(event) {
+    event.preventDefault();
+    return this.vehicle.roll({
+      title: `${this.vehicle.name}: ${game.i18n.localize('FLBR.ItemArmor')}`,
+      dice: new Array(2).fill(this.vehicle.system.armor),
+    });
   }
 
   /* ------------------------------------------ */
