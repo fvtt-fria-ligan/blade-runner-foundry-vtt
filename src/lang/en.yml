@@ -248,12 +248,14 @@ FLBR.ROLLER.SelectDiceToPush: Select dice to push
 FLBR.ROLLER.UnlimitedPush: Unlimited
 FLBR.SignatureItemUsedCheckboxHint: Used?
 FLBR.VEHICLE.AddSeat: Increase the passengers capacity (GM only)
+FLBR.VEHICLE.Components: Components
 FLBR.VEHICLE.CreateActor: Create Actor?
 FLBR.VEHICLE.CreateActorHint: Do you want to duplicate actor {name} before crewing it?
 FLBR.VEHICLE.Crew: Crew
 FLBR.VEHICLE.DecreaseHull: Decrease max. Hull
 FLBR.VEHICLE.DeleteSeat: Decrease passenger capacity
 FLBR.VEHICLE.EditPassenger: Edit passenger
+FLBR.VEHICLE.Engine: Engine
 FLBR.VEHICLE.IncreaseHull: Increase max. Hull
 FLBR.VEHICLE.MountedWeapons: Mounted Weapons
 FLBR.VEHICLE.NotifCrewFull: No more free seat!

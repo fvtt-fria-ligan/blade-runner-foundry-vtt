@@ -1,10 +1,10 @@
 {{#with occupant}}
-  <div class="vehicle-seat occupied rollable" data-action="roll-occupant" data-occupant-id="{{id}}" data-tooltip="{{name}}" data-tooltip-direction="UP">
-    <img src="{{img}}"/>
+  <div class="vehicle-seat occupied" data-action="roll-occupant" data-occupant-id="{{id}}" data-tooltip="{{name}}" data-tooltip-direction="UP">
+    <img class="rollable" src="{{img}}"/>
   </div>
 {{else}}
   {{#if (and @root.isGM (eq seat -1))}}
-    <div class="vehicle-seat empty button rollable" data-action="add-occupant" data-tooltip="{{localize "FLBR.VEHICLE.AddSeat"}}" data-tooltip-direction="UP">
+    <div class="vehicle-seat button" data-action="add-occupant" data-tooltip="{{localize "FLBR.VEHICLE.AddSeat"}}" data-tooltip-direction="RIGHT">
       <div class="seat-icon">{{{@root.config.Icons.buttons.plus}}}</div>
     </div>
   {{else}}

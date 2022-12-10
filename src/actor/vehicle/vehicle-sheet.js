@@ -71,6 +71,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     await super._onDropActor(event, data);
 
     if (!this.vehicle.isOwner) return;
+    if (data.parent === this.vehicle.id) return;
 
     const actor = await fromUuid(data.uuid);
     if (!actor) return;
@@ -112,6 +113,23 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
   }
 
   /* ------------------------------------------ */
+  /*  Drag Passengers                           */
+  /* ------------------------------------------ */
+
+  /** @override */
+  _onDragStart(event) {
+    super._onDragStart(event);
+
+    const elem = event.currentTarget.closest('.vehicle-seat');
+    if (!elem) return;
+    const actor = this.vehicle.crew.get(elem.dataset.occupantId);
+    if (!actor) return;
+    const dragData = actor.toDragData();
+    dragData.parent = this.vehicle.id;
+    event.dataTransfer.setData('text/plain', JSON.stringify(dragData));
+  }
+
+  /* ------------------------------------------ */
   /*  Sheet Listeners & Context Menus           */
   /* ------------------------------------------ */
 
@@ -150,7 +168,11 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     ]);
 
     // Crew
-    html.find('.vehicle-seat.rollable').click(this._onCrewAction.bind(this));
+    html.find('.vehicle-seat:not(.empty)').click(this._onCrewAction.bind(this));
+    html.find('.vehicle-seat.occupied img').each((_index, elem) => {
+      elem.setAttribute('draggable', true);
+      elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);
+    });
     new ContextMenu(html, '.vehicle-seat:not(.button)', [
       {
         name: game.i18n.localize('FLBR.VEHICLE.EditPassenger'),
@@ -208,6 +230,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     event.preventDefault();
     return this.vehicle.roll({
       title: game.i18n.localize('FLBR.ATTRIBUTE.MVR'),
+      dice: [this.vehicle.system.maneuverability],
     });
   }
 
@@ -218,6 +241,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     return this.vehicle.roll({
       title: `${this.vehicle.name}: ${game.i18n.localize('FLBR.ItemArmor')}`,
       dice: new Array(2).fill(this.vehicle.system.armor),
+      maxPush: 0,
     });
   }
 

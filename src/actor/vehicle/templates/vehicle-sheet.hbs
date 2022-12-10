@@ -99,9 +99,25 @@
 	<div class="sheet-body">
 
 		<div class="tab" data-group="primary" data-tab="combat">
-			<div class="mounted-weapons boxed-property">
-				<h3>{{localize "FLBR.VEHICLE.MountedWeapons"}}</h3>
-{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=mountedWeapons wrap=true}}
+			<div class="combat-tab">
+				<div class="boxed-property">
+					<h3>{{localize "FLBR.VEHICLE.Components"}}</h3>
+					<div class="vehicle-components">
+						{{#each system.components}}
+							<div class="vehicle-component">
+								<label class="switch">
+									<input type="checkbox" name="system.components.{{@key}}" {{checked this}}/>
+									<span class="slider red"></span>
+								</label>
+								{{localize (concat "FLBR.VEHICLE." (capitalize @key))}}
+							</div>
+						{{/each}}
+					</div>
+				</div>
+				<div class="mounted-weapons boxed-property">
+					<h3>{{localize "FLBR.VEHICLE.MountedWeapons"}}</h3>
+	{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=mountedWeapons wrap=true}}
+				</div>
 			</div>
 		</div>
 
