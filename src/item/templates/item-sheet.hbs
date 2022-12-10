@@ -65,19 +65,19 @@
 					</select>
 				</div>
 				<div class="item-property item-property-lethal">
-					<label>{{localize "FLBR.InjuryLethal"}}</label>
+					<label for="injury_lethal"><a>{{localize "FLBR.InjuryLethal"}}</a></label>
 					<div style="text-align: center;">
 						<label class="switch">
-							<input type="checkbox" name="system.lethal" {{checked system.lethal}}/>
+							<input type="checkbox" id="injury_lethal" name="system.lethal" {{checked system.lethal}}/>
 							<span class="slider gold"></span>
 						</label>
 					</div>
 				</div>
 				<div class="item-property item-property-permanent">
-					<label>{{localize "FLBR.InjuryPermanent"}}</label>
+					<label for="injury_permanent"><a>{{localize "FLBR.InjuryPermanent"}}</a></label>
 					<div style="text-align: center;">
 						<label class="switch">
-							<input type="checkbox" name="system.permanent" {{checked system.permanent}}/>
+							<input type="checkbox" id="injury_permanent" name="system.permanent" {{checked system.permanent}}/>
 							<span class="slider gold"></span>
 						</label>
 					</div>
@@ -111,10 +111,10 @@
 
 			{{#if isConsumable}}
 				<div class="item-property item-property-consumable">
-					<label>{{localize "FLBR.ItemConsumable"}}</label>
+					<label for="item_consumable"><a>{{localize "FLBR.ItemConsumable"}}</a></label>
 					<div style="text-align: center;">
 						<label class="switch">
-							<input type="checkbox" name="system.consumable" {{checked system.consumable}}/>
+							<input type="checkbox" id="item_consumable" name="system.consumable" {{checked system.consumable}}/>
 							<span class="slider gold"></span>
 						</label>
 					</div>
@@ -123,10 +123,10 @@
 
 			{{#if inVehicle}}
 				<div class="item-property item-property-mounted">
-					<label>{{localize "FLBR.ItemMounted"}}</label>
+					<label for="item_mounted"><a>{{localize "FLBR.ItemMounted"}}</a></label>
 					<div style="text-align: center;">
 						<label class="switch">
-							<input type="checkbox" name="system.mounted" {{checked system.mounted}}/>
+							<input type="checkbox" id="item_mounted" name="system.mounted" {{checked system.mounted}}/>
 							<span class="slider gold"></span>
 						</label>
 					</div>

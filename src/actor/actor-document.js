@@ -57,6 +57,24 @@ export default class BladeRunnerActor extends Actor {
     return 1;
   }
 
+  get healthBarColor() {
+    const pct = this.system.health?.ratio;
+    return foundry.utils.Color.fromRGB([
+      1 - (pct / 2),
+      pct,
+      0,
+    ]).css;
+  }
+
+  get resolveBarColor() {
+    const pct = this.system.resolve?.ratio;
+    return foundry.utils.Color.fromRGB([
+      0.5 * pct,
+      0.7 * pct,
+      0.5 + (pct / 2),
+    ]).css;
+  }
+
   get rollData() {
     return this.getRollData();
   }

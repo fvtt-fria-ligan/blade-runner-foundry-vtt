@@ -18,7 +18,7 @@
 					<div class="attribute-name">
 						<label>
 							<a class="mvr-roll">
-								{{trim (localize "FLBR.ATTRIBUTE.MVR") 7}}
+								{{trim (localize "FLBR.ATTRIBUTE.MVR") 8}}
 							</a>
 						</label>
 					</div>
@@ -104,12 +104,14 @@
 					<h3>{{localize "FLBR.VEHICLE.Components"}}</h3>
 					<div class="vehicle-components">
 						{{#each system.components}}
-							<div class="vehicle-component">
+							<div class="vehicle-component{{#unless this}} disabled{{/unless}}">
 								<label class="switch">
-									<input type="checkbox" name="system.components.{{@key}}" {{checked this}}/>
+									<input type="checkbox" id="component_{{@key}}" name="system.components.{{@key}}" {{checked this}}/>
 									<span class="slider red"></span>
 								</label>
-								{{localize (concat "FLBR.VEHICLE." (capitalize @key))}}
+								<label for="component_{{@key}}">
+									<a>{{localize (concat "FLBR.VEHICLE." (capitalize @key))}}</a>
+								</label>
 							</div>
 						{{/each}}
 					</div>

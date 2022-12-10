@@ -1,6 +1,8 @@
 @use "../utils";
 
 .blade-runner.sheet.vehicle {
+  min-width: 330px;
+  min-height: 328px;
 
   .container-header {
     display: grid;
@@ -73,13 +75,35 @@
     }
   }
 
+  .vehicle-properties {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-evenly;
+  }
+
   .vehicle-properties hr {
     border-top-color: var(--color-green);
-    border-bottom-color: var(--color-green);
+    border-bottom: none;
+    width: 100%;
   }
 
   .vehicle-property {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    label {
+      flex: 1;
+      font-size: 80%;
+    }
+
+    select, input {
+      flex: 0 0 80px;
+      font-size: 90%;
+      max-width: 80px;
+      height: 20px;
+    }
   }
 
   label {
@@ -88,7 +112,6 @@
     font-size: var(--font-size--very-small);
     font-weight: bold;
     text-transform: uppercase;
-    text-align: center;
   }
 
   a.mvr-roll,
@@ -98,6 +121,27 @@
     font-weight: bold;
     // letter-spacing: 1px;
     &:hover { color: var(--color-red); }
+  }
+
+  .vehicle-components {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  .vehicle-component {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    background-color: #222;
+    border: 1px solid var(--color-green);
+    border-radius: 4px;
+
+    &.disabled {
+      border-color: var(--color-red-darker);
+      a { color: var(--color-red-darker); }
+    }
   }
 
   .vehicle-crew {
@@ -114,8 +158,17 @@
   }
   .embedded-item {
     width: 100%;
+    .details { width: 100%; }
+    .name { max-width: 450px; }
+  }
+  .vehicle-inventory .embedded-item .photo {
+    width: 36px; height: 36px; min-width: 36px; min-height: 36px;
   }
 }
+
+/* ------------------------------------------ */
+/*  VEHICLE CREW                              */
+/* ------------------------------------------ */
 
 .vehicle-crew {
   display: flex;
@@ -131,6 +184,7 @@
   }
 
   .vehicle-seat {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -145,21 +199,52 @@
       font-size: 2em;
       text-align: center;
       vertical-align: middle;
+
+      &.broken {
+        position: absolute;
+        opacity: .5;
+      }
+    }
+
+    &.broken {
+      border: 1px dotted var(--color-red-darker);
     }
 
     &.empty {
       color: var(--color-blue-darker);
-      border: 1px solid var(--color-blue-darker);
+      border: 1px dashed var(--color-blue-darker);
     }
 
     &.button {
       color: var(--color-text-dark-secondary);
-      border: 1px solid var(--color-text-dark-secondary);
+      border: 1px dotted var(--color-text-dark-secondary);
+      &:hover, &:focus { border-style: solid; }
     }
 
     &:hover {
       color: var(--color-green);
-      border: 1px solid var(--color-green);
+      border-color: var(--color-green);
     }
+  }
+
+  /* ------------------------------------------ */
+
+  .attribute-bar {
+    position: absolute;
+    left: 0;
+    height: 8px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    border: 1px solid #000;
+    border-radius: 3px;
+
+    &.bar1 { bottom: 0; }
+    &.bar2 { top: 0; }
+  }
+  .attribute-bar-progress {
+    height: 100%;
+    border-radius: 2px;
+    // width: 100%;
+    // background-color: red;
   }
 }

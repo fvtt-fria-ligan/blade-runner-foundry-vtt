@@ -1,6 +1,25 @@
 {{#with occupant}}
-  <div class="vehicle-seat occupied" data-action="roll-occupant" data-occupant-id="{{id}}" data-tooltip="{{name}}" data-tooltip-direction="UP">
+  <div class="vehicle-seat occupied{{#if isBroken}} broken{{/if}}" data-action="roll-occupant" data-occupant-id="{{id}}" data-tooltip="{{name}}<hr/>HP: {{system.health.value}} / {{system.health.max}}" data-tooltip-direction="UP">
     <img class="rollable" src="{{img}}"/>
+    {{#if (lt system.health.ratio 1)}}
+      <div class="attribute-bar bar1">
+        <div
+          class="attribute-bar-progress"
+          style="background-color: {{healthBarColor}}; width: {{multiply system.health.ratio 100}}%;"
+        ></div>
+      </div>
+    {{/if}}
+    {{#if (and (eq system.subtype "pc") (lt system.resolve.ratio 1))}}
+      <div class="attribute-bar bar2">
+        <div
+          class="attribute-bar-progress"
+          style="background-color: {{resolveBarColor}}; width: {{multiply system.resolve.ratio 100}}%;"
+        ></div>
+      </div>
+    {{/if}}
+    {{#if isBroken}}
+      <div class="seat-icon broken">{{{@root.config.Icons.buttons.lethal}}}</div>
+    {{/if}}
   </div>
 {{else}}
   {{#if (and @root.isGM (eq seat -1))}}

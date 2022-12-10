@@ -25,8 +25,8 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     const sysId = game.system.id || SYSTEM_ID;
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: [sysId, 'sheet', 'actor', 'vehicle'],
-      width: 500,
-      height: 600,
+      width: 569,
+      height: 700,
       resizable: true,
       scrollY: ['.sheet-body'],
       tabs: [{
@@ -79,7 +79,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     if (actor.type === ACTOR_TYPES.CHAR) {
       return this.dropCrew(actor);
     }
-    return ui.notifications.info(`FLBR.VehicleNotifDropCrew${actor.type.capitalize()}`, { localize: true });
+    return ui.notifications.info(`FLBR.VEHICLE.NotifDropCrew${actor.type.capitalize()}`, { localize: true });
   }
 
   /* ------------------------------------------ */

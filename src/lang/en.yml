@@ -85,10 +85,10 @@ FLBR.COMBAT_ACTION_HINT.Manipulate: Empathy + Manipulation
 FLBR.COMBAT_ACTION_HINT.UseItem: Use Item
 FLBR.BUTTON.Delete: Delete item
 FLBR.BUTTON.Edit: Edit item
-FLBR.BUTTON.Mount: Mount item
+FLBR.BUTTON.Mount: Mount weapon
 FLBR.BUTTON.Roll: Roll item
 FLBR.BUTTON.ToChat: Send item to chat
-FLBR.BUTTON.Unmount: Unmount item
+FLBR.BUTTON.Unmount: Unmount weapon
 FLBR.CHAT_ACTION.ApplyDamage: Apply damage to targeted tokens
 FLBR.DIALOG.AssignSuccesses: Assign Success(es)
 FLBR.DIALOG.AssignSuccessesHint: Choose a number of successes to spent against {name}.

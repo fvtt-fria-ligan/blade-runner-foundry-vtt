@@ -1,3 +1,5 @@
+// https://www.w3schools.com/howto/howto_css_switch.asp
+
 $slider-size: 12px;
 $switch-gap: 3px;
 
@@ -7,10 +9,6 @@ $switch-gap: 3px;
   display: inline-block;
   width: $slider-size * 2 + $switch-gap * 2;
   height: $slider-size + $switch-gap * 2;
-
-  &:hover {
-    box-shadow: 0 0 1px var(--color-gold);
-  }
 
   /* Hide default HTML checkbox */
   input {
@@ -61,7 +59,7 @@ $switch-gap: 3px;
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px var(--color-gold);
+    box-shadow: 0 0 1px var(--color-shadow-highlight);
   }
   
   input:checked + .slider::before {
