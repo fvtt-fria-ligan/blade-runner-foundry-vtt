@@ -42,7 +42,7 @@
 						<h3>
 							{{localize "FLBR.HEADER.Hull"}}
 							{{#if (lte system.hull.value 0)}}
-								<b>({{localize "FLBR.Wrecked"}})</b>
+								<b>({{toUpperCase (localize "FLBR.Wrecked")}})</b>
 							{{/if}}
 							<span class="capacity-rating">{{system.hull.value}}/{{system.hull.max}}</span>
 						</h3>

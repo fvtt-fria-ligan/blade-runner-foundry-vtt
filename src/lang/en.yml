@@ -160,9 +160,9 @@ FLBR.Advantage: Advantage
 FLBR.Capacities: Health & Resolve
 FLBR.Blast: Blast
 FLBR.BlastPower: Blast Power
-FLBR.Broken: BROKEN
-FLBR.BrokenByDamage: BROKEN BY DAMAGE
-FLBR.BrokenByStress: BROKEN BY STRESS
+FLBR.Broken: Broken
+FLBR.BrokenByDamage: Broken by Damage
+FLBR.BrokenByStress: Broken by Stress
 FLBR.Cancel: Cancel
 FLBR.CHAT.DamageDealt: '{name} is dealt {amount} damage.'
 FLBR.CHAT.NoDamageDealt: No damage was dealt to {name}.

@@ -26,7 +26,7 @@
 						<h3>
 							{{localize "FLBR.HEADER.Health"}}
 							{{#if (lte system.health.value 0)}}
-								<b>({{localize "FLBR.BrokenByDamage"}})</b>
+								<b>({{toUpperCase (localize "FLBR.BrokenByDamage")}})</b>
 							{{/if}}
 							<span class="capacity-rating">{{system.health.value}}/{{system.health.max}}</span>
 						</h3>
@@ -38,7 +38,7 @@
 						<h3>
 							{{localize "FLBR.HEADER.Resolve"}}
 							{{#if (lte system.resolve.value 0)}}
-								<b>({{localize "FLBR.BrokenByStress"}})</b>
+								<b>({{toUpperCase (localize "FLBR.BrokenByStress")}})</b>
 							{{/if}}
 							<span class="capacity-rating">{{system.resolve.value}}/{{system.resolve.max}}</span>
 						</h3>

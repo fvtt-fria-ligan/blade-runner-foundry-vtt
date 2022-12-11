@@ -4,6 +4,7 @@ import { ACTOR_SUBTYPES, ACTOR_TYPES, ATTRIBUTES,
 import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
 import CrewCollection from '@components/vehicle-crew';
+import { YearZeroRoll } from 'yzur';
 
 /**
  * @typedef {Object} ActorCapacity
@@ -37,26 +38,52 @@ export default class BladeRunnerActor extends Actor {
     return this.system.skills;
   }
 
+  /**
+   * Whether this actor is broken or wrecked.
+   * @type {boolean}
+   * @readonly
+   */
   get isBroken() {
     switch (this.type) {
-      case ACTOR_TYPES.VEHICLE:
-        return this.system.hull.value <= 0;
       case ACTOR_TYPES.CHAR:
         for (const cap of Object.values(CAPACITIES)) {
           const capacity = this.system[cap];
           if (capacity && capacity.value <= 0) return true;
         }
+        return false;
+      case ACTOR_TYPES.VEHICLE:
+        return this.system.hull.value <= 0;
+      default:
+        return undefined;
     }
-    return false;
   }
 
   get maxPush() {
-    if (this.type === ACTOR_TYPES.CHAR) {
-      return this.system.subtype === ACTOR_SUBTYPES.PC ? FLBR.maxPushMap[this.system.nature] : 0;
+    switch (this.type) {
+      case ACTOR_TYPES.CHAR:
+        return this.system.subtype === ACTOR_SUBTYPES.PC ? FLBR.maxPushMap[this.system.nature] : 0;
+      default:
+        return 1;
     }
-    return 1;
   }
 
+  get armored() {
+    switch (this.type) {
+      case ACTOR_TYPES.CHAR:
+        return this.itemTypes[ITEM_TYPES.ARMOR].filter(i => i.qty > 0).length;
+      case ACTOR_TYPES.VEHICLE:
+        return this.system.armor > 0;
+      default:
+        return false;
+    }
+  }
+
+  /**
+   * The health bar (bar1) CSS color code according to the actor's health value.
+   * Based on the calculation made in the Token document.
+   * @type {string}
+   * @readonly
+   */
   get healthBarColor() {
     const pct = this.system.health?.ratio;
     return foundry.utils.Color.fromRGB([
@@ -66,6 +93,12 @@ export default class BladeRunnerActor extends Actor {
     ]).css;
   }
 
+  /**
+   * The resolve bar (bar2) CSS color code according to the actor's resolve value.
+   * Based on the calculation made in the Token document.
+   * @type {string}
+   * @readonly
+   */
   get resolveBarColor() {
     const pct = this.system.resolve?.ratio;
     return foundry.utils.Color.fromRGB([
@@ -447,12 +480,31 @@ export default class BladeRunnerActor extends Actor {
 
   /**
    * Applies damage to one capacity of the actor (usually health).
-   * @param {number}  damage             Quantity of damage
-   * @param {string} [capacity='health'] Capacity to damage
-   * @returns {BladeRunnerActor} this
+   * @param {number}  damage    Quantity of damage
+   * @param {string} [capacity] Capacity to damage
+   * @returns {Promise.<this>}
    * @async
    */
-  async applyDamage(damage, capacity = 'health') {
+  async applyDamage(damage, capacity) {
+    if (!capacity) {
+      switch (this.type) {
+        case ACTOR_TYPES.CHAR: capacity = 'health'; break;
+        case ACTOR_TYPES.VEHICLE: capacity = 'hull'; break;
+        default: return this;
+      }
+    }
+    return this._applyDamage(damage, capacity);
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * @see {BladeRunnerActor.applyDamage}
+   * @param {number} damage
+   * @param {string} capacity
+   * @returns {Promise.<this>}
+   */
+  async _applyDamage(damage, capacity) {
     if (damage <= 0) return;
     if (!(capacity in this.system)) {
       throw new Error(`FLBR | BladeRunnerActor.applyDamage → Non-existent capacity "${capacity}"`);
@@ -460,16 +512,9 @@ export default class BladeRunnerActor extends Actor {
 
     const initialDamage = damage;
 
-    // Rolls all armors, if any, and reduces damage, if success(es) were obtained.
-    let armorAblation = 0;
-    /** @type {Array.<import('@item/item-document').default>} */
-    const armors = this.itemTypes[ITEM_TYPES.ARMOR].filter(i => i.qty > 0);
-    for (const armor of armors) {
-      const rollMessage = await armor.roll();
-      armorAblation += rollMessage?.rolls[0]?.successCount ?? 0;
-    };
-
-    damage -= armorAblation;
+    if (this.armored) {
+      damage -= await this.getArmorAblation();
+    }
 
     if (damage > 0) {
       const max = this.system[capacity].max;
@@ -487,8 +532,9 @@ export default class BladeRunnerActor extends Actor {
       initialDamage,
       damage,
       deflectedDamage: initialDamage - damage,
-      armored: !!armors.length,
+      armored: this.armored,
       broken: this.isBroken,
+      vroom: this.type === ACTOR_TYPES.VEHICLE,
       config: CONFIG.BLADE_RUNNER,
     });
     const chatData = {
@@ -501,5 +547,34 @@ export default class BladeRunnerActor extends Actor {
     await ChatMessage.create(chatData);
 
     return this;
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * Rolls the actor's armor and returns the ablation value.
+   * @returns {Promise.<number>}
+   */
+  async getArmorAblation() {
+    let armorAblation = 0;
+
+    // For characters:
+    if (this.type === ACTOR_TYPES.CHAR) {
+      // Rolls all armors, if any, and reduces damage, if success(es) were obtained.
+      /** @type {Array.<import('@item/item-document').default>} */
+      const armors = this.itemTypes[ITEM_TYPES.ARMOR].filter(i => i.qty > 0);
+      for (const armor of armors) {
+        const rollMessage = await armor.roll();
+        armorAblation += rollMessage?.rolls[0]?.successCount ?? 0;
+      };
+    }
+    // For vehicles:
+    else if (this.type === ACTOR_TYPES.VEHICLE) {
+      const armorRoll = Roll.create(`2d${this.system.armor}p0`);
+      await armorRoll.roll({ async: true });
+      // await armorRoll.toMessage();
+      armorAblation = armorRoll.successCount;
+    }
+    return armorAblation;
   }
 }
