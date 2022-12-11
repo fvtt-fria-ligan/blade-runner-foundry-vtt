@@ -34,6 +34,37 @@
     color: #424242;
   }
 
+  .actions {
+    font-family: var(--font-table);
+    font-size: var(--font-size--very-small);
+    font-weight: bold;
+    color: var(--color-green);
+
+    h4 {
+      grid-column: 1 / -1;
+    }
+    a {
+      padding: 0 4px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      white-space: nowrap;
+      i {
+        opacity: 0;
+        width: 0;
+        transition: width 250ms ease, opacity 0s;
+      }
+      &:hover {
+        border-color: var(--color-red);
+        color: var(--color-red);
+        i {
+          opacity: 1;
+          width: 15px;
+          transition: width 250ms ease, opacity 250ms ease .100ms;
+        }
+      }
+    }
+  }
+
   /* ------------------------------------------ */
 
   .sheet-body {

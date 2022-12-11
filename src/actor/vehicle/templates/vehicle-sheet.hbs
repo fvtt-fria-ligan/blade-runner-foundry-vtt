@@ -99,27 +99,50 @@
 	<div class="sheet-body">
 
 		<div class="tab" data-group="primary" data-tab="combat">
-			<div class="combat-tab">
-				<div class="boxed-property">
-					<h3>{{localize "FLBR.VEHICLE.Components"}}</h3>
-					<div class="vehicle-components">
-						{{#each system.components}}
-							<div class="vehicle-component{{#unless this}} disabled{{/unless}}">
-								<label class="switch">
-									<input type="checkbox" id="component_{{@key}}" name="system.components.{{@key}}" {{checked this}}/>
-									<span class="slider red"></span>
-								</label>
-								<label for="component_{{@key}}">
-									<a>{{localize (concat "FLBR.VEHICLE." (capitalize @key))}}</a>
-								</label>
-							</div>
-						{{/each}}
-					</div>
-				</div>
+			<div class="container">
+
+				{{!-- Mounted Weapons --}}
 				<div class="mounted-weapons boxed-property">
 					<h3>{{localize "FLBR.VEHICLE.MountedWeapons"}}</h3>
-	{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=mountedWeapons wrap=true}}
+{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=mountedWeapons wrap=true}}
 				</div>
+
+				<div class="combat-options">
+
+					{{!-- Altitude --}}
+					<div class="vehicle-altitude boxed-property">
+						<label>{{localize "FLBR.VEHICLE.Altitude"}}</label>
+						<input type="text" name="system.altitude" value="{{system.altitude}}" data-dtype="Number"/>
+					</div>
+
+					{{!-- Components --}}
+					<div class="boxed-property">
+						<h4>{{localize "FLBR.VEHICLE.Components"}}</h4>
+						<div class="vehicle-components">
+							{{#each system.components}}
+								<div class="vehicle-component{{#unless this}} disabled{{/unless}}">
+									<label class="switch">
+										<input type="checkbox" id="component_{{@key}}" name="system.components.{{@key}}" {{checked this}}/>
+										<span class="slider red"></span>
+									</label>
+									<label for="component_{{@key}}">
+										<a>{{localize (concat "FLBR.VEHICLE." (capitalize @key))}}</a>
+									</label>
+								</div>
+							{{/each}}
+						</div>
+					</div>
+
+					{{!-- Actions --}}
+					<div class="actions boxed-property">
+						<h4>{{localize "FLBR.HEADER.Actions"}}</h4>
+						{{#each actions}}
+							<a class="action-roll" data-action="{{id}}" data-tooltip="{{localize hint}}">{{{@root.config.Icons.buttons.action}}}{{localize label}}</a>
+						{{/each}}
+					</div>
+
+				</div>
+
 			</div>
 		</div>
 

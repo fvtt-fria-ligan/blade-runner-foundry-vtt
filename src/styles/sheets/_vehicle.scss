@@ -148,9 +148,25 @@
     grid-area: crew;
   }
 
-  .combat-tab {
+  .vehicle-altitude {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    input {
+      width: 69px;
+    }
+  }
+
+  .combat-options {
     display: grid;
     gap: 4px;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
   .embedded-items {
@@ -159,7 +175,7 @@
   .embedded-item {
     width: 100%;
     .details { width: 100%; }
-    .name { max-width: 450px; }
+    // .name { max-width: 450px; }
   }
   .vehicle-inventory .embedded-item .photo {
     width: 36px; height: 36px; min-width: 36px; min-height: 36px;
@@ -196,7 +212,7 @@
     border-radius: 4px;
 
     img {
-      border-radius: 5px;
+      border-radius: 4px;
     }
 
     .seat-icon {
@@ -236,7 +252,7 @@
   .attribute-bar {
     position: absolute;
     left: 0;
-    height: 8px;
+    height: 6px;
     width: 100%;
     background-color: rgba(0, 0, 0, .5);
     border: 1px solid #000;

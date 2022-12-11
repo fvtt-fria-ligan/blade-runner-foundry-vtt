@@ -103,6 +103,7 @@ FLBR.pushTraumaMap = {
  * Action Map
  * - The action property name is added in "data-action"
  * - The callback takes the actor as an argument
+ * @type {import('@components/actor-action').ActorActionData[]}
  */
 FLBR.Actions = [
   {
@@ -112,6 +113,7 @@ FLBR.Actions = [
     skill: BR.SKILLS.MOBILITY,
     attribute: null,
     callback: null,
+    actorType: BR.ACTOR_TYPES.CHAR,
   },
   {
     id: BR.COMBAT_ACTIONS.CRAWL,
@@ -119,66 +121,103 @@ FLBR.Actions = [
     hint: 'FLBR.COMBAT_ACTION_HINT.Crawl',
     skill: null,
     callback: () => ui.notifications.warn('Not implemented yet.'),
+    actorType: BR.ACTOR_TYPES.CHAR,
   },
   {
     id: BR.COMBAT_ACTIONS.UNARMED_ATTACK,
     label: 'FLBR.COMBAT_ACTION.UnarmedAttack',
     hint: 'FLBR.COMBAT_ACTION_HINT.UnarmedAttack',
     skill: BR.SKILLS.CLOSE_COMBAT,
+    actorType: BR.ACTOR_TYPES.CHAR,
   },
   {
     id: BR.COMBAT_ACTIONS.MELEE_ATTACK,
     label: 'FLBR.COMBAT_ACTION.MeleeAttack',
     hint: 'FLBR.COMBAT_ACTION_HINT.MeleeAttack',
     skill: BR.SKILLS.CLOSE_COMBAT,
+    actorType: BR.ACTOR_TYPES.CHAR,
   },
   {
     id: BR.COMBAT_ACTIONS.GRAPPLE,
     label: 'FLBR.COMBAT_ACTION.Grapple',
     hint: 'FLBR.COMBAT_ACTION_HINT.Grapple',
     skill: BR.SKILLS.CLOSE_COMBAT,
+    actorType: BR.ACTOR_TYPES.CHAR,
   },
   {
     id: BR.COMBAT_ACTIONS.BREAK_FREE,
     label: 'FLBR.COMBAT_ACTION.BreakFree',
     hint: 'FLBR.COMBAT_ACTION_HINT.BreakFree',
     skill: BR.SKILLS.CLOSE_COMBAT,
+    actorType: BR.ACTOR_TYPES.CHAR,
   },
   {
     id: BR.COMBAT_ACTIONS.SHOOT_FIREARM,
     label: 'FLBR.COMBAT_ACTION.ShootFirearm',
     hint: 'FLBR.COMBAT_ACTION_HINT.ShootFirearm',
     skill: BR.SKILLS.FIREARMS,
+    actorType: BR.ACTOR_TYPES.CHAR,
   },
   {
     id: BR.COMBAT_ACTIONS.CAREFUL_AIM,
     label: 'FLBR.COMBAT_ACTION.CarefulAim',
     hint: 'FLBR.COMBAT_ACTION_HINT.CarefulAim',
     callback: () => ui.notifications.warn('Not implemented yet.'),
+    actorType: BR.ACTOR_TYPES.CHAR,
   },
   {
     id: BR.COMBAT_ACTIONS.THROW_WEAPON,
     label: 'FLBR.COMBAT_ACTION.ThrowWeapon',
     hint: 'FLBR.COMBAT_ACTION_HINT.ThrowWeapon',
     skill: BR.SKILLS.FIREARMS,
+    actorType: BR.ACTOR_TYPES.CHAR,
   },
   {
     id: BR.COMBAT_ACTIONS.FIRST_AID,
     label: 'FLBR.COMBAT_ACTION.FirstAid',
     hint: 'FLBR.COMBAT_ACTION_HINT.FirstAid',
     skill: BR.SKILLS.MEDICAL_AID,
+    actorType: BR.ACTOR_TYPES.CHAR,
   },
   {
     id: BR.COMBAT_ACTIONS.MANIPULATE,
     label: 'FLBR.COMBAT_ACTION.Manipulate',
     hint: 'FLBR.COMBAT_ACTION_HINT.Manipulate',
     skill: BR.SKILLS.MANIPULATION,
+    actorType: BR.ACTOR_TYPES.CHAR,
   },
   {
     id: BR.COMBAT_ACTIONS.USE_ITEM,
     label: 'FLBR.COMBAT_ACTION.UseItem',
     hint: 'FLBR.COMBAT_ACTION_HINT.UseItem',
     callback: () => ui.notifications.warn('Not implemented yet.'),
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_SPEEDING,
+    label: 'FLBR.VEHICLE.Action.Speeding',
+    hint: 'FLBR.VEHICLE.Action.SpeedingHint',
+    skill: BR.SKILLS.MOBILITY,
+    actorType: BR.ACTOR_TYPES.VEHICLE,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_RAMMING,
+    label: 'FLBR.VEHICLE.Action.Ramming',
+    hint: 'FLBR.VEHICLE.Action.RammingHint',
+    actorType: BR.ACTOR_TYPES.VEHICLE,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_REPAIR,
+    label: 'FLBR.VEHICLE.Action.Repair',
+    hint: 'FLBR.VEHICLE.Action.RepairHint',
+    skill: BR.SKILLS.TECH,
+    actorType: BR.ACTOR_TYPES.VEHICLE,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_CRASH,
+    label: 'FLBR.VEHICLE.Action.Crash',
+    hint: 'FLBR.VEHICLE.Action.CrashHint',
+    actorType: BR.ACTOR_TYPES.VEHICLE,
   },
 ];
 

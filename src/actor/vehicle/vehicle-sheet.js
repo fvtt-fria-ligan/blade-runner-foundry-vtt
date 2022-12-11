@@ -1,5 +1,5 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet';
-import { SYSTEM_ID, ACTOR_TYPES, ACTOR_SUBTYPES, SKILLS, ATTRIBUTES } from '@system/constants';
+import { SYSTEM_ID, ACTOR_TYPES, ACTOR_SUBTYPES, SKILLS, ATTRIBUTES, COMBAT_ACTIONS } from '@system/constants';
 import { FLBR } from '@system/config';
 
 /**
@@ -41,9 +41,9 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
   get template() {
     const sysId = game.system.id || SYSTEM_ID;
     // if (!game.user.isGM && this.actor.limited) {
-    //   return `systems/${sysId}/templates/actor/${ACTOR_TYPES.VEHICLE}/${ACTOR_TYPES.VEHICLE}-limited-sheet.hbs`;
+    //   return `systems/${sysId}/templates/actor/${this.actor.type}/${this.actor.type}-limited-sheet.hbs`;
     // }
-    return `systems/${sysId}/templates/actor/${ACTOR_TYPES.VEHICLE}/${ACTOR_TYPES.VEHICLE}-sheet.hbs`;
+    return `systems/${sysId}/templates/actor/${this.actor.type}/${this.actor.type}-sheet.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -59,6 +59,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     sheetData.trunk = otherItems;
     sheetData.mountedWeapons = mountedWeapons;
     sheetData.crew = this.vehicle.crew.contents;
+    sheetData.actions = game.bladerunner.actions.filter(a => a.actorType === this.actor.type);
     return sheetData;
   }
 
@@ -145,7 +146,6 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     // Stats Roll
     html.find('.mvr-roll').click(this._onManeuverabilityRoll.bind(this));
     html.find('.roll-vehicle-armor').click(this._onVehicleArmorRoll.bind(this));
-    html.find('.action-roll').click(this._onActionRoll.bind(this));
 
     // Hull
     new ContextMenu(html, '.hull', [
@@ -207,6 +207,27 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
 
   /* ------------------------------------------ */
 
+  /** @override */
+  async _onActionRoll(event) {
+    event.preventDefault();
+    const elem = event.currentTarget;
+    const actionKey = elem.dataset.action;
+
+    if (actionKey === COMBAT_ACTIONS.VEHICLE_RAMMING) {
+      return this.vehicle.rollRamming();
+    }
+    else if (actionKey === COMBAT_ACTIONS.VEHICLE_CRASH) {
+      return this.vehicle.crash();
+    }
+    else {
+      const actor = await this.vehicle.crew.choose();
+      if (!actor) return;
+      return game.bladerunner.actions.get(actionKey)?.execute(actor);
+    }
+  }
+
+  /* ------------------------------------------ */
+
   _onCrewAction(event) {
     event.preventDefault();
     const elem = event.currentTarget;
@@ -243,21 +264,5 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
       dice: new Array(2).fill(this.vehicle.system.armor),
       maxPush: 0,
     });
-  }
-
-  /* ------------------------------------------ */
-
-  _onActionRoll(event) {
-    event.preventDefault();
-    const elem = event.currentTarget;
-    const actionKey = elem.dataset.action;
-    const action = FLBR.Actions.find(a => a.id === actionKey);
-    if (!action) return;
-    if (typeof action.callback === 'function') return action.callback(this.actor);
-
-    const skillKey = action.skill;
-    const attrKey = action.attribute || FLBR.skillMap[skillKey];
-    const title = `${elem.innerText} (${game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`)})`;
-    return this.actor.rollStat(attrKey, skillKey, { title });
   }
 }

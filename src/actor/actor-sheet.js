@@ -159,6 +159,9 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const inputs = html.find('input');
     inputs.focus(ev => ev.currentTarget.select());
 
+    // Executing Actions
+    html.find('.action-roll').click(this._onActionRoll.bind(this));
+
     // Item Management
     html.find('.capacities .capacity-boxes').on('click contextmenu', this._onCapacityIncrease.bind(this));
 
@@ -179,6 +182,24 @@ export default class BladeRunnerActorSheet extends ActorSheet {
         elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);
       });
     }
+  }
+
+  /* ------------------------------------------ */
+
+  _onActionRoll(event) {
+    event.preventDefault();
+    const elem = event.currentTarget;
+    const actionKey = elem.dataset.action;
+    return game.bladerunner.actions.get(actionKey)?.execute(this.actor);
+    // TODO clean code
+    // const action = FLBR.Actions.find(a => a.id === actionKey);
+    // if (!action) return;
+    // if (typeof action.callback === 'function') return action.callback(this.actor);
+
+    // const skillKey = action.skill;
+    // const attrKey = action.attribute || FLBR.skillMap[skillKey];
+    // const title = `${elem.innerText} (${game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`)})`;
+    // return this.actor.rollStat(attrKey, skillKey, { title });
   }
 
   /* ------------------------------------------ */

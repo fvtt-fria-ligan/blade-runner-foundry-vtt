@@ -43,8 +43,7 @@ FLBR.COMBAT_ACTION_HINT.Sprint: >-
   You can make additional moves in a single Round by using the sprint
   action. This will then count as your action for the Round,
   meaning you can perform no other action.
-  Roll <span class="smallcaps">MOBILITY</span> –
-  for each <span class="blade-runner-symbols">S</span> rolled,
+  Roll MOBILITY – for each <span class="blade-runner-symbols">S</span> rolled,
   you can make one more move, in addition to your free move.
   If you fail the roll, you fall (before the second move)
   and cannot get up until your next turn.
@@ -61,8 +60,7 @@ FLBR.COMBAT_ACTION_HINT.Grapple: >-
   they were holding and cannot move. The only
   action they can perform is an attempt to break
   free – which is an action that succeeds if the
-  opponent wins an opposed
-  <span class="smallcaps">CLOSE COMBAT</span> roll against
+  opponent wins an opposed CLOSE COMBAT roll against
   you. While you are grappling, the only action you
   can perform (until you release your opponent) is
   a grapple attack. This works as a normal unarmed
@@ -247,7 +245,50 @@ FLBR.ROLLER.RollWithDisadvantageButton: Disadvantage
 FLBR.ROLLER.SelectDiceToPush: Select dice to push
 FLBR.ROLLER.UnlimitedPush: Unlimited
 FLBR.SignatureItemUsedCheckboxHint: Used?
+FLBR.VEHICLE.Action.Crash: Crash
+FLBR.VEHICLE.Action.CrashHint: >-
+  If a Spinner is Wrecked, it crashes violently
+  to the ground. All people inside suffer D3 points of falling
+  damage plus one for each zone of altitude, mitigated by
+  the vehicle’s Armor rating. You can also brace yourself for
+  the hit by rolling MOBILITY – each <span class="blade-runner-symbols">S</span> rolled reduces the
+  damage by one.
+FLBR.VEHICLE.Action.Ramming: Ramming
+FLBR.VEHICLE.Action.RammingHint: >-
+  Most vehicles can be used
+  as weapons – i.e. to simply run your target over. It counts
+  as a close combat attack but roll for DRIVING instead of
+  CLOSE COMBAT. This roll can be combined with the speeding
+  action above, but that will make the DRIVING roll an
+  opposed roll, meaning that the effectiveness of the speeding
+  might be reduced. The base Damage rating of the attack
+  equals your vehicle’s Hull rating divided by two, rounded up.
+  Ramming vehicles inflict crushing damage and the Crit
+  Die has a die size equal to the Hull rating, rounded up to
+  the closest die, to a maximum of D12 – i.e. a vehicle with
+  Hull 9 has a D10 Crit Die.
+FLBR.VEHICLE.Action.Repair: Repair
+FLBR.VEHICLE.Action.RepairHint: >-
+  Repairing damage to a vehicle requires one or several TECH
+  rolls. One roll can be made per Shift. Only one person can
+  roll to repair the hull, but others can help.
+  Each <span class="blade-runner-symbols">S</span> rolled
+  removes one point of damage. If the vehicle was Wrecked,
+  it is no longer considered Wrecked once one point of damage
+  has been repaired.
+  If the engine or a mounted
+  weapon has been disabled due to a critical hit, repairing it
+  typically requires a TECH roll, in addition to any roll for
+  repairing hull damage. The work takes one Shift.
+FLBR.VEHICLE.Action.Speeding: Speeding
+FLBR.VEHICLE.Action.SpeedingHint: >-
+  Corresponding to sprinting on foot,
+  you can use the speeding action to make additional
+  moves in the same Round with a vehicle.
+FLBR.VEHICLE.Altitude: Altitude
 FLBR.VEHICLE.AddSeat: Increase the passengers capacity (GM only)
+FLBR.VEHICLE.ChoosePassenger: Choose Passenger
+FLBR.VEHICLE.ChoosePassengerHint: Choose one of the passenger.
 FLBR.VEHICLE.Components: Components
 FLBR.VEHICLE.CreateActor: Create Actor?
 FLBR.VEHICLE.CreateActorHint: Do you want to duplicate actor {name} before crewing it?

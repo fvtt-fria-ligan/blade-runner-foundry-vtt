@@ -4,7 +4,6 @@ import { ACTOR_SUBTYPES, ACTOR_TYPES, ATTRIBUTES,
 import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
 import CrewCollection from '@components/vehicle-crew';
-import { YearZeroRoll } from 'yzur';
 
 /**
  * @typedef {Object} ActorCapacity
@@ -474,6 +473,16 @@ export default class BladeRunnerActor extends Actor {
       return loss;
     }
     return 0;
+  }
+
+  /* ------------------------------------------ */
+
+  async rollRamming() {}
+
+  /* ------------------------------------------ */
+
+  async crash() {
+
   }
 
   /* ------------------------------------------ */

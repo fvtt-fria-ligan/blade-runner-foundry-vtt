@@ -73,18 +73,22 @@ export const RANGES = {
 
 /** @enum {string} */
 export const COMBAT_ACTIONS = {
-  /** @type {'sprint'} */ SPRINT: 'action-sprint',
-  /** @type {'crawl'} */ CRAWL: 'action-crawl',
-  /** @type {'attack'} */ UNARMED_ATTACK: 'action-unarmed-attack',
-  /** @type {'attack'} */ MELEE_ATTACK: 'action-melee-attack',
-  /** @type {'grapple'} */ GRAPPLE: 'action-grapple',
-  /** @type {'free'} */ BREAK_FREE: 'action-break-free',
-  /** @type {'firearm'} */ SHOOT_FIREARM: 'action-shoot-firearm',
-  /** @type {'aim'} */ CAREFUL_AIM: 'action-careful-aim',
-  /** @type {'weapon'} */ THROW_WEAPON: 'action-throw-weapon',
-  /** @type {'aid'} */ FIRST_AID: 'action-first-aid',
-  /** @type {'manipulate'} */ MANIPULATE: 'action-manipulate',
-  /** @type {'item'} */ USE_ITEM: 'action-use-item',
+  /** @type {'action-sprint'} */ SPRINT: 'action-sprint',
+  /** @type {'action-crawl'} */ CRAWL: 'action-crawl',
+  /** @type {'action-unarmed-attack'} */ UNARMED_ATTACK: 'action-unarmed-attack',
+  /** @type {'action-melee-attack'} */ MELEE_ATTACK: 'action-melee-attack',
+  /** @type {'action-grapple'} */ GRAPPLE: 'action-grapple',
+  /** @type {'action-break-free'} */ BREAK_FREE: 'action-break-free',
+  /** @type {'action-shoot-firearm'} */ SHOOT_FIREARM: 'action-shoot-firearm',
+  /** @type {'action-careful-aim'} */ CAREFUL_AIM: 'action-careful-aim',
+  /** @type {'action-throw-weapon'} */ THROW_WEAPON: 'action-throw-weapon',
+  /** @type {'action-first-aid'} */ FIRST_AID: 'action-first-aid',
+  /** @type {'action-manipulate'} */ MANIPULATE: 'action-manipulate',
+  /** @type {'action-use-item'} */ USE_ITEM: 'action-use-item',
+  /** @type {'action-vehicle-crash'} */ VEHICLE_CRASH: 'action-vehicle-crash',
+  /** @type {'action-vehicle-ramming'} */ VEHICLE_RAMMING: 'action-vehicle-ramming',
+  /** @type {'action-vehicle-repair'} */ VEHICLE_REPAIR: 'action-vehicle-repair',
+  /** @type {'action-vehicle-speeding'} */ VEHICLE_SPEEDING: 'action-vehicle-speeding',
 };
 
 /** @enum {number} */

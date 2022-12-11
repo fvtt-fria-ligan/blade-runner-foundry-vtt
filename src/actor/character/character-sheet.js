@@ -1,6 +1,5 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet';
-import { SYSTEM_ID, ACTOR_TYPES, ACTOR_SUBTYPES } from '@system/constants';
-import { FLBR } from '@system/config';
+import { SYSTEM_ID, ACTOR_SUBTYPES } from '@system/constants';
 import { enrichTextFields } from '@utils/string-util';
 
 /**
@@ -34,9 +33,9 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
   get template() {
     const sysId = game.system.id || SYSTEM_ID;
     if (!game.user.isGM && this.actor.limited) {
-      return `systems/${sysId}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-limited-sheet.hbs`;
+      return `systems/${sysId}/templates/actor/${this.actor.type}/${this.actor.type}-limited-sheet.hbs`;
     }
-    return `systems/${sysId}/templates/actor/${ACTOR_TYPES.CHAR}/${ACTOR_TYPES.CHAR}-sheet.hbs`;
+    return `systems/${sysId}/templates/actor/${this.actor.type}/${this.actor.type}-sheet.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -49,6 +48,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     sheetData.isPC = this.actor.system.subtype === ACTOR_SUBTYPES.PC;
     sheetData.isNPC = this.actor.system.subtype === ACTOR_SUBTYPES.NPC;
     sheetData.driving = this.actor.skills.driving?.value;
+    sheetData.actions = game.bladerunner.actions.filter(a => a.actorType === this.actor.type);
 
     if (this.actor.system.subtype === ACTOR_SUBTYPES.PC) {
       await enrichTextFields(sheetData, [
@@ -77,7 +77,6 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
 
     // Stats Roll
     html.find('.stat-roll').click(this._onStatRoll.bind(this));
-    html.find('.action-roll').click(this._onActionRoll.bind(this));
 
     // Resolve Permanent Loss
     html.find('.meta-currencies .capacity-boxes').on('click contextmenu', super._onCapacityIncrease.bind(this));
@@ -100,22 +99,6 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     const attrKey = elem.dataset.attribute;
     const skillKey = elem.dataset.skill;
     return this.actor.rollStat(attrKey, skillKey);
-  }
-
-  /* ------------------------------------------ */
-
-  _onActionRoll(event) {
-    event.preventDefault();
-    const elem = event.currentTarget;
-    const actionKey = elem.dataset.action;
-    const action = FLBR.Actions.find(a => a.id === actionKey);
-    if (!action) return;
-    if (typeof action.callback === 'function') return action.callback(this.actor);
-
-    const skillKey = action.skill;
-    const attrKey = action.attribute || FLBR.skillMap[skillKey];
-    const title = `${elem.innerText} (${game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`)})`;
-    return this.actor.rollStat(attrKey, skillKey, { title });
   }
 
   /* ------------------------------------------ */

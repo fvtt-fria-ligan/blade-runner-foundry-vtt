@@ -34,7 +34,7 @@ export async function chooseActor(actors = [], options = {}) {
   actors.forEach((a, i) => {
     content += `<option value="${a.id}"${i === 0 ? ' selected' : ''}>`
       + `<img src="${a.img}" width="24" height="24"/>`
-      + `${a.name} (HP: ${a.sytem.health.value}/${a.sytem.health.max}) (ID: ${a.id})`
+      + `${a.name} (HP: ${a.system.health.value}/${a.system.health.max}) (ID: ${a.id})`
       + '</option>';
   });
 

@@ -70,6 +70,7 @@
       "armor": 0,
       "availability": 2,
       "cost": 5,
+      "altitude": 0,
       "components": {
         "engine": true
       },

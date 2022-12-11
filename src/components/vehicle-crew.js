@@ -1,3 +1,5 @@
+import { chooseActor } from '@utils/get-actor';
+
 export default class CrewCollection extends foundry.utils.Collection {
   constructor(parentVehicle, sourcePropertyName, passengersPropertyName) {
     super();
@@ -22,6 +24,10 @@ export default class CrewCollection extends foundry.utils.Collection {
 
   /* ------------------------------------------ */
 
+  /**
+   * Updates the collection entries with the source array.
+   * @returns {this}
+   */
   update() {
     this.clear();
     for (const occupant of this.source) {
@@ -30,5 +36,21 @@ export default class CrewCollection extends foundry.utils.Collection {
       this.set(id, actor);
     }
     return this;
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * Displays a dialog to choose an actor from the crew.
+   * @param {Object} [options]       Additional options for the dialog
+   * @param {string} [options.title] Custom title for the dialog
+   * @param {string} [options.notes] Custom notes/message for the dialog
+   * @returns {Promise.<import('@actor/actor-document').default>}
+   */
+  async choose(options = {}) {
+    return chooseActor(this.contents, {
+      title: options.title ?? `${this.vehicle.name}: ${game.i18n.localize('FLBR.VEHICLE.ChoosePassenger')}`,
+      notes: options.notes ?? game.i18n.localize('FLBR.VEHICLE.ChoosePassengerHint'),
+    });
   }
 }

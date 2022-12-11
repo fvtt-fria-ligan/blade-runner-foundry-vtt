@@ -18,6 +18,7 @@
 
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES } from '@system/constants';
+import { ActionCollection } from '@components/actor-action';
 import * as YZUR from 'yzur';
 import * as Chat from '@system/chat';
 import * as BRMacro from '@system/macros';
@@ -73,6 +74,7 @@ Hooks.once('init', async () => {
       rollStat: BRMacro.rollStat,
       displayManual: async () => (await getManual()).sheet.render(true),
     },
+    actions: new ActionCollection(FLBR.Actions.map(a => [a.id, a])),
   };
 
   // Records configuration values.
