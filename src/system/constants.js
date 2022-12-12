@@ -86,9 +86,11 @@ export const COMBAT_ACTIONS = {
   /** @type {'action-manipulate'} */ MANIPULATE: 'action-manipulate',
   /** @type {'action-use-item'} */ USE_ITEM: 'action-use-item',
   /** @type {'action-vehicle-crash'} */ VEHICLE_CRASH: 'action-vehicle-crash',
+  /** @type {'action-vehicle-massive-crash'} */ VEHICLE_MASSIVE_CRASH: 'action-vehicle-massive-crash',
   /** @type {'action-vehicle-ramming'} */ VEHICLE_RAMMING: 'action-vehicle-ramming',
   /** @type {'action-vehicle-repair'} */ VEHICLE_REPAIR: 'action-vehicle-repair',
   /** @type {'action-vehicle-speeding'} */ VEHICLE_SPEEDING: 'action-vehicle-speeding',
+  /** @type {'action-vehicle-explode'} */ VEHICLE_EXPLODE: 'action-vehicle-explode',
 };
 
 /** @enum {number} */

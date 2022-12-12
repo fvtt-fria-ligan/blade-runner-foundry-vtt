@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, ITEM_TYPES } from '@system/constants';
+import { ACTOR_TYPES, ITEM_TYPES, SYSTEM_ID } from '@system/constants';
 import { enrichTextFields } from '@utils/string-util';
 import ActorSheetConfig from './actor-sheet-config';
 
@@ -15,6 +15,12 @@ export default class BladeRunnerActorSheet extends ActorSheet {
 
   get rollData() {
     return this.actor.getRollData();
+  }
+
+  /** @override */
+  get template() {
+    const sysId = game.system.id || SYSTEM_ID;
+    return `systems/${sysId}/templates/actor/${this.actor.type}/${this.actor.type}-sheet.hbs`;
   }
 
   /* ------------------------------------------ */

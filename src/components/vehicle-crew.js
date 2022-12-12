@@ -48,6 +48,7 @@ export default class CrewCollection extends foundry.utils.Collection {
    * @returns {Promise.<import('@actor/actor-document').default>}
    */
   async choose(options = {}) {
+    if (!this.size) return;
     return chooseActor(this.contents, {
       title: options.title ?? `${this.vehicle.name}: ${game.i18n.localize('FLBR.VEHICLE.ChoosePassenger')}`,
       notes: options.notes ?? game.i18n.localize('FLBR.VEHICLE.ChoosePassengerHint'),

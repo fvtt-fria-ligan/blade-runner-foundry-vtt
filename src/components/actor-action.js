@@ -4,11 +4,13 @@ import { FLBR } from '@system/config';
  * @typedef {Object} ActorActionData
  * @property {string}  id         The reference for the action,
  *   added in the "data-action" field
- * @property {string}  actorType  The type of actor allowed to use this action
- * @property {string}  label      The label of the action
- * @property {string} [hint]      Additional tooltip info
- * @property {string} [attribute] Actor's attribute rolled by the action
- * @property {string} [skill]     Actor's skill rolled by the action
+ * @property {string}   actorType  The type of actor allowed to use this action
+ * @property {string}   label      The label of the action
+ * @property {string}  [hint]      Additional tooltip info
+ * @property {string}  [attribute] Actor's attribute rolled by the action
+ * @property {string}  [skill]     Actor's skill rolled by the action
+ * @property {boolean} [onCrew]    Whether this action applies to a crew member
+ *   or the vehicle itself
  * @property {(actor: import('@actor/actor-document').default) => {}} [callback]
  *   An callback run by the action in place of a skill roll,
  *   it takes the source actor as an argument
@@ -31,6 +33,7 @@ export class ActorAction {
     this._hint = actionData.hint;
     this.attribute = actionData.attribute;
     this.skill = actionData.skill;
+    this.onCrew = actionData.onCrew;
     this.callback = actionData.callback;
   }
 
@@ -58,6 +61,7 @@ export class ActorAction {
     return actor.rollStat(attribute, this.skill, { title });
   }
 
+  /** @returns {ActorActionData} */
   toObject() {
     return {
       id: this.id,
@@ -66,6 +70,7 @@ export class ActorAction {
       hint: this._hint,
       attribute: this.attribute,
       skill: this.skill,
+      onCrew: this.onCrew,
       callback: this.callback,
     };
   }

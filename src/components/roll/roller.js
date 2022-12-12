@@ -17,9 +17,12 @@ import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
 
 /**
  * @typedef {Object} RollHandlerOptions Additional options for the FormApplication instance
- * @param {string}  [options.rollMode]            The default roll mode to use
- * @param {boolean} [options.sendMessage=true]    Whether the message should be sent
- * @param {boolean} [options.unlimitedPush=false] Whether to allow unlimited roll pushes
+ * @property {number}  [damage]              Overriding damage quantity
+ * @property {number}  [damageType]          Overriding damage type
+ * @property {number}  [crit]                Overriding crit die
+ * @property {string}  [rollMode]            The default roll mode to use
+ * @property {boolean} [sendMessage=true]    Whether the message should be sent
+ * @property {boolean} [unlimitedPush=false] Whether to allow unlimited roll pushes
 */
 
 /**

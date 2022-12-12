@@ -13,7 +13,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
   /* ------------------------------------------ */
 
   /**
-   * A convenient shortcut to the actor in this sheet.
+   * A convenient shortcut to the vehicle actor in this sheet.
    * @type {import('@actor/actor-document').default}
    */
   get vehicle() {
@@ -35,15 +35,6 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
         initial: 'combat',
       }],
     });
-  }
-
-  /** @override */
-  get template() {
-    const sysId = game.system.id || SYSTEM_ID;
-    // if (!game.user.isGM && this.actor.limited) {
-    //   return `systems/${sysId}/templates/actor/${this.actor.type}/${this.actor.type}-limited-sheet.hbs`;
-    // }
-    return `systems/${sysId}/templates/actor/${this.actor.type}/${this.actor.type}-sheet.hbs`;
   }
 
   /* ------------------------------------------ */
@@ -212,17 +203,16 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     event.preventDefault();
     const elem = event.currentTarget;
     const actionKey = elem.dataset.action;
+    const action = game.bladerunner.actions.get(actionKey);
+    if (!action) return;
 
-    if (actionKey === COMBAT_ACTIONS.VEHICLE_RAMMING) {
-      return this.vehicle.rollRamming();
-    }
-    else if (actionKey === COMBAT_ACTIONS.VEHICLE_CRASH) {
-      return this.vehicle.crash();
-    }
-    else {
+    if (action.onCrew) {
       const actor = await this.vehicle.crew.choose();
       if (!actor) return;
-      return game.bladerunner.actions.get(actionKey)?.execute(actor);
+      return action.execute(actor);
+    }
+    else {
+      return action.execute(this.vehicle);
     }
   }
 

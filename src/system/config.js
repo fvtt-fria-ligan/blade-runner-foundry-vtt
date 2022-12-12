@@ -99,6 +99,116 @@ FLBR.pushTraumaMap = {
   },
 };
 
+FLBR.characterSubtypes = {
+  [BR.ACTOR_SUBTYPES.PC]: 'ACTOR.SubtypePc',
+  [BR.ACTOR_SUBTYPES.NPC]: 'ACTOR.SubtypeNpc',
+};
+
+FLBR.physicalItems = [BR.ITEM_TYPES.GENERIC, BR.ITEM_TYPES.WEAPON, BR.ITEM_TYPES.ARMOR, BR.ITEM_TYPES.EXPLOSIVE];
+
+FLBR.ranges = {
+  [BR.RANGES.ENGAGED]: 'FLBR.WEAPON_RANGE.Engaged',
+  [BR.RANGES.SHORT]: 'FLBR.WEAPON_RANGE.Short',
+  [BR.RANGES.MEDIUM]: 'FLBR.WEAPON_RANGE.Medium',
+  [BR.RANGES.LONG]: 'FLBR.WEAPON_RANGE.Long',
+  [BR.RANGES.EXTREME]: 'FLBR.WEAPON_RANGE.Extreme',
+};
+
+FLBR.availabilities = {
+  [BR.AVAILABILITIES.INCIDENTAL]: 'FLBR.ITEM_AVAILABILITY.Incidental',
+  [BR.AVAILABILITIES.STANDARD]: 'FLBR.ITEM_AVAILABILITY.Standard',
+  [BR.AVAILABILITIES.PREMIUM]: 'FLBR.ITEM_AVAILABILITY.Premium',
+  [BR.AVAILABILITIES.RARE]: 'FLBR.ITEM_AVAILABILITY.Rare',
+  [BR.AVAILABILITIES.LUXURY]: 'FLBR.ITEM_AVAILABILITY.Luxury',
+};
+
+FLBR.damageTypes = {
+  [BR.DAMAGE_TYPES.NONE]: 'FLBR.WEAPON_DAMAGE_TYPE.None',
+  [BR.DAMAGE_TYPES.CRUSHING]: 'FLBR.WEAPON_DAMAGE_TYPE.Crushing',
+  [BR.DAMAGE_TYPES.PIERCING]: 'FLBR.WEAPON_DAMAGE_TYPE.Piercing',
+  [BR.DAMAGE_TYPES.STRESS]: 'FLBR.WEAPON_DAMAGE_TYPE.Stress',
+};
+
+FLBR.blastPowerMap = {
+  12: { damage: 4, crit: 12 },
+  10: { damage: 3, crit: 10 },
+  8: { damage: 2, crit: 8 },
+  6: { damage: 1, crit: 6 },
+};
+
+FLBR.startingAttributeLevel = 8;
+FLBR.startingSkillLevel = 6;
+
+FLBR.deathSaveTest = BR.SKILLS.STAMINA;
+FLBR.baselineTest = BR.SKILLS.INSIGHT;
+
+FLBR.maxPromotionPoints = 20;
+FLBR.maxHumanityPoints = 20;
+FLBR.maxChinyenPoints = 20;
+FLBR.maxVehicleHull = 10;
+
+FLBR.maxRolledDice = 3;
+FLBR.itemSpecialInputMaxLength = 80;
+FLBR.vehicleCrashDamage = '1d3 + @altitude';
+FLBR.vehicleMassiveCrashDamage = '1d6 + @altitude';
+FLBR.vehicleExplosionBlastPower = 10;
+
+/* ------------------------------------------ */
+
+/** @type {Object.<string, TranslationString>} */
+FLBR.rollModes = {};
+for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
+  FLBR.rollModes[v] = `CHAT.Roll${k.toLowerCase().capitalize()}`;
+}
+
+// TODO
+// FLBR.yearsOnTheForce = {
+//   [BR.YEARS_ON_THE_FORCE.ROOKIE]: {
+//     years: [0, 1],
+//     modifiers: {
+//       attributes: 4,
+//       skills: 8,
+//       specialties: 0,
+//       promos: 'D3',
+//       chinyen: -1,
+//     },
+//   },
+//   [BR.YEARS_ON_THE_FORCE.SEASONED]: {
+//     years: [2, 7],
+//     modifiers: {
+//       attributes: 3,
+//       skills: 10,
+//       specialties: 1,
+//       promos: 'D6',
+//       chinyen: 0,
+//     },
+//   },
+//   [BR.YEARS_ON_THE_FORCE.VETERAN]: {
+//     years: [8, 15],
+//     modifiers: {
+//       attributes: 2,
+//       skills: 12,
+//       specialties: 2,
+//       promos: 'D8',
+//       chinyen: 1,
+//     },
+//   },
+//   [BR.YEARS_ON_THE_FORCE.OLD_TIMER]: {
+//     years: [16, 99],
+//     modifiers: {
+//       attributes: 1,
+//       skills: 14,
+//       specialties: 3,
+//       promos: 'D10',
+//       chinyen: 2,
+//     },
+//   },
+// };
+
+/* ------------------------------------------ */
+/*  Actions                                   */
+/* ------------------------------------------ */
+
 /**
  * Action Map
  * - The action property name is added in "data-action"
@@ -205,6 +315,7 @@ FLBR.Actions = [
     label: 'FLBR.VEHICLE.Action.Ramming',
     hint: 'FLBR.VEHICLE.Action.RammingHint',
     actorType: BR.ACTOR_TYPES.VEHICLE,
+    callback: actor => actor.rollRamming(),
   },
   {
     id: BR.COMBAT_ACTIONS.VEHICLE_REPAIR,
@@ -212,117 +323,30 @@ FLBR.Actions = [
     hint: 'FLBR.VEHICLE.Action.RepairHint',
     skill: BR.SKILLS.TECH,
     actorType: BR.ACTOR_TYPES.VEHICLE,
+    onCrew: true,
   },
   {
     id: BR.COMBAT_ACTIONS.VEHICLE_CRASH,
     label: 'FLBR.VEHICLE.Action.Crash',
     hint: 'FLBR.VEHICLE.Action.CrashHint',
     actorType: BR.ACTOR_TYPES.VEHICLE,
+    callback: actor => actor.crashVehicle(),
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_MASSIVE_CRASH,
+    label: 'FLBR.VEHICLE.Action.MassiveCrash',
+    hint: 'FLBR.VEHICLE.Action.CrashHint',
+    actorType: BR.ACTOR_TYPES.VEHICLE,
+    callback: actor => actor.crashVehicle(true),
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_EXPLODE,
+    label: 'FLBR.VEHICLE.Action.Explode',
+    hint: 'FLBR.VEHICLE.Action.ExplodeHint',
+    actorType: BR.ACTOR_TYPES.VEHICLE,
+    callback: actor => actor.explodeVehicle(),
   },
 ];
-
-FLBR.characterSubtypes = {
-  [BR.ACTOR_SUBTYPES.PC]: 'ACTOR.SubtypePc',
-  [BR.ACTOR_SUBTYPES.NPC]: 'ACTOR.SubtypeNpc',
-};
-
-FLBR.physicalItems = [BR.ITEM_TYPES.GENERIC, BR.ITEM_TYPES.WEAPON, BR.ITEM_TYPES.ARMOR, BR.ITEM_TYPES.EXPLOSIVE];
-
-FLBR.ranges = {
-  [BR.RANGES.ENGAGED]: 'FLBR.WEAPON_RANGE.Engaged',
-  [BR.RANGES.SHORT]: 'FLBR.WEAPON_RANGE.Short',
-  [BR.RANGES.MEDIUM]: 'FLBR.WEAPON_RANGE.Medium',
-  [BR.RANGES.LONG]: 'FLBR.WEAPON_RANGE.Long',
-  [BR.RANGES.EXTREME]: 'FLBR.WEAPON_RANGE.Extreme',
-};
-
-FLBR.availabilities = {
-  [BR.AVAILABILITIES.INCIDENTAL]: 'FLBR.ITEM_AVAILABILITY.Incidental',
-  [BR.AVAILABILITIES.STANDARD]: 'FLBR.ITEM_AVAILABILITY.Standard',
-  [BR.AVAILABILITIES.PREMIUM]: 'FLBR.ITEM_AVAILABILITY.Premium',
-  [BR.AVAILABILITIES.RARE]: 'FLBR.ITEM_AVAILABILITY.Rare',
-  [BR.AVAILABILITIES.LUXURY]: 'FLBR.ITEM_AVAILABILITY.Luxury',
-};
-
-FLBR.damageTypes = {
-  [BR.DAMAGE_TYPES.NONE]: 'FLBR.WEAPON_DAMAGE_TYPE.None',
-  [BR.DAMAGE_TYPES.CRUSHING]: 'FLBR.WEAPON_DAMAGE_TYPE.Crushing',
-  [BR.DAMAGE_TYPES.PIERCING]: 'FLBR.WEAPON_DAMAGE_TYPE.Piercing',
-  [BR.DAMAGE_TYPES.STRESS]: 'FLBR.WEAPON_DAMAGE_TYPE.Stress',
-};
-
-FLBR.blastPowerMap = {
-  12: { damage: 4, crit: 12 },
-  10: { damage: 3, crit: 10 },
-  8: { damage: 2, crit: 8 },
-  6: { damage: 1, crit: 6 },
-};
-
-FLBR.startingAttributeLevel = 8;
-FLBR.startingSkillLevel = 6;
-
-FLBR.deathSaveTest = BR.SKILLS.STAMINA;
-FLBR.baselineTest = BR.SKILLS.INSIGHT;
-
-FLBR.maxPromotionPoints = 20;
-FLBR.maxHumanityPoints = 20;
-FLBR.maxChinyenPoints = 20;
-FLBR.maxVehicleHull = 10;
-
-FLBR.maxRolledDice = 3;
-FLBR.itemSpecialInputMaxLength = 80;
-
-/* ------------------------------------------ */
-
-/** @type {Object.<string, TranslationString>} */
-FLBR.rollModes = {};
-for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
-  FLBR.rollModes[v] = `CHAT.Roll${k.toLowerCase().capitalize()}`;
-}
-
-// TODO
-// FLBR.yearsOnTheForce = {
-//   [BR.YEARS_ON_THE_FORCE.ROOKIE]: {
-//     years: [0, 1],
-//     modifiers: {
-//       attributes: 4,
-//       skills: 8,
-//       specialties: 0,
-//       promos: 'D3',
-//       chinyen: -1,
-//     },
-//   },
-//   [BR.YEARS_ON_THE_FORCE.SEASONED]: {
-//     years: [2, 7],
-//     modifiers: {
-//       attributes: 3,
-//       skills: 10,
-//       specialties: 1,
-//       promos: 'D6',
-//       chinyen: 0,
-//     },
-//   },
-//   [BR.YEARS_ON_THE_FORCE.VETERAN]: {
-//     years: [8, 15],
-//     modifiers: {
-//       attributes: 2,
-//       skills: 12,
-//       specialties: 2,
-//       promos: 'D8',
-//       chinyen: 1,
-//     },
-//   },
-//   [BR.YEARS_ON_THE_FORCE.OLD_TIMER]: {
-//     years: [16, 99],
-//     modifiers: {
-//       attributes: 1,
-//       skills: 14,
-//       specialties: 3,
-//       promos: 'D10',
-//       chinyen: 2,
-//     },
-//   },
-// };
 
 /* ------------------------------------------ */
 /*  Icons                                     */
