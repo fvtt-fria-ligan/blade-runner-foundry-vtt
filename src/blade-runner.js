@@ -155,42 +155,43 @@ Hooks.on('renderChatMessage', (_msg, html, _data) => Chat.hideChatActionButtons(
 
 /* ------------------------------------------ */
 
-Hooks.on('createActor', async (actor, _data, _options) => {
-  const updateData = {
-    'prototypeToken.displayName': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
-    'prototypeToken.displayBars': CONST.TOKEN_DISPLAY_MODES.OWNER,
-  };
+// TODO clean code
+// Hooks.on('createActor', async (actor, _data, _options) => {
+//   const updateData = {
+//     'prototypeToken.displayName': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+//     'prototypeToken.displayBars': CONST.TOKEN_DISPLAY_MODES.OWNER,
+//   };
 
-  switch (actor.type) {
-    case ACTOR_TYPES.CHAR:
-      // TODO clean code
-      // if (actor.system.subtype === ACTOR_SUBTYPES.PC) {
-      //   // updateData['prototypeToken.actorLink'] = true;
-      //   // updateData['prototypeToken.bar2.attribute'] = CAPACITIES.RESOLVE;
-      // }
-      if (!actor.system.attributes || !actor.system.skills) {
-        throw new TypeError(`FLBR | "${actor.type}" has No attribute nor skill`);
-      }
-      if (foundry.utils.isEmpty(actor.system.skills)) {
-        // Sets the default starting value for each attribute.
-        for (const attribute in actor.system.attributes) {
-          updateData[`system.attributes.${attribute}.value`] = FLBR.startingAttributeLevel;
-        }
-        // Builds the list of skills and sets their default values.
-        for (const skill in FLBR.skillMap) {
-          updateData[`system.skills.${skill}.value`] = FLBR.startingSkillLevel;
-        }
-      }
-      break;
-    case ACTOR_TYPES.VEHICLE:
-      updateData['prototypeToken.bar1.attribute'] = 'hull';
-      // updateData['prototypeToken.bar2.attribute'] = null;
-      break;
-  }
-  if (!foundry.utils.isEmpty(updateData)) {
-    await actor.update(updateData);
-  }
-});
+//   switch (actor.type) {
+//     case ACTOR_TYPES.CHAR:
+//       // TODO clean code
+//       // if (actor.system.subtype === ACTOR_SUBTYPES.PC) {
+//       //   // updateData['prototypeToken.actorLink'] = true;
+//       //   // updateData['prototypeToken.bar2.attribute'] = CAPACITIES.RESOLVE;
+//       // }
+//       if (!actor.system.attributes || !actor.system.skills) {
+//         throw new TypeError(`FLBR | "${actor.type}" has No attribute nor skill`);
+//       }
+//       if (foundry.utils.isEmpty(actor.system.skills)) {
+//         // Sets the default starting value for each attribute.
+//         for (const attribute in actor.system.attributes) {
+//           updateData[`system.attributes.${attribute}.value`] = FLBR.startingAttributeLevel;
+//         }
+//         // Builds the list of skills and sets their default values.
+//         for (const skill in FLBR.skillMap) {
+//           updateData[`system.skills.${skill}.value`] = FLBR.startingSkillLevel;
+//         }
+//       }
+//       break;
+//     case ACTOR_TYPES.VEHICLE:
+//       updateData['prototypeToken.bar1.attribute'] = 'hull';
+//       // updateData['prototypeToken.bar2.attribute'] = null;
+//       break;
+//   }
+//   if (!foundry.utils.isEmpty(updateData)) {
+//     await actor.update(updateData);
+//   }
+// });
 
 
 /* -------------------------------------------- */

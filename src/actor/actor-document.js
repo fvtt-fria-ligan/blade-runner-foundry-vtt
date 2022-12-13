@@ -251,6 +251,55 @@ export default class BladeRunnerActor extends Actor {
   }
 
   /* ----------------------------------------- */
+  /*  Actor Creation                           */
+  /* ----------------------------------------- */
+
+  /** @override */
+  async _preCreate(data, options, userId) {
+    const updateData = {
+      'prototypeToken.displayName': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+    };
+
+    switch (this.type) {
+      case ACTOR_TYPES.CHAR:
+        updateData['prototypeToken.displayBars'] = CONST.TOKEN_DISPLAY_MODES.OWNER;
+        // TODO clean code
+        // if (actor.system.subtype === ACTOR_SUBTYPES.PC) {
+        //   // updateData['prototypeToken.actorLink'] = true;
+        //   // updateData['prototypeToken.bar2.attribute'] = CAPACITIES.RESOLVE;
+        // }
+        if (!this.system.attributes || !this.system.skills) {
+          throw new TypeError(`FLBR | "${this.type}" has No attribute nor skill`);
+        }
+        if (foundry.utils.isEmpty(this.system.skills)) {
+          // Sets the default starting value for each attribute.
+          for (const attribute in this.system.attributes) {
+            updateData[`system.attributes.${attribute}.value`] = FLBR.startingAttributeLevel;
+          }
+          // Builds the list of skills and sets their default values.
+          for (const skill in FLBR.skillMap) {
+            updateData[`system.skills.${skill}.value`] = FLBR.startingSkillLevel;
+          }
+        }
+        break;
+      case ACTOR_TYPES.VEHICLE:
+        updateData['prototypeToken.displayBars'] = CONST.TOKEN_DISPLAY_MODES.OWNER;
+        updateData['prototypeToken.bar1.attribute'] = 'hull';
+        // updateData['prototypeToken.bar2.attribute'] = null;
+        break;
+      case ACTOR_TYPES.LOOT:
+        // updateData['prototypeToken.bar1.attribute'] = null;
+        updateData.img = 'core/svg/item-bag.svg';
+        break;
+    }
+    if (!foundry.utils.isEmpty(updateData)) {
+      await this.updateSource(updateData);
+    }
+
+    return super._preCreate(data, options, userId);
+  }
+
+  /* ----------------------------------------- */
   /*  Crew Management (Vehicles only)          */
   /* ----------------------------------------- */
 
