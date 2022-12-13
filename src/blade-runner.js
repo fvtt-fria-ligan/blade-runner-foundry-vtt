@@ -17,7 +17,7 @@
  */
 
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES } from '@system/constants';
+import { ACTOR_TYPES, CAPACITIES } from '@system/constants';
 import { ActionCollection } from '@components/actor-action';
 import * as YZUR from 'yzur';
 import * as Chat from '@system/chat';
@@ -100,7 +100,6 @@ Hooks.once('init', async () => {
   // Adds a shortcut directory for vehicle actors.
   Object.defineProperty(game, 'vehicles', {
     enumerable: true,
-    writable: false,
     get: () => new Collection(game.actors
       .filter(a => a.type === ACTOR_TYPES.VEHICLE)
       .map(a => [a.id, a]),
@@ -148,51 +147,29 @@ Hooks.on('renderItemSheet', (app, _html) => {
 
 /* ------------------------------------------ */
 
+Hooks.on('updateActor', (actor, updateData, _options, _userId) => {
+  // Refreshes a vehicle sheet if a passenger is updated.
+  if (actor.type === ACTOR_TYPES.CHAR) {
+    if (
+      foundry.utils.hasProperty(updateData, `system.${CAPACITIES.HEALTH}`) ||
+      foundry.utils.hasProperty(updateData, `system.${CAPACITIES.RESOLVE}`)
+    ) {
+      const vehicles = game.vehicles.filter(v => v.sheet?._state === Application.RENDER_STATES.RENDERED);
+      for (const vehicle of vehicles) {
+        if (vehicle.crew.has(actor.id)) {
+          vehicle.sheet.render(true);
+        }
+      }
+    }
+  }
+});
+
+/* ------------------------------------------ */
+
 Hooks.on('getChatLogEntryContext', Chat.addChatMessageContextOptions);
 
 Hooks.on('renderChatLog', (_app, html, _data) => Chat.addChatListeners(html));
 Hooks.on('renderChatMessage', (_msg, html, _data) => Chat.hideChatActionButtons(html));
-
-/* ------------------------------------------ */
-
-// TODO clean code
-// Hooks.on('createActor', async (actor, _data, _options) => {
-//   const updateData = {
-//     'prototypeToken.displayName': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
-//     'prototypeToken.displayBars': CONST.TOKEN_DISPLAY_MODES.OWNER,
-//   };
-
-//   switch (actor.type) {
-//     case ACTOR_TYPES.CHAR:
-//       // TODO clean code
-//       // if (actor.system.subtype === ACTOR_SUBTYPES.PC) {
-//       //   // updateData['prototypeToken.actorLink'] = true;
-//       //   // updateData['prototypeToken.bar2.attribute'] = CAPACITIES.RESOLVE;
-//       // }
-//       if (!actor.system.attributes || !actor.system.skills) {
-//         throw new TypeError(`FLBR | "${actor.type}" has No attribute nor skill`);
-//       }
-//       if (foundry.utils.isEmpty(actor.system.skills)) {
-//         // Sets the default starting value for each attribute.
-//         for (const attribute in actor.system.attributes) {
-//           updateData[`system.attributes.${attribute}.value`] = FLBR.startingAttributeLevel;
-//         }
-//         // Builds the list of skills and sets their default values.
-//         for (const skill in FLBR.skillMap) {
-//           updateData[`system.skills.${skill}.value`] = FLBR.startingSkillLevel;
-//         }
-//       }
-//       break;
-//     case ACTOR_TYPES.VEHICLE:
-//       updateData['prototypeToken.bar1.attribute'] = 'hull';
-//       // updateData['prototypeToken.bar2.attribute'] = null;
-//       break;
-//   }
-//   if (!foundry.utils.isEmpty(updateData)) {
-//     await actor.update(updateData);
-//   }
-// });
-
 
 /* -------------------------------------------- */
 /*  Chat Commands                               */

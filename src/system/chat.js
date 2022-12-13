@@ -1,3 +1,4 @@
+import { ACTOR_TYPES } from './constants';
 import { FLBR } from './config';
 import BRRollHandler from '@components/roll/roller';
 import BladeRunnerDialog from '@components/dialog/dialog';
@@ -68,6 +69,7 @@ export async function distributeDamageFromMessage(messageId) {
   // ? const defenderTokens = canvas.tokens.controlled;
   const defenderTokens = game.user.targets;
   for (const defenderToken of defenderTokens) {
+    if (defenderToken.actor.type === ACTOR_TYPES.LOOT) continue;
     if (!s) break;
     let n = s;
     // Prompts for assigning a qty of successes to tokens if more than one were targeted.

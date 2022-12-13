@@ -21,13 +21,13 @@ export function registerSystemSettings() {
     type: Array,
     default: [],
   });
-  // game.settings.register(sysId, SETTINGS_KEYS.AUTO_APPLY_DAMAGE, {
-  //   name: 'SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName',
-  //   hint: 'SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint',
-  //   config: true,
-  //   type: Boolean,
-  //   default: false,
-  // });
+  game.settings.register(sysId, SETTINGS_KEYS.AUTO_APPLY_DAMAGE, {
+    name: 'SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName',
+    hint: 'SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint',
+    config: true,
+    type: Boolean,
+    default: true,
+  });
   game.settings.register(sysId, SETTINGS_KEYS.AUTO_ARMOR_ROLL, {
     name: 'SETTINGS.BLADE_RUNNER.AutomaticArmorRollName',
     hint: 'SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint',

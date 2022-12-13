@@ -317,9 +317,14 @@ export default class BladeRunnerItem extends Item {
       this.type === ITEM_TYPES.ARMOR &&
       game.settings.get(game.system.id, SETTINGS_KEYS.AUTO_ARMOR_ROLL);
 
+    const title = (this.actor ? `${this.actor.name}: ` : '')
+      + game.i18n.localize(`ITEM.Type${this.type.capitalize()}`);
+
     const execute = autoArmorRoll || await Dialog.confirm({
-      title: game.i18n.localize(`ITEM.Type${this.type.capitalize()}`),
-      content: `<p>${this.name}</p>`,
+      title,
+      content: `<p>${game.i18n.format('FLBR.ROLLER.RollSpecialHint', {
+        name: `<b>${this.name}</b>`,
+      })}</p>`,
     });
     if (!execute) return;
 

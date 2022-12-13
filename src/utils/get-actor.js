@@ -28,6 +28,9 @@ export async function getActiveActor() {
  * @returns {Promise<Actor>} Selected Actor
  */
 export async function chooseActor(actors = [], options = {}) {
+  if (!actors.length) return;
+  if (actors.length === 1) return actors[0];
+
   let content = '<form><div class="form-group">'
     + '<select name="actor" style="width: 100%;">';
 

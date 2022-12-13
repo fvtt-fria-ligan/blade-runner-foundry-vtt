@@ -4,6 +4,15 @@
 /*  Foundry Overrides                         */
 /* ------------------------------------------ */
 
+.fa-comments::before {
+  content: "\f8ef"; // Replaced by a talkie-walkie
+}
+.fa-swords::before {
+  content: "\e19b"; // Replaced by a gun
+}
+
+/* ------------------------------------------ */
+
 #context-menu li.context-item {
   padding: 5px;
   line-height: 1.1;

@@ -240,6 +240,7 @@ FLBR.ROLLER.ResolveTestHint: >-
   lost, meaning your maximum Resolve is reduced one step.
 FLBR.ROLLER.ResolveTestFailed: '{name} failed their Empathy roll and permanently loses 1 point of resolve.'
 FLBR.ROLLER.RollButton: Roll
+FLBR.ROLLER.RollSpecialHint: 'Roll: {name}?'
 FLBR.ROLLER.RollWithAdvantageButton: Advantage
 FLBR.ROLLER.RollWithDisadvantageButton: Disadvantage
 FLBR.ROLLER.SelectDiceToPush: Select dice to push

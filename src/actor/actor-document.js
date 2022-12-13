@@ -256,6 +256,8 @@ export default class BladeRunnerActor extends Actor {
 
   /** @override */
   async _preCreate(data, options, userId) {
+    await super._preCreate(data, options, userId);
+
     const updateData = {
       'prototypeToken.displayName': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
     };
@@ -263,11 +265,6 @@ export default class BladeRunnerActor extends Actor {
     switch (this.type) {
       case ACTOR_TYPES.CHAR:
         updateData['prototypeToken.displayBars'] = CONST.TOKEN_DISPLAY_MODES.OWNER;
-        // TODO clean code
-        // if (actor.system.subtype === ACTOR_SUBTYPES.PC) {
-        //   // updateData['prototypeToken.actorLink'] = true;
-        //   // updateData['prototypeToken.bar2.attribute'] = CAPACITIES.RESOLVE;
-        // }
         if (!this.system.attributes || !this.system.skills) {
           throw new TypeError(`FLBR | "${this.type}" has No attribute nor skill`);
         }
@@ -286,17 +283,16 @@ export default class BladeRunnerActor extends Actor {
         updateData['prototypeToken.displayBars'] = CONST.TOKEN_DISPLAY_MODES.OWNER;
         updateData['prototypeToken.bar1.attribute'] = 'hull';
         // updateData['prototypeToken.bar2.attribute'] = null;
+        updateData.img = `systems/${SYSTEM_ID}/assets/icons/steering-wheel.svg`;
         break;
       case ACTOR_TYPES.LOOT:
         // updateData['prototypeToken.bar1.attribute'] = null;
-        updateData.img = 'core/svg/item-bag.svg';
+        updateData.img = `systems/${SYSTEM_ID}/assets/icons/cardboard-box-closed.svg`;
         break;
     }
     if (!foundry.utils.isEmpty(updateData)) {
       await this.updateSource(updateData);
     }
-
-    return super._preCreate(data, options, userId);
   }
 
   /* ----------------------------------------- */
@@ -669,6 +665,7 @@ export default class BladeRunnerActor extends Actor {
       const armors = this.itemTypes[ITEM_TYPES.ARMOR].filter(i => i.qty > 0);
       for (const armor of armors) {
         const rollMessage = await armor.roll();
+        if (game.dice3d) await game.dice3d.waitFor3DAnimationByMessageID(rollMessage.id);
         armorAblation += rollMessage?.rolls[0]?.successCount ?? 0;
       };
     }
@@ -698,7 +695,7 @@ export default class BladeRunnerActor extends Actor {
   async crashVehicle(massive = false) {
     if (this.type !== ACTOR_TYPES.VEHICLE) return;
 
-    const formula = massive ? FLBR.vehicleMassiveCrashDamage : FLBR.vehicleCrashDamage;
+    let formula = massive ? FLBR.vehicleMassiveCrashDamage : FLBR.vehicleCrashDamage;
 
     const toCrash = await Dialog.confirm({
       title: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}`,
@@ -708,21 +705,22 @@ export default class BladeRunnerActor extends Actor {
     });
     if (!toCrash) return;
 
+    // Rolls the vehicle's armor ablation.
+    const armorAblation = this.armored ? await this.getArmorAblation() : 0;
+
     // Rolls the quantity of crash damage.
-    const crashDamageRoll = Roll.create(formula, this.rollData, {
+    const rollData = this.rollData;
+    rollData.armor = armorAblation;
+    formula += ' - @armor';
+    const crashDamageRoll = Roll.create(formula, rollData, {
       name: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}`,
     });
     await crashDamageRoll.roll({ async: true });
     const crashDamageRollMessage = await crashDamageRoll.toMessage({
-      flavor: game.i18n.localize('FLBR.VEHICLE.CrashDamageFlavor'),
+      flavor: `${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}: ${formula}`,
     });
     if (game.dice3d) await game.dice3d.waitFor3DAnimationByMessageID(crashDamageRollMessage.id);
-    let crashDamage = crashDamageRoll.total;
-
-    // Applies the vehicle's armor ablation.
-    if (this.armored) {
-      crashDamage -= await this.getArmorAblation();
-    }
+    const crashDamage = crashDamageRoll.total;
 
     // Inflicts crash damage to each passenger.
     if (crashDamage > 0 && game.settings.get(SYSTEM_ID, SETTINGS_KEYS.AUTO_APPLY_DAMAGE)) {
@@ -738,7 +736,8 @@ export default class BladeRunnerActor extends Actor {
           maxPush: 0,
         }, {
           disabledPush: true,
-        });
+        }).catch(err => console.warn(err));
+
         const mitigation = mitigationRoll?.successCount || 0;
         await passenger.applyDamage(crashDamage - mitigation, { ignoreArmor: true });
       }
@@ -768,9 +767,11 @@ export default class BladeRunnerActor extends Actor {
     const blast = FLBR.blastPowerMap[FLBR.vehicleExplosionBlastPower];
 
     /** @type {import('yzur').YearZeroRoll} */
+    const damageType = DAMAGE_TYPES.PIERCING;
     const blastRoll = Roll.create(`2d${blastPower}p0`, {}, {
       damage: blast.damage,
-      damageType: DAMAGE_TYPES.PIERCING,
+      damageType,
+      damageTypeName: game.i18n.localize(FLBR.damageTypes[damageType]),
       crit: blast.crit,
       yzur: true,
     });

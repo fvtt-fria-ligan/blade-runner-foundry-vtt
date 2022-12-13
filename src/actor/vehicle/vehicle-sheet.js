@@ -240,7 +240,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
   _onManeuverabilityRoll(event) {
     event.preventDefault();
     return this.vehicle.roll({
-      title: game.i18n.localize('FLBR.ATTRIBUTE.MVR'),
+      title: `${this.vehicle.name}: ${game.i18n.localize('FLBR.ATTRIBUTE.MVR')}`,
       dice: [this.vehicle.system.maneuverability],
     });
   }
@@ -253,6 +253,8 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
       title: `${this.vehicle.name}: ${game.i18n.localize('FLBR.ItemArmor')}`,
       dice: new Array(2).fill(this.vehicle.system.armor),
       maxPush: 0,
+    }, {
+      disabledPush: true,
     });
   }
 }

@@ -60,7 +60,9 @@
 					{{/each}}
 				{{/select}}
 			</select>
-			<h3>{{localize "FLBR.WeaponDamage"}}:<span style="color: var(--color-green); float: right;">{{damage}}, {{localize (lookup config.damageTypes damageType)}}</span></h3>
+			{{#if damage includeZero=true}}
+				<h3>{{localize "FLBR.WeaponDamage"}}:<span style="color: var(--color-green); float: right;">{{damage}}, <small>{{localize (lookup config.damageTypes damageType)}}</small></span></h3>
+			{{/if}}
 		</div>
 	</div>
 
