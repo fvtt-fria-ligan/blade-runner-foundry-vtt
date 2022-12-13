@@ -56,7 +56,7 @@ export class ActorAction {
     if (typeof this.callback === 'function') return this.callback(actor);
 
     const attribute = this.attribute || FLBR.skillMap[this.skill];
-    const title = `${this.label} (${game.i18n.localize(`FLBR.SKILL.${this.skill.capitalize()}`)})`;
+    const title = `${actor.name}: ${this.label} (${game.i18n.localize(`FLBR.SKILL.${this.skill.capitalize()}`)})`;
 
     return actor.rollStat(attribute, this.skill, { title });
   }

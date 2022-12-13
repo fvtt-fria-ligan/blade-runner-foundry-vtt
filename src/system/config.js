@@ -309,6 +309,7 @@ FLBR.Actions = [
     hint: 'FLBR.VEHICLE.Action.SpeedingHint',
     skill: BR.SKILLS.MOBILITY,
     actorType: BR.ACTOR_TYPES.VEHICLE,
+    onCrew: true,
   },
   {
     id: BR.COMBAT_ACTIONS.VEHICLE_RAMMING,

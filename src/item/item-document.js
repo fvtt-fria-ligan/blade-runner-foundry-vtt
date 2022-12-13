@@ -273,8 +273,9 @@ export default class BladeRunnerItem extends Item {
     const skillKey = action.skill;
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`) : null;
-    const title = `${this.detailedName} (${attributeName}${skillKey ? ` & ${skillName}` : ''})`
-      + (attack ? ` - ${attack.name}` : '');
+    const title = (this.actor ? `${this.actor.name}: ` : '')
+      + `${this.detailedName} (${attributeName}${skillKey ? ` + ${skillName}` : ''})`
+      + (attack ? ` → ${attack.name}` : '');
     const attributeValue = actor?.getAttribute(attributeKey);
     const skillValue = actor?.getSkill(skillKey);
 

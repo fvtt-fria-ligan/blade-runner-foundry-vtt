@@ -123,6 +123,10 @@
     &:hover { color: var(--color-red); }
   }
 
+  .mounted-weapons {
+    height: fit-content;
+  }
+
   .vehicle-components {
     display: flex;
     flex-direction: row;

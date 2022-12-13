@@ -159,7 +159,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     ]);
 
     // Crew
-    html.find('.vehicle-seat:not(.empty)').click(this._onCrewAction.bind(this));
+    html.find('.vehicle-seat:not(.empty):not(.broken)').click(this._onCrewAction.bind(this));
     html.find('.vehicle-seat.occupied img').each((_index, elem) => {
       elem.setAttribute('draggable', true);
       elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);

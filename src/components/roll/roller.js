@@ -34,6 +34,18 @@ import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
  */
 export default class BRRollHandler extends FormApplication {
   /**
+   * The roll in this FormApplication.
+   * @type {YearZeroRoll}
+   */
+  roll = {};
+
+  /**
+   * The ID of the message that contains the rolled result.
+   * @type {string}
+   */
+  messageId;
+
+  /**
    * @param {BladeRunnerRollHandlerData} rollData
    * @param {BladeRunnerRollHandlerOptions} options
    */
@@ -115,12 +127,6 @@ export default class BRRollHandler extends FormApplication {
     this.dice = this.dice.filter(d => d > 0);
 
     /**
-     * The roll in this FormApplication.
-     * @type {YearZeroRoll}
-     */
-    this.roll = {};
-
-    /**
      * The maximum number of pushes (default is 1).
      * @type {number}
      */
@@ -176,6 +182,10 @@ export default class BRRollHandler extends FormApplication {
 
   get isAttack() {
     return !!this.damage || [ITEM_TYPES.WEAPON, ITEM_TYPES.EXPLOSIVE].includes(this.item?.type);
+  }
+
+  get message() {
+    return game.messages.get(this.messageId);
   }
 
   /* ------------------------------------------ */
@@ -243,8 +253,8 @@ export default class BRRollHandler extends FormApplication {
   /**
    * Creates a Blade Runner Roll Handler FormApplication.
    * @see {@link BRRollHandler} constructor
-   * @param {Object} [data]
-   * @param {Object} [options]
+   * @param {BladeRunnerRollHandlerData}    [data]
+   * @param {BladeRunnerRollHandlerOptions} [options]
    * @returns {BRRollHandler} Rendered instance of this FormApplication
    */
   static create(data = {}, options = {}) {
@@ -338,7 +348,9 @@ export default class BRRollHandler extends FormApplication {
     const speaker = this.createSpeaker();
     const unlimitedPush = this.options.unlimitedPush;
     return {
-      name: this.title,
+      name: this.actor
+        ? this.title.replace(`${this.actor.name}: `, '')
+        : this.title,
       maxPush: unlimitedPush ? 1000 : this.maxPush,
       // type: this.options.type,
       attributeKey: this.attributeKey,
@@ -386,11 +398,13 @@ export default class BRRollHandler extends FormApplication {
     await this.roll.roll({ async: true });
 
     if (this.options.sendMessage) {
-      return this.roll.toMessage({
+      const message = await this.roll.toMessage({
         speaker: this.createSpeaker(),
       }, {
         rollMode: this.options.rollMode,
       });
+      this.messageId = message.id;
+      return message;
     }
     return this.roll;
   }
@@ -466,7 +480,7 @@ export default class BRRollHandler extends FormApplication {
   /* ------------------------------------------ */
 
   /**
-   * Handles cancellation .
+   * Handles push cancellation.
    * @param {ChatMessage} message The message that contains the roll
    * @returns {Promise.<ChatMessage>} The updated message
    */
@@ -595,6 +609,31 @@ export default class BRRollHandler extends FormApplication {
 
   /* ------------------------------------------ */
   /*  Dialogs                                   */
+  /* ------------------------------------------ */
+
+  /**
+   * Waits for the result of the handler.
+   * @param {BladeRunnerRollHandlerData}    [data]
+   * @param {BladeRunnerRollHandlerOptions} [options]
+   * @returns {Promise.<YearZeroRoll>}
+   */
+  static async waitForRoll(data, options) {
+    return new Promise((resolve, reject) => {
+      const roller = new this(data, options);
+      const originalClose = roller.close;
+      roller.close = async opts => {
+        await originalClose.bind(roller, opts)();
+        const roll = roller.roll;
+        if (roll instanceof YearZeroRoll || roll instanceof Roll) {
+          if (game.dice3d && roller.message) await game.dice3d.waitFor3DAnimationByMessageID(roller.messageId);
+          resolve(roll);
+        }
+        else reject(new Error('The dialog was closed without a choice being made.'));
+      };
+      roller.render(true);
+    });
+  }
+
   /* ------------------------------------------ */
 
   /**

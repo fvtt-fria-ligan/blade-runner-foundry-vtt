@@ -376,7 +376,7 @@ export default class BladeRunnerActor extends Actor {
    */
   async roll(rollData = {}, options = {}) {
     if (options.title) rollData.title = options.title;
-    if (!rollData.title) rollData.title = game.i18n.localize('FLBR.SHEET_HEADER.GenericRoll');
+    if (!rollData.title) rollData.title = `${this.name}: ${game.i18n.localize('FLBR.SHEET_HEADER.GenericRoll')}`;
     if (!rollData.modifiers) rollData.modifiers = this.getRollModifiers();
     const roller = new BRRollHandler({
       actor: this,
@@ -409,11 +409,10 @@ export default class BladeRunnerActor extends Actor {
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`) : null;
 
-    // ? const title = options.title ?? skillName ?? attributeName;
-    let title;
+    let title = `${this.name}: `;
     if (options.title) title = options.title;
-    else if (skillName) title = `${skillName} (${attributeName})`;
-    else title = attributeName;
+    else if (skillName) title += `${skillName} (${attributeName})`;
+    else title += attributeName;
 
     const attributeValue = this.getAttribute(attributeKey);
     const skillValue = this.getSkill(skillKey);
@@ -496,7 +495,7 @@ export default class BladeRunnerActor extends Actor {
     const hullDamage = Math.ceil(this.system.hull.max / 2);
 
     return this.roll({
-      title: `${this.name}: ${actor.name}: `
+      title: `${this.name} | ${actor.name}: `
         + `${game.i18n.localize('FLBR.VEHICLE.Action.Ramming')} `
         + `(${game.i18n.localize(`FLBR.SKILL.${SKILLS.DRIVING.capitalize()}`)})`,
       actor: actor,
@@ -644,7 +643,9 @@ export default class BladeRunnerActor extends Actor {
       { name: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}` },
     );
     await crashDamageRoll.roll({ async: true });
-    const crashDamageRollMessage = await crashDamageRoll.toMessage();
+    const crashDamageRollMessage = await crashDamageRoll.toMessage({
+      flavor: 'Crash damage',
+    });
     if (game.dice3d) await game.dice3d.waitFor3DAnimationByMessageID(crashDamageRollMessage.id);
     let crashDamage = crashDamageRoll.total;
     const initialDamage = crashDamage;
@@ -656,13 +657,12 @@ export default class BladeRunnerActor extends Actor {
 
     // Inflicts crash damage to each passenger.
     for (const passenger of this.crew) {
-
-      // ! const mitigation = mitigationRoll?.successCount || 0;
-      // ! await passenger.applyDamage(crashDamage - mitigation);
+      // ! x
     }
 
-    // Refresh the vehicle sheet.
-    await this.sheet.render();
+
+    // Crashes the vehicle. No need to await.
+    this.update({ 'system.hull.value': 0 });
   }
 
   /* ------------------------------------------ */

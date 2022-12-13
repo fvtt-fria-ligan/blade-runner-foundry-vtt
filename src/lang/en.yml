@@ -253,6 +253,12 @@ FLBR.VEHICLE.Action.CrashHint: >-
   the vehicle’s Armor rating. You can also brace yourself for
   the hit by rolling MOBILITY – each <span class="blade-runner-symbols">S</span> rolled reduces the
   damage by one.
+FLBR.VEHICLE.Action.Explode: Explode
+FLBR.VEHICLE.Action.ExplodeHint: >-
+  The vehicle explodes in a ball of flame.
+  Everyone inside is exposed to a Blast Power B explosion,
+  and the vehicle is destroyed beyond repair.
+FLBR.VEHICLE.Action.MassiveCrash: Massive Crash
 FLBR.VEHICLE.Action.Ramming: Ramming
 FLBR.VEHICLE.Action.RammingHint: >-
   Most vehicles can be used
