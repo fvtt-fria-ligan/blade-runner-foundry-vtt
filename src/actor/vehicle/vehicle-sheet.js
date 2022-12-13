@@ -1,5 +1,5 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet';
-import { SYSTEM_ID, ACTOR_TYPES, ACTOR_SUBTYPES, SKILLS, ATTRIBUTES, COMBAT_ACTIONS } from '@system/constants';
+import { SYSTEM_ID, ACTOR_TYPES, ACTOR_SUBTYPES, SKILLS, ATTRIBUTES } from '@system/constants';
 import { FLBR } from '@system/config';
 
 /**
@@ -14,7 +14,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
 
   /**
    * A convenient shortcut to the vehicle actor in this sheet.
-   * @type {import('@actor/actor-document').default}
+   * @type {import('@actor/actor-document').default & { crew: import('@components/vehicle-crew').default}}
    */
   get vehicle() {
     return this.actor;

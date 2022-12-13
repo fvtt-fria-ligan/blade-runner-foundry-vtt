@@ -161,7 +161,7 @@ for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
   FLBR.rollModes[v] = `CHAT.Roll${k.toLowerCase().capitalize()}`;
 }
 
-// TODO
+// TODO Implements Years On The Force on creation. Maybe move to a module
 // FLBR.yearsOnTheForce = {
 //   [BR.YEARS_ON_THE_FORCE.ROOKIE]: {
 //     years: [0, 1],

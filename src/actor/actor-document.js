@@ -20,7 +20,6 @@ import CrewCollection from '@components/vehicle-crew';
 
 /**
  * Blade Runner Actor Document.
- * @class
  * @extends {Actor}
  */
 export default class BladeRunnerActor extends Actor {
@@ -341,7 +340,7 @@ export default class BladeRunnerActor extends Actor {
   }
 
   /* ------------------------------------------ */
-  /*  Utility Functions                         */
+  /*  Utility Methods                           */
   /* ------------------------------------------ */
 
   /**
@@ -360,6 +359,20 @@ export default class BladeRunnerActor extends Actor {
    */
   getSkill(skillKey) {
     return +this.skills?.[skillKey]?.value;
+  }
+
+  /**
+   * Kills the actor, reducing its HP to 0.
+   * @returns {Promise.<void>}
+   */
+  async kill() {
+    let capacity;
+    switch (this.type) {
+      case ACTOR_TYPES.CHAR: capacity = 'health'; break;
+      case ACTOR_TYPES.VEHICLE: capacity = 'hull'; break;
+      default: return;
+    }
+    await this.update({ [`system.${capacity}.value`]: 0 });
   }
 
   /* ------------------------------------------ */
@@ -492,16 +505,17 @@ export default class BladeRunnerActor extends Actor {
     const actor = await this.crew.choose();
     if (!actor) return;
 
+    const driving = FLBR.vehicleSkill;
     const hullDamage = Math.ceil(this.system.hull.max / 2);
 
     return this.roll({
       title: `${this.name} | ${actor.name}: `
         + `${game.i18n.localize('FLBR.VEHICLE.Action.Ramming')} `
-        + `(${game.i18n.localize(`FLBR.SKILL.${SKILLS.DRIVING.capitalize()}`)})`,
+        + `(${game.i18n.localize(`FLBR.SKILL.${driving.capitalize()}`)})`,
       actor: actor,
-      attributeKey: ATTRIBUTES.VEHICLE_MANEUVERABILITY,
-      skillKey: SKILLS.DRIVING,
-      dice: [this.system.maneuverability, actor.skills.driving?.value],
+      attributeKey: FLBR.vehicleAttribute,
+      skillKey: driving,
+      dice: [this.system.maneuverability, actor.skills[driving]?.value],
       modifiers: [...this.getRollModifiers(), ...actor.getRollModifiers()],
       maxPush: actor.maxPush,
     }, {
@@ -518,12 +532,14 @@ export default class BladeRunnerActor extends Actor {
 
   /**
    * Applies damage to one capacity of the actor (usually health).
-   * @param {number}  damage    Quantity of damage
-   * @param {string} [capacity] Capacity to damage
+   * @param {number}   damage               Quantity of damage
+   * @param {Object}  [options]             Additional options
+   * @param {string}  [options.capacity]    Capacity to damage
+   * @param {boolean} [options.ignoreArmor] Whether to ignore the armor roll
    * @returns {Promise.<this>}
    * @async
    */
-  async applyDamage(damage, capacity) {
+  async applyDamage(damage, { capacity, ignoreArmor } = {}) {
     if (!capacity) {
       switch (this.type) {
         case ACTOR_TYPES.CHAR: capacity = 'health'; break;
@@ -531,18 +547,19 @@ export default class BladeRunnerActor extends Actor {
         default: return this;
       }
     }
-    return this._applyDamage(damage, capacity);
+    return this._applyDamage(damage, capacity, ignoreArmor);
   }
 
   /* ------------------------------------------ */
 
   /**
    * @see {BladeRunnerActor.applyDamage}
-   * @param {number} damage
-   * @param {string} capacity
+   * @param {number}   damage
+   * @param {string}   capacity
+   * @param {boolean} [ignoreArmor=false]
    * @returns {Promise.<this>}
    */
-  async _applyDamage(damage, capacity) {
+  async _applyDamage(damage, capacity, ignoreArmor = false) {
     if (damage <= 0) return;
     if (!(capacity in this.system)) {
       throw new Error(`FLBR | BladeRunnerActor.applyDamage → Non-existent capacity "${capacity}"`);
@@ -550,7 +567,7 @@ export default class BladeRunnerActor extends Actor {
 
     const initialDamage = damage;
 
-    if (this.armored) {
+    if (!ignoreArmor && this.armored) {
       damage -= await this.getArmorAblation();
     }
 
@@ -621,52 +638,74 @@ export default class BladeRunnerActor extends Actor {
   }
 
   /* ------------------------------------------ */
+  /*  Vehicle Crashes & Explosions              */
+  /* ------------------------------------------ */
 
   /**
    * Crashes the vehicle, inflicting damage to the crew.
-   * @param {boolean} [massive=false] Whether the crash is massive
-   * @returns {Promise}
+   * @param {boolean} [massive=false] Whether the crash is massive (more damage)
+   * @returns {Promise.<this>} The crashed vehicle Actor
    */
   async crashVehicle(massive = false) {
     if (this.type !== ACTOR_TYPES.VEHICLE) return;
 
+    const formula = massive ? FLBR.vehicleMassiveCrashDamage : FLBR.vehicleCrashDamage;
+
     const toCrash = await Dialog.confirm({
       title: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}`,
-      content: game.i18n.localize('FLBR.VEHICLE.Action.CrashHint'),
+      content: game.i18n.format('FLBR.VEHICLE.Action.CrashDialog', {
+        damage: `<code>${formula}</code>`,
+      }),
     });
     if (!toCrash) return;
 
     // Rolls the quantity of crash damage.
-    const crashDamageRoll = Roll.create(
-      massive ? FLBR.vehicleMassiveCrashDamage : FLBR.vehicleCrashDamage,
-      this.rollData,
-      { name: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}` },
-    );
+    const crashDamageRoll = Roll.create(formula, this.rollData, {
+      name: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}`,
+    });
     await crashDamageRoll.roll({ async: true });
     const crashDamageRollMessage = await crashDamageRoll.toMessage({
-      flavor: 'Crash damage',
+      flavor: game.i18n.localize('FLBR.VEHICLE.CrashDamageFlavor'),
     });
     if (game.dice3d) await game.dice3d.waitFor3DAnimationByMessageID(crashDamageRollMessage.id);
     let crashDamage = crashDamageRoll.total;
-    const initialDamage = crashDamage;
 
-    // Applies armor ablation.
+    // Applies the vehicle's armor ablation.
     if (this.armored) {
       crashDamage -= await this.getArmorAblation();
     }
 
     // Inflicts crash damage to each passenger.
-    for (const passenger of this.crew) {
-      // ! x
+    if (crashDamage > 0 && game.settings.get(SYSTEM_ID, SETTINGS_KEYS.AUTO_APPLY_DAMAGE)) {
+      for (const passenger of this.crew) {
+        const attributeKey = ATTRIBUTES.AGILITY;
+        const skillKey = SKILLS.MOBILITY;
+        const mitigationRoll = await BRRollHandler.waitForRoll({
+          title: `${this.name} | ${passenger.name}: Crash Damage Mitigation (MOBILITY)`,
+          actor: passenger,
+          attributeKey, skillKey,
+          dice: [passenger.attributes[attributeKey].value, passenger.skills[skillKey].value],
+          modifiers: [...passenger.getRollModifiers()],
+          maxPush: 0,
+        }, {
+          disabledPush: true,
+        });
+        const mitigation = mitigationRoll?.successCount || 0;
+        await passenger.applyDamage(crashDamage - mitigation, { ignoreArmor: true });
+      }
     }
 
-
-    // Crashes the vehicle. No need to await.
-    this.update({ 'system.hull.value': 0 });
+    // Crashes the vehicle.
+    await this.kill();
+    return this;
   }
 
   /* ------------------------------------------ */
 
+  /**
+   * Explodes the vehicle, inflicting damage to the crew.
+   * @returns {Promise.<this>} The exploded vehicle Actor
+   */
   async explodeVehicle() {
     if (this.type !== ACTOR_TYPES.VEHICLE) return;
 
@@ -676,14 +715,32 @@ export default class BladeRunnerActor extends Actor {
     });
     if (!toExplode) return;
 
-    const blastPower = FLBR.blastPowerMap[FLBR.vehicleExplosionBlastPower];
-    return this.roll({
-      title: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Explode')}`,
-      dice: new Array(2).fill(FLBR.vehicleExplosionBlastPower),
-    }, {
-      damage: blastPower.damage + 1,
+    const blastPower = FLBR.vehicleExplosionBlastPower;
+    const blast = FLBR.blastPowerMap[FLBR.vehicleExplosionBlastPower];
+
+    /** @type {import('yzur').YearZeroRoll} */
+    const blastRoll = Roll.create(`2d${blastPower}p0`, {}, {
+      damage: blast.damage,
       damageType: DAMAGE_TYPES.PIERCING,
-      crit: blastPower.crit,
+      crit: blast.crit,
+      yzur: true,
     });
+    await blastRoll.roll({ async: true });
+    const blastRollMessage = await blastRoll.toMessage({
+      flavor: game.i18n.localize('FLBR.VEHICLE.Action.Explode'),
+    });
+    if (game.dice3d) await game.dice3d.waitFor3DAnimationByMessageID(blastRollMessage.id);
+
+    // Inflicts blast damage to each passenger.
+    if (blastRoll.successCount > 0 && game.settings.get(SYSTEM_ID, SETTINGS_KEYS.AUTO_APPLY_DAMAGE)) {
+      const damage = blast.damage + (blastRoll.successCount - 1) + 1;
+      for (const passenger of this.crew) {
+        await passenger.applyDamage(damage);
+      }
+    }
+
+    // Explodes the vehicle.
+    await this.kill();
+    return this;
   }
 }

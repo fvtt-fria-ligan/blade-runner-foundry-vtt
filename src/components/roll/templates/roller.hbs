@@ -40,16 +40,17 @@
 				{{/if}}
 				</div>
 			{{/each}}
-			{{!-- <input type="text" class="total" value="{{localize "FLBR.ROLLER.TotalModifier" value=modifier}}" disabled/> --}}
 		</div>
 		<div class="roll-options boxed-property flex column">
 			{{!-- Max Pushes --}}
-			<h3>{{localize "FLBR.ROLLER.MaxPush"}}</h3>
-			<div class="flex row align-center">
-				<input type="number" name="maxPush" value="{{maxPush}}"{{#if options.unlimitedPush}} style="display: none;"{{/if}}/>
-				<input type="checkbox" id="unlimitedPush" name="options.unlimitedPush" {{checked options.unlimitedPush}}/>
-				<label class="checkbox-label" for="unlimitedPush">{{localize "FLBR.ROLLER.UnlimitedPush"}}</label>
-			</div>
+			{{#unless options.disabledPush}}
+				<h3>{{localize "FLBR.ROLLER.MaxPush"}}</h3>
+				<div class="flex row align-center">
+					<input type="number" name="maxPush" value="{{maxPush}}"{{#if options.unlimitedPush}} style="display: none;"{{/if}}/>
+					<input type="checkbox" id="unlimitedPush" name="options.unlimitedPush" {{checked options.unlimitedPush}}/>
+					<label class="checkbox-label" for="unlimitedPush">{{localize "FLBR.ROLLER.UnlimitedPush"}}</label>
+				</div>
+			{{/unless}}
 			{{!-- RollMode --}}
 			<h3>{{localize "CHAT.RollDefault"}}</h3>
 			<select name="rollMode">
@@ -59,6 +60,7 @@
 					{{/each}}
 				{{/select}}
 			</select>
+			<h3>{{localize "FLBR.WeaponDamage"}}:<span style="color: var(--color-green); float: right;">{{damage}}, {{localize (lookup config.damageTypes damageType)}}</span></h3>
 		</div>
 	</div>
 

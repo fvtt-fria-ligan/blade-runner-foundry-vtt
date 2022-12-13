@@ -151,19 +151,6 @@ export async function rollAction(actionKey) {
     return ui.notifications.error(`Action "${actionKey}" not found!`);
   }
   return game.bladerunner.actions.get(actionKey).execute(await getActiveActor());
-  // TODO clean code
-  // const action = FLBR.Actions.find(a => a.id === actionKey);
-  // if (!action) return;
-  // if (typeof action.callback === 'function') {
-  //   return action.callback(await getActiveActor());
-  // }
-
-  // const skillKey = action.skill;
-  // const attributeKey = action.attribute || FLBR.skillMap[skillKey];
-  // const title = game.i18n.localize(action.label)
-  //   + ` (${game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`)})`;
-
-  // return rollStat(attributeKey, skillKey, { title });
 }
 
 /* ------------------------------------------ */

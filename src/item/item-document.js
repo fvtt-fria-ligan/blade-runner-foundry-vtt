@@ -207,7 +207,7 @@ export default class BladeRunnerItem extends Item {
     let actor;
     if (this.actor?.type === ACTOR_TYPES.VEHICLE) {
       actor = await this.actor.crew.choose();
-      if (!actor) actor = this.actor;
+      if (!actor) return;
     }
     else {
       actor = this.actor;
@@ -293,8 +293,7 @@ export default class BladeRunnerItem extends Item {
     }
 
     const roller = new BRRollHandler({
-      title,
-      actor: actor,
+      title, actor,
       attributeKey, skillKey, dice,
       items: [this],
       modifiers,

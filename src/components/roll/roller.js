@@ -23,6 +23,7 @@ import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
  * @property {string}  [rollMode]            The default roll mode to use
  * @property {boolean} [sendMessage=true]    Whether the message should be sent
  * @property {boolean} [unlimitedPush=false] Whether to allow unlimited roll pushes
+ * @property {boolean} [disabledPush=false]  Whether to disable the ability to set the max. push
 */
 
 /**
@@ -46,8 +47,8 @@ export default class BRRollHandler extends FormApplication {
   messageId;
 
   /**
-   * @param {BladeRunnerRollHandlerData} rollData
-   * @param {BladeRunnerRollHandlerOptions} options
+   * @param {RollHandlerData} rollData
+   * @param {RollHandlerOptions} options
    */
   constructor({
     title = 'Blade Runner RPG',
@@ -151,7 +152,8 @@ export default class BRRollHandler extends FormApplication {
     this.crit = options.crit ?? this.item?.attacks?.[0]?.crit;
 
     this.options.sendMessage = options.sendMessage ?? true;
-    this.options.unlimitedPush = options.unlimitedPush ?? false;
+    this.options.unlimitedPush = !!options.unlimitedPush;
+    this.options.disabledPush = !!options.disabledPush;
   }
 
   /* ------------------------------------------ */
@@ -226,6 +228,7 @@ export default class BRRollHandler extends FormApplication {
       rollMode: this.options.rollMode ?? game.settings.get('core', 'rollMode'),
       attack: this.isAttack,
       damage: this.damage,
+      damageType: this.damageType,
       config: CONFIG.BLADE_RUNNER,
       options,
     };
@@ -253,8 +256,8 @@ export default class BRRollHandler extends FormApplication {
   /**
    * Creates a Blade Runner Roll Handler FormApplication.
    * @see {@link BRRollHandler} constructor
-   * @param {BladeRunnerRollHandlerData}    [data]
-   * @param {BladeRunnerRollHandlerOptions} [options]
+   * @param {RollHandlerData}    [data]
+   * @param {RollHandlerOptions} [options]
    * @returns {BRRollHandler} Rendered instance of this FormApplication
    */
   static create(data = {}, options = {}) {
@@ -613,8 +616,8 @@ export default class BRRollHandler extends FormApplication {
 
   /**
    * Waits for the result of the handler.
-   * @param {BladeRunnerRollHandlerData}    [data]
-   * @param {BladeRunnerRollHandlerOptions} [options]
+   * @param {RollHandlerData}    data
+   * @param {RollHandlerOptions} [options]
    * @returns {Promise.<YearZeroRoll>}
    */
   static async waitForRoll(data, options) {
@@ -624,11 +627,13 @@ export default class BRRollHandler extends FormApplication {
       roller.close = async opts => {
         await originalClose.bind(roller, opts)();
         const roll = roller.roll;
-        if (roll instanceof YearZeroRoll || roll instanceof Roll) {
+        if (roll instanceof Roll) {
           if (game.dice3d && roller.message) await game.dice3d.waitFor3DAnimationByMessageID(roller.messageId);
           resolve(roll);
         }
-        else reject(new Error('The dialog was closed without a choice being made.'));
+        else {
+          reject(new Error('The dialog was closed without a choice being made.'));
+        }
       };
       roller.render(true);
     });

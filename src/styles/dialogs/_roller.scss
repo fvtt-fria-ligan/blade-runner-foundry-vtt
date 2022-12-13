@@ -49,14 +49,8 @@
     align-items: center;
     gap: 4px;
 
-    h3,
-    // TODO remove total
-    .total {
+    h3 {
       grid-column: 1 / -1;
-    }
-    // TODO remove total
-    .total {
-      align-self: end;
     }
     h4:not(:first-of-type),
     .modifier-value {

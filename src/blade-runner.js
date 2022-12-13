@@ -100,6 +100,7 @@ Hooks.once('init', async () => {
   // Adds a shortcut directory for vehicle actors.
   Object.defineProperty(game, 'vehicles', {
     enumerable: true,
+    writable: false,
     get: () => new Collection(game.actors
       .filter(a => a.type === ACTOR_TYPES.VEHICLE)
       .map(a => [a.id, a]),
