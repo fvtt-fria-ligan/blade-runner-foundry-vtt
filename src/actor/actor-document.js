@@ -1,6 +1,6 @@
 import { FLBR } from '@system/config';
-import { ACTOR_SUBTYPES, ACTOR_TYPES, ATTRIBUTES,
-  CAPACITIES, DAMAGE_TYPES, ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
+import { ACTOR_SUBTYPES, ACTOR_TYPES, ATTRIBUTES, CAPACITIES,
+  DAMAGE_TYPES, ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
 import CrewCollection from '@components/vehicle-crew';
@@ -127,7 +127,7 @@ export default class BladeRunnerActor extends Actor {
         rollData[k] = v.value;
       }
     }
-    rollData.maxPush = FLBR.maxPushMap[this.system.nature] ?? 1;
+    rollData.maxPush = this.maxPush;
     return rollData;
   }
 
@@ -362,9 +362,10 @@ export default class BladeRunnerActor extends Actor {
    */
   async updateCharacterManeuverability(value) {
     if (this.type !== ACTOR_TYPES.CHAR) return;
-    if (this.attributes[ATTRIBUTES.VEHICLE_MANEUVERABILITY]?.value !== value) {
+    const mvr = FLBR.vehicleAttribute;
+    if (this.attributes[mvr]?.value !== value) {
       await this.updateSource({
-        [`system.attributes.${ATTRIBUTES.VEHICLE_MANEUVERABILITY}.value`]: value,
+        [`system.attributes.${mvr}.value`]: value,
       });
     }
   }
@@ -681,7 +682,7 @@ export default class BladeRunnerActor extends Actor {
       };
     }
     // For vehicles:
-    else if (this.isVehicle) {
+    else if (this.type === ACTOR_TYPES.VEHICLE) {
       const armorRoll = Roll.create(`2d${this.system.armor}p0`, {}, {
         name: `${this.name}: ${game.i18n.localize('FLBR.ItemArmor')}`,
         yzur: true,
