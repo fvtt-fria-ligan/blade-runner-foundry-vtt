@@ -69,7 +69,14 @@ export async function distributeDamageFromMessage(messageId) {
   // ? const defenderTokens = canvas.tokens.controlled;
   const defenderTokens = game.user.targets;
   for (const defenderToken of defenderTokens) {
-    if (defenderToken.actor.type === ACTOR_TYPES.LOOT) continue;
+    if (defenderToken.actor.type === ACTOR_TYPES.LOOT) {
+      ui.notifications.info(
+        game.i18n.format('FLBR.COMBAT.SkippedDefender', {
+          name: `<b>${defenderToken.name}</b>`,
+        }) + ' <i>(' + game.i18n.localize('FLBR.COMBAT.CannotBeDamaged') + ')</i>',
+      );
+      continue;
+    }
     if (!s) break;
     let n = s;
     // Prompts for assigning a qty of successes to tokens if more than one were targeted.

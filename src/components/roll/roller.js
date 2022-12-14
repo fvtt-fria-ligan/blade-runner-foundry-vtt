@@ -628,8 +628,10 @@ export default class BRRollHandler extends FormApplication {
         await originalClose.bind(roller, opts)();
         const roll = roller.roll;
         if (roll instanceof Roll) {
-          if (game.dice3d && roller.message) await game.dice3d.waitFor3DAnimationByMessageID(roller.messageId);
-          resolve(roll);
+          if (roller.message && game.dice3d && game.dice3d.isEnabled()) {
+            await game.dice3d.waitFor3DAnimationByMessageID(roller.messageId);
+            resolve(roll);
+          }
         }
         else {
           reject(new Error('The dialog was closed without a choice being made.'));

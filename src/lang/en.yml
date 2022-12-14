@@ -168,6 +168,8 @@ FLBR.CHAT.InitialDamageDealt: The attack had an initial amount of {damage} damag
 FLBR.CHAT.ArmorDeflectedDamage: Armor deflected {damage} damage.
 FLBR.CHAT.ArmorDeflectedAllDamage: Armor deflected all damage.
 FLBR.CHAT.ArmorNoEffect: Armor had no effect.
+FLBR.COMBAT.SkippedDefender: Skipped defender {name}
+FLBR.COMBAT.CannotBeDamaged: Can't be damaged
 FLBR.CreateNewItem: Create a new {type} item
 FLBR.Crit: Crit
 FLBR.Disadvantage: Disadvantage
@@ -246,6 +248,7 @@ FLBR.ROLLER.RollWithDisadvantageButton: Disadvantage
 FLBR.ROLLER.SelectDiceToPush: Select dice to push
 FLBR.ROLLER.UnlimitedPush: Unlimited
 FLBR.SignatureItemUsedCheckboxHint: Used?
+FLBR.SomeoneIsSomething: '{name} is {status}'
 FLBR.VEHICLE.Action.Crash: Crash
 FLBR.VEHICLE.Action.CrashHint: >-
   If a Spinner is Wrecked, it crashes violently
@@ -313,6 +316,7 @@ FLBR.VEHICLE.MountedWeapons: Mounted Weapons
 FLBR.VEHICLE.NotifCrewFull: No more free seat!
 FLBR.VEHICLE.NotifDropCrewVehicle: Vehicles inceptions are not allowed!
 FLBR.VEHICLE.NotifDropCrewLoot: Put your trashes in the trunk instead!
+FLBR.VEHICLE.NotifPassengerAlreadyPresent: Passenger already present!
 FLBR.VEHICLE.RemovePassenger: Remove passenger
 FLBR.WeaponDamage: Damage
 FLBR.WeaponCrit: Crit Die

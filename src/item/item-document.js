@@ -205,7 +205,7 @@ export default class BladeRunnerItem extends Item {
 
     // Gets the actor.
     let actor;
-    if (this.actor?.type === ACTOR_TYPES.VEHICLE) {
+    if (this.actor?.isVehicle) {
       actor = await this.actor.crew.choose();
       if (!actor) return;
     }

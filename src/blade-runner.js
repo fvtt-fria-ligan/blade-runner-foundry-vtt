@@ -101,7 +101,7 @@ Hooks.once('init', async () => {
   Object.defineProperty(game, 'vehicles', {
     enumerable: true,
     get: () => new Collection(game.actors
-      .filter(a => a.type === ACTOR_TYPES.VEHICLE)
+      .filter(a => a.isVehicle)
       .map(a => [a.id, a]),
     ),
   });
@@ -146,19 +146,49 @@ Hooks.on('renderItemSheet', (app, _html) => {
 // });
 
 /* ------------------------------------------ */
+/*  Hooks for updating the vehicles' crew     */
+/* ------------------------------------------ */
 
 Hooks.on('updateActor', (actor, updateData, _options, _userId) => {
-  // Refreshes a vehicle sheet if a passenger is updated.
-  if (actor.type === ACTOR_TYPES.CHAR) {
-    if (
-      foundry.utils.hasProperty(updateData, `system.${CAPACITIES.HEALTH}`) ||
-      foundry.utils.hasProperty(updateData, `system.${CAPACITIES.RESOLVE}`)
-    ) {
+  const hasCapacityUpdate =
+    foundry.utils.hasProperty(updateData, `system.${CAPACITIES.HEALTH}`) ||
+    foundry.utils.hasProperty(updateData, `system.${CAPACITIES.RESOLVE}`) ||
+    foundry.utils.hasProperty(updateData, 'system.hull');
+
+  if (hasCapacityUpdate) {
+    // Notifies if the actor is broken.
+    if (actor.isBroken) {
+      const statusCondition = game.i18n.localize(
+        `FLBR.${actor.isVehicle ? 'Wrecked' : 'Broken'}`,
+      );
+      ui.notifications.error(
+        game.i18n.format('FLBR.SomeoneIsSomething', {
+          name: `<b>${actor.name}</b>`,
+          status: statusCondition.toLowerCase(),
+        }),
+      );
+
+    }
+    // Refreshes a vehicle sheet if a passenger is updated.
+    if (actor.type === ACTOR_TYPES.CHAR) {
       const vehicles = game.vehicles.filter(v => v.sheet?._state === Application.RENDER_STATES.RENDERED);
       for (const vehicle of vehicles) {
         if (vehicle.crew.has(actor.id)) {
           vehicle.sheet.render(true);
         }
+      }
+    }
+  }
+});
+
+Hooks.on('deleteActor', async actor => {
+  // Removes any deleted actor from vehicles' crew.
+  if (actor.type === ACTOR_TYPES.CHAR) {
+    const vehicles = game.vehicles;
+    for (const vehicle of vehicles) {
+      if (vehicle.crew.has(actor.id)) {
+        const crew = vehicle.system.crew.filter(p => p.id !== actor.id);
+        await vehicle.update({ 'system.crew': crew });
       }
     }
   }

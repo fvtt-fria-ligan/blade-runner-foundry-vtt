@@ -93,11 +93,11 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
         content: game.i18n.format('FLBR.VEHICLE.CreateActorHint', {
           name: actor.name,
         }),
-        defaultYes: true,
       });
       if (toCopy) {
         const actorData = actor.toObject();
-        actorData.name = `${actor.name} (in ${this.vehicle.name})`;
+        actorData.prototypeToken.actorLink = true;
+        actorData.name = `[${this.vehicle.name}] ${actor.name} (Copy)`;
         actor = await Actor.create(actorData); // This creates a new actor with a new ID
       }
     }

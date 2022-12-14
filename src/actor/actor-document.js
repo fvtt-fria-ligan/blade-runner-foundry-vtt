@@ -36,6 +36,10 @@ export default class BladeRunnerActor extends Actor {
     return this.system.skills;
   }
 
+  get isVehicle() {
+    return this.type === ACTOR_TYPES.VEHICLE;
+  }
+
   /**
    * Whether this actor is broken or wrecked.
    * @type {boolean}
@@ -241,8 +245,8 @@ export default class BladeRunnerActor extends Actor {
     }
 
     // Cleanses the source array of old entries.
-    const [, updatedCrew] = this.system.crew.partition(c => game.actors.has(c.id));
-    if (this.system.crew.length !== updatedCrew.length) {
+    const updatedCrew = this.system.crew.filter(p => game.actors.has(p.id));
+    if (updatedCrew.length !== this.system.crew.length) {
       this.updateSource({ 'system.crew': updatedCrew });
     }
 
@@ -306,8 +310,11 @@ export default class BladeRunnerActor extends Actor {
    * @returns {Promise.<VehicleOccupant[]>} The crew
    */
   async addVehicleOccupant(actor) {
-    if (this.type !== ACTOR_TYPES.VEHICLE) return;
+    if (!this.isVehicle) return;
     if (this.crew.full) return;
+    if (this.crew.has(actor.id)) {
+      return ui.notifications.info('FLBR.VEHICLE.NotifPassengerAlreadyPresent', { localize: true });
+    }
 
     /** @type {VehicleOccupant} */
     const occupant = {
@@ -333,10 +340,12 @@ export default class BladeRunnerActor extends Actor {
    * @returns {Promise.<VehicleOccupant[]>} The crew
    */
   async removeVehicleOccupant(occupantId) {
-    if (this.type !== ACTOR_TYPES.VEHICLE) return;
+    if (!this.isVehicle) return;
 
-    const crew = this.system.crew.filter(c => c.id !== occupantId);
-    await this.update({ 'system.crew': crew });
+    const crew = this.system.crew.filter(p => p.id !== occupantId);
+    if (crew.length !== this.system.crew.length) {
+      await this.update({ 'system.crew': crew });
+    }
 
     if (game.settings.get(SYSTEM_ID, SETTINGS_KEYS.UPDATE_ACTOR_MANEUVERABILITY_ON_UNCREW)) {
       await game.actors.get(occupantId)?.updateCharacterManeuverability(0);
@@ -545,7 +554,7 @@ export default class BladeRunnerActor extends Actor {
    * Rolls a ramming attack with an actor of this vehicle.
    */
   async rollRamming() {
-    if (this.type !== ACTOR_TYPES.VEHICLE) return;
+    if (!this.isVehicle) return;
 
     const actor = await this.crew.choose();
     if (!actor) return;
@@ -634,7 +643,7 @@ export default class BladeRunnerActor extends Actor {
       deflectedDamage: initialDamage - damage,
       armored: this.armored,
       broken: this.isBroken,
-      vroom: this.type === ACTOR_TYPES.VEHICLE,
+      vroom: this.isVehicle,
       config: CONFIG.BLADE_RUNNER,
     });
     const chatData = {
@@ -665,19 +674,21 @@ export default class BladeRunnerActor extends Actor {
       const armors = this.itemTypes[ITEM_TYPES.ARMOR].filter(i => i.qty > 0);
       for (const armor of armors) {
         const rollMessage = await armor.roll();
-        if (game.dice3d) await game.dice3d.waitFor3DAnimationByMessageID(rollMessage.id);
-        armorAblation += rollMessage?.rolls[0]?.successCount ?? 0;
+        if (rollMessage) {
+          if (game.dice3d && game.dice3d.isEnabled()) await game.dice3d.waitFor3DAnimationByMessageID(rollMessage.id);
+          armorAblation += rollMessage.rolls[0].successCount ?? 0;
+        }
       };
     }
     // For vehicles:
-    else if (this.type === ACTOR_TYPES.VEHICLE) {
+    else if (this.isVehicle) {
       const armorRoll = Roll.create(`2d${this.system.armor}p0`, {}, {
         name: `${this.name}: ${game.i18n.localize('FLBR.ItemArmor')}`,
         yzur: true,
       });
       await armorRoll.roll({ async: true });
       const armorRollMessage = await armorRoll.toMessage();
-      if (game.dice3d) await game.dice3d.waitFor3DAnimationByMessageID(armorRollMessage.id);
+      if (game.dice3d && game.dice3d.isEnabled()) await game.dice3d.waitFor3DAnimationByMessageID(armorRollMessage.id);
       armorAblation = armorRoll.successCount;
     }
     return armorAblation;
@@ -693,7 +704,7 @@ export default class BladeRunnerActor extends Actor {
    * @returns {Promise.<this>} The crashed vehicle Actor
    */
   async crashVehicle(massive = false) {
-    if (this.type !== ACTOR_TYPES.VEHICLE) return;
+    if (!this.isVehicle) return;
 
     let formula = massive ? FLBR.vehicleMassiveCrashDamage : FLBR.vehicleCrashDamage;
 
@@ -719,7 +730,9 @@ export default class BladeRunnerActor extends Actor {
     const crashDamageRollMessage = await crashDamageRoll.toMessage({
       flavor: `${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}: ${formula}`,
     });
-    if (game.dice3d) await game.dice3d.waitFor3DAnimationByMessageID(crashDamageRollMessage.id);
+    if (game.dice3d && game.dice3d.isEnabled()) {
+      await game.dice3d.waitFor3DAnimationByMessageID(crashDamageRollMessage.id);
+    }
     const crashDamage = crashDamageRoll.total;
 
     // Inflicts crash damage to each passenger.
@@ -755,7 +768,7 @@ export default class BladeRunnerActor extends Actor {
    * @returns {Promise.<this>} The exploded vehicle Actor
    */
   async explodeVehicle() {
-    if (this.type !== ACTOR_TYPES.VEHICLE) return;
+    if (!this.isVehicle) return;
 
     const toExplode = await Dialog.confirm({
       title: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Explode')}`,
@@ -779,7 +792,7 @@ export default class BladeRunnerActor extends Actor {
     const blastRollMessage = await blastRoll.toMessage({
       flavor: game.i18n.localize('FLBR.VEHICLE.Action.Explode'),
     });
-    if (game.dice3d) await game.dice3d.waitFor3DAnimationByMessageID(blastRollMessage.id);
+    if (game.dice3d && game.dice3d.isEnabled()) await game.dice3d.waitFor3DAnimationByMessageID(blastRollMessage.id);
 
     // Inflicts blast damage to each passenger.
     if (blastRoll.successCount > 0 && game.settings.get(SYSTEM_ID, SETTINGS_KEYS.AUTO_APPLY_DAMAGE)) {

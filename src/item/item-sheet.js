@@ -58,7 +58,7 @@ export default class BladeRunnerItemSheet extends ItemSheet {
       inActor: !!this.item.actor,
       isOffensive: this.item.isOffensive,
       isConsumable: this.item.isConsumable,
-      inVehicle: this.item.actor?.type === ACTOR_TYPES.VEHICLE,
+      inVehicle: this.item.actor?.isVehicle,
       item: baseData.item,
       system: foundry.utils.duplicate(baseData.item.system),
       // effects: baseData.effects,
