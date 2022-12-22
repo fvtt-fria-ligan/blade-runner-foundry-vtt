@@ -26,6 +26,8 @@
     <div class="vehicle-seat button" data-action="add-occupant" data-tooltip="{{localize "FLBR.VEHICLE.AddSeat"}}" data-tooltip-direction="RIGHT">
       <div class="seat-icon">{{{@root.config.Icons.buttons.plus}}}</div>
     </div>
+  {{else if (eq seat -1)}}
+    {{! Nothing}}
   {{else}}
     <div class="vehicle-seat empty">
       <div class="seat-icon">
