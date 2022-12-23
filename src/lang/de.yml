@@ -1,1 +1,18 @@
-{}
+FLBR.Attributes: Attribute
+FLBR.ATTRIBUTE.STR: Stärke
+FLBR.ATTRIBUTE.AGI: Geschicklichkeit
+FLBR.ATTRIBUTE.INT: Intelligenz
+FLBR.ATTRIBUTE.EMP: Em­pa­thie
+FLBR.ATTRIBUTE.MVR: Wendigkeit
+FLBR.Skills: Fähigkeiten
+FLBR.SKILL.Stamina: Ausdauer
+FLBR.SKILL.Firearms: Feuerwaffen
+FLBR.SKILL.Mobility: Mobilität
+FLBR.SKILL.Stealth: Heimlichkeit
+FLBR.NATURE.Human: Mensch
+FLBR.NATURE.Replicant: Replikant
+FLBR.ARCHETYPE.ANALYST: Analyst
+FLBR.COMBAT_ACTION.UnarmedAttack: Unbewaffneter Angriff
+FLBR.COMBAT_ACTION.MeleeAttack: Nahkampf Angriff
+FLBR.COMBAT_ACTION.CarefulAim: sorgfältiges zielen
+FLBR.COMBAT_ACTION.ThrowWeapon: Wurfwaffe
