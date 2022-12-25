@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, ITEM_TYPES, SYSTEM_ID } from '@system/constants';
+import { ACTOR_TYPES, ITEM_TYPES, SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
 import { enrichTextFields } from '@utils/string-util';
 import ActorSheetConfig from './actor-sheet-config';
 
@@ -41,6 +41,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
   /** @override */
   async getData(options) {
     const isOwner = this.actor.isOwner;
+    const showEffects = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.USE_ACTIVE_EFFECTS);
     const baseData = super.getData(options);
     const sheetData = {
       cssClass: isOwner ? 'editable' : 'locked',
@@ -52,7 +53,8 @@ export default class BladeRunnerActorSheet extends ActorSheet {
       actor: baseData.actor,
       system: foundry.utils.duplicate(baseData.actor.system),
       items: [...this.actor.items].sort((a, b) => (a.sort || 0) - (b.sort || 0)),
-      effects: baseData.effects,
+      showEffects,
+      effects: showEffects ? [...this.actor.effects] : null,
       rollData: this.rollData,
       config: CONFIG.BLADE_RUNNER,
     };
@@ -187,6 +189,12 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     html.find('.item-delete-confirmed').click(this._onItemDeleteConfirmed.bind(this));
     html.find('.item-control').click(this._onItemControl.bind(this));
     html.find('.embedded-item').on('contextmenu', this._onItemEdit.bind(this));
+
+    // Active Effects
+    if (game.settings.get(SYSTEM_ID, SETTINGS_KEYS.USE_ACTIVE_EFFECTS)) {
+      html.find('.add-active-effect').click(this._onAddActiveEffect.bind(this));
+      html.find('.active-effect-controls .btn').click(this._onActiveEffectAction.bind(this));
+    }
   }
 
   /* ------------------------------------------ */
@@ -282,5 +290,29 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     count = Math.clamped(count, min, max);
 
     return this.actor.update({ [field]: count });
+  }
+
+  /* ------------------------------------------ */
+
+  _onAddActiveEffect(event) {
+    event.preventDefault();
+    return this.actor.createEmbeddedDocuments('ActiveEffect', [{
+      label: game.i18n.localize('FLBR.ACTIVE_EFFECT.New'),
+      icon: 'icons/svg/aura.svg',
+      origin: this.actor.uuid,
+    }]);
+  }
+
+  _onActiveEffectAction(event) {
+    event.preventDefault();
+    const btn = event.currentTarget;
+    const effectId = btn.closest('[data-effect-id]').dataset.effectId;
+    const effect = this.actor.effects.get(effectId);
+    if (!effect) return;
+    switch (event.currentTarget.dataset.action) {
+      case 'toggle': return effect.update({ disabled: !effect.disabled });
+      case 'edit': return effect.sheet.render(true);
+      case 'delete': return effect.delete();
+    }
   }
 }

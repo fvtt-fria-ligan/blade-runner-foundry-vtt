@@ -56,4 +56,11 @@ export function registerSystemSettings() {
     type: Boolean,
     default: false,
   });
+  game.settings.register(sysId, SETTINGS_KEYS.USE_ACTIVE_EFFECTS, {
+    name: 'SETTINGS.BLADE_RUNNER.UseActiveEffectsName',
+    hint: 'SETTINGS.BLADE_RUNNER.UseActiveEffectsHint',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
 }

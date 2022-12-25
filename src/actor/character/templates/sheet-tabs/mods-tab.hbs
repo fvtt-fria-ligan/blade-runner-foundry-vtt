@@ -1,10 +1,21 @@
 <div class="mods-tab">
-  <div class="specialties boxed-property">
-    <h3>{{localize "FLBR.HEADER.Specialties"}}{{createNewItemButton "specialty"}}</h3>
-  {{> systems/blade-runner/templates/actor/inventory-partial.hbs items=actor.itemTypes.specialty}}
-  </div>
-  <div class="augments boxed-property">
-    <h3>{{localize "FLBR.HEADER.Augments"}}{{createNewItemButton "upgrade"}}</h3>
-  {{> systems/blade-runner/templates/actor/inventory-partial.hbs items=actor.itemTypes.upgrade}}
-  </div>
+	<div class="specialties boxed-property">
+		<h3>{{localize "FLBR.HEADER.Specialties"}}{{createNewItemButton "specialty"}}</h3>
+	{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=actor.itemTypes.specialty}}
+	</div>
+	<div class="augments boxed-property">
+		<h3>{{localize "FLBR.HEADER.Augments"}}{{createNewItemButton "upgrade"}}</h3>
+	{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=actor.itemTypes.upgrade}}
+	</div>
+	{{#if showEffects}}
+		<div class="active-effects boxed-property">
+			<h4>
+				{{localize "DOCUMENT.ActiveEffects"}}
+				<a class="btn add-active-effect" data-tooltip="{{localize "FLBR.ACTIVE_EFFECT.Add"}}">
+					{{{@root.config.Icons.buttons.plus}}}
+				</a>
+			</h4>
+{{> systems/blade-runner/templates/item/active-effects-partial.hbs}}
+		</div>
+	{{/if}}
 </div>

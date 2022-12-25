@@ -411,5 +411,6 @@ FLBR.Icons = {
     seat: '<i class="fa-regular fa-person-seat-reclined"></i>',
     chat: '<i class="far fa-comment-dots"></i>',
     roll: '<i class="fas fa-dice-d20"></i>',
+    onoff: '<i class="fas fa-power-off"></i>',
   },
 };

@@ -173,6 +173,10 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  .active-effects {
+    grid-column: 1 / -1;
+  }
+
   .embedded-items {
     height: 100%;
   }

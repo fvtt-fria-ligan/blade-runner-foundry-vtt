@@ -154,6 +154,13 @@ FLBR.TAB.Mods: Mods
 FLBR.TAB.Stats: Stats
 FLBR.D: D
 FLBR.NO_VALUE: –
+FLBR.ACTIVE_EFFECT.Add: Add an Active Effect
+FLBR.ACTIVE_EFFECT.Delete: Delete Effect
+FLBR.ACTIVE_EFFECT.Edit: Edit Effect
+FLBR.ACTIVE_EFFECT.Empty: No Effect.
+FLBR.ACTIVE_EFFECT.New: New Effect
+FLBR.ACTIVE_EFFECT.Toggle: Toggle Effect
+FLBR.ACTIVE_EFFECT.InActorDisclaimer: "Note: Active Effects cannot be edited in embedded Items (Foundry's limitation)."
 FLBR.Advantage: Advantage
 FLBR.Capacities: Health & Resolve
 FLBR.Blast: Blast
@@ -365,6 +372,8 @@ SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewName: Update Maneuverabili
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewHint: Whether to update the actor's maneuverability when crewed into a vehicle.
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewName: Update Maneuverability on Uncrew
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewHint: Whether to update the actor's maneuverability when removed from a vehicle.
+SETTINGS.BLADE_RUNNER.UseActiveEffectsName: Use Active Effects
+SETTINGS.BLADE_RUNNER.UseActiveEffectsHint: Whether to display an additional field in sheets for managing Active Effects (for advanced players).
 WARNING.ApplyDamageNoNature: 'Apply Push Damage: Actor Nature Not Found!'
 WARNING.ApplyDamageNoCapacityKey: 'Apply Push Damage: Nature-Capacity relation Not Found!'
 WARNING.ApplyDamageNoActorCapacity: 'Apply Push Damage: Actor Capacity Not Found!'

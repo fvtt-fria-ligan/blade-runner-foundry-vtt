@@ -143,4 +143,5 @@ export const SETTINGS_KEYS = {
   /** @type {'openFirstWeaponAttack'} */ OPEN_FIRST_WEAPON_ATTACK: 'openFirstWeaponAttack',
   /** @type {'updateActorMvrOnCrew'} */ UPDATE_ACTOR_MANEUVERABILITY_ON_CREW: 'updateActorMvrOnCrew',
   /** @type {'updateActorMvrOnUncrew'} */ UPDATE_ACTOR_MANEUVERABILITY_ON_UNCREW: 'updateActorMvrOnUncrew',
+  /** @type {'useActiveEffects'} */ USE_ACTIVE_EFFECTS: 'useActiveEffects',
 };
