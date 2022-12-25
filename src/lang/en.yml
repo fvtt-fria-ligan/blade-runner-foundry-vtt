@@ -307,17 +307,17 @@ FLBR.VEHICLE.CrashDamageFlavor: Damage dealt to the crew by the crash of the veh
 FLBR.VEHICLE.CreateActor: Create Actor?
 FLBR.VEHICLE.CreateActorHint: Do you want to duplicate actor {name} before crewing it?
 FLBR.VEHICLE.Crew: Crew
-FLBR.VEHICLE.DecreaseHull: Decrease max. Hull
-FLBR.VEHICLE.DeleteSeat: Decrease passenger capacity
-FLBR.VEHICLE.EditPassenger: Edit passenger
+FLBR.VEHICLE.DecreaseHull: Decrease Max. Hull
+FLBR.VEHICLE.DeleteSeat: Decrease Passenger Capacity
+FLBR.VEHICLE.EditPassenger: Edit Passenger
 FLBR.VEHICLE.Engine: Engine
-FLBR.VEHICLE.IncreaseHull: Increase max. Hull
+FLBR.VEHICLE.IncreaseHull: Increase Max. Hull
 FLBR.VEHICLE.MountedWeapons: Mounted Weapons
 FLBR.VEHICLE.NotifCrewFull: No more free seat!
 FLBR.VEHICLE.NotifDropCrewVehicle: Vehicles inceptions are not allowed!
 FLBR.VEHICLE.NotifDropCrewLoot: Put your trashes in the trunk instead!
 FLBR.VEHICLE.NotifPassengerAlreadyPresent: Passenger already present!
-FLBR.VEHICLE.RemovePassenger: Remove passenger
+FLBR.VEHICLE.RemovePassenger: Remove Passenger
 FLBR.WeaponDamage: Damage
 FLBR.WeaponCrit: Crit Die
 FLBR.WeaponDamageType: Damage Type
