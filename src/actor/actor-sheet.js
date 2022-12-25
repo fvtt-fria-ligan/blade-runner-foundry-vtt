@@ -13,14 +13,25 @@ export default class BladeRunnerActorSheet extends ActorSheet {
   /*  Properties                                */
   /* ------------------------------------------ */
 
-  get rollData() {
-    return this.actor.getRollData();
+  /** @override */
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      dragDrop: [
+        // { dragSelector: '.item-list .item', dropSelector: null },
+        { dragSelector: '.embedded-items .embedded-item', dropSelector: null },
+        { dragSelector: '.stat-roll[data-attribute]', dropSelector: null },
+      ],
+    });
   }
 
   /** @override */
   get template() {
     const sysId = game.system.id || SYSTEM_ID;
     return `systems/${sysId}/templates/actor/${this.actor.type}/${this.actor.type}-sheet.hbs`;
+  }
+
+  get rollData() {
+    return this.actor.getRollData();
   }
 
   /* ------------------------------------------ */
@@ -40,7 +51,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
       isGM: game.user.isGM,
       actor: baseData.actor,
       system: foundry.utils.duplicate(baseData.actor.system),
-      // items: baseData.items,
+      items: [...this.actor.items].sort((a, b) => (a.sort || 0) - (b.sort || 0)),
       effects: baseData.effects,
       rollData: this.rollData,
       config: CONFIG.BLADE_RUNNER,
@@ -176,18 +187,6 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     html.find('.item-delete-confirmed').click(this._onItemDeleteConfirmed.bind(this));
     html.find('.item-control').click(this._onItemControl.bind(this));
     html.find('.embedded-item').on('contextmenu', this._onItemEdit.bind(this));
-
-    // Owner-only listeners.
-    if (this.actor.isOwner) {
-      html.find('.stat-roll[data-attribute]').each((_index, elem) => {
-        elem.setAttribute('draggable', true);
-        elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);
-      });
-      html.find('.embedded-item[data-item-id]').each((_index, elem) => {
-        elem.setAttribute('draggable', true);
-        elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);
-      });
-    }
   }
 
   /* ------------------------------------------ */

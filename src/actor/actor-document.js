@@ -114,6 +114,16 @@ export default class BladeRunnerActor extends Actor {
     return this.getRollData();
   }
 
+  /** @override */
+  get itemTypes() {
+    // Copy-pasted from Foundry:
+    const types = Object.fromEntries(game.documentTypes.Item.map(t => [t, []]));
+    for (const item of this.items) types[item.type].push(item);
+    // Added the following line:
+    for (const type in types) types[type].sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    return types;
+  }
+
   /* ----------------------------------------- */
 
   /** @override */
