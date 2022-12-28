@@ -110,15 +110,15 @@ export default class BladeRunnerActor extends Actor {
     ]).css;
   }
 
-  get rollData() {
-    return this.getRollData();
-  }
-
   /** @override */
   get itemTypes() {
     const types = super.itemTypes;
     for (const type in types) types[type].sort((a, b) => (a.sort || 0) - (b.sort || 0));
     return types;
+  }
+
+  get rollData() {
+    return this.getRollData();
   }
 
   /* ----------------------------------------- */
