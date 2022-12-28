@@ -368,6 +368,8 @@ SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatic Apply Damage
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Whether to automatically apply damage from rolls to targeted tokens and vehicle passengers.
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatic Armor Roll
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Whether to automatically roll the armor.
+SETTINGS.BLADE_RUNNER.EditNaturePermissionName: Allow Nature Change
+SETTINGS.BLADE_RUNNER.EditNaturePermissionHint: Whether to allow the player to edit their nature in their character sheet.
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Open First Weapon Attack
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Whether to open the collapsible of the first weapon attack when the Item sheet is displayed.
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewName: Update Maneuverability on Crew

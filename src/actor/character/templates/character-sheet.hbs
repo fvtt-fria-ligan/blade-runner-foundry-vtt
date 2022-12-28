@@ -15,7 +15,7 @@
 
 			<div class="nature boxed-property container">
 				<h3>{{localize "FLBR.Nature"}}</h3>
-				<select name="system.nature" data-tooltip="{{localize "FLBR.NatureHint"}}"{{#unless isGM}} disabled{{/unless}}>
+				<select name="system.nature" data-tooltip="{{localize "FLBR.NatureHint"}}"{{#unless editNature}} disabled{{/unless}}>
 					{{selectOptions config.natures selected=system.nature localize=true}}
 				</select>
 			</div>

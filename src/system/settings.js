@@ -21,6 +21,13 @@ export function registerSystemSettings() {
     type: Array,
     default: [],
   });
+  game.settings.register(sysId, SETTINGS_KEYS.EDIT_NATURE_PERMISSION, {
+    name: 'SETTINGS.BLADE_RUNNER.EditNaturePermissionName',
+    hint: 'SETTINGS.BLADE_RUNNER.EditNaturePermissionHint',
+    config: true,
+    type: Boolean,
+    default: false,
+  });
   game.settings.register(sysId, SETTINGS_KEYS.AUTO_APPLY_DAMAGE, {
     name: 'SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName',
     hint: 'SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint',

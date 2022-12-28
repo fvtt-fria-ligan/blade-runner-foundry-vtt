@@ -1,5 +1,5 @@
 import BladeRunnerActorSheet from '@actor/actor-sheet';
-import { SYSTEM_ID, ACTOR_SUBTYPES } from '@system/constants';
+import { SYSTEM_ID, ACTOR_SUBTYPES, SETTINGS_KEYS } from '@system/constants';
 import { enrichTextFields } from '@utils/string-util';
 
 /**
@@ -49,6 +49,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     sheetData.isNPC = this.actor.system.subtype === ACTOR_SUBTYPES.NPC;
     sheetData.driving = this.actor.skills.driving?.value;
     sheetData.actions = game.bladerunner.actions.filter(a => a.actorType === this.actor.type);
+    sheetData.editNature = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.EDIT_NATURE_PERMISSION) || sheetData.isGM;
 
     if (this.actor.system.subtype === ACTOR_SUBTYPES.PC) {
       await enrichTextFields(sheetData, [
