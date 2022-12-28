@@ -127,6 +127,8 @@ Hooks.once('ready', () => {
 
   // Replaces the a.inline listener with our own.
   overrideInlineRollListener();
+
+  console.log('FLBR | Ready!');
 });
 
 /* ------------------------------------------ */
@@ -134,6 +136,8 @@ Hooks.once('ready', () => {
 /* ------------------------------------------ */
 
 Hooks.once('diceSoNiceReady', dice3d => registerDiceSoNice(dice3d));
+
+Hooks.once('yzeCombatReady', yzec => yzec.register({ actorDrawSizeAttribute: 'system.drawSize' }));
 
 /* ------------------------------------------ */
 

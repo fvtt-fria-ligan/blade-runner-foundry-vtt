@@ -378,6 +378,8 @@ SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewName: Update Maneuverabi
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewHint: Whether to update the actor's maneuverability when removed from a vehicle.
 SETTINGS.BLADE_RUNNER.UseActiveEffectsName: Use Active Effects
 SETTINGS.BLADE_RUNNER.UseActiveEffectsHint: Whether to display an additional field in sheets for managing Active Effects (for advanced players).
+YZEC.CombatTracker.FastAction: Moved
+YZEC.CombatTracker.SlowAction: Acted
 WARNING.ApplyDamageNoNature: 'Apply Push Damage: Actor Nature Not Found!'
 WARNING.ApplyDamageNoCapacityKey: 'Apply Push Damage: Nature-Capacity relation Not Found!'
 WARNING.ApplyDamageNoActorCapacity: 'Apply Push Damage: Actor Capacity Not Found!'
