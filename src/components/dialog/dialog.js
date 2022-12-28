@@ -80,7 +80,7 @@ export default class BladeRunnerDialog extends Dialog {
       default: choices[0][0],
       // close: () => Promise.resolve(),
     }, {}, {
-      classes: ['blade-runner', 'dialog', 'choice-dialog'],
+      classes: [SYSTEM_ID, 'dialog', 'choice-dialog'],
     });
   }
 }

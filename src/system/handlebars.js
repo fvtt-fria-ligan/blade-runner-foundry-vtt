@@ -9,6 +9,7 @@ function preloadHandlebarsTemplates() {
   /* Esbuild defines the template paths for us at build time. */
   // eslint-disable-next-line no-undef
   const paths = TEMPLATE_PATHS;
+  console.log('FLBR | Loading Handlebars templates:', paths);
   return loadTemplates(paths);
 }
 
