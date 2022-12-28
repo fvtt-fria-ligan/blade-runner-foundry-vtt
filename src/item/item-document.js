@@ -1,8 +1,8 @@
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, ITEM_TYPES, RANGES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
-import Modifier from '@components/item-modifier';
+import { ITEM_TYPES, RANGES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
 import BRRollHandler from '@components/roll/roller';
 import BladeRunnerDialog from '@components/dialog/dialog';
+import Modifier from '@components/item-modifier';
 import ItemAction from '@components/item-action';
 import ItemAttack from '@components/item-attack';
 
@@ -80,6 +80,11 @@ export default class BladeRunnerItem extends Item {
           case 'capacity':
             str += `HEADER.${n.capitalize()}`;
             break;
+          case 'combat':
+            str += `COMBAT.${n.capitalize()}`;
+            break;
+          default:
+            str += n.titleCase();
         }
         str = game.i18n.localize(str);
         if (t === 'capacity') str += ' ' + Number(m.value) > 0 ? '+1' : '−1';
@@ -128,9 +133,8 @@ export default class BladeRunnerItem extends Item {
 
   /**
    * Gets an array of modifiers in this item.
-   * @param {Object}         [options]           Additional options to filter the returned array of modifiers
-   * @param {string|string[]} options.targets    Filters modifiers based on plausible targets
-   * @param {boolean}         options.onlyActive Filters modifiers based on their active status
+   * @param {import('@components/item-modifier').ModifierFilterOptions} [options] Additional options
+   *   to filter the returned array of modifiers
    * @returns {Modifier[]}
    */
   getModifiers(options = {}) {

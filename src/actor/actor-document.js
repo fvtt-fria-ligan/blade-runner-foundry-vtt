@@ -163,6 +163,7 @@ export default class BladeRunnerActor extends Actor {
   /** @private */
   _prepareCharacterData() {
     this._prepareCapacities();
+    this._prepareDrawSize();
   }
 
   /* ----------------------------------------- */
@@ -176,6 +177,7 @@ export default class BladeRunnerActor extends Actor {
   _prepareCapacities() {
     // Rolls over each legal capacity.
     for (const cap of Object.values(CAPACITIES)) {
+      /** @type {ActorCapacity} */
       const capacity = this.system[cap];
       const capData = FLBR.capacitiesMap[cap];
       // Proceeds if it exists in the character.
@@ -213,6 +215,17 @@ export default class BladeRunnerActor extends Actor {
   }
 
   /* ----------------------------------------- */
+
+  /** @private */
+  _prepareDrawSize() {
+    const drawSize = this.getRollModifiers({ targets: 'drawSize' })
+      .reduce((tot, m) => tot + m.value, 0);
+    if (drawSize > 0) {
+      this.system.drawSize = drawSize + 1;
+    }
+  }
+
+  /* ----------------------------------------- */
   /*  Data Preparation                         */
   /*   → Vehicle                               */
   /* ----------------------------------------- */
@@ -221,6 +234,7 @@ export default class BladeRunnerActor extends Actor {
   _prepareVehicleData() {
     this._prepareHull();
     this._prepareCrew();
+    this._prepareDrawSize();
   }
 
   /* ----------------------------------------- */
@@ -383,7 +397,7 @@ export default class BladeRunnerActor extends Actor {
 
   /**
    * Gets all the modifiers from this actor's items.
-   * @param {Object} options Filtering options
+   * @param {import('@components/item-modifier').ModifierFilterOptions} [options] Filtering options
    * @returns {Array.<import('@components/item-modifier').default>} An array of Modifiers
    */
   getRollModifiers(options) {

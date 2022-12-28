@@ -1,4 +1,11 @@
 /* eslint-disable no-shadow */
+
+/**
+ * @typedef {Object} ModifierFilterOptions
+ * @property {string|string[]} [targets=[]]       Additional filter based on targets
+ * @property {boolean}         [onlyActive=false] Whether to return only active modifiers
+ */
+
 /**
  * A class representing a roll modifier with many properties and automatic label.
  */
@@ -7,10 +14,11 @@ export default class Modifier {
    * @param {string}        key     The key that will be parsed to identify the modifier.
    * @param {number|string} value   The modification value of the modifier. (If a string, will be parsed)
    * @param {Item}         [item]   The item that is the source of the modifier.
-   * @param {boolean}      [active] Whether the modifier is active.
-   * @param {string}       [name]   Alternative name for the modifier, if you don't want to use the item's name.
-   * @param {string}       [type]   Alternative type for the modifier, if you don't want to use the item's type.
-   * @param {string}       [description]   Alternative description for the modifier.
+   * @param {Object}       [options]        Additional options
+   * @param {boolean}      [options.active] Whether the modifier is active.
+   * @param {string}       [options.name]   Alternative name for the modifier, if you don't want to use the item's name.
+   * @param {string}       [options.type]   Alternative type for the modifier, if you don't want to use the item's type.
+   * @param {string}       [options.description]   Alternative description for the modifier.
    */
   constructor(key, value, item = {}, { active, name, type, description } = {}) {
     /**
@@ -130,8 +138,7 @@ export default class Modifier {
    * @param {Item}             item              The item containing the modifiers
    * @param {string}          [path='system.modifiers'] The path to the object within the item
    *   that contains the modifiers data
-   * @param {string|string[]} [targets=[]]       Additional filter based on targets
-   * @param {boolean}         [onlyActive=false] Whether to return only active modifiers
+   * @param {ModifierFilterOptions} options
    * @returns {Modifier[]}
    * @static
    */

@@ -175,8 +175,10 @@ FLBR.CHAT.InitialDamageDealt: The attack had an initial amount of {damage} damag
 FLBR.CHAT.ArmorDeflectedDamage: Armor deflected {damage} damage.
 FLBR.CHAT.ArmorDeflectedAllDamage: Armor deflected all damage.
 FLBR.CHAT.ArmorNoEffect: Armor had no effect.
-FLBR.COMBAT.SkippedDefender: Skipped defender {name}
+FLBR.COMBAT.Combat: Combat
 FLBR.COMBAT.CannotBeDamaged: Can't be damaged
+FLBR.COMBAT.DrawSize: Draw Size
+FLBR.COMBAT.SkippedDefender: Skipped defender {name}
 FLBR.CreateNewItem: Create a new {type} item
 FLBR.Crit: Crit
 FLBR.Disadvantage: Disadvantage
