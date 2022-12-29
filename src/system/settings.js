@@ -21,6 +21,20 @@ export function registerSystemSettings() {
     type: Array,
     default: [],
   });
+  game.settings.register(sysId, SETTINGS_KEYS.CRUSHING_TABLE, {
+    name: 'SETTINGS.BLADE_RUNNER.CrushingTableName',
+    hint: 'SETTINGS.BLADE_RUNNER.CrushingTableHint',
+    config: true,
+    type: String,
+    default: '',
+  });
+  game.settings.register(sysId, SETTINGS_KEYS.PIERCING_TABLE, {
+    name: 'SETTINGS.BLADE_RUNNER.PiercingTableName',
+    hint: 'SETTINGS.BLADE_RUNNER.PiercingTableHint',
+    config: true,
+    type: String,
+    default: '',
+  });
   game.settings.register(sysId, SETTINGS_KEYS.EDIT_NATURE_PERMISSION, {
     name: 'SETTINGS.BLADE_RUNNER.EditNaturePermissionName',
     hint: 'SETTINGS.BLADE_RUNNER.EditNaturePermissionHint',

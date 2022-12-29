@@ -175,13 +175,18 @@ FLBR.CHAT.InitialDamageDealt: The attack had an initial amount of {damage} damag
 FLBR.CHAT.ArmorDeflectedDamage: Armor deflected {damage} damage.
 FLBR.CHAT.ArmorDeflectedAllDamage: Armor deflected all damage.
 FLBR.CHAT.ArmorNoEffect: Armor had no effect.
+FLBR.CHAT.CritInflicted: '{name} is inflicted the {crit} critical injury.'
+FLBR.ChooseCrit: Choose a Critical Injury
 FLBR.COMBAT.Combat: Combat
 FLBR.COMBAT.CannotBeDamaged: Can't be damaged
 FLBR.COMBAT.DrawSize: Draw Size
 FLBR.COMBAT.SkippedDefender: Skipped defender {name}
 FLBR.CreateNewItem: Create a new {type} item
 FLBR.Crit: Crit
+FLBR.CustomFormula: Custom Formula
 FLBR.Disadvantage: Disadvantage
+FLBR.DrawCrit: Draw Critical Injury
+FLBR.Formula: Formula
 FLBR.InjuryCategory: Category
 FLBR.InjuryDeathSave: Death Save
 FLBR.InjuryHealing: Healing
@@ -343,6 +348,8 @@ FLBR.WEAPON_RANGE.Extreme: Extreme
 FLBR.Wrecked: Wrecked
 FLBR.YouAreBroken: You are Broken!
 FLBR.ActorSheet.NotifWrongItemType: Actor {actor} cannot hold {type} items!
+YZEC.CombatTracker.FastAction: Moved
+YZEC.CombatTracker.SlowAction: Acted
 YZUR.CHAT.ROLL.Infos: Infos
 YZUR.CHAT.ROLL.Damage: Base Damage
 YZUR.CHAT.ROLL.Push: Push
@@ -368,6 +375,10 @@ SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatic Apply Damage
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Whether to automatically apply damage from rolls to targeted tokens and vehicle passengers.
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatic Armor Roll
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Whether to automatically roll the armor.
+SETTINGS.BLADE_RUNNER.CrushingTableName: Crushing Table
+SETTINGS.BLADE_RUNNER.CrushingTableHint: ID or name of the crushing critical injuries table.
+SETTINGS.BLADE_RUNNER.PiercingTableName: Piercing Table
+SETTINGS.BLADE_RUNNER.PiercingTableHint: ID or name of the piercing critical injuries table.
 SETTINGS.BLADE_RUNNER.EditNaturePermissionName: Allow Nature Change
 SETTINGS.BLADE_RUNNER.EditNaturePermissionHint: Whether to allow the player to edit their nature in their character sheet.
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Open First Weapon Attack
@@ -378,8 +389,6 @@ SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewName: Update Maneuverabi
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewHint: Whether to update the actor's maneuverability when removed from a vehicle.
 SETTINGS.BLADE_RUNNER.UseActiveEffectsName: Use Active Effects
 SETTINGS.BLADE_RUNNER.UseActiveEffectsHint: Whether to display an additional field in sheets for managing Active Effects (for advanced players).
-YZEC.CombatTracker.FastAction: Moved
-YZEC.CombatTracker.SlowAction: Acted
 WARNING.ApplyDamageNoNature: 'Apply Push Damage: Actor Nature Not Found!'
 WARNING.ApplyDamageNoCapacityKey: 'Apply Push Damage: Nature-Capacity relation Not Found!'
 WARNING.ApplyDamageNoActorCapacity: 'Apply Push Damage: Actor Capacity Not Found!'

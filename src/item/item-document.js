@@ -355,7 +355,6 @@ export default class BladeRunnerItem extends Item {
    * @return {Promise.<ChatMessage|ChatMessageData>} A promise which resolves to the created ChatMessage entity
    *   if create is true
    *   or the Object of prepared chatData otherwise.
-   * @async
    */
   async toMessage(messageData = {}, { rollMode, create = true } = {}) {
     // Renders the template with item data.

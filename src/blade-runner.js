@@ -32,6 +32,7 @@ import { overrideInlineRollListener } from '@components/roll/inline-roll';
 import { getManual } from '@utils/get-manual';
 import BladeRunnerActor from '@actor/actor-document';
 import BladeRunnerItem from '@item/item-document';
+import BladeRunnerDialog from '@components/dialog/dialog';
 import displayMessages from '@components/messaging-system';
 
 /* ------------------------------------------ */
@@ -67,6 +68,7 @@ Hooks.once('init', async () => {
   game.bladerunner = {
     config: FLBR,
     roller: BRRollHandler,
+    dialog: BladeRunnerDialog,
     macros: {
       rollAction: BRMacro.rollAction,
       rollDice: BRMacro.showRollDialog,
