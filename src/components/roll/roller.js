@@ -1,6 +1,7 @@
 import { YearZeroRoll } from 'yzur';
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
+import { ACTOR_TYPES, ITEM_TYPES, SYSTEM_ID } from '@system/constants';
+import { chooseActor } from '@utils/get-actor';
 
 /**
  * @typedef {Object} RollHandlerData
@@ -548,6 +549,29 @@ export default class BRRollHandler extends FormApplication {
 
     await speaker.update({ [`system.${cap}.value`]: value });
     return value;
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * Applies a critical injury to an actor.
+   * @param {YearZeroRoll} roll
+   */
+  static async applyCrit(roll) {
+    let actor = game.user.character;
+    if (game.user.isGM || !actor) {
+      actor = await chooseActor(game.actors.filter(a => a.type === ACTOR_TYPES.CHAR), {
+        title: game.i18n.localize('FLBR.CRIT.CriticalInjury'),
+        notes: game.i18n.localize('FLBR.CRIT.ChooseActor'),
+      });
+    }
+    if (!actor) return;
+
+    return actor.drawCrit(
+      roll.options.damageType,
+      roll.successCount - 1,
+      `D${roll.options.crit}`,
+    );
   }
 
   /* ------------------------------------------ */

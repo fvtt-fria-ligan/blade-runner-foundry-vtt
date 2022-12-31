@@ -1,6 +1,6 @@
 <form autocomplete="off">
 	<div class="form-group">
-		<select id="table"{{#if disabledSelection}} disabled{{/if}}>
+		<select id="table"{{#if disableSelection}} disabled{{/if}}>
 			{{#each tables}}
 				<option value="{{id}}"{{#if (eq id ../selected)}} selected{{/if}}>{{name}}</option>
 			{{/each}}
@@ -15,7 +15,7 @@
 			value="{{qty}}"
 		/>
 	</div>
-	{{#unless disabledFormula}}
+	{{#unless hideFormula}}
 		<div class="form-group">
 			<label for="formula">{{localize "FLBR.Formula"}}</label>
 			<input
@@ -24,6 +24,7 @@
 				style="text-align: left; padding-left: 8px;"
 				value="{{formula}}"
 				placeholder="{{localize "FLBR.CustomFormula"}}"
+				{{#if disableFormula}}disabled{{/if}}
 			/>
 		</div>
 	{{/unless}}

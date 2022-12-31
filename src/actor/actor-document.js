@@ -852,16 +852,17 @@ export default class BladeRunnerActor extends Actor {
     if (!tables.length || index > tables.length - 1) tables = game.tables.contents;
 
     const { results } = await BladeRunnerDialog.drawTable(tables, {
-      title: `${this.name}: ${game.i18n.localize('FLBR.DrawCrit')}`,
+      title: `${this.name}: ${game.i18n.localize('FLBR.CRIT.DrawCrit')}`,
       defaultSelected: tableIds[index],
-      disabledSelection: !game.user.isGM,
+      disableSelection: !game.user.isGM,
+      disableFormula: !game.user.isGM,
       formula: critRollFormula,
       qty: severity,
     });
 
     const itemId = await BladeRunnerDialog.choose(
       results.map(r => [r.documentId, r.text]),
-      `${this.name}: ${game.i18n.localize('FLBR.ChooseCrit')}`,
+      `${this.name}: ${game.i18n.localize('FLBR.CRIT.ChooseCrit')}`,
       { icon: 'fa-solid fa-burst' },
     );
 

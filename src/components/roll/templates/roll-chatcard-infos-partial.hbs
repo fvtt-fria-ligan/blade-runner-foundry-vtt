@@ -11,9 +11,11 @@
 				</div>
 			{{/if}}
 			{{#if (and roll.options.crit (gte roll.successCount 2))}}
-				<div>{{localize "FLBR.Crit"}}</div>
+				<div>{{localize "FLBR.CRIT.Crit"}}</div>
 				<div>
-					{{{enrichText (concat "[[/r " (substract roll.successCount 1) "D" roll.options.crit "#" (localize "FLBR.Crit") "]]" )}}}
+					<a class="inline-table crit-roll">
+						{{substract roll.successCount 1}}{{localize "FLBR.D"}}{{roll.options.crit}}
+					</a>
 				</div>
 			{{/if}}
 		</div>

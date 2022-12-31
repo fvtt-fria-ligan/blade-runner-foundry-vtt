@@ -176,16 +176,18 @@ FLBR.CHAT.ArmorDeflectedDamage: Armor deflected {damage} damage.
 FLBR.CHAT.ArmorDeflectedAllDamage: Armor deflected all damage.
 FLBR.CHAT.ArmorNoEffect: Armor had no effect.
 FLBR.CHAT.CritInflicted: '{name} is inflicted the {crit} critical injury.'
-FLBR.ChooseCrit: Choose a Critical Injury
 FLBR.COMBAT.Combat: Combat
 FLBR.COMBAT.CannotBeDamaged: Can't be damaged
 FLBR.COMBAT.DrawSize: Draw Size
 FLBR.COMBAT.SkippedDefender: Skipped defender {name}
 FLBR.CreateNewItem: Create a new {type} item
-FLBR.Crit: Crit
+FLBR.CRIT.Crit: Crit
+FLBR.CRIT.CriticalInjury: Critical Injury
+FLBR.CRIT.ChooseCrit: Choose a Critical Injury
+FLBR.CRIT.ChooseActor: Choose an actor to inflict a critical injury.
+FLBR.CRIT.DrawCrit: Draw Critical Injury
 FLBR.CustomFormula: Custom Formula
 FLBR.Disadvantage: Disadvantage
-FLBR.DrawCrit: Draw Critical Injury
 FLBR.Formula: Formula
 FLBR.InjuryCategory: Category
 FLBR.InjuryDeathSave: Death Save

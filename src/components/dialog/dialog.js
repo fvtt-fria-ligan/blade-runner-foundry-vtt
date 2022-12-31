@@ -97,8 +97,8 @@ export default class BladeRunnerDialog extends Dialog {
    * @param {string}  [options.title] Dialog title
    * @param {string}  [options.formula] Overriding formula
    * @param {string}  [options.defaultSelected] ID of the default table
-   * @param {boolean} [options.disabledSelection=false]
-   * @param {boolean} [options.disabledFormula=false]
+   * @param {boolean} [options.disableSelection=false]
+   * @param {boolean} [options.disableFormula=false]
    * @returns {Promise.<{ roll: Roll, results: TableResult[]}>}
    */
   static async drawTable(tables, options = {}) {
@@ -107,8 +107,9 @@ export default class BladeRunnerDialog extends Dialog {
       formula: options.formula,
       qty: options.qty || 1,
       selected: options.defaultSelected,
-      disabledSelection: options.disabledSelection,
-      disabledFormula: options.disabledFormula,
+      disableSelection: options.disableSelection,
+      disableFormula: options.disableFormula,
+      hideFormula: options.disableFormula && !options.formula,
       tables,
     });
 
@@ -125,7 +126,7 @@ export default class BladeRunnerDialog extends Dialog {
     if (!form) return;
 
     const table = game.tables.get(form.table.value);
-    const formula = form.formula.value || table.formula;
+    const formula = form.formula?.value || table.formula;
     const drawOptions = formula ? { roll: new Roll(formula) } : {};
     const n = Number(form.qty.value) || 1;
     if (n > 1) return table.drawMany(n, drawOptions);
