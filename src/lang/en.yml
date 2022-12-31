@@ -182,10 +182,13 @@ FLBR.COMBAT.DrawSize: Draw Size
 FLBR.COMBAT.SkippedDefender: Skipped defender {name}
 FLBR.CreateNewItem: Create a new {type} item
 FLBR.CRIT.Crit: Crit
+FLBR.CRIT.CritButtonTooltip: Draw a crit for the player's character or a selected token
 FLBR.CRIT.CriticalInjury: Critical Injury
 FLBR.CRIT.ChooseCrit: Choose a Critical Injury
+FLBR.CRIT.ChooseVehicleDamage: Choose a Critical Vehicle Damage
 FLBR.CRIT.ChooseActor: Choose an actor to inflict a critical injury.
 FLBR.CRIT.DrawCrit: Draw Critical Injury
+FLBR.CRIT.DrawVehicleDamage: Draw Critical Vehicle Damage
 FLBR.CustomFormula: Custom Formula
 FLBR.Disadvantage: Disadvantage
 FLBR.Formula: Formula
@@ -377,6 +380,8 @@ SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatic Apply Damage
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Whether to automatically apply damage from rolls to targeted tokens and vehicle passengers.
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatic Armor Roll
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Whether to automatically roll the armor.
+SETTINGS.BLADE_RUNNER.CrashTableName: Vehicle Damage Table
+SETTINGS.BLADE_RUNNER.CrashTableHint: ID or name of the critical vehicle damages table.
 SETTINGS.BLADE_RUNNER.CrushingTableName: Crushing Table
 SETTINGS.BLADE_RUNNER.CrushingTableHint: ID or name of the crushing critical injuries table.
 SETTINGS.BLADE_RUNNER.PiercingTableName: Piercing Table

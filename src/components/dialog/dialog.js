@@ -42,7 +42,7 @@ export default class BladeRunnerDialog extends Dialog {
    */
   static async rangePicker({ value = 1, min = 1, max, title, description }) {
     max = max ?? value;
-    const template = 'systems/blade-runner/templates/components/dialog/range-picker-dialog.hbs';
+    const template = `systems/${SYSTEM_ID}/templates/components/dialog/range-picker-dialog.hbs`;
     const content = await renderTemplate(template, {
       value, min, max, description,
     });
@@ -92,17 +92,19 @@ export default class BladeRunnerDialog extends Dialog {
   /**
    * Displays a dialog to draw from a roll table.
    * @param {RollTable[]} tables
-   * @param {Object}  [options] Additional options
-   * @param {number}  [options.qty=1] Quantity to draw
-   * @param {string}  [options.title] Dialog title
-   * @param {string}  [options.formula] Overriding formula
+   * @param {Object}  [options]               Additional options
+   * @param {number}  [options.qty=1]           Quantity to draw
+   * @param {string}  [options.title]           Dialog title
+   * @param {string}  [options.formula]         Overriding formula
    * @param {string}  [options.defaultSelected] ID of the default table
    * @param {boolean} [options.disableSelection=false]
    * @param {boolean} [options.disableFormula=false]
+   * @param {boolean} [options.displayChat=true] Whether to display the drawn results in chat
+   * @param {string}  [options.rollMode]         Customize the roll mode used to display the drawn results
    * @returns {Promise.<{ roll: Roll, results: TableResult[]}>}
    */
   static async drawTable(tables, options = {}) {
-    const template = 'systems/blade-runner/templates/components/dialog/table-draw-dialog.hbs';
+    const template = `systems/${SYSTEM_ID}/templates/components/dialog/table-draw-dialog.hbs`;
     const content = await renderTemplate(template, {
       formula: options.formula,
       qty: options.qty || 1,
@@ -127,7 +129,12 @@ export default class BladeRunnerDialog extends Dialog {
 
     const table = game.tables.get(form.table.value);
     const formula = form.formula?.value || table.formula;
-    const drawOptions = formula ? { roll: new Roll(formula) } : {};
+    const drawOptions = {
+      displayChat: options.displayChat,
+      rollMode: options.rollMode,
+    };
+    if (formula) drawOptions.roll = new Roll(formula);
+
     const n = Number(form.qty.value) || 1;
     if (n > 1) return table.drawMany(n, drawOptions);
     return table.draw(drawOptions);

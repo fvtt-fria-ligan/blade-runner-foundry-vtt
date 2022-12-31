@@ -100,17 +100,21 @@ export async function distributeDamageFromMessage(messageId) {
     const damage = n > 0 ? (roll.options.damage || 0) + 1 * (n - 1) : 0;
     await actor.applyDamage(damage);
 
+    // Draws a critical injury if applicable.
     const brokenByDamage = actor.isBroken && [DAMAGE_TYPES.CRUSHING, DAMAGE_TYPES.PIERCING].includes(damageType);
-
-    if (actor.type === ACTOR_TYPES.CHAR && (roll.successCount >= 2 || brokenByDamage)) {
-      await actor.drawCrit(
-        damageType,
-        roll.successCount - 1,
-        `D${roll.options.crit}`,
-      );
+    if (roll.successCount >= 2 || brokenByDamage) {
+      try {
+        await actor.drawCrit(
+          damageType,
+          roll.successCount - 1,
+          `D${roll.options.crit}`,
+        );
+      }
+      catch (err) {
+        console.error(err);
+      }
     }
   }
-
 }
 
 /* ------------------------------------------- */

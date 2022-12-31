@@ -5,6 +5,7 @@ import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
 import BladeRunnerDialog from '@components/dialog/dialog';
 import CrewCollection from '@components/vehicle-crew';
+import { getTable } from '@utils/get-table';
 
 /**
  * @typedef {Object} ActorCapacity
@@ -73,7 +74,7 @@ export default class BladeRunnerActor extends Actor {
   get armored() {
     switch (this.type) {
       case ACTOR_TYPES.CHAR:
-        return this.itemTypes[ITEM_TYPES.ARMOR].filter(i => i.qty > 0).length;
+        return this.items.filter(i => i.type === ITEM_TYPES.ARMOR && i.qty > 0).length;
       case ACTOR_TYPES.VEHICLE:
         return this.system.armor > 0;
       default:
@@ -838,16 +839,29 @@ export default class BladeRunnerActor extends Actor {
    * @param {DAMAGE_TYPES} [damageType=1] Basically, from which table to draw
    * @param {number}       [severity=1]   How many crits to draw
    * @param {number}       [critRollFormula]  Crit roll formula
-   * @returns {Promise.<Item>} The created crit in the actor
+   * @returns {Promise.<Item|string>} The created crit in the actor
+   *   or the text of the vehicle damage
    */
   async drawCrit(damageType = DAMAGE_TYPES.CRUSHING, severity, critRollFormula) {
+    switch (this.type) {
+      case ACTOR_TYPES.CHAR: return this._drawCritForCharacter(damageType, severity, critRollFormula);
+      case ACTOR_TYPES.VEHICLE: return this._drawCritForVehicle(severity, critRollFormula);
+    }
+  }
+
+  /* ------------------------------------------ */
+
+  /** @returns {Promise.<Item>} */
+  async _drawCritForCharacter(damageType, severity, critRollFormula) {
+    if (this.type !== ACTOR_TYPES.CHAR) return;
+
     const index = damageType - DAMAGE_TYPES.CRUSHING;
     const tableIds = [
       game.settings.get(SYSTEM_ID, SETTINGS_KEYS.CRUSHING_TABLE),
       game.settings.get(SYSTEM_ID, SETTINGS_KEYS.PIERCING_TABLE),
     ];
 
-    let tables = tableIds.map(id => game.tables.get(id));
+    let tables = tableIds.map(id => getTable(id)).filter(Boolean);
 
     if (!tables.length || index > tables.length - 1) tables = game.tables.contents;
 
@@ -861,30 +875,83 @@ export default class BladeRunnerActor extends Actor {
     });
 
     const itemId = await BladeRunnerDialog.choose(
-      results.map(r => [r.documentId, r.text]),
+      results
+        .sort((a, b) => b.range[0] - a.range[0])
+        .map(r => [r.documentId, `${r.text} (${r.range[0]})`]),
       `${this.name}: ${game.i18n.localize('FLBR.CRIT.ChooseCrit')}`,
       { icon: 'fa-solid fa-burst' },
     );
 
     const item = game.items.get(itemId);
-    const crits = await this.createEmbeddedDocuments('Item', [item]);
-    const crit = crits[0];
+    const [crit] = await this.createEmbeddedDocuments('Item', [item]);
 
     // Creates a chat message.
     const template = `systems/${SYSTEM_ID}/templates/actor/actor-crit-chatcard.hbs`;
+    const resultText = await TextEditor.enrichHTML(
+      game.i18n.format('FLBR.CHAT.CritInflicted', {
+        name: `<b>${this.name}</b>`,
+        crit: `@UUID[${crit.uuid}]`,
+      }));
     const content = await renderTemplate(template, {
-      name: `<b>${this.name}</b>`,
-      crit: `@UUID[${crit.uuid}]`,
       img: crit.img,
+      result: resultText,
     });
     const chatData = {
       content,
-      speaker: ChatMessage.getSpeaker({ actor: this }),
+      speaker: ChatMessage.getSpeaker({ actor: this, token: this.token, scene: canvas.scene }),
       user: game.user.id,
     };
     ChatMessage.applyRollMode(chatData, game.settings.get('core', 'rollMode'));
     await ChatMessage.create(chatData);
 
     return crit;
+  }
+
+  /* ------------------------------------------ */
+
+  /** @returns {Promise.<string>} */
+  async _drawCritForVehicle(severity, critRollFormula) {
+    if (!this.isVehicle) return;
+
+    const id = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.CRASH_TABLE);
+    const table = getTable(id);
+    let tables = [];
+    if (table) tables.push(table);
+    else tables = game.tables.contents;
+
+    const { results } = await BladeRunnerDialog.drawTable(tables, {
+      title: `${this.name}: ${game.i18n.localize('FLBR.CRIT.DrawVehicleDamage')}`,
+      defaultSelected: tables[0].id,
+      disableSelection: !game.user.isGM,
+      disableFormula: !game.user.isGM,
+      formula: critRollFormula,
+      qty: severity,
+    });
+
+    const resultIndex = await BladeRunnerDialog.choose(
+      results
+        .sort((a, b) => b.range[0] - a.range[0])
+        .map((r, i) => {
+          const title = r.text.split(':')[0];
+          return [i, `${title} (${r.range[0]})`];
+        }),
+      `${this.name}: ${game.i18n.localize('FLBR.CRIT.ChooseVehicleDamage')}`,
+      { icon: 'fa-solid fa-car-burst' },
+    );
+
+    const result = results[resultIndex];
+
+    // Creates a chat message.
+    const template = `systems/${SYSTEM_ID}/templates/actor/actor-crit-chatcard.hbs`;
+    const text = await TextEditor.enrichHTML(result.text, { async: true });
+    const chatData = {
+      content: await renderTemplate(template, { img: result.img, result: text }),
+      speaker: ChatMessage.getSpeaker({ actor: this, token: this.token, scene: canvas.scene }),
+      user: game.user.id,
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get('core', 'rollMode'));
+    await ChatMessage.create(chatData);
+
+    return result.text;
   }
 }

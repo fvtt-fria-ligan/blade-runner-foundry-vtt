@@ -13,7 +13,7 @@
 			{{#if (and roll.options.crit (gte roll.successCount 2))}}
 				<div>{{localize "FLBR.CRIT.Crit"}}</div>
 				<div>
-					<a class="inline-table crit-roll">
+					<a class="inline-table crit-roll" data-tooltip="{{localize "FLBR.CRIT.CritButtonTooltip"}}">
 						{{substract roll.successCount 1}}{{localize "FLBR.D"}}{{roll.options.crit}}
 					</a>
 				</div>

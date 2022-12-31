@@ -1,7 +1,7 @@
 import { YearZeroRoll } from 'yzur';
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES, ITEM_TYPES, SYSTEM_ID } from '@system/constants';
-import { chooseActor } from '@utils/get-actor';
+import { chooseActor, getActiveActor } from '@utils/get-actor';
 
 /**
  * @typedef {Object} RollHandlerData
@@ -558,9 +558,10 @@ export default class BRRollHandler extends FormApplication {
    * @param {YearZeroRoll} roll
    */
   static async applyCrit(roll) {
-    let actor = game.user.character;
-    if (game.user.isGM || !actor) {
-      actor = await chooseActor(game.actors.filter(a => a.type === ACTOR_TYPES.CHAR), {
+    let actor = await getActiveActor() || game.user.character;
+    if (!actor) {
+      const actors = game.actors.filter(a => a.type === ACTOR_TYPES.CHAR || a.isVehicle);
+      actor = await chooseActor(actors, {
         title: game.i18n.localize('FLBR.CRIT.CriticalInjury'),
         notes: game.i18n.localize('FLBR.CRIT.ChooseActor'),
       });

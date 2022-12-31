@@ -37,6 +37,14 @@ export function registerSystemSettings() {
     type: String,
     default: '',
   });
+  game.settings.register(sysId, SETTINGS_KEYS.CRASH_TABLE, {
+    name: 'SETTINGS.BLADE_RUNNER.CrashTableName',
+    hint: 'SETTINGS.BLADE_RUNNER.CrashTableHint',
+    scope: 'world',
+    config: true,
+    type: String,
+    default: '',
+  });
   game.settings.register(sysId, SETTINGS_KEYS.EDIT_NATURE_PERMISSION, {
     name: 'SETTINGS.BLADE_RUNNER.EditNaturePermissionName',
     hint: 'SETTINGS.BLADE_RUNNER.EditNaturePermissionHint',
