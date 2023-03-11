@@ -4,6 +4,11 @@
 /*  Foundry Overrides                         */
 /* ------------------------------------------ */
 
+// Fix for Minimal UI module
+#players h3 {
+  font-size: unset;
+}
+
 /* -------------------------------------------- */
 /*  Logo & Pause Spinner Styles                 */
 /* -------------------------------------------- */
