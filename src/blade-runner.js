@@ -107,9 +107,6 @@ Hooks.once('init', async () => {
       .map(a => [a.id, a]),
     ),
   });
-
-  console.log('Blade Runner RPG | Ready!');
-  Hooks.call('bladeRunnerReady', game.bladerunner, CONFIG.BLADE_RUNNER);
 });
 
 /* ------------------------------------------ */
@@ -130,7 +127,8 @@ Hooks.once('ready', () => {
   // Replaces the a.inline listener with our own.
   overrideInlineRollListener();
 
-  console.log('FLBR | Ready!');
+  console.log('Blade Runner RPG | Ready!');
+  Hooks.callAll('bladeRunnerReady', game.bladerunner, CONFIG.BLADE_RUNNER);
 });
 
 /* ------------------------------------------ */
