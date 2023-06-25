@@ -149,6 +149,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const originalButtons = super._getHeaderButtons();
 
     if (!game.user.isGM && this.actor.limited) return originalButtons;
+    if (this.actor.type === ACTOR_TYPES.LOOT) return originalButtons;
 
     const myButtons = [
       {
