@@ -150,6 +150,9 @@
 
   .vehicle-crew {
     grid-area: crew;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .vehicle-altitude {
