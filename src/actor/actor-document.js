@@ -310,11 +310,15 @@ export default class BladeRunnerActor extends Actor {
         updateData['prototypeToken.displayBars'] = CONST.TOKEN_DISPLAY_MODES.OWNER;
         updateData['prototypeToken.bar1.attribute'] = 'hull';
         // updateData['prototypeToken.bar2.attribute'] = null;
-        updateData.img = `systems/${SYSTEM_ID}/assets/icons/steering-wheel.svg`;
+        if (this.img === 'icons/svg/mystery-man.svg') {
+          updateData.img = `systems/${SYSTEM_ID}/assets/icons/steering-wheel.svg`;
+        }
         break;
       case ACTOR_TYPES.LOOT:
         // updateData['prototypeToken.bar1.attribute'] = null;
-        updateData.img = `systems/${SYSTEM_ID}/assets/icons/cardboard-box-closed.svg`;
+        if (this.img === 'icons/svg/mystery-man.svg') {
+          updateData.img = `systems/${SYSTEM_ID}/assets/icons/cardboard-box-closed.svg`;
+        }
         break;
     }
     if (!foundry.utils.isEmpty(updateData)) {
