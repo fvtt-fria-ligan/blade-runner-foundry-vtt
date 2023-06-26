@@ -46,7 +46,7 @@ The core system features no content. It only provides support for various mechan
 
 ## System
 
-> **Warning**: The game system is **V10** compatible only. If you are still playing under V9, you must update your Foundry client before being able to install the game system.
+> **Note**: The game system is compatible with Foundry **V10** & **V11**.
 
 1. Go to the setup page in Foundry and choose `Game Systems`
 2. Click the `Install System` and search for "Blade Runner", or paste in this [manifest link](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/latest/download/system.json)
@@ -58,7 +58,7 @@ The core system features no content. It only provides support for various mechan
 
 > **Note**: Premium modules are not mandatory to play the game as the game system is free to use, but they will save you _weeks_ of preparation.
 
-1. Get the premium modules at [Free League's shop](https://freeleaguepublishing.com/en/store/?collection_id=405939749122)
+1. Get the premium modules at the [Free League's shop](https://freeleaguepublishing.com/en/store/?collection_id=405939749122)
 2. Retrieve your codes in your mail box _(contact Free League if you did not recieve anything after 15 minutes, also check your spam box)_
 3. Activate the codes in your Foundry account: visit [foundryvtt.com](https://foundryvtt.com/), go to your account settings, in _"Purchased Content"_, and paste in the codes
 4. Launch the Foundry client _(and make sure you have updated Foundry to V10)_
@@ -69,9 +69,12 @@ The core system features no content. It only provides support for various mechan
 
 # 🧩 Supported Modules
 
+List of modules confirmed to be stable with the Blade Runner game system.
+
 - [Dice So Nice](https://foundryvtt.com/packages/dice-so-nice/)
-- [Reverse Initiative Order](https://foundryvtt.com/packages/reverse-initiative-order)
-- [Year Zero Actions](https://foundryvtt.com/packages/alien-actions)
+- [Year Zero Engine: Combat](https://foundryvtt.com/packages/yze-combat)
+- [Simultaneous Cards](https://foundryvtt.com/packages/simultaneous-cards)
+- [Quick Insert - Search Widget](https://foundryvtt.com/packages/quick-insert)
 
 # 🛠️ Contributing
 
@@ -82,10 +85,6 @@ If you want to contribute to the project, download and build it for something el
 <a href="https://weblate.foundryvtt-hub.com/engage/blade-runner/">
 <img src="https://weblate.foundryvtt-hub.com/widgets/blade-runner/-/multi-auto.svg" alt="Translation status" />
 </a>
-
-## Top contributors
-
-- @aMediocreDad
 
 # 👤 Author
 
