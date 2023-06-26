@@ -1,18 +1,287 @@
 FLBR.Attributes: Attribute
-FLBR.ATTRIBUTE.STR: Stärke
+FLBR.ATTRIBUTE.STR: Staerke
 FLBR.ATTRIBUTE.AGI: Geschicklichkeit
 FLBR.ATTRIBUTE.INT: Intelligenz
-FLBR.ATTRIBUTE.EMP: Em­pa­thie
-FLBR.ATTRIBUTE.MVR: Wendigkeit
-FLBR.Skills: Fähigkeiten
+FLBR.ATTRIBUTE.EMP: Empathie
+FLBR.ATTRIBUTE.MVR: Manövrierbarkeit
+FLBR.Skills: Fertigkeiten
+FLBR.SKILL.CloseCombat: Nahkampf
+FLBR.SKILL.Force: Kraft
 FLBR.SKILL.Stamina: Ausdauer
 FLBR.SKILL.Firearms: Feuerwaffen
-FLBR.SKILL.Mobility: Mobilität
+FLBR.SKILL.Mobility: Beweglichkeit
 FLBR.SKILL.Stealth: Heimlichkeit
+FLBR.SKILL.MedicalAid: Medizinische Hilfe
+FLBR.SKILL.Observation: Beobachtung
+FLBR.SKILL.Tech: Technologie
+FLBR.SKILL.Connections: Kontakte
+FLBR.SKILL.Insight: Menchenkenntnis
+FLBR.SKILL.Manipulation: Manipulation
+FLBR.SKILL.Driving: Fahrkunst
 FLBR.NATURE.Human: Mensch
 FLBR.NATURE.Replicant: Replikant
 FLBR.ARCHETYPE.ANALYST: Analyst
+FLBR.ARCHETYPE.CITY_SPEAKER: City Speaker
+FLBR.ARCHETYPE.DOXIE: Doxie
+FLBR.ARCHETYPE.ENFORCER: Enforcer
+FLBR.ARCHETYPE.FIXER: Fixer
+FLBR.ARCHETYPE.INSPECTOR: Inspector
+FLBR.ARCHETYPE.SKIMMER: Skimmer
+FLBR.COMBAT_ACTION.Sprint: Sprint
+FLBR.COMBAT_ACTION.Crawl: Kriechen
 FLBR.COMBAT_ACTION.UnarmedAttack: Unbewaffneter Angriff
-FLBR.COMBAT_ACTION.MeleeAttack: Nahkampf Angriff
-FLBR.COMBAT_ACTION.CarefulAim: sorgfältiges zielen
-FLBR.COMBAT_ACTION.ThrowWeapon: Wurfwaffe
+FLBR.COMBAT_ACTION.MeleeAttack: Nahkampf-Angriff
+FLBR.COMBAT_ACTION.Grapple: Klammerangriff
+FLBR.COMBAT_ACTION.BreakFree: Losreissen
+FLBR.COMBAT_ACTION.ShootFirearm: Waffe abfeuern
+FLBR.COMBAT_ACTION.CarefulAim: Zielen
+FLBR.COMBAT_ACTION.ThrowWeapon: Waffe werfen
+FLBR.COMBAT_ACTION.FirstAid: Erste Hilfe
+FLBR.COMBAT_ACTION.Manipulate: Manipulieren
+FLBR.COMBAT_ACTION.UseItem: Objekt benutzen
+FLBR.COMBAT_ACTION_HINT.Sprint: >-
+  Du kannst in einer einzigen Runde zusätzliche Bewegungs-Aktionen 
+  durchführen, indem du die Sprint-Aktion verwendest. Dies zählt dann 
+  als deine Aktion für die Runde, was bedeutet, dass du keine andere 
+  Aktion ausführen kannst. Würfle <span class="smallcaps">BEWEGLICHKEIT</span> 
+  - für jedes gewürfelte <span class="blade-runner-symbols">S</span> kannst 
+  du zusätzlich zu deiner freien Bewegung eine weitere Bewegung machen. 
+  Wenn du den Wurf nicht schaffst, fällst du (vor der zweiten Bewegung) 
+  und kannst erst in deiner nächsten Runde wieder aufstehen.
+FLBR.COMBAT_ACTION_HINT.Crawl: >-
+  Wenn du dich bewegen musst, während du liegst, musst du kriechen. 
+  Dies funktioniert wie eine Bewegung, zählt aber als deine Aktion für diese Runde.  
+  Am Ende deiner Kriechbewegung kannst du aufstehen (freie Aktion).
+FLBR.COMBAT_ACTION_HINT.UnarmedAttack: Stärke + Nahkampf
+FLBR.COMBAT_ACTION_HINT.MeleeAttack: Stärke + Nahkampf
+FLBR.COMBAT_ACTION_HINT.Grapple: >-
+  Wenn du deinen Gegner als Spezialangriff im Nahkampf packst, fallen sowohl du 
+  als auch dein Gegner zu Boden. Der Gegner lässt alle Waffen fallen, die er in 
+  der Hand hatte, und kann sich nicht bewegen. Als einzige erlaubte Aktion kann 
+  er versuchen sich zu befreien – Dies gelingt, wenn dem Gegner ein vergleichender 
+  <span class="smallcaps">Nahkampf-Wurf</span> gegen dich gewinnt. Während du 
+  deinen Gegner im Griff hast, kannst du als einzige erlaubte Aktion 
+  (bis du deinen Gegner loslässt) einen Klammerangriff durchführen. Dieser 
+  funktioniert wie ein normaler unbewaffneter Angriff, aber dein Ziel gilt als 
+  gefesselt und kann sich daher nicht verteidigen.
+FLBR.COMBAT_ACTION_HINT.BreakFree: Stärke + Nahkampf
+FLBR.COMBAT_ACTION_HINT.ShootFirearm: Geschicklichkeit + Feuerwaffen
+FLBR.COMBAT_ACTION_HINT.CarefulAim: >-
+  Wenn du dir die Zeit nimmst, sorgfältig zu zielen, bevor du den Abzug drückst, 
+  erhältst du einen Vorteil für deinen Angriffswurf. Zielen ist jedoch eine 
+  eigenständige Aktion. Du kannst nicht in der gleichen Runde zielen 
+  und schießen. Wenn du nach dem Zielen irgendetwas anderes tust, als deine Waffe 
+  abzufeuern, oder wenn du von einem Angriff getroffen wirst, verlierst du den 
+  Effekt des Zielens und du musst eine weitere Aktion ausgeben, um erneut sorgfältig 
+  zu zielen.
+FLBR.COMBAT_ACTION_HINT.ThrowWeapon: Geschicklichkeit + Feuerwaffen
+FLBR.COMBAT_ACTION_HINT.FirstAid: Intelligenz + Medizinische Hilfe
+FLBR.COMBAT_ACTION_HINT.Manipulate: Empathie + Manipulation
+FLBR.COMBAT_ACTION_HINT.UseItem: Objekt benutzen
+FLBR.BUTTON.Delete: Objekt entfernen
+FLBR.BUTTON.Edit: Objekt editieren
+FLBR.BUTTON.Roll: Objekt würfeln
+FLBR.BUTTON.ToChat: Objekt in Chat anzeigen
+FLBR.CHAT_ACTION.ApplyDamage: Schaden auf ausgewählte Figur anwenden
+FLBR.DIALOG.AssignSuccesses: Erfolg(e) zuweisen
+FLBR.DIALOG.AssignSuccessesHint: Wähle die Anzahl der Erfolge, die du gegen {name} anwenden möchtest.
+FLBR.DIALOG.ChooseAction: Wähle Aktion
+FLBR.DIALOG.ChooseAttack: Wähle Angriff
+FLBR.HEADER.Actions: Aktionen
+FLBR.HEADER.Appearance: Aussehen
+FLBR.HEADER.Armor: Panzerung
+FLBR.HEADER.Attacks: Angriffs-Arten
+FLBR.HEADER.AttributesAndSkills: Attribute & Fähigkeiten
+FLBR.HEADER.Augments: Augmentierungen
+FLBR.HEADER.ChinyenPoints: Chinyen Punkte
+FLBR.HEADER.DieSize: Basis-Würfel
+FLBR.HEADER.FavoredGear: Bevorzugte Ausrüstung
+FLBR.HEADER.Health: Leben
+FLBR.HEADER.Home: Zuhause
+FLBR.HEADER.HumanityPoints: Menschlichkeits-Punkte
+FLBR.HEADER.Injuries: Verletzungen
+FLBR.HEADER.Inventory: Ausrüstung
+FLBR.HEADER.Notes: Notizen
+FLBR.HEADER.Modifiers: Modifikatoren
+FLBR.HEADER.PromotionPoints: Auszeichnungs-Punkte
+FLBR.HEADER.Resolve: Entschlossenheit
+FLBR.HEADER.SignatureItem: Persönlicher Gegenstand
+FLBR.HEADER.Specialties: Spezialisierungen
+FLBR.HEADER.KeyMemory: Schlüssel-Erinnerung
+FLBR.HEADER.KeyRelationship: Schlüssel-Beziehung
+FLBR.HEADER.Rating: Wertung
+FLBR.HEADER.YearsOnTheForce: Dienstjahre
+FLBR.HEADER.Weapons: Waffe
+FLBR.SHEET_CONFIG.CharacterSubtype: Unterklasse
+FLBR.SHEET_CONFIG.CharacterSubtypeHint: >-
+  Wähle aus, ob es sich um einen SC oder einen NSC handelt. Letzterer bietet einen
+  verkleinerten Charakterbogen mit zusätzlichen Funktionen für die SL, um NSCs 
+  einfacher zu verwalten.
+FLBR.SHEET_CONFIG.HealthMaxModifier: Leben (Bonus)
+FLBR.SHEET_CONFIG.HealthMaxModifierHint: Anzahl der zusätzlichen maximalen Lebenspunkte (nur SL).
+FLBR.SHEET_CONFIG.HealthPermanentLoss: Leben (Malus)
+FLBR.SHEET_CONFIG.HealthPermanentLossHint: Anzahl der reduzierten maximalen Lebenspunkte (nur SL).
+FLBR.SHEET_CONFIG.ResolveMaxModifier: Entschlossenheit (Bonus)
+FLBR.SHEET_CONFIG.ResolveMaxModifierHint: Anzahl der zusätzlichen maximalen Entschlossenheitspunkte (nur SL).
+FLBR.SHEET_CONFIG.ResolvePermanentLoss: Entschlossenheit (Malus)
+FLBR.SHEET_CONFIG.ResolvePermanentLossHint: Anzahl der reduzierten maximalen Entschlossenheitspunkte (nur SL).
+FLBR.SHEET_CONFIG.Maneuverability: Fahrzeug Manövrierbarkeit
+FLBR.SHEET_CONFIG.ManeuverabilityHint: >-
+  Legt die Manövrierbarkeit des von dieser Figur gefahrenen Fahrzeugs fest, falls zutreffend.
+FLBR.SHEET_CONFIG.UnlimitedPush: Erlaube unbegrenztes Strapazieren des Wurfs
+FLBR.SHEET_CONFIG.UnlimitedPushHint: >-
+  Wenn die SL eine unbegrenzte Anzahl von strapazierten Würfen erlaubt. Aktiviere diese Einstellung, 
+  um bei fast jedem Wurf einen Strapazieren-Knopf anzuzeigen.
+FLBR.SHEET_HEADER.ArmorRoll: Würfle auf Panzerung
+FLBR.SHEET_HEADER.BlastPowerRoll: Würfle auf Sprengkraft
+FLBR.SHEET_HEADER.GenericRoll: Standard Wurf
+FLBR.SHEET_HEADER.ItemPost: Zeige Objekt an
+FLBR.SHEET_HEADER.ItemRoll: Würfle auf Objekt
+FLBR.TAB.Actions: Aktionen
+FLBR.TAB.Bio: Hintergrund
+FLBR.TAB.Combat: Kampf
+FLBR.TAB.Info: Information
+FLBR.TAB.Inventory: Ausrüstung
+FLBR.TAB.Features: Besonderheiten
+FLBR.TAB.Mods: Besonderheiten
+FLBR.TAB.Stats: Werte
+FLBR.D: D
+FLBR.NO_VALUE: –
+FLBR.Advantage: Vorteil
+FLBR.Capacities: Leben und Entschlossenheit
+FLBR.Blast: Explosion
+FLBR.BlastPower: Sprengkraft
+FLBR.Broken: GEBROCHEN
+FLBR.BrokenByDamage: GEBROCHEN DURCH SCHADEN
+FLBR.BrokenByStress: GEBROCHEN DURCH STRESS
+FLBR.Cancel: Abbrechen
+FLBR.CHAT.DamageDealt: '{name} erleidet {amount} Schaden.'
+FLBR.CHAT.NoDamageDealt: '{name} erleidet keinen Schaden.'
+FLBR.CHAT.InitialDamageDealt: Der Angriff erzielte initial {damage} Schaden.
+FLBR.CHAT.ArmorDeflectedDamage: Panzerung wehrte {damage} Schaden ab.
+FLBR.CHAT.ArmorDeflectedAllDamage: Panzerung wehrte den komplette Schaden ab.
+FLBR.CHAT.ArmorNoEffect: Panzerung hat keinen Effekt.
+FLBR.CreateNewItem: Erstelle ein neues {type} Objekt
+FLBR.Crit: Krit
+FLBR.Disadvantage: Nachteil
+FLBR.InjuryCategory: Kategorie
+FLBR.InjuryDeathSave: Rettungswurf
+FLBR.InjuryHealing: Heilung
+FLBR.InjuryLethal: Tödlich
+FLBR.InjuryPermanent: Permanent
+FLBR.InventoryNoItem: Leer.
+FLBR.ItemAddAction: Aktion hinzufügen
+FLBR.ItemAddAttack: Angriff hinzufügen
+FLBR.ItemAddModifier: Wurf-Modifizierung hinzufügen
+FLBR.ItemActionAttribute: Attribut
+FLBR.ItemActionName: Aktions-Name
+FLBR.ItemActionSkill: Fertigkeit
+FLBR.ItemActionType: Aktionstyp
+FLBR.ItemActionTypeRollSkill: Fertigkeits-Wurf
+FLBR.ItemActionTypeRunMacro: Starte Macro
+FLBR.ItemAttackName: Angriffs-Name
+FLBR.ItemArmor: Panzerung
+FLBR.ITEM_AVAILABILITY.Incidental: Zufälllig
+FLBR.ITEM_AVAILABILITY.Luxury: Luxuriös
+FLBR.ITEM_AVAILABILITY.Premium: Premium
+FLBR.ITEM_AVAILABILITY.Rare: Selten
+FLBR.ITEM_AVAILABILITY.Standard: Standard
+FLBR.ItemAvailability: Verfügbarkeit
+FLBR.ItemConsumable: Verbrauchsgut
+FLBR.ItemConsumeNotif: '{qty} Eineiten von {name} wurden verbraucht'
+FLBR.ItemCost: Kosten
+FLBR.ItemDeleteAction: Aktion entfernen
+FLBR.ItemDeleteAttack: Angriff entfernen
+FLBR.ItemDeleteModifier: Modifikation entfernen
+FLBR.ItemNewAction: Neue Aktion
+FLBR.ItemNewAttack: Neuer Angriff
+FLBR.ItemNoAttack: Kein Angriffs-Modus definiert.
+FLBR.ItemNoModifier: Kein Modifikator.
+FLBR.ItemModifier: Modifikator
+FLBR.ItemQuantity: Anzahl
+FLBR.ItemSpecial: Spezialisierung
+FLBR.MACRO.GetActorTitle: Wähle eine Figur
+FLBR.MACRO.GetActorHint: Du hast mehrere Figuren ausgewählt. Bitte wähle eine davon aus.
+FLBR.MACRO.MultipleItems: >-
+  Deine zugewiesene Figur {actor} hat mehrere Objekte mit dem Namen {item}. Das erste gefundene Objekt wird genutzt.
+FLBR.MACRO.NoActor: Deine zugewiesene Figur {actor} wurde nicht gefunden.
+FLBR.MACRO.NoItem: Deine zugewiesene Figur {actor} besitzt kein Objekt mit dem Namen {item}.
+FLBR.MACRO.RollAction: Aktion {action}
+FLBR.MACRO.RollStat: Würfle {stat}
+FLBR.Nature: Abstammung
+FLBR.NatureHint: Abstammung des Characters (SL-Modifikation)
+FLBR.NewItem: Neu - {type}
+FLBR.OK: OK
+FLBR.Range: Reichweite
+FLBR.RANGED_COMBAT.OutOfRange: Außer Reichweite
+FLBR.RANGED_COMBAT.SmallTarget: Kleines Ziel
+FLBR.RANGED_COMBAT.LargeTarget: Großes Ziel
+FLBR.RANGED_COMBAT.TargetBehindCover: Ziel in Deckung
+FLBR.RANGED_COMBAT.CarefulAim: Zielen
+FLBR.RANGED_COMBAT.UnseenTarget: Nicht sichtbares Ziel
+FLBR.ROLLER.AddDie: Würfel hinzufügen
+FLBR.ROLLER.MaxPush: Max. Strapazieren
+FLBR.ROLLER.ModifierActive: Aktiv
+FLBR.ROLLER.ModifierName: Name
+FLBR.ROLLER.ModifierValue: Wert
+FLBR.ROLLER.TotalModifier: 'Insgesamt: {value}'
+FLBR.ROLLER.ResolveTest: Wurf für permanenten Verlust von Entschlossenheit
+FLBR.ROLLER.ResolveTestHint: >-
+  Wenn du durch Stress gebrochen bist, musst du einen Basis-Würfel werfen, der deinem 
+  Empathiewert entspricht. Wenn du eine Eins würfelst, verlierst du permanent 1 Punkt 
+  Entschlossenheit, d.h. dein maximaler Entschlossenheit Wert wird um einen Punkt reduziert.
+FLBR.ROLLER.ResolveTestFailed: Der Empathie-Wurf von {name} ist fehlgeschlagen. Daher sinkt ENTSCHLOSSENHEIT permanent um 1.
+FLBR.ROLLER.RollButton: Wurf
+FLBR.ROLLER.RollWithAdvantageButton: Vorteil
+FLBR.ROLLER.RollWithDisadvantageButton: Nachteil
+FLBR.ROLLER.SelectDiceToPush: Wähle zu strapazierende Würfel
+FLBR.ROLLER.UnlimitedPush: Unbegrenzt
+FLBR.SignatureItemUsedCheckboxHint: Benutzt?
+FLBR.WeaponDamage: Schaden
+FLBR.WeaponCrit: Krit Würfel
+FLBR.WeaponDamageType: Schadenstyp
+FLBR.WEAPON_DAMAGE_TYPE.None: –
+FLBR.WEAPON_DAMAGE_TYPE.Crushing: Hieb
+FLBR.WEAPON_DAMAGE_TYPE.Piercing: Stich
+FLBR.WEAPON_DAMAGE_TYPE.Stress: Stress
+FLBR.WeaponRange: Reichweite
+FLBR.WEAPON_RANGE.Engaged: Kontakt
+FLBR.WEAPON_RANGE.Short: Nah
+FLBR.WEAPON_RANGE.Medium: Mittel
+FLBR.WEAPON_RANGE.Long: Weit
+FLBR.WEAPON_RANGE.Extreme: Extrem
+FLBR.YouAreBroken: Du bist GEBROCHEN!
+FLBR.ActorSheet.NotifWrongItemType: Figur {actor} kann keine {type} Objekte tragen!
+YZUR.CHAT.ROLL.Infos: Info
+YZUR.CHAT.ROLL.Damage: Basis-Schaden
+YZUR.CHAT.ROLL.Push: Strapazieren
+YZUR.CHAT.ROLL.CancelPush: Akzeptieren
+YZUR.DIETERMS.D6BladeRunnerDie: D6
+YZUR.DIETERMS.D8BladeRunnerDie: D8
+YZUR.DIETERMS.D10BladeRunnerDie: D10
+YZUR.DIETERMS.D12BladeRunnerDie: D12
+ACTOR.TypeCharacter: Charakter
+ACTOR.TypeVehicle: Fahrzeug
+ACTOR.SubtypePc: SC
+ACTOR.SubtypeNpc: NSC
+ITEM.TypeGeneric: Standard
+ITEM.TypeUpgrade: Augmentierung
+ITEM.TypeArmor: Panzerung
+ITEM.TypeWeapon: Waffe
+ITEM.TypeExplosive: Explosiv
+ITEM.TypeSpecialty: Spezialisierung
+ITEM.TypeInjury: Verletzung
+GAME.Paused: Ermittlung pausiert
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatisch Schaden zuweisen
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Bestimmt, ob Schaden auf ausgewählte Ziele automatisch zugewiesen werden soll.
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatischer Panzerungs Wurf
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Bestimmt, ob aurtomatisch auf Panzerung gewürfelt werden soll.
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Zeige ersten Waffen Angriff
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Bestimmt, ob bei der Anzeige eines Waffen-Objekts automatisch der erste Waffen-Angriff des Objektes ausgeklappt dargestellt werden soll.
+WARNING.ApplyDamageNoNature: 'Zuweisung des Strapazierungs-Schadens: Figur-Abstammung nicht gefunden!'
+WARNING.ApplyDamageNoCapacityKey: 'Zuweisung des Strapazierungs-Schadens: Abstammung-Kapazität Verbindung nicht gefunden!'
+WARNING.ApplyDamageNoActorCapacity: 'Zuweisung des Strapazierungs-Schadens: Figur-Kapazität nicht gefunden!'
+WARNING.NoDiceInput: Keine Würfel zum werfen!
+WARNING.NoItemAction: Keine Objekt Aktionen definiert!
+WARNING.ItemActionMacroNotFound: Macro "{macro}" nicht gefunden!
+WARNING.NoItemUnit: 'Kann {name} nicht benutzen: Vorrat erschöpft!'
