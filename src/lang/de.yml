@@ -260,17 +260,17 @@ YZUR.DIETERMS.D6BladeRunnerDie: D6
 YZUR.DIETERMS.D8BladeRunnerDie: D8
 YZUR.DIETERMS.D10BladeRunnerDie: D10
 YZUR.DIETERMS.D12BladeRunnerDie: D12
-ACTOR.TypeCharacter: Charakter
-ACTOR.TypeVehicle: Fahrzeug
+TYPES.Actor.character: Charakter
+TYPES.Actor.vehicle: Fahrzeug
 ACTOR.SubtypePc: SC
 ACTOR.SubtypeNpc: NSC
-ITEM.TypeGeneric: Standard
-ITEM.TypeUpgrade: Augmentierung
-ITEM.TypeArmor: Panzerung
-ITEM.TypeWeapon: Waffe
-ITEM.TypeExplosive: Explosiv
-ITEM.TypeSpecialty: Spezialisierung
-ITEM.TypeInjury: Verletzung
+TYPES.Item.generic: Standard
+TYPES.Item.upgrade: Augmentierung
+TYPES.Item.armor: Panzerung
+TYPES.Item.weapon: Waffe
+TYPES.Item.explosive: Explosiv
+TYPES.Item.specialty: Spezialisierung
+TYPES.Item.injury: Verletzung
 GAME.Paused: Ermittlung pausiert
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatisch Schaden zuweisen
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Bestimmt, ob Schaden auf ausgewählte Ziele automatisch zugewiesen werden soll.

@@ -170,7 +170,7 @@ function registerHandlebarsHelpers() {
 
   Handlebars.registerHelper('createNewItemButton', function (type) {
     const title = game.i18n.format('FLBR.CreateNewItem', {
-      type: game.i18n.localize(`ITEM.Type${type.capitalize()}`),
+      type: game.i18n.localize(`TYPES.Item.${type}`),
     });
     const str = `<a class="btn item-create" data-type="${type}" data-tooltip="${title}">${FLBR.Icons.buttons.plus}</a>`;
     return new Handlebars.SafeString(str);

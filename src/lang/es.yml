@@ -156,13 +156,13 @@ YZUR.CHAT.ROLL.Push: Forzar
 YZUR.DIETERMS.D8BladeRunnerDie: D8
 YZUR.DIETERMS.D10BladeRunnerDie: D10
 YZUR.DIETERMS.D12BladeRunnerDie: D12
-ACTOR.TypeCharacter: Personaje
+TYPES.Actor.character: Personaje
 ACTOR.SubtypeNpc: Personaje No Jugador
-ITEM.TypeGeneric: Genérico
-ITEM.TypeUpgrade: Aumento
-ITEM.TypeWeapon: Arma
-ITEM.TypeSpecialty: Especialidad
-ITEM.TypeInjury: Herida
+TYPES.Item.generic: Genérico
+TYPES.Item.upgrade: Aumento
+TYPES.Item.weapon: Arma
+TYPES.Item.specialty: Especialidad
+TYPES.Item.injury: Herida
 GAME.Paused: Investigación en Pausa
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Tirada de Armadura Automática
 WARNING.ApplyDamageNoActorCapacity: 'Infligir Daño de Forzaje: ¡No se ha encontrado Capacidad del Personaje!'
@@ -233,10 +233,10 @@ FLBR.YouAreBroken: ¡Has quedado Incapacitado!
 FLBR.ActorSheet.NotifWrongItemType: ¡El personaje {actor} no puede llevar objetos de tipo {type}!
 YZUR.CHAT.ROLL.CancelPush: Aceptar
 YZUR.DIETERMS.D6BladeRunnerDie: D6
-ACTOR.TypeVehicle: Vehículo
+TYPES.Actor.vehicle: Vehículo
 ACTOR.SubtypePc: Personaje Jugador
-ITEM.TypeArmor: Armadura
-ITEM.TypeExplosive: Explosivo
+TYPES.Item.armor: Armadura
+TYPES.Item.explosive: Explosivo
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Infligir Daño Automáticamente
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Indica si se inflige daño automáticamente o no a las miniaturas seleccionadas.
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Indica si se realizarán tiradas de Armadura automáticamente.
