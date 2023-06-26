@@ -363,18 +363,18 @@ YZUR.DIETERMS.D6BladeRunnerDie: D6
 YZUR.DIETERMS.D8BladeRunnerDie: D8
 YZUR.DIETERMS.D10BladeRunnerDie: D10
 YZUR.DIETERMS.D12BladeRunnerDie: D12
-ACTOR.TypeCharacter: Character
-ACTOR.TypeVehicle: Vehicle
-ACTOR.TypeLoot: Loot
+TYPES.Actor.character: Character
+TYPES.Actor.vehicle: Vehicle
+TYPES.Actor.loot: Loot
 ACTOR.SubtypePc: Player Character
 ACTOR.SubtypeNpc: Non-Player Character
-ITEM.TypeGeneric: Generic
-ITEM.TypeUpgrade: Augment
-ITEM.TypeArmor: Armor
-ITEM.TypeWeapon: Weapon
-ITEM.TypeExplosive: Explosive
-ITEM.TypeSpecialty: Specialty
-ITEM.TypeInjury: Injury
+TYPES.Item.generic: Generic
+TYPES.Item.upgrade: Augment
+TYPES.Item.armor: Armor
+TYPES.Item.weapon: Weapon
+TYPES.Item.explosive: Explosive
+TYPES.Item.specialty: Specialty
+TYPES.Item.injury: Injury
 GAME.Paused: Investigation Paused
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatic Apply Damage
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Whether to automatically apply damage from rolls to targeted tokens and vehicle passengers.

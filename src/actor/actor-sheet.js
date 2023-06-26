@@ -87,8 +87,8 @@ export default class BladeRunnerActorSheet extends ActorSheet {
 
     if (!allowed) {
       const msg = game.i18n.format('FLBR.ActorSheet.NotifWrongItemType', {
-        type: game.i18n.localize(`ITEM.Type${type.capitalize()}`),
-        actor: game.i18n.localize(`ACTOR.Type${this.actor.type.capitalize()}`),
+        type: game.i18n.localize(`TYPES.Item.${type}`),
+        actor: game.i18n.localize(`TYPES.Actor.${this.actor.type}`),
       });
       console.warn(`FLBR | ${msg}`);
       ui.notifications.warn(msg);
@@ -214,7 +214,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const elem = event.currentTarget;
     const type = elem.dataset.type;
     const itemName = game.i18n.format('FLBR.NewItem', {
-      type: game.i18n.localize(`ITEM.Type${type.capitalize()}`),
+      type: game.i18n.localize(`TYPES.Item.${type}`),
     });
     const itemData = { name: itemName, type };
     return this.actor.createEmbeddedDocuments('Item', [itemData])

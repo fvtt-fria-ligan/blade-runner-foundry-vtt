@@ -194,17 +194,17 @@ YZUR.DIETERMS.D6BladeRunnerDie: D6
 YZUR.DIETERMS.D8BladeRunnerDie: D8
 YZUR.DIETERMS.D10BladeRunnerDie: D10
 YZUR.DIETERMS.D12BladeRunnerDie: D12
-ACTOR.TypeCharacter: 캐릭터
-ACTOR.TypeVehicle: 차량
+TYPES.Actor.character: 캐릭터
+TYPES.Actor.vehicle: 차량
 ACTOR.SubtypePc: 플레이어 캐릭터
 ACTOR.SubtypeNpc: 비 플레이어 캐릭터
-ITEM.TypeGeneric: 일반
-ITEM.TypeUpgrade: 강화
-ITEM.TypeArmor: 장갑
-ITEM.TypeWeapon: 무기
-ITEM.TypeExplosive: 폭발물
-ITEM.TypeSpecialty: 전문화
-ITEM.TypeInjury: 부상
+TYPES.Item.generic: 일반
+TYPES.Item.upgrade: 강화
+TYPES.Item.armor: 장갑
+TYPES.Item.weapon: 무기
+TYPES.Item.explosive: 폭발물
+TYPES.Item.specialty: 전문화
+TYPES.Item.injury: 부상
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: 피해 자동 적용
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: 장갑 자동 굴림
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: 장갑 굴림을 자동으로 수행할지를 정합니다.
