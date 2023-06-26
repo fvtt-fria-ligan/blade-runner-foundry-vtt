@@ -37,6 +37,6 @@
     "type": "chat", // Type of message: [prompt, chat]
     "display": "once", // Time until it goes away: [once, infinite, mm.dd.yyyy]
     "title": "Update 10.1.0 (2023-06-26)",
-    "content": "<h4>Added</h4><ul><li>Vehicle sheet</li><li>Items pile sheet</li><li>Draw critical injuries from the roll chat card</li><li>Automatically draw critical injuries</li><li>Support for Active Effects</li><li>New game system settings: Crushing Table, Piercing Table, Crash Table, Edit Nature Permission, Auto Apply Damage, Update Actor Maneuverability on crew/uncrew, Use Active Effects</li><li>New translations: German, Korean and Spanish</li></ul><h4>Changed</h4><ul><li>Better support for custom actor actions</li><li>Minor UI improvements</li></ul><h4>Fixed</h4><ul><li>Style issue with Minimal UI module</li><li>Issue with default initiative</li><li>Minor bug fixes</li></ul>"
+    "content": "<h4>Added</h4><ul><li>Vehicle sheet</li><li>Items pile sheet</li><li>Draw critical injuries from the roll chat card</li><li>Support for Active Effects</li><li>New game system settings</li><li>New translations: German, Korean and Spanish</li></ul><h4>Changed</h4><ul><li>Better support for custom actor actions</li><li>Minor UI improvements</li></ul><h4>Fixed</h4><ul><li>Issue with default initiative</li><li>Style issue with Minimal UI module</li><li>Minor bug fixes</li></ul>"
   }
 ]
