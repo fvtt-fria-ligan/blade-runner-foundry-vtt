@@ -1,3 +1,4 @@
+import { ACTOR_TYPES, DAMAGE_TYPES } from './constants';
 import { FLBR } from './config';
 import BRRollHandler from '@components/roll/roller';
 import BladeRunnerDialog from '@components/dialog/dialog';
@@ -58,6 +59,7 @@ export async function distributeDamageFromMessage(messageId) {
   // const messageId = messageElem.dataset.messageId;
   const message = game.messages.get(messageId);
   const roll = message.rolls[0];
+  const damageType = roll.options.damageType;
   let s = roll.successCount;
   if (!s) return;
 
@@ -68,6 +70,14 @@ export async function distributeDamageFromMessage(messageId) {
   // ? const defenderTokens = canvas.tokens.controlled;
   const defenderTokens = game.user.targets;
   for (const defenderToken of defenderTokens) {
+    if (defenderToken.actor.type === ACTOR_TYPES.LOOT) {
+      ui.notifications.info(
+        game.i18n.format('FLBR.COMBAT.SkippedDefender', {
+          name: `<b>${defenderToken.name}</b>`,
+        }) + ' <i>(' + game.i18n.localize('FLBR.COMBAT.CannotBeDamaged') + ')</i>',
+      );
+      continue;
+    }
     if (!s) break;
     let n = s;
     // Prompts for assigning a qty of successes to tokens if more than one were targeted.
@@ -85,10 +95,26 @@ export async function distributeDamageFromMessage(messageId) {
     }
 
     // Computes damage.
+    /** @type {import('@actor/actor-document').default} */
+    const actor = defenderToken.actor;
     const damage = n > 0 ? (roll.options.damage || 0) + 1 * (n - 1) : 0;
-    await defenderToken.actor.applyDamage(damage);
-  }
+    await actor.applyDamage(damage);
 
+    // Draws a critical injury if applicable.
+    const brokenByDamage = actor.isBroken && [DAMAGE_TYPES.CRUSHING, DAMAGE_TYPES.PIERCING].includes(damageType);
+    if (roll.successCount >= 2 || brokenByDamage) {
+      try {
+        await actor.drawCrit(
+          damageType,
+          roll.successCount - 1,
+          `D${roll.options.crit}`,
+        );
+      }
+      catch (err) {
+        console.error(err);
+      }
+    }
+  }
 }
 
 /* ------------------------------------------- */
@@ -121,21 +147,19 @@ export function hideChatActionButtons(html) {
  * @param {JQuery} html
  */
 export function addChatListeners(html) {
+  html.on('click', '.blade-runner-display-manual', game.bladerunner.macros.displayManual);
   html.on('click', '.roll-button', _onRollAction);
-
-  html.on('click', '.blade-runner-display-manual', () => {
-    game.bladerunner.macros.displayManual();
-  });
+  html.on('click', '.crit-roll', _onCritRoll);
 }
 
 /* ------------------------------------------- */
 
 /**
  * Triggers an action on the ChatMessage's roll.
- * @param {Event} event
+ * @param {MouseEvent} event
  * @returns {Promise.<import('yzur').YearZeroRoll|ChatMessage>}
  */
-function _onRollAction(event) {
+async function _onRollAction(event) {
   event.preventDefault();
 
   // Disables the button to avoid any tricky double push.
@@ -154,4 +178,19 @@ function _onRollAction(event) {
     case 'cancel-push': return BRRollHandler.cancelPush(message);
     default: return null;
   }
+}
+
+/* ------------------------------------------- */
+
+/**
+ * Triggers a crit roll.
+ * @param {MouseEvent} event
+ */
+function _onCritRoll(event) {
+  event.preventDefault();
+  const chatCard = event.currentTarget.closest('.chat-message');
+  const messageId = chatCard.dataset.messageId;
+  const message = game.messages.get(messageId);
+  const roll = message?.rolls[0];
+  return BRRollHandler.applyCrit(roll);
 }

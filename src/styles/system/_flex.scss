@@ -2,6 +2,7 @@
 
 .blade-runner {
   .flex { display: flex; }
+  .flex-0 { flex: 0; }
   .flex-1 { flex: 1; }
   .row { flex-direction: row; }
   .column { flex-direction: column; }
@@ -15,7 +16,7 @@
   .justify-start { justify-content: flex-start; }
   .justify-center { justify-content: center; }
   .justify-end { justify-content: flex-end; }
-  .half { flex: 0 0 50% }
+  .flex-half { flex: 0 0 50% }
   .margin { margin: 4px; }
   .padding { padding: 4px; }
   .full {

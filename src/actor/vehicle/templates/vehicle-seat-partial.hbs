@@ -1,0 +1,42 @@
+{{#with occupant}}
+  <div class="vehicle-seat occupied{{#if isBroken}} broken{{/if}}" data-action="roll-occupant" data-occupant-id="{{id}}" data-tooltip="{{name}}<hr/>{{localize "FLBR.HEADER.Health"}}: {{system.health.value}}/{{system.health.max}}" data-tooltip-direction="UP">
+    <img class="rollable" src="{{img}}"/>
+    {{#if (lt system.health.ratio 1)}}
+      <div class="attribute-bar bar1">
+        <div
+          class="attribute-bar-progress"
+          style="background-color: {{healthBarColor}}; width: {{multiply system.health.ratio 100}}%;"
+        ></div>
+      </div>
+    {{/if}}
+    {{#if (and (eq system.subtype "pc") (lt system.resolve.ratio 1))}}
+      <div class="attribute-bar bar2">
+        <div
+          class="attribute-bar-progress"
+          style="background-color: {{resolveBarColor}}; width: {{multiply system.resolve.ratio 100}}%;"
+        ></div>
+      </div>
+    {{/if}}
+    {{#if isBroken}}
+      <div class="seat-icon broken">{{{@root.config.Icons.buttons.lethal}}}</div>
+    {{/if}}
+  </div>
+{{else}}
+  {{#if (and @root.isGM (eq seat -1))}}
+    <div class="vehicle-seat button" data-action="add-occupant" data-tooltip="{{localize "FLBR.VEHICLE.AddSeat"}}" data-tooltip-direction="RIGHT">
+      <div class="seat-icon">{{{@root.config.Icons.buttons.plus}}}</div>
+    </div>
+  {{else if (eq seat -1)}}
+    {{! Nothing}}
+  {{else}}
+    <div class="vehicle-seat empty">
+      <div class="seat-icon">
+        {{#if (eq seat 1)}}
+          {{{@root.config.Icons.buttons.wheel}}}
+        {{else}}
+          {{{@root.config.Icons.buttons.seat}}}
+        {{/if}}
+      </div>
+    </div>
+  {{/if}}
+{{/with}}

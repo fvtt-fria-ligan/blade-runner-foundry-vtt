@@ -1,6 +1,31 @@
 import { YearZeroRoll } from 'yzur';
 import { FLBR } from '@system/config';
-import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
+import { ACTOR_TYPES, ITEM_TYPES, SYSTEM_ID } from '@system/constants';
+import { chooseActor, getActiveActor } from '@utils/get-actor';
+
+/**
+ * @typedef {Object} RollHandlerData
+ * @property {string}              [title]        The title of the roll
+ * @property {Actor}               [actor={}]     The actor who rolled the dice, if any
+ * @property {Item|Item[]}         [items]        The item(s) used to roll the dice, if any
+ * @property {string}              [attributeKey] The identifier of the attribute used (important for modifiers)
+ * @property {string}              [skillKey]     The identifier of the skill used (important for modifiers)
+ * @property {number|number[]}     [dice=[6]]     An array of die faces used to forge the roll
+ * @property {number}              [modifier]     Additional value for the final numeric modifier
+ * @property {Modifier|Modifier[]} [modifiers]    A group of modifiers that can also be applied to the roll
+ * @property {number}              [maxPush=1]    The maximum number of pushes (default is 1)
+ */
+
+/**
+ * @typedef {Object} RollHandlerOptions Additional options for the FormApplication instance
+ * @property {number}  [damage]              Overriding damage quantity
+ * @property {number}  [damageType]          Overriding damage type
+ * @property {number}  [crit]                Overriding crit die
+ * @property {string}  [rollMode]            The default roll mode to use
+ * @property {boolean} [sendMessage=true]    Whether the message should be sent
+ * @property {boolean} [unlimitedPush=false] Whether to allow unlimited roll pushes
+ * @property {boolean} [disabledPush=false]  Whether to disable the ability to set the max. push
+*/
 
 /**
  * A Form Application that mimics Dialog,
@@ -11,19 +36,20 @@ import { ITEM_TYPES, SYSTEM_ID } from '@system/constants';
  */
 export default class BRRollHandler extends FormApplication {
   /**
-   * @param {string}              [title]        The title of the roll
-   * @param {Actor}               [actor={}]     The actor who rolled the dice, if any
-   * @param {Item|Item[]}         [items]        The item(s) used to roll the dice, if any
-   * @param {string}              [attributeKey] The identifier of the attribute used (important for modifiers)
-   * @param {string}              [skillKey]     The identifier of the skill used (important for modifiers)
-   * @param {number|number[]}     [dice=[6]]     An array of die faces used to forge the roll
-   * @param {number}              [modifier]     Additional value for the final numeric modifier
-   * @param {Modifier|Modifier[]} [modifiers]    A group of modifiers that can also be applied to the roll
-   * @param {number}              [maxPush=1]    The maximum number of pushes (default is 1)
-   * @param {Object}  [options] Additional options for the FormApplication instance
-   * @param {string}  [options.rollMode]            The default roll mode to use
-   * @param {boolean} [options.sendMessage=true]    Whether the message should be sent
-   * @param {boolean} [options.unlimitedPush=false] Whether to allow unlimited roll pushes
+   * The roll in this FormApplication.
+   * @type {YearZeroRoll}
+   */
+  roll = {};
+
+  /**
+   * The ID of the message that contains the rolled result.
+   * @type {string}
+   */
+  messageId;
+
+  /**
+   * @param {RollHandlerData} rollData
+   * @param {RollHandlerOptions} options
    */
   constructor({
     title = 'Blade Runner RPG',
@@ -103,12 +129,6 @@ export default class BRRollHandler extends FormApplication {
     this.dice = this.dice.filter(d => d > 0);
 
     /**
-     * The roll in this FormApplication.
-     * @type {YearZeroRoll}
-     */
-    this.roll = {};
-
-    /**
      * The maximum number of pushes (default is 1).
      * @type {number}
      */
@@ -133,7 +153,8 @@ export default class BRRollHandler extends FormApplication {
     this.crit = options.crit ?? this.item?.attacks?.[0]?.crit;
 
     this.options.sendMessage = options.sendMessage ?? true;
-    this.options.unlimitedPush = options.unlimitedPush ?? false;
+    this.options.unlimitedPush = !!options.unlimitedPush;
+    this.options.disabledPush = !!options.disabledPush;
   }
 
   /* ------------------------------------------ */
@@ -164,6 +185,10 @@ export default class BRRollHandler extends FormApplication {
 
   get isAttack() {
     return !!this.damage || [ITEM_TYPES.WEAPON, ITEM_TYPES.EXPLOSIVE].includes(this.item?.type);
+  }
+
+  get message() {
+    return game.messages.get(this.messageId);
   }
 
   /* ------------------------------------------ */
@@ -204,6 +229,7 @@ export default class BRRollHandler extends FormApplication {
       rollMode: this.options.rollMode ?? game.settings.get('core', 'rollMode'),
       attack: this.isAttack,
       damage: this.damage,
+      damageType: this.damageType,
       config: CONFIG.BLADE_RUNNER,
       options,
     };
@@ -231,8 +257,8 @@ export default class BRRollHandler extends FormApplication {
   /**
    * Creates a Blade Runner Roll Handler FormApplication.
    * @see {@link BRRollHandler} constructor
-   * @param {Object} [data]
-   * @param {Object} [options]
+   * @param {RollHandlerData}    [data]
+   * @param {RollHandlerOptions} [options]
    * @returns {BRRollHandler} Rendered instance of this FormApplication
    */
   static create(data = {}, options = {}) {
@@ -326,7 +352,9 @@ export default class BRRollHandler extends FormApplication {
     const speaker = this.createSpeaker();
     const unlimitedPush = this.options.unlimitedPush;
     return {
-      name: this.title,
+      name: this.actor
+        ? this.title.replace(`${this.actor.name}: `, '')
+        : this.title,
       maxPush: unlimitedPush ? 1000 : this.maxPush,
       // type: this.options.type,
       attributeKey: this.attributeKey,
@@ -374,11 +402,13 @@ export default class BRRollHandler extends FormApplication {
     await this.roll.roll({ async: true });
 
     if (this.options.sendMessage) {
-      return this.roll.toMessage({
+      const message = await this.roll.toMessage({
         speaker: this.createSpeaker(),
       }, {
         rollMode: this.options.rollMode,
       });
+      this.messageId = message.id;
+      return message;
     }
     return this.roll;
   }
@@ -454,7 +484,7 @@ export default class BRRollHandler extends FormApplication {
   /* ------------------------------------------ */
 
   /**
-   * Handles cancellation .
+   * Handles push cancellation.
    * @param {ChatMessage} message The message that contains the roll
    * @returns {Promise.<ChatMessage>} The updated message
    */
@@ -489,7 +519,7 @@ export default class BRRollHandler extends FormApplication {
   static async applyDamage({ attributeTrauma, options: { attributeKey } }, speaker) {
     const currentDamage = attributeTrauma;
 
-    const nature = speaker?.nature;
+    const nature = speaker?.system.nature;
     if (!nature) {
       return ui.notifications.error('WARNING.ApplyDamageNoNature', { localize: true });
     }
@@ -519,6 +549,30 @@ export default class BRRollHandler extends FormApplication {
 
     await speaker.update({ [`system.${cap}.value`]: value });
     return value;
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * Applies a critical injury to an actor.
+   * @param {YearZeroRoll} roll
+   */
+  static async applyCrit(roll) {
+    let actor = await getActiveActor() || game.user.character;
+    if (!actor) {
+      const actors = game.actors.filter(a => a.type === ACTOR_TYPES.CHAR || a.isVehicle);
+      actor = await chooseActor(actors, {
+        title: game.i18n.localize('FLBR.CRIT.CriticalInjury'),
+        notes: game.i18n.localize('FLBR.CRIT.ChooseActor'),
+      });
+    }
+    if (!actor) return;
+
+    return actor.drawCrit(
+      roll.options.damageType,
+      roll.successCount - 1,
+      `D${roll.options.crit}`,
+    );
   }
 
   /* ------------------------------------------ */
@@ -583,6 +637,35 @@ export default class BRRollHandler extends FormApplication {
 
   /* ------------------------------------------ */
   /*  Dialogs                                   */
+  /* ------------------------------------------ */
+
+  /**
+   * Waits for the result of the handler.
+   * @param {RollHandlerData}    data
+   * @param {RollHandlerOptions} [options]
+   * @returns {Promise.<YearZeroRoll>}
+   */
+  static async waitForRoll(data, options) {
+    return new Promise((resolve, reject) => {
+      const roller = new this(data, options);
+      const originalClose = roller.close;
+      roller.close = async opts => {
+        await originalClose.bind(roller, opts)();
+        const roll = roller.roll;
+        if (roll instanceof Roll) {
+          if (roller.message && game.dice3d && game.dice3d.isEnabled()) {
+            await game.dice3d.waitFor3DAnimationByMessageID(roller.messageId);
+            resolve(roll);
+          }
+        }
+        else {
+          reject(new Error('The dialog was closed without a choice being made.'));
+        }
+      };
+      roller.render(true);
+    });
+  }
+
   /* ------------------------------------------ */
 
   /**

@@ -4,7 +4,7 @@
 <div class="embedded-items flex {{#if wrap}}row wrap{{else}}column{{/if}}">
 	{{#each items}}
 		<div class="embedded-item flex row {{type}}" data-item-id="{{id}}">
-			<div class="photo{{#if hasAction}} item-roll rollable{{/if}}">
+			<div class="photo{{#if hasAction}} item-control rollable{{/if}}" data-action="roll">
 				<img src="{{img}}" data-tooltip="{{name}}"/>
 			</div>
 
@@ -71,34 +71,49 @@
 				{{/if}}
 			</div>
 
+			{{!-- Item Controls --}}
+
 			<div class="item-controls">
 				{{#if system.blast}}
-					<a class="btn blast-roll" data-tooltip="{{localize "FLBR.SHEET_HEADER.BlastPowerRoll"}}">
+					<a class="btn item-control" data-action="blast" data-tooltip="{{localize "FLBR.SHEET_HEADER.BlastPowerRoll"}}">
 						{{{@root.config.Icons.buttons.bomb}}}
 					</a>
 				{{/if}}
 				{{#if (eq type "armor")}}
-					<a class="btn item-roll" data-tooltip="{{localize "FLBR.SHEET_HEADER.ArmorRoll"}}">
+					<a class="btn item-control" data-action="roll" data-tooltip="{{localize "FLBR.SHEET_HEADER.ArmorRoll"}}">
 						{{{@root.config.Icons.buttons.armor}}}
 					</a>
 				{{/if}}
 				{{#if hasAction}}
-					<a class="btn item-roll" data-tooltip="{{localize "FLBR.BUTTON.Roll"}}">
+					<a class="btn item-control" data-action="roll" data-tooltip="{{localize "FLBR.BUTTON.Roll"}}">
 						{{{@root.config.Icons.buttons.roll}}}
 					</a>
 				{{/if}}
-				<a class="btn item-edit" data-tooltip="{{localize "FLBR.BUTTON.Edit"}}">
+				<a class="btn item-control" data-action="edit" data-tooltip="{{localize "FLBR.BUTTON.Edit"}}">
 					{{{@root.config.Icons.buttons.edit}}}
 				</a>
-				<a class="btn item-chat" data-tooltip="{{localize "FLBR.BUTTON.ToChat"}}">
+				<a class="btn item-control" data-action="chat" data-tooltip="{{localize "FLBR.BUTTON.ToChat"}}">
 					{{{@root.config.Icons.buttons.chat}}}
 				</a>
-				<a class="btn item-delete" data-tooltip="{{localize "FLBR.BUTTON.Delete"}}">
-					{{{@root.config.Icons.buttons.remove}}}
-				</a>
-				<a class="btn item-delete-confirmed" style="display: none;" data-tooltip="{{localize "FLBR.BUTTON.Delete"}}">
-					{{{@root.config.Icons.buttons.delete}}}
-				</a>
+				{{#if (and hasAttack (eq @root.actor.type "vehicle"))}}
+					{{#if system.mounted}}
+						<a class="btn item-control" data-action="unmount" data-tooltip="{{localize "FLBR.BUTTON.Unmount"}}">
+							{{{@root.config.Icons.buttons.unmount}}}
+						</a>
+					{{else}}
+						<a class="btn item-control" data-action="mount" data-tooltip="{{localize "FLBR.BUTTON.Mount"}}">
+							{{{@root.config.Icons.buttons.mount}}}
+						</a>
+					{{/if}}
+				{{/if}}
+				{{#unless system.mounted}}
+					<a class="btn item-delete" data-tooltip="{{localize "FLBR.BUTTON.Delete"}}">
+						{{{@root.config.Icons.buttons.remove}}}
+					</a>
+					<a class="btn item-delete-confirmed" style="display: none;" data-tooltip="{{localize "FLBR.BUTTON.Delete"}}">
+						{{{@root.config.Icons.buttons.delete}}}
+					</a>
+				{{/unless}}
 			</div>
 
 		</div>

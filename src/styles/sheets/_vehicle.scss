@@ -1,0 +1,281 @@
+@use "../utils";
+
+.blade-runner.sheet.vehicle {
+  min-width: 330px;
+  min-height: 328px;
+
+  .container-header {
+    display: grid;
+    gap: 4px;
+    grid-template-columns: 2fr 1fr auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "name   name  type"
+      "avatar stats type"
+      "crew   crew  crew";
+  }
+
+  .vehicle-type {
+    grid-area: type;
+    color: var(--color-blue);
+    font-family: var(--font-table);
+    font-size: var(--font-size--large);
+    font-weight: bold;
+    text-transform: uppercase;
+    writing-mode: vertical-lr;
+    text-align: center;
+  }
+
+  .vehicle-name {
+    grid-area: name;
+
+    input {
+      @include utils.border-sheet(2px);
+      color: var(--color-blue-darker);
+      font-family: var(--font-table);
+      font-size: var(--font-size--default);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      width: 100%;
+      height: auto;
+      padding: 4px;
+      margin: 0;
+    }
+  }
+
+  .avatar {
+    grid-area: avatar;
+    @include utils.boxed-property(1px, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // width: 100px;
+    // height: 100%;
+  }
+
+  .vehicle-stats {
+    grid-area: stats;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-blok {
+    @include utils.boxed-property(1px, 1px);
+    display: grid;
+    grid-template-columns: 1fr auto 50px;
+
+    .attribute-name {
+      display: flex;
+      align-items: center;
+      padding-left: 2px;
+    }
+    .attribute-score, .attribute-size {
+      padding: 2px 4px 2px 0;
+    }
+  }
+
+  .vehicle-properties {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-evenly;
+  }
+
+  .vehicle-properties hr {
+    border-top-color: var(--color-green);
+    border-bottom: none;
+    width: 100%;
+  }
+
+  .vehicle-property {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    label {
+      flex: 1;
+      font-size: 80%;
+    }
+
+    select, input {
+      flex: 0 0 80px;
+      font-size: 90%;
+      max-width: 80px;
+      height: 20px;
+    }
+  }
+
+  label {
+    color: var(--color-green);
+    font-family: var(--font-table);
+    font-size: var(--font-size--very-small);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  a.mvr-roll,
+  a.roll-vehicle-armor {
+    font-family: var(--font-table);
+    color: var(--color-green);
+    font-weight: bold;
+    // letter-spacing: 1px;
+    &:hover { color: var(--color-red); }
+  }
+
+  .mounted-weapons {
+    height: fit-content;
+  }
+
+  .vehicle-components {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  .vehicle-component {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    background-color: #222;
+    // border: 1px solid var(--color-green);
+    border-radius: 4px;
+
+    &.disabled {
+      // border-color: var(--color-red-darker);
+      a { color: var(--color-red-darker); }
+    }
+  }
+
+  .vehicle-crew {
+    grid-area: crew;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .vehicle-altitude {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    input {
+      width: 69px;
+    }
+  }
+
+  .combat-options {
+    display: grid;
+    gap: 4px;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .active-effects {
+    grid-column: 1 / -1;
+  }
+
+  .embedded-items {
+    height: 100%;
+  }
+  .embedded-item {
+    width: 100%;
+    .details { width: 100%; }
+    // .name { max-width: 450px; }
+  }
+  .vehicle-inventory .embedded-item .photo {
+    width: 36px; height: 36px; min-width: 36px; min-height: 36px;
+  }
+}
+
+/* ------------------------------------------ */
+/*  VEHICLE CREW                              */
+/* ------------------------------------------ */
+
+.vehicle-crew {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  // overflow-x: auto;
+
+  h4 {
+    font-size: small;
+    writing-mode: vertical-lr;
+    text-align: center;
+    transform: rotate(180deg);
+  }
+
+  .vehicle-seat {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // padding: 4px;
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    border: 1px solid var(--color-gold);
+    border-radius: 4px;
+
+    img {
+      border-radius: 4px;
+    }
+
+    .seat-icon {
+      font-size: 2em;
+      text-align: center;
+      vertical-align: middle;
+
+      &.broken {
+        position: absolute;
+        opacity: .5;
+      }
+    }
+
+    &.broken {
+      border: 1px dotted var(--color-red-darker);
+    }
+
+    &.empty {
+      color: var(--color-blue-darker);
+      border: 1px dashed var(--color-blue-darker);
+    }
+
+    &.button {
+      color: var(--color-text-dark-secondary);
+      border: 1px dotted var(--color-text-dark-secondary);
+      &:hover, &:focus { border-style: solid; }
+    }
+
+    &:hover {
+      color: var(--color-green);
+      border-color: var(--color-green);
+    }
+  }
+
+  /* ------------------------------------------ */
+
+  .attribute-bar {
+    position: absolute;
+    left: 0;
+    height: 6px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    border: 1px solid #000;
+    border-radius: 3px;
+
+    &.bar1 { bottom: 0; }
+    &.bar2 { top: 0; }
+  }
+  .attribute-bar-progress {
+    height: 100%;
+    border-radius: 2px;
+    // width: 100%;
+    // background-color: red;
+  }
+}

@@ -1,0 +1,19 @@
+<div class="active-effects-list">
+	{{#each effects}}
+		<div class="active-effect" data-effect-id="{{id}}">
+			<div class="active-effect-name{{#if disabled}} suspended{{/if}}">{{label}}</div>
+			{{#unless ../inActor}}
+				<div class="active-effect-controls">
+					<a class="btn{{#if disabled}} suspended{{/if}}" data-action="toggle" data-tooltip="{{localize "FLBR.ACTIVE_EFFECT.Toggle"}}">{{{@root.config.Icons.buttons.onoff}}}</a>
+					<a class="btn" data-action="edit" data-tooltip="{{localize "FLBR.ACTIVE_EFFECT.Edit"}}">{{{@root.config.Icons.buttons.edit}}}</a>
+					<a class="btn" data-action="delete" data-tooltip="{{localize "FLBR.ACTIVE_EFFECT.Delete"}}">{{{@root.config.Icons.buttons.delete}}}</a>
+				</div>
+			{{/unless}}
+		</div>
+	{{else}}
+		<div class="active-effect empty">{{localize "FLBR.ACTIVE_EFFECT.Empty"}}</div>
+	{{/each}}
+	{{#if inActor}}
+		<div class="active-effect-disclaimer empty">{{localize "FLBR.ACTIVE_EFFECT.InActorDisclaimer"}}</div>
+	{{/if}}
+</div>

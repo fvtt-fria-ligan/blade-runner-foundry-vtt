@@ -1,3 +1,7 @@
+/**
+ * Gets the active actor of the user.
+ * @returns {Promise.<import('@actor/actor-document').default>}
+ */
 export async function getActiveActor() {
   let actor;
   if (game.user.isGM && canvas.ready && canvas.tokens.controlled.length > 1) {
@@ -25,16 +29,22 @@ export async function getActiveActor() {
  * @param {Object} [options]
  * @param {string} [options.title]
  * @param {string} [options.notes]
+ * @param {string} [options.selected] ID of the selected default actor
  * @returns {Promise<Actor>} Selected Actor
  */
 export async function chooseActor(actors = [], options = {}) {
+  if (!actors.length) return;
+  if (actors.length === 1) return actors[0];
+
   let content = '<form><div class="form-group">'
     + '<select name="actor" style="width: 100%;">';
 
-  actors.forEach((a, i) => {
-    content += `<option value="${a.id}"${i === 0 ? ' selected' : ''}>`
-      + `<img src="${a.img}" width="24" height="24"/>`
-      + `${a.name} (HP: ${a.health.value}/${a.health.max}) (ID: ${a.id})`
+  actors.forEach(a => {
+    content += `<option value="${a.id}"${a.id === options.selected ? ' selected' : ''}>`
+      // + `<img src="${a.img}" width="24" height="24"/>`
+      + a.name
+      + (a.system.health ? ` (HP: ${a.system.health.value}/${a.system.health.max})` : '')
+      + ` (ID: ${a.id})`
       + '</option>';
   });
 

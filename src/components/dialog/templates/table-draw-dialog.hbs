@@ -1,0 +1,31 @@
+<form autocomplete="off">
+	<div class="form-group">
+		<select id="table"{{#if disableSelection}} disabled{{/if}}>
+			{{#each tables}}
+				<option value="{{id}}"{{#if (eq id ../selected)}} selected{{/if}}>{{name}}</option>
+			{{/each}}
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="qty">{{localize "FLBR.COMBAT.DrawSize"}}</label>
+		<input
+			type="number"
+			id="qty"
+			style="text-align: left; padding-left: 8px;"
+			value="{{qty}}"
+		/>
+	</div>
+	{{#unless hideFormula}}
+		<div class="form-group">
+			<label for="formula">{{localize "FLBR.Formula"}}</label>
+			<input
+				type="text"
+				id="formula"
+				style="text-align: left; padding-left: 8px;"
+				value="{{formula}}"
+				placeholder="{{localize "FLBR.CustomFormula"}}"
+				{{#if disableFormula}}disabled{{/if}}
+			/>
+		</div>
+	{{/unless}}
+</form>

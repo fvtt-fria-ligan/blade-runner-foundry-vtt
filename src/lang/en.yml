@@ -43,8 +43,7 @@ FLBR.COMBAT_ACTION_HINT.Sprint: >-
   You can make additional moves in a single Round by using the sprint
   action. This will then count as your action for the Round,
   meaning you can perform no other action.
-  Roll <span class="smallcaps">MOBILITY</span> –
-  for each <span class="blade-runner-symbols">S</span> rolled,
+  Roll MOBILITY – for each <span class="blade-runner-symbols">S</span> rolled,
   you can make one more move, in addition to your free move.
   If you fail the roll, you fall (before the second move)
   and cannot get up until your next turn.
@@ -61,8 +60,7 @@ FLBR.COMBAT_ACTION_HINT.Grapple: >-
   they were holding and cannot move. The only
   action they can perform is an attempt to break
   free – which is an action that succeeds if the
-  opponent wins an opposed
-  <span class="smallcaps">CLOSE COMBAT</span> roll against
+  opponent wins an opposed CLOSE COMBAT roll against
   you. While you are grappling, the only action you
   can perform (until you release your opponent) is
   a grapple attack. This works as a normal unarmed
@@ -85,8 +83,10 @@ FLBR.COMBAT_ACTION_HINT.Manipulate: Empathy + Manipulation
 FLBR.COMBAT_ACTION_HINT.UseItem: Use Item
 FLBR.BUTTON.Delete: Delete item
 FLBR.BUTTON.Edit: Edit item
+FLBR.BUTTON.Mount: Mount weapon
 FLBR.BUTTON.Roll: Roll item
 FLBR.BUTTON.ToChat: Send item to chat
+FLBR.BUTTON.Unmount: Unmount weapon
 FLBR.CHAT_ACTION.ApplyDamage: Apply damage to targeted tokens
 FLBR.DIALOG.AssignSuccesses: Assign Success(es)
 FLBR.DIALOG.AssignSuccessesHint: Choose a number of successes to spent against {name}.
@@ -103,6 +103,7 @@ FLBR.HEADER.DieSize: Base Die
 FLBR.HEADER.FavoredGear: Favored Gear
 FLBR.HEADER.Health: Health
 FLBR.HEADER.Home: Home
+FLBR.HEADER.Hull: Hull
 FLBR.HEADER.HumanityPoints: Humanity Points
 FLBR.HEADER.Injuries: Injuries
 FLBR.HEADER.Inventory: Inventory
@@ -153,13 +154,20 @@ FLBR.TAB.Mods: Mods
 FLBR.TAB.Stats: Stats
 FLBR.D: D
 FLBR.NO_VALUE: –
+FLBR.ACTIVE_EFFECT.Add: Add an Active Effect
+FLBR.ACTIVE_EFFECT.Delete: Delete Effect
+FLBR.ACTIVE_EFFECT.Edit: Edit Effect
+FLBR.ACTIVE_EFFECT.Empty: No Effect.
+FLBR.ACTIVE_EFFECT.New: New Effect
+FLBR.ACTIVE_EFFECT.Toggle: Toggle Effect
+FLBR.ACTIVE_EFFECT.InActorDisclaimer: "Note: Active Effects cannot be edited in embedded Items (Foundry's limitation)."
 FLBR.Advantage: Advantage
 FLBR.Capacities: Health & Resolve
 FLBR.Blast: Blast
 FLBR.BlastPower: Blast Power
-FLBR.Broken: BROKEN
-FLBR.BrokenByDamage: BROKEN BY DAMAGE
-FLBR.BrokenByStress: BROKEN BY STRESS
+FLBR.Broken: Broken
+FLBR.BrokenByDamage: Broken by Damage
+FLBR.BrokenByStress: Broken by Stress
 FLBR.Cancel: Cancel
 FLBR.CHAT.DamageDealt: '{name} is dealt {amount} damage.'
 FLBR.CHAT.NoDamageDealt: No damage was dealt to {name}.
@@ -167,9 +175,23 @@ FLBR.CHAT.InitialDamageDealt: The attack had an initial amount of {damage} damag
 FLBR.CHAT.ArmorDeflectedDamage: Armor deflected {damage} damage.
 FLBR.CHAT.ArmorDeflectedAllDamage: Armor deflected all damage.
 FLBR.CHAT.ArmorNoEffect: Armor had no effect.
+FLBR.CHAT.CritInflicted: '{name} is inflicted the {crit} critical injury.'
+FLBR.COMBAT.Combat: Combat
+FLBR.COMBAT.CannotBeDamaged: Can't be damaged
+FLBR.COMBAT.DrawSize: Draw Size
+FLBR.COMBAT.SkippedDefender: Skipped defender {name}
 FLBR.CreateNewItem: Create a new {type} item
-FLBR.Crit: Crit
+FLBR.CRIT.Crit: Crit
+FLBR.CRIT.CritButtonTooltip: Draw a crit for the player's character or a selected token
+FLBR.CRIT.CriticalInjury: Critical Injury
+FLBR.CRIT.ChooseCrit: Choose a Critical Injury
+FLBR.CRIT.ChooseVehicleDamage: Choose a Critical Vehicle Damage
+FLBR.CRIT.ChooseActor: Choose an actor to inflict a critical injury.
+FLBR.CRIT.DrawCrit: Draw Critical Injury
+FLBR.CRIT.DrawVehicleDamage: Draw Critical Vehicle Damage
+FLBR.CustomFormula: Custom Formula
 FLBR.Disadvantage: Disadvantage
+FLBR.Formula: Formula
 FLBR.InjuryCategory: Category
 FLBR.InjuryDeathSave: Death Save
 FLBR.InjuryHealing: Healing
@@ -204,6 +226,7 @@ FLBR.ItemNewAttack: New attack
 FLBR.ItemNoAttack: No attack mode defined.
 FLBR.ItemNoModifier: No modifier.
 FLBR.ItemModifier: Modifier
+FLBR.ItemMounted: Mounted
 FLBR.ItemQuantity: Quantity
 FLBR.ItemSpecial: Special
 FLBR.MACRO.GetActorTitle: Choose an Actor
@@ -215,7 +238,7 @@ FLBR.MACRO.NoItem: Your controlled Actor {actor} does not have an item named {it
 FLBR.MACRO.RollAction: Action {action}
 FLBR.MACRO.RollStat: Roll {stat}
 FLBR.Nature: Nature
-FLBR.NatureHint: Character's Nature (Only GM)
+FLBR.NatureHint: Character's Nature (GM only)
 FLBR.NewItem: New {type}
 FLBR.OK: OK
 FLBR.Range: Range
@@ -238,11 +261,82 @@ FLBR.ROLLER.ResolveTestHint: >-
   lost, meaning your maximum Resolve is reduced one step.
 FLBR.ROLLER.ResolveTestFailed: '{name} failed their Empathy roll and permanently loses 1 point of resolve.'
 FLBR.ROLLER.RollButton: Roll
+FLBR.ROLLER.RollSpecialHint: 'Roll: {name}?'
 FLBR.ROLLER.RollWithAdvantageButton: Advantage
 FLBR.ROLLER.RollWithDisadvantageButton: Disadvantage
 FLBR.ROLLER.SelectDiceToPush: Select dice to push
 FLBR.ROLLER.UnlimitedPush: Unlimited
 FLBR.SignatureItemUsedCheckboxHint: Used?
+FLBR.SomeoneIsSomething: '{name} is {status}'
+FLBR.VEHICLE.Action.Crash: Crash
+FLBR.VEHICLE.Action.CrashHint: >-
+  If a Spinner is Wrecked, it crashes violently
+  to the ground. All people inside suffer D3 points of falling
+  damage plus one for each zone of altitude, mitigated by
+  the vehicle’s Armor rating. You can also brace yourself for
+  the hit by rolling MOBILITY – each <span class="blade-runner-symbols">S</span> rolled reduces the
+  damage by one.
+FLBR.VEHICLE.Action.CrashDialog: >-
+  This will crash the vehicle and inflict {damage} of falling damage to each passenger,
+  mitigated by the vehicle’s Armor rating and a MOBILITY roll (no action).
+FLBR.VEHICLE.Action.Explode: Explode
+FLBR.VEHICLE.Action.ExplodeHint: >-
+  The vehicle explodes in a ball of flame.
+  Everyone inside is exposed to a Blast Power B explosion,
+  and the vehicle is destroyed beyond repair.
+FLBR.VEHICLE.Action.MassiveCrash: Massive Crash
+FLBR.VEHICLE.Action.Ramming: Ramming
+FLBR.VEHICLE.Action.RammingHint: >-
+  Most vehicles can be used
+  as weapons – i.e. to simply run your target over. It counts
+  as a close combat attack but roll for DRIVING instead of
+  CLOSE COMBAT. This roll can be combined with the speeding
+  action above, but that will make the DRIVING roll an
+  opposed roll, meaning that the effectiveness of the speeding
+  might be reduced. The base Damage rating of the attack
+  equals your vehicle’s Hull rating divided by two, rounded up.
+  Ramming vehicles inflict crushing damage and the Crit
+  Die has a die size equal to the Hull rating, rounded up to
+  the closest die, to a maximum of D12 – i.e. a vehicle with
+  Hull 9 has a D10 Crit Die.
+FLBR.VEHICLE.Action.Repair: Repair
+FLBR.VEHICLE.Action.RepairHint: >-
+  Repairing damage to a vehicle requires one or several TECH
+  rolls. One roll can be made per Shift. Only one person can
+  roll to repair the hull, but others can help.
+  Each <span class="blade-runner-symbols">S</span> rolled
+  removes one point of damage. If the vehicle was Wrecked,
+  it is no longer considered Wrecked once one point of damage
+  has been repaired.
+  If the engine or a mounted
+  weapon has been disabled due to a critical hit, repairing it
+  typically requires a TECH roll, in addition to any roll for
+  repairing hull damage. The work takes one Shift.
+FLBR.VEHICLE.Action.Speeding: Speeding
+FLBR.VEHICLE.Action.SpeedingHint: >-
+  Corresponding to sprinting on foot,
+  you can use the speeding action to make additional
+  moves in the same Round with a vehicle.
+FLBR.VEHICLE.Altitude: Altitude
+FLBR.VEHICLE.AddSeat: Increase the passengers capacity (GM only)
+FLBR.VEHICLE.ChoosePassenger: Choose Passenger
+FLBR.VEHICLE.ChoosePassengerHint: Choose one of the passenger.
+FLBR.VEHICLE.Components: Components
+FLBR.VEHICLE.CrashDamageFlavor: Damage dealt to the crew by the crash of the vehicle
+FLBR.VEHICLE.CreateActor: Create Actor?
+FLBR.VEHICLE.CreateActorHint: Do you want to duplicate actor {name} before crewing it?
+FLBR.VEHICLE.Crew: Crew
+FLBR.VEHICLE.DecreaseHull: Decrease Max. Hull
+FLBR.VEHICLE.DeleteSeat: Decrease Passenger Capacity
+FLBR.VEHICLE.EditPassenger: Edit Passenger
+FLBR.VEHICLE.Engine: Engine
+FLBR.VEHICLE.IncreaseHull: Increase Max. Hull
+FLBR.VEHICLE.MountedWeapons: Mounted Weapons
+FLBR.VEHICLE.NotifCrewFull: No more free seat!
+FLBR.VEHICLE.NotifDropCrewVehicle: Vehicles inceptions are not allowed!
+FLBR.VEHICLE.NotifDropCrewLoot: Put your trashes in the trunk instead!
+FLBR.VEHICLE.NotifPassengerAlreadyPresent: Passenger already present!
+FLBR.VEHICLE.RemovePassenger: Remove Passenger
 FLBR.WeaponDamage: Damage
 FLBR.WeaponCrit: Crit Die
 FLBR.WeaponDamageType: Damage Type
@@ -256,8 +350,11 @@ FLBR.WEAPON_RANGE.Short: Short
 FLBR.WEAPON_RANGE.Medium: Medium
 FLBR.WEAPON_RANGE.Long: Long
 FLBR.WEAPON_RANGE.Extreme: Extreme
+FLBR.Wrecked: Wrecked
 FLBR.YouAreBroken: You are Broken!
 FLBR.ActorSheet.NotifWrongItemType: Actor {actor} cannot hold {type} items!
+YZEC.CombatTracker.FastAction: Moved
+YZEC.CombatTracker.SlowAction: Acted
 YZUR.CHAT.ROLL.Infos: Infos
 YZUR.CHAT.ROLL.Damage: Base Damage
 YZUR.CHAT.ROLL.Push: Push
@@ -268,6 +365,7 @@ YZUR.DIETERMS.D10BladeRunnerDie: D10
 YZUR.DIETERMS.D12BladeRunnerDie: D12
 ACTOR.TypeCharacter: Character
 ACTOR.TypeVehicle: Vehicle
+ACTOR.TypeLoot: Loot
 ACTOR.SubtypePc: Player Character
 ACTOR.SubtypeNpc: Non-Player Character
 ITEM.TypeGeneric: Generic
@@ -279,11 +377,25 @@ ITEM.TypeSpecialty: Specialty
 ITEM.TypeInjury: Injury
 GAME.Paused: Investigation Paused
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatic Apply Damage
-SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Whether to automatically apply damage from rolls to targeted tokens.
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Whether to automatically apply damage from rolls to targeted tokens and vehicle passengers.
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatic Armor Roll
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Whether to automatically roll the armor.
+SETTINGS.BLADE_RUNNER.CrashTableName: Vehicle Damage Table
+SETTINGS.BLADE_RUNNER.CrashTableHint: ID or name of the critical vehicle damages table.
+SETTINGS.BLADE_RUNNER.CrushingTableName: Crushing Table
+SETTINGS.BLADE_RUNNER.CrushingTableHint: ID or name of the crushing critical injuries table.
+SETTINGS.BLADE_RUNNER.PiercingTableName: Piercing Table
+SETTINGS.BLADE_RUNNER.PiercingTableHint: ID or name of the piercing critical injuries table.
+SETTINGS.BLADE_RUNNER.EditNaturePermissionName: Allow Nature Change
+SETTINGS.BLADE_RUNNER.EditNaturePermissionHint: Whether to allow the player to edit their nature in their character sheet.
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Open First Weapon Attack
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Whether to open the collapsible of the first weapon attack when the Item sheet is displayed.
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewName: Update Maneuverability on Crew
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewHint: Whether to update the actor's maneuverability when crewed into a vehicle.
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewName: Update Maneuverability on Uncrew
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewHint: Whether to update the actor's maneuverability when removed from a vehicle.
+SETTINGS.BLADE_RUNNER.UseActiveEffectsName: Use Active Effects
+SETTINGS.BLADE_RUNNER.UseActiveEffectsHint: Whether to display an additional field in sheets for managing Active Effects (for advanced players).
 WARNING.ApplyDamageNoNature: 'Apply Push Damage: Actor Nature Not Found!'
 WARNING.ApplyDamageNoCapacityKey: 'Apply Push Damage: Nature-Capacity relation Not Found!'
 WARNING.ApplyDamageNoActorCapacity: 'Apply Push Damage: Actor Capacity Not Found!'
