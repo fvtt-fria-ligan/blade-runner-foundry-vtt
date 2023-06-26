@@ -61,6 +61,7 @@
   "background": "systems/blade-runner/assets/splash.webp",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": null,
+  "initiative": "1d10 + (@agi / 100)",
   "url": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt",
   "readme": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/blob/main/README.md",
   "license": "LICENSE.txt",

@@ -6,7 +6,11 @@
 				{{#if broken}}
 					<br/>
 					<span class="broken">
-						{{{config.Icons.buttons.lethal}}} {{localize "FLBR.Broken"}}
+						{{#if vroom}}
+							{{{config.Icons.buttons.pierce}}} {{toUpperCase (localize "FLBR.Wrecked")}}
+						{{else}}
+							{{{config.Icons.buttons.lethal}}} {{toUpperCase (localize "FLBR.Broken")}}
+						{{/if}}
 					</span>
 				{{/if}}
 			</p>

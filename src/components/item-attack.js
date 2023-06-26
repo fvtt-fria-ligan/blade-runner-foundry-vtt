@@ -40,7 +40,7 @@ export default class ItemAttack {
       + `${game.i18n.localize('FLBR.WeaponDamage')}: `
       + `<code>${this.damage}</code> `
       + `<em>${game.i18n.localize(CONFIG.BLADE_RUNNER.damageTypes[this.damageType])}</em>,&nbsp;&nbsp;`
-      + `${game.i18n.localize('FLBR.Crit')}: `
+      + `${game.i18n.localize('FLBR.CRIT.Crit')}: `
       + `<code>${game.i18n.localize('FLBR.D')}${this.crit}</code>,&nbsp;&nbsp;`
       + `${game.i18n.localize('FLBR.Range')}: `
       + `<code>${game.i18n.localize(CONFIG.BLADE_RUNNER.ranges[this.range.max])}</code>`

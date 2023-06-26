@@ -1,0 +1,37 @@
+.active-effects-list {
+  color: var(--color-blue-lighter);
+
+  .active-effect {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .active-effect-name {
+    color: var(--color-green);
+
+    &.suspended {
+      color: var(--color-disabled);
+      text-decoration: line-through;
+    }
+  }
+
+  .active-effect-controls {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+
+    .btn:hover {
+      color: var(--color-yellow);
+    }
+    .btn.suspended {
+      color: var(--color-disabled);
+    }
+  }
+
+  .active-effect-disclaimer {
+    color: var(--color-disabled);
+    font-style: italic;
+    font-weight: normal;
+  }
+}

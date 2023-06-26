@@ -99,89 +99,6 @@ FLBR.pushTraumaMap = {
   },
 };
 
-/**
- * Action Map
- * - The action property name is added in "data-action"
- * - The callback takes the actor as an argument
- */
-FLBR.Actions = [
-  {
-    id: BR.COMBAT_ACTIONS.SPRINT,
-    label: 'FLBR.COMBAT_ACTION.Sprint',
-    hint: 'FLBR.COMBAT_ACTION_HINT.Sprint',
-    skill: BR.SKILLS.MOBILITY,
-    attribute: null,
-    callback: null,
-  },
-  {
-    id: BR.COMBAT_ACTIONS.CRAWL,
-    label: 'FLBR.COMBAT_ACTION.Crawl',
-    hint: 'FLBR.COMBAT_ACTION_HINT.Crawl',
-    skill: null,
-    callback: () => ui.notifications.warn('Not implemented yet.'),
-  },
-  {
-    id: BR.COMBAT_ACTIONS.UNARMED_ATTACK,
-    label: 'FLBR.COMBAT_ACTION.UnarmedAttack',
-    hint: 'FLBR.COMBAT_ACTION_HINT.UnarmedAttack',
-    skill: BR.SKILLS.CLOSE_COMBAT,
-  },
-  {
-    id: BR.COMBAT_ACTIONS.MELEE_ATTACK,
-    label: 'FLBR.COMBAT_ACTION.MeleeAttack',
-    hint: 'FLBR.COMBAT_ACTION_HINT.MeleeAttack',
-    skill: BR.SKILLS.CLOSE_COMBAT,
-  },
-  {
-    id: BR.COMBAT_ACTIONS.GRAPPLE,
-    label: 'FLBR.COMBAT_ACTION.Grapple',
-    hint: 'FLBR.COMBAT_ACTION_HINT.Grapple',
-    skill: BR.SKILLS.CLOSE_COMBAT,
-  },
-  {
-    id: BR.COMBAT_ACTIONS.BREAK_FREE,
-    label: 'FLBR.COMBAT_ACTION.BreakFree',
-    hint: 'FLBR.COMBAT_ACTION_HINT.BreakFree',
-    skill: BR.SKILLS.CLOSE_COMBAT,
-  },
-  {
-    id: BR.COMBAT_ACTIONS.SHOOT_FIREARM,
-    label: 'FLBR.COMBAT_ACTION.ShootFirearm',
-    hint: 'FLBR.COMBAT_ACTION_HINT.ShootFirearm',
-    skill: BR.SKILLS.FIREARMS,
-  },
-  {
-    id: BR.COMBAT_ACTIONS.CAREFUL_AIM,
-    label: 'FLBR.COMBAT_ACTION.CarefulAim',
-    hint: 'FLBR.COMBAT_ACTION_HINT.CarefulAim',
-    callback: () => ui.notifications.warn('Not implemented yet.'),
-  },
-  {
-    id: BR.COMBAT_ACTIONS.THROW_WEAPON,
-    label: 'FLBR.COMBAT_ACTION.ThrowWeapon',
-    hint: 'FLBR.COMBAT_ACTION_HINT.ThrowWeapon',
-    skill: BR.SKILLS.FIREARMS,
-  },
-  {
-    id: BR.COMBAT_ACTIONS.FIRST_AID,
-    label: 'FLBR.COMBAT_ACTION.FirstAid',
-    hint: 'FLBR.COMBAT_ACTION_HINT.FirstAid',
-    skill: BR.SKILLS.MEDICAL_AID,
-  },
-  {
-    id: BR.COMBAT_ACTIONS.MANIPULATE,
-    label: 'FLBR.COMBAT_ACTION.Manipulate',
-    hint: 'FLBR.COMBAT_ACTION_HINT.Manipulate',
-    skill: BR.SKILLS.MANIPULATION,
-  },
-  {
-    id: BR.COMBAT_ACTIONS.USE_ITEM,
-    label: 'FLBR.COMBAT_ACTION.UseItem',
-    hint: 'FLBR.COMBAT_ACTION_HINT.UseItem',
-    callback: () => ui.notifications.warn('Not implemented yet.'),
-  },
-];
-
 FLBR.characterSubtypes = {
   [BR.ACTOR_SUBTYPES.PC]: 'ACTOR.SubtypePc',
   [BR.ACTOR_SUBTYPES.NPC]: 'ACTOR.SubtypeNpc',
@@ -228,9 +145,13 @@ FLBR.baselineTest = BR.SKILLS.INSIGHT;
 FLBR.maxPromotionPoints = 20;
 FLBR.maxHumanityPoints = 20;
 FLBR.maxChinyenPoints = 20;
+FLBR.maxVehicleHull = 10;
 
 FLBR.maxRolledDice = 3;
 FLBR.itemSpecialInputMaxLength = 80;
+FLBR.vehicleCrashDamage = '1d3 + @altitude';
+FLBR.vehicleMassiveCrashDamage = '1d6 + @altitude';
+FLBR.vehicleExplosionBlastPower = 10;
 
 /* ------------------------------------------ */
 
@@ -240,7 +161,7 @@ for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
   FLBR.rollModes[v] = `CHAT.Roll${k.toLowerCase().capitalize()}`;
 }
 
-// TODO
+// TODO Implements Years On The Force on creation. Maybe move to a module
 // FLBR.yearsOnTheForce = {
 //   [BR.YEARS_ON_THE_FORCE.ROOKIE]: {
 //     years: [0, 1],
@@ -285,6 +206,150 @@ for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
 // };
 
 /* ------------------------------------------ */
+/*  Actions                                   */
+/* ------------------------------------------ */
+
+/**
+ * Action Map
+ * - The action property name is added in "data-action"
+ * - The callback takes the actor as an argument
+ * @type {import('@components/actor-action').ActorActionData[]}
+ */
+FLBR.Actions = [
+  {
+    id: BR.COMBAT_ACTIONS.SPRINT,
+    label: 'FLBR.COMBAT_ACTION.Sprint',
+    hint: 'FLBR.COMBAT_ACTION_HINT.Sprint',
+    skill: BR.SKILLS.MOBILITY,
+    attribute: null,
+    callback: null,
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.CRAWL,
+    label: 'FLBR.COMBAT_ACTION.Crawl',
+    hint: 'FLBR.COMBAT_ACTION_HINT.Crawl',
+    skill: null,
+    callback: () => ui.notifications.warn('Not implemented yet.'),
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.UNARMED_ATTACK,
+    label: 'FLBR.COMBAT_ACTION.UnarmedAttack',
+    hint: 'FLBR.COMBAT_ACTION_HINT.UnarmedAttack',
+    skill: BR.SKILLS.CLOSE_COMBAT,
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.MELEE_ATTACK,
+    label: 'FLBR.COMBAT_ACTION.MeleeAttack',
+    hint: 'FLBR.COMBAT_ACTION_HINT.MeleeAttack',
+    skill: BR.SKILLS.CLOSE_COMBAT,
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.GRAPPLE,
+    label: 'FLBR.COMBAT_ACTION.Grapple',
+    hint: 'FLBR.COMBAT_ACTION_HINT.Grapple',
+    skill: BR.SKILLS.CLOSE_COMBAT,
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.BREAK_FREE,
+    label: 'FLBR.COMBAT_ACTION.BreakFree',
+    hint: 'FLBR.COMBAT_ACTION_HINT.BreakFree',
+    skill: BR.SKILLS.CLOSE_COMBAT,
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.SHOOT_FIREARM,
+    label: 'FLBR.COMBAT_ACTION.ShootFirearm',
+    hint: 'FLBR.COMBAT_ACTION_HINT.ShootFirearm',
+    skill: BR.SKILLS.FIREARMS,
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.CAREFUL_AIM,
+    label: 'FLBR.COMBAT_ACTION.CarefulAim',
+    hint: 'FLBR.COMBAT_ACTION_HINT.CarefulAim',
+    callback: () => ui.notifications.warn('Not implemented yet.'),
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.THROW_WEAPON,
+    label: 'FLBR.COMBAT_ACTION.ThrowWeapon',
+    hint: 'FLBR.COMBAT_ACTION_HINT.ThrowWeapon',
+    skill: BR.SKILLS.FIREARMS,
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.FIRST_AID,
+    label: 'FLBR.COMBAT_ACTION.FirstAid',
+    hint: 'FLBR.COMBAT_ACTION_HINT.FirstAid',
+    skill: BR.SKILLS.MEDICAL_AID,
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.MANIPULATE,
+    label: 'FLBR.COMBAT_ACTION.Manipulate',
+    hint: 'FLBR.COMBAT_ACTION_HINT.Manipulate',
+    skill: BR.SKILLS.MANIPULATION,
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.USE_ITEM,
+    label: 'FLBR.COMBAT_ACTION.UseItem',
+    hint: 'FLBR.COMBAT_ACTION_HINT.UseItem',
+    callback: () => ui.notifications.warn('Not implemented yet.'),
+    actorType: BR.ACTOR_TYPES.CHAR,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_SPEEDING,
+    label: 'FLBR.VEHICLE.Action.Speeding',
+    hint: 'FLBR.VEHICLE.Action.SpeedingHint',
+    skill: BR.SKILLS.MOBILITY,
+    actorType: BR.ACTOR_TYPES.VEHICLE,
+    onCrew: true,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_RAMMING,
+    label: 'FLBR.VEHICLE.Action.Ramming',
+    hint: 'FLBR.VEHICLE.Action.RammingHint',
+    actorType: BR.ACTOR_TYPES.VEHICLE,
+    callback: actor => actor.rollRamming(),
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_REPAIR,
+    label: 'FLBR.VEHICLE.Action.Repair',
+    hint: 'FLBR.VEHICLE.Action.RepairHint',
+    skill: BR.SKILLS.TECH,
+    actorType: BR.ACTOR_TYPES.VEHICLE,
+    onCrew: true,
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_CRASH,
+    label: 'FLBR.VEHICLE.Action.Crash',
+    hint: 'FLBR.VEHICLE.Action.CrashHint',
+    actorType: BR.ACTOR_TYPES.VEHICLE,
+    callback: actor => actor.crashVehicle(),
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_MASSIVE_CRASH,
+    label: 'FLBR.VEHICLE.Action.MassiveCrash',
+    hint: 'FLBR.VEHICLE.Action.CrashHint',
+    actorType: BR.ACTOR_TYPES.VEHICLE,
+    callback: actor => actor.crashVehicle(true),
+  },
+  {
+    id: BR.COMBAT_ACTIONS.VEHICLE_EXPLODE,
+    label: 'FLBR.VEHICLE.Action.Explode',
+    hint: 'FLBR.VEHICLE.Action.ExplodeHint',
+    actorType: BR.ACTOR_TYPES.VEHICLE,
+    callback: actor => actor.explodeVehicle(),
+  },
+];
+
+/* ------------------------------------------ */
 /*  Icons                                     */
 /* ------------------------------------------ */
 
@@ -325,8 +390,8 @@ FLBR.Icons = {
     // equip: '<i class="fas fa-star"></i>',
     // unequip: '<i class="far fa-star"></i>',
     // stash: '<i class="fas fa-shopping-bag"></i>',
-    // unmount: '<i class="fas fa-thumbtack"></i>',
-    // mount: '<i class="fas fa-wrench"></i>',
+    mount: '<i class="fas fa-wrench"></i>',
+    unmount: '<i class="fas fa-thumbtack"></i>',
     attack: '<i class="fas fa-crosshairs"></i>',
     armor: '<i class="fas fa-shield-alt"></i>',
     bomb: '<i class="fas fa-bomb"></i>',
@@ -337,12 +402,15 @@ FLBR.Icons = {
     pierce: '<i class="fa-regular fa-burst"></i>',
     stress: '<i class="fa-regular fa-wave-pulse"></i>',
     range: '<i class="fa-regular fa-crosshairs-simple"></i>',
-    // damage: '<i class="fa-solid fa-burst"></i>',
+    damage: '<i class="fa-solid fa-burst"></i>',
     // reload: '<i class="fas fa-sync-alt"></i>',
     lethal: '<i class="fas fa-skull"></i>',
     // mental: '<i class="fas fa-brain"></i>',
     vehicle: '<i class="fas fa-car"></i>',
+    wheel: '<i class="fa-regular fa-steering-wheel"></i>',
+    seat: '<i class="fa-regular fa-person-seat-reclined"></i>',
     chat: '<i class="far fa-comment-dots"></i>',
     roll: '<i class="fas fa-dice-d20"></i>',
+    onoff: '<i class="fas fa-power-off"></i>',
   },
 };

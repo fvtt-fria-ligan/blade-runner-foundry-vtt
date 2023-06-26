@@ -17,7 +17,8 @@
  */
 
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES } from '@system/constants';
+import { ACTOR_TYPES, CAPACITIES } from '@system/constants';
+import { ActionCollection } from '@components/actor-action';
 import * as YZUR from 'yzur';
 import * as Chat from '@system/chat';
 import * as BRMacro from '@system/macros';
@@ -31,6 +32,7 @@ import { overrideInlineRollListener } from '@components/roll/inline-roll';
 import { getManual } from '@utils/get-manual';
 import BladeRunnerActor from '@actor/actor-document';
 import BladeRunnerItem from '@item/item-document';
+import BladeRunnerDialog from '@components/dialog/dialog';
 import displayMessages from '@components/messaging-system';
 
 /* ------------------------------------------ */
@@ -66,6 +68,7 @@ Hooks.once('init', async () => {
   game.bladerunner = {
     config: FLBR,
     roller: BRRollHandler,
+    dialog: BladeRunnerDialog,
     macros: {
       rollAction: BRMacro.rollAction,
       rollDice: BRMacro.showRollDialog,
@@ -73,6 +76,7 @@ Hooks.once('init', async () => {
       rollStat: BRMacro.rollStat,
       displayManual: async () => (await getManual()).sheet.render(true),
     },
+    actions: new ActionCollection(FLBR.Actions.map(a => [a.id, a])),
   };
 
   // Records configuration values.
@@ -95,8 +99,14 @@ Hooks.once('init', async () => {
   enrichTextEditors();
   await initializeHandlebars();
 
-  console.log('Blade Runner RPG | Ready!');
-  Hooks.call('bladeRunnerReady', game.bladerunner, CONFIG.BLADE_RUNNER);
+  // Adds a shortcut directory for vehicle actors.
+  Object.defineProperty(game, 'vehicles', {
+    enumerable: true,
+    get: () => new Collection(game.actors
+      .filter(a => a.isVehicle)
+      .map(a => [a.id, a]),
+    ),
+  });
 });
 
 /* ------------------------------------------ */
@@ -116,6 +126,9 @@ Hooks.once('ready', () => {
 
   // Replaces the a.inline listener with our own.
   overrideInlineRollListener();
+
+  console.log('Blade Runner RPG | Ready!');
+  Hooks.callAll('bladeRunnerReady', game.bladerunner, CONFIG.BLADE_RUNNER);
 });
 
 /* ------------------------------------------ */
@@ -123,6 +136,8 @@ Hooks.once('ready', () => {
 /* ------------------------------------------ */
 
 Hooks.once('diceSoNiceReady', dice3d => registerDiceSoNice(dice3d));
+
+Hooks.once('yzeCombatReady', yzec => yzec.register({ actorDrawSizeAttribute: 'system.drawSize' }));
 
 /* ------------------------------------------ */
 
@@ -135,47 +150,60 @@ Hooks.on('renderItemSheet', (app, _html) => {
 // });
 
 /* ------------------------------------------ */
+/*  Hooks for updating the vehicles' crew     */
+/* ------------------------------------------ */
+
+Hooks.on('updateActor', (actor, updateData, _options, _userId) => {
+  const hasCapacityUpdate =
+    foundry.utils.hasProperty(updateData, `system.${CAPACITIES.HEALTH}`) ||
+    foundry.utils.hasProperty(updateData, `system.${CAPACITIES.RESOLVE}`) ||
+    foundry.utils.hasProperty(updateData, 'system.hull');
+
+  if (hasCapacityUpdate) {
+    // Notifies if the actor is broken.
+    if (actor.isBroken) {
+      const statusCondition = game.i18n.localize(
+        `FLBR.${actor.isVehicle ? 'Wrecked' : 'Broken'}`,
+      );
+      ui.notifications.error(
+        game.i18n.format('FLBR.SomeoneIsSomething', {
+          name: `<b>${actor.name}</b>`,
+          status: statusCondition.toLowerCase(),
+        }),
+      );
+
+    }
+    // Refreshes a vehicle sheet if a passenger is updated.
+    if (actor.type === ACTOR_TYPES.CHAR) {
+      const vehicles = game.vehicles.filter(v => v.sheet?._state === Application.RENDER_STATES.RENDERED);
+      for (const vehicle of vehicles) {
+        if (vehicle.crew.has(actor.id)) {
+          vehicle.sheet.render(true);
+        }
+      }
+    }
+  }
+});
+
+Hooks.on('deleteActor', async actor => {
+  // Removes any deleted actor from vehicles' crew.
+  if (actor.type === ACTOR_TYPES.CHAR) {
+    const vehicles = game.vehicles;
+    for (const vehicle of vehicles) {
+      if (vehicle.crew.has(actor.id)) {
+        const crew = vehicle.system.crew.filter(p => p.id !== actor.id);
+        await vehicle.update({ 'system.crew': crew });
+      }
+    }
+  }
+});
+
+/* ------------------------------------------ */
 
 Hooks.on('getChatLogEntryContext', Chat.addChatMessageContextOptions);
 
 Hooks.on('renderChatLog', (_app, html, _data) => Chat.addChatListeners(html));
 Hooks.on('renderChatMessage', (_msg, html, _data) => Chat.hideChatActionButtons(html));
-
-/* ------------------------------------------ */
-
-Hooks.on('createActor', async (actor, _data, _options) => {
-  const updateData = {
-    'prototypeToken.displayName': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
-    'prototypeToken.displayBars': CONST.TOKEN_DISPLAY_MODES.OWNER,
-  };
-
-  switch (actor.type) {
-    case ACTOR_TYPES.CHAR:
-      // TODO clean code
-      // if (actor.system.subtype === ACTOR_SUBTYPES.PC) {
-      //   // updateData['prototypeToken.actorLink'] = true;
-      //   // updateData['prototypeToken.bar2.attribute'] = CAPACITIES.RESOLVE;
-      // }
-      if (!actor.system.attributes || !actor.system.skills) {
-        throw new TypeError(`FLBR | "${actor.type}" has No attribute nor skill`);
-      }
-      if (foundry.utils.isEmpty(actor.system.skills)) {
-        // Sets the default starting value for each attribute.
-        for (const attribute in actor.system.attributes) {
-          updateData[`system.attributes.${attribute}.value`] = FLBR.startingAttributeLevel;
-        }
-        // Builds the list of skills and sets their default values.
-        for (const skill in FLBR.skillMap) {
-          updateData[`system.skills.${skill}.value`] = FLBR.startingSkillLevel;
-        }
-      }
-      break;
-  }
-  if (!foundry.utils.isEmpty(updateData)) {
-    await actor.update(updateData);
-  }
-});
-
 
 /* -------------------------------------------- */
 /*  Chat Commands                               */
@@ -197,32 +225,3 @@ Hooks.on('chatMessage', async (_chatlog, content, _chatData) => {
     return true;
   }
 });
-
-// async function fixNumbers() {
-//   const items = [];
-//   game.items.contents.forEach(i => items.push(i));
-//   game.actors.contents.forEach(a => items.push(...a.items));
-//   console.warn(items);
-//   for (const item of items) {
-//     const updateData = {};
-//     const sys = item.system;
-//     if (sys.availability != undefined) {
-//       updateData['system.availability'] = +sys.availability;
-//     }
-//     if (sys.blast != undefined) {
-//       updateData['system.blast'] = +sys.blast;
-//     }
-//     if (item.isOffensive) {
-//       for (const atk of item.attacks) {
-//         updateData[`system.attacks.${atk.id}.damageType`] = +sys.attacks[atk.id].damageType;
-//         updateData[`system.attacks.${atk.id}.crit`] = +sys.attacks[atk.id].crit;
-//         updateData[`system.attacks.${atk.id}.range.min`] = +sys.attacks[atk.id].range.min;
-//         updateData[`system.attacks.${atk.id}.range.max`] = +sys.attacks[atk.id].range.max;
-//       }
-//     }
-//     if (!foundry.utils.isEmpty(updateData)) {
-//       console.warn('Updating item', item.name, 'with data', updateData);
-//       await item.update(updateData);
-//     }
-//   }
-// }

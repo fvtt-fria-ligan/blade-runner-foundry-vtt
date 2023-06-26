@@ -15,7 +15,7 @@
 
 			<div class="nature boxed-property container">
 				<h3>{{localize "FLBR.Nature"}}</h3>
-				<select name="system.nature" data-tooltip="{{localize "FLBR.NatureHint"}}"{{#unless isGM}} disabled{{/unless}}>
+				<select name="system.nature" data-tooltip="{{localize "FLBR.NatureHint"}}"{{#unless editNature}} disabled{{/unless}}>
 					{{selectOptions config.natures selected=system.nature localize=true}}
 				</select>
 			</div>
@@ -26,7 +26,7 @@
 						<h3>
 							{{localize "FLBR.HEADER.Health"}}
 							{{#if (lte system.health.value 0)}}
-								<b>({{localize "FLBR.BrokenByDamage"}})</b>
+								<b>({{toUpperCase (localize "FLBR.BrokenByDamage")}})</b>
 							{{/if}}
 							<span class="capacity-rating">{{system.health.value}}/{{system.health.max}}</span>
 						</h3>
@@ -38,7 +38,7 @@
 						<h3>
 							{{localize "FLBR.HEADER.Resolve"}}
 							{{#if (lte system.resolve.value 0)}}
-								<b>({{localize "FLBR.BrokenByStress"}})</b>
+								<b>({{toUpperCase (localize "FLBR.BrokenByStress")}})</b>
 							{{/if}}
 							<span class="capacity-rating">{{system.resolve.value}}/{{system.resolve.max}}</span>
 						</h3>
@@ -89,15 +89,15 @@
 		<div class="tab" data-group="primary" data-tab="inventory">
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/inventory-tab.hbs}}
 		</div>
-			<div class="tab" data-group="primary" data-tab="bio">
-				{{#if isPC}}
+		<div class="tab" data-group="primary" data-tab="bio">
+			{{#if isPC}}
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/bio-tab.hbs}}
-				{{else if isNPC}}
-					<div class="boxed-property npc-notes">
-						{{{editor system.description target="system.description" button=true editable=editable}}}
-					</div>
-				{{/if}}
-			</div>
+			{{else if isNPC}}
+				<div class="boxed-property npc-notes">
+					{{{editor system.description target="system.description" button=true editable=editable}}}
+				</div>
+			{{/if}}
+		</div>
 
 	</div>
 

@@ -17,13 +17,15 @@
 						<option value="capacity.{{cap}}">{{localize (concat "FLBR.HEADER." (capitalize cap))}}</option>
 					{{/each}}
 				</optgroup>
+				<optgroup label="{{localize "FLBR.COMBAT.Combat"}}">
+					<option value="combat.drawSize">{{localize "FLBR.COMBAT.DrawSize"}}</option>
+				</optgroup>
 			{{/select}}
 		</select>
-		{{!-- <input type="text" name="system.modifiers.{{@key}}.value" value="{{modifier.value}}"/> --}}
 		<select name="system.modifiers.{{@key}}.value" value="{{modifier.value}}">
 			{{#select modifier.value}}
 				<option value="0">{{localize "FLBR.NO_VALUE"}}</option>
-				{{#if (or (eq modifier.name "capacity.health") (eq modifier.name "capacity.resolve"))}}
+				{{#if (or (eq modifier.name "capacity.health") (eq modifier.name "capacity.resolve") (eq modifier.name "combat.drawSize"))}}
 					<option value="+1">+1</option>
 					<option value="-1">−1</option>
 				{{else}}

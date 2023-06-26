@@ -1,7 +1,11 @@
 import { FLBR } from '@system/config';
-import { ACTOR_SUBTYPES, ACTOR_TYPES, CAPACITIES, ITEM_TYPES, SKILLS, SYSTEM_ID } from '@system/constants';
+import { ACTOR_SUBTYPES, ACTOR_TYPES, ATTRIBUTES, CAPACITIES,
+  DAMAGE_TYPES, ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
 import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
+import BladeRunnerDialog from '@components/dialog/dialog';
+import CrewCollection from '@components/vehicle-crew';
+import { getTable } from '@utils/get-table';
 
 /**
  * @typedef {Object} ActorCapacity
@@ -12,8 +16,12 @@ import BRRollHandler from '@components/roll/roller';
  */
 
 /**
+ * @typedef {Object} VehicleOccupant
+ * @property {string} id
+ */
+
+/**
  * Blade Runner Actor Document.
- * @class
  * @extends {Actor}
  */
 export default class BladeRunnerActor extends Actor {
@@ -30,35 +38,85 @@ export default class BladeRunnerActor extends Actor {
     return this.system.skills;
   }
 
-  get archetype() {
-    return this.system.archetype;
+  get isVehicle() {
+    return this.type === ACTOR_TYPES.VEHICLE;
   }
 
-  get nature() {
-    return this.system.nature;
-  }
-
-  get health() {
-    return this.system.health;
-  }
-
-  get resolve() {
-    return this.system.resolve;
-  }
-
+  /**
+   * Whether this actor is broken or wrecked.
+   * @type {boolean}
+   * @readonly
+   */
   get isBroken() {
-    for (const cap of Object.values(CAPACITIES)) {
-      const capacity = this.system[cap];
-      if (capacity && capacity.value <= 0) return true;
+    switch (this.type) {
+      case ACTOR_TYPES.CHAR:
+        for (const cap of Object.values(CAPACITIES)) {
+          const capacity = this.system[cap];
+          if (capacity && capacity.value <= 0) return true;
+        }
+        return false;
+      case ACTOR_TYPES.VEHICLE:
+        return this.system.hull.value <= 0;
+      default:
+        return undefined;
     }
-    return false;
   }
 
   get maxPush() {
-    if (this.type === ACTOR_TYPES.CHAR) {
-      return this.system.subtype === ACTOR_SUBTYPES.PC ? FLBR.maxPushMap[this.nature] : 0;
+    switch (this.type) {
+      case ACTOR_TYPES.CHAR:
+        return this.system.subtype === ACTOR_SUBTYPES.PC ? FLBR.maxPushMap[this.system.nature] : 0;
+      default:
+        return 1;
     }
-    return 1;
+  }
+
+  get armored() {
+    switch (this.type) {
+      case ACTOR_TYPES.CHAR:
+        return this.items.filter(i => i.type === ITEM_TYPES.ARMOR && i.qty > 0).length;
+      case ACTOR_TYPES.VEHICLE:
+        return this.system.armor > 0;
+      default:
+        return false;
+    }
+  }
+
+  /**
+   * The health bar (bar1) CSS color code according to the actor's health value.
+   * Based on the calculation made in the Token document.
+   * @type {string}
+   * @readonly
+   */
+  get healthBarColor() {
+    const pct = this.system.health?.ratio;
+    return foundry.utils.Color.fromRGB([
+      1 - (pct / 2),
+      pct,
+      0,
+    ]).css;
+  }
+
+  /**
+   * The resolve bar (bar2) CSS color code according to the actor's resolve value.
+   * Based on the calculation made in the Token document.
+   * @type {string}
+   * @readonly
+   */
+  get resolveBarColor() {
+    const pct = this.system.resolve?.ratio;
+    return foundry.utils.Color.fromRGB([
+      0.5 * pct,
+      0.7 * pct,
+      0.5 + (pct / 2),
+    ]).css;
+  }
+
+  /** @override */
+  get itemTypes() {
+    const types = super.itemTypes;
+    for (const type in types) types[type].sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    return types;
   }
 
   get rollData() {
@@ -70,13 +128,15 @@ export default class BladeRunnerActor extends Actor {
   /** @override */
   getRollData() {
     const rollData = super.getRollData();
-    for (const [k, v] of Object.entries(this.attributes)) {
-      rollData[k] = v.value;
+    if (this.type === ACTOR_TYPES.CHAR) {
+      for (const [k, v] of Object.entries(this.attributes)) {
+        rollData[k] = v.value;
+      }
+      for (const [k, v] of Object.entries(this.skills)) {
+        rollData[k] = v.value;
+      }
     }
-    for (const [k, v] of Object.entries(this.skills)) {
-      rollData[k] = v.value;
-    }
-    rollData.maxPush = FLBR.maxPushMap[this.nature] ?? 1;
+    rollData.maxPush = this.maxPush;
     return rollData;
   }
 
@@ -93,6 +153,7 @@ export default class BladeRunnerActor extends Actor {
 
     switch (this.type) {
       case ACTOR_TYPES.CHAR: this._prepareCharacterData(); break;
+      case ACTOR_TYPES.VEHICLE: this._prepareVehicleData(); break;
     }
   }
 
@@ -104,6 +165,7 @@ export default class BladeRunnerActor extends Actor {
   /** @private */
   _prepareCharacterData() {
     this._prepareCapacities();
+    this._prepareDrawSize();
   }
 
   /* ----------------------------------------- */
@@ -117,12 +179,13 @@ export default class BladeRunnerActor extends Actor {
   _prepareCapacities() {
     // Rolls over each legal capacity.
     for (const cap of Object.values(CAPACITIES)) {
+      /** @type {ActorCapacity} */
       const capacity = this.system[cap];
       const capData = FLBR.capacitiesMap[cap];
       // Proceeds if it exists in the character.
       if (capacity && capData) {
         // Gets the nature modifier.
-        const natureModifier = FLBR.natureModifierMap[this.nature]?.[cap] ?? 0;
+        const natureModifier = FLBR.natureModifierMap[this.system.nature]?.[cap] ?? 0;
         // Gets any permanent loss.
         const permanentLoss = capacity.permanentLoss ?? 0;
 
@@ -144,9 +207,193 @@ export default class BladeRunnerActor extends Actor {
 
         // Records the value in the actor data.
         capacity.max = max;
-        if (capacity.value > max) capacity.value = max;
+        if (capacity.value > max) {
+          capacity.value = max;
+          // this.updateSource({ [`system.${cap}.value`]: max });
+        }
         capacity.ratio = capacity.value / capacity.max;
       }
+    }
+  }
+
+  /* ----------------------------------------- */
+
+  /** @private */
+  _prepareDrawSize() {
+    const drawSize = this.getRollModifiers({ targets: 'drawSize' })
+      .reduce((tot, m) => tot + m.value, 0);
+    if (drawSize > 0) {
+      this.system.drawSize = drawSize + 1;
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Data Preparation                         */
+  /*   → Vehicle                               */
+  /* ----------------------------------------- */
+
+  /** @private */
+  _prepareVehicleData() {
+    this._prepareHull();
+    this._prepareCrew();
+    this._prepareDrawSize();
+  }
+
+  /* ----------------------------------------- */
+
+  /** @private */
+  _prepareHull() {
+    const hull = this.system.hull;
+    if (hull.value > hull.max) {
+      hull.value = hull.max;
+      this.updateSource({ 'system.hull.value': hull.max });
+    }
+  }
+
+  /* ----------------------------------------- */
+
+  /** @private */
+  _prepareCrew() {
+    // Creates the crew collection if it does not exist yet.
+    if (!Object.hasOwn(this, 'crew')) {
+      const c = new CrewCollection(
+        this,
+        'system.crew',
+        'system.passengers',
+      );
+      Object.defineProperty(this, 'crew', {
+        value: c,
+        writable: false,
+      });
+    }
+
+    // Cleanses the source array of old entries.
+    const updatedCrew = this.system.crew.filter(p => game.actors.has(p.id));
+    if (updatedCrew.length !== this.system.crew.length) {
+      this.updateSource({ 'system.crew': updatedCrew });
+    }
+
+    // Updates the crew collection (builds actors).
+    this.crew.update();
+  }
+
+  /* ----------------------------------------- */
+  /*  Actor Creation                           */
+  /* ----------------------------------------- */
+
+  /** @override */
+  async _preCreate(data, options, userId) {
+    await super._preCreate(data, options, userId);
+
+    const updateData = {
+      'prototypeToken.displayName': CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+    };
+
+    switch (this.type) {
+      case ACTOR_TYPES.CHAR:
+        updateData['prototypeToken.displayBars'] = CONST.TOKEN_DISPLAY_MODES.OWNER;
+        if (!this.system.attributes || !this.system.skills) {
+          throw new TypeError(`FLBR | "${this.type}" has No attribute nor skill`);
+        }
+        if (foundry.utils.isEmpty(this.system.skills)) {
+          // Sets the default starting value for each attribute.
+          for (const attribute in this.system.attributes) {
+            updateData[`system.attributes.${attribute}.value`] = FLBR.startingAttributeLevel;
+          }
+          // Builds the list of skills and sets their default values.
+          for (const skill in FLBR.skillMap) {
+            updateData[`system.skills.${skill}.value`] = FLBR.startingSkillLevel;
+          }
+        }
+        break;
+      case ACTOR_TYPES.VEHICLE:
+        updateData['prototypeToken.displayBars'] = CONST.TOKEN_DISPLAY_MODES.OWNER;
+        updateData['prototypeToken.bar1.attribute'] = 'hull';
+        // updateData['prototypeToken.bar2.attribute'] = null;
+        if (this.img === 'icons/svg/mystery-man.svg') {
+          updateData.img = `systems/${SYSTEM_ID}/assets/icons/steering-wheel.svg`;
+        }
+        break;
+      case ACTOR_TYPES.LOOT:
+        // updateData['prototypeToken.bar1.attribute'] = null;
+        if (this.img === 'icons/svg/mystery-man.svg') {
+          updateData.img = `systems/${SYSTEM_ID}/assets/icons/cardboard-box-closed.svg`;
+        }
+        break;
+    }
+    if (!foundry.utils.isEmpty(updateData)) {
+      await this.updateSource(updateData);
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Crew Management (Vehicles only)          */
+  /* ----------------------------------------- */
+
+  /**
+   * Adds an actor to the vehicle's crew.
+   * @param {BladeRunnerActor} actor The actor to add to the crew
+   *   (its ID is used, and its MVR is updated)
+   * @returns {Promise.<VehicleOccupant[]>} The crew
+   */
+  async addVehicleOccupant(actor) {
+    if (!this.isVehicle) return;
+    if (this.crew.full) return;
+    if (this.crew.has(actor.id)) {
+      return ui.notifications.info('FLBR.VEHICLE.NotifPassengerAlreadyPresent', { localize: true });
+    }
+
+    /** @type {VehicleOccupant} */
+    const occupant = {
+      id: actor.id,
+    };
+
+    const crew = this.system.crew;
+    crew.push(occupant);
+    await this.update({ 'system.crew': crew });
+
+    if (game.settings.get(SYSTEM_ID, SETTINGS_KEYS.UPDATE_ACTOR_MANEUVERABILITY_ON_CREW)) {
+      await actor.updateCharacterManeuverability(this.system.maneuverability);
+    }
+
+    return crew;
+  }
+
+  /* ----------------------------------------- */
+
+  /**
+   * Removes an actor from the vehicle's crew.
+   * @param {string} occupantId The id of the actor to remove from the crew
+   * @returns {Promise.<VehicleOccupant[]>} The crew
+   */
+  async removeVehicleOccupant(occupantId) {
+    if (!this.isVehicle) return;
+
+    const crew = this.system.crew.filter(p => p.id !== occupantId);
+    if (crew.length !== this.system.crew.length) {
+      await this.update({ 'system.crew': crew });
+    }
+
+    if (game.settings.get(SYSTEM_ID, SETTINGS_KEYS.UPDATE_ACTOR_MANEUVERABILITY_ON_UNCREW)) {
+      await game.actors.get(occupantId)?.updateCharacterManeuverability(0);
+    }
+
+    return crew;
+  }
+
+  /* ----------------------------------------- */
+
+  /**
+   * Updates the character's maneuverability (MVR) with a new value.
+   * @param {number} value New MVR value
+   */
+  async updateCharacterManeuverability(value) {
+    if (this.type !== ACTOR_TYPES.CHAR) return;
+    const mvr = FLBR.vehicleAttribute;
+    if (this.attributes[mvr]?.value !== value) {
+      await this.updateSource({
+        [`system.attributes.${mvr}.value`]: value,
+      });
     }
   }
 
@@ -156,7 +403,7 @@ export default class BladeRunnerActor extends Actor {
 
   /**
    * Gets all the modifiers from this actor's items.
-   * @param {Object} options Filtering options
+   * @param {import('@components/item-modifier').ModifierFilterOptions} [options] Filtering options
    * @returns {Array.<import('@components/item-modifier').default>} An array of Modifiers
    */
   getRollModifiers(options) {
@@ -175,7 +422,7 @@ export default class BladeRunnerActor extends Actor {
   }
 
   /* ------------------------------------------ */
-  /*  Utility Functions                         */
+  /*  Utility Methods                           */
   /* ------------------------------------------ */
 
   /**
@@ -184,7 +431,7 @@ export default class BladeRunnerActor extends Actor {
    * @returns {number}
    */
   getAttribute(attributeKey) {
-    return +this.attributes[attributeKey]?.value;
+    return +this.attributes?.[attributeKey]?.value;
   }
 
   /**
@@ -193,9 +440,53 @@ export default class BladeRunnerActor extends Actor {
    * @returns {number}
    */
   getSkill(skillKey) {
-    return +this.skills[skillKey]?.value;
+    return +this.skills?.[skillKey]?.value;
   }
 
+  /**
+   * Kills the actor, reducing its HP to 0.
+   * @returns {Promise.<void>}
+   */
+  async kill() {
+    let capacity;
+    switch (this.type) {
+      case ACTOR_TYPES.CHAR: capacity = 'health'; break;
+      case ACTOR_TYPES.VEHICLE: capacity = 'hull'; break;
+      default: return;
+    }
+    await this.update({ [`system.${capacity}.value`]: 0 });
+  }
+
+  /* ------------------------------------------ */
+  /*  Roll Methods                              */
+  /* ------------------------------------------ */
+
+  /**
+   * Performs a roll with this actor.
+   * @param {import('@components/roll/roller').RollHandlerData}    [rollData]
+   * @param {import('@components/roll/roller').RollHandlerOptions} [options]
+   * @param {string} [options.title] A custom title for the roll
+   *   if you don't want to use the default
+   * @returns {Promise.<BRRollHandler>} Rendered RollHandler FormApplication
+   */
+  async roll(rollData = {}, options = {}) {
+    if (options.title) rollData.title = options.title;
+    if (!rollData.title) rollData.title = `${this.name}: ${game.i18n.localize('FLBR.SHEET_HEADER.GenericRoll')}`;
+    if (!rollData.modifiers) rollData.modifiers = this.getRollModifiers();
+    const roller = new BRRollHandler({
+      actor: this,
+      dice: [],
+      maxPush: this.maxPush,
+      ...rollData,
+    }, {
+      unlimitedPush: this.flags.bladerunner?.unlimitedPush,
+      ...options,
+    });
+    return roller.render(true);
+  }
+
+  /* ------------------------------------------ */
+  /*  Roll Methods for Characters               */
   /* ------------------------------------------ */
 
   /**
@@ -204,20 +495,19 @@ export default class BladeRunnerActor extends Actor {
    * @param {?string}  skillkey       The identifier for the skill
    * @param {Object}  [options={}]    Additional options
    * @param {string}  [options.title] Custom title
-   * @returns {BRRollHandler} Rendered RollHandler FormApplication
+   * @returns {Promise.<BRRollHandler>} Rendered RollHandler FormApplication
    */
-  rollStat(attributeKey, skillKey, options = {}) {
+  async rollStat(attributeKey, skillKey, options = {}) {
     if (!attributeKey) {
-      return this.rollBlank(options);
+      return this.roll(null, options);
     }
     const attributeName = game.i18n.localize(`FLBR.ATTRIBUTE.${attributeKey.toUpperCase()}`);
     const skillName = skillKey ? game.i18n.localize(`FLBR.SKILL.${skillKey.capitalize()}`) : null;
 
-    // ? const title = options.title ?? skillName ?? attributeName;
-    let title;
+    let title = `${this.name}: `;
     if (options.title) title = options.title;
-    else if (skillName) title = `${skillName} (${attributeName})`;
-    else title = attributeName;
+    else if (skillName) title += `${skillName} (${attributeName})`;
+    else title += attributeName;
 
     const attributeValue = this.getAttribute(attributeKey);
     const skillValue = this.getSkill(skillKey);
@@ -249,29 +539,8 @@ export default class BladeRunnerActor extends Actor {
   /* ------------------------------------------ */
 
   /**
-   * Performs a roll from an empty dice pool.
-   * @param {Object} [options]       Additional options for the roll
-   * @param {string} [options.title] A custom title for the roll if you don't want to use the default
-   * @returns {BRRollHandler} Rendered RollHandler FormApplication
-   */
-  rollBlank(options = {}) {
-    return BRRollHandler.create({
-      title: options.title ?? game.i18n.localize('FLBR.SHEET_HEADER.GenericRoll'),
-      actor: this,
-      dice: [],
-      modifiers: this.getRollModifiers(),
-      maxPush: this.maxPush,
-    }, {
-      unlimitedPush: this.flags.bladerunner?.unlimitedPush,
-    });
-  }
-
-  /* ------------------------------------------ */
-
-  /**
    * Rolls the actor's empathy and marks a permanent loss in resolve if a bane was rolled.
-   * @returns {number} Quantity of resolve permanently lost, or 0
-   * @async
+   * @returns {Promise.<number>} Quantity of resolve permanently lost, or 0
    */
   async rollResolve() {
     const title = game.i18n.localize('FLBR.ROLLER.ResolveTest');
@@ -297,7 +566,7 @@ export default class BladeRunnerActor extends Actor {
       }), {
         permanent: true,
       });
-      let loss = +this.resolve.permanentLoss;
+      let loss = +this.system.resolve.permanentLoss;
       loss--;
       await this.update({ 'system.resolve.permanentLoss': loss });
       return loss;
@@ -306,15 +575,72 @@ export default class BladeRunnerActor extends Actor {
   }
 
   /* ------------------------------------------ */
+  /*  Roll Methods for Vehicles                 */
+  /* ------------------------------------------ */
+
+  /**
+   * Rolls a ramming attack with an actor of this vehicle.
+   */
+  async rollRamming() {
+    if (!this.isVehicle) return;
+
+    const actor = await this.crew.choose();
+    if (!actor) return;
+
+    const driving = FLBR.vehicleSkill;
+    const hullDamage = Math.ceil(this.system.hull.max / 2);
+
+    return this.roll({
+      title: `${this.name} | ${actor.name}: `
+        + `${game.i18n.localize('FLBR.VEHICLE.Action.Ramming')} `
+        + `(${game.i18n.localize(`FLBR.SKILL.${driving.capitalize()}`)})`,
+      actor: actor,
+      attributeKey: FLBR.vehicleAttribute,
+      skillKey: driving,
+      dice: [this.system.maneuverability, actor.skills[driving]?.value],
+      modifiers: [...this.getRollModifiers(), ...actor.getRollModifiers()],
+      maxPush: actor.maxPush,
+    }, {
+      damage: hullDamage,
+      damageType: DAMAGE_TYPES.CRUSHING,
+      crit: Math.max(12, hullDamage * 2),
+      unlimitedPush: this.flags.bladerunner?.unlimitedPush || actor.flags.bladerunner?.unlimitedPush,
+    });
+  }
+
+  /* ------------------------------------------ */
+  /*  Methods for Damage Control                */
+  /* ------------------------------------------ */
 
   /**
    * Applies damage to one capacity of the actor (usually health).
-   * @param {number}  damage             Quantity of damage
-   * @param {string} [capacity='health'] Capacity to damage
-   * @returns {BladeRunnerActor} this
-   * @async
+   * @param {number}   damage               Quantity of damage
+   * @param {Object}  [options]             Additional options
+   * @param {string}  [options.capacity]    Capacity to damage
+   * @param {boolean} [options.ignoreArmor] Whether to ignore the armor roll
+   * @returns {Promise.<this>}
    */
-  async applyDamage(damage, capacity = 'health') {
+  async applyDamage(damage, { capacity, ignoreArmor } = {}) {
+    if (!capacity) {
+      switch (this.type) {
+        case ACTOR_TYPES.CHAR: capacity = 'health'; break;
+        case ACTOR_TYPES.VEHICLE: capacity = 'hull'; break;
+        default: return this;
+      }
+    }
+    return this._applyDamage(damage, capacity, ignoreArmor);
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * @see {BladeRunnerActor.applyDamage}
+   * @param {number}   damage
+   * @param {string}   capacity
+   * @param {boolean} [ignoreArmor=false]
+   * @returns {Promise.<this>}
+   */
+  async _applyDamage(damage, capacity, ignoreArmor = false) {
     if (damage <= 0) return;
     if (!(capacity in this.system)) {
       throw new Error(`FLBR | BladeRunnerActor.applyDamage → Non-existent capacity "${capacity}"`);
@@ -322,17 +648,9 @@ export default class BladeRunnerActor extends Actor {
 
     const initialDamage = damage;
 
-    // Rolls all armors, if any, and reduces damage, if success(es) were obtained.
-    let armorAblation = 0;
-    /** @type {Array.<import('@item/item-document').default>} */
-    const armors = this.itemTypes[ITEM_TYPES.ARMOR]
-      .filter(i => i.qty > 0);
-    for (const armor of armors) {
-      const rollMessage = await armor.roll();
-      armorAblation += rollMessage?.rolls[0]?.successCount ?? 0;
-    };
-
-    damage -= armorAblation;
+    if (!ignoreArmor && this.armored) {
+      damage -= await this.getArmorAblation();
+    }
 
     if (damage > 0) {
       const max = this.system[capacity].max;
@@ -350,8 +668,9 @@ export default class BladeRunnerActor extends Actor {
       initialDamage,
       damage,
       deflectedDamage: initialDamage - damage,
-      armored: !!armors.length,
+      armored: this.armored,
       broken: this.isBroken,
+      vroom: this.isVehicle,
       config: CONFIG.BLADE_RUNNER,
     });
     const chatData = {
@@ -364,5 +683,279 @@ export default class BladeRunnerActor extends Actor {
     await ChatMessage.create(chatData);
 
     return this;
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * Rolls the actor's armor and returns the ablation value.
+   * @returns {Promise.<number>}
+   */
+  async getArmorAblation() {
+    let armorAblation = 0;
+
+    // For characters:
+    if (this.type === ACTOR_TYPES.CHAR) {
+      // Rolls all armors, if any, and reduces damage, if success(es) were obtained.
+      /** @type {Array.<import('@item/item-document').default>} */
+      const armors = this.itemTypes[ITEM_TYPES.ARMOR].filter(i => i.qty > 0);
+      for (const armor of armors) {
+        const rollMessage = await armor.roll();
+        if (rollMessage) {
+          if (game.dice3d && game.dice3d.isEnabled()) await game.dice3d.waitFor3DAnimationByMessageID(rollMessage.id);
+          armorAblation += rollMessage.rolls[0].successCount ?? 0;
+        }
+      };
+    }
+    // For vehicles:
+    else if (this.type === ACTOR_TYPES.VEHICLE) {
+      const armorRoll = Roll.create(`2d${this.system.armor}p0`, {}, {
+        name: `${this.name}: ${game.i18n.localize('FLBR.ItemArmor')}`,
+        yzur: true,
+      });
+      await armorRoll.roll({ async: true });
+      const armorRollMessage = await armorRoll.toMessage();
+      if (game.dice3d && game.dice3d.isEnabled()) await game.dice3d.waitFor3DAnimationByMessageID(armorRollMessage.id);
+      armorAblation = armorRoll.successCount;
+    }
+    return armorAblation;
+  }
+
+  /* ------------------------------------------ */
+  /*  Vehicle Crashes & Explosions              */
+  /* ------------------------------------------ */
+
+  /**
+   * Crashes the vehicle, inflicting damage to the crew.
+   * @param {boolean} [massive=false] Whether the crash is massive (more damage)
+   * @returns {Promise.<this>} The crashed vehicle Actor
+   */
+  async crashVehicle(massive = false) {
+    if (!this.isVehicle) return;
+
+    let formula = massive ? FLBR.vehicleMassiveCrashDamage : FLBR.vehicleCrashDamage;
+
+    const toCrash = await Dialog.confirm({
+      title: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}`,
+      content: game.i18n.format('FLBR.VEHICLE.Action.CrashDialog', {
+        damage: `<code>${formula}</code>`,
+      }),
+    });
+    if (!toCrash) return;
+
+    // Rolls the vehicle's armor ablation.
+    const armorAblation = this.armored ? await this.getArmorAblation() : 0;
+
+    // Rolls the quantity of crash damage.
+    const rollData = this.rollData;
+    rollData.armor = armorAblation;
+    formula += ' - @armor';
+    const crashDamageRoll = Roll.create(formula, rollData, {
+      name: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}`,
+    });
+    await crashDamageRoll.roll({ async: true });
+    const crashDamageRollMessage = await crashDamageRoll.toMessage({
+      flavor: `${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}: ${formula}`,
+    });
+    if (game.dice3d && game.dice3d.isEnabled()) {
+      await game.dice3d.waitFor3DAnimationByMessageID(crashDamageRollMessage.id);
+    }
+    const crashDamage = crashDamageRoll.total;
+
+    // Inflicts crash damage to each passenger.
+    if (crashDamage > 0 && game.settings.get(SYSTEM_ID, SETTINGS_KEYS.AUTO_APPLY_DAMAGE)) {
+      for (const passenger of this.crew) {
+        const attributeKey = ATTRIBUTES.AGILITY;
+        const skillKey = SKILLS.MOBILITY;
+        const mitigationRoll = await BRRollHandler.waitForRoll({
+          title: `${this.name} | ${passenger.name}: Crash Damage Mitigation (MOBILITY)`,
+          actor: passenger,
+          attributeKey, skillKey,
+          dice: [passenger.attributes[attributeKey].value, passenger.skills[skillKey].value],
+          modifiers: [...passenger.getRollModifiers()],
+          maxPush: 0,
+        }, {
+          disabledPush: true,
+        }).catch(err => console.warn(err));
+
+        const mitigation = mitigationRoll?.successCount || 0;
+        await passenger.applyDamage(crashDamage - mitigation, { ignoreArmor: true });
+      }
+    }
+
+    // Crashes the vehicle.
+    await this.kill();
+    return this;
+  }
+
+  /* ------------------------------------------ */
+
+  /**
+   * Explodes the vehicle, inflicting damage to the crew.
+   * @returns {Promise.<this>} The exploded vehicle Actor
+   */
+  async explodeVehicle() {
+    if (!this.isVehicle) return;
+
+    const toExplode = await Dialog.confirm({
+      title: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Explode')}`,
+      content: game.i18n.localize('FLBR.VEHICLE.Action.ExplodeHint'),
+    });
+    if (!toExplode) return;
+
+    const blastPower = FLBR.vehicleExplosionBlastPower;
+    const blast = FLBR.blastPowerMap[FLBR.vehicleExplosionBlastPower];
+
+    /** @type {import('yzur').YearZeroRoll} */
+    const damageType = DAMAGE_TYPES.PIERCING;
+    const blastRoll = Roll.create(`2d${blastPower}p0`, {}, {
+      damage: blast.damage,
+      damageType,
+      damageTypeName: game.i18n.localize(FLBR.damageTypes[damageType]),
+      crit: blast.crit,
+      yzur: true,
+    });
+    await blastRoll.roll({ async: true });
+    const blastRollMessage = await blastRoll.toMessage({
+      flavor: game.i18n.localize('FLBR.VEHICLE.Action.Explode'),
+    });
+    if (game.dice3d && game.dice3d.isEnabled()) await game.dice3d.waitFor3DAnimationByMessageID(blastRollMessage.id);
+
+    // Inflicts blast damage to each passenger.
+    if (blastRoll.successCount > 0 && game.settings.get(SYSTEM_ID, SETTINGS_KEYS.AUTO_APPLY_DAMAGE)) {
+      const damage = blast.damage + (blastRoll.successCount - 1) + 1;
+      for (const passenger of this.crew) {
+        await passenger.applyDamage(damage);
+      }
+    }
+
+    // Explodes the vehicle.
+    await this.kill();
+    return this;
+  }
+
+  /* ------------------------------------------ */
+  /*  Critics                                   */
+  /* ------------------------------------------ */
+
+  /**
+   * Draws a critical injury for this character and adds it to their inventory.
+   * @param {DAMAGE_TYPES} [damageType=1] Basically, from which table to draw
+   * @param {number}       [severity=1]   How many crits to draw
+   * @param {number}       [critRollFormula]  Crit roll formula
+   * @returns {Promise.<Item|string>} The created crit in the actor
+   *   or the text of the vehicle damage
+   */
+  async drawCrit(damageType = DAMAGE_TYPES.CRUSHING, severity, critRollFormula) {
+    switch (this.type) {
+      case ACTOR_TYPES.CHAR: return this._drawCritForCharacter(damageType, severity, critRollFormula);
+      case ACTOR_TYPES.VEHICLE: return this._drawCritForVehicle(severity, critRollFormula);
+    }
+  }
+
+  /* ------------------------------------------ */
+
+  /** @returns {Promise.<Item>} */
+  async _drawCritForCharacter(damageType, severity, critRollFormula) {
+    if (this.type !== ACTOR_TYPES.CHAR) return;
+
+    const index = damageType - DAMAGE_TYPES.CRUSHING;
+    const tableIds = [
+      game.settings.get(SYSTEM_ID, SETTINGS_KEYS.CRUSHING_TABLE),
+      game.settings.get(SYSTEM_ID, SETTINGS_KEYS.PIERCING_TABLE),
+    ];
+
+    let tables = tableIds.map(id => getTable(id)).filter(Boolean);
+
+    if (!tables.length || index > tables.length - 1) tables = game.tables.contents;
+
+    const { results } = await BladeRunnerDialog.drawTable(tables, {
+      title: `${this.name}: ${game.i18n.localize('FLBR.CRIT.DrawCrit')}`,
+      defaultSelected: tableIds[index],
+      disableSelection: !game.user.isGM,
+      disableFormula: !game.user.isGM,
+      formula: critRollFormula,
+      qty: severity,
+    });
+
+    const itemId = await BladeRunnerDialog.choose(
+      results
+        .sort((a, b) => b.range[0] - a.range[0])
+        .map(r => [r.documentId, `${r.text} (${r.range[0]})`]),
+      `${this.name}: ${game.i18n.localize('FLBR.CRIT.ChooseCrit')}`,
+      { icon: 'fa-solid fa-burst' },
+    );
+
+    const item = game.items.get(itemId);
+    const [crit] = await this.createEmbeddedDocuments('Item', [item]);
+
+    // Creates a chat message.
+    const template = `systems/${SYSTEM_ID}/templates/actor/actor-crit-chatcard.hbs`;
+    const resultText = await TextEditor.enrichHTML(
+      game.i18n.format('FLBR.CHAT.CritInflicted', {
+        name: `<b>${this.name}</b>`,
+        crit: `@UUID[${crit.uuid}]`,
+      }));
+    const content = await renderTemplate(template, {
+      img: crit.img,
+      result: resultText,
+    });
+    const chatData = {
+      content,
+      speaker: ChatMessage.getSpeaker({ actor: this, token: this.token, scene: canvas.scene }),
+      user: game.user.id,
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get('core', 'rollMode'));
+    await ChatMessage.create(chatData);
+
+    return crit;
+  }
+
+  /* ------------------------------------------ */
+
+  /** @returns {Promise.<string>} */
+  async _drawCritForVehicle(severity, critRollFormula) {
+    if (!this.isVehicle) return;
+
+    const id = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.CRASH_TABLE);
+    const table = getTable(id);
+    let tables = [];
+    if (table) tables.push(table);
+    else tables = game.tables.contents;
+
+    const { results } = await BladeRunnerDialog.drawTable(tables, {
+      title: `${this.name}: ${game.i18n.localize('FLBR.CRIT.DrawVehicleDamage')}`,
+      defaultSelected: tables[0].id,
+      disableSelection: !game.user.isGM,
+      disableFormula: !game.user.isGM,
+      formula: critRollFormula,
+      qty: severity,
+    });
+
+    const resultIndex = await BladeRunnerDialog.choose(
+      results
+        .sort((a, b) => b.range[0] - a.range[0])
+        .map((r, i) => {
+          const title = r.text.split(':')[0];
+          return [i, `${title} (${r.range[0]})`];
+        }),
+      `${this.name}: ${game.i18n.localize('FLBR.CRIT.ChooseVehicleDamage')}`,
+      { icon: 'fa-solid fa-car-burst' },
+    );
+
+    const result = results[resultIndex];
+
+    // Creates a chat message.
+    const template = `systems/${SYSTEM_ID}/templates/actor/actor-crit-chatcard.hbs`;
+    const text = await TextEditor.enrichHTML(result.text, { async: true });
+    const chatData = {
+      content: await renderTemplate(template, { img: result.img, result: text }),
+      speaker: ChatMessage.getSpeaker({ actor: this, token: this.token, scene: canvas.scene }),
+      user: game.user.id,
+    };
+    ChatMessage.applyRollMode(chatData, game.settings.get('core', 'rollMode'));
+    await ChatMessage.create(chatData);
+
+    return result.text;
   }
 }

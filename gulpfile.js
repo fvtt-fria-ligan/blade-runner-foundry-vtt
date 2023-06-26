@@ -31,7 +31,6 @@ const stdio = 'inherit';
 
 /**
  * Builds the distributable JavaScript code.
- * @async
  */
 async function buildSource({ watch } = {}) {
   await esBuild({ production, watch });
@@ -41,7 +40,6 @@ async function buildSource({ watch } = {}) {
 
 /**
  * Copies all template files.
- * @async
  */
 async function pipeTemplates() {
   const templateFiles = await fs.glob([`${sourceDirectory}/**/*.${templateExt}`]);
@@ -59,7 +57,6 @@ async function pipeTemplates() {
 
 /**
  * Creates the JSON translation files, from the Yaml ones.
- * @async
  */
 async function pipeTranslations() {
   gulp
@@ -72,7 +69,6 @@ async function pipeTranslations() {
 
 /**
  * Copies other source files.
- * @async
  */
 async function pipeStatics() {
   for (const file of staticFiles) {
@@ -106,7 +102,6 @@ function buildWatch() {
 
 /**
  * Removes built files from `dist` folder while ignoring source files.
- * @async
  */
 async function cleanDist() {
   if (fs.existsSync('./dist')) await fs.remove('./dist');
@@ -151,7 +146,6 @@ function getTargetVersion(currentVersion, release) {
 
 /**
  * Makes a changelog.
- * @async
  */
 async function changelog() {
   await execa('npx', ['standard-version', '--skip.bump', '--skip.tag', '--skip.commit'], { stdio });
@@ -159,7 +153,6 @@ async function changelog() {
 
 /**
  * Commits and pushes release to Github Upstream.
- * @async
  */
 async function commitTagPush() {
   const { version } = packageJson;
@@ -180,7 +173,6 @@ async function commitTagPush() {
  * @throws {Error} When missing release type
  * @throws {Error} When incorrect version arguments
  * @throws {Error} When target version is identical to current version
- * @async
  */
 async function bumpVersion(cb) {
   const manifest = getManifest();

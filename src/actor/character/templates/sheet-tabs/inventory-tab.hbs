@@ -9,7 +9,8 @@
 				<h3>{{localize "FLBR.HEADER.SignatureItem"}}</h3>
 				<div class="flex row">
 					<input type="text" name="system.signatureItem.name" value="{{system.signatureItem.name}}" class="flex-1"/>
-					<input type="checkbox" name="system.signatureItem.used" data-tooltip="{{localize "FLBR.SignatureItemUsedCheckboxHint"}}" {{checked system.signatureItem.used}}/>
+						<input type="checkbox" name="system.signatureItem.used" data-tooltip="{{localize "FLBR.SignatureItemUsedCheckboxHint"}}" {{checked system.signatureItem.used}}/>
+					</label>
 				</div>
 			</div>
 		</div>
@@ -17,7 +18,7 @@
 
 	<div class="inventory boxed-property">
 		<h3>{{localize "FLBR.HEADER.Inventory"}}{{createNewItemButton "generic"}}</h3>
-	{{> systems/blade-runner/templates/actor/character/inventory-partial.hbs items=actor.itemTypes.generic wrap=true}}
+	{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=actor.itemTypes.generic wrap=true}}
 	</div>
 
 	{{#if isPC}}
