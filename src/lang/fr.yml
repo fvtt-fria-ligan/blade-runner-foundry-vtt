@@ -194,7 +194,7 @@ FLBR.WEAPON_RANGE.Short: Court
 FLBR.WEAPON_RANGE.Medium: Moyen
 FLBR.WEAPON_RANGE.Long: Long
 FLBR.YouAreBroken: Tu es brisé !
-FLBR.ActorSheet.NotifWrongItemType: L'acteur {actor} ne peut pas contenir d'objets de {type} !
+FLBR.ActorSheet.NotifWrongItemType: L'acteur {actor} ne peut pas contenir d'objets de type {type} !
 YZUR.CHAT.ROLL.Infos: Infos
 YZUR.CHAT.ROLL.Damage: Dégats de base
 YZUR.CHAT.ROLL.Push: Pousser
@@ -327,3 +327,4 @@ FLBR.VEHICLE.NotifDropCrewVehicle: Les inceptions de véhicules ne sont pas auto
 SETTINGS.BLADE_RUNNER.UseActiveEffectsHint: Montrer un champ additionnel dans les feuilles pour gérer les effets (pour utilisateur avancé).
 FLBR.VEHICLE.Action.RepairHint: Réparer les dégâts d'un véhicule requiert un ou plusieurs lancers de TECHNOLOGIE. Un seul lancer peut être tenté par Shift. Une seule personne peut tenter la réparation, mais les autres peuvent aider. Chaque <span class="blade-runner-symbols">S</span> obtenu retire 1 point de dégât. Si le véhicule était démoli, il ne l'est plus dès lors qu'un point de dégâts a été réparé. Si le moteur ou une arme montée a été endommagé lors d'un coup critique, le réparer requiert typiquement un lancer de TECHNOLOGIE, en supplément des lancers pour réparer les dégâts de la coque. Ce travail dure un Shift.
 FLBR.VEHICLE.Action.RammingHint: La plupart des véhicules peuvent être utilisés comme une arme – ex. rouler sur votre cible. Cela compte comme une attaque au combat rapproché mais lancez CONDUITE au lieu de COMBAT RAPPROCHÉ. Ce lancer peut être combiné avec l'action d'accélérer, mais dans ce cas le lancer de CONDUITE devient un jet opposé, signifiant que l'efficacité de l'accélération peut être réduite. Les dégâts de base de l'attaque sont égaux à la valeur de la coque du véhicule divisée par deux, arrondie au supérieur. Percuter avec un véhicule inflige des dégâts écrasants avec un dé critique de taille égale à la valeur de la coque, arrondie au dé le plus proche de taille supérieure, jusqu'au maximum D12 – ex. un véhicule avec une coque 9 a un dé critique de D10.
+TYPES.Actor.loot: Pile d'objets
