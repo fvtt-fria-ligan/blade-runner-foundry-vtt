@@ -167,7 +167,7 @@ FLBR.Disadvantage: Nachteil
 FLBR.InjuryCategory: Kategorie
 FLBR.InjuryDeathSave: Rettungswurf
 FLBR.InjuryHealing: Heilung
-FLBR.InjuryLethal: Tödlich
+FLBR.InjuryLethal: Toedlich
 FLBR.InjuryPermanent: Permanent
 FLBR.InventoryNoItem: Leer.
 FLBR.ItemAddAction: Aktion hinzufügen
@@ -181,12 +181,12 @@ FLBR.ItemActionTypeRollSkill: Fertigkeits-Wurf
 FLBR.ItemActionTypeRunMacro: Starte Macro
 FLBR.ItemAttackName: Angriffs-Name
 FLBR.ItemArmor: Panzerung
-FLBR.ITEM_AVAILABILITY.Incidental: Zufälllig
-FLBR.ITEM_AVAILABILITY.Luxury: Luxuriös
+FLBR.ITEM_AVAILABILITY.Incidental: Zufaelllig
+FLBR.ITEM_AVAILABILITY.Luxury: Luxurioes
 FLBR.ITEM_AVAILABILITY.Premium: Premium
 FLBR.ITEM_AVAILABILITY.Rare: Selten
 FLBR.ITEM_AVAILABILITY.Standard: Standard
-FLBR.ItemAvailability: Verfügbarkeit
+FLBR.ItemAvailability: Verfuegbarkeit
 FLBR.ItemConsumable: Verbrauchsgut
 FLBR.ItemConsumeNotif: '{qty} Eineiten von {name} wurden verbraucht'
 FLBR.ItemCost: Kosten
