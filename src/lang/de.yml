@@ -15,7 +15,7 @@ FLBR.SKILL.MedicalAid: Medizinische Hilfe
 FLBR.SKILL.Observation: Beobachtung
 FLBR.SKILL.Tech: Technologie
 FLBR.SKILL.Connections: Kontakte
-FLBR.SKILL.Insight: Menchenkenntnis
+FLBR.SKILL.Insight: Menschenkenntnis
 FLBR.SKILL.Manipulation: Manipulation
 FLBR.SKILL.Driving: Fahrkunst
 FLBR.NATURE.Human: Mensch
@@ -42,7 +42,7 @@ FLBR.COMBAT_ACTION.UseItem: Objekt benutzen
 FLBR.COMBAT_ACTION_HINT.Sprint: >-
   Du kannst in einer einzigen Runde zusätzliche Bewegungs-Aktionen 
   durchführen, indem du die Sprint-Aktion verwendest. Dies zählt dann 
-  als deine Aktion für die Runde, was bedeutet, dass du keine andere 
+  als deine Aktion für diese Runde, was bedeutet, dass du keine andere 
   Aktion ausführen kannst. Würfle <span class="smallcaps">BEWEGLICHKEIT</span> 
   - für jedes gewürfelte <span class="blade-runner-symbols">S</span> kannst 
   du zusätzlich zu deiner freien Bewegung eine weitere Bewegung machen. 
@@ -91,19 +91,19 @@ FLBR.HEADER.Actions: Aktionen
 FLBR.HEADER.Appearance: Aussehen
 FLBR.HEADER.Armor: Panzerung
 FLBR.HEADER.Attacks: Angriffs-Arten
-FLBR.HEADER.AttributesAndSkills: Attribute & Fähigkeiten
+FLBR.HEADER.AttributesAndSkills: Attribute & Fertigkeiten
 FLBR.HEADER.Augments: Augmentierungen
-FLBR.HEADER.ChinyenPoints: Chinyen Punkte
+FLBR.HEADER.ChinyenPoints: Chinyen-Punkte
 FLBR.HEADER.DieSize: Basis-Würfel
 FLBR.HEADER.FavoredGear: Bevorzugte Ausrüstung
 FLBR.HEADER.Health: Leben
-FLBR.HEADER.Home: Zuhause
+FLBR.HEADER.Home: Wohnung
 FLBR.HEADER.HumanityPoints: Menschlichkeits-Punkte
 FLBR.HEADER.Injuries: Verletzungen
 FLBR.HEADER.Inventory: Ausrüstung
 FLBR.HEADER.Notes: Notizen
 FLBR.HEADER.Modifiers: Modifikatoren
-FLBR.HEADER.PromotionPoints: Auszeichnungs-Punkte
+FLBR.HEADER.PromotionPoints: Beförderungs-Punkte
 FLBR.HEADER.Resolve: Entschlossenheit
 FLBR.HEADER.SignatureItem: Persönlicher Gegenstand
 FLBR.HEADER.Specialties: Spezialisierungen
@@ -274,8 +274,8 @@ TYPES.Item.injury: Verletzung
 GAME.Paused: Ermittlung pausiert
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatisch Schaden zuweisen
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Bestimmt, ob Schaden auf ausgewählte Ziele automatisch zugewiesen werden soll.
-SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatischer Panzerungs Wurf
-SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Bestimmt, ob aurtomatisch auf Panzerung gewürfelt werden soll.
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatischer Panzerungs-Wurf
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Bestimmt, ob automatisch auf Panzerung gewürfelt werden soll.
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Zeige ersten Waffen Angriff
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Bestimmt, ob bei der Anzeige eines Waffen-Objekts automatisch der erste Waffen-Angriff des Objektes ausgeklappt dargestellt werden soll.
 WARNING.ApplyDamageNoNature: 'Zuweisung des Strapazierungs-Schadens: Figur-Abstammung nicht gefunden!'
