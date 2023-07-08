@@ -8,7 +8,7 @@ FLBR.Skills: Fertigkeiten
 FLBR.SKILL.CloseCombat: Nahkampf
 FLBR.SKILL.Force: Kraft
 FLBR.SKILL.Stamina: Ausdauer
-FLBR.SKILL.Firearms: Feuerwaffen
+FLBR.SKILL.Firearms: Schusswaffen
 FLBR.SKILL.Mobility: Beweglichkeit
 FLBR.SKILL.Stealth: Heimlichkeit
 FLBR.SKILL.MedicalAid: Medizinische Hilfe
@@ -65,7 +65,7 @@ FLBR.COMBAT_ACTION_HINT.Grapple: >-
   funktioniert wie ein normaler unbewaffneter Angriff, aber dein Ziel gilt als 
   gefesselt und kann sich daher nicht verteidigen.
 FLBR.COMBAT_ACTION_HINT.BreakFree: Stärke + Nahkampf
-FLBR.COMBAT_ACTION_HINT.ShootFirearm: Geschicklichkeit + Feuerwaffen
+FLBR.COMBAT_ACTION_HINT.ShootFirearm: Geschicklichkeit + Schusswaffen
 FLBR.COMBAT_ACTION_HINT.CarefulAim: >-
   Wenn du dir die Zeit nimmst, sorgfältig zu zielen, bevor du den Abzug drückst, 
   erhältst du einen Vorteil für deinen Angriffswurf. Zielen ist jedoch eine 
@@ -74,7 +74,7 @@ FLBR.COMBAT_ACTION_HINT.CarefulAim: >-
   abzufeuern, oder wenn du von einem Angriff getroffen wirst, verlierst du den 
   Effekt des Zielens und du musst eine weitere Aktion ausgeben, um erneut sorgfältig 
   zu zielen.
-FLBR.COMBAT_ACTION_HINT.ThrowWeapon: Geschicklichkeit + Feuerwaffen
+FLBR.COMBAT_ACTION_HINT.ThrowWeapon: Geschicklichkeit + Schusswaffen
 FLBR.COMBAT_ACTION_HINT.FirstAid: Intelligenz + Medizinische Hilfe
 FLBR.COMBAT_ACTION_HINT.Manipulate: Empathie + Manipulation
 FLBR.COMBAT_ACTION_HINT.UseItem: Objekt benutzen
@@ -96,7 +96,7 @@ FLBR.HEADER.Augments: Augmentierungen
 FLBR.HEADER.ChinyenPoints: Chinyen-Punkte
 FLBR.HEADER.DieSize: Basis-Würfel
 FLBR.HEADER.FavoredGear: Bevorzugte Ausrüstung
-FLBR.HEADER.Health: Leben
+FLBR.HEADER.Health: Gesundheit
 FLBR.HEADER.Home: Wohnung
 FLBR.HEADER.HumanityPoints: Menschlichkeits-Punkte
 FLBR.HEADER.Injuries: Verletzungen
@@ -109,17 +109,17 @@ FLBR.HEADER.SignatureItem: Persönlicher Gegenstand
 FLBR.HEADER.Specialties: Spezialisierungen
 FLBR.HEADER.KeyMemory: Schlüssel-Erinnerung
 FLBR.HEADER.KeyRelationship: Schlüssel-Beziehung
-FLBR.HEADER.Rating: Wertung
+FLBR.HEADER.Rating: Stufe
 FLBR.HEADER.YearsOnTheForce: Dienstjahre
-FLBR.HEADER.Weapons: Waffe
+FLBR.HEADER.Weapons: Waffen
 FLBR.SHEET_CONFIG.CharacterSubtype: Unterklasse
 FLBR.SHEET_CONFIG.CharacterSubtypeHint: >-
   Wähle aus, ob es sich um einen SC oder einen NSC handelt. Letzterer bietet einen
   verkleinerten Charakterbogen mit zusätzlichen Funktionen für die SL, um NSCs 
   einfacher zu verwalten.
-FLBR.SHEET_CONFIG.HealthMaxModifier: Leben (Bonus)
+FLBR.SHEET_CONFIG.HealthMaxModifier: Gesundheit (Bonus)
 FLBR.SHEET_CONFIG.HealthMaxModifierHint: Anzahl der zusätzlichen maximalen Lebenspunkte (nur SL).
-FLBR.SHEET_CONFIG.HealthPermanentLoss: Leben (Malus)
+FLBR.SHEET_CONFIG.HealthPermanentLoss: Gesundheit (Malus)
 FLBR.SHEET_CONFIG.HealthPermanentLossHint: Anzahl der reduzierten maximalen Lebenspunkte (nur SL).
 FLBR.SHEET_CONFIG.ResolveMaxModifier: Entschlossenheit (Bonus)
 FLBR.SHEET_CONFIG.ResolveMaxModifierHint: Anzahl der zusätzlichen maximalen Entschlossenheitspunkte (nur SL).
@@ -148,7 +148,7 @@ FLBR.TAB.Stats: Werte
 FLBR.D: D
 FLBR.NO_VALUE: –
 FLBR.Advantage: Vorteil
-FLBR.Capacities: Leben und Entschlossenheit
+FLBR.Capacities: Gesundheit und Entschlossenheit
 FLBR.Blast: Explosion
 FLBR.BlastPower: Sprengkraft
 FLBR.Broken: GEBROCHEN
