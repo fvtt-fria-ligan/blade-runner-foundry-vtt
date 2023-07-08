@@ -13,7 +13,7 @@
     // "min-core-version": "9.0.0", //optional, inclusive
     // "max-core-version": "10.0.0", //optional, exclusive
     "min-sys-version": "10.0.1", //optional, inclusive
-    // "max-sys-version": "11.0.0", //optional, exclusive
+    "max-sys-version": "10.1.0", //optional, exclusive
     "type": "chat", // Type of message: [prompt, chat]
     "display": "once", // Time until it goes away: [once, infinite, mm.dd.yyyy]
     "title": "Patch 10.0.1 (2022-11-29)",
@@ -23,10 +23,30 @@
     // "min-core-version": "9.0.0", //optional, inclusive
     // "max-core-version": "10.0.0", //optional, exclusive
     "min-sys-version": "10.0.2", //optional, inclusive
-    // "max-sys-version": "11.0.0", //optional, exclusive
+    "max-sys-version": "10.1.0", //optional, exclusive
     "type": "chat", // Type of message: [prompt, chat]
     "display": "once", // Time until it goes away: [once, infinite, mm.dd.yyyy]
     "title": "Patch 10.0.2 (2022-12-05)",
     "content": "<h4>Added</h4><ul><li>Dice choice when pushing</li><li>Health & Resolve option for modifiers in the item sheet (the character's capacities are automatically updated accordingly)</li></ul><h4>Fixed</h4><ul><li>Display the \"roll item\" button in the sheet header only when needed</li><li>An error when rolling two dice of the same size with disadvantage</li><li>Some French translations being too long</li><li>Some text color styles</li></ul>"
+  },
+  {
+    // "min-core-version": "9.0.0", //optional, inclusive
+    // "max-core-version": "10.0.0", //optional, exclusive
+    "min-sys-version": "10.1.0", //optional, inclusive
+    "max-sys-version": "12.0.0", //optional, exclusive
+    "type": "chat", // Type of message: [prompt, chat]
+    "display": "once", // Time until it goes away: [once, infinite, mm.dd.yyyy]
+    "title": "Update 10.1.0 (2023-06-26)",
+    "content": "<h4>Added</h4><ul><li>Vehicle sheet</li><li>Items pile sheet</li><li>Draw critical injuries from the roll chat card</li><li>Support for Active Effects</li><li>New game system settings</li><li>New translations: German, Korean and Spanish</li></ul><h4>Changed</h4><ul><li>Better support for custom actor actions</li><li>Minor UI improvements</li></ul><h4>Fixed</h4><ul><li>Issue with default initiative</li><li>Style issue with Minimal UI module</li><li>Minor bug fixes</li></ul>"
+  },
+  {
+    // "min-core-version": "9.0.0", //optional, inclusive
+    // "max-core-version": "10.0.0", //optional, exclusive
+    "min-sys-version": "11.0.0", //optional, inclusive
+    "max-sys-version": "11.1.0", //optional, exclusive
+    "type": "chat", // Type of message: [prompt, chat]
+    "display": "once", // Time until it goes away: [once, infinite, mm.dd.yyyy]
+    "title": "Update 11.0.0 (2023-06-26)",
+    "content": "<h4>Added</h4><ul><li>Compatibility with Foundry V11</li></ul>"
   }
 ]

@@ -1,0 +1,248 @@
+FLBR.ATTRIBUTE.AGI: Agilidad
+FLBR.ATTRIBUTE.EMP: Empatía
+FLBR.ATTRIBUTE.MVR: Maniobrabilidad
+FLBR.Skills: Habilidades
+FLBR.ATTRIBUTE.STR: Fortaleza
+FLBR.SKILL.Force: Fuerza
+FLBR.SKILL.Stamina: Resistencia
+FLBR.SKILL.Firearms: Disparar
+FLBR.SKILL.Mobility: Movilidad
+FLBR.SKILL.Stealth: Sigilo
+FLBR.SKILL.MedicalAid: Primeros Auxilios
+FLBR.SKILL.Tech: Tecnología
+FLBR.SKILL.Connections: Conexiones
+FLBR.SKILL.Insight: Perspicacia
+FLBR.SKILL.Manipulation: Manipulación
+FLBR.SKILL.Driving: Conducción
+FLBR.NATURE.Human: Humano
+FLBR.NATURE.Replicant: Replicante
+FLBR.ARCHETYPE.ANALYST: Analista
+FLBR.ARCHETYPE.CITY_SPEAKER: Informante
+FLBR.COMBAT_ACTION.Sprint: Correr
+FLBR.COMBAT_ACTION.Crawl: Arrastrarrse
+FLBR.COMBAT_ACTION.UnarmedAttack: Ataque desarmado
+FLBR.COMBAT_ACTION.MeleeAttack: Ataque Cuerpo a Cuerpo
+FLBR.COMBAT_ACTION.BreakFree: Liberarse
+FLBR.COMBAT_ACTION.Grapple: Apresar
+FLBR.COMBAT_ACTION.ShootFirearm: Disparar arma
+FLBR.COMBAT_ACTION.CarefulAim: Apuntar
+FLBR.COMBAT_ACTION.FirstAid: Primeros Auxilios
+FLBR.COMBAT_ACTION.Manipulate: Manipular
+FLBR.COMBAT_ACTION.UseItem: Usar objeto
+FLBR.ARCHETYPE.DOXIE: Maleante
+FLBR.ARCHETYPE.SKIMMER: Corrupto
+FLBR.ARCHETYPE.FIXER: Confiable
+FLBR.ARCHETYPE.ENFORCER: Tipo duro
+FLBR.SKILL.CloseCombat: Luchar
+FLBR.COMBAT_ACTION_HINT.Crawl: Si necesitas moverte mientras estás tumbado, debes arrastrarte. Esto funciona igual que moverse, pero cuenta como Acción de la Ronda. Puedes levantarte al final del movimiento como acción gratuita.
+FLBR.COMBAT_ACTION_HINT.UnarmedAttack: Fortaleza + Luchar
+FLBR.COMBAT_ACTION_HINT.MeleeAttack: Fortaleza + Luchar
+FLBR.COMBAT_ACTION_HINT.ShootFirearm: Agilidad + Disparar
+FLBR.COMBAT_ACTION_HINT.ThrowWeapon: Agilidad + Disparar
+FLBR.COMBAT_ACTION_HINT.FirstAid: Inteligencia + Primeros Auxilios
+FLBR.COMBAT_ACTION_HINT.Manipulate: Empatía + Manipulación
+FLBR.COMBAT_ACTION_HINT.UseItem: Usar Objeto
+FLBR.BUTTON.Delete: Eliminar objeto
+FLBR.BUTTON.Edit: Editar objeto
+FLBR.BUTTON.Roll: Hacer tirada
+FLBR.BUTTON.ToChat: Enviar objeto al chat
+FLBR.DIALOG.AssignSuccesses: Asignar éxito(s)
+FLBR.DIALOG.ChooseAction: Elige Acción
+FLBR.DIALOG.ChooseAttack: Elige Ataque
+FLBR.HEADER.Actions: Acciones
+FLBR.HEADER.Appearance: Apariencia
+FLBR.HEADER.Armor: Armadura
+FLBR.HEADER.Attacks: Modos de Ataque
+FLBR.HEADER.AttributesAndSkills: Atributos y Habilidades
+FLBR.HEADER.Augments: Aumentos
+FLBR.HEADER.ChinyenPoints: Chinyens
+FLBR.HEADER.FavoredGear: Equipo Predilecto
+FLBR.HEADER.Home: Hogar
+FLBR.HEADER.Injuries: Heridas
+FLBR.HEADER.Notes: Notas
+FLBR.HEADER.Modifiers: Modificadores
+FLBR.HEADER.Resolve: Resiliencia
+FLBR.HEADER.SignatureItem: Objeto característico
+FLBR.HEADER.Specialties: Especialidades
+FLBR.HEADER.KeyMemory: Recuerdo Clave
+FLBR.HEADER.KeyRelationship: Relación Clave
+FLBR.HEADER.Rating: Índice
+FLBR.HEADER.YearsOnTheForce: Años de Servicio
+FLBR.HEADER.Weapons: Armas
+FLBR.SHEET_CONFIG.HealthMaxModifier: Modificador máx. Salud
+FLBR.SHEET_CONFIG.HealthMaxModifierHint: Modifica la capacidad de salud máxima (Solo Máster).
+FLBR.SHEET_CONFIG.HealthPermanentLoss: Pérdida de Salud permanente
+FLBR.SHEET_CONFIG.HealthPermanentLossHint: Indica cuanta Salud se ha perdido permanentemente (Solo Máster).
+FLBR.SHEET_CONFIG.ResolveMaxModifier: Modificador máx. Resiliencia
+FLBR.SHEET_CONFIG.ResolveMaxModifierHint: Modifica la capacidad máxima de resiliencia (Solo Máster).
+FLBR.SHEET_CONFIG.ResolvePermanentLoss: Pérdida de Resiliencia permanente
+FLBR.SHEET_CONFIG.UnlimitedPush: Permite Forzar Tiradas Ilimitadamente
+FLBR.SHEET_HEADER.ArmorRoll: Hacer tirada de Armadura
+FLBR.SHEET_HEADER.BlastPowerRoll: Hacer tirada de Poder de Detonación
+FLBR.SHEET_HEADER.GenericRoll: Tirada Genérica
+FLBR.TAB.Bio: Biografía
+FLBR.TAB.Info: Info
+FLBR.TAB.Inventory: Inventario
+FLBR.TAB.Features: Características
+FLBR.TAB.Mods: Mods
+FLBR.TAB.Stats: Estadísticas
+FLBR.D: D
+FLBR.Capacities: Salud y Resiliencia
+FLBR.Blast: Detonación
+FLBR.BlastPower: Poder de Detonación
+FLBR.Broken: INCAPACITADO
+FLBR.BrokenByStress: INCAPACITADO POR ESTRÉS
+FLBR.CHAT.NoDamageDealt: '{name} no ha recibido daño.'
+FLBR.CHAT.InitialDamageDealt: El ataque tenía un daño inicial de {damage}.
+FLBR.CHAT.ArmorDeflectedAllDamage: La armadura bloqueó todo el dañó.
+FLBR.CHAT.ArmorNoEffect: La armadura no tuvo efecto.
+FLBR.Disadvantage: Desventaja
+FLBR.InjuryDeathSave: Tirada de Muerte
+FLBR.InjuryHealing: Sanación
+FLBR.InventoryNoItem: Vacío.
+FLBR.ItemAddAttack: Añadir Ataque
+FLBR.ItemAddModifier: Añadir Modificador de tirada
+FLBR.ItemActionAttribute: Atributo
+FLBR.ItemActionName: Nombre de la Acción
+FLBR.ItemActionSkill: Habilidad
+FLBR.ItemActionType: Tipo de Acción
+FLBR.ItemActionTypeRollSkill: Tirada de Habilidad
+FLBR.ItemAttackName: Nombre del Ataque
+FLBR.ItemArmor: Armadura
+FLBR.ITEM_AVAILABILITY.Luxury: Lujoso
+FLBR.ITEM_AVAILABILITY.Premium: Premium
+FLBR.ITEM_AVAILABILITY.Rare: Raro
+FLBR.ITEM_AVAILABILITY.Standard: Estándar
+FLBR.ItemAvailability: Disponibilidad
+FLBR.ItemConsumable: Consumible
+FLBR.ItemCost: Coste
+FLBR.ItemDeleteAction: Eliminar acción
+FLBR.ItemDeleteAttack: Eliminar ataque
+FLBR.ItemDeleteModifier: Eliminar modificador
+FLBR.ItemNewAction: Nueva acción
+FLBR.ItemNewAttack: Nuevo ataque
+FLBR.ItemNoAttack: No se ha definido un modo de ataque.
+FLBR.ItemModifier: Modificador
+FLBR.MACRO.NoActor: No se ha encontrado a tu personaje {actor}.
+FLBR.MACRO.RollAction: Acción {action}
+FLBR.NewItem: Nuevo {type}
+FLBR.OK: OK
+FLBR.Range: Rango
+FLBR.RANGED_COMBAT.OutOfRange: Fuera de rango
+FLBR.RANGED_COMBAT.LargeTarget: Objetivo grande
+FLBR.RANGED_COMBAT.TargetBehindCover: Objetivo tras cobertura
+FLBR.ROLLER.AddDie: Añadir un dado
+FLBR.ROLLER.ModifierName: Nombre
+FLBR.ROLLER.ModifierValue: Valor
+FLBR.ROLLER.TotalModifier: 'Total: {value}'
+FLBR.ROLLER.RollButton: Tirada
+FLBR.ROLLER.RollWithAdvantageButton: Ventaja
+FLBR.ROLLER.RollWithDisadvantageButton: Desventaja
+FLBR.ROLLER.SelectDiceToPush: Selecciona un dado para forzar
+FLBR.ROLLER.UnlimitedPush: Ilimitado
+FLBR.WeaponDamage: Daño
+FLBR.WeaponCrit: Dado Crítico
+FLBR.WeaponDamageType: Tipo de Daño
+FLBR.WEAPON_DAMAGE_TYPE.Crushing: Contundente
+FLBR.WEAPON_DAMAGE_TYPE.Piercing: Perforante
+FLBR.WEAPON_DAMAGE_TYPE.Stress: Estrés
+FLBR.WeaponRange: Rango
+FLBR.WEAPON_RANGE.Short: Corto
+FLBR.WEAPON_RANGE.Medium: Medio
+FLBR.WEAPON_RANGE.Extreme: Extremo
+YZUR.CHAT.ROLL.Infos: Infos
+YZUR.CHAT.ROLL.Damage: Daño Base
+YZUR.CHAT.ROLL.Push: Forzar
+YZUR.DIETERMS.D8BladeRunnerDie: D8
+YZUR.DIETERMS.D10BladeRunnerDie: D10
+YZUR.DIETERMS.D12BladeRunnerDie: D12
+TYPES.Actor.character: Personaje
+ACTOR.SubtypeNpc: Personaje No Jugador
+TYPES.Item.generic: Genérico
+TYPES.Item.upgrade: Aumento
+TYPES.Item.weapon: Arma
+TYPES.Item.specialty: Especialidad
+TYPES.Item.injury: Herida
+GAME.Paused: Investigación en Pausa
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Tirada de Armadura Automática
+WARNING.ApplyDamageNoActorCapacity: 'Infligir Daño de Forzaje: ¡No se ha encontrado Capacidad del Personaje!'
+WARNING.NoDiceInput: ¡No se han seleccionado dados!
+WARNING.ItemActionMacroNotFound: ¡Macro {macro} no encontrada!
+FLBR.Attributes: Atributos
+FLBR.ATTRIBUTE.INT: Inteligencia
+FLBR.SKILL.Observation: Observación
+FLBR.ARCHETYPE.INSPECTOR: Inspector
+FLBR.COMBAT_ACTION.ThrowWeapon: Lanzar arma
+FLBR.COMBAT_ACTION_HINT.Sprint: Puedes realizar desplazamientos adicionales en la Ronda utilizando la acción de correr. Esto contará como tu Maniobra de la Ronda, lo cual implica que no podrás realizar ninguna otra Acción. Haz una tirada de <span class="smallcaps">MOVILIDAD</span> – por cada <span class="blade-runner-symbols">S</span> obtenido,puedes hacer un movimiento más, además de tu movimiento gratuito. Si fallas la tirada, te caerás (antes del segundo movimiento) y no podrás levantarte hasta tu próximo turno.
+FLBR.COMBAT_ACTION_HINT.Grapple: Si apresas a tu oponente como ataque especial al luchar, ambos caéis al suelo. El oponente suelta cualquier arma que llevase en las manos y no puede moverse. La única acción que puede realizar es intentar liberarse – lo cual es una acción que tendrá éxito si el oponente gana una tirada enfrentada de <span class="smallcaps">LUCHAR</span> contra ti. Mientras estás apresando, la única acción que puedes realizar (hasta que liberes a tu oponente) es un ataque de presa. Esto funciona como un ataque cuerpo a cuerpo normal, pero tu oponente contará como retenido y no podrá defenderse.
+FLBR.COMBAT_ACTION_HINT.BreakFree: Fortaleza + Luchar
+FLBR.COMBAT_ACTION_HINT.CarefulAim: Si te tomas tu tiempo para apuntar cuidadosamente antes de apretar el gatillo, obtendrás ventaja en tu tirada de ataque. Apuntar, sin embargo, es una Acción por si misma. No puedes apuntar y disparar en la misma Ronda. Si haces algo aparte de disparar tu arma tras haber apuntad, o si eres golpeado por un ataque, perderás el efecto de apuntar y tendrás que gastar otra acción para volver a apuntar.
+FLBR.CHAT_ACTION.ApplyDamage: Infligir daño a las miniaturas seleccionadas
+FLBR.DIALOG.AssignSuccessesHint: Elige un número de éxitos para gastar contra {name}.
+FLBR.HEADER.DieSize: Dado Base
+FLBR.HEADER.Health: Salud
+FLBR.HEADER.HumanityPoints: Humanidad
+FLBR.HEADER.Inventory: Inventario
+FLBR.HEADER.PromotionPoints: Puntos de Promoción
+FLBR.SHEET_CONFIG.CharacterSubtype: Subtipo
+FLBR.SHEET_CONFIG.CharacterSubtypeHint: Selecciona si es un PJ o un PNJ. El último tiene una ficha de personaje más sencilla y funcionalidad añadida para el Máster.
+FLBR.SHEET_CONFIG.ResolvePermanentLossHint: Indica cuanta Resiliencia se ha perdido permanentemente (Solo Máster).
+FLBR.SHEET_CONFIG.Maneuverability: Maniobrabilidad del Vehículo
+FLBR.SHEET_CONFIG.ManeuverabilityHint: Fija la maniobrabilidad del vehículo conducido por este personaje, si se da el caso.
+FLBR.SHEET_CONFIG.UnlimitedPushHint: Si tu Máster lo permite, puedes realizar un número ilimitado de tiradas forzadas. Marca esta opción para mostrar un botón de Forzar tirada en prácticamente cualquier tirada.
+FLBR.SHEET_HEADER.ItemPost: Publicar Objeto
+FLBR.SHEET_HEADER.ItemRoll: Hacer tirada de Objeto
+FLBR.TAB.Actions: Acciones
+FLBR.TAB.Combat: Combate
+FLBR.Advantage: Ventaja
+FLBR.BrokenByDamage: INCAPACITADO POR DAÑO
+FLBR.Cancel: Cancelar
+FLBR.CHAT.DamageDealt: '{name} sufre {amount} de daño.'
+FLBR.CHAT.ArmorDeflectedDamage: La armadura bloqueó {damage} de daño.
+FLBR.CreateNewItem: Crea un nuevo objeto de tipo {type}
+FLBR.Crit: Crit
+FLBR.InjuryCategory: Categoría
+FLBR.InjuryLethal: Letal
+FLBR.InjuryPermanent: Permanente
+FLBR.ItemAddAction: Añadir Acción
+FLBR.ItemActionTypeRunMacro: Ejecutar macro
+FLBR.ITEM_AVAILABILITY.Incidental: Incidente
+FLBR.ItemConsumeNotif: Ha consumido {qty} unidades de {name}
+FLBR.ItemNoModifier: Sin modificador.
+FLBR.ItemQuantity: Cantidad
+FLBR.ItemSpecial: Especial
+FLBR.MACRO.GetActorTitle: Selecciona una Armadura
+FLBR.MACRO.GetActorHint: Has seleccionado múltiples miniaturas. Por favor, selecciona solo una.
+FLBR.MACRO.MultipleItems: Tu personaje {actor} tiene más de un objeto llamado {item}. El primero que se encuentre será el seleccionado.
+FLBR.MACRO.NoItem: Tu personaje {actor} no tiene ningún objeto llamado {item}.
+FLBR.MACRO.RollStat: Hacer tirada de {stat}
+FLBR.Nature: Condición
+FLBR.NatureHint: Condición del Personaje (Sólo Máster)
+FLBR.RANGED_COMBAT.SmallTarget: Objetivo pequeño
+FLBR.RANGED_COMBAT.CarefulAim: Apuntando
+FLBR.RANGED_COMBAT.UnseenTarget: Objetivo fuera de vista
+FLBR.ROLLER.MaxPush: Forzajes máximos
+FLBR.ROLLER.ModifierActive: Activo
+FLBR.ROLLER.ResolveTest: Prueba de pérdida de Resiliencia Permanente
+FLBR.ROLLER.ResolveTestHint: Cuando quedas incapacitado por estrés, debes lanzar un dado base correspondiente a tu índice de Empatía. Si sacas un uno, 1 punto de Resiliencia se pierde de manera permanente, lo cual implica que tu Resiliencia queda reducida en una unidad.
+FLBR.ROLLER.ResolveTestFailed: '{name} falló la tirada de Empatía y ha perdido 1 punto de Resiliencia de forma permanente.'
+FLBR.SignatureItemUsedCheckboxHint: ¿Usado?
+FLBR.WEAPON_RANGE.Engaged: Adyacente
+FLBR.WEAPON_RANGE.Long: Largo
+FLBR.YouAreBroken: ¡Has quedado Incapacitado!
+FLBR.ActorSheet.NotifWrongItemType: ¡El personaje {actor} no puede llevar objetos de tipo {type}!
+YZUR.CHAT.ROLL.CancelPush: Aceptar
+YZUR.DIETERMS.D6BladeRunnerDie: D6
+TYPES.Actor.vehicle: Vehículo
+ACTOR.SubtypePc: Personaje Jugador
+TYPES.Item.armor: Armadura
+TYPES.Item.explosive: Explosivo
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Infligir Daño Automáticamente
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Indica si se inflige daño automáticamente o no a las miniaturas seleccionadas.
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Indica si se realizarán tiradas de Armadura automáticamente.
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Desplegar primer ataque del arma
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Indica si se desplegará el primer ataque de un arma al abrir su ficha de objeto.
+WARNING.ApplyDamageNoNature: 'Infligir daño de Forzaje: ¡Condición del Personaje no encontrada!'
+WARNING.ApplyDamageNoCapacityKey: 'Infligir Daño de Forzaje: ¡No se ha encontrado relación de Condición/Capacidad!'
+WARNING.NoItemAction: ¡No se ha definido ninguna acción en este objeto!
+WARNING.NoItemUnit: 'No se puede usar {name}: ¡No te quedan unidades!'

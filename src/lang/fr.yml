@@ -106,9 +106,9 @@ FLBR.NO_VALUE: '–'
 FLBR.Advantage: Avantage
 FLBR.Blast: Explosion
 FLBR.BlastPower: Puissance de l'explosion
-FLBR.BrokenByDamage: BRISÉ PAR DES DÉGATS
-FLBR.Broken: BRISÉ
-FLBR.BrokenByStress: BRISÉ PAR LE STRESS
+FLBR.BrokenByDamage: Brisé par des dégats
+FLBR.Broken: Brisé
+FLBR.BrokenByStress: Brisé par le stress
 FLBR.Cancel: Annuler
 FLBR.CHAT.DamageDealt: '{name} subit {amount} dégâts.'
 FLBR.CHAT.NoDamageDealt: Aucun dégat n'a été infligé à {name}.
@@ -175,12 +175,12 @@ FLBR.ROLLER.RollWithAdvantageButton: Avantage
 FLBR.ROLLER.RollWithDisadvantageButton: Désavantage
 FLBR.ROLLER.UnlimitedPush: Illimité
 FLBR.SignatureItemUsedCheckboxHint: Utilisé ?
-ITEM.TypeGeneric: Générique
-ITEM.TypeUpgrade: Augmentation
-ITEM.TypeArmor: Armure
-ITEM.TypeWeapon: Arme
-ITEM.TypeExplosive: Explosif
-ITEM.TypeSpecialty: Spécialité
+TYPES.Item.generic: Générique
+TYPES.Item.upgrade: Augmentation
+TYPES.Item.armor: Armure
+TYPES.Item.weapon: Arme
+TYPES.Item.explosive: Explosif
+TYPES.Item.specialty: Spécialité
 FLBR.WeaponDamage: Dégâts
 FLBR.WeaponCrit: Dé Crit.
 FLBR.WeaponDamageType: Type de dégats
@@ -203,8 +203,8 @@ YZUR.DIETERMS.D6BladeRunnerDie: D6
 YZUR.DIETERMS.D8BladeRunnerDie: D8
 YZUR.DIETERMS.D10BladeRunnerDie: D10
 YZUR.DIETERMS.D12BladeRunnerDie: D12
-ACTOR.TypeCharacter: Personnage
-ACTOR.TypeVehicle: Véhicule
+TYPES.Actor.character: Personnage
+TYPES.Actor.vehicle: Véhicule
 FLBR.Attributes: Attributs
 FLBR.ATTRIBUTE.STR: Vigueur
 FLBR.ATTRIBUTE.AGI: Agilité
@@ -232,7 +232,7 @@ FLBR.SHEET_HEADER.BlastPowerRoll: Jet de puissance de l'explosion
 FLBR.SHEET_HEADER.GenericRoll: Jet générique
 FLBR.SHEET_HEADER.ItemPost: Déposer objet
 FLBR.SHEET_HEADER.ItemRoll: Jet d'objet
-ITEM.TypeInjury: Blessure
+TYPES.Item.injury: Blessure
 GAME.Paused: Investigation en pause
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Application automatique des dégats
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Appliquer automatiquement les dégâts des jets aux jetons ciblés.
@@ -240,7 +240,7 @@ SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Jet d'armure automatique
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Si l'on veut que le jet d'armure soit fait automatiquement.
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Ouvrir la première attaque
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Ouvrir l'accordéon de la première attaque lorsque la feuille de l'arme est affichée.
-WARNING.ApplyDamageNoNature: 'Application des dégâts de poussée : Nature de l''acteur pas trouvée !'
+WARNING.ApplyDamageNoNature: "Application des dégâts de poussée : Nature de l'acteur pas trouvée !"
 WARNING.ApplyDamageNoCapacityKey: 'Application des dégâts de poussée : Relation Nature-Capacité introuvable !'
 WARNING.ApplyDamageNoActorCapacity: "Application des dégâts de poussée : Capacité de l'acteur pas trouvée !"
 WARNING.NoDiceInput: Aucun dé à lancer !

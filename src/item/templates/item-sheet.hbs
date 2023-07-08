@@ -7,7 +7,7 @@
 			<div class="photo">
 				<img src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}"/>
 			</div>
-			<div class="item-type">{{localize (concat "ITEM.Type" (capitalize item.type))}}</div>
+			<div class="item-type">{{localize (concat "TYPES.Item." item.type)}}</div>
 		</div>
 		<div class="item-name">
 			<input type="text" name="name" value="{{item.name}}"/>
@@ -65,12 +65,22 @@
 					</select>
 				</div>
 				<div class="item-property item-property-lethal">
-					<label>{{localize "FLBR.InjuryLethal"}}</label>
-					<input type="checkbox" name="system.lethal" {{checked system.lethal}}/>
+					<label for="injury_lethal"><a>{{localize "FLBR.InjuryLethal"}}</a></label>
+					<div style="text-align: center;">
+						<label class="switch">
+							<input type="checkbox" id="injury_lethal" name="system.lethal" {{checked system.lethal}}/>
+							<span class="slider gold"></span>
+						</label>
+					</div>
 				</div>
 				<div class="item-property item-property-permanent">
-					<label>{{localize "FLBR.InjuryPermanent"}}</label>
-					<input type="checkbox" name="system.permanent" {{checked system.permanent}}/>
+					<label for="injury_permanent"><a>{{localize "FLBR.InjuryPermanent"}}</a></label>
+					<div style="text-align: center;">
+						<label class="switch">
+							<input type="checkbox" id="injury_permanent" name="system.permanent" {{checked system.permanent}}/>
+							<span class="slider gold"></span>
+						</label>
+					</div>
 				</div>
 				<div class="item-property item-property-death-save">
 					<label>{{localize "FLBR.InjuryDeathSave"}}</label>
@@ -101,8 +111,25 @@
 
 			{{#if isConsumable}}
 				<div class="item-property item-property-consumable">
-					<label>{{localize "FLBR.ItemConsumable"}}</label>
-					<input type="checkbox" name="system.consumable" {{checked system.consumable}}/>
+					<label for="item_consumable"><a>{{localize "FLBR.ItemConsumable"}}</a></label>
+					<div style="text-align: center;">
+						<label class="switch">
+							<input type="checkbox" id="item_consumable" name="system.consumable" {{checked system.consumable}}/>
+							<span class="slider gold"></span>
+						</label>
+					</div>
+				</div>
+			{{/if}}
+
+			{{#if inVehicle}}
+				<div class="item-property item-property-mounted">
+					<label for="item_mounted"><a>{{localize "FLBR.ItemMounted"}}</a></label>
+					<div style="text-align: center;">
+						<label class="switch">
+							<input type="checkbox" id="item_mounted" name="system.mounted" {{checked system.mounted}}/>
+							<span class="slider gold"></span>
+						</label>
+					</div>
 				</div>
 			{{/if}}
 			
@@ -119,6 +146,20 @@
 						</a>
 					</h4>
 {{> systems/blade-runner/templates/item/modifiers-partial.hbs}}
+				</div>
+			{{/if}}
+
+			{{#if showEffects}}
+				<div class="item-active-effects boxed-property">
+					<h4>
+						{{localize "DOCUMENT.ActiveEffects"}}
+						{{#unless inActor}}
+							<a class="btn add-active-effect" data-tooltip="{{localize "FLBR.ACTIVE_EFFECT.Add"}}">
+								{{{@root.config.Icons.buttons.plus}}}
+							</a>
+						{{/unless}}
+					</h4>
+{{> systems/blade-runner/templates/item/active-effects-partial.hbs}}
 				</div>
 			{{/if}}
 

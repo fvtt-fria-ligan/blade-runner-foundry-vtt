@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, ITEM_TYPES } from '@system/constants';
+import { ACTOR_TYPES, ITEM_TYPES, SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
 import { enrichTextFields } from '@utils/string-util';
 import ActorSheetConfig from './actor-sheet-config';
 
@@ -13,6 +13,23 @@ export default class BladeRunnerActorSheet extends ActorSheet {
   /*  Properties                                */
   /* ------------------------------------------ */
 
+  /** @override */
+  static get defaultOptions() {
+    return foundry.utils.mergeObject(super.defaultOptions, {
+      dragDrop: [
+        // { dragSelector: '.item-list .item', dropSelector: null },
+        { dragSelector: '.embedded-items .embedded-item', dropSelector: null },
+        { dragSelector: '.stat-roll[data-attribute]', dropSelector: null },
+      ],
+    });
+  }
+
+  /** @override */
+  get template() {
+    const sysId = game.system.id || SYSTEM_ID;
+    return `systems/${sysId}/templates/actor/${this.actor.type}/${this.actor.type}-sheet.hbs`;
+  }
+
   get rollData() {
     return this.actor.getRollData();
   }
@@ -24,6 +41,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
   /** @override */
   async getData(options) {
     const isOwner = this.actor.isOwner;
+    const showEffects = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.USE_ACTIVE_EFFECTS);
     const baseData = super.getData(options);
     const sheetData = {
       cssClass: isOwner ? 'editable' : 'locked',
@@ -34,8 +52,9 @@ export default class BladeRunnerActorSheet extends ActorSheet {
       isGM: game.user.isGM,
       actor: baseData.actor,
       system: foundry.utils.duplicate(baseData.actor.system),
-      items: baseData.items,
-      effects: baseData.effects,
+      items: [...this.actor.items].sort((a, b) => (a.sort || 0) - (b.sort || 0)),
+      showEffects,
+      effects: showEffects ? [...this.actor.effects] : null,
       rollData: this.rollData,
       config: CONFIG.BLADE_RUNNER,
     };
@@ -44,10 +63,6 @@ export default class BladeRunnerActorSheet extends ActorSheet {
 
     return sheetData;
   }
-
-  /* ------------------------------------------ */
-  /*  Methods                                   */
-  /* ------------------------------------------ */
 
   /* ------------------------------------------ */
   /*  Filtering Dropped Items                   */
@@ -60,6 +75,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const allowedItems = {
       [ACTOR_TYPES.CHAR]: [ITEM_TYPES.SPECIALTY, ITEM_TYPES.SYNTHETIC_AUGMENTATION, ITEM_TYPES.CRITICAL_INJURY],
       [ACTOR_TYPES.VEHICLE]: [],
+      [ACTOR_TYPES.LOOT]: [],
     };
     let allowed = true;
 
@@ -71,8 +87,8 @@ export default class BladeRunnerActorSheet extends ActorSheet {
 
     if (!allowed) {
       const msg = game.i18n.format('FLBR.ActorSheet.NotifWrongItemType', {
-        type: game.i18n.localize(`FLBR.ItemTypes.${type}`),
-        actor: game.i18n.localize(`FLBR.ActorTypes.${this.actor.type}`),
+        type: game.i18n.localize(`TYPES.Item.${type}`),
+        actor: game.i18n.localize(`TYPES.Actor.${this.actor.type}`),
       });
       console.warn(`FLBR | ${msg}`);
       ui.notifications.warn(msg);
@@ -118,7 +134,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
   _onConfigureSheet(event) {
     event.preventDefault();
     new ActorSheetConfig(this.actor, {
-      // classes: ['blade-runner'],
+      // classes: ['blade-runner', 'dialog'],
       top: this.position.top + 40,
       left: this.position.left + (this.position.width - 400) / 2,
     }).render(true);
@@ -133,13 +149,14 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const originalButtons = super._getHeaderButtons();
 
     if (!game.user.isGM && this.actor.limited) return originalButtons;
+    if (this.actor.type === ACTOR_TYPES.LOOT) return originalButtons;
 
     const myButtons = [
       {
         label: game.i18n.localize('FLBR.SHEET_HEADER.GenericRoll'),
         class: 'custom-roll',
         icon: 'fas fa-dice',
-        onclick: () => this.actor.rollStat(),
+        onclick: () => this.actor.roll(),
       },
     ];
     return myButtons.concat(originalButtons);
@@ -162,30 +179,32 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const inputs = html.find('input');
     inputs.focus(ev => ev.currentTarget.select());
 
+    // Executing Actions
+    html.find('.action-roll').click(this._onActionRoll.bind(this));
+
     // Item Management
     html.find('.capacities .capacity-boxes').on('click contextmenu', this._onCapacityIncrease.bind(this));
-    html.find('.meta-currencies .capacity-boxes').on('click contextmenu', this._onCapacityIncrease.bind(this));
 
     html.find('.item-create').click(this._onItemCreate.bind(this));
-    html.find('.item-edit').click(this._onItemEdit.bind(this));
     html.find('.item-delete').click(this._onItemDelete.bind(this));
     html.find('.item-delete-confirmed').click(this._onItemDeleteConfirmed.bind(this));
-    html.find('.item-roll').click(this._onItemRoll.bind(this));
-    html.find('.item-chat').click(this._onItemChat.bind(this));
-    html.find('.blast-roll').click(this._onBlastRoll.bind(this));
+    html.find('.item-control').click(this._onItemControl.bind(this));
     html.find('.embedded-item').on('contextmenu', this._onItemEdit.bind(this));
 
-    // Owner-only listeners.
-    if (this.actor.isOwner) {
-      html.find('.stat-roll[data-attribute]').each((_index, elem) => {
-        elem.setAttribute('draggable', true);
-        elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);
-      });
-      html.find('.embedded-item[data-item-id]').each((_index, elem) => {
-        elem.setAttribute('draggable', true);
-        elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);
-      });
+    // Active Effects
+    if (game.settings.get(SYSTEM_ID, SETTINGS_KEYS.USE_ACTIVE_EFFECTS)) {
+      html.find('.add-active-effect').click(this._onAddActiveEffect.bind(this));
+      html.find('.active-effect-controls .btn').click(this._onActiveEffectAction.bind(this));
     }
+  }
+
+  /* ------------------------------------------ */
+
+  _onActionRoll(event) {
+    event.preventDefault();
+    const elem = event.currentTarget;
+    const actionKey = elem.dataset.action;
+    return game.bladerunner.actions.get(actionKey)?.execute(this.actor);
   }
 
   /* ------------------------------------------ */
@@ -195,7 +214,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     const elem = event.currentTarget;
     const type = elem.dataset.type;
     const itemName = game.i18n.format('FLBR.NewItem', {
-      type: game.i18n.localize(`ITEM.Type${type.capitalize()}`),
+      type: game.i18n.localize(`TYPES.Item.${type}`),
     });
     const itemData = { name: itemName, type };
     return this.actor.createEmbeddedDocuments('Item', [itemData])
@@ -207,13 +226,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
       });
   }
 
-  _onItemEdit(event) {
-    event.preventDefault();
-    const elem = event.currentTarget;
-    const itemId = elem.closest('.embedded-item').dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    return item.sheet.render(true);
-  }
+  /* ------------------------------------------ */
 
   /** @param {MouseEvent} event */
   _onItemDelete(event) {
@@ -234,32 +247,27 @@ export default class BladeRunnerActorSheet extends ActorSheet {
 
   /* ------------------------------------------ */
 
-  _onItemRoll(event) {
+  _onItemEdit(event) {
     event.preventDefault();
-    const elem = event.currentTarget;
-    const itemId = elem.closest('.embedded-item').dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    if (item) return item.roll();
+    event.currentTarget.dataset.action = 'edit';
+    return this._onItemControl(event);
   }
 
-  /* ------------------------------------------ */
-
-  _onBlastRoll(event) {
+  _onItemControl(event) {
     event.preventDefault();
     const elem = event.currentTarget;
     const itemId = elem.closest('.embedded-item').dataset.itemId;
     const item = this.actor.items.get(itemId);
-    if (item) return item._rollExplosive();
-  }
+    if (!item) return;
 
-  /* ------------------------------------------ */
-
-  _onItemChat(event) {
-    event.preventDefault();
-    const elem = event.currentTarget;
-    const itemId = elem.closest('.embedded-item').dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    if (item) return item.toMessage();
+    switch (elem.dataset.action) {
+      case 'edit': return item.sheet.render(true);
+      case 'roll': return item.roll();
+      case 'blast': return item._rollExplosive();
+      case 'mount': return item.update({ 'system.mounted': true });
+      case 'unmount': return item.update({ 'system.mounted': false });
+      case 'chat': return item.toMessage();
+    }
   }
 
   /* ------------------------------------------ */
@@ -283,5 +291,29 @@ export default class BladeRunnerActorSheet extends ActorSheet {
     count = Math.clamped(count, min, max);
 
     return this.actor.update({ [field]: count });
+  }
+
+  /* ------------------------------------------ */
+
+  _onAddActiveEffect(event) {
+    event.preventDefault();
+    return this.actor.createEmbeddedDocuments('ActiveEffect', [{
+      label: game.i18n.localize('FLBR.ACTIVE_EFFECT.New'),
+      icon: 'icons/svg/aura.svg',
+      origin: this.actor.uuid,
+    }]);
+  }
+
+  _onActiveEffectAction(event) {
+    event.preventDefault();
+    const btn = event.currentTarget;
+    const effectId = btn.closest('[data-effect-id]').dataset.effectId;
+    const effect = this.actor.effects.get(effectId);
+    if (!effect) return;
+    switch (event.currentTarget.dataset.action) {
+      case 'toggle': return effect.update({ disabled: !effect.disabled });
+      case 'edit': return effect.sheet.render(true);
+      case 'delete': return effect.delete();
+    }
   }
 }

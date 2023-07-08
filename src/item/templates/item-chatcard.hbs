@@ -59,7 +59,7 @@
 		{{#if system.availability}}
 			{{localize (lookup config.availabilities system.availability)}} 
 		{{/if}}
-		{{localize (concat "ITEM.Type" (capitalize type))}}
+		{{localize (concat "TYPES.Item." type)}}
 		{{#unless inActor}} {{link}}{{/unless}}
 	</div>
 </div>

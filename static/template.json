@@ -1,7 +1,9 @@
 {
   "Actor": {
     "types": [
-      "character"
+      "character",
+      "vehicle",
+      "loot"
     ],
     "templates": {
       "actorNature": { "nature": "human" },
@@ -23,8 +25,7 @@
           "int": { "value": 8 },
           "emp": { "value": 8 }
         },
-        "skills": {},
-        "hasFastReflexes": false
+        "skills": {}
       },
       "actorHealth": {
         "health": { "value": 4, "max": 4, "mod": 0, "permanentLoss": 0 }
@@ -67,7 +68,15 @@
       "hull": { "value": 2, "max": 2 },
       "armor": 0,
       "availability": 2,
-      "cost": 5
+      "cost": 5,
+      "altitude": 0,
+      "components": {
+        "engine": true
+      },
+      "crew": []
+    },
+    "loot": {
+      "templates": ["actorDescription"]
     }
   },
   "Item": {
@@ -93,7 +102,7 @@
       "itemConsumable": {
         "consumable": false
       },
-      "itemAttacks": { "attacks": {} },
+      "itemAttacks": { "attacks": {}, "mounted": false },
       "itemActions": { "actions": {} },
       "itemModifiers": { "modifiers": {} }
     },

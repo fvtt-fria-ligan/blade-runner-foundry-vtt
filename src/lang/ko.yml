@@ -1,0 +1,248 @@
+FLBR.ATTRIBUTE.STR: 힘
+FLBR.ATTRIBUTE.AGI: 민첩
+FLBR.ATTRIBUTE.INT: 지능
+FLBR.ATTRIBUTE.EMP: 공감
+FLBR.Skills: 기술
+FLBR.SKILL.CloseCombat: 격투
+FLBR.SKILL.Force: 완력
+FLBR.SKILL.Stamina: 강단
+FLBR.SKILL.Firearms: 총기
+FLBR.SKILL.Mobility: 운동
+FLBR.SKILL.Stealth: 잠행
+FLBR.SKILL.MedicalAid: 의료
+FLBR.SKILL.Observation: 관찰
+FLBR.SKILL.Tech: 공학
+FLBR.SKILL.Connections: 연줄
+FLBR.SKILL.Insight: 조작
+FLBR.SKILL.Driving: 운전
+FLBR.NATURE.Human: 인간
+FLBR.NATURE.Replicant: 레플리컨트
+FLBR.ARCHETYPE.ANALYST: 분석가
+FLBR.ARCHETYPE.CITY_SPEAKER: 정보통
+FLBR.ARCHETYPE.DOXIE: 화류인
+FLBR.ARCHETYPE.ENFORCER: 집행자
+FLBR.ARCHETYPE.FIXER: 해결사
+FLBR.ARCHETYPE.INSPECTOR: 보안관
+FLBR.ARCHETYPE.SKIMMER: 돈받이
+FLBR.COMBAT_ACTION.Sprint: 전력 질주
+FLBR.COMBAT_ACTION.UnarmedAttack: 비무장 공격
+FLBR.COMBAT_ACTION.MeleeAttack: 근접 공격
+FLBR.COMBAT_ACTION.Grapple: 붙잡기
+FLBR.COMBAT_ACTION.BreakFree: 풀려나기
+FLBR.COMBAT_ACTION.ShootFirearm: 총기 발사
+FLBR.COMBAT_ACTION.CarefulAim: 조심스러운 조준
+FLBR.COMBAT_ACTION.FirstAid: 응급 치료
+FLBR.COMBAT_ACTION.Manipulate: 조작하기
+FLBR.COMBAT_ACTION.UseItem: 물건 사용
+FLBR.COMBAT_ACTION_HINT.Crawl: 엎드린 상태로 이동해야 한다면, 기어야 합니다. 기어가기는 이동과 같게 진행하지만, 그 라운드에서 여러분이 수행하는 행동으로 취급됩니다. 기어가기를 마칠 때 무료 행동으로 일어날 수 있습니다.
+FLBR.COMBAT_ACTION_HINT.UnarmedAttack: 힘 + 근접 공격
+FLBR.COMBAT_ACTION_HINT.MeleeAttack: 힘+ 근접 공격
+FLBR.COMBAT_ACTION_HINT.BreakFree: 힘 + 격투
+FLBR.COMBAT_ACTION_HINT.ThrowWeapon: 민첩 + 총기
+FLBR.COMBAT_ACTION_HINT.FirstAid: 지능 + 의료
+FLBR.COMBAT_ACTION_HINT.Manipulate: 공감 + 조작
+FLBR.COMBAT_ACTION_HINT.UseItem: 사용하기
+FLBR.BUTTON.Delete: 지우기
+FLBR.BUTTON.Edit: 수정하기
+FLBR.BUTTON.Roll: 굴리기
+FLBR.BUTTON.ToChat: 대화창으로 보내기
+FLBR.CHAT_ACTION.ApplyDamage: 목표 토큰에 피해 적용
+FLBR.DIALOG.AssignSuccesses: 성공값 할당
+FLBR.DIALOG.AssignSuccessesHint: '{name}에 성공값을 얼마나 사용할지 선택하세요.'
+FLBR.DIALOG.ChooseAction: 행동 선택
+FLBR.DIALOG.ChooseAttack: 공격 선택
+FLBR.HEADER.Actions: 행동
+FLBR.HEADER.Appearance: 외모
+FLBR.HEADER.Armor: 장갑
+FLBR.HEADER.Attacks: 공격 모드
+FLBR.HEADER.AttributesAndSkills: 특성과 기술
+FLBR.HEADER.Augments: 강화
+FLBR.HEADER.ChinyenPoints: 친엔 점수
+FLBR.HEADER.DieSize: 기본 주사위
+FLBR.HEADER.FavoredGear: 선호 장비
+FLBR.HEADER.Health: 체력
+FLBR.HEADER.Home: 집
+FLBR.HEADER.HumanityPoints: 인간성 점수
+FLBR.HEADER.Injuries: 부상
+FLBR.HEADER.Inventory: 소지품
+FLBR.HEADER.Notes: 상세
+FLBR.HEADER.Modifiers: 변경자
+FLBR.HEADER.PromotionPoints: 진급 점수
+FLBR.HEADER.Resolve: 결의
+FLBR.HEADER.SignatureItem: 나만의 물건
+FLBR.HEADER.Specialties: 전문화
+FLBR.HEADER.KeyMemory: 핵심 기억
+FLBR.HEADER.KeyRelationship: 핵심 관계
+FLBR.HEADER.Rating: 등급
+FLBR.HEADER.YearsOnTheForce: 근속 연수
+FLBR.HEADER.Weapons: 무기
+FLBR.SHEET_CONFIG.CharacterSubtype: 하위 종류
+FLBR.SHEET_CONFIG.HealthMaxModifier: 최대 체력 변경
+FLBR.SHEET_CONFIG.HealthMaxModifierHint: 최대 체력 한도를 변경합니다 (GM 전용).
+FLBR.SHEET_CONFIG.HealthPermanentLoss: 체력 영구 손실
+FLBR.SHEET_CONFIG.HealthPermanentLossHint: 영구히 잃는 체력의 양을 정합니다(GM 전용).
+FLBR.SHEET_CONFIG.ResolveMaxModifier: 최대 결의 변경
+FLBR.SHEET_CONFIG.ResolveMaxModifierHint: 최대 결의 한도를 변경합니다(GM 전용).
+FLBR.SHEET_CONFIG.ResolvePermanentLossHint: 영구히 잃는 결의의 양을 정합니다(GM 전용).
+FLBR.SHEET_CONFIG.Maneuverability: 차량 조종성
+FLBR.SHEET_CONFIG.UnlimitedPush: 강행 굴림 무제한 허용
+FLBR.SHEET_CONFIG.UnlimitedPushHint: GM이 강행 굴림을 무제한 허용했다면, 여기에 체크해 강행 버튼을 표기합니다.
+FLBR.SHEET_HEADER.ArmorRoll: 장갑 굴림
+FLBR.SHEET_HEADER.BlastPowerRoll: 폭발 굴림
+FLBR.SHEET_HEADER.GenericRoll: 일반 굴림
+FLBR.SHEET_HEADER.ItemPost: 물건 올리기
+FLBR.SHEET_HEADER.ItemRoll: 물건 굴리기
+FLBR.TAB.Actions: 행동
+FLBR.TAB.Bio: 배경 이야기
+FLBR.TAB.Combat: 전투
+FLBR.TAB.Info: 정보
+FLBR.TAB.Features: 특징
+FLBR.TAB.Mods: 기타 요인
+FLBR.TAB.Stats: 수치
+FLBR.D: D
+FLBR.Advantage: 이점
+FLBR.Capacities: 체력과 결의
+FLBR.Blast: 폭발
+FLBR.BlastPower: 폭발 강도
+FLBR.Broken: 무너짐
+FLBR.BrokenByStress: 스트레스로 무너짐
+FLBR.Cancel: 취소
+FLBR.CHAT.DamageDealt: '{name}이(가) {amount} 피해를 입었습니다.'
+FLBR.CHAT.InitialDamageDealt: 이 공격은 기본 {damage} 피해를 입힙니다.
+FLBR.CHAT.ArmorDeflectedDamage: 장갑이 {damage} 피해를 막아냅니다.
+FLBR.CHAT.ArmorDeflectedAllDamage: 장갑이 모든 피해를 막아냅니다.
+FLBR.CHAT.ArmorNoEffect: 장갑이 효과가 없습니다.
+FLBR.Crit: 치명
+FLBR.Disadvantage: 난점
+FLBR.InjuryCategory: 종류
+FLBR.InjuryDeathSave: 죽음 저항
+FLBR.InjuryHealing: 치유
+FLBR.InjuryLethal: 치사
+FLBR.InjuryPermanent: 영구
+FLBR.InventoryNoItem: 비어있음.
+FLBR.ItemAddAction: 행동 추가
+FLBR.ItemAddAttack: 공격 추가
+FLBR.ItemAddModifier: 굴림 변경자 추가
+FLBR.ItemActionAttribute: 특성
+FLBR.ItemActionSkill: 기술
+FLBR.ItemActionType: 행동 종류
+FLBR.ItemActionTypeRollSkill: 기술 굴림
+FLBR.ItemActionTypeRunMacro: 매크로 사용
+FLBR.ItemArmor: 장갑
+FLBR.ITEM_AVAILABILITY.Incidental: 잡동사니
+FLBR.ITEM_AVAILABILITY.Luxury: 사치품
+FLBR.ITEM_AVAILABILITY.Premium: 고급품
+FLBR.ITEM_AVAILABILITY.Rare: 희귀품
+FLBR.ITEM_AVAILABILITY.Standard: 일반
+FLBR.ItemAvailability: 희귀도
+FLBR.ItemConsumable: 소모품
+FLBR.ItemCost: 비용
+FLBR.ItemDeleteAction: 행동 제거
+FLBR.ItemDeleteAttack: 공격 제거
+FLBR.ItemDeleteModifier: 변경자 제거
+FLBR.ItemNewAction: 신규 행동
+FLBR.ItemNewAttack: 신규 공격
+FLBR.ItemNoAttack: 공격 모드 미설정.
+FLBR.ItemNoModifier: 변경자 없음.
+FLBR.ItemModifier: 변경자
+FLBR.ItemSpecial: 특수
+FLBR.MACRO.GetActorTitle: 행위자 선택
+FLBR.MACRO.MultipleItems: 당신이 통제하는 {actor}이(가) 같은 {item}을(를) 여러개 가지고 있습니다. 가장 위에 있는 물건이 선택됩니다.
+FLBR.MACRO.NoActor: 당신이 통제하는 {actor}을(를) 찾을 수 없습니다.
+FLBR.MACRO.RollAction: '{action} 행동'
+FLBR.MACRO.RollStat: '{stat} 굴림'
+FLBR.Nature: 본질
+FLBR.NatureHint: 캐릭터의 본질 (GM 전용)
+FLBR.NewItem: 신규 {type}
+FLBR.OK: 네
+FLBR.Range: 거리
+FLBR.RANGED_COMBAT.OutOfRange: 거리 벗어남
+FLBR.RANGED_COMBAT.SmallTarget: 소형 목표
+FLBR.RANGED_COMBAT.LargeTarget: 대형 목표
+FLBR.RANGED_COMBAT.TargetBehindCover: 엄폐를 취한 목표
+FLBR.RANGED_COMBAT.CarefulAim: 조심스러운 조준
+FLBR.RANGED_COMBAT.UnseenTarget: 보이지 않는 목표
+FLBR.ROLLER.AddDie: 주사위 추가
+FLBR.ROLLER.ModifierActive: 활성화
+FLBR.ROLLER.ModifierName: 이름
+FLBR.ROLLER.ModifierValue: 값
+FLBR.ROLLER.TotalModifier: '최종: {value}'
+FLBR.ROLLER.ResolveTest: 결의 영구 상실 테스트
+FLBR.ROLLER.ResolveTestFailed: '{name}이(가) 공감 굴림에 실패해 결의 1점을 영구적으로 잃습니다.'
+FLBR.ROLLER.RollButton: 굴림
+FLBR.ROLLER.RollWithAdvantageButton: 이점
+FLBR.ROLLER.RollWithDisadvantageButton: 난점
+FLBR.ROLLER.UnlimitedPush: 무제한
+FLBR.WeaponDamage: 피해
+FLBR.WeaponCrit: 치명 주사위
+FLBR.WeaponDamageType: 피해 종류
+FLBR.WEAPON_DAMAGE_TYPE.Crushing: 으스러짐
+FLBR.WEAPON_DAMAGE_TYPE.Piercing: 관통
+FLBR.WEAPON_DAMAGE_TYPE.Stress: 스트레스
+FLBR.WeaponRange: 거리
+FLBR.WEAPON_RANGE.Engaged: 인접
+FLBR.WEAPON_RANGE.Short: 단
+FLBR.WEAPON_RANGE.Medium: 중
+FLBR.WEAPON_RANGE.Long: 장
+FLBR.WEAPON_RANGE.Extreme: 초장
+FLBR.YouAreBroken: 무너집니다!
+YZUR.CHAT.ROLL.Infos: 정보
+YZUR.CHAT.ROLL.Damage: 기본 피해
+YZUR.CHAT.ROLL.Push: 강행
+YZUR.CHAT.ROLL.CancelPush: 수락
+YZUR.DIETERMS.D6BladeRunnerDie: D6
+YZUR.DIETERMS.D8BladeRunnerDie: D8
+YZUR.DIETERMS.D10BladeRunnerDie: D10
+YZUR.DIETERMS.D12BladeRunnerDie: D12
+TYPES.Actor.character: 캐릭터
+TYPES.Actor.vehicle: 차량
+ACTOR.SubtypePc: 플레이어 캐릭터
+ACTOR.SubtypeNpc: 비 플레이어 캐릭터
+TYPES.Item.generic: 일반
+TYPES.Item.upgrade: 강화
+TYPES.Item.armor: 장갑
+TYPES.Item.weapon: 무기
+TYPES.Item.explosive: 폭발물
+TYPES.Item.specialty: 전문화
+TYPES.Item.injury: 부상
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: 피해 자동 적용
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: 장갑 자동 굴림
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: 장갑 굴림을 자동으로 수행할지를 정합니다.
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: 첫 무기 공격 펼치기
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: 물건 시트가 표시될 때 첫 무기의 상세를 펼칠지를 정합니다.
+WARNING.ApplyDamageNoNature: '강행 피해 적용: 행위자 본질이 정해지지 않았습니다!'
+WARNING.ApplyDamageNoActorCapacity: '강행 피해 적용: 행위자 한계치가 정해지지 않았습니다!'
+WARNING.NoDiceInput: 굴릴 주사위가 없습니다!
+WARNING.NoItemAction: 물건 행동이 정해지지 않았습니다!
+WARNING.ItemActionMacroNotFound: '"{macro}" 매크로를 찾을 수 없습니다!'
+FLBR.SignatureItemUsedCheckboxHint: 사용 여부?
+FLBR.Attributes: 특성
+FLBR.ATTRIBUTE.MVR: 조종성
+FLBR.SKILL.Manipulation: 통찰
+FLBR.COMBAT_ACTION.Crawl: 기어가기
+FLBR.COMBAT_ACTION.ThrowWeapon: 무기 던지기
+FLBR.COMBAT_ACTION_HINT.Sprint: 한 라운드에서 전력 질주 행동을 사용하여 이동을 추가로 수행할 수 있습니다. 전력 질주는 그 라운드에서 여러분이 수행하는 행동으로 취급되기에, 다른 행동은 수행할 수 없습니다. <span class="smallcaps">운동</span> 굴림을 수행합니다. 결괏값으로 나온 <span class="blade-runner-symbols">S</span>마다, 기본 이동에 더해 이동을 한 번씩 더 할 수 있습니다. 굴림이 실패하면, (두 번째 이동을 수행하기 전에) 넘어지고 다음 턴까지 일어날 수 없습니다.
+FLBR.COMBAT_ACTION_HINT.Grapple: 근접 전투에서 특수 공격을 사용해 상대를 붙잡으면 여러분과 상대는 모두 바닥에 넘어집니다. 상대는 들고 있던 모든 무기를 떨어트리고 이동할 수 없습니다. 상대가 수행할 수 있는 유일한 행동은 풀려나기 뿐입니다. 이는 행동이고, 여러분을 대상으로 하는 <span class="smallcaps">격투</span> 대항 굴림에서 이겨야 성공합니다. 상대를 붙잡고 있는 동안, (놓아주기 전까지) 여러분이 수행할 수 있는 유일한 행동은 붙잡기 공격뿐입니다. 이는 일반적인 비무장 공격으로 수행하지만, 상대는 구속된 상태로 취급되기에 자신을 방어할 수 없습니다.
+FLBR.COMBAT_ACTION_HINT.ShootFirearm: 민첩 + 총기
+FLBR.COMBAT_ACTION_HINT.CarefulAim: 방아쇠를 당기기 전에 시간을 들여 조준한다면 공격 굴림에 이점을 얻습니다. 하지만, 조준은 그 자체로 행동입니다. 조준과 사격을 같은 라운드에 모두 할 수는 없습니다. 조준한 뒤 사격 이외에 다른 무엇이라도 한다던가 공격으로 타격당한다면, 조준의 효과를 잃어버립니다. 다시 조준하려면 행동을 또 소비해야 합니다.
+FLBR.SHEET_CONFIG.CharacterSubtypeHint: PC/NPC 여부를 표시합니다. NPC로 표시하면 시트가 간략해져 GM이 NPC를 편하게 다룰 수 있습니다.
+FLBR.SHEET_CONFIG.ResolvePermanentLoss: 결의 영구 손실
+FLBR.SHEET_CONFIG.ManeuverabilityHint: 이 캐릭터가 모는 탈 것의 조종성을 정합니다.
+FLBR.TAB.Inventory: 소지품
+FLBR.BrokenByDamage: 피해로 무너짐
+FLBR.CHAT.NoDamageDealt: '{name}은(는) 피해를 입지 않았습니다.'
+FLBR.CreateNewItem: 새 {type} 물건을 만듭니다
+FLBR.ItemActionName: 행동 이름
+FLBR.ItemAttackName: 공격 이름
+FLBR.ItemConsumeNotif: '{name}을(를) {qty}개 소모했습니다'
+FLBR.ItemQuantity: 수량
+FLBR.MACRO.GetActorHint: 토큰을 여러개 선택하셨습니다. 하나만 선택해주세요.
+FLBR.MACRO.NoItem: 당신이 통제하는 {actor}이(가) {item}을(를) 가지고 있지 않습니다.
+FLBR.ROLLER.MaxPush: 최대 강행
+FLBR.ROLLER.ResolveTestHint: 스트레스로 인해 무너졌다면, 반드시 공감 등급에 해당하는 기본 주사위 하나를 굴려야 합니다. 만약 결괏값으로 1이 나왔다면, 결의 1점이 영구적으로 사라집니다. 최대 결의가 1점 낮아진다는 뜻입니다.
+FLBR.ROLLER.SelectDiceToPush: 강행할 주사위 선택
+FLBR.ActorSheet.NotifWrongItemType: '{actor}은(는) {type}을(를) 가질 수 없습니다!'
+GAME.Paused: 수사 일시 중지
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: 굴림에서 나온 피해를 선택한 토큰에 자동으로 적용할지를 정합니다.
+WARNING.ApplyDamageNoCapacityKey: '강행 피해 적용: 본질-한계치가 정해지지 않았습니다!'
+WARNING.NoItemUnit: '{name} 사용 불가: 모두 사용했습니다!'

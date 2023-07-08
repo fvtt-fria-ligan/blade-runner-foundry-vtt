@@ -4,6 +4,25 @@
 /*  Foundry Overrides                         */
 /* ------------------------------------------ */
 
+#sidebar-tabs .fa-comments::before {
+  content: "\f8ef"; // Replaced by a talkie-walkie
+}
+#sidebar-tabs .fa-swords::before {
+  content: "\e19b"; // Replaced by a gun
+}
+
+/* ------------------------------------------ */
+
+#context-menu li.context-item {
+  padding: 5px;
+  line-height: 1.1;
+}
+
+// Fix for Minimal UI module
+#players h3 {
+  font-size: unset;
+}
+
 /* -------------------------------------------- */
 /*  Logo & Pause Spinner Styles                 */
 /* -------------------------------------------- */

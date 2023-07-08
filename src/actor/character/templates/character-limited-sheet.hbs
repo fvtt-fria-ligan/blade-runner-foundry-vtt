@@ -22,7 +22,7 @@
 			<div class="capacities">
 				{{#if system.health}}
 					<div class="capacity-health boxed-property">
-						<h3>{{localize "FLBR.HEADER.Health"}}<span>?/?</span></h3>
+						<h3>{{localize "FLBR.HEADER.Health"}}<span class="capacity-rating">?/?</span></h3>
 						<div class="capacity-boxes" style="color: var(--color-disabled);">
 							{{#times 4}}
 								{{{@root.config.Icons.boxes.empty}}}
@@ -32,7 +32,7 @@
 				{{/if}}
 				{{#if system.resolve}}
 					<div class="capacity-resolve boxed-property">
-						<h3>{{localize "FLBR.HEADER.Resolve"}}<span>?/?</span></h3>
+						<h3>{{localize "FLBR.HEADER.Resolve"}}<span class="capacity-rating">?/?</span></h3>
 						<div class="capacity-boxes" style="color: var(--color-disabled);">
 							{{#times 4}}
 								{{{@root.config.Icons.boxes.empty}}}

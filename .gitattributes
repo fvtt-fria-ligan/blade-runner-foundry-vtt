@@ -5,3 +5,4 @@
 *.hbs text eol=lf
 *.scss text eol=lf
 *.json text eol=lf
+*.db binary

@@ -9,6 +9,7 @@ function preloadHandlebarsTemplates() {
   /* Esbuild defines the template paths for us at build time. */
   // eslint-disable-next-line no-undef
   const paths = TEMPLATE_PATHS;
+  console.log('Blade Runner RPG | Loading Handlebars templates:', paths);
   return loadTemplates(paths);
 }
 
@@ -61,6 +62,8 @@ function registerHandlebarsHelpers() {
   Handlebars.registerHelper('times', function (n, content) {
     let str = '';
     for (let i = 0; i < n; i++) {
+      content.data.first = i === 0;
+      content.data.last = i === n - 1;
       content.data.max = n;
       content.data.index = i + 1;
       str += content.fn(i);
@@ -167,7 +170,7 @@ function registerHandlebarsHelpers() {
 
   Handlebars.registerHelper('createNewItemButton', function (type) {
     const title = game.i18n.format('FLBR.CreateNewItem', {
-      type: game.i18n.localize(`ITEM.Type${type.capitalize()}`),
+      type: game.i18n.localize(`TYPES.Item.${type}`),
     });
     const str = `<a class="btn item-create" data-type="${type}" data-tooltip="${title}">${FLBR.Icons.buttons.plus}</a>`;
     return new Handlebars.SafeString(str);
