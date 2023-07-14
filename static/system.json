@@ -54,6 +54,21 @@
       "lang": "fr",
       "name": "Français",
       "path": "lang/fr.json"
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
+    },
+    {
+      "lang": "ko",
+      "name": "한국인",
+      "path": "lang/ko.json"
+    },
+    {
+      "lang": "es",
+      "name": "Español",
+      "path": "lang/es.json"
     }
   ],
   "gridDistance": 1,
