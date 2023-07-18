@@ -1,6 +1,6 @@
 {
   "name": "blade-runner-foundry-vtt",
-  "version": "11.0.0",
+  "version": "11.0.1",
   "type": "module",
   "description": "Foundry VTT game System for Fria Ligan's Blade Runner RPG",
   "repository": {
