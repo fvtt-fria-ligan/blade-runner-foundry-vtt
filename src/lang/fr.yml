@@ -1,10 +1,10 @@
 FLBR.COMBAT_ACTION.MeleeAttack: Attaque de mêlée
 FLBR.COMBAT_ACTION.BreakFree: Se libérer
-FLBR.COMBAT_ACTION_HINT.Sprint: Vous pouvez effectuer des mouvements supplémentaires au cours d'un même round en utilisant l'action courir. Cela comptera alors comme votre action pour le round, ce qui signifie que vous ne pouvez effectuer aucune autre action. Faites un jet de <span class="smallcaps">MOBILITÉ</span> – pour chaque <span class="blade-runner-symbols">S</span> , vous pouvez effectuer un mouvement supplémentaire, en plus de votre mouvement libre. Si vous échouez le jet, vous tombez (avant le deuxième mouvement) et ne pouvez pas vous relever avant votre prochain tour.
+FLBR.COMBAT_ACTION_HINT.Sprint: Vous pouvez effectuer des mouvements supplémentaires au cours d'un même round en utilisant l'action courir. Cela comptera alors comme votre action pour le round, ce qui signifie que vous ne pouvez effectuer aucune autre action. Faites un jet de MOBILITÉ – pour chaque <span class="blade-runner-symbols">S</span> , vous pouvez effectuer un mouvement supplémentaire, en plus de votre mouvement libre. Si vous échouez le jet, vous tombez (avant le deuxième mouvement) et ne pouvez pas vous relever avant votre prochain tour.
 FLBR.COMBAT_ACTION_HINT.BreakFree: Vigueur + Combat rapproché
 FLBR.COMBAT_ACTION_HINT.CarefulAim: Si vous prenez le temps de bien viser avant d'appuyer sur la gâchette, vous bénéficez d'un avantage sur votre jet d'attaque. Cependant, viser est une action en soi. Vous ne pouvez pas viser et tirer dans le même round. Si vous faites autre chose que tirer avec votre arme après avoir visé, ou si vous êtes touché par une attaque, vous perdez l'effet de la visée et vous devez dépenser une autre action pour viser.
 FLBR.COMBAT_ACTION_HINT.Manipulate: Empathie + Manipulation
-FLBR.COMBAT_ACTION_HINT.Grapple: Si vous agrippez votre adversaire en tant qu'attaque spéciale en combat rapproché, vous et votre adversaire tombez au sol. L'adversaire lâche toute arme qu'il tenait et ne peut plus bouger. La seule action qu'il peut effectuer est une tentative de se libérer – qui est une action qui réussit si l'adversaire remporte un jet opposé de <span class="smallcaps">COMBAT RAPPROCHE</span> contre vous. Pendant que vous agrippez votre adversaire, la seule action que vous pouvez effectuer (jusqu'à ce que vous le libériez) est une attaque de lutte. Cela fonctionne comme une attaque à mains nues, mais votre cible est considérée comme étant attachée et ne peut donc pas se défendre.
+FLBR.COMBAT_ACTION_HINT.Grapple: Si vous agrippez votre adversaire en tant qu'attaque spéciale en combat rapproché, vous et votre adversaire tombez au sol. L'adversaire lâche toute arme qu'il tenait et ne peut plus bouger. La seule action qu'il peut effectuer est une tentative de se libérer – qui est une action qui réussit si l'adversaire remporte un jet opposé de COMBAT RAPPROCHÉ contre vous. Pendant que vous agrippez votre adversaire, la seule action que vous pouvez effectuer (jusqu'à ce que vous le libériez) est une attaque de lutte. Cela fonctionne comme une attaque à mains nues, mais votre cible est considérée comme étant attachée et ne peut donc pas se défendre.
 FLBR.BUTTON.ToChat: Envoyer l'objet dans le chat
 FLBR.CHAT_ACTION.ApplyDamage: Appliquer des dégats aux jetons ciblés
 FLBR.DIALOG.AssignSuccessesHint: Choisissez un nombre de succès à dépenser contre {name}.
@@ -24,7 +24,7 @@ FLBR.MACRO.GetActorHint: Vous avez sélectionné plusieurs jetons. Veuillez en c
 FLBR.MACRO.MultipleItems: Votre acteur contrôlé {actor} a plus d'un élément avec le nom {item}. Le premier élément correspondant sera choisi.
 FLBR.MACRO.NoItem: L'acteur {actor} que vous contrôlez ne possède pas d'objet nommé {item}.
 FLBR.Nature: Nature
-FLBR.NatureHint: Nature du personnage (uniquement pour le MJ)
+FLBR.NatureHint: Nature du personnage (MJ seulement)
 FLBR.RANGED_COMBAT.OutOfRange: Hors de portée
 FLBR.ROLLER.MaxPush: Poussée max.
 FLBR.ROLLER.ModifierName: Nom
@@ -106,7 +106,7 @@ FLBR.NO_VALUE: '–'
 FLBR.Advantage: Avantage
 FLBR.Blast: Explosion
 FLBR.BlastPower: Puissance de l'explosion
-FLBR.BrokenByDamage: Brisé par des dégats
+FLBR.BrokenByDamage: Brisé par des dégâts
 FLBR.Broken: Brisé
 FLBR.BrokenByStress: Brisé par le stress
 FLBR.Cancel: Annuler
@@ -194,7 +194,7 @@ FLBR.WEAPON_RANGE.Short: Court
 FLBR.WEAPON_RANGE.Medium: Moyen
 FLBR.WEAPON_RANGE.Long: Long
 FLBR.YouAreBroken: Tu es brisé !
-FLBR.ActorSheet.NotifWrongItemType: L'acteur {actor} ne peut pas contenir d'objets de {type} !
+FLBR.ActorSheet.NotifWrongItemType: L'acteur {actor} ne peut pas contenir d'objets de type {type} !
 YZUR.CHAT.ROLL.Infos: Infos
 YZUR.CHAT.ROLL.Damage: Dégats de base
 YZUR.CHAT.ROLL.Push: Pousser
@@ -235,7 +235,7 @@ FLBR.SHEET_HEADER.ItemRoll: Jet d'objet
 TYPES.Item.injury: Blessure
 GAME.Paused: Investigation en pause
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Application automatique des dégats
-SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Appliquer automatiquement les dégâts des jets aux jetons ciblés.
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Appliquer automatiquement les dégâts des jets aux jetons ciblés et aux passagers des véhicules.
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Jet d'armure automatique
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Si l'on veut que le jet d'armure soit fait automatiquement.
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Ouvrir la première attaque
@@ -249,3 +249,82 @@ WARNING.ItemActionMacroNotFound: Macro "{macro}" pas trouvée !
 WARNING.NoItemUnit: "Impossible d'utiliser {name} : pas d'unité restante !"
 FLBR.ROLLER.SelectDiceToPush: Sélectionnez les dés à relancer
 FLBR.Capacities: Capacités
+FLBR.BUTTON.Mount: Monter une arme
+FLBR.BUTTON.Unmount: Démonter une arme
+FLBR.HEADER.Hull: Coque
+FLBR.ACTIVE_EFFECT.Delete: Supprimer l'effet
+FLBR.ACTIVE_EFFECT.Edit: Editer l'effet
+FLBR.ACTIVE_EFFECT.Empty: Aucun effet.
+FLBR.ACTIVE_EFFECT.New: Nouvel effet
+FLBR.ACTIVE_EFFECT.Toggle: Basculer l'effet
+FLBR.CHAT.CritInflicted: '{name} reçoit la blessure critique {crit}.'
+FLBR.COMBAT.Combat: Combat
+FLBR.COMBAT.CannotBeDamaged: Ne peut pas être endommagé
+FLBR.COMBAT.DrawSize: Taille de pioche
+FLBR.COMBAT.SkippedDefender: Défenseur {name} ignoré
+FLBR.CRIT.CriticalInjury: Blessure critique
+FLBR.CRIT.Crit: Crit
+FLBR.CRIT.ChooseCrit: Choisir une blessure critique
+FLBR.CRIT.ChooseVehicleDamage: Choisir un dégât critique pour le véhicule
+FLBR.CRIT.ChooseActor: Choisir un acteur qui recevra une blessure critique.
+FLBR.CRIT.DrawCrit: Tirer une blessure critique
+FLBR.CRIT.DrawVehicleDamage: Tirer un dégât critique de véhicule
+FLBR.CustomFormula: Formule personnalisée
+FLBR.Formula: Formule
+FLBR.ItemMounted: Monté
+FLBR.ROLLER.RollSpecialHint: 'Lancer : {name} ?'
+FLBR.SomeoneIsSomething: '{name} est {status}'
+FLBR.VEHICLE.Action.Explode: Exploser
+FLBR.VEHICLE.Action.Ramming: Percuter
+FLBR.VEHICLE.Action.Repair: Réparer
+FLBR.VEHICLE.Action.Speeding: Accélérer
+FLBR.VEHICLE.Altitude: Altitude
+FLBR.VEHICLE.AddSeat: Augmenter le nombre de passagers (MJ seulement)
+FLBR.VEHICLE.ChoosePassenger: Choisir un passager
+FLBR.VEHICLE.ChoosePassengerHint: Choisir l'un des passagers.
+FLBR.VEHICLE.Components: Composants
+FLBR.VEHICLE.CrashDamageFlavor: Dégâts infligés à l'équipage lors du crash du véhicule
+FLBR.VEHICLE.Action.MassiveCrash: Crash total
+FLBR.VEHICLE.Action.ExplodeHint: Le véhicule explose dans une gerbe de flammes. Chaque passager à l'intérieur subit une explosion de puissance B, et le véhicule est détruit au-delà de toute réparation.
+FLBR.VEHICLE.Action.Crash: Crash
+FLBR.VEHICLE.Action.CrashHint: Si un Spinner est démoli, il se crash violemment au sol. Toute personne à l'intérieur subit D3 points de dégâts de chute plus 1 pour chaque zone d'altitude, mitigé par l'armure du véhicule. Vous pouvez également vous préparer au coup en lançant MOBILITÉ– chaque <span class="blade-runner-symbols">S</span> obtenu réduit les dégâts de 1.
+FLBR.VEHICLE.Action.SpeedingHint: Similaire à l'action de courir à pied, vous pouvez utiliser l'action d'accélérer pour effectuer des mouvements supplémentaires avec le véhicule lors d'un même round.
+FLBR.VEHICLE.Action.CrashDialog: Crasher le véhicule et infliger {damage} dégâts de chute à chaque passager, mitigé par l'armure du véhicule et un lancer de MOBILITÉ (ne compte pas comme une action).
+FLBR.VEHICLE.Crew: Equipage
+FLBR.VEHICLE.DecreaseHull: Diminuer la coque max.
+FLBR.VEHICLE.DeleteSeat: Diminuer le nombre de passagers
+FLBR.VEHICLE.EditPassenger: Editer le passager
+FLBR.VEHICLE.Engine: Moteur
+FLBR.VEHICLE.IncreaseHull: Augmenter la coque max.
+FLBR.VEHICLE.MountedWeapons: Armes montées
+FLBR.VEHICLE.NotifCrewFull: Plus de place libre !
+FLBR.VEHICLE.NotifDropCrewLoot: Mettez vos ordures dans le coffre à la place !
+FLBR.VEHICLE.NotifPassengerAlreadyPresent: Le passager est déjà présent !
+FLBR.VEHICLE.RemovePassenger: Retirer le passager
+FLBR.Wrecked: Démoli
+YZEC.CombatTracker.FastAction: A bougé
+YZEC.CombatTracker.SlowAction: A acté
+ACTOR.TypeLoot: Pile d'objets
+SETTINGS.BLADE_RUNNER.CrashTableName: Table des dégâts de véhicule
+SETTINGS.BLADE_RUNNER.CrashTableHint: ID ou nom de la table des dégâts critiques pour véhicule.
+SETTINGS.BLADE_RUNNER.CrushingTableName: Table des blessures écrasantes
+SETTINGS.BLADE_RUNNER.CrushingTableHint: ID ou nom de la table des blessures critiques écrasantes.
+SETTINGS.BLADE_RUNNER.PiercingTableName: Table des blessures perçantes
+SETTINGS.BLADE_RUNNER.PiercingTableHint: ID ou nom de la table des blessures critiques perçantes.
+SETTINGS.BLADE_RUNNER.EditNaturePermissionName: Autoriser le changement de nature
+SETTINGS.BLADE_RUNNER.EditNaturePermissionHint: Autoriser le joueur à éditer sa nature dans sa fiche de personnage.
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewHint: Mettre à jour la manœuvrabilité de l'acteur lorsque qu'il est ajouté à un véhicule.
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewHint: Mettre à jour la manœuvrabilité de l'acteur quand il est retiré du véhicule.
+SETTINGS.BLADE_RUNNER.UseActiveEffectsName: Utiliser les effets
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewName: Mise à jour manœuvrabilité quand équipe
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewName: Mise à jour manœuvrabilité quand déséquipe
+FLBR.ACTIVE_EFFECT.Add: Ajouter un effet
+FLBR.ACTIVE_EFFECT.InActorDisclaimer: 'Note : les effets ne peuvent pas être modifiés dans les objets qui sont embarqués (limitation de Foundry).'
+FLBR.CRIT.CritButtonTooltip: Tirer une blessure critique pour le personnage du joueur ou un jeton sélectionné
+FLBR.VEHICLE.CreateActor: Créer un acteur ?
+FLBR.VEHICLE.CreateActorHint: Voulez-vous dupliquer l'acteur {name} avant de l'ajouter à l'équipage ?
+FLBR.VEHICLE.NotifDropCrewVehicle: Les inceptions de véhicules ne sont pas autorisées !
+SETTINGS.BLADE_RUNNER.UseActiveEffectsHint: Montrer un champ additionnel dans les feuilles pour gérer les effets (pour utilisateur avancé).
+FLBR.VEHICLE.Action.RepairHint: Réparer les dégâts d'un véhicule requiert un ou plusieurs lancers de TECHNOLOGIE. Un seul lancer peut être tenté par Shift. Une seule personne peut tenter la réparation, mais les autres peuvent aider. Chaque <span class="blade-runner-symbols">S</span> obtenu retire 1 point de dégât. Si le véhicule était démoli, il ne l'est plus dès lors qu'un point de dégâts a été réparé. Si le moteur ou une arme montée a été endommagé lors d'un coup critique, le réparer requiert typiquement un lancer de TECHNOLOGIE, en supplément des lancers pour réparer les dégâts de la coque. Ce travail dure un Shift.
+FLBR.VEHICLE.Action.RammingHint: La plupart des véhicules peuvent être utilisés comme une arme – ex. rouler sur votre cible. Cela compte comme une attaque au combat rapproché mais lancez CONDUITE au lieu de COMBAT RAPPROCHÉ. Ce lancer peut être combiné avec l'action d'accélérer, mais dans ce cas le lancer de CONDUITE devient un jet opposé, signifiant que l'efficacité de l'accélération peut être réduite. Les dégâts de base de l'attaque sont égaux à la valeur de la coque du véhicule divisée par deux, arrondie au supérieur. Percuter avec un véhicule inflige des dégâts écrasants avec un dé critique de taille égale à la valeur de la coque, arrondie au dé le plus proche de taille supérieure, jusqu'au maximum D12 – ex. un véhicule avec une coque 9 a un dé critique de D10.
+TYPES.Actor.loot: Pile d'objets
