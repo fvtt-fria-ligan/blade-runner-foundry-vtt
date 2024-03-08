@@ -316,6 +316,8 @@ SETTINGS.BLADE_RUNNER.EditNaturePermissionHint: Autoriser le joueur à éditer s
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewHint: Mettre à jour la manœuvrabilité de l'acteur lorsque qu'il est ajouté à un véhicule.
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewHint: Mettre à jour la manœuvrabilité de l'acteur quand il est retiré du véhicule.
 SETTINGS.BLADE_RUNNER.UseActiveEffectsName: Utiliser les effets
+SETTINGS.BLADE_RUNNER.DoNotUseHandwrittenFontName: Ne pas utiliser de police manuscrite
+SETTINGS.BLADE_RUNNER.DoNotUseHandwrittenFontHint: Désactive l'utilisation de la police manuscrite "Caveat" dans les feuilles de personnage.
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewName: Mise à jour manœuvrabilité quand équipe
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewName: Mise à jour manœuvrabilité quand déséquipe
 FLBR.ACTIVE_EFFECT.Add: Ajouter un effet

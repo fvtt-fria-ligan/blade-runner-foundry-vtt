@@ -142,6 +142,7 @@ export const SETTINGS_KEYS = {
   /** @type {'autoArmorRoll'} */ AUTO_ARMOR_ROLL: 'autoArmorRoll',
   /** @type {'crashTable'} */ CRASH_TABLE: 'crashTable',
   /** @type {'crushingTable'} */ CRUSHING_TABLE: 'crushingTable',
+  /** @type {'doNotUseHandwrittenFont'} */ DO_NOT_USE_HANDWRITTEN_FONT: 'doNotUseHandwrittenFont',
   /** @type {'editNaturePermission'} */ EDIT_NATURE_PERMISSION: 'editNaturePermission',
   /** @type {'openFirstWeaponAttack'} */ OPEN_FIRST_WEAPON_ATTACK: 'openFirstWeaponAttack',
   /** @type {'piercingTable'} */ PIERCING_TABLE: 'piercingTable',

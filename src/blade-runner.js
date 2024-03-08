@@ -17,7 +17,7 @@
  */
 
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, CAPACITIES } from '@system/constants';
+import { ACTOR_TYPES, CAPACITIES, SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
 import { ActionCollection } from '@components/actor-action';
 import * as YZUR from 'yzur';
 import * as Chat from '@system/chat';
@@ -25,7 +25,7 @@ import * as BRMacro from '@system/macros';
 import BRRollHandler from '@components/roll/roller';
 import { registerSheets } from '@system/sheets';
 import { initializeHandlebars } from '@system/handlebars';
-import { registerSystemSettings } from '@system/settings';
+import { changeEditorFont, registerSystemSettings } from '@system/settings';
 import { enrichTextEditors } from '@system/enricher';
 import { registerDiceSoNice } from './plugins/dice-so-nice';
 import { overrideInlineRollListener } from '@components/roll/inline-roll';
@@ -129,6 +129,11 @@ Hooks.once('ready', () => {
 
   console.log('Blade Runner RPG | Ready!');
   Hooks.callAll('bladeRunnerReady', game.bladerunner, CONFIG.BLADE_RUNNER);
+
+  // Change default font for editable text in character sheets.
+  if (game.settings.get(SYSTEM_ID, SETTINGS_KEYS.DO_NOT_USE_HANDWRITTEN_FONT)) {
+    changeEditorFont(true);
+  }
 });
 
 /* ------------------------------------------ */
