@@ -3,7 +3,7 @@ FLBR.ATTRIBUTE.STR: Staerke
 FLBR.ATTRIBUTE.AGI: Geschicklichkeit
 FLBR.ATTRIBUTE.INT: Intelligenz
 FLBR.ATTRIBUTE.EMP: Empathie
-FLBR.ATTRIBUTE.MVR: Manövrierbarkeit
+FLBR.ATTRIBUTE.MVR: Wendigkeit
 FLBR.Skills: Fertigkeiten
 FLBR.SKILL.CloseCombat: Nahkampf
 FLBR.SKILL.Force: Kraft
@@ -17,7 +17,7 @@ FLBR.SKILL.Tech: Technologie
 FLBR.SKILL.Connections: Kontakte
 FLBR.SKILL.Insight: Menschenkenntnis
 FLBR.SKILL.Manipulation: Manipulation
-FLBR.SKILL.Driving: Fahrkunst
+FLBR.SKILL.Driving: Fahren
 FLBR.NATURE.Human: Mensch
 FLBR.NATURE.Replicant: Replikant
 FLBR.ARCHETYPE.ANALYST: Analyst
@@ -40,17 +40,17 @@ FLBR.COMBAT_ACTION.FirstAid: Erste Hilfe
 FLBR.COMBAT_ACTION.Manipulate: Manipulieren
 FLBR.COMBAT_ACTION.UseItem: Objekt benutzen
 FLBR.COMBAT_ACTION_HINT.Sprint: >-
-  Du kannst in einer einzigen Runde zusätzliche Bewegungs-Aktionen 
-  durchführen, indem du die Sprint-Aktion verwendest. Dies zählt dann 
-  als deine Aktion für diese Runde, was bedeutet, dass du keine andere 
-  Aktion ausführen kannst. Würfle <span class="smallcaps">BEWEGLICHKEIT</span> 
-  - für jedes gewürfelte <span class="blade-runner-symbols">S</span> kannst 
-  du zusätzlich zu deiner freien Bewegung eine weitere Bewegung machen. 
-  Wenn du den Wurf nicht schaffst, fällst du (vor der zweiten Bewegung) 
-  und kannst erst in deiner nächsten Runde wieder aufstehen.
+  Du kannst in einer einzigen Runde zusätzliche Bewegungs-Aktionen  durchführen,
+  indem du die Sprint-Aktion verwendest. Dies zählt dann  als deine Aktion für
+  diese Runde, was bedeutet, dass du keine andere  Aktion ausführen kannst.
+  Würfle <span class="smallcaps">BEWEGLICHKEIT</span>  - für jedes gewürfelte
+  <span class="blade-runner-symbols">S</span> kannst  du zusätzlich zu deiner
+  freien Bewegung eine weitere Bewegung machen.  Wenn du den Wurf nicht
+  schaffst, fällst du (vor der zweiten Bewegung)  und kannst erst in deiner
+  nächsten Runde wieder aufstehen.
 FLBR.COMBAT_ACTION_HINT.Crawl: >-
-  Wenn du dich bewegen musst, während du liegst, musst du kriechen. 
-  Dies funktioniert wie eine Bewegung, zählt aber als deine Aktion für diese Runde.  
+  Wenn du dich bewegen musst, während du liegst, musst du kriechen.  Dies
+  funktioniert wie eine Bewegung, zählt aber als deine Aktion für diese Runde.  
   Am Ende deiner Kriechbewegung kannst du aufstehen (freie Aktion).
 FLBR.COMBAT_ACTION_HINT.UnarmedAttack: Stärke + Nahkampf
 FLBR.COMBAT_ACTION_HINT.MeleeAttack: Stärke + Nahkampf
@@ -58,33 +58,35 @@ FLBR.COMBAT_ACTION_HINT.Grapple: >-
   Wenn du deinen Gegner als Spezialangriff im Nahkampf packst, fallen sowohl du 
   als auch dein Gegner zu Boden. Der Gegner lässt alle Waffen fallen, die er in 
   der Hand hatte, und kann sich nicht bewegen. Als einzige erlaubte Aktion kann 
-  er versuchen sich zu befreien – Dies gelingt, wenn dem Gegner ein vergleichender 
-  <span class="smallcaps">Nahkampf-Wurf</span> gegen dich gewinnt. Während du 
-  deinen Gegner im Griff hast, kannst du als einzige erlaubte Aktion 
-  (bis du deinen Gegner loslässt) einen Klammerangriff durchführen. Dieser 
-  funktioniert wie ein normaler unbewaffneter Angriff, aber dein Ziel gilt als 
-  gefesselt und kann sich daher nicht verteidigen.
+  er versuchen sich zu befreien – Dies gelingt, wenn dem Gegner ein
+  vergleichender  <span class="smallcaps">Nahkampf-Wurf</span> gegen dich
+  gewinnt. Während du  deinen Gegner im Griff hast, kannst du als einzige
+  erlaubte Aktion  (bis du deinen Gegner loslässt) einen Klammerangriff
+  durchführen. Dieser  funktioniert wie ein normaler unbewaffneter Angriff, aber
+  dein Ziel gilt als  gefesselt und kann sich daher nicht verteidigen.
 FLBR.COMBAT_ACTION_HINT.BreakFree: Stärke + Nahkampf
 FLBR.COMBAT_ACTION_HINT.ShootFirearm: Geschicklichkeit + Schusswaffen
 FLBR.COMBAT_ACTION_HINT.CarefulAim: >-
-  Wenn du dir die Zeit nimmst, sorgfältig zu zielen, bevor du den Abzug drückst, 
-  erhältst du einen Vorteil für deinen Angriffswurf. Zielen ist jedoch eine 
-  eigenständige Aktion. Du kannst nicht in der gleichen Runde zielen 
-  und schießen. Wenn du nach dem Zielen irgendetwas anderes tust, als deine Waffe 
+  Wenn du dir die Zeit nimmst, sorgfältig zu zielen, bevor du den Abzug
+  drückst,  erhältst du einen Vorteil für deinen Angriffswurf. Zielen ist jedoch
+  eine  eigenständige Aktion. Du kannst nicht in der gleichen Runde zielen  und
+  schießen. Wenn du nach dem Zielen irgendetwas anderes tust, als deine Waffe 
   abzufeuern, oder wenn du von einem Angriff getroffen wirst, verlierst du den 
-  Effekt des Zielens und du musst eine weitere Aktion ausgeben, um erneut sorgfältig 
-  zu zielen.
+  Effekt des Zielens und du musst eine weitere Aktion ausgeben, um erneut
+  sorgfältig  zu zielen.
 FLBR.COMBAT_ACTION_HINT.ThrowWeapon: Geschicklichkeit + Schusswaffen
 FLBR.COMBAT_ACTION_HINT.FirstAid: Intelligenz + Medizinische Hilfe
 FLBR.COMBAT_ACTION_HINT.Manipulate: Empathie + Manipulation
 FLBR.COMBAT_ACTION_HINT.UseItem: Objekt benutzen
 FLBR.BUTTON.Delete: Objekt entfernen
 FLBR.BUTTON.Edit: Objekt editieren
+FLBR.BUTTON.Mount: Zur Waffe greifen
 FLBR.BUTTON.Roll: Objekt würfeln
 FLBR.BUTTON.ToChat: Objekt in Chat anzeigen
+FLBR.BUTTON.Unmount: Waffe ins Holster
 FLBR.CHAT_ACTION.ApplyDamage: Schaden auf ausgewählte Figur anwenden
 FLBR.DIALOG.AssignSuccesses: Erfolg(e) zuweisen
-FLBR.DIALOG.AssignSuccessesHint: Wähle die Anzahl der Erfolge, die du gegen {name} anwenden möchtest.
+FLBR.DIALOG.AssignSuccessesHint: 'Wähle die Anzahl der Erfolge, die du gegen {name} anwenden möchtest.'
 FLBR.DIALOG.ChooseAction: Wähle Aktion
 FLBR.DIALOG.ChooseAttack: Wähle Angriff
 FLBR.HEADER.Actions: Aktionen
@@ -94,10 +96,11 @@ FLBR.HEADER.Attacks: Angriffs-Arten
 FLBR.HEADER.AttributesAndSkills: Attribute & Fertigkeiten
 FLBR.HEADER.Augments: Augmentierungen
 FLBR.HEADER.ChinyenPoints: Chinyen-Punkte
-FLBR.HEADER.DieSize: Basis-Würfel
+FLBR.HEADER.DieSize: Würfel
 FLBR.HEADER.FavoredGear: Bevorzugte Ausrüstung
 FLBR.HEADER.Health: Gesundheit
 FLBR.HEADER.Home: Wohnung
+FLBR.HEADER.Hull: Hülle
 FLBR.HEADER.HumanityPoints: Menschlichkeits-Punkte
 FLBR.HEADER.Injuries: Verletzungen
 FLBR.HEADER.Inventory: Ausrüstung
@@ -114,9 +117,9 @@ FLBR.HEADER.YearsOnTheForce: Dienstjahre
 FLBR.HEADER.Weapons: Waffen
 FLBR.SHEET_CONFIG.CharacterSubtype: Unterklasse
 FLBR.SHEET_CONFIG.CharacterSubtypeHint: >-
-  Wähle aus, ob es sich um einen SC oder einen NSC handelt. Letzterer bietet einen
-  verkleinerten Charakterbogen mit zusätzlichen Funktionen für die SL, um NSCs 
-  einfacher zu verwalten.
+  Wähle aus, ob es sich um einen SC oder einen NSC handelt. Letzterer bietet
+  einen verkleinerten Charakterbogen mit zusätzlichen Funktionen für die SL, um
+  NSCs  einfacher zu verwalten.
 FLBR.SHEET_CONFIG.HealthMaxModifier: Gesundheit (Bonus)
 FLBR.SHEET_CONFIG.HealthMaxModifierHint: Anzahl der zusätzlichen maximalen Lebenspunkte (nur SL).
 FLBR.SHEET_CONFIG.HealthPermanentLoss: Gesundheit (Malus)
@@ -127,11 +130,13 @@ FLBR.SHEET_CONFIG.ResolvePermanentLoss: Entschlossenheit (Malus)
 FLBR.SHEET_CONFIG.ResolvePermanentLossHint: Anzahl der reduzierten maximalen Entschlossenheitspunkte (nur SL).
 FLBR.SHEET_CONFIG.Maneuverability: Fahrzeug Manövrierbarkeit
 FLBR.SHEET_CONFIG.ManeuverabilityHint: >-
-  Legt die Manövrierbarkeit des von dieser Figur gefahrenen Fahrzeugs fest, falls zutreffend.
+  Legt die Manövrierbarkeit des von dieser Figur gefahrenen Fahrzeugs fest,
+  falls zutreffend.
 FLBR.SHEET_CONFIG.UnlimitedPush: Erlaube unbegrenztes Strapazieren des Wurfs
 FLBR.SHEET_CONFIG.UnlimitedPushHint: >-
-  Wenn die SL eine unbegrenzte Anzahl von strapazierten Würfen erlaubt. Aktiviere diese Einstellung, 
-  um bei fast jedem Wurf einen Strapazieren-Knopf anzuzeigen.
+  Wenn die SL eine unbegrenzte Anzahl von strapazierten Würfen erlaubt.
+  Aktiviere diese Einstellung,  um bei fast jedem Wurf einen Strapazieren-Knopf
+  anzuzeigen.
 FLBR.SHEET_HEADER.ArmorRoll: Würfle auf Panzerung
 FLBR.SHEET_HEADER.BlastPowerRoll: Würfle auf Sprengkraft
 FLBR.SHEET_HEADER.GenericRoll: Standard Wurf
@@ -147,6 +152,15 @@ FLBR.TAB.Mods: Besonderheiten
 FLBR.TAB.Stats: Werte
 FLBR.D: D
 FLBR.NO_VALUE: –
+FLBR.ACTIVE_EFFECT.Add: Addieren einen aktiven Effekt
+FLBR.ACTIVE_EFFECT.Delete: Entferne Effect
+FLBR.ACTIVE_EFFECT.Edit: Editiere Effekt
+FLBR.ACTIVE_EFFECT.Empty: Kein Effect.
+FLBR.ACTIVE_EFFECT.New: Neuer Effekt
+FLBR.ACTIVE_EFFECT.Toggle: Schalte Effekt ein/aus
+FLBR.ACTIVE_EFFECT.InActorDisclaimer: >-
+  Hinweis: Aktive Effekte können nicht in eingebundenen Objekten editiert werden
+  (Limitierung durch FoundryVTT).
 FLBR.Advantage: Vorteil
 FLBR.Capacities: Gesundheit und Entschlossenheit
 FLBR.Blast: Explosion
@@ -157,13 +171,27 @@ FLBR.BrokenByStress: GEBROCHEN DURCH STRESS
 FLBR.Cancel: Abbrechen
 FLBR.CHAT.DamageDealt: '{name} erleidet {amount} Schaden.'
 FLBR.CHAT.NoDamageDealt: '{name} erleidet keinen Schaden.'
-FLBR.CHAT.InitialDamageDealt: Der Angriff erzielte initial {damage} Schaden.
-FLBR.CHAT.ArmorDeflectedDamage: Panzerung wehrte {damage} Schaden ab.
+FLBR.CHAT.InitialDamageDealt: 'Der Angriff erzielte initial {damage} Schaden.'
+FLBR.CHAT.ArmorDeflectedDamage: 'Panzerung wehrte {damage} Schaden ab.'
 FLBR.CHAT.ArmorDeflectedAllDamage: Panzerung wehrte den komplette Schaden ab.
 FLBR.CHAT.ArmorNoEffect: Panzerung hat keinen Effekt.
-FLBR.CreateNewItem: Erstelle ein neues {type} Objekt
+FLBR.CHAT.CritInflicted: '{name} erleidet die kritische Verletzung {crit}.'
+FLBR.COMBAT.Combat: Kampf
+FLBR.COMBAT.CannotBeDamaged: Kann keinen Schaden erleiden
+FLBR.COMBAT.DrawSize: Bestimme Größe
+FLBR.COMBAT.SkippedDefender: 'Übersprungener Verteidiger {name}'
+FLBR.CreateNewItem: 'Erstelle ein neues {type} Objekt'
 FLBR.Crit: Krit
+FLBR.CRIT.CritButtonTooltip: Erstelle ein KRIT für den SC des Spielers oder ein ausgewähltes Token
+FLBR.CRIT.CriticalInjury: Kritische Verletzung
+FLBR.CRIT.ChooseCrit: Wähle eine Kritische Verletzung
+FLBR.CRIT.ChooseVehicleDamage: Wähle eine Kritische Fahrzeug Beschädigung
+FLBR.CRIT.ChooseActor: Wähle einen Actor um eine Kritische Verletzung zu verursachen.
+FLBR.CRIT.DrawCrit: Ermittle Kritische Verletzung
+FLBR.CRIT.DrawVehicleDamage: Ermittle Kritischen Fahrzeug-Schaden
+FLBR.CustomFormula: Eigene Formel
 FLBR.Disadvantage: Nachteil
+FLBR.Formula: Formel
 FLBR.InjuryCategory: Kategorie
 FLBR.InjuryDeathSave: Rettungswurf
 FLBR.InjuryHealing: Heilung
@@ -182,13 +210,13 @@ FLBR.ItemActionTypeRunMacro: Starte Macro
 FLBR.ItemAttackName: Angriffs-Name
 FLBR.ItemArmor: Panzerung
 FLBR.ITEM_AVAILABILITY.Incidental: Zufaelllig
-FLBR.ITEM_AVAILABILITY.Luxury: Luxurioes
+FLBR.ITEM_AVAILABILITY.Luxury: Luxus
 FLBR.ITEM_AVAILABILITY.Premium: Premium
-FLBR.ITEM_AVAILABILITY.Rare: Selten
+FLBR.ITEM_AVAILABILITY.Rare: Rar
 FLBR.ITEM_AVAILABILITY.Standard: Standard
 FLBR.ItemAvailability: Verfuegbarkeit
 FLBR.ItemConsumable: Verbrauchsgut
-FLBR.ItemConsumeNotif: '{qty} Eineiten von {name} wurden verbraucht'
+FLBR.ItemConsumeNotif: '{qty} Einheiten von {name} wurden verbraucht'
 FLBR.ItemCost: Kosten
 FLBR.ItemDeleteAction: Aktion entfernen
 FLBR.ItemDeleteAttack: Angriff entfernen
@@ -198,19 +226,21 @@ FLBR.ItemNewAttack: Neuer Angriff
 FLBR.ItemNoAttack: Kein Angriffs-Modus definiert.
 FLBR.ItemNoModifier: Kein Modifikator.
 FLBR.ItemModifier: Modifikator
+FLBR.ItemMounted: Angelegt
 FLBR.ItemQuantity: Anzahl
 FLBR.ItemSpecial: Spezialisierung
 FLBR.MACRO.GetActorTitle: Wähle eine Figur
 FLBR.MACRO.GetActorHint: Du hast mehrere Figuren ausgewählt. Bitte wähle eine davon aus.
 FLBR.MACRO.MultipleItems: >-
-  Deine zugewiesene Figur {actor} hat mehrere Objekte mit dem Namen {item}. Das erste gefundene Objekt wird genutzt.
-FLBR.MACRO.NoActor: Deine zugewiesene Figur {actor} wurde nicht gefunden.
-FLBR.MACRO.NoItem: Deine zugewiesene Figur {actor} besitzt kein Objekt mit dem Namen {item}.
-FLBR.MACRO.RollAction: Aktion {action}
-FLBR.MACRO.RollStat: Würfle {stat}
+  Deine zugewiesene Figur {actor} hat mehrere Objekte mit dem Namen {item}. Das
+  erste gefundene Objekt wird genutzt.
+FLBR.MACRO.NoActor: 'Deine zugewiesene Figur {actor} wurde nicht gefunden.'
+FLBR.MACRO.NoItem: 'Deine zugewiesene Figur {actor} besitzt kein Objekt mit dem Namen {item}.'
+FLBR.MACRO.RollAction: 'Aktion {action}'
+FLBR.MACRO.RollStat: 'Würfle {stat}'
 FLBR.Nature: Abstammung
 FLBR.NatureHint: Abstammung des Characters (SL-Modifikation)
-FLBR.NewItem: Neu - {type}
+FLBR.NewItem: 'Neu - {type}'
 FLBR.OK: OK
 FLBR.Range: Reichweite
 FLBR.RANGED_COMBAT.OutOfRange: Außer Reichweite
@@ -227,21 +257,85 @@ FLBR.ROLLER.ModifierValue: Wert
 FLBR.ROLLER.TotalModifier: 'Insgesamt: {value}'
 FLBR.ROLLER.ResolveTest: Wurf für permanenten Verlust von Entschlossenheit
 FLBR.ROLLER.ResolveTestHint: >-
-  Wenn du durch Stress gebrochen bist, musst du einen Basis-Würfel werfen, der deinem 
-  Empathiewert entspricht. Wenn du eine Eins würfelst, verlierst du permanent 1 Punkt 
-  Entschlossenheit, d.h. dein maximaler Entschlossenheit Wert wird um einen Punkt reduziert.
-FLBR.ROLLER.ResolveTestFailed: Der Empathie-Wurf von {name} ist fehlgeschlagen. Daher sinkt ENTSCHLOSSENHEIT permanent um 1.
+  Wenn du durch Stress gebrochen bist, musst du einen Basis-Würfel werfen, der
+  deinem  Empathiewert entspricht. Wenn du eine Eins würfelst, verlierst du
+  permanent 1 Punkt  Entschlossenheit, d.h. dein maximaler Entschlossenheit Wert
+  wird um einen Punkt reduziert.
+FLBR.ROLLER.ResolveTestFailed: >-
+  Der Empathie-Wurf von {name} ist fehlgeschlagen. Daher sinkt ENTSCHLOSSENHEIT
+  permanent um 1.
 FLBR.ROLLER.RollButton: Wurf
+FLBR.ROLLER.RollSpecialHint: 'Roll: {name}?'
 FLBR.ROLLER.RollWithAdvantageButton: Vorteil
 FLBR.ROLLER.RollWithDisadvantageButton: Nachteil
 FLBR.ROLLER.SelectDiceToPush: Wähle zu strapazierende Würfel
 FLBR.ROLLER.UnlimitedPush: Unbegrenzt
 FLBR.SignatureItemUsedCheckboxHint: Benutzt?
+FLBR.SomeoneIsSomething: '{name} is {status}'
+FLBR.VEHICLE.Action.Crash: Absturz
+FLBR.VEHICLE.Action.CrashHint: >-
+  Wenn ein Spinner zerstört wurde, stürzt er auf den Boden. Alle Insassen
+  erleiden W3 Punkte Fallschaden plus einen für jede Höhen-Zone, gemildert durch
+  die Panzerung des Fahrzeugs und einen BEWEGLICHKEIT-Wurf (keine Aktion): Jeder
+  Erfolg senkt den Schaden um 1.
+FLBR.VEHICLE.Action.CrashDialog: >-
+  Das Fahrzeug stürzt ab und verursacht bei allen Insassen {damage} Fallschaden,
+  abgemildert durch die Panzerung des Fahrzeugs und einen BEWEGLICHKEIT-Wurf
+  (keine Aktion): Jeder Erfolg senkt den Schaden um 1.
+FLBR.VEHICLE.Action.Explode: Explosion
+FLBR.VEHICLE.Action.ExplodeHint: >-
+  Das Fahrzeug explodiert in einem Feuerball. Alle Insassen erleiden Schaden in
+  Höhe einer Sprengkraft B Explosion. Das Fahrzeug ist irreparabel zerstört.
+FLBR.VEHICLE.Action.MassiveCrash: Schwerer Aufprall
+FLBR.VEHICLE.Action.Ramming: Rammen
+FLBR.VEHICLE.Action.RammingHint: >-
+  Die meisten Fahrzeuge können als Waffen genutzt werden - bspw. indem man das
+  Ziel überfährt. Dies zählt als NAHKAMPF Angriff, der mit einem Wurf auf FAHREN
+  durchgeführt wird. Der Wurf kann mit einer Beschleunigungs-Aktion kombiniert
+  werden, in diesem Fall ist der FAHREN-Wurf ein vergleichender Wurf, was die
+  Effektivität der Beschleunigung einschränken kann. Der Basis-Schaden der
+  Attacke entspricht dem HÜLLEN-Wert des Fahrzeugs geteilt durch 2 (abgerundet).
+  Ramm-Angriffe verursachen Stumpfen Schaden mit einem KRIT-Würfel der dem
+  HÜLLEN-Wert des Fahrzeugs entspricht (aufgerundet).
+FLBR.VEHICLE.Action.Repair: Reparieren
+FLBR.VEHICLE.Action.RepairHint: >-
+  Reparaturen von Fahrzeugschaden benötigen ein oder mehrere Würfe auf
+  TECHNOLOGIE. Pro SCHICHT kann ein Wurf ablegegt werden. Nur eien Person kann
+  auf Hüllen-Reparaturen würfeln, aber weitere können helfen. Jedes gewürfelte
+  <span class="blade-runner-symbols">S</span> reduziert den Schaden um 1. Ein
+  Fahrzeug gilt nicht mehr als zerstört, wenn es 1 Schadenspunkt repairet wurde.
+  Wenn der Motor oder eine Fahrzeugwaffe durch einen kritischen Treffer
+  ausgefallen ist, so müssen diese normalerweise mit einem zusätzlichen Wurf auf
+  TECNHNOLOGIE repariert werden. Auch dieser Wurf dauert eine SCHICHT.
+FLBR.VEHICLE.Action.Speeding: Beschleunigen
+FLBR.VEHICLE.Action.SpeedingHint: >-
+  Ähnlich wie bei einem Sprint zu Fuß kannst du über die Beschleunigungs-Aktion
+  für ein Fahrzeug zusätzliche Manöver-Aktionen in einer Runde erhalten.
+FLBR.VEHICLE.Altitude: Hoehe
+FLBR.VEHICLE.AddSeat: Erhöhe die Insassen Kapazität (nur SL)
+FLBR.VEHICLE.ChoosePassenger: Wähle Insasse
+FLBR.VEHICLE.ChoosePassengerHint: Wähle einen der Insassen.
+FLBR.VEHICLE.Components: Komponenten
+FLBR.VEHICLE.CrashDamageFlavor: Schaden den die Crew durch den Absturz ihres Fahrzeugs erleidet
+FLBR.VEHICLE.CreateActor: Erstelle Actor?
+FLBR.VEHICLE.CreateActorHint: 'Möchtest du den Actor {name} duplizieren, bevor du ihn zur Crew machst?'
+FLBR.VEHICLE.Crew: Crew
+FLBR.VEHICLE.DecreaseHull: Reduziere Max. Hülle
+FLBR.VEHICLE.DeleteSeat: Reduziere Insassen Kapazität
+FLBR.VEHICLE.EditPassenger: Editiere Insasse
+FLBR.VEHICLE.Engine: Motor
+FLBR.VEHICLE.IncreaseHull: Erhöhe Max. Hülle
+FLBR.VEHICLE.MountedWeapons: Fahrzeug-Waffen
+FLBR.VEHICLE.NotifCrewFull: Keine freien Sitze mehr!
+FLBR.VEHICLE.NotifDropCrewVehicle: Nicht erlaubt!
+FLBR.VEHICLE.NotifDropCrewLoot: Wirf deinen Abfall besser in den Mülleimer!
+FLBR.VEHICLE.NotifPassengerAlreadyPresent: Insasse ist bereits platziert!
+FLBR.VEHICLE.RemovePassenger: Entferne Insasse
 FLBR.WeaponDamage: Schaden
 FLBR.WeaponCrit: Krit Würfel
 FLBR.WeaponDamageType: Schadenstyp
 FLBR.WEAPON_DAMAGE_TYPE.None: –
-FLBR.WEAPON_DAMAGE_TYPE.Crushing: Hieb
+FLBR.WEAPON_DAMAGE_TYPE.Crushing: Stumpf
 FLBR.WEAPON_DAMAGE_TYPE.Piercing: Stich
 FLBR.WEAPON_DAMAGE_TYPE.Stress: Stress
 FLBR.WeaponRange: Reichweite
@@ -250,8 +344,11 @@ FLBR.WEAPON_RANGE.Short: Nah
 FLBR.WEAPON_RANGE.Medium: Mittel
 FLBR.WEAPON_RANGE.Long: Weit
 FLBR.WEAPON_RANGE.Extreme: Extrem
+FLBR.Wrecked: Zerstört
 FLBR.YouAreBroken: Du bist GEBROCHEN!
-FLBR.ActorSheet.NotifWrongItemType: Figur {actor} kann keine {type} Objekte tragen!
+FLBR.ActorSheet.NotifWrongItemType: 'Figur {actor} kann keine {type} Objekte tragen!'
+YZEC.CombatTracker.FastAction: Bewegt
+YZEC.CombatTracker.SlowAction: Agiert
 YZUR.CHAT.ROLL.Infos: Info
 YZUR.CHAT.ROLL.Damage: Basis-Schaden
 YZUR.CHAT.ROLL.Push: Strapazieren
@@ -262,6 +359,7 @@ YZUR.DIETERMS.D10BladeRunnerDie: D10
 YZUR.DIETERMS.D12BladeRunnerDie: D12
 TYPES.Actor.character: Charakter
 TYPES.Actor.vehicle: Fahrzeug
+TYPES.Actor.loot: Fund
 ACTOR.SubtypePc: SC
 ACTOR.SubtypeNpc: NSC
 TYPES.Item.generic: Standard
@@ -273,15 +371,39 @@ TYPES.Item.specialty: Spezialisierung
 TYPES.Item.injury: Verletzung
 GAME.Paused: Ermittlung pausiert
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatisch Schaden zuweisen
-SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Bestimmt, ob Schaden auf ausgewählte Ziele automatisch zugewiesen werden soll.
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: 'Bestimmt, ob Schaden auf ausgewählte Ziele automatisch zugewiesen werden soll.'
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatischer Panzerungs-Wurf
-SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Bestimmt, ob automatisch auf Panzerung gewürfelt werden soll.
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: 'Bestimmt, ob automatisch auf Panzerung gewürfelt werden soll.'
+SETTINGS.BLADE_RUNNER.CrashTableName: Vehicle Damage Table
+SETTINGS.BLADE_RUNNER.CrashTableHint: ID oder Name der kritischen Fahrzeug-Schaden Tabelle.
+SETTINGS.BLADE_RUNNER.CrushingTableName: Crushing Table
+SETTINGS.BLADE_RUNNER.CrushingTableHint: ID oder Name der Kritische Stumpfe Verletzungen Tabelle.
+SETTINGS.BLADE_RUNNER.PiercingTableName: Piercing Table
+SETTINGS.BLADE_RUNNER.PiercingTableHint: ID oder Name der Kritische Stich Verletzungen Tabelle.
+SETTINGS.BLADE_RUNNER.EditNaturePermissionName: Erlaube Veränderung der Abstammung
+SETTINGS.BLADE_RUNNER.EditNaturePermissionHint: Erlaube dem Spieler die Abstammung seines Charakters zu verändern.
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Zeige ersten Waffen Angriff
-SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Bestimmt, ob bei der Anzeige eines Waffen-Objekts automatisch der erste Waffen-Angriff des Objektes ausgeklappt dargestellt werden soll.
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: >-
+  Bestimmt, ob bei der Anzeige eines Waffen-Objekts automatisch der erste
+  Waffen-Angriff des Objektes ausgeklappt dargestellt werden soll.
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewName: Aktualisiere Manövrierbarkeit bei Crew-Beitritt
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewHint: >-
+  Erlaube die Änderung der Manövrierbarkeit eines Actors, wenn er einer
+  Fahrzeug-Crew zugewiesen wurde.
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewName: Aktualisiere Manövrierbarkeit bei Crew-Entfernung
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewHint: >-
+  Erlaube die Änderung der Manövrierbarkeit eines Actors, wenn er von einer
+  Fahrzeug-Crew entfernt wurde.
+SETTINGS.BLADE_RUNNER.UseActiveEffectsName: Benutze Aktive Effekte
+SETTINGS.BLADE_RUNNER.UseActiveEffectsHint: >-
+  Aktiviere die Anzeige eines zusätzliches Feldes im Charakter-Blatt für das
+  Einstellen von Aktiven Effekten (für fortgeschrittene Spieler).
 WARNING.ApplyDamageNoNature: 'Zuweisung des Strapazierungs-Schadens: Figur-Abstammung nicht gefunden!'
-WARNING.ApplyDamageNoCapacityKey: 'Zuweisung des Strapazierungs-Schadens: Abstammung-Kapazität Verbindung nicht gefunden!'
+WARNING.ApplyDamageNoCapacityKey: >-
+  Zuweisung des Strapazierungs-Schadens: Abstammung-Kapazität Verbindung nicht
+  gefunden!
 WARNING.ApplyDamageNoActorCapacity: 'Zuweisung des Strapazierungs-Schadens: Figur-Kapazität nicht gefunden!'
 WARNING.NoDiceInput: Keine Würfel zum werfen!
 WARNING.NoItemAction: Keine Objekt Aktionen definiert!
-WARNING.ItemActionMacroNotFound: Macro "{macro}" nicht gefunden!
+WARNING.ItemActionMacroNotFound: 'Macro "{macro}" nicht gefunden!'
 WARNING.NoItemUnit: 'Kann {name} nicht benutzen: Vorrat erschöpft!'
