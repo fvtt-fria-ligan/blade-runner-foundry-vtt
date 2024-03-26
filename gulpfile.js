@@ -148,7 +148,7 @@ function getTargetVersion(currentVersion, release) {
  * Makes a changelog.
  */
 async function changelog() {
-  await execa('npx', ['standard-version', '--skip.bump', '--skip.tag', '--skip.commit'], { stdio });
+  await execa('npx', ['commit-and-tag-version', '--skip.bump', '--skip.tag', '--skip.commit', '-t', ''], { stdio });
 }
 
 /**
