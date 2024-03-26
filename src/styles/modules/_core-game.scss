@@ -712,6 +712,10 @@ $pad: 25px;
       li::marker {
         content: "a";
       }
+
+      ul li::marker {
+        content: "A";
+      }
     }
   }
 
