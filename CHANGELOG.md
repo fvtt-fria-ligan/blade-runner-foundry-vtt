@@ -1,6 +1,13 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [11.0.2](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/11.0.1...11.0.2) (2024-03-26)
+
+
+### Features
+
+* **Settings:** ✨ Add new setting to disable handwritten font ([44af555](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/44af555cf69687f82a8fd3cf64a95a850fc00758))
 
 ### [11.0.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/11.0.0...11.0.1) (2023-07-18)
 
