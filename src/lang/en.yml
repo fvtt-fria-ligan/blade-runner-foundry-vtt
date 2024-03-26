@@ -386,6 +386,8 @@ SETTINGS.BLADE_RUNNER.CrushingTableName: Crushing Table
 SETTINGS.BLADE_RUNNER.CrushingTableHint: ID or name of the crushing critical injuries table.
 SETTINGS.BLADE_RUNNER.PiercingTableName: Piercing Table
 SETTINGS.BLADE_RUNNER.PiercingTableHint: ID or name of the piercing critical injuries table.
+SETTINGS.BLADE_RUNNER.DoNotUseHandwrittenFontName: Don't Use Handwritten Font
+SETTINGS.BLADE_RUNNER.DoNotUseHandwrittenFontHint: Disable the use of the handwritten font "Caveat" in character sheets.
 SETTINGS.BLADE_RUNNER.EditNaturePermissionName: Allow Nature Change
 SETTINGS.BLADE_RUNNER.EditNaturePermissionHint: Whether to allow the player to edit their nature in their character sheet.
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Open First Weapon Attack

@@ -101,4 +101,31 @@ export function registerSystemSettings() {
     type: Boolean,
     default: false,
   });
+  game.settings.register(sysId, SETTINGS_KEYS.DO_NOT_USE_HANDWRITTEN_FONT, {
+    name: 'SETTINGS.BLADE_RUNNER.DoNotUseHandwrittenFontName',
+    hint: 'SETTINGS.BLADE_RUNNER.DoNotUseHandwrittenFontHint',
+    scope: 'client',
+    config: true,
+    type: Boolean,
+    default: false,
+    onChange: s => changeEditorFont(s),
+  });
+}
+
+/**
+ * @param {boolean} useAlternateFont
+ */
+export function changeEditorFont(useAlternateFont) {
+  const root = document.querySelector(':root');
+  let ff = getComputedStyle(root).getPropertyValue('--font-editor');
+  if (useAlternateFont) {
+    ff = ff.replace('"Caveat", ', '');
+  }
+  else if (!ff.includes('Caveat')) {
+    ff = '"Caveat", ' + ff;
+  }
+  else {
+    return;
+  }
+  root.style.setProperty('--font-editor', ff);
 }
