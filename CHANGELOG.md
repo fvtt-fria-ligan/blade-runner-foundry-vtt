@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+### [12.0.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/11.0.2...12.0.0) (2024-06-09)
+
+### Bug Fixes
+
+- Fixed v12 compatibility with YZUR library and verified system for 12.327
+
 ## [11.0.2](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/11.0.1...11.0.2) (2024-03-26)
 
 
