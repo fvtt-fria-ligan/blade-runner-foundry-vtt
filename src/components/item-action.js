@@ -64,7 +64,7 @@ export default class ItemAction {
   }
 }
 
-/** @enum {number} */
+/** @enum {string} */
 ItemAction.Types = {
   ROLL_SKILL: 'skill',
   RUN_MACRO: 'macro',
