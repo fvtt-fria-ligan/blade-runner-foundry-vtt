@@ -108,11 +108,11 @@ function registerHandlebarsHelpers() {
   //   return undefined;
   // });
 
-  Handlebars.registerHelper('enrichText', function (text) {
-    // Enriches content.
-    text = TextEditor.enrichHTML(text, { documents: true, async: false });
-    return new Handlebars.SafeString(text);
-  });
+  // Handlebars.registerHelper('enrichText', function (text) {
+  //   // Enriches content.
+  //   text = TextEditor.enrichHTML(text, { documents: true, async: false });
+  //   return new Handlebars.SafeString(text);
+  // });
 
   Handlebars.registerHelper('enrichDocumentName', function (text) {
     const rgx = /@UUID\[(.+?)\](?:{(.+?)})?/gm;
@@ -121,7 +121,7 @@ function registerHandlebarsHelpers() {
       const title = p2 ?? fromUuidSync(p1)?.name ?? '{undefined}';
       return `<b>${title}</b>`;
     });
-    text = TextEditor.enrichHTML(text, { documents: true, async: false });
+    // text = TextEditor.enrichHTML(text, { documents: true, async: false });
     return new Handlebars.SafeString(text);
   });
 
