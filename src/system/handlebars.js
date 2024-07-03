@@ -108,20 +108,23 @@ function registerHandlebarsHelpers() {
   //   return undefined;
   // });
 
-  Handlebars.registerHelper('enrichText', function (text) {
-    // Enriches content.
-    text = TextEditor.enrichHTML(text, { documents: true, async: false });
-    return new Handlebars.SafeString(text);
-  });
+  // Handlebars.registerHelper('enrichText', function (text) {
+  //   // Enriches content.
+  //   text = TextEditor.enrichHTML(text, { documents: true, async: false });
+  //   return new Handlebars.SafeString(text);
+  // });
 
   Handlebars.registerHelper('enrichDocumentName', function (text) {
     const rgx = /@UUID\[(.+?)\](?:{(.+?)})?/gm;
-    text = text.replace(rgx, (_match, p1, p2) => {
+    if (rgx.test(text)) {
+      text = text.replace(rgx, (_match, p1, p2) => {
       // eslint-disable-next-line no-undef
-      const title = p2 ?? fromUuidSync(p1)?.name ?? '{undefined}';
-      return `<b>${title}</b>`;
-    });
-    text = TextEditor.enrichHTML(text, { documents: true, async: false });
+        const title = p2 ?? fromUuidSync(p1)?.name ?? '{undefined}';
+        return `<b>${title}</b>`;
+      });
+    }
+    // ! Next line removed because Foundry dropped support for async:
+    // text = TextEditor.enrichHTML(text, { documents: true, async: false });
     return new Handlebars.SafeString(text);
   });
 
