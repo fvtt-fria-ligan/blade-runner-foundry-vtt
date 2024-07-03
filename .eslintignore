@@ -2,5 +2,6 @@
 dist/
 node_modules
 foundry.js
+foundry-*.js
 static/system.json
 static/template.json

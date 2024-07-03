@@ -3,5 +3,6 @@ dist/
 .eslintrc
 package-lock.json
 foundry.js
+foundry-*.js
 static/system.json
 static/template.json
