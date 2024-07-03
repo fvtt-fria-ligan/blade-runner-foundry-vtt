@@ -54,11 +54,7 @@
 			{{!-- RollMode --}}
 			<h3>{{localize "CHAT.RollDefault"}}</h3>
 			<select name="rollMode">
-				{{#select rollMode}}
-					{{#each config.rollModes}}
-						<option value="{{@key}}">{{localize .}}</option>
-					{{/each}}
-				{{/select}}
+				{{selectOptions config.rollModes selected=rollMode localize=true}}
 			</select>
 			{{#if damage includeZero=true}}
 				<h3>{{localize "FLBR.WeaponDamage"}}:<span style="color: var(--color-green); float: right;">{{damage}}, <small>{{localize (lookup config.damageTypes damageType)}}</small></span></h3>
