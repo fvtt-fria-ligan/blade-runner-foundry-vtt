@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [12.0.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/12.0.0...12.0.1) (2024-07-04)
+
+### Bug Fixes
+
+- 🐛 Fixed an issue with items in character sheets displaying the text "[object Promise]" instead of its proper description. ([ed58576](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/ed58576b6d0703563b96f7b39d3969124ab664fe))
+
 ### [12.0.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/11.0.2...12.0.0) (2024-06-09)
 
 ### Bug Fixes
@@ -10,10 +16,9 @@ All notable changes to this project will be documented in this file. See [commit
 
 ## [11.0.2](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/11.0.1...11.0.2) (2024-03-26)
 
-
 ### Features
 
-* **Settings:** ✨ Add new setting to disable handwritten font ([44af555](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/44af555cf69687f82a8fd3cf64a95a850fc00758))
+- **Settings:** ✨ Add new setting to disable handwritten font ([44af555](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/44af555cf69687f82a8fd3cf64a95a850fc00758))
 
 ### [11.0.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/11.0.0...11.0.1) (2023-07-18)
 
