@@ -129,6 +129,21 @@ function registerHandlebarsHelpers() {
   });
 
   /**
+   * Foundry's {{#select}} custom helper used here because pending removal from Foundry's code.
+   * A helper to assign an `<option>` within a `<select>` block as selected based on its value.
+   * Escape the string as handlebars would, then escape any regexp characters in it.
+   * Parameters:
+   * * `selected` - Value to be tagged as "selected"
+   * * `options` - options for the helper
+   */
+  Handlebars.registerHelper('select', function (selected, options) {
+    const escapedValue = RegExp.escape(Handlebars.escapeExpression(selected));
+    const rgx = new RegExp(` value=["']${escapedValue}["']`);
+    const html = options.fn(HandlebarsHelpers);
+    return html.replace(rgx, '$& selected');
+  });
+
+  /**
    * Templates for a die Score selector.
    * Parameters:
    * * `target` - The name of the affected variable.
