@@ -5,13 +5,13 @@ FLBR.ATTRIBUTE.INT: Inteligencja
 FLBR.ATTRIBUTE.EMP: Empatia
 FLBR.ATTRIBUTE.MVR: Manewrowość
 FLBR.Skills: Umiejętności
-FLBR.SKILL.CloseCombat: Walka Wręcz
-FLBR.SKILL.Force: Siła
-FLBR.SKILL.Stamina: Wytrzymałość
-FLBR.SKILL.Firearms: Strzelectwo
-FLBR.SKILL.Mobility: Mobilność
-FLBR.SKILL.Stealth: Skradanie
-FLBR.SKILL.MedicalAid: Pomoc Medyczna
+FLBR.SKILL.CloseCombat: Bijatyka
+FLBR.SKILL.Force: Impet
+FLBR.SKILL.Stamina: Kondycja
+FLBR.SKILL.Firearms: Celność
+FLBR.SKILL.Mobility: Sprawność
+FLBR.SKILL.Stealth: Dyskrecja
+FLBR.SKILL.MedicalAid: Medycyna
 FLBR.SKILL.Observation: Obserwacja
 FLBR.SKILL.Tech: Technika
 FLBR.COMBAT_ACTION.Crawl: Pełzanie
@@ -24,7 +24,7 @@ FLBR.COMBAT_ACTION.ThrowWeapon: Rzut Bronią
 FLBR.COMBAT_ACTION.FirstAid: Pierwsza Pomoc
 FLBR.COMBAT_ACTION.Manipulate: Manipulacja
 FLBR.COMBAT_ACTION.UseItem: Użyj Przedmiotu
-FLBR.COMBAT_ACTION_HINT.UnarmedAttack: Siła + Walka Wręcz
+FLBR.COMBAT_ACTION_HINT.UnarmedAttack: Siła + Bijatyka
 FLBR.COMBAT_ACTION_HINT.ThrowWeapon: Zręczność + Strzelectwo
 FLBR.COMBAT_ACTION_HINT.FirstAid: Inteligencja + Pomoc Medyczna
 FLBR.COMBAT_ACTION_HINT.Manipulate: Empatia + Manipulacja
@@ -46,14 +46,14 @@ FLBR.COMBAT_ACTION.ShootFirearm: Strzał z Broni Palnej
 FLBR.COMBAT_ACTION_HINT.Sprint: Możesz wykonać dodatkowe ruchy w jednej rundzie, korzystając z akcji sprintu. Ta akcja będzie jedyną możliwą do wykonania w danej rundzie. Rzućć na Mobilność - za każdy wyrzucony <span class="blade-runner-symbols">Sukces</span>, możesz wykonać dodatkowy ruch oprócz darmowego. Jeśli nie uda ci się rzut, upadasz i nie możesz wstać do następnej tury.
 FLBR.COMBAT_ACTION_HINT.Crawl: Jeśli musisz się poruszać, będąc w pozycji leżącej, musisz pełzać. Działa to jak ruch, ale jest traktowane jako twoja akcja na tę rundę. Możesz wstać na końcu swojego pełzania (akcja darmowa).
 FLBR.SKILL.Connections: Kontakty
-FLBR.SKILL.Insight: Wnikliwość
-FLBR.SKILL.Manipulation: Manipulacja
-FLBR.SKILL.Driving: Prowadzenie pojazdów
+FLBR.SKILL.Insight: Intuicja
+FLBR.SKILL.Manipulation: Perswazja
+FLBR.SKILL.Driving: Prowadzenie
 FLBR.NATURE.Human: Człowiek
 FLBR.COMBAT_ACTION_HINT.BreakFree: Siła + Walka Wręcz
 FLBR.COMBAT_ACTION_HINT.ShootFirearm: Zręczność + Strzelectwo
 FLBR.COMBAT_ACTION_HINT.CarefulAim: Jeśli poświęcisz czas na staranne celowanie przed naciśnięciem spustu, zyskujesz przewagę w rzucie ataku. Celowanie samo w sobie jest jednak akcją i nie możesz celować ostrożnie oraz strzelać w tej samej rundzie. Jeśli wykonasz jakąkolwiek inną akcję po celowaniu lub zostaniesz trafiony, tracisz efekt celowania i musisz poświęcić kolejną akcję, aby ponownie celować ostrożnie.
-FLBR.COMBAT_ACTION_HINT.MeleeAttack: Siła + Walka Wręcz
+FLBR.COMBAT_ACTION_HINT.MeleeAttack: Siła + Bijatyka
 FLBR.COMBAT_ACTION_HINT.Grapple: Jeśli złapiesz przeciwnika w walce wręcz jako specjalny atak, oboje upadacie na ziemię. Przeciwnik traci trzymaną broń i nie może się ruszać. Jedyną akcją, jaką może wykonać, jest próba wyzwolenia się, która odnosi sukces, jeśli przeciwnik wygra rzut na walkę wręcz przeciwko tobie. Podczas chwytania, jedyną twoją akcją (do momentu zwolnienia przeciwnika) jest atak chwytem. Działa to jak normalny atak bez broni, ale cel jest unieruchomiony i nie może się bronić.
 FLBR.BUTTON.Delete: Usuń przedmiot
 FLBR.BUTTON.Edit: Edytuj przedmiot
@@ -89,12 +89,12 @@ FLBR.HEADER.Rating: Ocena
 FLBR.HEADER.YearsOnTheForce: Lata Służby
 FLBR.HEADER.Weapons: Bronie
 FLBR.SHEET_CONFIG.CharacterSubtype: Podtyp
-FLBR.SHEET_CONFIG.HealthMaxModifier: Modyfikuj maksymalne zdrowie (Tylko dla MG).
+FLBR.SHEET_CONFIG.HealthMaxModifier: Modyfikator maksymalnego zdrowia
 FLBR.SHEET_HEADER.ItemRoll: Rzut Przedmiotem
 FLBR.TAB.Actions: Akcje
 FLBR.TAB.Bio: Biografia
 FLBR.TAB.Combat: Walka
-FLBR.TAB.Info: Informacje
+FLBR.TAB.Info: Informacja
 FLBR.MACRO.GetActorTitle: Wybierz Postać
 FLBR.MACRO.RollAction: Akcja {action}
 FLBR.VEHICLE.Action.SpeedingHint: Odpowiednik sprintu na piechotę, możesz użyć akcji przyspieszenia, aby wykonać dodatkowe ruchy w tej samej rundzie pojazdem.
@@ -115,7 +115,7 @@ FLBR.VEHICLE.MountedWeapons: Zamontowane Bronie
 FLBR.VEHICLE.NotifDropCrewLoot: Umieść swoje śmieci w bagażniku!
 FLBR.VEHICLE.NotifPassengerAlreadyPresent: Pasażer już jest obecny!
 FLBR.VEHICLE.RemovePassenger: Usuń Pasażera
-FLBR.WeaponDamage: Obrażenia
+FLBR.WeaponDamage: Uszkodzenia
 FLBR.WeaponCrit: Kość Krytyczna
 FLBR.WEAPON_RANGE.Long: Długi
 FLBR.WEAPON_RANGE.Extreme: Ekstremalny
@@ -255,7 +255,7 @@ FLBR.Nature: Typ
 FLBR.ROLLER.MaxPush: Maksymalny przerzut
 FLBR.ROLLER.ModifierActive: Aktywny
 FLBR.ROLLER.ModifierName: Nazwa
-FLBR.ROLLER.ModifierValue: Modyfikator
+FLBR.ROLLER.ModifierValue: Wartość
 FLBR.ROLLER.TotalModifier: 'Suma: {value}'
 FLBR.ROLLER.ResolveTest: Test na stałą utratę Opanowania
 FLBR.ROLLER.ResolveTestHint: Kiedy jesteś złamany przez stres, musisz rzucić jedną kością bazową odpowiadającą twojej Empatii. Jeśli wyrzucisz jedynkę, tracisz na stałe 1 punkt Opanowania, co oznacza redukcję maksymalnego Opanowania o jeden stopień.
@@ -323,3 +323,5 @@ WARNING.NoDiceInput: Brak kości do rzutu!
 WARNING.NoItemAction: Brak zdefiniowanej akcji przedmiotu!
 WARNING.ItemActionMacroNotFound: Makro "{macro}" nie znalezione!
 WARNING.NoItemUnit: 'Nie można użyć {name}: brak jednostek!'
+SETTINGS.BLADE_RUNNER.DoNotUseHandwrittenFontName: Nie używaj pisma odręcznego
+SETTINGS.BLADE_RUNNER.DoNotUseHandwrittenFontHint: Wyłącz użycie odręcznego fontu "Caveat" w kartach postaci.
