@@ -1,0 +1,396 @@
+FLBR.Attributes: Cechy
+FLBR.ATTRIBUTE.STR: Siła
+FLBR.ATTRIBUTE.AGI: Zręczność
+FLBR.ATTRIBUTE.INT: Inteligencja
+FLBR.ATTRIBUTE.EMP: Empatia
+FLBR.ATTRIBUTE.MVR: Manewrowość
+FLBR.Skills: Umiejętności
+FLBR.SKILL.CloseCombat: Bijatyka
+FLBR.SKILL.Force: Impet
+FLBR.SKILL.Stamina: Kondycja
+FLBR.SKILL.Firearms: Celność
+FLBR.SKILL.Mobility: Sprawność
+FLBR.SKILL.Stealth: Dyskrecja
+FLBR.SKILL.MedicalAid: Medycyna
+FLBR.SKILL.Observation: Obserwacja
+FLBR.SKILL.Tech: Technika
+FLBR.SKILL.Connections: Kontakty
+FLBR.SKILL.Insight: Intuicja
+FLBR.SKILL.Manipulation: Perswazja
+FLBR.SKILL.Driving: Prowadzenie
+FLBR.NATURE.Human: Człowiek
+FLBR.NATURE.Replicant: Replikant
+FLBR.ARCHETYPE.ANALYST: Analityk
+FLBR.ARCHETYPE.CITY_SPEAKER: Miastowiec
+FLBR.ARCHETYPE.DOXIE: Lalka
+FLBR.ARCHETYPE.ENFORCER: Egzekutorka
+FLBR.ARCHETYPE.FIXER: Lawirantka
+FLBR.ARCHETYPE.INSPECTOR: Inspektor
+FLBR.ARCHETYPE.SKIMMER: Szubrawiec
+FLBR.COMBAT_ACTION.Sprint: Sprint
+FLBR.COMBAT_ACTION.Crawl: Pełzanie
+FLBR.COMBAT_ACTION.UnarmedAttack: Atak Bez Broni
+FLBR.COMBAT_ACTION.MeleeAttack: Atak Wręcz
+FLBR.COMBAT_ACTION.Grapple: Chwyt
+FLBR.COMBAT_ACTION.BreakFree: Wyrwanie Się
+FLBR.COMBAT_ACTION.ShootFirearm: Strzał z Broni Palnej
+FLBR.COMBAT_ACTION.CarefulAim: Staranne Celowanie
+FLBR.COMBAT_ACTION.ThrowWeapon: Rzut Bronią
+FLBR.COMBAT_ACTION.FirstAid: Pierwsza Pomoc
+FLBR.COMBAT_ACTION.Manipulate: Manipulacja
+FLBR.COMBAT_ACTION.UseItem: Użyj Przedmiotu
+FLBR.COMBAT_ACTION_HINT.Sprint: >-
+  Możesz wykonać dodatkowe ruchy w jednej rundzie, korzystając
+  z akcji sprintu. Ta akcja będzie jedyną możliwą do wykonania
+  w danej rundzie.
+  Rzućć na Mobilność - za każdy wyrzucony <span class="blade-runner-symbols">Sukces</span>,
+  możesz wykonać dodatkowy ruch oprócz darmowego. Jeśli nie uda
+  ci się rzut, upadasz i nie możesz wstać do następnej tury.
+FLBR.COMBAT_ACTION_HINT.Crawl: >-
+  Jeśli musisz się poruszać, będąc w pozycji leżącej, musisz pełzać.
+  Działa to jak ruch, ale jest traktowane jako twoja akcja na tę rundę.
+  Możesz wstać na końcu swojego pełzania (akcja darmowa).
+FLBR.COMBAT_ACTION_HINT.UnarmedAttack: Siła + Walka Wręcz
+FLBR.COMBAT_ACTION_HINT.MeleeAttack: Siła + Walka Wręcz
+FLBR.COMBAT_ACTION_HINT.Grapple: >-
+  Jeśli złapiesz przeciwnika w walce wręcz jako specjalny atak,
+  oboje upadacie na ziemię. Przeciwnik traci trzymaną broń
+  i nie może się ruszać. Jedyną akcją, jaką może wykonać, jest
+  próba wyzwolenia się, która odnosi sukces, jeśli przeciwnik
+  wygra rzut na walkę wręcz przeciwko tobie. Podczas chwytania,
+  jedyną twoją akcją (do momentu zwolnienia przeciwnika) jest
+  atak chwytem. Działa to jak normalny atak bez broni, ale cel
+  jest unieruchomiony i nie może się bronić.
+FLBR.COMBAT_ACTION_HINT.BreakFree: Siła + Walka Wręcz
+FLBR.COMBAT_ACTION_HINT.ShootFirearm: Zręczność + Strzelectwo
+FLBR.COMBAT_ACTION_HINT.CarefulAim: >-
+  Jeśli poświęcisz czas na staranne celowanie przed naciśnięciem
+  spustu, zyskujesz przewagę w rzucie ataku. Celowanie samo
+  w sobie jest jednak akcją i nie możesz celować ostrożnie
+  oraz strzelać w tej samej rundzie. Jeśli wykonasz jakąkolwiek
+  inną akcję po celowaniu lub zostaniesz trafiony, tracisz efekt
+  celowania i musisz poświęcić kolejną akcję, aby ponownie celować
+  ostrożnie.
+FLBR.COMBAT_ACTION_HINT.ThrowWeapon: Zręczność + Strzelectwo
+FLBR.COMBAT_ACTION_HINT.FirstAid: Inteligencja + Pomoc Medyczna
+FLBR.COMBAT_ACTION_HINT.Manipulate: Empatia + Manipulacja
+FLBR.COMBAT_ACTION_HINT.UseItem: Użyj Przedmiotu
+FLBR.BUTTON.Delete: Usuń przedmiot
+FLBR.BUTTON.Edit: Edytuj przedmiot
+FLBR.BUTTON.Mount: Zamontuj broń
+FLBR.BUTTON.Roll: Rzuć przedmiotem
+FLBR.BUTTON.ToChat: Wyślij przedmiot do czatu
+FLBR.BUTTON.Unmount: Odłącz broń
+FLBR.CHAT_ACTION.ApplyDamage: Zastosuj obrażenia do wybranych celów
+FLBR.DIALOG.AssignSuccesses: Przydziel Sukces(y)
+FLBR.DIALOG.AssignSuccessesHint: Wybierz liczbę sukcesów do wykorzystania przeciwko {name}.
+FLBR.DIALOG.ChooseAction: Wybierz Akcję
+FLBR.DIALOG.ChooseAttack: Wybierz Atak
+FLBR.HEADER.Actions: Akcje
+FLBR.HEADER.Appearance: Wygląd
+FLBR.HEADER.Armor: Pancerz
+FLBR.HEADER.Attacks: Rodzaje Ataków
+FLBR.HEADER.AttributesAndSkills: Atrybuty i Umiejętności
+FLBR.HEADER.Augments: Ulepszenia
+FLBR.HEADER.ChinyenPoints: Punkty Chinyen
+FLBR.HEADER.DieSize: Bazowa Kostka
+FLBR.HEADER.FavoredGear: Ulubiony Ekwipunek
+FLBR.HEADER.Health: Zdrowie
+FLBR.HEADER.Home: Dom
+FLBR.HEADER.Hull: Kadłub
+FLBR.HEADER.HumanityPoints: Punkty Humanitarności
+FLBR.HEADER.Injuries: Obrażenia
+FLBR.HEADER.Inventory: Ekwipunek
+FLBR.HEADER.Notes: Notatki
+FLBR.HEADER.Modifiers: Modyfikatory
+FLBR.HEADER.PromotionPoints: Punkty Promocji
+FLBR.HEADER.Resolve: Opanowanie
+FLBR.HEADER.SignatureItem: Charakterystyczny Przedmiot
+FLBR.HEADER.Specialties: Specjalności
+FLBR.HEADER.KeyMemory: Kluczowe Wspomnienie
+FLBR.HEADER.KeyRelationship: Kluczowa Relacja
+FLBR.HEADER.Rating: Ocena
+FLBR.HEADER.YearsOnTheForce: Lata Służby
+FLBR.HEADER.Weapons: Bronie
+FLBR.SHEET_CONFIG.CharacterSubtype: Podtyp
+FLBR.SHEET_CONFIG.CharacterSubtypeHint:  >-
+  Wybierz, czy to jest PC (Postać Gracza)
+  czy NPC (Postać Niezależna). Druga opcja zapewnia
+  uproszczoną kartę postaci oraz dodatkowe funkcje
+  dla Mistrza Gry, ułatwiające prowadzenie NPC.
+FLBR.SHEET_CONFIG.HealthMaxModifier: Modyfikuj maksymalne zdrowie (Tylko dla MG).
+FLBR.SHEET_CONFIG.HealthMaxModifierHint: Modyfikuj maksymalną pojemność zdrowia (Tylko dla MG).
+FLBR.SHEET_CONFIG.HealthPermanentLoss: Stała utrata zdrowia
+FLBR.SHEET_CONFIG.HealthPermanentLossHint: Ustaw, ile zdrowia jest trwale utracone (Tylko dla MG).
+FLBR.SHEET_CONFIG.ResolveMaxModifier: Modyfikator maksymalnego opanowania
+FLBR.SHEET_CONFIG.ResolveMaxModifierHint: Modyfikuj maksymalną pojemność opanowania (Tylko dla MG).
+FLBR.SHEET_CONFIG.ResolvePermanentLoss: Stała utrata opanowania
+FLBR.SHEET_CONFIG.ResolvePermanentLossHint: Ustaw, ile opanowania jest trwale utracone (Tylko dla MG).
+FLBR.SHEET_CONFIG.Maneuverability: Manewrowość pojazdu
+FLBR.SHEET_CONFIG.ManeuverabilityHint: >-
+  Ustaw manewrowość prowadzonego pojazdu,
+  jeśli ma to zastosowanie.
+FLBR.SHEET_CONFIG.UnlimitedPush: Pozwól na nieograniczone przerzuty
+FLBR.SHEET_CONFIG.UnlimitedPushHint:  >-
+  Jeśli twój MG pozwala na nieograniczoną liczbę
+  przerzutów. Sprawdź to ustawienie, aby wyświetlić
+  przycisk przerzutu przy prawie każdym rzucie.
+FLBR.SHEET_HEADER.ArmorRoll: Rzut na Pancerz
+FLBR.SHEET_HEADER.BlastPowerRoll: Rzut na Moc Wybuchu
+FLBR.SHEET_HEADER.GenericRoll: Ogólny Rzut
+FLBR.SHEET_HEADER.ItemPost: Opublikuj Przedmiot
+FLBR.SHEET_HEADER.ItemRoll: Rzut Przedmiotem
+FLBR.TAB.Actions: Akcje
+FLBR.TAB.Bio: Biografia
+FLBR.TAB.Combat: Walka
+FLBR.TAB.Info: Informacje
+FLBR.TAB.Inventory: Ekwipunek
+FLBR.TAB.Features: Cechy
+FLBR.TAB.Mods: Modyfikacje
+FLBR.TAB.Stats: Statystyki
+FLBR.D: K
+FLBR.NO_VALUE: –
+FLBR.ACTIVE_EFFECT.Add: Dodaj Aktywny Efekt
+FLBR.ACTIVE_EFFECT.Delete: Usuń Efekt
+FLBR.ACTIVE_EFFECT.Edit: Edytuj Efekt
+FLBR.ACTIVE_EFFECT.Empty: Brak Efektu.
+FLBR.ACTIVE_EFFECT.New: Nowy Efekt
+FLBR.ACTIVE_EFFECT.Toggle: Przełącz Efekt
+FLBR.ACTIVE_EFFECT.InActorDisclaimer: "Uwaga: Aktywne efekty nie mogą być edytowane w osadzonych przedmiotach (ograniczenie Foundry)."
+FLBR.Advantage: Ułatwienie
+FLBR.Capacities: Zdrowie & Opanowanie
+FLBR.Blast: Wybuch
+FLBR.BlastPower: Moc Wybuchu
+FLBR.Broken: Zepsuty
+FLBR.BrokenByDamage: Zepsuty przez Obrażenia
+FLBR.BrokenByStress: Zepsuty przez Stres
+FLBR.Cancel: Anuluj
+FLBR.CHAT.DamageDealt: '{name} otrzymuje {amount} obrażeń.'
+FLBR.CHAT.NoDamageDealt: '{name} nie otrzymał obrażeń.'
+FLBR.CHAT.InitialDamageDealt: Atak spowodował początkowo {damage} obrażeń.
+FLBR.CHAT.ArmorDeflectedDamage: Pancerz odparł {damage} obrażeń.
+FLBR.CHAT.ArmorDeflectedAllDamage: Pancerz odparł wszystkie obrażenia.
+FLBR.CHAT.ArmorNoEffect: Pancerz nie ma efektu.
+FLBR.CHAT.CritInflicted: '{name} doznał krytycznego obrażenia {crit}.'
+FLBR.COMBAT.Combat: Walka
+FLBR.COMBAT.CannotBeDamaged: Nie można zadać obrażeń
+FLBR.COMBAT.DrawSize: Rozmiar kostki
+FLBR.COMBAT.SkippedDefender: Pominięto obrońcę {name}
+FLBR.CreateNewItem: Stwórz nowy przedmiot {type}
+FLBR.CRIT.Crit: Krytyk
+FLBR.CRIT.CritButtonTooltip: Wylosuj krytyczne obrażenie dla postaci gracza lub wybranego znacznika
+FLBR.CRIT.CriticalInjury: Krytyczne Obrażenie
+FLBR.CRIT.ChooseCrit: Wybierz Krytyczne Obrażenie
+FLBR.CRIT.ChooseVehicleDamage: Wybierz Krytyczne Uszkodzenie Pojazdu
+FLBR.CRIT.ChooseActor: Wybierz postać, która ma otrzymać krytyczne obrażenie.
+FLBR.CRIT.DrawCrit: Wylosuj Krytyczne Obrażenie
+FLBR.CRIT.DrawVehicleDamage: Wylosuj Krytyczne Uszkodzenie Pojazdu
+FLBR.CustomFormula: Własna Formuła
+FLBR.Disadvantage: Utrudnienie
+FLBR.Formula: Formuła
+FLBR.InjuryCategory: Kategoria Obrażeń
+FLBR.InjuryDeathSave: Rzut na Śmierć
+FLBR.InjuryHealing: Leczenie
+FLBR.InjuryLethal: Śmiertelne
+FLBR.InjuryPermanent: Trwałe
+FLBR.InventoryNoItem: Pusty.
+FLBR.ItemAddAction: Dodaj Akcję
+FLBR.ItemAddAttack: Dodaj Atak
+FLBR.ItemAddModifier: Dodaj Modyfikator Rzutu
+FLBR.ItemActionAttribute: Atrybut
+FLBR.ItemActionName: Nazwa Akcji
+FLBR.ItemActionSkill: Umiejętność
+FLBR.ItemActionType: Typ Akcji
+FLBR.ItemActionTypeRollSkill: Rzut Umiejętnością
+FLBR.ItemActionTypeRunMacro: Uruchom Makro
+FLBR.ItemAttackName: Nazwa Ataku
+FLBR.ItemArmor: Pancerz
+FLBR.ITEM_AVAILABILITY.Incidental: Przypadkowy
+FLBR.ITEM_AVAILABILITY.Luxury: Luksusowy
+FLBR.ITEM_AVAILABILITY.Premium: Premium
+FLBR.ITEM_AVAILABILITY.Rare: Rzadki
+FLBR.ITEM_AVAILABILITY.Standard: Standardowy
+FLBR.ItemAvailability: Dostępność
+FLBR.ItemConsumable: Zużywalny
+FLBR.ItemConsumeNotif: Zużyto {qty} jednostek {name}
+FLBR.ItemCost: Koszt
+FLBR.ItemDeleteAction: Usuń Akcję
+FLBR.ItemDeleteAttack: Usuń Atak
+FLBR.ItemDeleteModifier: Usuń Modyfikator
+FLBR.ItemNewAction: Nowa Akcja
+FLBR.ItemNewAttack: Nowy Atak
+FLBR.ItemNoAttack: Brak zdefiniowanego trybu ataku.
+FLBR.ItemNoModifier: Brak modyfikatora.
+FLBR.ItemModifier: Modyfikator
+FLBR.ItemMounted: Zamontowany
+FLBR.ItemQuantity: Ilość
+FLBR.ItemSpecial: Specjalny
+FLBR.MACRO.GetActorTitle: Wybierz Postać
+FLBR.MACRO.GetActorHint: Wybrałeś wiele znaczników. Proszę wybierz jednego z nich.
+FLBR.MACRO.MultipleItems: >-
+  Twoja postać {actor} posiada więcej niż jeden przedmiot
+  o nazwie {item}. Wybrany zostanie pierwszy pasujący przedmiot.
+FLBR.MACRO.NoActor: Twoja postać {actor} nie została znaleziona.
+FLBR.MACRO.NoItem: Twoja postać {actor} nie posiada przedmiotu o nazwie {item}.
+FLBR.MACRO.RollAction: Akcja {action}
+FLBR.MACRO.RollStat: Rzut {stat}
+FLBR.Nature: Typ
+FLBR.NatureHint: Typ postaci (Tylko dla MG)
+FLBR.NewItem: Nowy {type}
+FLBR.OK: OK
+FLBR.Range: Zasięg
+FLBR.RANGED_COMBAT.OutOfRange: Poza zasięgiem
+FLBR.RANGED_COMBAT.SmallTarget: Mały cel
+FLBR.RANGED_COMBAT.LargeTarget: Duży cel
+FLBR.RANGED_COMBAT.TargetBehindCover: Cel za osłoną
+FLBR.RANGED_COMBAT.CarefulAim: Precyzyjne celowanie
+FLBR.RANGED_COMBAT.UnseenTarget: Cel niewidoczny
+FLBR.ROLLER.AddDie: Dodaj kość
+FLBR.ROLLER.MaxPush: Maksymalny przerzut
+FLBR.ROLLER.ModifierActive: Aktywny
+FLBR.ROLLER.ModifierName: Nazwa
+FLBR.ROLLER.ModifierValue: Modyfikator
+FLBR.ROLLER.TotalModifier: 'Suma: {value}'
+FLBR.ROLLER.ResolveTest: Test na stałą utratę Opanowania
+FLBR.ROLLER.ResolveTestHint:  >-
+  Kiedy jesteś złamany przez stres, musisz rzucić
+  jedną kością bazową odpowiadającą twojej Empatii.
+  Jeśli wyrzucisz jedynkę, tracisz na stałe 1 punkt
+  Opanowania, co oznacza redukcję maksymalnego
+  Opanowania o jeden stopień.
+FLBR.ROLLER.ResolveTestFailed: '{name} nie zdał testu na Empatię i traci na stałe 1 punkt opanowania.'
+FLBR.ROLLER.RollButton: Rzuć
+FLBR.ROLLER.RollSpecialHint: 'Rzut: {name}?'
+FLBR.ROLLER.RollWithAdvantageButton: Ułatwienie
+FLBR.ROLLER.RollWithDisadvantageButton: Utrudnienie
+FLBR.ROLLER.SelectDiceToPush: Wybierz kości do przerzutu
+FLBR.ROLLER.UnlimitedPush: Nieograniczony przerzut
+FLBR.SignatureItemUsedCheckboxHint: Użyte?
+FLBR.SomeoneIsSomething: '{name} jest {status}'
+FLBR.VEHICLE.Action.Crash: Wypadek
+FLBR.VEHICLE.Action.CrashHint: >-
+  Jeśli Spinner jest rozbity, uderza gwałtownie w ziemię.
+  Wszyscy znajdujący się w środku doznają obrażeń
+  upadkowych K3 punktów plus jeden za każdą strefę wysokości,
+  zredukowane o wartość pancerza pojazdu. Możesz również
+  przygotować się na uderzenie, rzucając na ZWINNOŚĆ -
+  każde wyrzucone <span class="blade-runner-symbols">S</span> zmniejsza obrażenia o jeden.
+FLBR.VEHICLE.Action.CrashDialog: >-
+  To spowoduje rozbicie pojazdu i zada {damage} obrażeń
+  upadkowych każdemu pasażerowi, zmniejszone o wartość
+  pancerza pojazdu i rzut na ZWINNOŚĆ (bez akcji).
+FLBR.VEHICLE.Action.Explode: Eksplozja
+FLBR.VEHICLE.Action.ExplodeHint: >-
+  Pojazd eksploduje w kuli ognia.
+  Wszyscy znajdujący się w środku są narażeni na wybuch o mocy B,
+  a pojazd zostaje zniszczony poza możliwością naprawy.
+FLBR.VEHICLE.Action.MassiveCrash: Ogromny Wypadek
+FLBR.VEHICLE.Action.Ramming: Taranowanie
+FLBR.VEHICLE.Action.RammingHint: >-
+  Większość pojazdów może być używana jako broń - np. do przejechania celu.
+  Liczy się to jako atak wręcz, ale zamiast walki wręcz wykonuje się rzut na PROWADZENIE.
+  Ten rzut może być połączony z akcją przyspieszenia, ale wtedy rzut na PROWADZENIE
+  staje się rzutem przeciwnystawnym, co może zmniejszyć skuteczność przyspieszenia.
+  Podstawowy poziom obrażeń ataku równa się połowie wartości Wytrzymałości kadłuba pojazdu, zaokrąglając w górę.
+  Taranowanie pojazdów powoduje obrażenia miażdżące, a kość krytyczna ma wielkość równą Wytrzymałości kadłuba,
+  zaokrągloną w górę do najbliższej kości, do maksymalnej wartości K12 - np. pojazd o kadłubie 9 ma kość krytyczną K10.
+FLBR.VEHICLE.Action.Repair: Naprawa
+FLBR.VEHICLE.Action.RepairHint: >-
+  Naprawa uszkodzeń pojazdu wymaga jednego lub kilku rzutów na Technika.
+  Jeden rzut można wykonać na zmianę. Tylko jedna osoba może rzucać na naprawę kadłuba,
+  ale inni mogą pomagać. Każde wyrzucone <span class="blade-runner-symbols">S</span> usuwa jeden punkt uszkodzeń.
+  Jeśli pojazd był zniszczony, przestaje być uznawany za zniszczony po naprawie jednego punktu uszkodzeń.
+  Jeśli silnik lub zamontowana broń zostały unieruchomione wskutek krytycznego trafienia,
+  naprawa zazwyczaj wymaga rzutu na Technika, oprócz jakiegokolwiek rzutu na naprawę uszkodzeń kadłuba.
+  Praca trwa jedną zmianę.
+FLBR.VEHICLE.Action.Speeding: Przyspieszanie
+FLBR.VEHICLE.Action.SpeedingHint: >-
+  Odpowiednik sprintu na piechotę,
+  możesz użyć akcji przyspieszenia, aby wykonać dodatkowe
+  ruchy w tej samej rundzie pojazdem.
+FLBR.VEHICLE.Altitude: Wysokość
+FLBR.VEHICLE.AddSeat: Zwiększ liczbę pasażerów (tylko dla MG)
+FLBR.VEHICLE.ChoosePassenger: Wybierz Pasażera
+FLBR.VEHICLE.ChoosePassengerHint: Wybierz jednego z pasażerów.
+FLBR.VEHICLE.Components: Komponenty
+FLBR.VEHICLE.CrashDamageFlavor: Obrażenia zadane załodze wskutek wypadku pojazdu
+FLBR.VEHICLE.CreateActor: Utworzyć postać?
+FLBR.VEHICLE.CreateActorHint: Czy chcesz zduplikować postać {name} przed dodaniem go do załogi?
+FLBR.VEHICLE.Crew: Załoga
+FLBR.VEHICLE.DecreaseHull: Zmniejsz maksymalną wartość Wytrzymałości kadłuba
+FLBR.VEHICLE.DeleteSeat: Zmniejsz liczbę pasażerów
+FLBR.VEHICLE.EditPassenger: Edytuj Pasażera
+FLBR.VEHICLE.Engine: Silnik
+FLBR.VEHICLE.IncreaseHull: Zwiększ maksymalną wartość Wytrzymałości kadłuba
+FLBR.VEHICLE.MountedWeapons: Zamontowane Bronie
+FLBR.VEHICLE.NotifCrewFull: Brak wolnych miejsc!
+FLBR.VEHICLE.NotifDropCrewVehicle: Wkładanie pojazdów do pojazdów jest niedozwolone!
+FLBR.VEHICLE.NotifDropCrewLoot: Umieść swoje śmieci w bagażniku!
+FLBR.VEHICLE.NotifPassengerAlreadyPresent: Pasażer już jest obecny!
+FLBR.VEHICLE.RemovePassenger: Usuń Pasażera
+FLBR.WeaponDamage: Obrażenia
+FLBR.WeaponCrit: Kość Krytyczna
+FLBR.WeaponDamageType: Rodzaj Obrażeń
+FLBR.WEAPON_DAMAGE_TYPE.None: –
+FLBR.WEAPON_DAMAGE_TYPE.Crushing: Miażdżące
+FLBR.WEAPON_DAMAGE_TYPE.Piercing: Przebijające
+FLBR.WEAPON_DAMAGE_TYPE.Stress: Stres
+FLBR.WeaponRange: Zasięg
+FLBR.WEAPON_RANGE.Engaged: Zaangażowany
+FLBR.WEAPON_RANGE.Short: Krótki
+FLBR.WEAPON_RANGE.Medium: Średni
+FLBR.WEAPON_RANGE.Long: Długi
+FLBR.WEAPON_RANGE.Extreme: Ekstremalny
+FLBR.Wrecked: Zniszczony
+FLBR.YouAreBroken: Jesteś Pokonany!
+FLBR.ActorSheet.NotifWrongItemType: Aktor {actor} nie może posiadać przedmiotów typu {type}!
+YZEC.CombatTracker.FastAction: Ruch
+YZEC.CombatTracker.SlowAction: Akcja
+YZUR.CHAT.ROLL.Infos: Informacje
+YZUR.CHAT.ROLL.Damage: Podstawowe Obrażenia
+YZUR.CHAT.ROLL.Push: Przerzut
+YZUR.CHAT.ROLL.CancelPush: Akceptuj
+YZUR.DIETERMS.D6BladeRunnerDie: K6
+YZUR.DIETERMS.D8BladeRunnerDie: K8
+YZUR.DIETERMS.D10BladeRunnerDie: K10
+YZUR.DIETERMS.D12BladeRunnerDie: K12
+TYPES.Actor.character: Postać
+TYPES.Actor.vehicle: Pojazd
+TYPES.Actor.loot: Łup
+ACTOR.SubtypePc: Postać Gracza
+ACTOR.SubtypeNpc: Postać Niezależna
+TYPES.Item.generic: Ogólny
+TYPES.Item.upgrade: Ulepszenie
+TYPES.Item.armor: Pancerz
+TYPES.Item.weapon: Broń
+TYPES.Item.explosive: Materiał Wybuchowy
+TYPES.Item.specialty: Specjalność
+TYPES.Item.injury: Obrażenie
+GAME.Paused: Śledztwo Wstrzymane
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatyczne Zastosowanie Obrażeń
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Czy automatycznie stosować obrażenia z rzutów do wybranych tokenów i pasażerów pojazdów.
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatyczny Rzut na Pancerz
+SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Czy automatycznie rzucać na pancerz.
+SETTINGS.BLADE_RUNNER.CrashTableName: Tabela Uszkodzeń Pojazdu
+SETTINGS.BLADE_RUNNER.CrashTableHint: ID lub nazwa tabeli krytycznych uszkodzeń pojazdów.
+SETTINGS.BLADE_RUNNER.CrushingTableName: Tabela Obrażeń Miażdżących
+SETTINGS.BLADE_RUNNER.CrushingTableHint: ID lub nazwa tabeli krytycznych obrażeń miażdżących.
+SETTINGS.BLADE_RUNNER.PiercingTableName: Tabela Obrażeń Przebijających
+SETTINGS.BLADE_RUNNER.PiercingTableHint: ID lub nazwa tabeli krytycznych obrażeń przebijających.
+SETTINGS.BLADE_RUNNER.EditNaturePermissionName: Pozwól na Zmianę Typu
+SETTINGS.BLADE_RUNNER.EditNaturePermissionHint: Czy pozwolić graczowi na edycję jego typu na karcie postaci.
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Rozpocznij Pierwszy Atak Bronią
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Czy otworzyć zwijaną sekcję pierwszego ataku bronią po wyświetleniu karty przedmiotu.
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewName: Aktualizuj Manewrowość Przy Dodaniu Do Załogi
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewHint: Czy aktualizować manewrowość postacji przy dodaniu go do pojazdu.
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewName: Aktualizuj Manewrowość Przy Usunięciu Z Załogi
+SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewHint: Czy aktualizować manewrowość postacji przy usunięciu go z pojazdu.
+SETTINGS.BLADE_RUNNER.UseActiveEffectsName: Używaj Aktywnych Efektów
+SETTINGS.BLADE_RUNNER.UseActiveEffectsHint: Czy wyświetlać dodatkowe pole w kartach postaci do zarządzania Aktywnymi Efektami (dla zaawansowanych graczy).
+WARNING.ApplyDamageNoNature: 'Zastosuj Obrażenia Pchnięcia: Nieznany Typ Postaci!'
+WARNING.ApplyDamageNoCapacityKey: 'Zastosuj Obrażenia Pchnięcia: Nie Znaleziono Relacji Typ-Wytrzymałość!'
+WARNING.ApplyDamageNoActorCapacity: 'Zastosuj Obrażenia Pchnięcia: Wytrzymałość Postacji Nieznana!'
+WARNING.NoDiceInput: Brak kości do rzutu!
+WARNING.NoItemAction: Brak zdefiniowanej akcji przedmiotu!
+WARNING.ItemActionMacroNotFound: Makro "{macro}" nie znalezione!
+WARNING.NoItemUnit: 'Nie można użyć {name}: brak jednostek!'
