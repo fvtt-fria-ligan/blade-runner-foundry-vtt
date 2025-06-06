@@ -208,7 +208,7 @@ Hooks.on('deleteActor', async actor => {
 Hooks.on('getChatLogEntryContext', Chat.addChatMessageContextOptions);
 
 Hooks.on('renderChatLog', (_app, html, _data) => Chat.addChatListeners(html));
-Hooks.on('renderChatMessage', (_msg, html, _data) => Chat.hideChatActionButtons(html));
+Hooks.on('renderChatMessageHTML', (_msg, html, _data) => Chat.hideChatActionButtons(html));
 
 /* -------------------------------------------- */
 /*  Chat Commands                               */

@@ -4,10 +4,10 @@ import { SYSTEM_ID } from '@system/constants';
 // TODO Fix deprecated class
 /**
  * Configuration Sheet for the Actor sheet.
- * @extends {DocumentSheetConfig} Foundry
+ * @extends {foundry.applications.apps.DocumentSheetConfig} Foundry
  */
 // eslint-disable-next-line no-undef
-export default class ActorSheetConfig extends DocumentSheetConfig {
+export default class ActorSheetConfig extends foundry.applications.apps.DocumentSheetConfig {
   static get defaultOptions() {
     const sysId = game.system.id || SYSTEM_ID;
     return foundry.utils.mergeObject(super.defaultOptions, {

@@ -6,9 +6,9 @@ import { enrichTextFields } from '@utils/string-util';
 
 /**
  * Blade Runner RPG Item Sheet.
- * @extends {ItemSheet} Extends the basic ItemSheet
+ * @extends {foundry.appv1.sheets.ItemSheet} Extends the basic ItemSheet
  */
-export default class BladeRunnerItemSheet extends ItemSheet {
+export default class BladeRunnerItemSheet extends foundry.appv1.sheets.ItemSheet {
 
   /**
    * Used to store the state of collapsible menus in an accordion

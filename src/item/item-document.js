@@ -166,7 +166,7 @@ export default class BladeRunnerItem extends Item {
   async modifyNumberedProperty(key, mod, min = 0, max = Infinity) {
     const currentValue = +foundry.utils.getProperty(this.system, key);
     if (typeof currentValue !== 'number') return;
-    const newValue = Math.clamped(currentValue + mod, min, max);
+    const newValue = Math.clamp(currentValue + mod, min, max);
     await this.update({ [`system.${key}`]: newValue });
     return newValue - currentValue;
   }
@@ -358,7 +358,7 @@ export default class BladeRunnerItem extends Item {
    */
   async toMessage(messageData = {}, { rollMode, create = true } = {}) {
     // Renders the template with item data.
-    const content = await renderTemplate(this.constructor.CHAT_TEMPLATE, {
+    const content = await foundry.applications.handlebars.renderTemplate(this.constructor.CHAT_TEMPLATE, {
       name: this.name,
       img: this.img,
       type: this.type,

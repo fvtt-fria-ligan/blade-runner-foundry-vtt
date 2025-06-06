@@ -5,9 +5,9 @@ import ActorSheetConfig from './actor-sheet-config';
 
 /**
  * Blade Runner RPG Actor Sheet.
- * @extends {ActorSheet} Extends the basic ActorSheet
+ * @extends {foundry.appv1.sheets.ActorSheet} Extends the basic ActorSheet
  */
-export default class BladeRunnerActorSheet extends ActorSheet {
+export default class BladeRunnerActorSheet extends foundry.appv1.sheets.ActorSheet {
 
   /* ------------------------------------------ */
   /*  Properties                                */
@@ -133,10 +133,9 @@ export default class BladeRunnerActorSheet extends ActorSheet {
   /** @override */
   _onConfigureSheet(event) {
     event.preventDefault();
-    new ActorSheetConfig(this.actor, {
+    new ActorSheetConfig({
       // classes: ['blade-runner', 'dialog'],
-      top: this.position.top + 40,
-      left: this.position.left + (this.position.width - 400) / 2,
+      document: this.actor,
     }).render(true);
   }
 
@@ -288,7 +287,7 @@ export default class BladeRunnerActorSheet extends ActorSheet {
 
     if (event.type === 'click') count += mod;
     else count -= mod; // contextmenu
-    count = Math.clamped(count, min, max);
+    count = Math.clamp(count, min, max);
 
     return this.actor.update({ [field]: count });
   }

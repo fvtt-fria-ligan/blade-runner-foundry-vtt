@@ -203,7 +203,7 @@ export default class BladeRunnerActor extends Actor {
           .reduce((tot, m) => tot + m.value, 0);
 
         // Clamps within margins defined in the config.
-        max = Math.clamped(max, 0, capData.max);
+        max = Math.clamp(max, 0, capData.max);
 
         // Records the value in the actor data.
         capacity.max = max;
@@ -655,7 +655,7 @@ export default class BladeRunnerActor extends Actor {
     if (damage > 0) {
       const max = this.system[capacity].max;
       const oldVal = this.system[capacity].value;
-      const newVal = Math.clamped(oldVal - damage, 0, max);
+      const newVal = Math.clamp(oldVal - damage, 0, max);
       const diff = newVal - oldVal;
 
       if (diff !== 0) await this.update({ [`system.${capacity}.value`]: newVal });
@@ -663,7 +663,7 @@ export default class BladeRunnerActor extends Actor {
 
     // Prepares the chat message.
     const template = `systems/${SYSTEM_ID}/templates/actor/actor-damage-chatcard.hbs`;
-    const content = await renderTemplate(template, {
+    const content = await foundry.applications.handlebars.renderTemplate(template, {
       name: this.name,
       initialDamage,
       damage,
@@ -891,12 +891,12 @@ export default class BladeRunnerActor extends Actor {
 
     // Creates a chat message.
     const template = `systems/${SYSTEM_ID}/templates/actor/actor-crit-chatcard.hbs`;
-    const resultText = await TextEditor.enrichHTML(
+    const resultText = await foundry.applications.ux.TextEditor.enrichHTML(
       game.i18n.format('FLBR.CHAT.CritInflicted', {
         name: `<b>${this.name}</b>`,
         crit: `@UUID[${crit.uuid}]`,
       }));
-    const content = await renderTemplate(template, {
+    const content = await foundry.applications.handlebars.renderTemplate(template, {
       img: crit.img,
       result: resultText,
     });
@@ -947,9 +947,9 @@ export default class BladeRunnerActor extends Actor {
 
     // Creates a chat message.
     const template = `systems/${SYSTEM_ID}/templates/actor/actor-crit-chatcard.hbs`;
-    const text = await TextEditor.enrichHTML(result.text, { async: true });
+    const text = await foundry.applications.ux.TextEditor.enrichHTML(result.text, { async: true });
     const chatData = {
-      content: await renderTemplate(template, { img: result.img, result: text }),
+      content: await foundry.applications.handlebars.renderTemplate(template, { img: result.img, result: text }),
       speaker: ChatMessage.getSpeaker({ actor: this, token: this.token, scene: canvas.scene }),
       user: game.user.id,
     };

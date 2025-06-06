@@ -10,7 +10,7 @@ function preloadHandlebarsTemplates() {
   // eslint-disable-next-line no-undef
   const paths = TEMPLATE_PATHS;
   console.log('Blade Runner RPG | Loading Handlebars templates:', paths);
-  return loadTemplates(paths);
+  return foundry.applications.handlebars.loadTemplates(paths);
 }
 
 /* ------------------------------------------ */
@@ -56,7 +56,7 @@ function registerHandlebarsHelpers() {
       n = 100;
     }
     // return TextEditor.truncateText(str, { maxLength: n, splitWords: true });
-    return TextEditor.previewHTML(str, n);
+    return foundry.applications.ux.TextEditor.previewHTML(str, n);
   });
 
   Handlebars.registerHelper('times', function (n, content) {

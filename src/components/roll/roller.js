@@ -541,7 +541,7 @@ export default class BRRollHandler extends FormApplication {
 
     // eslint-disable-next-line prefer-const
     let { value, max } = capacity;
-    value = Math.clamped(value - currentDamage, 0, max);
+    value = Math.clamp(value - currentDamage, 0, max);
 
     if (value === 0) {
       ui.notifications.info('FLBR.YouAreBroken', { localize: true });
@@ -676,7 +676,7 @@ export default class BRRollHandler extends FormApplication {
    */
   static async askDie(lowest = 6) {
     const template = 'systems/blade-runner/templates/components/roll/roll-askdie-dialog.hbs';
-    const content = await renderTemplate(template, { lowest });
+    const content = await foundry.applications.handlebars.renderTemplate(template, { lowest });
     return Dialog.prompt({
       title: game.i18n.localize('FLBR.ROLLER.AddDie'),
       content,
@@ -702,7 +702,7 @@ export default class BRRollHandler extends FormApplication {
   static async selectPush(dice) {
     return Dialog.wait({
       title: game.i18n.localize('FLBR.ROLLER.SelectDiceToPush'),
-      content: await renderTemplate(
+      content: await foundry.applications.handlebars.renderTemplate(
         'systems/blade-runner/templates/components/roll/roll-push-select-dialog.hbs',
         { dice },
       ),

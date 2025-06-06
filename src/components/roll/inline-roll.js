@@ -33,7 +33,7 @@ export function overrideInlineRollListener() {
       });
     }
     else {
-      return TextEditor._onClickInlineRoll(event);
+      return foundry.applications.ux.TextEditor._onClickInlineRoll(event);
     }
   });
   console.log('Blade Runner RPG | Inline-roll listener overridden.');
