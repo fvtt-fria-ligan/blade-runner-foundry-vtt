@@ -136,6 +136,10 @@ export default class BladeRunnerActorSheet extends foundry.appv1.sheets.ActorShe
     new ActorSheetConfig({
       // classes: ['blade-runner', 'dialog'],
       document: this.actor,
+      position: {
+        top: this.position.top + 40,
+        left: this.position.left + (this.position.width - 400) / 2,
+      },
     }).render(true);
   }
 
