@@ -123,10 +123,10 @@ export async function distributeDamageFromMessage(messageId) {
 
 /**
  * Hides buttons of Chat messages for non-owners.
- * @param {JQuery} html
+ * @param {HTMLElement} html
  */
 export function hideChatActionButtons(html) {
-  const chatCard = html.find('.yzur.chat-card');
+  const chatCard = $(html).find('.yzur.chat-card');
 
   // Exits early if no chatCard were found.
   if (chatCard.length === 0) return;
@@ -144,12 +144,13 @@ export function hideChatActionButtons(html) {
 
 /**
  * Adds Event Listeners to the Chat log.
- * @param {JQuery} html
+ * @param {HTMLElement} html
  */
 export function addChatListeners(html) {
-  html.on('click', '.blade-runner-display-manual', game.bladerunner.macros.displayManual);
-  html.on('click', '.roll-button', _onRollAction);
-  html.on('click', '.crit-roll', _onCritRoll);
+  const jhtml = $(html);
+  jhtml.on('click', '.blade-runner-display-manual', game.bladerunner.macros.displayManual);
+  jhtml.on('click', '.roll-button', _onRollAction);
+  jhtml.on('click', '.crit-roll', _onCritRoll);
 }
 
 /* ------------------------------------------- */
