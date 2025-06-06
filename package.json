@@ -51,8 +51,8 @@
     "yzur": "github:Stefouch/foundry-year-zero-roller#v5.2.0"
   },
   "devDependencies": {
-    "@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
-    "@types/jquery": "^3.5.16",
+    "@league-of-foundry-developers/foundry-vtt-types": "^12.331.5",
+    "@types/jquery": "^3.5.32",
     "@typhonjs-fvtt/eslint-config-foundry.js": "0.8.0",
     "chalk": "^5.3.0",
     "commit-and-tag-version": "^12.2.0",
@@ -69,8 +69,8 @@
     "gulp": "^4.0.2",
     "gulp-yaml": "2.0.4",
     "husky": "^8.0.3",
-    "prettier": "^2.8.8",
-    "prettier-eslint-cli": "^7.1.0",
+    "prettier": "^3.5.3",
+    "prettier-eslint-cli": "^8.0.1",
     "semver": "^7.5.4"
   }
 }
