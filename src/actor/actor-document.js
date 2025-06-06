@@ -713,7 +713,7 @@ export default class BladeRunnerActor extends Actor {
         name: `${this.name}: ${game.i18n.localize('FLBR.ItemArmor')}`,
         yzur: true,
       });
-      await armorRoll.roll({ async: true });
+      await armorRoll.roll();
       const armorRollMessage = await armorRoll.toMessage();
       if (game.dice3d && game.dice3d.isEnabled()) await game.dice3d.waitFor3DAnimationByMessageID(armorRollMessage.id);
       armorAblation = armorRoll.successCount;
@@ -753,7 +753,7 @@ export default class BladeRunnerActor extends Actor {
     const crashDamageRoll = Roll.create(formula, rollData, {
       name: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}`,
     });
-    await crashDamageRoll.roll({ async: true });
+    await crashDamageRoll.roll();
     const crashDamageRollMessage = await crashDamageRoll.toMessage({
       flavor: `${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}: ${formula}`,
     });
@@ -815,7 +815,7 @@ export default class BladeRunnerActor extends Actor {
       crit: blast.crit,
       yzur: true,
     });
-    await blastRoll.roll({ async: true });
+    await blastRoll.roll();
     const blastRollMessage = await blastRoll.toMessage({
       flavor: game.i18n.localize('FLBR.VEHICLE.Action.Explode'),
     });

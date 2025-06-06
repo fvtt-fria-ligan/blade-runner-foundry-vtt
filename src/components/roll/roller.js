@@ -399,7 +399,7 @@ export default class BRRollHandler extends FormApplication {
     const dice = this.dice.map(d => ({ term: `${d}`, number: 1 }));
     this.roll = YearZeroRoll.forge(dice, {}, this.getRollOptions());
 
-    await this.roll.roll({ async: true });
+    await this.roll.roll();
 
     if (this.options.sendMessage) {
       const message = await this.roll.toMessage({
@@ -463,7 +463,7 @@ export default class BRRollHandler extends FormApplication {
     }
 
     // Pushes the roll.
-    await roll.push({ async: true });
+    await roll.push();
 
     // Prepares the message.
     const flavor = message.flavor;

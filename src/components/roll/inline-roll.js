@@ -12,7 +12,7 @@ export function overrideInlineRollListener() {
     if (/np|p(?:\d+|@maxPush)/i.test(formula)) {
       const actor = await getActiveActor();
       const roll = Roll.create(formula, actor?.getRollData());
-      await roll.roll({ async: true });
+      await roll.roll();
 
       const dice = roll.terms
         .filter(t => t instanceof DiceTerm)

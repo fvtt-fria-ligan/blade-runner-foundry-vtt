@@ -110,7 +110,7 @@ async function chooserEnricher(match, options) {
   const chooseDoc = document.createElement('span');
 
   const roll = Roll.create(match[1], options.rollData);
-  await roll.roll({ async: true });
+  await roll.roll();
   const choices = match[2].split('|');
   const index = Math.clamped(roll.total, 1, choices.length) - 1;
   const result = (match[3] ? `${match[3]}: ` : '') + choices[index];
