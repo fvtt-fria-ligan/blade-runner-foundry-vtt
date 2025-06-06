@@ -51,7 +51,7 @@ Hooks.once('init', async () => {
   }, { index: 1 });
 
   // TODO Temporary fix
-  Roll.prototype.constructor.create = function (formula, data = {}, options = {}) {
+  foundry.dice.Roll.prototype.constructor.create = function (formula, data = {}, options = {}) {
     const isYZURFormula = options.yzur ?? (
       'game' in data ||
       'game' in options ||
