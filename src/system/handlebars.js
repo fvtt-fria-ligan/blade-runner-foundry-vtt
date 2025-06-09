@@ -139,7 +139,7 @@ function registerHandlebarsHelpers() {
   Handlebars.registerHelper('select', function (selected, options) {
     const escapedValue = RegExp.escape(Handlebars.escapeExpression(selected));
     const rgx = new RegExp(` value=["']${escapedValue}["']`);
-    const html = options.fn(HandlebarsHelpers);
+    const html = options.fn(foundry.applications.handlebars);
     return html.replace(rgx, '$& selected');
   });
 
