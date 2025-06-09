@@ -67,6 +67,7 @@ Hooks.once('init', async () => {
   // Places our classes in their own namespace for later reference.
   game.bladerunner = {
     config: FLBR,
+    roll: YZUR.YearZeroRoll,
     roller: BRRollHandler,
     dialog: BladeRunnerDialog,
     macros: {
