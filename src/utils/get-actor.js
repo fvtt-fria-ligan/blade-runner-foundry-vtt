@@ -49,7 +49,7 @@ export async function chooseActor(actors = [], options = {}) {
   });
 
   content += '</select>';
-  if (options.notes) content += `<p class="notes">${options.notes}</p>`;
+  if (options.notes) content += `<p class="hint">${options.notes}</p>`;
   content += '</div></form>';
 
   const actorId = await Dialog.prompt({
