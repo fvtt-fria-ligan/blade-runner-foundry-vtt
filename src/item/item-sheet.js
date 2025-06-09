@@ -239,7 +239,7 @@ export default class BladeRunnerItemSheet extends foundry.appv1.sheets.ItemSheet
   _onAddActiveEffect(event) {
     event.preventDefault();
     return this.item.createEmbeddedDocuments('ActiveEffect', [{
-      label: game.i18n.localize('FLBR.ACTIVE_EFFECT.New'),
+      name: game.i18n.localize('FLBR.ACTIVE_EFFECT.New'),
       icon: 'icons/svg/aura.svg',
       origin: this.item.uuid,
     }]);

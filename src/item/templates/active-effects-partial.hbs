@@ -1,7 +1,7 @@
 <div class="active-effects-list">
 	{{#each effects}}
 		<div class="active-effect" data-effect-id="{{id}}">
-			<div class="active-effect-name{{#if disabled}} suspended{{/if}}">{{label}}</div>
+			<div class="active-effect-name{{#if disabled}} suspended{{/if}}">{{name}}</div>
 			{{#unless ../inActor}}
 				<div class="active-effect-controls">
 					<a class="btn{{#if disabled}} suspended{{/if}}" data-action="toggle" data-tooltip="{{localize "FLBR.ACTIVE_EFFECT.Toggle"}}">{{{@root.config.Icons.buttons.onoff}}}</a>
