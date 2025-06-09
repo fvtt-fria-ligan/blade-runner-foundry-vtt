@@ -119,7 +119,7 @@
 					<div class="boxed-property">
 						<h4>{{localize "FLBR.VEHICLE.Components"}}</h4>
 						<div class="vehicle-components">
-							{{#each system.components}} {{log isGM}}
+							{{#each system.components}}
 								<div class="vehicle-component{{#unless ../isGM}}{{#unless this}} disabled{{/unless}}{{/unless}}">
 									<label class="switch">
 										<input type="checkbox" id="component_{{@key}}" name="system.components.{{@key}}" {{checked this}}/>
