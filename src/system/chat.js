@@ -30,8 +30,8 @@ export function getChatCardActor(card) {
 
 /**
  * Adds a context menu (right-clic) to Chat messages.
- * @param {JQuery} html
- * @param {Object} options Menu options
+ * @param {HTMLElement} _html
+ * @param {Object}      options Menu options
  * @link https://www.youtube.com/watch?v=uBC5DSci0NI
  */
 export function addChatMessageContextOptions(_html, options) {
@@ -39,16 +39,16 @@ export function addChatMessageContextOptions(_html, options) {
   // Allows only this menu option if we have targeted some tokens
   // & the message contains some damage.
   // Note: <li> is the chat message HTML element in the sidebar.
-  const canDefend = li => game.user.isGM
+  const canApplyDamage = li => game.user.isGM
     // ? && canvas.tokens?.controlled?.length
     && game.user.targets.size
-    && li.find('.chat-card[data-damage]').length;
+    && li.querySelector('.chat-card[data-damage]');
 
   options.push({
     name: game.i18n.localize('FLBR.CHAT_ACTION.ApplyDamage'),
     icon: FLBR.Icons.buttons.attack,
-    condition: canDefend,
-    callback: li => distributeDamageFromMessage(li[0].dataset.messageId),
+    condition: canApplyDamage,
+    callback: li => distributeDamageFromMessage(li.dataset.messageId),
   });
   return options;
 }
@@ -138,6 +138,7 @@ export function hideChatActionButtons(html) {
     if (actor && !actor.isOwner) btn.style.display = 'none';
   }
 }
+
 /* ------------------------------------------- */
 /*  Chat Event Listeners                       */
 /* ------------------------------------------- */
