@@ -119,7 +119,7 @@ function registerHandlebarsHelpers() {
     if (rgx.test(text)) {
       text = text.replace(rgx, (_match, p1, p2) => {
       // eslint-disable-next-line no-undef
-        const title = p2 ?? fromUuidSync(p1)?.name ?? '{undefined}';
+        const title = p2 ?? foundry.utils.fromUuidSync(p1)?.name ?? '{undefined}';
         return `<b>${title}</b>`;
       });
     }

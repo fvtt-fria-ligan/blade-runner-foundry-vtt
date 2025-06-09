@@ -84,7 +84,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     await super._onDropActor(event, data);
     if (!this.vehicle.isOwner) return;
 
-    const actor = await fromUuid(data.uuid);
+    const actor = await foundry.utils.fromUuid(data.uuid);
     if (!actor) return;
 
     if (data.parent === this.vehicle.id) return this._sortCrew(event, actor);
