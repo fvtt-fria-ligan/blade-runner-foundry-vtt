@@ -4,7 +4,7 @@
 /*  Journal Entry Window Apps                 */
 /* ------------------------------------------ */
 
-.app.journal-entry {
+.application.journal-entry {
   border: 1px solid var(--color-blue-darker);
   border-radius: 4px;
 
@@ -65,7 +65,7 @@
 /*  Journal Entry Content                     */
 /* ------------------------------------------ */
 
-.app.journal-entry .journal-entry-content {
+.application.journal-entry .journal-entry-content {
   color: #FFF2DE;
   background-image: url("./assets/textures/journal-sheet-background.webp");
   background-position: top center;

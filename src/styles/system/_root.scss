@@ -1,34 +1,37 @@
-:root {
-  --color-white: #FFF2DE;
-  --color-black: #1D1D1B; // 231F20;
-  --color-red: #C32E1B; // C53426; // Heading 1 on red pages
-  --color-red-darker: #AB191E; // AA1E28; // Heading 2 on red pages
-  --color-green: #A3BA8E; // Table text on blue pages
-  --color-blue-lighter: #A3CDD3; // Boxed text on blue pages
-  --color-blue: #74B8C0; // Heading 1 on blue pages
-  --color-blue-darker: #065C71; // Heading 2 on blue pages
-  --color-yellow: #F7BD59; // Boxed text on red pages
-  --color-gold: #F9C254; // Bottom border of heading row of table on red pages
-  --color-skin: #FFE5BD; // FFEED6
-  --color-border--core-box-orange: #F3742A;
-  --color-border--core-box-beige: rgba(255,229,189,.7);
-  --color-border--core-box-blue: rgba(197,220,225,.7);
-  --color-background--gray-dust: rgba(0,0,0,.4);
-  --color-foreground: var(--color-white);
-  --color-background: var(--color-black);
-  --color-border: #74B8C0;
-  --color-disabled: gray;
-  --font-editor: "Caveat", "Goudy Old Style", "Times New Roman", serif;
-  --font-text-editor: "Goudy Old Style", "Times New Roman", serif;
-  --font-header: "URW DIN Condensed", sans-serif;
-  --font-headline: "IdentikalSans", sans-serif;
-  --font-table: "Foundry Gridnik", "Consolas", sans-serif;
-  --font-size--extra-small: .7rem;
-  --font-size--very-small: .8rem;
-  --font-size--small: .9rem;
-  --font-size--default: 1rem;
-  --font-size--large: 1.5rem;
-  --font-size--extra-large: 2rem;
-  // Foundry override
-  --color-text-hyperlink: var(--color-red-darker);
+@layer variables.themes.bladerunner {
+  :root {
+    --color-white: #FFF2DE;
+    --color-black: #1D1D1B; // 231F20;
+    --color-red: #C32E1B; // C53426; // Heading 1 on red pages
+    --color-red-darker: #AB191E; // AA1E28; // Heading 2 on red pages
+    --color-green: #A3BA8E; // Table text on blue pages
+    --color-blue-lighter: #A3CDD3; // Boxed text on blue pages
+    --color-blue: #74B8C0; // Heading 1 on blue pages
+    --color-blue-darker: #065C71; // Heading 2 on blue pages
+    --color-yellow: #F7BD59; // Boxed text on red pages
+    --color-gold: #F9C254; // Bottom border of heading row of table on red pages
+    --color-skin: #FFE5BD; // FFEED6
+    --color-border--core-box-orange: #F3742A;
+    --color-border--core-box-beige: rgba(255,229,189,.7);
+    --color-border--core-box-blue: rgba(197,220,225,.7);
+    --color-background--gray-dust: rgba(0,0,0,.4);
+    --color-foreground: var(--color-white);
+    --color-background: var(--color-black);
+    --color-border: #74B8C0;
+    --color-disabled: gray;
+    --font-editor: "Caveat", "Goudy Old Style", "Times New Roman", serif;
+    --font-text-editor: "Goudy Old Style", "Times New Roman", serif;
+    --font-header: "URW DIN Condensed", sans-serif;
+    --font-headline: "IdentikalSans", sans-serif;
+    --font-table: "Foundry Gridnik", "Consolas", sans-serif;
+    --font-size--extra-small: .7rem;
+    --font-size--very-small: .8rem;
+    --font-size--small: .9rem;
+    --font-size--default: 1rem;
+    --font-size--large: 1.5rem;
+    --font-size--extra-large: 2rem;
+    // Foundry override
+    --color-text-hyperlink: var(--color-red-darker);
+    --content-link-text-color: unset;
+  }
 }

@@ -11,7 +11,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-h1 { font-size: var(--font-size--extra-large); }
+// h1 { font-size: var(--font-size--extra-large); }
 h2 { font-size: var(--font-size--large); }
 h3 { font-size: var(--font-size--default); }
 h4 { font-size: var(--font-size--small); }
@@ -30,6 +30,7 @@ a.inline-table {
   padding: 0;
   text-indent: 0;
   border-radius: 2px;
+  color: unset;
 
   i {
     color: var(--color-text-dark-inactive);
@@ -84,7 +85,8 @@ a.entity-link {
 .blade-runner,
 // .chat-message,
 // .window-app.dialog,
-.app:not(.form) {
+.app:not(.form)
+.application:not(.form) {
   button:not(.tox-tbtn),
   .button,
   .dialog-button {
@@ -119,7 +121,9 @@ a.entity-link {
 /* ------------------------------------------ */
 
 .app.window-app.dialog,
-.app.window-app.blade-runner {
+.app.window-app.blade-runner,
+.application.window-app.dialog,
+.application.window-app.blade-runner {
   color: var(--color-foreground);
   border: 1px solid var(--color-blue-darker);
   border-radius: $gap;

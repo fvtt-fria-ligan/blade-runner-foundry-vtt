@@ -1,4 +1,5 @@
-.app.sheet .editor:not(.prosemirror) {
+.app.sheet .editor:not(.prosemirror),
+.application.sheet .editor:not(.prosemirror) {
   min-height: 55px;
   height: 100%;
 
