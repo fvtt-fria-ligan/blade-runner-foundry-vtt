@@ -878,15 +878,15 @@ export default class BladeRunnerActor extends Actor {
       qty: severity,
     });
 
-    const itemId = await BladeRunnerDialog.choose(
+    const itemUuid = await BladeRunnerDialog.choose(
       results
         .sort((a, b) => b.range[0] - a.range[0])
-        .map(r => [r.documentId, `${r.text} (${r.range[0]})`]),
+        .map(r => [r.documentUuid, `${r.name} (${r.range[0]})`]),
       `${this.name}: ${game.i18n.localize('FLBR.CRIT.ChooseCrit')}`,
       { icon: 'fa-solid fa-burst' },
     );
 
-    const item = game.items.get(itemId);
+    const item = await foundry.utils.fromUuid(itemUuid);
     const [crit] = await this.createEmbeddedDocuments('Item', [item]);
 
     // Creates a chat message.
@@ -936,7 +936,7 @@ export default class BladeRunnerActor extends Actor {
       results
         .sort((a, b) => b.range[0] - a.range[0])
         .map((r, i) => {
-          const title = r.text.split(':')[0];
+          const title = r.description.split(':')[0];
           return [i, `${title} (${r.range[0]})`];
         }),
       `${this.name}: ${game.i18n.localize('FLBR.CRIT.ChooseVehicleDamage')}`,
@@ -947,7 +947,7 @@ export default class BladeRunnerActor extends Actor {
 
     // Creates a chat message.
     const template = `systems/${SYSTEM_ID}/templates/actor/actor-crit-chatcard.hbs`;
-    const text = await foundry.applications.ux.TextEditor.enrichHTML(result.text, { async: true });
+    const text = await foundry.applications.ux.TextEditor.enrichHTML(result.description);
     const chatData = {
       content: await foundry.applications.handlebars.renderTemplate(template, { img: result.img, result: text }),
       speaker: ChatMessage.getSpeaker({ actor: this, token: this.token, scene: canvas.scene }),
@@ -956,6 +956,6 @@ export default class BladeRunnerActor extends Actor {
     ChatMessage.applyRollMode(chatData, game.settings.get('core', 'rollMode'));
     await ChatMessage.create(chatData);
 
-    return result.text;
+    return result.name;
   }
 }
