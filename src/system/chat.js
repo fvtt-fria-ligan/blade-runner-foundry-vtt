@@ -181,10 +181,13 @@ async function _onRollAction(event) {
   // Gets the desired action.
   const action = button.dataset.action;
   switch (action) {
-    case 'push': return BRRollHandler.pushRoll(message);
-    case 'cancel-push': return BRRollHandler.cancelPush(message);
-    default: return null;
+    case 'push': await BRRollHandler.pushRoll(message); break;
+    case 'cancel-push': await BRRollHandler.cancelPush(message); break;
+    default: break;
   }
+
+  // Re-enables the button.
+  button.disabled = false;
 }
 
 /* ------------------------------------------- */
