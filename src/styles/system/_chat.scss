@@ -235,7 +235,12 @@
     margin-top: 4px;
   }
   .roll-button {
+    flex-grow: 1;
     font-size: var(--font-size--extra-small);
     line-height: 1;
+
+    &:not(:disabled) {
+      border: 1px solid var(--color-blue);
+    }
   }
 }
