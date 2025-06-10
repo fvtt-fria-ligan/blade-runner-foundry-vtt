@@ -108,7 +108,7 @@ If you want to contribute to the project, download and build it for something el
 
 # 📜 List of Changes
 
-See the [changelog](https://github.com/fvtt-fria-ligan/blade-runner/blob/master/CHANGELOG.md#changelog) for a complete list of changes applied to the system since 2022.
+See the [changelog](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/blob/master/CHANGELOG.md#changelog) for a complete list of changes applied to the system since 2022.
 
 # 📝 Licenses
 

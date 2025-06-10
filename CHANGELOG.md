@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [commit
 
 - 🐛 Fixed an issue with items in character sheets displaying the text "[object Promise]" instead of its proper description. ([ed58576](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/ed58576b6d0703563b96f7b39d3969124ab664fe))
 
-### [12.0.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/11.0.2...12.0.0) (2024-06-09)
+## [12.0.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/11.0.2...12.0.0) (2024-06-09)
 
 ### Bug Fixes
 
