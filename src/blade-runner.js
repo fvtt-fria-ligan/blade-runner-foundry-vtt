@@ -28,7 +28,7 @@ import { initializeHandlebars } from '@system/handlebars';
 import { changeEditorFont, registerSystemSettings } from '@system/settings';
 import { enrichTextEditors } from '@system/enricher';
 import { registerDiceSoNice } from './plugins/dice-so-nice';
-import { overrideInlineRollListener } from '@components/roll/inline-roll';
+// ! import { overrideInlineRollListener } from '@components/roll/inline-roll';
 import { getManual } from '@utils/get-manual';
 import BladeRunnerActor from '@actor/actor-document';
 import BladeRunnerItem from '@item/item-document';
@@ -84,12 +84,8 @@ Hooks.once('init', async () => {
   CONFIG.BLADE_RUNNER = FLBR;
   CONFIG.Actor.documentClass = BladeRunnerActor;
   CONFIG.Item.documentClass = BladeRunnerItem;
-  // TODO Combat
-  // CONFIG.Combat.documentClass = BladeRunnerCombat;
-  // CONFIG.Combatant.documentClass = BladeRunnerCombatant;
 
   // Patches Core functions.
-  // TODO use initiative cards
   CONFIG.Combat.initiative = {
     formula: '1d10 + (@agi / 100)',
     decimals: 2,
@@ -126,7 +122,7 @@ Hooks.once('ready', () => {
   displayMessages();
 
   // Replaces the a.inline listener with our own.
-  overrideInlineRollListener();
+  // ! overrideInlineRollListener();
 
   console.log('Blade Runner RPG | Ready!');
   Hooks.callAll('bladeRunnerReady', game.bladerunner, CONFIG.BLADE_RUNNER);
