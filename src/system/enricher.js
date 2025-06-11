@@ -65,7 +65,7 @@ async function drawTableEnricher(match, options) {
   const title = match[2];
 
   const tableDrawOptions = { displayChat: false };
-  if (match[3]) tableDrawOptions.roll = Roll.create(match[3], options.rollData);
+  if (match[3]) tableDrawOptions.roll = foundry.dice.Roll.create(match[3], options.rollData);
 
   const drawResult = await table.draw(tableDrawOptions);
   const result = drawResult.results[0];
@@ -78,12 +78,11 @@ async function drawTableEnricher(match, options) {
     + `data-tooltip="${table.name}: ${drawResult.roll.formula} (${drawResult.roll.total})">`
     + `<img src="${result.img}" style="vertical-align: top; height: 1em;"/>&nbsp;`;
 
-  if (result.type === 0) {
-    htmlFormat += (title ? `${title}:&nbsp;` : '') + result.text;
+  if (result.type === 'text') {
+    htmlFormat += (title ? `${title}:&nbsp;` : '') + (result.name ? result.name : result.description);
   }
   else {
-    const uuid = `${result.documentCollection}.${result.documentId}`;
-    htmlFormat += `@UUID[${uuid}]${title ? `{${title}}` : ''}`;
+    htmlFormat += `@UUID[${result.documentUuid}]${title ? `{${title}}` : ''}`;
   }
 
   htmlFormat += '</a>';
@@ -109,7 +108,7 @@ const CHOOSER_PATTERN = /\[\[choose: (.+?) ?#(.+?)\]\](?:{(.+?)})?/gm;
 async function chooserEnricher(match, options) {
   const chooseDoc = document.createElement('span');
 
-  const roll = Roll.create(match[1], options.rollData);
+  const roll = foundry.dice.Roll.create(match[1], options.rollData);
   await roll.roll();
   const choices = match[2].split('|');
   const index = Math.clamp(roll.total, 1, choices.length) - 1;
