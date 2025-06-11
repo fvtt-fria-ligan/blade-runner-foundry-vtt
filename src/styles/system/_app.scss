@@ -37,6 +37,10 @@ a.inline-table {
     margin-right: 0.25em;
   }
 
+  img {
+    display: inline;
+  }
+
   &.broken {
     color: var(--color-red);
     background: rgba(255, 0, 0, 0.05);
@@ -181,6 +185,32 @@ code, code.block {
     color: var(--color-green);
   }
 
+  .dialog-button {
+    @include utils.boxed-property;
+    border-radius: 4px;
+    font-family: var(--font-table);
+    font-weight: bold;
+    color: var(--color-green);
+    letter-spacing: -1px;
+    cursor: pointer;
+    transition: color 250ms linear, background-color 250ms ease;
+
+    &:hover {
+      background: #333;
+      border-color: var(--color-yellow);
+      color: var(--color-red);
+      i { color: var(--color-yellow); }
+    }
+    &:disabled,
+    &.disabled {
+      border-color: var(--color-disabled);
+      color: var(--color-disabled);
+    }
+  }
+  button.default {
+    background: var(--color-background);
+  }
+
   /* ------------------------------------------ */
 
   h1, h2, h3, h4, h5, h6 {
@@ -268,6 +298,10 @@ code, code.block {
   }
   .update-document-description {
     color: #ccc;
+  }
+
+  .notification {
+    display: block;
   }
 }
 

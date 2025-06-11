@@ -133,12 +133,22 @@
       font-size: var(--font-size--default);
     }
 
+    a[href] {
+      color: var(--color-red-darker);
+    }
+
     code {
       font-family: inherit;
       font-weight: normal;
       padding: 0 4px;
-      background-color: var(--color-border-light-2);
+      background-color: #999;
       border-radius: 4px;
+      border: none;
+      white-space: pre-wrap;
+
+      img {
+        display: inline;
+      }
     }
   // }
 
@@ -150,5 +160,9 @@
     font-family: var(--font-table);
     font-weight: normal;
     color: var(--color-skin);
+  }
+
+  .notification {
+    display: block;
   }
 }
