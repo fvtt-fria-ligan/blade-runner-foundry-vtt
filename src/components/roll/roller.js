@@ -652,11 +652,11 @@ export default class BRRollHandler extends FormApplication {
       roller.close = async opts => {
         await originalClose.bind(roller, opts)();
         const roll = roller.roll;
-        if (roll instanceof Roll) {
+        if (roll instanceof foundry.dice.Roll) {
           if (roller.message && game.dice3d && game.dice3d.isEnabled()) {
             await game.dice3d.waitFor3DAnimationByMessageID(roller.messageId);
-            resolve(roll);
           }
+          resolve(roll);
         }
         else {
           reject(new Error('The dialog was closed without a choice being made.'));

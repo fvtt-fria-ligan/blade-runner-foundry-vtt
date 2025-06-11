@@ -709,7 +709,7 @@ export default class BladeRunnerActor extends Actor {
     }
     // For vehicles:
     else if (this.type === ACTOR_TYPES.VEHICLE) {
-      const armorRoll = Roll.create(`2d${this.system.armor}p0`, {}, {
+      const armorRoll = game.bladerunner.roll.create(`2d${this.system.armor}p0`, {}, {
         name: `${this.name}: ${game.i18n.localize('FLBR.ItemArmor')}`,
         yzur: true,
       });
@@ -750,7 +750,7 @@ export default class BladeRunnerActor extends Actor {
     const rollData = this.rollData;
     rollData.armor = armorAblation;
     formula += ' - @armor';
-    const crashDamageRoll = Roll.create(formula, rollData, {
+    const crashDamageRoll = foundry.dice.Roll.create(formula, rollData, {
       name: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}`,
     });
     await crashDamageRoll.roll();
@@ -808,7 +808,7 @@ export default class BladeRunnerActor extends Actor {
 
     /** @type {import('yzur').YearZeroRoll} */
     const damageType = DAMAGE_TYPES.PIERCING;
-    const blastRoll = Roll.create(`2d${blastPower}p0`, {}, {
+    const blastRoll = game.bladerunner.roll.create(`2d${blastPower}p0`, {}, {
       damage: blast.damage,
       damageType,
       damageTypeName: game.i18n.localize(FLBR.damageTypes[damageType]),
