@@ -1,29 +1,30 @@
 <div class="blade-runner item-chat-card">
 	<h3>{{name}}</h3>
 	{{#if system.description}}
-		<hr/>
 		<div class="description">{{{system.description}}}</div>
 	{{/if}}
 	{{#if showProperties}}
-		<div class="details boxed-property">
-			{{#if (eq type "explosive")}}
-				<div>{{localize "FLBR.BlastPower"}}</div>
-				<div>2x{{localize "FLBR.D"}}{{system.blast}}</div>
-			{{else if (eq type "armor")}}
-				<div>{{localize "FLBR.ItemArmor"}}</div>
-				<div>{{localize "FLBR.D"}}{{system.armor}}</div>
-			{{/if}}
-			{{#if hasModifier}}
-				<div class="modifiers">{{localize "FLBR.ItemModifier"}}</div>
-				<div class="modifiers">{{modifiersDescription}}</div>
-			{{/if}}
-			{{#if system.consumable}}
-				<div class="grid-column-all">{{localize "FLBR.ItemConsumable"}}</div>
-			{{/if}}
-			{{#if system.special}}
-				<div class="grid-column-all special">{{system.special}}</div>
-			{{/if}}
-		</div>
+		{{#if (or (eq type "explosive") (eq type "armor") hasModifier system.consumable system.special)}}
+			<div class="details boxed-property">
+				{{#if (eq type "explosive")}}
+					<div>{{localize "FLBR.BlastPower"}}</div>
+					<div>2x{{localize "FLBR.D"}}{{system.blast}}</div>
+				{{else if (eq type "armor")}}
+					<div>{{localize "FLBR.ItemArmor"}}</div>
+					<div>{{localize "FLBR.D"}}{{system.armor}}</div>
+				{{/if}}
+				{{#if hasModifier}}
+					<div class="modifiers">{{localize "FLBR.ItemModifier"}}</div>
+					<div class="modifiers">{{modifiersDescription}}</div>
+				{{/if}}
+				{{#if system.consumable}}
+					<div class="grid-column-all">{{localize "FLBR.ItemConsumable"}}</div>
+				{{/if}}
+				{{#if system.special}}
+					<div class="grid-column-all special">{{system.special}}</div>
+				{{/if}}
+			</div>
+		{{/if}}
 		{{#if hasAttack}}
 			{{#each system.attacks as | atk |}}
 				<fieldset class="item-attack">
