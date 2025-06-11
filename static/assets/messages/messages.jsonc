@@ -68,5 +68,15 @@
     "display": "once", // Time until it goes away: [once, infinite, mm.dd.yyyy]
     "title": "Update 11.0.2 (2024-03-27)",
     "content": "<h4>Added</h4><ul><li>Added support for the upcoming <i>Fiery Angels</i> module.</li><li>Added new setting to disable handwritten font.</li></ul>"
+  },
+  {
+    // "min-core-version": "9.0.0", //optional, inclusive
+    // "max-core-version": "10.0.0", //optional, exclusive
+    "min-sys-version": "13.0.0", //optional, inclusive
+    "max-sys-version": "13.1.0", //optional, exclusive
+    "type": "chat", // Type of message: [prompt, chat]
+    "display": "once", // Time until it goes away: [once, infinite, mm.dd.yyyy]
+    "title": "Update 13.0.0 (2025-06-11)",
+    "content": "<p>Added compatibility with Foundry V13.</p><p>See the <a href=\"https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/tag/13.0.0\" target=\"_blank\">changelog</a> for the complete list of changes.</p>"
   }
 ]
