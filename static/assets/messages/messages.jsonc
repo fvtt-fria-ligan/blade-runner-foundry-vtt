@@ -77,6 +77,6 @@
     "type": "chat", // Type of message: [prompt, chat]
     "display": "once", // Time until it goes away: [once, infinite, mm.dd.yyyy]
     "title": "Update 13.0.0 (2025-06-11)",
-    "content": "<p>Added compatibility with Foundry V13.</p><p>See the <a href=\"https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/tag/13.0.0\" target=\"_blank\">changelog</a> for the complete list of changes.</p>"
+    "content": "<ul><li>Added compatibility with Foundry V13.</li><li>Added support for <a href=\"https://foundryvtt.com/packages/item-piles/\" target=\"_blank\">Item Piles</a>.</li></ul><p>See the <a href=\"https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/tag/13.0.0\" target=\"_blank\">changelog</a> for the complete list of changes.</p>"
   }
 ]

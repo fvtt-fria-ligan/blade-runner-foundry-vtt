@@ -28,6 +28,7 @@ import { initializeHandlebars } from '@system/handlebars';
 import { changeEditorFont, registerSystemSettings } from '@system/settings';
 import { enrichTextEditors } from '@system/enricher';
 import { registerDiceSoNice } from './plugins/dice-so-nice';
+import itemPilesConfig from './plugins/item-piles';
 // ! import { overrideInlineRollListener } from '@components/roll/inline-roll';
 import { getManual } from '@utils/get-manual';
 import BladeRunnerActor from '@actor/actor-document';
@@ -140,6 +141,8 @@ Hooks.once('ready', () => {
 Hooks.once('diceSoNiceReady', dice3d => registerDiceSoNice(dice3d));
 
 Hooks.once('yzeCombatReady', yzec => yzec.register({ actorDrawSizeAttribute: 'system.drawSize' }));
+
+Hooks.once('item-piles-ready', () => game.itempiles.API.addSystemIntegration(itemPilesConfig));
 
 /* ------------------------------------------ */
 
