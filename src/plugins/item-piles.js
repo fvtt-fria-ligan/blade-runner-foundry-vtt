@@ -50,6 +50,29 @@ export default {
         '2': 'FLBR.ITEM_AVAILABILITY.Rare',
         '1': 'FLBR.ITEM_AVAILABILITY.Luxury',
       },
+    }, {
+      label: '&nbsp;',
+      path: 'system.consumable',
+      formatting: '{#}',
+      buying: true,
+      selling: true,
+      mapping: {
+        'true': '<i class="fa-solid fa-apple-core"></i>',
+        'false': '',
+      },
+    }, {
+      label: '<i class="fa-solid fa-shield-halved"></i>',
+      path: 'system.armor',
+      formatting: '{#}',
+      buying: true,
+      selling: true,
+      mapping: {
+        '0': '',
+        '6': 'D',
+        '8': 'C',
+        '10': 'B',
+        '12': 'A',
+      },
     }],
   },
 
@@ -85,7 +108,7 @@ export default {
       type: 'attribute',
       name: 'FLBR.HEADER.PromotionPoints',
       img: 'icons/commodities/treasure/medal-ribbon-gold-blue.webp',
-      abbreviation: '{#}PP',
+      abbreviation: '{#}<i class="fa-solid fa-award-simple"></i>',
       data: {
         path: 'system.metaCurrencies.promotion',
       },
@@ -94,7 +117,7 @@ export default {
       type: 'attribute',
       name: 'FLBR.HEADER.HumanityPoints',
       img: 'icons/sundries/gaming/chess-knight-white.webp',
-      abbreviation: '{#}HP',
+      abbreviation: '{#}<i class="fa-solid fa-chess-knight"></i>',
       data: {
         path: 'system.metaCurrencies.humanity',
       },
@@ -104,21 +127,21 @@ export default {
   'VAULT_STYLES': [
     {
       path: 'system.availability',
-      value: String(AVAILABILITIES.LUXURY),
+      value: AVAILABILITIES.LUXURY,
       styling: {
         'box-shadow': 'inset 0px 0px 7px 0px rgba(255,119,0,1)',
       },
     },
     {
       path: 'system.availability',
-      value: String(AVAILABILITIES.RARE),
+      value: AVAILABILITIES.RARE,
       styling: {
         'box-shadow': 'inset 0px 0px 7px 0px rgba(255,0,247,1)',
       },
     },
     {
       path: 'system.availability',
-      value: String(AVAILABILITIES.PREMIUM),
+      value: AVAILABILITIES.PREMIUM,
       styling: {
         'box-shadow': 'inset 0px 0px 7px 0px rgba(0,136,255,1)',
       },
