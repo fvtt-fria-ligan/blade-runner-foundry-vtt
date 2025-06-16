@@ -203,7 +203,7 @@ export default class BladeRunnerActor extends Actor {
           .reduce((tot, m) => tot + m.value, 0);
 
         // Clamps within margins defined in the config.
-        max = Math.clamped(max, 0, capData.max);
+        max = Math.clamp(max, 0, capData.max);
 
         // Records the value in the actor data.
         capacity.max = max;
@@ -655,7 +655,7 @@ export default class BladeRunnerActor extends Actor {
     if (damage > 0) {
       const max = this.system[capacity].max;
       const oldVal = this.system[capacity].value;
-      const newVal = Math.clamped(oldVal - damage, 0, max);
+      const newVal = Math.clamp(oldVal - damage, 0, max);
       const diff = newVal - oldVal;
 
       if (diff !== 0) await this.update({ [`system.${capacity}.value`]: newVal });
@@ -663,7 +663,7 @@ export default class BladeRunnerActor extends Actor {
 
     // Prepares the chat message.
     const template = `systems/${SYSTEM_ID}/templates/actor/actor-damage-chatcard.hbs`;
-    const content = await renderTemplate(template, {
+    const content = await foundry.applications.handlebars.renderTemplate(template, {
       name: this.name,
       initialDamage,
       damage,
@@ -709,11 +709,11 @@ export default class BladeRunnerActor extends Actor {
     }
     // For vehicles:
     else if (this.type === ACTOR_TYPES.VEHICLE) {
-      const armorRoll = Roll.create(`2d${this.system.armor}p0`, {}, {
+      const armorRoll = game.bladerunner.roll.create(`2d${this.system.armor}p0`, {}, {
         name: `${this.name}: ${game.i18n.localize('FLBR.ItemArmor')}`,
         yzur: true,
       });
-      await armorRoll.roll({ async: true });
+      await armorRoll.roll();
       const armorRollMessage = await armorRoll.toMessage();
       if (game.dice3d && game.dice3d.isEnabled()) await game.dice3d.waitFor3DAnimationByMessageID(armorRollMessage.id);
       armorAblation = armorRoll.successCount;
@@ -750,10 +750,10 @@ export default class BladeRunnerActor extends Actor {
     const rollData = this.rollData;
     rollData.armor = armorAblation;
     formula += ' - @armor';
-    const crashDamageRoll = Roll.create(formula, rollData, {
+    const crashDamageRoll = foundry.dice.Roll.create(formula, rollData, {
       name: `${this.name}: ${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}`,
     });
-    await crashDamageRoll.roll({ async: true });
+    await crashDamageRoll.roll();
     const crashDamageRollMessage = await crashDamageRoll.toMessage({
       flavor: `${game.i18n.localize('FLBR.VEHICLE.Action.Crash')}: ${formula}`,
     });
@@ -808,14 +808,14 @@ export default class BladeRunnerActor extends Actor {
 
     /** @type {import('yzur').YearZeroRoll} */
     const damageType = DAMAGE_TYPES.PIERCING;
-    const blastRoll = Roll.create(`2d${blastPower}p0`, {}, {
+    const blastRoll = game.bladerunner.roll.create(`2d${blastPower}p0`, {}, {
       damage: blast.damage,
       damageType,
       damageTypeName: game.i18n.localize(FLBR.damageTypes[damageType]),
       crit: blast.crit,
       yzur: true,
     });
-    await blastRoll.roll({ async: true });
+    await blastRoll.roll();
     const blastRollMessage = await blastRoll.toMessage({
       flavor: game.i18n.localize('FLBR.VEHICLE.Action.Explode'),
     });
@@ -878,25 +878,25 @@ export default class BladeRunnerActor extends Actor {
       qty: severity,
     });
 
-    const itemId = await BladeRunnerDialog.choose(
+    const itemUuid = await BladeRunnerDialog.choose(
       results
         .sort((a, b) => b.range[0] - a.range[0])
-        .map(r => [r.documentId, `${r.text} (${r.range[0]})`]),
+        .map(r => [r.documentUuid, `${r.name} (${r.range[0]})`]),
       `${this.name}: ${game.i18n.localize('FLBR.CRIT.ChooseCrit')}`,
       { icon: 'fa-solid fa-burst' },
     );
 
-    const item = game.items.get(itemId);
+    const item = await foundry.utils.fromUuid(itemUuid);
     const [crit] = await this.createEmbeddedDocuments('Item', [item]);
 
     // Creates a chat message.
     const template = `systems/${SYSTEM_ID}/templates/actor/actor-crit-chatcard.hbs`;
-    const resultText = await TextEditor.enrichHTML(
+    const resultText = await foundry.applications.ux.TextEditor.enrichHTML(
       game.i18n.format('FLBR.CHAT.CritInflicted', {
         name: `<b>${this.name}</b>`,
         crit: `@UUID[${crit.uuid}]`,
       }));
-    const content = await renderTemplate(template, {
+    const content = await foundry.applications.handlebars.renderTemplate(template, {
       img: crit.img,
       result: resultText,
     });
@@ -936,7 +936,7 @@ export default class BladeRunnerActor extends Actor {
       results
         .sort((a, b) => b.range[0] - a.range[0])
         .map((r, i) => {
-          const title = r.text.split(':')[0];
+          const title = r.description.split(':')[0];
           return [i, `${title} (${r.range[0]})`];
         }),
       `${this.name}: ${game.i18n.localize('FLBR.CRIT.ChooseVehicleDamage')}`,
@@ -947,15 +947,15 @@ export default class BladeRunnerActor extends Actor {
 
     // Creates a chat message.
     const template = `systems/${SYSTEM_ID}/templates/actor/actor-crit-chatcard.hbs`;
-    const text = await TextEditor.enrichHTML(result.text, { async: true });
+    const text = await foundry.applications.ux.TextEditor.enrichHTML(result.description);
     const chatData = {
-      content: await renderTemplate(template, { img: result.img, result: text }),
+      content: await foundry.applications.handlebars.renderTemplate(template, { img: result.img, result: text }),
       speaker: ChatMessage.getSpeaker({ actor: this, token: this.token, scene: canvas.scene }),
       user: game.user.id,
     };
     ChatMessage.applyRollMode(chatData, game.settings.get('core', 'rollMode'));
     await ChatMessage.create(chatData);
 
-    return result.text;
+    return result.name;
   }
 }

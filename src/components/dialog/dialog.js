@@ -43,7 +43,7 @@ export default class BladeRunnerDialog extends Dialog {
   static async rangePicker({ value = 1, min = 1, max, title, description }) {
     max = max ?? value;
     const template = `systems/${SYSTEM_ID}/templates/components/dialog/range-picker-dialog.hbs`;
-    const content = await renderTemplate(template, {
+    const content = await foundry.applications.handlebars.renderTemplate(template, {
       value, min, max, description,
     });
     return this.prompt({
@@ -105,7 +105,7 @@ export default class BladeRunnerDialog extends Dialog {
    */
   static async drawTable(tables, options = {}) {
     const template = `systems/${SYSTEM_ID}/templates/components/dialog/table-draw-dialog.hbs`;
-    const content = await renderTemplate(template, {
+    const content = await foundry.applications.handlebars.renderTemplate(template, {
       formula: options.formula,
       qty: options.qty || 1,
       selected: options.defaultSelected,

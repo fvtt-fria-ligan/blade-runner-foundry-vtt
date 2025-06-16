@@ -23,7 +23,7 @@ export function createBladeRunnerMacro(data, slot) {
 
     // ! Use synced method or conflict with Foundry
     // eslint-disable-next-line no-undef
-    const item = fromUuidSync(data.uuid);
+    const item = foundry.utils.fromUuidSync(data.uuid);
     if (!item) return;
     if (!item.rollable) return;
 
@@ -58,7 +58,7 @@ async function _createBladeRunnerStatMacro(data, slot) {
   const command = `game.bladerunner.macros.rollStat("${data.attribute}"`
     + (data.skill ? `, "${data.skill}"` : '')
     + ');';
-  const actor = await fromUuid(data.uuid);
+  const actor = await foundry.utils.fromUuid(data.uuid);
   if (!actor) return;
 
   const commandName = game.i18n.format('FLBR.MACRO.RollStat', {
@@ -86,7 +86,7 @@ async function _createBladeRunnerStatMacro(data, slot) {
 async function _createBladeRunnerActionMacro(data, slot) {
   const folder = game.folders.find(f => f.type === 'Macro' && f.name === FLBR.systemMacroFolder);
   const command = `game.bladerunner.macros.rollAction("${data.action}");`;
-  const actor = await fromUuid(data.uuid);
+  const actor = await foundry.utils.fromUuid(data.uuid);
   if (!actor) return;
 
   const action = FLBR.Actions.find(a => a.id === data.action);

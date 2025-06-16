@@ -1,77 +1,82 @@
-<form autocomplete="off">
-  {{#if (eq object.type "character")}}
-
-    <div class="form-group">
-      <label>{{localize "FLBR.SHEET_CONFIG.CharacterSubtype"}}</label>
-      <select name="system.subtype">
-        {{selectOptions types selected=object.system.subtype localize=true}}
-      </select>
-      <p class="notes">{{localize "FLBR.SHEET_CONFIG.CharacterSubtypeHint"}}</p>
-    </div>
-
-    <hr/>
-
-    <div class="form-group">
-      <label>{{localize "FLBR.SHEET_CONFIG.HealthMaxModifier"}}</label>
-      <input type="text" name="system.health.mod" value="{{numberFormat object.system.health.mod sign=true}}" data-dtype="Number"{{#unless isGM}} disabled{{/unless}}/>
-      <p class="notes">{{localize "FLBR.SHEET_CONFIG.HealthMaxModifierHint"}}</p>
-    </div>
-    {{!-- <div class="form-group">
-      <label>{{localize "FLBR.SHEET_CONFIG.HealthPermanentLoss"}}</label>
-      <input type="number" name="system.health.permanentLoss" value="{{object.system.health.permanentLoss}}" max="0"{{#unless isGM}} disabled{{/unless}}/>
-      <p class="notes">{{localize "FLBR.SHEET_CONFIG.HealthPermanentLossHint"}}</p>
-    </div> --}}
-
-    {{#if (eq object.system.subtype "pc")}}
+<section data-application-part="form" class="standard-form">
+  {{#if (eq document.type "character")}}
+    <fieldset>
+      <legend>{{localize "FLBR.SHEET_CONFIG.CharacterConfiguration"}}</legend>
       <div class="form-group">
-        <label>{{localize "FLBR.SHEET_CONFIG.ResolveMaxModifier"}}</label>
-        <input type="text" name="system.resolve.mod" value="{{numberFormat object.system.resolve.mod sign=true}}" data-dtype="Number"{{#unless isGM}} disabled{{/unless}}/>
-        <p class="notes">{{localize "FLBR.SHEET_CONFIG.ResolveMaxModifierHint"}}</p>
+        <label>{{localize "FLBR.SHEET_CONFIG.CharacterSubtype"}}</label>
+        <select name="system.subtype">
+          {{selectOptions types selected=document.system.subtype localize=true}}
+        </select>
+        <p class="hint">{{localize "FLBR.SHEET_CONFIG.CharacterSubtypeHint"}}</p>
       </div>
+
+      <hr/>
+
       <div class="form-group">
-        <label>{{localize "FLBR.SHEET_CONFIG.ResolvePermanentLoss"}}</label>
-        <input type="number" name="system.resolve.permanentLoss" value="{{object.system.resolve.permanentLoss}}" max="0"{{#unless isGM}} disabled{{/unless}}/>
-        <p class="notes">{{localize "FLBR.SHEET_CONFIG.ResolvePermanentLossHint"}}</p>
+        <label>{{localize "FLBR.SHEET_CONFIG.HealthMaxModifier"}}</label>
+        <input type="text" name="system.health.mod" value="{{numberFormat document.system.health.mod sign=true}}" data-dtype="Number"{{#unless isGM}} disabled{{/unless}}/>
+        <p class="hint">{{localize "FLBR.SHEET_CONFIG.HealthMaxModifierHint"}}</p>
       </div>
-    {{/if}}
+      {{!-- <div class="form-group">
+        <label>{{localize "FLBR.SHEET_CONFIG.HealthPermanentLoss"}}</label>
+        <input type="number" name="system.health.permanentLoss" value="{{document.system.health.permanentLoss}}" max="0"{{#unless isGM}} disabled{{/unless}}/>
+        <p class="hint">{{localize "FLBR.SHEET_CONFIG.HealthPermanentLossHint"}}</p>
+      </div> --}}
 
-    <hr/>
+      {{#if (eq document.system.subtype "pc")}}
+        <div class="form-group">
+          <label>{{localize "FLBR.SHEET_CONFIG.ResolveMaxModifier"}}</label>
+          <input type="text" name="system.resolve.mod" value="{{numberFormat document.system.resolve.mod sign=true}}" data-dtype="Number"{{#unless isGM}} disabled{{/unless}}/>
+          <p class="hint">{{localize "FLBR.SHEET_CONFIG.ResolveMaxModifierHint"}}</p>
+        </div>
+        <div class="form-group">
+          <label>{{localize "FLBR.SHEET_CONFIG.ResolvePermanentLoss"}}</label>
+          <input type="number" name="system.resolve.permanentLoss" value="{{document.system.resolve.permanentLoss}}" max="0"{{#unless isGM}} disabled{{/unless}}/>
+          <p class="hint">{{localize "FLBR.SHEET_CONFIG.ResolvePermanentLossHint"}}</p>
+        </div>
+      {{/if}}
 
-    <div class="form-group">
-      <label>{{localize "FLBR.SHEET_CONFIG.Maneuverability"}}</label>
-      {{scoreSelector "system.attributes.mvr.value" selected=object.system.attributes.mvr.value}}
-      <p class="notes">{{localize "FLBR.SHEET_CONFIG.ManeuverabilityHint"}}</p>
-    </div>
+      <hr/>
 
-    <hr/>
+      <div class="form-group">
+        <label>{{localize "FLBR.SHEET_CONFIG.Maneuverability"}}</label>
+        {{scoreSelector "system.attributes.mvr.value" selected=document.system.attributes.mvr.value}}
+        <p class="hint">{{localize "FLBR.SHEET_CONFIG.ManeuverabilityHint"}}</p>
+      </div>
 
+      <hr/>
+
+      <div class="form-group">
+        <label>{{localize "FLBR.SHEET_CONFIG.UnlimitedPush"}}</label>
+        <input type="checkbox" name="flags.bladerunner.unlimitedPush" {{checked document.flags.bladerunner.unlimitedPush}} />
+        <p class="hint">{{localize "FLBR.SHEET_CONFIG.UnlimitedPushHint"}}</p>
+      </div>
+    </fieldset>
   {{/if}}
 
-  <div class="form-group">
-    <label>{{localize "FLBR.SHEET_CONFIG.UnlimitedPush"}}</label>
-    <input type="checkbox" name="flags.bladerunner.unlimitedPush" {{checked object.flags.bladerunner.unlimitedPush}} />
-    <p class="notes">{{localize "FLBR.SHEET_CONFIG.UnlimitedPushHint"}}</p>
-  </div>
+  <fieldset>
+    <legend>{{localize "FLBR.SHEET_CONFIG.Document"}}</legend>
+    <div class="form-group">
+      <label>{{localize "SHEETS.ThisSheet"}}</label>
+      <div class="form-fields">
+        <select name="sheetClass">
+          {{selectOptions sheetClasses selected=sheetClass blank=blankLabel}}
+        </select>
+      </div>
+      <p class="hint">{{localize "SHEETS.DocumentSheetHint"}}</p>
+    </div>
+  </fieldset>
 
-  <hr/>
-
-  <div class="form-group">
-    <label>{{localize "SHEETS.ThisSheet"}}</label>
-    <select name="sheetClass">
-      {{selectOptions sheetClasses selected=sheetClass blank=blankLabel}}
-    </select>
-    <p class="notes">{{localize "SHEETS.DocumentSheetHint"}}</p>
-  </div>
-
-  <div class="form-group">
-    <label>{{localize "Default"}} <strong>{{type}}</strong> {{localize "Sheet"}}</label>
-    <select name="defaultClass"{{#unless isGM}} disabled{{/unless}}>
-      {{selectOptions sheetClasses selected=defaultClass}}
-    </select>
-    <p class="notes">{{localize "SHEETS.TypeSheetHint"}}</p>
-  </div>
-
-  <button type="submit" name="submit" class="dialog-button">
-    <i class="fas fa-save"></i> {{localize "SHEETS.Save"}}
-  </button>
-</form>
+  <fieldset>
+    <legend>{{localize "FLBR.SHEET_CONFIG.Defaults"}}</legend>
+      <div class="form-group">
+        <label>{{localize "Default"}} <strong>{{type}}</strong> {{localize "Sheet"}}</label>
+        <div class="form-fields">
+          <select name="defaultClass"{{#unless isGM}} disabled{{/unless}}>
+            {{selectOptions sheetClasses selected=defaultClass blank=blankLabel}}
+          </select>
+        </div>
+        <p class="hint">{{localize "SHEETS.TypeSheetHint"}}</p>
+      </div>
+  </fieldset>
+</section>

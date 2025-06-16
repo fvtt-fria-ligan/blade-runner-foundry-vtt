@@ -30,8 +30,8 @@ export function getChatCardActor(card) {
 
 /**
  * Adds a context menu (right-clic) to Chat messages.
- * @param {JQuery} html
- * @param {Object} options Menu options
+ * @param {HTMLElement} _html
+ * @param {Object}      options Menu options
  * @link https://www.youtube.com/watch?v=uBC5DSci0NI
  */
 export function addChatMessageContextOptions(_html, options) {
@@ -39,16 +39,16 @@ export function addChatMessageContextOptions(_html, options) {
   // Allows only this menu option if we have targeted some tokens
   // & the message contains some damage.
   // Note: <li> is the chat message HTML element in the sidebar.
-  const canDefend = li => game.user.isGM
+  const canApplyDamage = li => game.user.isGM
     // ? && canvas.tokens?.controlled?.length
     && game.user.targets.size
-    && li.find('.chat-card[data-damage]').length;
+    && !!li.querySelector('.chat-card[data-damage]');
 
   options.push({
     name: game.i18n.localize('FLBR.CHAT_ACTION.ApplyDamage'),
     icon: FLBR.Icons.buttons.attack,
-    condition: canDefend,
-    callback: li => distributeDamageFromMessage(li[0].dataset.messageId),
+    condition: canApplyDamage,
+    callback: li => distributeDamageFromMessage(li.dataset.messageId),
   });
   return options;
 }
@@ -123,33 +123,40 @@ export async function distributeDamageFromMessage(messageId) {
 
 /**
  * Hides buttons of Chat messages for non-owners.
- * @param {JQuery} html
+ * @param {HTMLElement} html
  */
 export function hideChatActionButtons(html) {
-  const chatCard = html.find('.yzur.chat-card');
+  const chatCard = html.querySelector('.yzur.chat-card');
 
   // Exits early if no chatCard were found.
-  if (chatCard.length === 0) return;
+  if (!chatCard) return;
 
   // Hides buttons.
-  const actor = game.actors.get(chatCard.attr('data-actor-id'));
-  const buttons = chatCard.find('button');
+  const actor = game.actors.get(chatCard.getAttribute('data-actor-id'));
+  const buttons = chatCard.querySelectorAll('button');
   for (const btn of buttons) {
     if (actor && !actor.isOwner) btn.style.display = 'none';
   }
 }
+
 /* ------------------------------------------- */
 /*  Chat Event Listeners                       */
 /* ------------------------------------------- */
 
 /**
  * Adds Event Listeners to the Chat log.
- * @param {JQuery} html
+ * @param {HTMLElement} html
  */
 export function addChatListeners(html) {
-  html.on('click', '.blade-runner-display-manual', game.bladerunner.macros.displayManual);
-  html.on('click', '.roll-button', _onRollAction);
-  html.on('click', '.crit-roll', _onCritRoll);
+  html.addEventListener('click', ev => {
+    if (ev.target.closest('.blade-runner-display-manual')) game.bladerunner.macros.displayManual.call(ev.target, ev);
+  });
+  html.addEventListener('click', ev => {
+    if (ev.target.closest('.roll-button')) _onRollAction.call(ev.target, ev);
+  });
+  html.addEventListener('click', ev => {
+    if (ev.target.closest('.crit-roll')) _onCritRoll.call(ev.target, ev);
+  });
 }
 
 /* ------------------------------------------- */
@@ -163,21 +170,24 @@ async function _onRollAction(event) {
   event.preventDefault();
 
   // Disables the button to avoid any tricky double push.
-  const button = event.currentTarget;
+  const button = event.target;
   button.disabled = true;
 
   // Gets infos and requires a push.
-  const chatCard = event.currentTarget.closest('.chat-message');
+  const chatCard = button.closest('.chat-message');
   const messageId = chatCard.dataset.messageId;
   const message = game.messages.get(messageId);
 
   // Gets the desired action.
   const action = button.dataset.action;
   switch (action) {
-    case 'push': return BRRollHandler.pushRoll(message);
-    case 'cancel-push': return BRRollHandler.cancelPush(message);
-    default: return null;
+    case 'push': await BRRollHandler.pushRoll(message); break;
+    case 'cancel-push': await BRRollHandler.cancelPush(message); break;
+    default: break;
   }
+
+  // Re-enables the button.
+  button.disabled = false;
 }
 
 /* ------------------------------------------- */
@@ -188,7 +198,7 @@ async function _onRollAction(event) {
  */
 function _onCritRoll(event) {
   event.preventDefault();
-  const chatCard = event.currentTarget.closest('.chat-message');
+  const chatCard = event.target.closest('.chat-message');
   const messageId = chatCard.dataset.messageId;
   const message = game.messages.get(messageId);
   const roll = message?.rolls[0];

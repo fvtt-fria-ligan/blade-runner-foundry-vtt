@@ -65,7 +65,7 @@ async function drawTableEnricher(match, options) {
   const title = match[2];
 
   const tableDrawOptions = { displayChat: false };
-  if (match[3]) tableDrawOptions.roll = Roll.create(match[3], options.rollData);
+  if (match[3]) tableDrawOptions.roll = foundry.dice.Roll.create(match[3], options.rollData);
 
   const drawResult = await table.draw(tableDrawOptions);
   const result = drawResult.results[0];
@@ -78,17 +78,16 @@ async function drawTableEnricher(match, options) {
     + `data-tooltip="${table.name}: ${drawResult.roll.formula} (${drawResult.roll.total})">`
     + `<img src="${result.img}" style="vertical-align: top; height: 1em;"/>&nbsp;`;
 
-  if (result.type === 0) {
-    htmlFormat += (title ? `${title}:&nbsp;` : '') + result.text;
+  if (result.type === 'text') {
+    htmlFormat += (title ? `${title}:&nbsp;` : '') + (result.name ? result.name : result.description);
   }
   else {
-    const uuid = `${result.documentCollection}.${result.documentId}`;
-    htmlFormat += `@UUID[${uuid}]${title ? `{${title}}` : ''}`;
+    htmlFormat += `@UUID[${result.documentUuid}]${title ? `{${title}}` : ''}`;
   }
 
   htmlFormat += '</a>';
 
-  tableDoc.innerHTML = await TextEditor.enrichHTML(htmlFormat, { rollData: options.rollData, async: true });
+  tableDoc.innerHTML = await foundry.applications.ux.TextEditor.enrichHTML(htmlFormat, { rollData: options.rollData });
   return tableDoc;
 }
 
@@ -109,10 +108,10 @@ const CHOOSER_PATTERN = /\[\[choose: (.+?) ?#(.+?)\]\](?:{(.+?)})?/gm;
 async function chooserEnricher(match, options) {
   const chooseDoc = document.createElement('span');
 
-  const roll = Roll.create(match[1], options.rollData);
-  await roll.roll({ async: true });
+  const roll = foundry.dice.Roll.create(match[1], options.rollData);
+  await roll.roll();
   const choices = match[2].split('|');
-  const index = Math.clamped(roll.total, 1, choices.length) - 1;
+  const index = Math.clamp(roll.total, 1, choices.length) - 1;
   const result = (match[3] ? `${match[3]}: ` : '') + choices[index];
 
   chooseDoc.innerHTML =
@@ -225,7 +224,7 @@ ${sys.description ? `<div class="actor-description">${sys.description}</div>` : 
 
   actorDoc.className = 'flbr-enriched-actor';
   // actorDoc.style.flexWrap = 'nowrap';
-  actorDoc.innerHTML = await TextEditor.enrichHTML(htmlFormat, { async: true });
+  actorDoc.innerHTML = await foundry.applications.ux.TextEditor.enrichHTML(htmlFormat);
   return actorDoc;
 }
 
@@ -277,7 +276,7 @@ async function weaponEnricher(match, _options) {
 
   itemDoc.className = 'flbr-enriched-weapon flexrow';
   itemDoc.style.flexWrap = 'nowrap';
-  itemDoc.innerHTML = await TextEditor.enrichHTML(htmlFormat, { async: true });
+  itemDoc.innerHTML = await foundry.applications.ux.TextEditor.enrichHTML(htmlFormat);
   return itemDoc;
 }
 
@@ -296,7 +295,7 @@ const HANDOUT_PATTERN = /@BladeRunnerHandout\[(.+?)\](?:{(.+?)})?/gm;
 async function handoutEnricher(match) {
   const divDoc = document.createElement('div');
 
-  const page = await fromUuid(match[1]);
+  const page = await foundry.utils.fromUuid(match[1]);
   if (!page || page.type !== 'image') {
     divDoc.innerHTML = _createBrokenLink('entity-link', match[2] || '[handout?]');
     return divDoc;
@@ -309,7 +308,7 @@ async function handoutEnricher(match) {
 <img src="${page.src}"/>`;
 
   divDoc.className = 'flbr-enriched-handout flbr-tab-box handout';
-  divDoc.innerHTML = await TextEditor.enrichHTML(htmlFormat, { async: true });
+  divDoc.innerHTML = await foundry.applications.ux.TextEditor.enrichHTML(htmlFormat);
   return divDoc;
 }
 

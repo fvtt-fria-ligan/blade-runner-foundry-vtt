@@ -40,42 +40,35 @@ FLBR.COMBAT_ACTION.FirstAid: First Aid
 FLBR.COMBAT_ACTION.Manipulate: Manipulate
 FLBR.COMBAT_ACTION.UseItem: Use Item
 FLBR.COMBAT_ACTION_HINT.Sprint: >-
-  You can make additional moves in a single Round by using the sprint
-  action. This will then count as your action for the Round,
-  meaning you can perform no other action.
-  Roll MOBILITY – for each <span class="blade-runner-symbols">S</span> rolled,
-  you can make one more move, in addition to your free move.
-  If you fail the roll, you fall (before the second move)
-  and cannot get up until your next turn.
+  You can make additional moves in a single Round by using the sprint action.
+  This will then count as your action for the Round, meaning you can perform no
+  other action. Roll MOBILITY – for each <span
+  class="blade-runner-symbols">S</span> rolled, you can make one more move, in
+  addition to your free move. If you fail the roll, you fall (before the second
+  move) and cannot get up until your next turn.
 FLBR.COMBAT_ACTION_HINT.Crawl: >-
-  If you need to move while being prone, you must crawl.
-  This works like a move but counts as your action for the Round.
-  You can get up at the end of your crawl (free action).
+  If you need to move while being prone, you must crawl. This works like a move
+  but counts as your action for the Round. You can get up at the end of your
+  crawl (free action).
 FLBR.COMBAT_ACTION_HINT.UnarmedAttack: Strength + Close Combat
 FLBR.COMBAT_ACTION_HINT.MeleeAttack: Strength + Close Combat
 FLBR.COMBAT_ACTION_HINT.Grapple: >-
-  If you grapple your opponent as a special attack
-  in close combat, both you and your opponent fall
-  to the ground. The opponent drops any weapon
-  they were holding and cannot move. The only
-  action they can perform is an attempt to break
-  free – which is an action that succeeds if the
-  opponent wins an opposed CLOSE COMBAT roll against
-  you. While you are grappling, the only action you
-  can perform (until you release your opponent) is
-  a grapple attack. This works as a normal unarmed
-  attack, but your target counts as restrained and
-  thus cannot defend themselves.
+  If you grapple your opponent as a special attack in close combat, both you and
+  your opponent fall to the ground. The opponent drops any weapon they were
+  holding and cannot move. The only action they can perform is an attempt to
+  break free – which is an action that succeeds if the opponent wins an opposed
+  CLOSE COMBAT roll against you. While you are grappling, the only action you
+  can perform (until you release your opponent) is a grapple attack. This works
+  as a normal unarmed attack, but your target counts as restrained and thus
+  cannot defend themselves.
 FLBR.COMBAT_ACTION_HINT.BreakFree: Strength + Hand-to-hand Combat
 FLBR.COMBAT_ACTION_HINT.ShootFirearm: Agility + Firearms
 FLBR.COMBAT_ACTION_HINT.CarefulAim: >-
-  If you take your time to aim carefully
-  before squeezing the trigger, you get an advantage to your
-  attack roll. Aiming, however, is an action in itself. You
-  cannot aim carefully and fire in the same Round. If you
-  do anything else except shoot your weapon after you have
-  aimed, or if you are hit by an attack, you lose the effect
-  of the aim and you need to spend another action to aim
+  If you take your time to aim carefully before squeezing the trigger, you get
+  an advantage to your attack roll. Aiming, however, is an action in itself. You
+  cannot aim carefully and fire in the same Round. If you do anything else
+  except shoot your weapon after you have aimed, or if you are hit by an attack,
+  you lose the effect of the aim and you need to spend another action to aim
   carefully again.
 FLBR.COMBAT_ACTION_HINT.ThrowWeapon: Agility + Firearms
 FLBR.COMBAT_ACTION_HINT.FirstAid: Intelligence + Medical Aid
@@ -120,9 +113,8 @@ FLBR.HEADER.YearsOnTheForce: Years On The Force
 FLBR.HEADER.Weapons: Weapons
 FLBR.SHEET_CONFIG.CharacterSubtype: Subtype
 FLBR.SHEET_CONFIG.CharacterSubtypeHint: >-
-  Select whether this is a PC or NPC.
-  The later provides a pared down character sheet and
-  added functionality for the GM to more easily run NPCs.
+  Select whether this is a PC or NPC. The later provides a pared down character
+  sheet and added functionality for the GM to more easily run NPCs.
 FLBR.SHEET_CONFIG.HealthMaxModifier: Health max. modifier
 FLBR.SHEET_CONFIG.HealthMaxModifierHint: Modify the health capacity maximum (GM Only).
 FLBR.SHEET_CONFIG.HealthPermanentLoss: Health permanent loss
@@ -133,12 +125,12 @@ FLBR.SHEET_CONFIG.ResolvePermanentLoss: Resolve permanent loss
 FLBR.SHEET_CONFIG.ResolvePermanentLossHint: Set how much resolve is permanently lost (GM Only).
 FLBR.SHEET_CONFIG.Maneuverability: Vehicle Maneuverability
 FLBR.SHEET_CONFIG.ManeuverabilityHint: >-
-  Set the maneuverability of the vehicle driven
-  by this character, if applicable.
+  Set the maneuverability of the vehicle driven by this character, if
+  applicable.
 FLBR.SHEET_CONFIG.UnlimitedPush: Allow Unlimited Pushed Rolls
 FLBR.SHEET_CONFIG.UnlimitedPushHint: >-
-  If your GM allows an unlimited number of pushed rolls.
-  Check this setting to display a push button on almost any roll.
+  If your GM allows an unlimited number of pushed rolls. Check this setting to
+  display a push button on almost any roll.
 FLBR.SHEET_HEADER.ArmorRoll: Roll Armor
 FLBR.SHEET_HEADER.BlastPowerRoll: Roll Blast Power
 FLBR.SHEET_HEADER.GenericRoll: Generic Roll
@@ -160,7 +152,9 @@ FLBR.ACTIVE_EFFECT.Edit: Edit Effect
 FLBR.ACTIVE_EFFECT.Empty: No Effect.
 FLBR.ACTIVE_EFFECT.New: New Effect
 FLBR.ACTIVE_EFFECT.Toggle: Toggle Effect
-FLBR.ACTIVE_EFFECT.InActorDisclaimer: "Note: Active Effects cannot be edited in embedded Items (Foundry's limitation)."
+FLBR.ACTIVE_EFFECT.InActorDisclaimer: >-
+  Note: Active Effects cannot be edited in embedded Items (Foundry's
+  limitation).
 FLBR.Advantage: Advantage
 FLBR.Capacities: Health & Resolve
 FLBR.Blast: Blast
@@ -232,7 +226,8 @@ FLBR.ItemSpecial: Special
 FLBR.MACRO.GetActorTitle: Choose an Actor
 FLBR.MACRO.GetActorHint: You have selected multiple tokens. Please choose one of them.
 FLBR.MACRO.MultipleItems: >-
-  Your controlled Actor {actor} has more than one Item with name {item}. The first matched item will be chosen.
+  Your controlled Actor {actor} has more than one Item with name {item}. The
+  first matched item will be chosen.
 FLBR.MACRO.NoActor: Your controlled Actor {actor} was not found.
 FLBR.MACRO.NoItem: Your controlled Actor {actor} does not have an item named {item}.
 FLBR.MACRO.RollAction: Action {action}
@@ -270,53 +265,45 @@ FLBR.SignatureItemUsedCheckboxHint: Used?
 FLBR.SomeoneIsSomething: '{name} is {status}'
 FLBR.VEHICLE.Action.Crash: Crash
 FLBR.VEHICLE.Action.CrashHint: >-
-  If a Spinner is Wrecked, it crashes violently
-  to the ground. All people inside suffer D3 points of falling
-  damage plus one for each zone of altitude, mitigated by
-  the vehicle’s Armor rating. You can also brace yourself for
-  the hit by rolling MOBILITY – each <span class="blade-runner-symbols">S</span> rolled reduces the
-  damage by one.
+  If a Spinner is Wrecked, it crashes violently to the ground. All people inside
+  suffer D3 points of falling damage plus one for each zone of altitude,
+  mitigated by the vehicle’s Armor rating. You can also brace yourself for the
+  hit by rolling MOBILITY – each <span class="blade-runner-symbols">S</span>
+  rolled reduces the damage by one.
 FLBR.VEHICLE.Action.CrashDialog: >-
-  This will crash the vehicle and inflict {damage} of falling damage to each passenger,
-  mitigated by the vehicle’s Armor rating and a MOBILITY roll (no action).
+  This will crash the vehicle and inflict {damage} of falling damage to each
+  passenger, mitigated by the vehicle’s Armor rating and a MOBILITY roll (no
+  action).
 FLBR.VEHICLE.Action.Explode: Explode
 FLBR.VEHICLE.Action.ExplodeHint: >-
-  The vehicle explodes in a ball of flame.
-  Everyone inside is exposed to a Blast Power B explosion,
-  and the vehicle is destroyed beyond repair.
+  The vehicle explodes in a ball of flame. Everyone inside is exposed to a Blast
+  Power B explosion, and the vehicle is destroyed beyond repair.
 FLBR.VEHICLE.Action.MassiveCrash: Massive Crash
 FLBR.VEHICLE.Action.Ramming: Ramming
 FLBR.VEHICLE.Action.RammingHint: >-
-  Most vehicles can be used
-  as weapons – i.e. to simply run your target over. It counts
-  as a close combat attack but roll for DRIVING instead of
-  CLOSE COMBAT. This roll can be combined with the speeding
-  action above, but that will make the DRIVING roll an
-  opposed roll, meaning that the effectiveness of the speeding
-  might be reduced. The base Damage rating of the attack
-  equals your vehicle’s Hull rating divided by two, rounded up.
-  Ramming vehicles inflict crushing damage and the Crit
-  Die has a die size equal to the Hull rating, rounded up to
-  the closest die, to a maximum of D12 – i.e. a vehicle with
-  Hull 9 has a D10 Crit Die.
+  Most vehicles can be used as weapons – i.e. to simply run your target over. It
+  counts as a close combat attack but roll for DRIVING instead of CLOSE COMBAT.
+  This roll can be combined with the speeding action above, but that will make
+  the DRIVING roll an opposed roll, meaning that the effectiveness of the
+  speeding might be reduced. The base Damage rating of the attack equals your
+  vehicle’s Hull rating divided by two, rounded up. Ramming vehicles inflict
+  crushing damage and the Crit Die has a die size equal to the Hull rating,
+  rounded up to the closest die, to a maximum of D12 – i.e. a vehicle with Hull
+  9 has a D10 Crit Die.
 FLBR.VEHICLE.Action.Repair: Repair
 FLBR.VEHICLE.Action.RepairHint: >-
-  Repairing damage to a vehicle requires one or several TECH
-  rolls. One roll can be made per Shift. Only one person can
-  roll to repair the hull, but others can help.
-  Each <span class="blade-runner-symbols">S</span> rolled
-  removes one point of damage. If the vehicle was Wrecked,
-  it is no longer considered Wrecked once one point of damage
-  has been repaired.
-  If the engine or a mounted
-  weapon has been disabled due to a critical hit, repairing it
-  typically requires a TECH roll, in addition to any roll for
-  repairing hull damage. The work takes one Shift.
+  Repairing damage to a vehicle requires one or several TECH rolls. One roll can
+  be made per Shift. Only one person can roll to repair the hull, but others can
+  help. Each <span class="blade-runner-symbols">S</span> rolled removes one
+  point of damage. If the vehicle was Wrecked, it is no longer considered
+  Wrecked once one point of damage has been repaired. If the engine or a mounted
+  weapon has been disabled due to a critical hit, repairing it typically
+  requires a TECH roll, in addition to any roll for repairing hull damage. The
+  work takes one Shift.
 FLBR.VEHICLE.Action.Speeding: Speeding
 FLBR.VEHICLE.Action.SpeedingHint: >-
-  Corresponding to sprinting on foot,
-  you can use the speeding action to make additional
-  moves in the same Round with a vehicle.
+  Corresponding to sprinting on foot, you can use the speeding action to make
+  additional moves in the same Round with a vehicle.
 FLBR.VEHICLE.Altitude: Altitude
 FLBR.VEHICLE.AddSeat: Increase the passengers capacity (GM only)
 FLBR.VEHICLE.ChoosePassenger: Choose Passenger
@@ -377,7 +364,9 @@ TYPES.Item.specialty: Specialty
 TYPES.Item.injury: Injury
 GAME.Paused: Investigation Paused
 SETTINGS.BLADE_RUNNER.AutomaticApplyDamageName: Automatic Apply Damage
-SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: Whether to automatically apply damage from rolls to targeted tokens and vehicle passengers.
+SETTINGS.BLADE_RUNNER.AutomaticApplyDamageHint: >-
+  Whether to automatically apply damage from rolls to targeted tokens and
+  vehicle passengers.
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollName: Automatic Armor Roll
 SETTINGS.BLADE_RUNNER.AutomaticArmorRollHint: Whether to automatically roll the armor.
 SETTINGS.BLADE_RUNNER.CrashTableName: Vehicle Damage Table
@@ -391,13 +380,17 @@ SETTINGS.BLADE_RUNNER.DoNotUseHandwrittenFontHint: Disable the use of the handwr
 SETTINGS.BLADE_RUNNER.EditNaturePermissionName: Allow Nature Change
 SETTINGS.BLADE_RUNNER.EditNaturePermissionHint: Whether to allow the player to edit their nature in their character sheet.
 SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackName: Open First Weapon Attack
-SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: Whether to open the collapsible of the first weapon attack when the Item sheet is displayed.
+SETTINGS.BLADE_RUNNER.OpenFirstWeaponAttackHint: >-
+  Whether to open the collapsible of the first weapon attack when the Item sheet
+  is displayed.
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewName: Update Maneuverability on Crew
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnCrewHint: Whether to update the actor's maneuverability when crewed into a vehicle.
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewName: Update Maneuverability on Uncrew
 SETTINGS.BLADE_RUNNER.UpdateActorManeuverabilityOnUncrewHint: Whether to update the actor's maneuverability when removed from a vehicle.
 SETTINGS.BLADE_RUNNER.UseActiveEffectsName: Use Active Effects
-SETTINGS.BLADE_RUNNER.UseActiveEffectsHint: Whether to display an additional field in sheets for managing Active Effects (for advanced players).
+SETTINGS.BLADE_RUNNER.UseActiveEffectsHint: >-
+  Whether to display an additional field in sheets for managing Active Effects
+  (for advanced players).
 WARNING.ApplyDamageNoNature: 'Apply Push Damage: Actor Nature Not Found!'
 WARNING.ApplyDamageNoCapacityKey: 'Apply Push Damage: Nature-Capacity relation Not Found!'
 WARNING.ApplyDamageNoActorCapacity: 'Apply Push Damage: Actor Capacity Not Found!'
@@ -405,3 +398,7 @@ WARNING.NoDiceInput: No dice to roll!
 WARNING.NoItemAction: No item action defined!
 WARNING.ItemActionMacroNotFound: Macro "{macro}" not found!
 WARNING.NoItemUnit: 'Cannot use {name}: no unit left!'
+FLBR.SHEET_CONFIG.Title: Sheet Configuration
+FLBR.SHEET_CONFIG.CharacterConfiguration: Character Configuration
+FLBR.SHEET_CONFIG.Document: Document
+FLBR.SHEET_CONFIG.Defaults: Defaults

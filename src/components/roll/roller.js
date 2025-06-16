@@ -399,7 +399,7 @@ export default class BRRollHandler extends FormApplication {
     const dice = this.dice.map(d => ({ term: `${d}`, number: 1 }));
     this.roll = YearZeroRoll.forge(dice, {}, this.getRollOptions());
 
-    await this.roll.roll({ async: true });
+    await this.roll.roll();
 
     if (this.options.sendMessage) {
       const message = await this.roll.toMessage({
@@ -463,7 +463,7 @@ export default class BRRollHandler extends FormApplication {
     }
 
     // Pushes the roll.
-    await roll.push({ async: true });
+    await roll.push();
 
     // Prepares the message.
     const flavor = message.flavor;
@@ -541,7 +541,7 @@ export default class BRRollHandler extends FormApplication {
 
     // eslint-disable-next-line prefer-const
     let { value, max } = capacity;
-    value = Math.clamped(value - currentDamage, 0, max);
+    value = Math.clamp(value - currentDamage, 0, max);
 
     if (value === 0) {
       ui.notifications.info('FLBR.YouAreBroken', { localize: true });
@@ -652,11 +652,11 @@ export default class BRRollHandler extends FormApplication {
       roller.close = async opts => {
         await originalClose.bind(roller, opts)();
         const roll = roller.roll;
-        if (roll instanceof Roll) {
+        if (roll instanceof foundry.dice.Roll) {
           if (roller.message && game.dice3d && game.dice3d.isEnabled()) {
             await game.dice3d.waitFor3DAnimationByMessageID(roller.messageId);
-            resolve(roll);
           }
+          resolve(roll);
         }
         else {
           reject(new Error('The dialog was closed without a choice being made.'));
@@ -676,7 +676,7 @@ export default class BRRollHandler extends FormApplication {
    */
   static async askDie(lowest = 6) {
     const template = 'systems/blade-runner/templates/components/roll/roll-askdie-dialog.hbs';
-    const content = await renderTemplate(template, { lowest });
+    const content = await foundry.applications.handlebars.renderTemplate(template, { lowest });
     return Dialog.prompt({
       title: game.i18n.localize('FLBR.ROLLER.AddDie'),
       content,
@@ -702,7 +702,7 @@ export default class BRRollHandler extends FormApplication {
   static async selectPush(dice) {
     return Dialog.wait({
       title: game.i18n.localize('FLBR.ROLLER.SelectDiceToPush'),
-      content: await renderTemplate(
+      content: await foundry.applications.handlebars.renderTemplate(
         'systems/blade-runner/templates/components/roll/roll-push-select-dialog.hbs',
         { dice },
       ),

@@ -84,7 +84,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     await super._onDropActor(event, data);
     if (!this.vehicle.isOwner) return;
 
-    const actor = await fromUuid(data.uuid);
+    const actor = await foundry.utils.fromUuid(data.uuid);
     if (!actor) return;
 
     if (data.parent === this.vehicle.id) return this._sortCrew(event, actor);
@@ -176,7 +176,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     html.find('.roll-vehicle-armor').click(this._onVehicleArmorRoll.bind(this));
 
     // Hull
-    new ContextMenu(html, '.hull', [
+    new foundry.applications.ux.ContextMenu.implementation(html[0], '.hull', [
       {
         name: game.i18n.localize('FLBR.VEHICLE.IncreaseHull'),
         icon: FLBR.Icons.buttons.plus,
@@ -193,7 +193,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
         }),
         condition: () => this.vehicle.system.hull.max > 1,
       },
-    ]);
+    ], { jQuery: true });
 
     // Crew
     html.find('.vehicle-seat:not(.empty):not(.broken)').click(this._onCrewAction.bind(this));
@@ -201,7 +201,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
     //   elem.setAttribute('draggable', true);
     //   elem.addEventListener('dragstart', ev => this._onDragStart(ev), false);
     // });
-    new ContextMenu(html, '.vehicle-seat:not(.button)', [
+    new foundry.applications.ux.ContextMenu.implementation(html[0], '.vehicle-seat:not(.button)', [
       {
         name: game.i18n.localize('FLBR.VEHICLE.EditPassenger'),
         icon: FLBR.Icons.buttons.edit,
@@ -222,7 +222,7 @@ export default class BladeRunnerVehicleSheet extends BladeRunnerActorSheet {
         }),
         condition: () => !this.vehicle.crew.full && this.vehicle.system.passengers > 1,
       },
-    ]);
+    ], { jQuery: true });
 
     // Owner-only listeners.
     if (this.actor.isOwner) {

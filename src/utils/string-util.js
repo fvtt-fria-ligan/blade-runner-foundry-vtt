@@ -19,7 +19,9 @@ export async function enrichTextFields(sheetData, fieldNames) {
       foundry.utils.setProperty(
         sheetData,
         fieldName,
-        await TextEditor.enrichHTML(foundry.utils.getProperty(sheetData, fieldName), { async: true }),
+        await foundry.applications.ux.TextEditor.enrichHTML(
+          foundry.utils.getProperty(sheetData, fieldName),
+        ),
       );
     }
   }

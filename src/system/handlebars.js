@@ -10,7 +10,7 @@ function preloadHandlebarsTemplates() {
   // eslint-disable-next-line no-undef
   const paths = TEMPLATE_PATHS;
   console.log('Blade Runner RPG | Loading Handlebars templates:', paths);
-  return loadTemplates(paths);
+  return foundry.applications.handlebars.loadTemplates(paths);
 }
 
 /* ------------------------------------------ */
@@ -56,7 +56,7 @@ function registerHandlebarsHelpers() {
       n = 100;
     }
     // return TextEditor.truncateText(str, { maxLength: n, splitWords: true });
-    return TextEditor.previewHTML(str, n);
+    return foundry.applications.ux.TextEditor.previewHTML(str, n);
   });
 
   Handlebars.registerHelper('times', function (n, content) {
@@ -119,7 +119,7 @@ function registerHandlebarsHelpers() {
     if (rgx.test(text)) {
       text = text.replace(rgx, (_match, p1, p2) => {
       // eslint-disable-next-line no-undef
-        const title = p2 ?? fromUuidSync(p1)?.name ?? '{undefined}';
+        const title = p2 ?? foundry.utils.fromUuidSync(p1)?.name ?? '{undefined}';
         return `<b>${title}</b>`;
       });
     }
@@ -139,7 +139,7 @@ function registerHandlebarsHelpers() {
   Handlebars.registerHelper('select', function (selected, options) {
     const escapedValue = RegExp.escape(Handlebars.escapeExpression(selected));
     const rgx = new RegExp(` value=["']${escapedValue}["']`);
-    const html = options.fn(HandlebarsHelpers);
+    const html = options.fn(foundry.applications.handlebars);
     return html.replace(rgx, '$& selected');
   });
 

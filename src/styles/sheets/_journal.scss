@@ -4,7 +4,7 @@
 /*  Journal Entry Window Apps                 */
 /* ------------------------------------------ */
 
-.app.journal-entry {
+.application.journal-entry {
   border: 1px solid var(--color-blue-darker);
   border-radius: 4px;
 
@@ -65,7 +65,7 @@
 /*  Journal Entry Content                     */
 /* ------------------------------------------ */
 
-.app.journal-entry .journal-entry-content {
+.application.journal-entry .journal-entry-content {
   color: #FFF2DE;
   background-image: url("./assets/textures/journal-sheet-background.webp");
   background-position: top center;
@@ -133,12 +133,22 @@
       font-size: var(--font-size--default);
     }
 
+    a[href] {
+      color: var(--color-red-darker);
+    }
+
     code {
       font-family: inherit;
       font-weight: normal;
       padding: 0 4px;
-      background-color: var(--color-border-light-2);
+      background-color: #999;
       border-radius: 4px;
+      border: none;
+      white-space: pre-wrap;
+
+      img {
+        display: inline;
+      }
     }
   // }
 
@@ -150,5 +160,9 @@
     font-family: var(--font-table);
     font-weight: normal;
     color: var(--color-skin);
+  }
+
+  .notification {
+    display: block;
   }
 }

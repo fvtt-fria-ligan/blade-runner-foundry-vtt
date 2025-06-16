@@ -3,5 +3,6 @@ dist/
 node_modules
 foundry.js
 foundry-*.js
+foundry-*.mjs
 static/system.json
 static/template.json

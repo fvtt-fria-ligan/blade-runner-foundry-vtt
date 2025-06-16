@@ -2,13 +2,44 @@
   "id": "blade-runner",
   "title": "Blade Runner 🦄 - The Roleplaying Game",
   "description": "A neon-noir wonderland that’ll take your breath away. One way or another. An evocative world of conflicts and contrasts that dares to ask the hard questions and investigate the powers of empathy, the poisons of fear, and the burdens of being human during inhumane times. An iconic and unforgiving playground of endless possibilities that picks you up, slaps you in the face, and tells you to wake up. Time to live. Or time to die.",
-  "version": "12.0.1",
+  "version": "13.0.0",
   "compatibility": {
-    "minimum": 10,
-    "verified": "12.328",
-    "maximum": 12
+    "minimum": 13,
+    "verified": "13.345",
+    "maximum": 13
   },
-  "author": "Stefouch",
+  "relationships": {
+    "recommends": [
+      {
+        "id": "dice-so-nice",
+        "type": "module",
+        "compatibility": {
+          "minimum": "5.1.8"
+        }
+      },
+      {
+        "id": "yze-combat",
+        "type": "module",
+        "compatibility": {
+          "minimum": "1.3.5"
+        }
+      },
+      {
+        "id": "simultaneous-cards",
+        "type": "module",
+        "compatibility": {
+          "minimum": "3.0.0"
+        }
+      },
+            {
+        "id": "item-piles",
+        "type": "module",
+        "compatibility": {
+          "minimum": "3.2.13"
+        }
+      }
+    ]
+  },
   "authors": [
     {
       "name": "Stefouch",
@@ -20,11 +51,6 @@
       "url": "https://github.com/orgs/fvtt-fria-ligan"
     }
   ],
-  "contributors": [
-    "aMediocreDad"
-  ],
-  "localization": "",
-  "allowBugReporter": true,
   "bugs": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues",
   "media": [],
   "scripts": [],
@@ -71,8 +97,10 @@
       "path": "lang/es.json"
     }
   ],
-  "gridDistance": 1,
-  "gridUnits": "m",
+  "grid": {
+    "distance": 1,
+    "units": "m"
+  },
   "background": "systems/blade-runner/assets/splash.webp",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": null,
