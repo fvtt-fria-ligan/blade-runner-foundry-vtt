@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [13.0.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/12.0.1...13.0.0) (2025-06-16)
+
+### Features
+
+- ✨ Add recommended modules ([ee80a41](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/ee80a4131680e14eec5f034d992f1602ed128c8d))
+- ✨ Add support for module Item Piles ([8328ddb](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/8328ddbc7a17bbfb222013039a00f7dc5210da26))
+- ✨ Add update chat message ([085fc38](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/085fc3871c68a7978928f356cf9e88bbe4a728f1))
+- ✨ Expose YearZeroRoller into game.bladerunner.roll ([b2ac644](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/b2ac644199fc5393908a2eef68907430369bc229))
+- **ChatMessage:** ✨ Remove jQuery from chat buttons ([5decc21](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/5decc2159177fa11f42adeee71e4993f4fb2e58b))
+- **i18n:** ✨ 🌐 Add more translation lines ([3e019b8](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/3e019b8f090905ffb72e95696475be0fba51f501))
+- **item-piles:** ✨ Add more config ([b8bac27](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/b8bac27efe4bce4981b8a723e1d369d927976d0b))
+
+### Bug Fixes
+
+- 🐛 Add custom select helper and remove deprecation warnings ([5c56642](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/5c56642d6e9fc83b7c91ad95c7cd74c22718c58f))
+- 🐛 Attempt to repair the a.inline-roll overriding body event listener ([15381ce](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/15381ce0de99cde2da474bccde990a4f720717c7))
+- 🐛 Change more namespaces ([ea51d91](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/ea51d9150feaf47301a1174d52d9a450aa6f60c4))
+- 🐛 Change p class notes by hint ([69e2ea9](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/69e2ea9caf8b3eca9dc46bff8541accba7b28e4b))
+- 🐛 Move DiceSoNice FX config to assets ([e527219](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/e5272190d735cd652a72ba984dd28f0151ecbab4))
+- 🐛 Reactivate the roll button in chat message after action ([8e66ed1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/8e66ed10f0da02963bdc00101885913af3c3fb61))
+- 🐛 Remove async roll deprecation warnings ([8e79ddf](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/8e79ddfd4ae870463065c1b121689633d870c0e3))
+- 🐛 Remove more namespace warnings with RollTables ([868027a](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/868027a8ec98b4283dfc2168371e5ffec2145e98))
+- 🐛 Remove namespaces warnings ([6f24858](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/6f24858e636c936c7d2987bd5178a8e33426df2b))
+- 🐛 Repair ChatMessage ContextMenu ApplyDamage ([0422272](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/042227267441bc22dc1fd0d921eac1df2b3e6ef4))
+- 🐛 Repair JQuery in chat hooks ([712ac26](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/712ac26f7992ee2e6efb9bd58f06dc4ad263ad71))
+- 🐛 Repair Sheet Config ([6a1439c](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/6a1439c4b31a988ba81460ea038438d8d111dac8))
+- 🐛 Repair table enricher ([36e1dd8](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/36e1dd87815f4dd611a527c0cbce36d12ea616e3))
+- 🐛 Repair the chat roll result expand ([4a6a455](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/4a6a4552a556751aff2c814907cb893438823b22))
+- 🐛 Repair vehicle component not repairable ([895497c](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/895497ce54ba6c5387f57265806793a6ced52d80))
+- 🐛 Repair Vehicle crash mitigation roll ([a875cf9](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/a875cf95b3f1f30e3388cf8bb997f23308295243))
+- 🐛 Repair window position of the ActorSheetConfig ([1b139a6](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/1b139a6b09a76d965a95159819c8dcb5835ae8b5))
+- 🐛 Replace more namespaces ([d3d1b8f](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/d3d1b8f77c213383597375cbba16de89144c2cf3))
+- **Item:** 🐛 Repair the ActiveEffects ([e6aef71](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/e6aef71a8ec05b0797900029d03dbed112548851))
+
 ## [12.0.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/12.0.0...12.0.1) (2024-07-04)
 
 ### Bug Fixes

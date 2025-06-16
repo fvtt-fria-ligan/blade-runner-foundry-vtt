@@ -31,7 +31,7 @@
           "minimum": "3.0.0"
         }
       },
-            {
+      {
         "id": "item-piles",
         "type": "module",
         "compatibility": {
@@ -111,5 +111,5 @@
   "socket": false,
   "changelog": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases",
   "manifest": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/latest/download/system.json",
-  "download": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/12.0.1/blade-runner-fvtt_v12.0.1.zip"
+  "download": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/13.0.0/blade-runner-fvtt_v13.0.0.zip"
 }
