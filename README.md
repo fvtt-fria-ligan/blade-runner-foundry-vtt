@@ -69,12 +69,21 @@ The core system features no content. It only provides support for various mechan
 
 # 🧩 Supported Modules
 
-List of modules confirmed to be stable with the Blade Runner game system.
+List of modules confirmed to be stable with the Blade Runner game system:
 
-- [Dice So Nice](https://foundryvtt.com/packages/dice-so-nice/)
-- [Year Zero Engine: Combat](https://foundryvtt.com/packages/yze-combat)
-- [Simultaneous Cards](https://foundryvtt.com/packages/simultaneous-cards)
-- [Quick Insert - Search Widget](https://foundryvtt.com/packages/quick-insert)
+- [Dice So Nice](https://foundryvtt.com/packages/dice-so-nice/): Enables the Blade Runner 3D dice. Also, a set of predefined Special Effects is available in the `/assets/plugins` folder. _(Use the import button in the DsN settings.)_
+- [Year Zero Engine: Combat](https://foundryvtt.com/packages/yze-combat): Combat mechanics with initiative cards.
+- [Simultaneous Cards](https://foundryvtt.com/packages/simultaneous-cards): Useful for chases.
+- [Simple Calendar](https://foundryvtt.com/packages/foundryvtt-simple-calendar): Tracks time, useful for the investigation's time table.
+- [Item Piles](https://foundryvtt.com/packages/item-piles): Useful for creating merchants and RDU services providers.
+- [Token Action HUD](https://foundryvtt.com/packages/token-action-hud-core) with [this plugin](https://foundryvtt.com/packages/token-action-hud-bladerunner)
+- [Quick Insert - Search Widget](https://foundryvtt.com/packages/quick-insert): Quickly search content.
+
+List of premium content modules:
+
+- [Blade Runner RPG Core Rules](https://foundryvtt.com/packages/blade-runner-core-game)
+- [Blade Runner RPG Starter Set](https://foundryvtt.com/packages/blade-runner-starter-set)
+- [Blade Runner RPG Fiery Angels](https://foundryvtt.com/packages/blade-runner-fiery-angels)
 
 # 🛠️ Contributing
 
