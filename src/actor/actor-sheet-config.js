@@ -1,92 +1,90 @@
 import { FLBR } from '@system/config';
 import { SYSTEM_ID } from '@system/constants';
-const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
  * Configuration Sheet for the Actor sheet.
  */
-export default class ActorSheetConfig extends HandlebarsApplicationMixin(ApplicationV2) {
-
-  constructor(options = {}) {
-    super(options);
-    this.document = options.document;
-
-    // Sets a dynamic title based on the actor's name.
-    const actorName = this.document.name;
-    const configTitle = game.i18n.localize('FLBR.SHEET_CONFIG.Title');
-    this.options.window.title = `${actorName}: ${configTitle}`;
-  }
+export default class ActorSheetConfig extends foundry.applications.apps.DocumentSheetConfig {
 
   static DEFAULT_OPTIONS = {
     tag: 'form',
-    classes: ['application', 'sheet', 'sheet-config'],
     form: {
       handler: ActorSheetConfig.myFormHandler,
       submitOnChange: false,
       closeOnSubmit: true,
     },
-    window: {
-      icon: 'fa-solid fa-gear',
-      contentClasses: ['standard-form'],
-    },
-    position: {
-      width: 500,
-      height: 'auto',
-    },
+    // position: {
+    //   width: 500,
+    //   height: 'auto',
+    // },
   };
 
   static PARTS = {
-    body: {
+    character: {
+      classes: ['standard-form'],
       template: `systems/${SYSTEM_ID}/templates/actor/actor-sheet-config.hbs`,
+    },
+    form: {
+      classes: ['standard-form'],
+      template: 'templates/sheets/document-sheet-config.hbs',
     },
     footer: {
       template: 'templates/generic/form-footer.hbs',
     },
   };
 
-  async _prepareContext(_options) {
-    const documentName = this.document.documentName;
-    const allSheetClasses = CONFIG[documentName]?.sheetClasses || {};
-    const actorType = this.document.type || 'character';
-    const relevantSheetClasses = allSheetClasses[actorType] || {};
+  get title() {
+    return `${this.document.name} - ${super.title}`;
+  }
 
-    // console.log('actorType:', actorType);
-    // console.log('relevantSheetClasses:', relevantSheetClasses);
-
-    return {
-      document: this.document,
-      types: FLBR.characterSubtypes,
-      sheetClasses: relevantSheetClasses,
-      sheetClass: this.document._sheetClass,
-      defaultClass: CONFIG[documentName]?.sheetClass,
-      isGM: game.user.isGM,
-      blankLabel: game.i18n.localize('None'),
-      type: documentName,
-      editable: true,
-      buttons: [
-        {
-          type: 'submit',
-          icon: 'fa-solid fa-save',
-          label: 'SHEETS.Save',
-        },
-      ],
-    };
+  async _preparePartContext(partId, context, options) {
+    const data = await super._preparePartContext(partId, context, options);
+    if (partId === 'character') {
+      data.types = FLBR.characterSubtypes;
+      data.isGM = game.user.isGM;
+    }
+    return data;
   }
 
   static async myFormHandler(_event, _form, formData) {
+    // ----- Applies our character changes.
     const updateData = foundry.utils.expandObject(formData.object);
     await this.document.update(updateData);
-  }
 
-  // async _updateObject(event, formData) {
-  //   event.preventDefault();
-  //   const original = this.getData();
-  //   this.object.update(formData);
-  //   if (
-  //     formData.sheetClass !== original.sheetClass ||
-  //     formData.defaultClass !== original.defaultClass
-  //   ) {
-  //     return super._updateObject(event, formData);
-  //   }
-  // }
+    // ----- Applies theme changes (copy-pasted from the Foundry's code because their f*cking method is private!!)
+    const { object } = formData;
+    const { documentName, type = CONST.BASE_DOCUMENT_TYPE } = this.document;
+
+    // Update themes.
+    const themes = game.settings.get('core', 'sheetThemes');
+    const defaultTheme = foundry.utils.getProperty(themes, `defaults.${documentName}.${type}`);
+    const documentTheme = themes.documents?.[this.document.uuid];
+    const themeChanged = (object.defaultTheme !== defaultTheme) || (object.theme !== documentTheme);
+    if (themeChanged) {
+      foundry.utils.setProperty(themes, `defaults.${documentName}.${type}`, object.defaultTheme);
+      themes.documents ??= {};
+      themes.documents[this.document.uuid] = object.theme;
+      await game.settings.set('core', 'sheetThemes', themes);
+    }
+
+    // Update sheets.
+    const { defaultClass } = this.constructor.getSheetClassesForSubType(documentName, type);
+    const sheetClass = this.document.getFlag('core', 'sheetClass') ?? '';
+    const defaultSheetChanged = object.defaultClass !== defaultClass;
+    const documentSheetChanged = object.sheetClass !== sheetClass;
+
+    if (themeChanged || (game.user.isGM && defaultSheetChanged)) {
+      if (game.user.isGM && defaultSheetChanged) {
+        const setting = game.settings.get('core', 'sheetClasses');
+        foundry.utils.setProperty(setting, `${documentName}.${type}`, object.defaultClass);
+        await game.settings.set('core', 'sheetClasses', setting);
+      }
+
+      // Trigger a sheet change manually if it wouldn't be triggered by the normal ClientDocument#_onUpdate workflow.
+      if (!documentSheetChanged) return this.document._onSheetChange({ sheetOpen: true });
+    }
+
+    // Update the document-specific override.
+    if (documentSheetChanged) return this.document.setFlag('core', 'sheetClass', object.sheetClass);
+  }
 }
