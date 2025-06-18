@@ -64,7 +64,7 @@ All notable changes to this project will be documented in this file. See [commit
 
 - **Settings:** ✨ Add new setting to disable handwritten font ([44af555](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/44af555cf69687f82a8fd3cf64a95a850fc00758))
 
-### [11.0.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/11.0.0...11.0.1) (2023-07-18)
+## [11.0.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/11.0.0...11.0.1) (2023-07-18)
 
 ### Bug Fixes
 
@@ -171,7 +171,7 @@ All notable changes to this project will be documented in this file. See [commit
 - **Vehicle-sheet:** 🐛 Empty button seat ([31e051c](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/31e051cf3060baa0786fcdb1bff325916d981686))
 - **Vehicle:** 🐛 Apply damage to vehicles ([b8042e1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/b8042e11089631a14d8be666aa0a110dc297613c))
 
-### [10.0.2](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/9.0.0...10.0.2) (2022-12-05)
+## [10.0.2](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/9.0.0...10.0.2) (2022-12-05)
 
 ### Features
 
