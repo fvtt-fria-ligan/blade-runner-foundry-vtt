@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [13.1.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.0.0...13.1.0) (2025-06-18)
+
+### Features
+
+- ✨🌐 Add polish translation
+
+### Bug Fixes
+
+- 🐛 Fix the actor sheet config theme change ([9fb051c](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/9fb051c5ae2cf296729e7908e9e0bedb4237661d))
+
 ## [13.0.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/12.0.1...13.0.0) (2025-06-16)
 
 ### Features
