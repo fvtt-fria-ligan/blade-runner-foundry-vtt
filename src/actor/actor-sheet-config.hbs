@@ -1,4 +1,4 @@
-<section data-application-part="form" class="standard-form">
+<section data-application-part="character" class="standard-form">
   {{#if (eq document.type "character")}}
     <fieldset>
       <legend>{{localize "FLBR.SHEET_CONFIG.CharacterConfiguration"}}</legend>
@@ -53,30 +53,4 @@
       </div>
     </fieldset>
   {{/if}}
-
-  <fieldset>
-    <legend>{{localize "FLBR.SHEET_CONFIG.Document"}}</legend>
-    <div class="form-group">
-      <label>{{localize "SHEETS.ThisSheet"}}</label>
-      <div class="form-fields">
-        <select name="sheetClass">
-          {{selectOptions sheetClasses selected=sheetClass blank=blankLabel}}
-        </select>
-      </div>
-      <p class="hint">{{localize "SHEETS.DocumentSheetHint"}}</p>
-    </div>
-  </fieldset>
-
-  <fieldset>
-    <legend>{{localize "FLBR.SHEET_CONFIG.Defaults"}}</legend>
-      <div class="form-group">
-        <label>{{localize "Default"}} <strong>{{type}}</strong> {{localize "Sheet"}}</label>
-        <div class="form-fields">
-          <select name="defaultClass"{{#unless isGM}} disabled{{/unless}}>
-            {{selectOptions sheetClasses selected=defaultClass blank=blankLabel}}
-          </select>
-        </div>
-        <p class="hint">{{localize "SHEETS.TypeSheetHint"}}</p>
-      </div>
-  </fieldset>
 </section>
