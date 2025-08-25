@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [13.1.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.1.0...13.1.1) (2025-08-25)
+
+### Bug Fixes
+
+- 🐛 Fix push button on floating dice chat card #62
+
 ## [13.1.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.0.0...13.1.0) (2025-06-18)
 
 ### Features
