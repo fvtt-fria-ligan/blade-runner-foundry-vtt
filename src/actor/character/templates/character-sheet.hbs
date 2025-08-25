@@ -94,7 +94,7 @@
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/bio-tab.hbs}}
 			{{else if isNPC}}
 				<div class="boxed-property npc-notes">
-					{{{editor system.description target="system.description" button=true editable=editable}}}
+					{{{editor system.description target="system.description" button=true editable=editable engine="prosemirror" collaborate=false}}}
 				</div>
 			{{/if}}
 		</div>
