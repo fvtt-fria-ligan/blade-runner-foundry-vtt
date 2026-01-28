@@ -24,7 +24,7 @@ import * as Chat from '@system/chat';
 import * as BRMacro from '@system/macros';
 import BRRollHandler from '@components/roll/roller';
 import { registerSheets } from '@system/sheets';
-import { initializeHandlebars } from '@system/handlebars';
+import { initializeHandlebars, registerCustomItemTypesTemplates } from '@system/handlebars';
 import { changeEditorFont, registerSystemSettings } from '@system/settings';
 import { enrichTextEditors } from '@system/enricher';
 import { registerDiceSoNice } from './plugins/dice-so-nice';
@@ -124,6 +124,8 @@ Hooks.once('ready', () => {
 
   // Replaces the a.inline listener with our own.
   // ! overrideInlineRollListener();
+
+  registerCustomItemTypesTemplates();
 
   console.log('Blade Runner RPG | Ready!');
   Hooks.callAll('bladeRunnerReady', game.bladerunner, CONFIG.BLADE_RUNNER);
