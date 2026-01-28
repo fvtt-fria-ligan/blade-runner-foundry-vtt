@@ -419,3 +419,6 @@ FLBR.Icons = {
     onoff: '<i class="fas fa-power-off"></i>',
   },
 };
+
+// Allow modules to add custom item types
+FLBR.customItemTypesTemplates = {};
