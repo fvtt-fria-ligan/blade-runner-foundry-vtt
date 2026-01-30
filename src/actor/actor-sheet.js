@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, ITEM_TYPES, SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
+import { ACTOR_TYPES, SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
 import { enrichTextFields } from '@utils/string-util';
 import ActorSheetConfig from './actor-sheet-config';
 
