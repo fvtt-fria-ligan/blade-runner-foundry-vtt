@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [13.2.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.1.1...13.2.0) (2026-01-30)
+
+### Features
+
+- Allow modules to register item custom types. ([a78f9bf](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/a78f9bf03b63ae12563dfa1d09a7947a4cd9ebe5))
+- bump `foundry-year-zero-roller` to v6.1.0 ([1b87d9e](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/1b87d9eaa65ec02892dcabb115b383c2299a82ce))
+
 ## [13.1.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.1.0...13.1.1) (2025-08-25)
 
 ### Bug Fixes
