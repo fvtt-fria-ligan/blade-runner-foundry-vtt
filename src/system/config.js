@@ -105,6 +105,11 @@ FLBR.characterSubtypes = {
 };
 
 FLBR.physicalItems = [BR.ITEM_TYPES.GENERIC, BR.ITEM_TYPES.WEAPON, BR.ITEM_TYPES.ARMOR, BR.ITEM_TYPES.EXPLOSIVE];
+FLBR.allowedItems = {
+  [BR.ACTOR_TYPES.CHAR]: [BR.ITEM_TYPES.SPECIALTY, BR.ITEM_TYPES.SYNTHETIC_AUGMENTATION, BR.ITEM_TYPES.CRITICAL_INJURY],
+  [BR.ACTOR_TYPES.VEHICLE]: [],
+  [BR.ACTOR_TYPES.LOOT]: [],
+};
 
 FLBR.ranges = {
   [BR.RANGES.ENGAGED]: 'FLBR.WEAPON_RANGE.Engaged',
@@ -414,3 +419,6 @@ FLBR.Icons = {
     onoff: '<i class="fas fa-power-off"></i>',
   },
 };
+
+// Allow modules to add custom item types
+FLBR.customItemTypesTemplates = {};

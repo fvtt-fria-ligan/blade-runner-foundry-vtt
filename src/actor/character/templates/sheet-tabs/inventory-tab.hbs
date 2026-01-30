@@ -21,6 +21,13 @@
 	{{> systems/blade-runner/templates/actor/inventory-partial.hbs items=actor.itemTypes.generic wrap=true}}
 	</div>
 
+	{{#each config.customItemTypesTemplates as | template |}}
+	<div class="inventory boxed-property">
+		<h3>{{localize (concat "TYPES.Item." @key)}}{{createNewItemButton @key}}</h3>
+	{{> (template) items=(lookup ../actor.itemTypes @key)}}
+	</div>
+	{{/each}}
+
 	{{#if isPC}}
 		<div class="meta-currencies flex row space-between">
 			<div class="meta-currency-promotion boxed-property">
