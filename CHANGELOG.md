@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [13.2.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.2.0...13.2.1) (2026-02-01)
+
+### Bug Fixes
+
+- 📦 Update YZUR library to 6.1.1 => 🐛 Fix inline roll issue (#65) ([4363441](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/4363441efde3f0400921b66bb34a2ebc4482f866))
+
 ## [13.2.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.1.1...13.2.0) (2026-01-30)
 
 ### Features
