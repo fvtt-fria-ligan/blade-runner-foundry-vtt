@@ -139,21 +139,19 @@ $pad: 25px;
 
 :root {
   --font-gridnik: "Foundry Gridnik", "Consolas", sans-serif;
-  --font-urwdin: "URW DIN Condensed", sans-serif;
+  --font-teko: "Teko", sans-serif;
 }
 
 .font-gridnik {
   font-family: var(--font-gridnik) !important;
 }
 
-.font-urwdin {
-  font-family: var(--font-urwdin) !important;
+.font-urwdin, .font-teko {
+  font-family: var(--font-teko) !important;
 }
 
 /* ------------------------------------------ */
 /*  Fonts Definitions                         */
-/* ------------------------------------------ */
-
 /* ------------------------------------------ */
 
 /* ------------------------------------------ */
@@ -175,26 +173,6 @@ $pad: 25px;
 // @font-face {
 //   font-family: "Foundry Gridnik";
 //   src: url("./fonts/FoundryGridnik-Bold.otf");
-//   font-weight: bold;
-// }
-
-/* ------------------------------------------ */
-// URW DIN Condensed
-
-// @font-face {
-//   font-family: "URW DIN Condensed";
-//   src: url("./fonts/urwdin-cond-regular.ttf");
-// }
-
-// @font-face {
-//   font-family: "URW DIN Condensed";
-//   src: url("./fonts/urwdin-cond-medium.ttf");
-//   font-weight: bold;
-// }
-
-// @font-face {
-//   font-family: "URW DIN Condensed";
-//   src: url("./fonts/urwdin-cond-black.ttf");
 //   font-weight: bold;
 // }
 
