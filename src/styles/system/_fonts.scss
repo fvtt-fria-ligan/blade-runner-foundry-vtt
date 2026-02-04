@@ -36,6 +36,30 @@
   font-weight: 300 700;
 }
 
+@font-face {
+  font-family: "Quantico";
+  src: url("../fonts/Quantico-Regular.ttf")
+}
+
+@font-face {
+  font-family: "Quantico";
+  src: url("../fonts/Quantico-Bold.ttf");
+  font-weight: bold
+}
+
+@font-face {
+  font-family: "Quantico";
+  src: url("../fonts/Quantico-Italic.ttf");
+  font-style: italic
+}
+
+@font-face {
+  font-family: "Quantico";
+  src: url("../fonts/Quantico-BoldItalic.ttf");
+  font-style: italic;
+  font-weight: bold;
+}
+
 .blade-runner-symbols {
   font-family: "Blade Runner Symbols";
   font-size: 1.3em;

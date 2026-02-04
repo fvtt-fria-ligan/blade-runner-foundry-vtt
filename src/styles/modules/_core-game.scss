@@ -35,7 +35,7 @@ $pad: 25px;
 
 @mixin flbr-tab-heading() {
   flex: 0;
-  font-family: var(--font-gridnik);
+  font-family: var(--font-quantico);
   writing-mode: vertical-rl;
   height: fit-content;
   padding: (.5 * $marg) (.25 * $marg) (2 * $marg) (.25 * $marg);
@@ -53,11 +53,11 @@ $pad: 25px;
   @include bg-yellow();
   h3 {
     color: inherit;
-    font-family: var(--font-gridnik);
+    font-family: var(--font-quantico);
     padding-bottom: .5em;
   }
   p, li {
-    font-family: var(--font-gridnik);
+    font-family: var(--font-quantico);
     font-size: var(--font-size--small);
     // font-weight: bold;
     line-height: 1.67;
@@ -100,7 +100,7 @@ $pad: 25px;
 }
 
 @mixin flbr-table($border-color) {
-  font-family: var(--font-gridnik);
+  font-family: var(--font-quantico);
   border-bottom: none;
   letter-spacing: 1px;
   // border-top: 1px solid $border-color;
@@ -129,7 +129,7 @@ $pad: 25px;
   }
 
   li {
-    font-family: var(--font-gridnik);
+    font-family: var(--font-quantico);
   }
 }
 
@@ -138,12 +138,12 @@ $pad: 25px;
 /* ------------------------------------------ */
 
 :root {
-  --font-gridnik: "Foundry Gridnik", "Consolas", sans-serif;
+  --font-quantico: "Quantico", "Consolas", sans-serif;
   --font-teko: "Teko", sans-serif;
 }
 
-.font-gridnik {
-  font-family: var(--font-gridnik) !important;
+.font-gridnik, .font-quantico {
+  font-family: var(--font-quantico) !important;
 }
 
 .font-urwdin, .font-teko {
@@ -160,20 +160,6 @@ $pad: 25px;
 // @font-face {
 //   font-family: "IdentikalSans";
 //   src: url("./fonts/IDENSS_.TTF");
-// }
-
-/* ------------------------------------------ */
-// Foundry Gridnik
-
-// @font-face {
-//   font-family: "Foundry Gridnik";
-//   src: url("./fonts/FoundryGridnik-Medium.otf");
-// }
-
-// @font-face {
-//   font-family: "Foundry Gridnik";
-//   src: url("./fonts/FoundryGridnik-Bold.otf");
-//   font-weight: bold;
 // }
 
 /* ------------------------------------------ */
@@ -209,7 +195,7 @@ $pad: 25px;
   /* ------------------------------------------ */
 
   .flbr-chapter-quote {
-    font-family: var(--font-gridnik);
+    font-family: var(--font-quantico);
     color: var(--color-skin);
     text-align: center;
     margin-bottom: $marg;
@@ -291,7 +277,7 @@ $pad: 25px;
     border: 1px solid var(--color-red-darker);
 
     h3, p {
-      font-family: var(--font-gridnik);
+      font-family: var(--font-quantico);
       font-weight: bold;
     }
   }
@@ -312,7 +298,7 @@ $pad: 25px;
     border: 1px solid var(--color-border--core-box-blue);
 
     p {
-      font-family: var(--font-gridnik);
+      font-family: var(--font-quantico);
       color: var(--color-green);
       padding: 1em 4px;
 
@@ -375,7 +361,7 @@ $pad: 25px;
 
     h3, p, li {
       color: var(--color-blue-lighter);
-      font-family: var(--font-gridnik);
+      font-family: var(--font-quantico);
     }
     ul li::marker {
       color: var(--color-blue-lighter);
@@ -401,7 +387,7 @@ $pad: 25px;
 
     p {
       color: var(--color-green);
-      font-family: var(--font-gridnik);
+      font-family: var(--font-quantico);
     }
 
     table {
@@ -455,7 +441,7 @@ $pad: 25px;
         td:first-child {
           .boxed {
             color: var(--color-gold);
-            font-family: var(--font-gridnik);
+            font-family: var(--font-quantico);
             font-size: var(--font-size--very-small);
             text-align: center;
             @include utils.text-stroke(#000);
@@ -492,13 +478,13 @@ $pad: 25px;
 
     h3 {
       color: var(--color-skin);
-      font-family: var(--font-gridnik);
+      font-family: var(--font-quantico);
       padding-left: .5 * $pad;
       // padding-bottom: .5em;
     }
 
     p {
-      font-family: var(--font-gridnik);
+      font-family: var(--font-quantico);
       font-size: var(--font-size--small);
       line-height: 1.67;
       padding-left: .5 * $pad;
@@ -528,7 +514,7 @@ $pad: 25px;
     }
 
     table + p {
-      font-family: var(--font-gridnik);
+      font-family: var(--font-quantico);
       font-size: var(--font-size--very-small);
       padding-left: .5 * $pad;
       padding-top: .5em;
@@ -594,7 +580,7 @@ $pad: 25px;
     }
 
     p {
-      font-family: var(--font-gridnik);
+      font-family: var(--font-quantico);
       font-size: var(--font-size--small);
       color: var(--color-green);
       margin-top: .5 * $pad;
@@ -606,7 +592,7 @@ $pad: 25px;
   /* ------------------------------------------ */
 
   .flbr-inline-heading {
-    font-family: var(--font-gridnik);
+    font-family: var(--font-quantico);
     font-weight: bold;
     color: var(--color-red-darker);
     text-transform: uppercase;
@@ -697,7 +683,7 @@ $pad: 25px;
     background-color: var(--color-blue-lighter);
 
     p {
-      font-family: var(--font-gridnik);
+      font-family: var(--font-quantico);
       font-size: var(--font-size--large);
       font-weight: bold;
       color: var(--color-black);
