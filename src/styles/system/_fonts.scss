@@ -6,6 +6,30 @@
   src: url("./fonts/blade-runner-symbols.ttf");
 }
 
+@font-face {
+  font-family: "Crimson Text";
+  src: url("../fonts/CrimsonText-Regular.ttf")
+}
+
+@font-face {
+  font-family: "Crimson Text";
+  src: url("../fonts/CrimsonText-Bold.ttf");
+  font-weight: bold
+}
+
+@font-face {
+  font-family: "Crimson Text";
+  src: url("../fonts/CrimsonText-Italic.ttf");
+  font-style: italic
+}
+
+@font-face {
+  font-family: "Crimson Text";
+  src: url("../fonts/CrimsonText-BoldItalic.ttf");
+  font-style: italic;
+  font-weight: bold;
+}
+
 .blade-runner-symbols {
   font-family: "Blade Runner Symbols";
   font-size: 1.3em;
