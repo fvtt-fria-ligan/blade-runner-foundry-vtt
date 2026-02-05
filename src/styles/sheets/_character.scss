@@ -63,13 +63,12 @@ $border-stat-dotted: 1px dotted var(--color-green);
       // writing-mode: vertical-lr;
       text-align: left;
       width: 200px;
-      // padding-left: 6px;
       background: none;
       border: none;
       transform: rotate(90deg);
-      transform-origin: 25px;
-      position: absolute;
-      top: 45px;
+      transform-origin: 11px;
+      position: relative;
+      left: 11px;
     }
     .capacities {
       grid-area: extra;
