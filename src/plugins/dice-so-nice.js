@@ -14,7 +14,7 @@ export function registerDiceSoNice(dice3d) {
     // edge: '#000',
     texture: 'none',
     material: 'metal',
-    font: 'IdentikalSans, Consolas, sans-Serif',
+    font: 'AllertaStencil, Consolas, sans-Serif',
   }, 'default');
 
   dice3d.addDicePreset({

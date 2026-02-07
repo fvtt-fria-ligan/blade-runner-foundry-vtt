@@ -6,6 +6,75 @@
   src: url("./fonts/blade-runner-symbols.ttf");
 }
 
+@font-face {
+  font-family: "Crimson Text";
+  src: url("./fonts/CrimsonText-Regular.ttf")
+}
+
+@font-face {
+  font-family: "Crimson Text";
+  src: url("./fonts/CrimsonText-Bold.ttf");
+  font-weight: bold
+}
+
+@font-face {
+  font-family: "Crimson Text";
+  src: url("./fonts/CrimsonText-Italic.ttf");
+  font-style: italic
+}
+
+@font-face {
+  font-family: "Crimson Text";
+  src: url("./fonts/CrimsonText-BoldItalic.ttf");
+  font-style: italic;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Teko";
+  src: url("./fonts/Teko-VariableFont_wght.ttf");
+  font-weight: 300 700;
+}
+
+@font-face {
+  font-family: "Quantico";
+  src: url("./fonts/Quantico-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Quantico";
+  src: url("./fonts/Quantico-Bold.ttf");
+  font-weight: bold
+}
+
+@font-face {
+  font-family: "Quantico";
+  src: url("./fonts/Quantico-Italic.ttf");
+  font-style: italic
+}
+
+@font-face {
+  font-family: "Quantico";
+  src: url("./fonts/Quantico-BoldItalic.ttf");
+  font-style: italic;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "AllertaStencil";
+  src: url("./fonts/AllertaStencil-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Square Things";
+  src: url("./fonts/squarethings.ttf")
+}
+
+@font-face {
+  font-family: "Caveat";
+  src: url("./fonts/Caveat-Medium.ttf");
+}
+
 .blade-runner-symbols {
   font-family: "Blade Runner Symbols";
   font-size: 1.3em;

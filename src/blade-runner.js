@@ -29,6 +29,7 @@ import { changeEditorFont, registerSystemSettings } from '@system/settings';
 import { enrichTextEditors } from '@system/enricher';
 import { registerDiceSoNice } from './plugins/dice-so-nice';
 import itemPilesConfig from './plugins/item-piles';
+import { registerFontEditor } from './plugins/font-editor';
 // ! import { overrideInlineRollListener } from '@components/roll/inline-roll';
 import { getManual } from '@utils/get-manual';
 import BladeRunnerActor from '@actor/actor-document';
@@ -95,6 +96,7 @@ Hooks.once('init', async () => {
   registerSheets();
   registerSystemSettings();
   enrichTextEditors();
+  registerFontEditor();
   await initializeHandlebars();
 
   // Adds a shortcut directory for vehicle actors.

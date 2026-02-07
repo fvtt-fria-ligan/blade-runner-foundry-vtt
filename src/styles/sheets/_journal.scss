@@ -79,11 +79,10 @@
     .title {
       font-family: var(--font-headline);
       font-size: var(--font-size--extra-large);
-      // line-height: 26pt;
       color: var(--color-skin);
       text-transform: uppercase;
-      word-spacing: 33 * 2 * .01em; // 330%
-      letter-spacing: 25 * 2 * .01em; // 250%
+      word-spacing: 15 * .01em; // 150%
+      letter-spacing: 20 * .01em; // 250%
       border: none;
       background: transparent;
     }
