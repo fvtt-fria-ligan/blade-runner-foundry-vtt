@@ -2,7 +2,7 @@
   "id": "blade-runner",
   "title": "Blade Runner 🦄 - The Roleplaying Game",
   "description": "A neon-noir wonderland that’ll take your breath away. One way or another. An evocative world of conflicts and contrasts that dares to ask the hard questions and investigate the powers of empathy, the poisons of fear, and the burdens of being human during inhumane times. An iconic and unforgiving playground of endless possibilities that picks you up, slaps you in the face, and tells you to wake up. Time to live. Or time to die.",
-  "version": "13.2.1",
+  "version": "13.3.0",
   "compatibility": {
     "minimum": 13,
     "verified": "13.351",
@@ -121,5 +121,5 @@
   "socket": false,
   "changelog": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases",
   "manifest": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/latest/download/system.json",
-  "download": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/13.2.1/blade-runner-fvtt_v13.2.1.zip"
+  "download": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/13.3.0/blade-runner-fvtt_v13.3.0.zip"
 }

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [13.3.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.2.1...13.3.0) (2026-02-07)
+
+
+### Features
+
+* ✨ Add new font definitions ([4a297e3](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/4a297e3adc3832581b2be900309e0dca6875c19b))
+
+
+### Bug Fixes
+
+* 🐛 Adjust archetype input style ([c044fa9](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/c044fa9fccbaa84b7ad3007afd4a649dbcedbb59))
+
 ## [13.2.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.2.0...13.2.1) (2026-02-01)
 
 ### Bug Fixes
