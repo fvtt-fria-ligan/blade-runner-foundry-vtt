@@ -47,6 +47,7 @@ export default class BladeRunnerCharacterSheet extends BladeRunnerActorSheet {
     const sheetData = await super.getData(options);
     sheetData.isPC = this.actor.system.subtype === ACTOR_SUBTYPES.PC;
     sheetData.isNPC = this.actor.system.subtype === ACTOR_SUBTYPES.NPC;
+    sheetData.isRebellion = this.actor.system.subtype === ACTOR_SUBTYPES.REPLICANT_REBELLION;
     sheetData.driving = this.actor.skills.driving?.value;
     sheetData.actions = game.bladerunner.actions.filter(a => a.actorType === this.actor.type);
     sheetData.editNature = game.settings.get(SYSTEM_ID, SETTINGS_KEYS.EDIT_NATURE_PERMISSION) || sheetData.isGM;

@@ -16,7 +16,11 @@
 			<div class="nature boxed-property container">
 				<h3>{{localize "FLBR.Nature"}}</h3>
 				<select name="system.nature" data-tooltip="{{localize "FLBR.NatureHint"}}"{{#unless editNature}} disabled{{/unless}}>
+				{{#if isRebellion}}
+					{{selectOptions config.naturesRebellion selected=system.nature localize=true}}
+				{{else}}
 					{{selectOptions config.natures selected=system.nature localize=true}}
+				{{/if}}
 				</select>
 			</div>
 			
@@ -33,7 +37,7 @@
 						{{boxes "system.health.value" value=system.health.value min=0 max=system.health.max loss=system.health.permanentLoss}}
 					</div>
 				{{/if}}
-				{{#if (and system.resolve isPC)}}
+				{{#if (and system.resolve (or isPC isRebellion))}}
 					<div class="capacity-resolve boxed-property{{#if (lte system.resolve.value 0)}} broken{{else if (lte system.resolve.ratio 0.5)}} half{{/if}}">
 						<h3>
 							{{localize "FLBR.HEADER.Resolve"}}
@@ -50,7 +54,11 @@
 			<div class="archetype">
 				<input list="list-of-archetypes" type="text" name="system.archetype" value="{{system.archetype}}"/>
 				<datalist id="list-of-archetypes">
+					{{#if isRebellion}}
+					{{selectOptions config.archetypes_rebellion localize=true}}
+					{{else}}
 					{{selectOptions config.archetypes localize=true}}
+					{{/if}}
 				</datalist>
 			</div>
 
@@ -66,7 +74,7 @@
 		<a class="sheet-tab" data-tab="inventory">{{{config.Icons.tabs.inventory}}}&nbsp;{{localize "FLBR.TAB.Inventory"}}</a>
 		<a class="sheet-tab" data-tab="bio">
 			{{{config.Icons.tabs.bio}}}&nbsp;
-			{{#if isPC}}
+			{{#if (or isPC isRebellion)}}
 				{{localize "FLBR.TAB.Bio"}}
 			{{else if isNPC}}
 				{{localize "FLBR.HEADER.Notes"}}
@@ -92,6 +100,8 @@
 		<div class="tab" data-group="primary" data-tab="bio">
 			{{#if isPC}}
 {{> systems/blade-runner/templates/actor/character/sheet-tabs/bio-tab.hbs}}
+			{{else if isRebellion}}
+{{> systems/blade-runner/templates/actor/character/sheet-tabs/rebellion-bio-tab.hbs}}
 			{{else if isNPC}}
 				<div class="boxed-property npc-notes">
 					{{{editor system.description target="system.description" button=true editable=editable}}}

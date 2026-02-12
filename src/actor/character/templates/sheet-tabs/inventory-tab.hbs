@@ -1,5 +1,5 @@
 <div class="inventory-tab">
-	{{#if isPC}}
+	{{#if (or isPC isRebellion)}}
 		<div class="special-gear">
 			{{!-- <div class="favored-gear boxed-property">
 				<h3>{{localize "FLBR.HEADER.FavoredGear"}}</h3>
@@ -28,14 +28,14 @@
 	</div>
 	{{/each}}
 
-	{{#if isPC}}
+	{{#if (or isPC isRebellion)}}
 		<div class="meta-currencies flex row space-between">
 			<div class="meta-currency-promotion boxed-property">
-				<h4>{{localize "FLBR.HEADER.PromotionPoints"}}<span style="float: right;">{{system.metaCurrencies.promotion}}</span></h4>
+				<h4>{{localize (ifThen isRebellion "FLBR.HEADER.RebelPoints" "FLBR.HEADER.PromotionPoints")}}<span style="float: right;">{{system.metaCurrencies.promotion}}</span></h4>
 				{{boxes "system.metaCurrencies.promotion" value=system.metaCurrencies.promotion min=0 max=config.maxPromotionPoints}}
 			</div>
 			<div class="meta-currency-humanity boxed-property">
-				<h4>{{localize "FLBR.HEADER.HumanityPoints"}}<span style="float: right;">{{system.metaCurrencies.humanity}}</span></h4>
+				<h4>{{localize (ifThen isRebellion "FLBR.HEADER.CoverPoints" "FLBR.HEADER.HumanityPoints")}}<span style="float: right;">{{system.metaCurrencies.humanity}}</span></h4>
 				{{boxes "system.metaCurrencies.humanity" value=system.metaCurrencies.humanity min=0 max=config.maxHumanityPoints}}
 			</div>
 			<div class="meta-currency-chinyen boxed-property">
