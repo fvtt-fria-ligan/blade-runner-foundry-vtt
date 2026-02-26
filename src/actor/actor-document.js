@@ -887,6 +887,32 @@ export default class BladeRunnerActor extends Actor {
     );
 
     const item = await foundry.utils.fromUuid(itemUuid);
+
+    if (!this.isOwner) {
+      const contentNotOwner = `
+      <p><strong>${this.name}</strong> got the @UUID[${item.uuid}] critical injury.</p>
+      <p><a class="inline-table crit-apply" data-tooltip="Apply the critical injury to the actor" style="">
+						Apply Critical Injury
+					</a>
+      </p>
+      `;
+      const chatDataNotOwner = {
+        content: contentNotOwner,
+        speaker: ChatMessage.getSpeaker({ actor: this, token: this.token, scene: canvas.scene }),
+        user: game.user.id,
+        flags: {
+          [SYSTEM_ID]: {
+            critToApply: {
+              itemUuid: item.uuid,
+              actorUuid: this.uuid,
+            },
+          },
+        },
+      };
+      ChatMessage.applyRollMode(chatDataNotOwner, game.settings.get('core', 'rollMode'));
+      return await ChatMessage.create(chatDataNotOwner);
+    }
+
     const [crit] = await this.createEmbeddedDocuments('Item', [item]);
 
     // Creates a chat message.

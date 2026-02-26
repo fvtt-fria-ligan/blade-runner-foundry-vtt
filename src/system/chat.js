@@ -1,4 +1,4 @@
-import { ACTOR_TYPES, DAMAGE_TYPES } from './constants';
+import { ACTOR_TYPES, DAMAGE_TYPES, SYSTEM_ID } from './constants';
 import { FLBR } from './config';
 import BRRollHandler from '@components/roll/roller';
 import BladeRunnerDialog from '@components/dialog/dialog';
@@ -157,6 +157,15 @@ export function addChatListeners(html) {
   html.addEventListener('click', ev => {
     if (ev.target.closest('.crit-roll')) _onCritRoll.call(ev.target, ev);
   });
+  if (game.user.isGM) {
+    html.addEventListener('click', ev => {
+      if (ev.target.closest('.crit-apply')) _onCritApply.call(ev.target, ev);
+    });
+  }
+  else {
+    const critApplyButtons = html.querySelectorAll('.crit-apply');
+    critApplyButtons.forEach(btn => (btn.style.display = 'none'));
+  }
 }
 
 /* ------------------------------------------- */
@@ -204,3 +213,32 @@ function _onCritRoll(event) {
   const roll = message?.rolls[0];
   return BRRollHandler.applyCrit(roll);
 }
+
+/* ------------------------------------------- */
+
+/**
+ * Apply the critical injury to a character.
+ * @param {MouseEvent} event
+ */
+async function _onCritApply(event) {
+  event.preventDefault();
+  const chatCard = event.target.closest('.chat-message');
+  const messageId = chatCard.dataset.messageId;
+  const message = game.messages.get(messageId);
+  console.log(message);
+  const item = message.flags?.[SYSTEM_ID]?.critToApply?.itemUuid;
+  const actor = message.flags?.[SYSTEM_ID]?.critToApply?.actorUuid;
+  if (!item || !actor) {
+    ui.notifications.error(game.i18n.localize('FLBR.COMBAT.CritApplyErrorMessage'));
+    return;
+  }
+  const itemDoc = await foundry.utils.fromUuid(item);
+  const actorDoc = await foundry.utils.fromUuid(actor);
+  if (!itemDoc || !actorDoc) {
+    ui.notifications.error(game.i18n.localize('FLBR.COMBAT.CritApplyErrorNotFound'));
+    return;
+  }
+  await actorDoc.createEmbeddedDocuments('Item', [itemDoc.toObject()]);
+}
+
+/* ------------------------------------------- */

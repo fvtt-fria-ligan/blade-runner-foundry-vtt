@@ -4,6 +4,14 @@
  */
 export async function getActiveActor() {
   let actor;
+  if (game.user.targets.size == 1) {
+    return game.user.targets.first().actor;
+  }
+  else if (game.user.targets.size > 1) {
+    ui.notifications.warn(game.i18n.format('FLBR.MACRO.GetActorHint'));
+    throw new Error('Multiple targets selected');
+  }
+
   if (game.user.isGM && canvas.ready && canvas.tokens.controlled.length > 1) {
     return chooseActor(canvas.tokens.controlled.map(t => t.actor), {
       title: game.i18n.localize('FLBR.MACRO.GetActorTitle'),
