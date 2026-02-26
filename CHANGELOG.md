@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [13.4.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.3.0...13.4.0) (2026-02-26)
+
+
+### Features
+
+* ✨ add Rebellion actor subtype handler ([5248d15](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/5248d159087c756478114d06ce2f31649d6dd246))
+* ✨ improvements on the critical injury handler ([5638739](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/56387395a8298145ab17e0574117ec5b109d6b6c)), relates to [#68](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues/68)
+
 ## [13.3.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.2.1...13.3.0) (2026-02-07)
 
 
