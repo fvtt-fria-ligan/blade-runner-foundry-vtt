@@ -52,6 +52,12 @@ for (const [k, v] of Object.entries(BR.ARCHETYPES)) {
   FLBR.archetypes[v] = `FLBR.ARCHETYPE.${k}`;
 }
 
+/** @type {Object.<KeyString, TranslationString>} */
+FLBR.archetypes_rebellion = {};
+for (const [k, v] of Object.entries(BR.ARCHETYPES_REBELLION)) {
+  FLBR.archetypes_rebellion[v] = `FLBR.ARCHETYPE.${k}`;
+}
+
 FLBR.capacitiesMap = {
   [BR.CAPACITIES.HEALTH]: {
     attributes: [BR.ATTRIBUTES.STRENGTH, BR.ATTRIBUTES.AGILITY],
@@ -66,6 +72,12 @@ FLBR.capacitiesMap = {
 FLBR.natures = {
   [BR.NATURES.HUMAN]: 'FLBR.NATURE.Human',
   [BR.NATURES.REPLICANT]: 'FLBR.NATURE.Replicant',
+};
+
+FLBR.naturesRebellion = {
+  [BR.NATURES.HUMAN]: 'FLBR.NATURE.Human',
+  [BR.NATURES.N8]: 'FLBR.NATURE.N8',
+  [BR.NATURES.N9]: 'FLBR.NATURE.N9',
 };
 
 FLBR.natureModifierMap = {
@@ -102,6 +114,7 @@ FLBR.pushTraumaMap = {
 FLBR.characterSubtypes = {
   [BR.ACTOR_SUBTYPES.PC]: 'ACTOR.SubtypePc',
   [BR.ACTOR_SUBTYPES.NPC]: 'ACTOR.SubtypeNpc',
+  [BR.ACTOR_SUBTYPES.REPLICANT_REBELLION]: 'ACTOR.SubtypeReplicantRebellion',
 };
 
 FLBR.physicalItems = [BR.ITEM_TYPES.GENERIC, BR.ITEM_TYPES.WEAPON, BR.ITEM_TYPES.ARMOR, BR.ITEM_TYPES.EXPLOSIVE];
