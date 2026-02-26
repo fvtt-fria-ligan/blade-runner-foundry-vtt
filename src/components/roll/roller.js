@@ -558,21 +558,23 @@ export default class BRRollHandler extends FormApplication {
    * @param {YearZeroRoll} roll
    */
   static async applyCrit(roll) {
-    let actor = await getActiveActor() || game.user.character;
-    if (!actor) {
+    let actor = await getActiveActor();
+    if (!actor && game.user.isGM) {
       const actors = game.actors.filter(a => a.type === ACTOR_TYPES.CHAR || a.isVehicle);
       actor = await chooseActor(actors, {
         title: game.i18n.localize('FLBR.CRIT.CriticalInjury'),
-        notes: game.i18n.localize('FLBR.CRIT.ChooseActor'),
+        notes: game.i18n.localize(game.i18n.format('FLBR.CRIT.ChooseActor')),
       });
     }
-    if (!actor) return;
+    if (!actor) {
+      return ui.notifications.error(game.i18n.format('FLBR.CRIT.NoActorSelected'));
+    }
 
-    return actor.drawCrit(
-      roll.options.damageType,
-      roll.successCount - 1,
-      `D${roll.options.crit}`,
-    );
+    if (actor.id == game.user.character?.id) {
+      return ui.notifications.warn(game.i18n.format('FLBR.CRIT.DrawCritOwnCharacter'));
+    }
+
+    return actor.drawCrit(roll.options.damageType, roll.successCount - 1, `D${roll.options.crit}`);
   }
 
   /* ------------------------------------------ */
@@ -718,8 +720,8 @@ export default class BRRollHandler extends FormApplication {
           callback: () => false,
         },
       },
-    }, {}, {
+      }, {}, {
       classes: ['blade-runner', 'dialog', 'dice-push-select'],
-    });
+      });
   }
 }

@@ -188,6 +188,8 @@ FLBR.COMBAT.Combat: Combat
 FLBR.COMBAT.CannotBeDamaged: Can't be damaged
 FLBR.COMBAT.DrawSize: Draw Size
 FLBR.COMBAT.SkippedDefender: Skipped defender {name}
+FLBR.COMBAT.CritApplyErrorMessage: Error to get item/actor from message
+FLBR.COMBAT.CritApplyErrorNotFound: Item/actor not found
 FLBR.CreateNewItem: Create a new {type} item
 FLBR.CRIT.Crit: Crit
 FLBR.CRIT.CritButtonTooltip: Draw a crit for the player's character or a selected token
@@ -197,6 +199,8 @@ FLBR.CRIT.ChooseVehicleDamage: Choose a Critical Vehicle Damage
 FLBR.CRIT.ChooseActor: Choose an actor to inflict a critical injury.
 FLBR.CRIT.DrawCrit: Draw Critical Injury
 FLBR.CRIT.DrawVehicleDamage: Draw Critical Vehicle Damage
+FLBR.CRIT.NoActorSelected: No actor selected
+FLBR.CRIT.DrawCritOwnCharacter: You cannot draw a critical injury for your own character!
 FLBR.CustomFormula: Custom Formula
 FLBR.Disadvantage: Disadvantage
 FLBR.Formula: Formula
