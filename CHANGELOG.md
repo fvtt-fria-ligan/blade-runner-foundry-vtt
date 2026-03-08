@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [13.5.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.4.0...13.5.0) (2026-03-08)
+
+
+### Features
+
+* ✨ improvements on the critical injury handler ([975a2df](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/975a2dfa8a2a61a8d836d9799265ec0fa5822a15)), closes [#68](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues/68)
+
+
+### Bug Fixes
+
+* 🐛 Configure maxPush and bonuses for RR ([a9e140f](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/a9e140f95fd395640be408e519e8e6f1ee3cd2da)), closes [#71](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues/71)
+
 ## [13.4.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.3.0...13.4.0) (2026-02-26)
 
 
