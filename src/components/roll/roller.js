@@ -720,8 +720,8 @@ export default class BRRollHandler extends FormApplication {
           callback: () => false,
         },
       },
-      }, {}, {
+    }, {}, {
       classes: ['blade-runner', 'dialog', 'dice-push-select'],
-      });
+    });
   }
 }
