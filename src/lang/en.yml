@@ -243,6 +243,7 @@ FLBR.ItemQuantity: Quantity
 FLBR.ItemSpecial: Special
 FLBR.MACRO.GetActorTitle: Choose an Actor
 FLBR.MACRO.GetActorHint: You have selected multiple tokens. Please choose one of them.
+FLBR.MACRO.GetActorNoTarget: This action requires a targeted token. Please select a single token and try again.
 FLBR.MACRO.MultipleItems: >-
   Your controlled Actor {actor} has more than one Item with name {item}. The
   first matched item will be chosen.

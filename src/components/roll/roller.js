@@ -558,7 +558,7 @@ export default class BRRollHandler extends FormApplication {
    * @param {YearZeroRoll} roll
    */
   static async applyCrit(roll) {
-    let actor = await getActiveActor();
+    let actor = await getActiveActor(true);
     if (!actor && game.user.isGM) {
       const actors = game.actors.filter(a => a.type === ACTOR_TYPES.CHAR || a.isVehicle);
       actor = await chooseActor(actors, {
