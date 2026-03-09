@@ -15,7 +15,11 @@
           "keyRelationship": "",
           "home": "",
           "appearance": "",
-          "yearsOnTheForce": 0
+          "yearsOnTheForce": 0,
+          "cover": "",
+          "coverStatus": "",
+          "handler": "",
+          "hideout": ""
         }
       },
       "actorAttributesAndSkills": {

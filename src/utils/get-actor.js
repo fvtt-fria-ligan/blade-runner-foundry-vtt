@@ -1,9 +1,23 @@
 /**
  * Gets the active actor of the user.
+ * @param {boolean} [requiresTarget=false] Whether to require a targeted token or not.
+ * If true, will throw an error if no target is selected.
  * @returns {Promise.<import('@actor/actor-document').default>}
  */
-export async function getActiveActor() {
+export async function getActiveActor(requiresTarget = false) {
   let actor;
+  if (game.user.targets.size == 1) {
+    return game.user.targets.first().actor;
+  }
+  else if (game.user.targets.size > 1) {
+    ui.notifications.warn(game.i18n.format('FLBR.MACRO.GetActorHint'));
+    throw new Error('Multiple targets selected');
+  }
+  if (!actor && requiresTarget) {
+    ui.notifications.warn(game.i18n.format('FLBR.MACRO.GetActorNoTarget'));
+    throw new Error('No target selected');
+  }
+
   if (game.user.isGM && canvas.ready && canvas.tokens.controlled.length > 1) {
     return chooseActor(canvas.tokens.controlled.map(t => t.actor), {
       title: game.i18n.localize('FLBR.MACRO.GetActorTitle'),

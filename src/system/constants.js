@@ -49,6 +49,8 @@ export const CAPACITIES = {
 export const NATURES = {
   /** @type {'human'} */ HUMAN: 'human',
   /** @type {'replicant'} */ REPLICANT: 'replicant',
+  /** @type {'n8'} */ N8: 'n8',
+  /** @type {'n9'} */ N9: 'n9',
 };
 
 /** @enum {string} */
@@ -60,6 +62,16 @@ export const ARCHETYPES = {
   /** @type {'fixer'} */ FIXER: 'fixer',
   /** @type {'inspector'} */ INSPECTOR: 'inspector',
   /** @type {'skimmer'} */ SKIMMER: 'skimmer',
+};
+
+/** @enum {string} */
+export const ARCHETYPES_REBELLION = {
+  /** @type {'doctor'} */ DOCTOR: 'doctor',
+  /** @type {'powderkeg'} */ POWDERKEG: 'powderkeg',
+  /** @type {'powerbroker'} */ POWERBROKER: 'powerbroker',
+  /** @type {'siren'} */ SIREN: 'siren',
+  /** @type {'streetRat'} */ STREET_RAT: 'streetRat',
+  /** @type {'tank'} */ TANK: 'tank',
 };
 
 /** @enum {string} */
@@ -121,6 +133,7 @@ export const ACTOR_TYPES = {
 export const ACTOR_SUBTYPES = {
   /** @type {'pc'} */ PC: 'pc',
   /** @type {'npc'} */ NPC: 'npc',
+  /** @type {'replicantRebellion'} */ REPLICANT_REBELLION: 'replicantRebellion',
 };
 
 /** @enum {string} */

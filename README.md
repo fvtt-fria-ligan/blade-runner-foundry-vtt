@@ -105,6 +105,14 @@ If you want to contribute to the project, download and build it for something el
   <i>Built by a fan, for the fans.</i>
 </p>
 
+# 👷 Maintainer
+
+<p align="center">
+  <a href="https://hodpub.com" target="_blank">
+    <img src="static/assets/logos/hod-publishing.webp" alt="Hod Publishing" style="width: auto; height: auto; max-height: 250px;"/>
+  </a>
+</p>
+
 # 🔗 See Also
 
 - [Foundry VTT](https://foundryvtt.com/)

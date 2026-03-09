@@ -1,5 +1,5 @@
 import { FLBR } from '@system/config';
-import { ACTOR_TYPES, ITEM_TYPES, SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
+import { ACTOR_TYPES, SETTINGS_KEYS, SYSTEM_ID } from '@system/constants';
 import { enrichTextFields } from '@utils/string-util';
 import ActorSheetConfig from './actor-sheet-config';
 
@@ -72,11 +72,7 @@ export default class BladeRunnerActorSheet extends foundry.appv1.sheets.ActorShe
   async _onDropItemCreate(itemData) {
     const type = itemData.type;
     const alwaysAllowedItems = FLBR.physicalItems;
-    const allowedItems = {
-      [ACTOR_TYPES.CHAR]: [ITEM_TYPES.SPECIALTY, ITEM_TYPES.SYNTHETIC_AUGMENTATION, ITEM_TYPES.CRITICAL_INJURY],
-      [ACTOR_TYPES.VEHICLE]: [],
-      [ACTOR_TYPES.LOOT]: [],
-    };
+    const allowedItems = FLBR.allowedItems;
     let allowed = true;
 
     if (!alwaysAllowedItems.includes(type)) {

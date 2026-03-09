@@ -20,6 +20,8 @@ FLBR.SKILL.Manipulation: Manipulation
 FLBR.SKILL.Driving: Driving
 FLBR.NATURE.Human: Human
 FLBR.NATURE.Replicant: Replicant
+FLBR.NATURE.N8: N8
+FLBR.NATURE.N9: N9
 FLBR.ARCHETYPE.ANALYST: Analyst
 FLBR.ARCHETYPE.CITY_SPEAKER: City Speaker
 FLBR.ARCHETYPE.DOXIE: Doxie
@@ -27,6 +29,12 @@ FLBR.ARCHETYPE.ENFORCER: Enforcer
 FLBR.ARCHETYPE.FIXER: Fixer
 FLBR.ARCHETYPE.INSPECTOR: Inspector
 FLBR.ARCHETYPE.SKIMMER: Skimmer
+FLBR.ARCHETYPE.DOCTOR: Doctor
+FLBR.ARCHETYPE.POWDERKEG: Powderkeg
+FLBR.ARCHETYPE.POWERBROKER: Powerbroker
+FLBR.ARCHETYPE.SIREN: Siren
+FLBR.ARCHETYPE.STREET_RAT: Street Rat
+FLBR.ARCHETYPE.TANK: Tank
 FLBR.COMBAT_ACTION.Sprint: Sprint
 FLBR.COMBAT_ACTION.Crawl: Crawl
 FLBR.COMBAT_ACTION.UnarmedAttack: Unarmed Attack
@@ -92,9 +100,14 @@ FLBR.HEADER.Attacks: Attack Modes
 FLBR.HEADER.AttributesAndSkills: Attributes & Skills
 FLBR.HEADER.Augments: Augments
 FLBR.HEADER.ChinyenPoints: Chinyen Points
+FLBR.HEADER.Cover: Cover
+FLBR.HEADER.CoverPoints: Cover Points
+FLBR.HEADER.CoverStatus: Cover Status
 FLBR.HEADER.DieSize: Base Die
 FLBR.HEADER.FavoredGear: Favored Gear
+FLBR.HEADER.Handler: Handler
 FLBR.HEADER.Health: Health
+FLBR.HEADER.Hideout: Hideout
 FLBR.HEADER.Home: Home
 FLBR.HEADER.Hull: Hull
 FLBR.HEADER.HumanityPoints: Humanity Points
@@ -103,6 +116,7 @@ FLBR.HEADER.Inventory: Inventory
 FLBR.HEADER.Notes: Notes
 FLBR.HEADER.Modifiers: Modifiers
 FLBR.HEADER.PromotionPoints: Promotion Points
+FLBR.HEADER.RebelPoints: Rebel Points
 FLBR.HEADER.Resolve: Resolve
 FLBR.HEADER.SignatureItem: Signature Item
 FLBR.HEADER.Specialties: Specialties
@@ -174,6 +188,8 @@ FLBR.COMBAT.Combat: Combat
 FLBR.COMBAT.CannotBeDamaged: Can't be damaged
 FLBR.COMBAT.DrawSize: Draw Size
 FLBR.COMBAT.SkippedDefender: Skipped defender {name}
+FLBR.COMBAT.CritApplyErrorMessage: Error to get item/actor from message
+FLBR.COMBAT.CritApplyErrorNotFound: Item/actor not found
 FLBR.CreateNewItem: Create a new {type} item
 FLBR.CRIT.Crit: Crit
 FLBR.CRIT.CritButtonTooltip: Draw a crit for the player's character or a selected token
@@ -183,6 +199,8 @@ FLBR.CRIT.ChooseVehicleDamage: Choose a Critical Vehicle Damage
 FLBR.CRIT.ChooseActor: Choose an actor to inflict a critical injury.
 FLBR.CRIT.DrawCrit: Draw Critical Injury
 FLBR.CRIT.DrawVehicleDamage: Draw Critical Vehicle Damage
+FLBR.CRIT.NoActorSelected: No actor selected
+FLBR.CRIT.DrawCritOwnCharacter: You cannot draw a critical injury for your own character!
 FLBR.CustomFormula: Custom Formula
 FLBR.Disadvantage: Disadvantage
 FLBR.Formula: Formula
@@ -225,6 +243,7 @@ FLBR.ItemQuantity: Quantity
 FLBR.ItemSpecial: Special
 FLBR.MACRO.GetActorTitle: Choose an Actor
 FLBR.MACRO.GetActorHint: You have selected multiple tokens. Please choose one of them.
+FLBR.MACRO.GetActorNoTarget: This action requires a targeted token. Please select a single token and try again.
 FLBR.MACRO.MultipleItems: >-
   Your controlled Actor {actor} has more than one Item with name {item}. The
   first matched item will be chosen.
@@ -355,6 +374,7 @@ TYPES.Actor.vehicle: Vehicle
 TYPES.Actor.loot: Loot
 ACTOR.SubtypePc: Player Character
 ACTOR.SubtypeNpc: Non-Player Character
+ACTOR.SubtypeReplicantRebellion: Replicant Rebellion Character
 TYPES.Item.generic: Generic
 TYPES.Item.upgrade: Augment
 TYPES.Item.armor: Armor

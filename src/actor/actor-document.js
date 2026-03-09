@@ -1,6 +1,8 @@
 import { FLBR } from '@system/config';
-import { ACTOR_SUBTYPES, ACTOR_TYPES, ATTRIBUTES, CAPACITIES,
-  DAMAGE_TYPES, ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID } from '@system/constants';
+import {
+  ACTOR_SUBTYPES, ACTOR_TYPES, ATTRIBUTES, CAPACITIES,
+  DAMAGE_TYPES, ITEM_TYPES, SETTINGS_KEYS, SKILLS, SYSTEM_ID,
+} from '@system/constants';
 import Modifier from '@components/item-modifier';
 import BRRollHandler from '@components/roll/roller';
 import BladeRunnerDialog from '@components/dialog/dialog';
@@ -65,7 +67,9 @@ export default class BladeRunnerActor extends Actor {
   get maxPush() {
     switch (this.type) {
       case ACTOR_TYPES.CHAR:
-        return this.system.subtype === ACTOR_SUBTYPES.PC ? FLBR.maxPushMap[this.system.nature] : 0;
+        return [ACTOR_SUBTYPES.PC, ACTOR_SUBTYPES.REPLICANT_REBELLION].includes(this.system.subtype)
+          ? FLBR.maxPushMap[this.system.nature]
+          : 0;
       default:
         return 1;
     }
@@ -887,6 +891,32 @@ export default class BladeRunnerActor extends Actor {
     );
 
     const item = await foundry.utils.fromUuid(itemUuid);
+
+    if (!this.isOwner) {
+      const contentNotOwner = `
+      <p><strong>${this.name}</strong> got the @UUID[${item.uuid}] critical injury.</p>
+      <p><a class="inline-table crit-apply" data-tooltip="Apply the critical injury to the actor" style="">
+						Apply Critical Injury
+					</a>
+      </p>
+      `;
+      const chatDataNotOwner = {
+        content: contentNotOwner,
+        speaker: ChatMessage.getSpeaker({ actor: this, token: this.token, scene: canvas.scene }),
+        user: game.user.id,
+        flags: {
+          [SYSTEM_ID]: {
+            critToApply: {
+              itemUuid: item.uuid,
+              actorUuid: this.uuid,
+            },
+          },
+        },
+      };
+      ChatMessage.applyRollMode(chatDataNotOwner, game.settings.get('core', 'rollMode'));
+      return await ChatMessage.create(chatDataNotOwner);
+    }
+
     const [crit] = await this.createEmbeddedDocuments('Item', [item]);
 
     // Creates a chat message.

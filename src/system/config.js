@@ -52,6 +52,12 @@ for (const [k, v] of Object.entries(BR.ARCHETYPES)) {
   FLBR.archetypes[v] = `FLBR.ARCHETYPE.${k}`;
 }
 
+/** @type {Object.<KeyString, TranslationString>} */
+FLBR.archetypes_rebellion = {};
+for (const [k, v] of Object.entries(BR.ARCHETYPES_REBELLION)) {
+  FLBR.archetypes_rebellion[v] = `FLBR.ARCHETYPE.${k}`;
+}
+
 FLBR.capacitiesMap = {
   [BR.CAPACITIES.HEALTH]: {
     attributes: [BR.ATTRIBUTES.STRENGTH, BR.ATTRIBUTES.AGILITY],
@@ -68,6 +74,12 @@ FLBR.natures = {
   [BR.NATURES.REPLICANT]: 'FLBR.NATURE.Replicant',
 };
 
+FLBR.naturesRebellion = {
+  [BR.NATURES.HUMAN]: 'FLBR.NATURE.Human',
+  [BR.NATURES.N8]: 'FLBR.NATURE.N8',
+  [BR.NATURES.N9]: 'FLBR.NATURE.N9',
+};
+
 FLBR.natureModifierMap = {
   [BR.NATURES.HUMAN]: {
     [BR.CAPACITIES.HEALTH]: 0,
@@ -77,11 +89,21 @@ FLBR.natureModifierMap = {
     [BR.CAPACITIES.HEALTH]: 2,
     [BR.CAPACITIES.RESOLVE]: -2,
   },
+  [BR.NATURES.N8]: {
+    [BR.CAPACITIES.HEALTH]: 1,
+    [BR.CAPACITIES.RESOLVE]: -1,
+  },
+  [BR.NATURES.N9]: {
+    [BR.CAPACITIES.HEALTH]: 2,
+    [BR.CAPACITIES.RESOLVE]: -2,
+  },
 };
 
 FLBR.maxPushMap = {
   [BR.NATURES.HUMAN]: 1,
   [BR.NATURES.REPLICANT]: 2,
+  [BR.NATURES.N8]: 2,
+  [BR.NATURES.N9]: 2,
 };
 
 FLBR.pushTraumaMap = {
@@ -97,14 +119,32 @@ FLBR.pushTraumaMap = {
     [BR.ATTRIBUTES.INTELLIGENCE]: BR.CAPACITIES.RESOLVE,
     [BR.ATTRIBUTES.EMPATHY]: BR.CAPACITIES.RESOLVE,
   },
+  [BR.NATURES.N8]: {
+    [BR.ATTRIBUTES.STRENGTH]: BR.CAPACITIES.RESOLVE,
+    [BR.ATTRIBUTES.AGILITY]: BR.CAPACITIES.RESOLVE,
+    [BR.ATTRIBUTES.INTELLIGENCE]: BR.CAPACITIES.RESOLVE,
+    [BR.ATTRIBUTES.EMPATHY]: BR.CAPACITIES.RESOLVE,
+  },
+  [BR.NATURES.N9]: {
+    [BR.ATTRIBUTES.STRENGTH]: BR.CAPACITIES.RESOLVE,
+    [BR.ATTRIBUTES.AGILITY]: BR.CAPACITIES.RESOLVE,
+    [BR.ATTRIBUTES.INTELLIGENCE]: BR.CAPACITIES.RESOLVE,
+    [BR.ATTRIBUTES.EMPATHY]: BR.CAPACITIES.RESOLVE,
+  },
 };
 
 FLBR.characterSubtypes = {
   [BR.ACTOR_SUBTYPES.PC]: 'ACTOR.SubtypePc',
   [BR.ACTOR_SUBTYPES.NPC]: 'ACTOR.SubtypeNpc',
+  [BR.ACTOR_SUBTYPES.REPLICANT_REBELLION]: 'ACTOR.SubtypeReplicantRebellion',
 };
 
 FLBR.physicalItems = [BR.ITEM_TYPES.GENERIC, BR.ITEM_TYPES.WEAPON, BR.ITEM_TYPES.ARMOR, BR.ITEM_TYPES.EXPLOSIVE];
+FLBR.allowedItems = {
+  [BR.ACTOR_TYPES.CHAR]: [BR.ITEM_TYPES.SPECIALTY, BR.ITEM_TYPES.SYNTHETIC_AUGMENTATION, BR.ITEM_TYPES.CRITICAL_INJURY],
+  [BR.ACTOR_TYPES.VEHICLE]: [],
+  [BR.ACTOR_TYPES.LOOT]: [],
+};
 
 FLBR.ranges = {
   [BR.RANGES.ENGAGED]: 'FLBR.WEAPON_RANGE.Engaged',
@@ -414,3 +454,6 @@ FLBR.Icons = {
     onoff: '<i class="fas fa-power-off"></i>',
   },
 };
+
+// Allow modules to add custom item types
+FLBR.customItemTypesTemplates = {};

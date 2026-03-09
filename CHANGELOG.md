@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [13.5.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.4.0...13.5.0) (2026-03-08)
+
+
+### Features
+
+* ✨ improvements on the critical injury handler ([975a2df](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/975a2dfa8a2a61a8d836d9799265ec0fa5822a15)), closes [#68](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues/68)
+
+
+### Bug Fixes
+
+* 🐛 Configure maxPush and bonuses for RR ([a9e140f](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/a9e140f95fd395640be408e519e8e6f1ee3cd2da)), closes [#71](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues/71)
+
+## [13.4.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.3.0...13.4.0) (2026-02-26)
+
+
+### Features
+
+* ✨ add Rebellion actor subtype handler ([5248d15](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/5248d159087c756478114d06ce2f31649d6dd246))
+* ✨ improvements on the critical injury handler ([5638739](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/56387395a8298145ab17e0574117ec5b109d6b6c)), relates to [#68](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues/68)
+
+## [13.3.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.2.1...13.3.0) (2026-02-07)
+
+
+### Features
+
+* ✨ Add new font definitions ([4a297e3](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/4a297e3adc3832581b2be900309e0dca6875c19b))
+
+
+### Bug Fixes
+
+* 🐛 Adjust archetype input style ([c044fa9](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/c044fa9fccbaa84b7ad3007afd4a649dbcedbb59))
+
+## [13.2.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.2.0...13.2.1) (2026-02-01)
+
+### Bug Fixes
+
+- 📦 Update YZUR library to 6.1.1 => 🐛 Fix inline roll issue (#65) ([4363441](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/4363441efde3f0400921b66bb34a2ebc4482f866))
+
+## [13.2.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.1.1...13.2.0) (2026-01-30)
+
+### Features
+
+- Allow modules to register item custom types. ([a78f9bf](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/a78f9bf03b63ae12563dfa1d09a7947a4cd9ebe5))
+- bump `foundry-year-zero-roller` to v6.1.0 ([1b87d9e](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/1b87d9eaa65ec02892dcabb115b383c2299a82ce))
+
+## [13.1.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.1.0...13.1.1) (2025-08-25)
+
+### Bug Fixes
+
+- 🐛 Fix push button on floating dice chat card #62
+
 ## [13.1.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.0.0...13.1.0) (2025-06-18)
 
 ### Features

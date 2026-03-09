@@ -13,6 +13,11 @@ function preloadHandlebarsTemplates() {
   return foundry.applications.handlebars.loadTemplates(paths);
 }
 
+export function registerCustomItemTypesTemplates() {
+  const customItemTypesTemplates = Object.values(FLBR.customItemTypesTemplates);
+  return foundry.applications.handlebars.loadTemplates(customItemTypesTemplates);
+}
+
 /* ------------------------------------------ */
 /*  HandlebarsJS Custom Helpers               */
 /* ------------------------------------------ */
@@ -118,7 +123,7 @@ function registerHandlebarsHelpers() {
     const rgx = /@UUID\[(.+?)\](?:{(.+?)})?/gm;
     if (rgx.test(text)) {
       text = text.replace(rgx, (_match, p1, p2) => {
-      // eslint-disable-next-line no-undef
+        // eslint-disable-next-line no-undef
         const title = p2 ?? foundry.utils.fromUuidSync(p1)?.name ?? '{undefined}';
         return `<b>${title}</b>`;
       });
