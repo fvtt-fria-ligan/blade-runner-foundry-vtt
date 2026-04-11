@@ -5,8 +5,7 @@
   "version": "13.5.0",
   "compatibility": {
     "minimum": 13,
-    "verified": "13.351",
-    "maximum": 13
+    "verified": "14.359"
   },
   "relationships": {
     "recommends": [
@@ -47,7 +46,7 @@
       "discord": "@stefouch"
     },
     {
-      "name": "Cussa Mitre",
+      "name": "Cussa Mitre [Hod Publishing]",
       "url": "https://hodpub.com",
       "discord": "@cussamitre"
     },
