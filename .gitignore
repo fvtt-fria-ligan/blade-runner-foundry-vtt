@@ -23,3 +23,4 @@ copy-packs.bat
 /dist
 /foundry.js
 /foundry-*.js
+.linkedToFoundry
