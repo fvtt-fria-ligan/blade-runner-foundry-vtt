@@ -120,5 +120,5 @@
   "socket": false,
   "changelog": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases",
   "manifest": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/latest/download/system.json",
-  "download": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/13.5.0/blade-runner-fvtt_v13.5.0.zip"
+  "download": "https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/releases/download/14.0.0/blade-runner-fvtt_v14.0.0.zip"
 }

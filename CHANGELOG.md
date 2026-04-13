@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [14.0.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.5.0...14.0.0) (2026-04-13)
+
 ## [13.5.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.4.0...13.5.0) (2026-03-08)
 
 
