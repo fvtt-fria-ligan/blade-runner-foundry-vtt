@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [commit
 
 ## [14.0.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.5.0...14.0.0) (2026-04-13)
 
+### Features
+
+* ✨ v14 compatibility ([6d84ab7cefe15e0b57a28b5f35440ccd94840f44](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/6d84ab7cefe15e0b57a28b5f35440ccd94840f44))
+
 ## [13.5.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.4.0...13.5.0) (2026-03-08)
 
 
