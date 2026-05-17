@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [14.0.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/14.0.0...14.0.1) (2026-05-17)
+
+
+### Bug Fixes
+
+* 🐛 ([#78](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues/78)) temporary removing recommeded modules that do not have a v14 release ([a613a71](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/a613a71e9ab659e51580bd001e99b07dbb14c93e))
+
 ## [14.0.0](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/13.5.0...14.0.0) (2026-04-13)
 
 ### Features
