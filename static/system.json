@@ -22,20 +22,6 @@
         "compatibility": {
           "minimum": "1.3.5"
         }
-      },
-      {
-        "id": "simultaneous-cards",
-        "type": "module",
-        "compatibility": {
-          "minimum": "3.0.0"
-        }
-      },
-      {
-        "id": "item-piles",
-        "type": "module",
-        "compatibility": {
-          "minimum": "3.2.13"
-        }
       }
     ]
   },
