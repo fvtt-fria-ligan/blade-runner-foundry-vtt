@@ -21,6 +21,14 @@ export async function enrichTextFields(sheetData, fieldNames) {
         fieldName,
         await foundry.applications.ux.TextEditor.enrichHTML(
           foundry.utils.getProperty(sheetData, fieldName),
+          {
+            // Whether to show secret blocks in the finished html
+            secrets: sheetData.owner,
+            // Data to fill in for inline rolls
+            rollData: sheetData.actor.getRollData(),
+            // Relative UUID resolution
+            relativeTo: sheetData.actor,
+          },
         ),
       );
     }

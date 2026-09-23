@@ -5,7 +5,7 @@
   "version": "14.0.1",
   "compatibility": {
     "minimum": 13,
-    "verified": "14.359"
+    "verified": "14.368"
   },
   "relationships": {
     "recommends": [
@@ -21,6 +21,13 @@
         "type": "module",
         "compatibility": {
           "minimum": "1.3.5"
+        }
+      },
+      {
+        "id": "item-piles",
+        "type": "module",
+        "compatibility": {
+          "minimum": "3.2.13"
         }
       }
     ]
