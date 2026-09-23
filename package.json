@@ -73,7 +73,7 @@
     "gulp": "^4.0.2",
     "gulp-yaml": "2.0.4",
     "husky": "^8.0.3",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.2",
     "prettier-eslint-cli": "^8.0.1",
     "semver": "^7.5.4"
   }
