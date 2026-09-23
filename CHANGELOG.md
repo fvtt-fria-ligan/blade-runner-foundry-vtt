@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [14.0.2](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/14.0.1...14.0.2) (2026-09-23)
+
+
+### Bug Fixes
+
+* 🐛 ([#78](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues/78)) returning recommeded modules ([3b67bd1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/3b67bd1d349f39f8cddae313bfa8a334ed5f270a))
+* 🐛 ([#80](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues/80)) secret not working on the enriched fields ([3fbfab2](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/3fbfab246af9f86bfe8007830514099ce3616cba))
+
 ## [14.0.1](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/14.0.0...14.0.1) (2026-05-17)
 
 
