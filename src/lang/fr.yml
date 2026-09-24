@@ -171,6 +171,7 @@ FLBR.ROLLER.TotalModifier: 'Total : {value}'
 FLBR.ROLLER.ResolveTestFailed: "{name} a raté son jet d'Empathie et perd définitivement 1 point de détermination."
 FLBR.ROLLER.ResolveTest: Test pour la perte permanente de détermination
 FLBR.ROLLER.RollButton: Lancer
+FLBR.ROLLER.RollMode: Mode de jet
 FLBR.ROLLER.RollWithAdvantageButton: Avantage
 FLBR.ROLLER.RollWithDisadvantageButton: Désavantage
 FLBR.ROLLER.UnlimitedPush: Illimité

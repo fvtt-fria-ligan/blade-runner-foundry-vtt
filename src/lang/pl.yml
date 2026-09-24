@@ -261,6 +261,7 @@ FLBR.ROLLER.ResolveTest: Test na stałą utratę Opanowania
 FLBR.ROLLER.ResolveTestHint: Kiedy jesteś złamany przez stres, musisz rzucić jedną kością bazową odpowiadającą twojej Empatii. Jeśli wyrzucisz jedynkę, tracisz na stałe 1 punkt Opanowania, co oznacza redukcję maksymalnego Opanowania o jeden stopień.
 FLBR.ROLLER.ResolveTestFailed: '{name} nie zdał testu na Empatię i traci na stałe 1 punkt opanowania.'
 FLBR.ROLLER.RollButton: Rzuć
+FLBR.ROLLER.RollMode: Tryb rzutu
 FLBR.ROLLER.RollSpecialHint: 'Rzut: {name}?'
 FLBR.ROLLER.RollWithAdvantageButton: Ułatwienie
 FLBR.ROLLER.RollWithDisadvantageButton: Utrudnienie

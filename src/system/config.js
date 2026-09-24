@@ -195,10 +195,25 @@ FLBR.vehicleExplosionBlastPower = 10;
 
 /* ------------------------------------------ */
 
-/** @type {Object.<string, TranslationString>} */
+/**
+ * Roll modes selectable in the roller dialog, mapped to their translation keys.
+ * Foundry v14 replaced `CONST.DICE_ROLL_MODES` (and the `CHAT.Roll*` keys)
+ * with `CONFIG.ChatMessage.modes`, whose ids are the native message modes.
+ * The `ic` (in-character) mode is skipped since it is not a roll mode.
+ * Older cores fall back to the legacy constants.
+ * @type {Object.<string, TranslationString>}
+ */
 FLBR.rollModes = {};
-for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
-  FLBR.rollModes[v] = `CHAT.Roll${k.toLowerCase().capitalize()}`;
+if (CONFIG.ChatMessage?.modes) {
+  for (const [k, v] of Object.entries(CONFIG.ChatMessage.modes)) {
+    if (k === 'ic') continue;
+    FLBR.rollModes[k] = v.label;
+  }
+}
+else {
+  for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
+    FLBR.rollModes[v] = `CHAT.Roll${k.toLowerCase().capitalize()}`;
+  }
 }
 
 // TODO Implements Years On The Force on creation. Maybe move to a module

@@ -265,6 +265,7 @@ FLBR.ROLLER.ResolveTestFailed: >-
   Der Empathie-Wurf von {name} ist fehlgeschlagen. Daher sinkt ENTSCHLOSSENHEIT
   permanent um 1.
 FLBR.ROLLER.RollButton: Wurf
+FLBR.ROLLER.RollMode: Wurfmodus
 FLBR.ROLLER.RollSpecialHint: 'Roll: {name}?'
 FLBR.ROLLER.RollWithAdvantageButton: Vorteil
 FLBR.ROLLER.RollWithDisadvantageButton: Nachteil
