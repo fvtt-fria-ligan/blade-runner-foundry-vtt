@@ -136,6 +136,7 @@ FLBR.ROLLER.ModifierName: Nombre
 FLBR.ROLLER.ModifierValue: Valor
 FLBR.ROLLER.TotalModifier: 'Total: {value}'
 FLBR.ROLLER.RollButton: Tirada
+FLBR.ROLLER.RollMode: Modo de Tirada
 FLBR.ROLLER.RollWithAdvantageButton: Ventaja
 FLBR.ROLLER.RollWithDisadvantageButton: Desventaja
 FLBR.ROLLER.SelectDiceToPush: Selecciona un dado para forzar

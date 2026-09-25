@@ -170,6 +170,7 @@ FLBR.ROLLER.TotalModifier: '최종: {value}'
 FLBR.ROLLER.ResolveTest: 결의 영구 상실 테스트
 FLBR.ROLLER.ResolveTestFailed: '{name}이(가) 공감 굴림에 실패해 결의 1점을 영구적으로 잃습니다.'
 FLBR.ROLLER.RollButton: 굴림
+FLBR.ROLLER.RollMode: Roll mode
 FLBR.ROLLER.RollWithAdvantageButton: 이점
 FLBR.ROLLER.RollWithDisadvantageButton: 난점
 FLBR.ROLLER.UnlimitedPush: 무제한

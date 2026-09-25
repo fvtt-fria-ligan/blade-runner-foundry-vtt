@@ -2,6 +2,7 @@ import { YearZeroRoll } from 'yzur';
 import { FLBR } from '@system/config';
 import { ACTOR_TYPES, ITEM_TYPES, SYSTEM_ID } from '@system/constants';
 import { chooseActor, getActiveActor } from '@utils/get-actor';
+import { getUserRollMode } from '@utils/get-roll-mode';
 
 /**
  * @typedef {Object} RollHandlerData
@@ -226,7 +227,7 @@ export default class BRRollHandler extends FormApplication {
       disadvantage: this.advantage ? false : this.disadvantage,
       attributeKey: this.attributeKey,
       skillKey: this.skillKey,
-      rollMode: this.options.rollMode ?? game.settings.get('core', 'rollMode'),
+      rollMode: this.options.rollMode ?? getUserRollMode(),
       attack: this.isAttack,
       damage: this.damage,
       damageType: this.damageType,
