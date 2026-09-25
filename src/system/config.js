@@ -197,9 +197,20 @@ FLBR.vehicleExplosionBlastPower = 10;
 
 /** @type {Object.<string, TranslationString>} */
 FLBR.rollModes = {};
-for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
-  FLBR.rollModes[v] = `CHAT.Roll${k.toLowerCase().capitalize()}`;
+const v14RollModes = CONFIG.ChatMessage?.modes;
+
+if(v14RollModes) {
+  for (const [k, v] of Object.entries(CONFIG.ChatMessage.modes)) {
+    if (k === 'ic') continue;
+    FLBR.rollModes[k] = v.label;
+  }
 }
+else {
+  for (const [k, v] of Object.entries(CONST.DICE_ROLL_MODES)) {
+    FLBR.rollModes[v] = `CHAT.Roll${k.toLowerCase().capitalize()}`;
+  }
+}
+
 
 // TODO Implements Years On The Force on creation. Maybe move to a module
 // FLBR.yearsOnTheForce = {
