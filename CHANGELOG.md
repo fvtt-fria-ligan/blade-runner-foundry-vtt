@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [14.0.3](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/14.0.2...14.0.3) (2026-09-27)
+
+
+### Bug Fixes
+
+* 🐛 fixes item sheet not opening ([3af3fdd](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/commit/3af3fdd33f19941df0216ec32833585b03068606)), closes [#86](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/issues/86)
+
 ## [14.0.2](https://github.com/fvtt-fria-ligan/blade-runner-foundry-vtt/compare/14.0.1...14.0.2) (2026-09-23)
 
 
