@@ -25,9 +25,9 @@ export async function enrichTextFields(sheetData, fieldNames) {
             // Whether to show secret blocks in the finished html
             secrets: sheetData.owner,
             // Data to fill in for inline rolls
-            rollData: sheetData.actor.getRollData(),
+            rollData: sheetData.rollData,
             // Relative UUID resolution
-            relativeTo: sheetData.actor,
+            relativeTo: sheetData.actor ?? sheetData.item,
           },
         ),
       );
